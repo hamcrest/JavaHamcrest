@@ -1,0 +1,56 @@
+<project name="hamcrest" default="all">
+
+    <property name="version" value="SNAPSHOT"/>
+
+    <target name="all" depends="clean, build,test,package"
+            description="Performs clean build, test and package for distribution"/>
+
+    <target name="clean" description="Clean up all built files">
+        <delete dir="build"/>
+    </target>
+
+    <target name="build" description="Build project">
+        <mkdir dir="build"/>
+        <java-to-jar srcdir="src/api" destjar="build/hamcrest-api-${version}.jar"/>
+        <java-to-jar srcdir="src/library" destjar="build/hamcrest-library-${version}.jar"
+                     classpath="build/hamcrest-api-${version}.jar"/>
+        <java-to-jar srcdir="src/integration" destjar="build/hamcrest-integration-${version}.jar"
+                     classpath="build/hamcrest-api-${version}.jar"/>
+        <java-to-jar srcdir="src/unit-test" destjar="build/hamcrest-unit-test-${version}.jar"
+                     classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar"/>
+    </target>
+
+    <target name="test" description="Test project">
+        <!-- TODO -->
+    </target>
+
+    <target name="package" depends="build" description="Package for distribution">
+        <zip zipfile="build/hamcrest-${version}.zip">
+            <zipfileset dir="." prefix="hamcrest-${version}">
+                <include name="src/**"/>
+                <include name="lib/**"/>
+                <include name="*.txt"/>
+                <include name="build.xml"/>
+            </zipfileset>
+            <zipfileset dir="build" prefix="hamcrest-${version}">
+                <include name="hamcrest-api-${version}.jar"/>
+                <include name="hamcrest-library-${version}.jar"/>
+                <include name="hamcrest-integration-${version}.jar"/>
+            </zipfileset>
+        </zip>
+    </target>
+
+    <macrodef name="java-to-jar" description="Compile Java source and build a Jar">
+        <attribute name="srcdir" description="Directory containg Java source"/>
+        <attribute name="destjar" description="Path to Jar"/>
+        <attribute name="classpath" description="Anything additional to add on the classpath" default=""/>
+        <sequential>
+            <mkdir dir="build/temp/@{destjar}.contents"/>
+            <javac srcdir="@{srcdir}" destdir="build/temp/@{destjar}.contents" classpath="@{classpath}"/>
+            <jar jarfile="@{destjar}">
+                <fileset dir="build/temp/@{destjar}.contents"/>
+            </jar>
+        </sequential>
+    </macrodef>
+
+</project>

@@ -1,0 +1,54 @@
+                    **********************
+********************* Building Ham Crest ********************
+                    **********************
+
+--[ Build requirements ]---000-------------------------------
+
+* JDK 1.5
+  Note: that this is a buildtime dependency for 1.5 specific
+  features. However the final built jars should run on 1.4
+  and 1.3 JVMs with some features unavailable.
+
+* Ant 1.6 or greater
+  To enable testing support, ensure junit.jar exists in
+  ANT_HOME/lib.
+
+
+--[ Building from the command line ]-------------------------
+
+Execute the default ant target:
+  ant
+
+This will do a full clean build, run all tests and (if
+successful) package up a distribution. The resulting builds
+reside in the 'build' directory.
+
+For a list of finer grained build operations:
+  ant -projecthelp
+
+The default version number used in the build is 'SNAPSHOT'.
+To override this, you can pass a property to ant:
+  ant -Dversion=MY.OTHER.VERSION
+
+
+--[ Building from the IDE ]----------------------------------
+
+It is possible to compile and test the source directly from
+popular IDEs, without resorting to the command line.
+
+Steps:
+  - Create a new project.
+  - Add src/api, src/library and src/integration as source
+    directories.
+  - Add src/unit-test as a test directory. If this is
+    unsupported by the IDE, add it as another source
+    directory.
+  - Include all jars in the lib directory in the classpath.
+  - Compile as usual in the IDE.
+  - If supported, run all tests under org.hamcrest from the
+    IDEs JUnit runner.
+
+
+-------------------------------------------------------------
+-Nat Pryce and Joe Walnes
+http://hamcrest.org/

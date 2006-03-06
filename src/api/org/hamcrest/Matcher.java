@@ -1,0 +1,25 @@
+/*  Copyright (c) 2000-2006 hamcrest.org
+ */
+package org.hamcrest;
+
+// TODO: Update JavaDoc to make better use of 'matcher' word.
+
+/**
+ * A matcher over acceptable values. A matcher should be able to describe itself to give feedback when it fails.
+ */
+public interface Matcher {
+    /**
+     * Evaluates the matcher for argument <var>o</var>.
+     *
+     * @param o the object against which the matcher is evaluated.
+     * @return <code>true</code> if <var>o</var> matcher, otherwise <code>false</code>.
+     */
+    boolean match(Object o);
+
+    /**
+     * Appends the description of this object to the buffer.
+     *
+     * @param buffer The buffer that the description is appended to.
+     */
+    void describeTo(StringBuffer buffer);
+}

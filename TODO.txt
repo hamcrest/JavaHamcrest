@@ -1,0 +1,34 @@
+* Add matchers for dealing with collections allowing flexibility over:
+  - ordered/not-ordered
+  - use of matchers for item checking
+  - contains these items, at least
+  - contains these items, exclusively
+  - contains none of thes items
+  - all items should match a specific matcher
+
+* Collection based matchers should not care about implementation of datastructure. Polymorphism across:
+  - arrays
+  - collections
+  - iterators
+  - iterables (jdk 1.5)
+
+* String matchers
+  - case insensitive
+  - whitespace insensitive
+  - reg exp matching
+
+* XML
+  - is wellformed XML
+  - xpath expressions for XML/HTML strings and existing Nodes
+
+* Invocation
+  - method called
+  - ... with particular arguments
+
+* JDK 1.5 Enums
+
+* Sugar for between(12, 20)
+
+* ComparisonMatcher (See NMock2)
+
+* Sugar for new matchers
