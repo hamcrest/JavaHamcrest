@@ -25,7 +25,7 @@ import org.hamcrest.text.StringStartsWith;
 
 import java.util.Collection;
 
-public class MatcherSugar {
+public class Is {
 
     public static final Matcher ANYTHING = new IsAnything();
     public static final Matcher NULL = new IsNull();
