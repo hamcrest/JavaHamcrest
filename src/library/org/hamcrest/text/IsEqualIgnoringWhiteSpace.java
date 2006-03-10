@@ -4,6 +4,7 @@ package org.hamcrest.text;
 
 import org.hamcrest.Formatting;
 import org.hamcrest.Matcher;
+import org.hamcrest.Description;
 
 /**
  * Tests if a string is equal to another string, ignoring any changes in whitespace.
@@ -29,8 +30,8 @@ public class IsEqualIgnoringWhiteSpace implements Matcher {
         }
     }
 
-    public void describeTo(StringBuffer buffer) {
-        buffer.append("eqIgnoringWhiteSpace(")
+    public void describeTo(Description description) {
+        description.append("eqIgnoringWhiteSpace(")
                 .append(Formatting.toReadableString(string))
                 .append(")");
     }

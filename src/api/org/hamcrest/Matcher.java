@@ -17,9 +17,7 @@ public interface Matcher {
     boolean match(Object o);
 
     /**
-     * Appends the description of this object to the buffer.
-     *
-     * @param buffer The buffer that the description is appended to.
+     * Describes this matcher.
      */
-    void describeTo(StringBuffer buffer);
+    void describeTo(Description description);
 }

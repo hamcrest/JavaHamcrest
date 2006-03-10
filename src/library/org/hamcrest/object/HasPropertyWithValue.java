@@ -3,6 +3,7 @@
 package org.hamcrest.object;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Description;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -97,11 +98,11 @@ public class HasPropertyWithValue implements Matcher {
         return property == null ? null : property.getReadMethod();
     }
 
-    public void describeTo(StringBuffer buffer) {
-        buffer.append("hasProperty(\"");
-        buffer.append(propertyName);
-        buffer.append("\", ");
-        expectation.describeTo(buffer);
-        buffer.append(")");
+    public void describeTo(Description description) {
+        description.append("hasProperty(\"");
+        description.append(propertyName);
+        description.append("\", ");
+        expectation.describeTo(description);
+        description.append(")");
     }
 }

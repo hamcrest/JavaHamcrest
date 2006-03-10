@@ -3,6 +3,7 @@
 package org.hamcrest.object;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Description;
 
 import java.util.EventObject;
 
@@ -42,8 +43,8 @@ public class IsEventFrom implements Matcher {
         return ev.getSource() == source;
     }
 
-    public void describeTo(StringBuffer buffer) {
-        buffer.append("an event of type ")
+    public void describeTo(Description description) {
+        description.append("an event of type ")
                 .append(eventClass.getName())
                 .append(" from ")
                 .append(source);

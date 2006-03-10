@@ -3,6 +3,8 @@
 package org.hamcrest.object;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Description;
+import org.hamcrest.internal.StringDescription;
 import org.hamcrest.core.IsAnything;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsSame;
@@ -46,7 +48,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
     public void testDescribeTo() {
         IsEqual isEqual = new IsEqual(Boolean.TRUE);
-        StringBuffer isEqualDescription = new StringBuffer();
+        Description isEqualDescription = new StringDescription();
         isEqual.describeTo(isEqualDescription);
         HasPropertyWithValue hasProperty = new HasPropertyWithValue("property", new IsEqual(Boolean.TRUE));
 

@@ -5,6 +5,7 @@ package org.hamcrest;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import org.hamcrest.core.Always;
+import org.hamcrest.internal.StringDescription;
 
 public abstract class AbstractMatcherTest extends TestCase {
     protected static final Matcher TRUE_MATCHER = new Always(true);
@@ -15,8 +16,8 @@ public abstract class AbstractMatcherTest extends TestCase {
             throw new AssertionFailedError("matcher should not have been evaluated");
         }
 
-        public void describeTo(StringBuffer buffer) {
-            buffer.append("NEVER_EVALUATED");
+        public void describeTo(Description description) {
+            description.append("NEVER_EVALUATED");
         }
     };
 
@@ -32,8 +33,8 @@ public abstract class AbstractMatcherTest extends TestCase {
     }
 
     public void assertDescription(String expected, Matcher matcher) {
-        StringBuffer buffer = new StringBuffer();
-        matcher.describeTo(buffer);
-        assertEquals(expected, buffer.toString());
+        Description description = new StringDescription();
+        matcher.describeTo(description);
+        assertEquals(expected, description.toString());
     }
 }

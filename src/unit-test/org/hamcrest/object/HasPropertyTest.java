@@ -3,6 +3,8 @@
 package org.hamcrest.object;
 
 import junit.framework.TestCase;
+import org.hamcrest.Description;
+import org.hamcrest.internal.StringDescription;
 
 /**
  * @author Iain McGinniss
@@ -28,9 +30,9 @@ public class HasPropertyTest extends TestCase {
 
     public void testDescribeTo() {
         HasProperty hasProperty = new HasProperty("property");
-        StringBuffer buffer = new StringBuffer();
-        hasProperty.describeTo(buffer);
+        Description description = new StringDescription();
+        hasProperty.describeTo(description);
 
-        assertEquals("hasProperty(\"property\")", buffer.toString());
+        assertEquals("hasProperty(\"property\")", description.toString());
     }
 }

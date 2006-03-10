@@ -4,6 +4,7 @@ package org.hamcrest.text;
 
 import org.hamcrest.Formatting;
 import org.hamcrest.Matcher;
+import org.hamcrest.Description;
 
 /**
  * Tests if a string is equal to another string, regardless of the case.
@@ -29,8 +30,8 @@ public class IsEqualIgnoringCase implements Matcher {
         }
     }
 
-    public void describeTo(StringBuffer buffer) {
-        buffer.append("eqIgnoringCase(")
+    public void describeTo(Description description) {
+        description.append("eqIgnoringCase(")
                 .append(Formatting.toReadableString(string))
                 .append(")");
     }

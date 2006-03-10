@@ -9,6 +9,7 @@
 * Packages moved from org.jmock.core.matcher to org.hamcrest.
 * Merged SelfDescribing into Matcher interface.
 * SelfDescribing.describe() no longer returns a StringBuffer. Simpler for users to implement.
+* Introduced Description interface that acts as a domain centric abstraction over StringBuffer.
 
 [Library Changes]
 * Matchers categorised and broken into subpackages (core, collection, number, object, text).

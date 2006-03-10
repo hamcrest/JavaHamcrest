@@ -1,6 +1,7 @@
 package org.hamcrest.collection;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Description;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -31,11 +32,11 @@ public class IsMapContaining implements Matcher {
         return false;
     }
 
-    public void describeTo(StringBuffer buffer) {
-        buffer.append("map containing [");
-        keyMatcher.describeTo(buffer);
-        buffer.append("->");
-        valueMatcher.describeTo(buffer);
-        buffer.append("]");
+    public void describeTo(Description description) {
+        description.append("map containing [");
+        keyMatcher.describeTo(description);
+        description.append("->");
+        valueMatcher.describeTo(description);
+        description.append("]");
     }
 }

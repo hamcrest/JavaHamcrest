@@ -3,6 +3,7 @@
 package org.hamcrest.number;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Description;
 
 
 /**
@@ -23,8 +24,8 @@ public class IsCloseTo implements Matcher {
         return Math.abs((argValue - value)) <= error;
     }
 
-    public void describeTo(StringBuffer buffer) {
-        buffer.append("a numeric value within ")
+    public void describeTo(Description description) {
+        description.append("a numeric value within ")
                 .append(error)
                 .append(" of ")
                 .append(value);

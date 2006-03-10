@@ -4,6 +4,7 @@ package org.hamcrest.number;
 
 import org.hamcrest.Formatting;
 import org.hamcrest.Matcher;
+import org.hamcrest.Description;
 
 
 /**
@@ -20,8 +21,8 @@ public class IsLessThan implements Matcher {
         return upperLimit.compareTo(arg) > 0;
     }
 
-    public void describeTo(StringBuffer buffer) {
-        buffer.append("a value less than ")
+    public void describeTo(Description description) {
+        description.append("a value less than ")
                 .append(Formatting.toReadableString(upperLimit));
     }
 }

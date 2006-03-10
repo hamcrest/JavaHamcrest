@@ -3,6 +3,7 @@
 package org.hamcrest.object;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Description;
 
 import java.beans.IntrospectionException;
 
@@ -33,10 +34,10 @@ public class HasProperty implements Matcher {
         }
     }
 
-    public void describeTo(StringBuffer buffer) {
-        buffer.append("hasProperty(\"");
-        buffer.append(propertyName);
-        buffer.append("\")");
+    public void describeTo(Description description) {
+        description.append("hasProperty(\"");
+        description.append(propertyName);
+        description.append("\")");
     }
 
 }

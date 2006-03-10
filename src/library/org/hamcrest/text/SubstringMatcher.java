@@ -2,6 +2,7 @@ package org.hamcrest.text;
 
 import org.hamcrest.Formatting;
 import org.hamcrest.Matcher;
+import org.hamcrest.Description;
 
 public abstract class SubstringMatcher implements Matcher {
     protected final String substring;
@@ -14,8 +15,8 @@ public abstract class SubstringMatcher implements Matcher {
         return o instanceof String && evalSubstringOf((String) o);
     }
 
-    public void describeTo(StringBuffer buffer) {
-        buffer.append("a string ")
+    public void describeTo(Description description) {
+        description.append("a string ")
                 .append(relationship())
                 .append(" ")
                 .append(Formatting.toReadableString(substring));

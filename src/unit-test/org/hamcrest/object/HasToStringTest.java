@@ -2,6 +2,8 @@ package org.hamcrest.object;
 
 import junit.framework.TestCase;
 import org.hamcrest.Matcher;
+import org.hamcrest.Description;
+import org.hamcrest.internal.StringDescription;
 import org.hamcrest.core.IsEqual;
 
 public class HasToStringTest extends TestCase {
@@ -28,8 +30,8 @@ public class HasToStringTest extends TestCase {
     }
 
     private String descriptionOf(Matcher matcher) {
-        StringBuffer buffer = new StringBuffer();
-        matcher.describeTo(buffer);
-        return buffer.toString();
+        Description description = new StringDescription();
+        matcher.describeTo(description);
+        return description.toString();
     }
 }

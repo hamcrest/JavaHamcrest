@@ -2,6 +2,8 @@
  */
 package org.hamcrest;
 
+import org.hamcrest.internal.StringDescription;
+
 import java.lang.reflect.Array;
 import java.util.Collection;
 
@@ -23,9 +25,9 @@ public class Formatting {
         } else if (element instanceof Float) {
             return "<" + element.toString() + "F>";
         } else if (element.getClass().isArray()) {
-            StringBuffer buffer = new StringBuffer();
-            join(element, buffer);
-            return buffer.toString();
+            Description description = new StringDescription();
+            join(element, description);
+            return description.toString();
         } else {
             return "<" + element.toString() + ">";
         }
@@ -61,24 +63,24 @@ public class Formatting {
         }
     }
 
-    public static void join(Object array, StringBuffer buf) {
+    public static void join(Object array, Description buf) {
         join(array, buf, "[", "]");
     }
 
-    public static void join(Collection collection, StringBuffer buf, String prefix, String postfix) {
+    public static void join(Collection collection, Description buf, String prefix, String postfix) {
         join(collection.toArray(), buf, prefix, postfix);
     }
 
-    public static void join(Collection collection, StringBuffer buf,
+    public static void join(Collection collection, Description buf,
                                     String prefix, String separator, String postfix) {
         join(collection.toArray(), buf, prefix, separator, postfix);
     }
 
-    private static void join(Object array, StringBuffer buf, String prefix, String postfix) {
+    private static void join(Object array, Description buf, String prefix, String postfix) {
         join(array, buf, prefix, ", ", postfix);
     }
 
-    public static void join(Object array, StringBuffer buf,
+    public static void join(Object array, Description buf,
                                     String prefix, String separator, String postfix) {
         buf.append(prefix);
 
