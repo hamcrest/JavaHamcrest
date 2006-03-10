@@ -2,8 +2,6 @@
  */
 package org.hamcrest;
 
-// TODO: Update JavaDoc to make better use of 'matcher' word.
-
 /**
  * A matcher over acceptable values. A matcher should be able to describe itself to give feedback when it fails.
  */
