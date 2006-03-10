@@ -2,9 +2,8 @@
  */
 package org.hamcrest.text;
 
-import org.hamcrest.Formatting;
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 /**
  * Tests if a string is equal to another string, ignoring any changes in whitespace.
@@ -26,14 +25,14 @@ public class IsEqualIgnoringWhiteSpace implements Matcher {
         } else if (!(o instanceof String)) {
             return false;
         } else {
-            return stripSpace(string).equalsIgnoreCase(stripSpace((String)o));
+            return stripSpace(string).equalsIgnoreCase(stripSpace((String) o));
         }
     }
 
     public void describeTo(Description description) {
-        description.append("eqIgnoringWhiteSpace(")
-                .append(Formatting.toReadableString(string))
-                .append(")");
+        description.appendText("eqIgnoringWhiteSpace(")
+                .appendValue(string)
+                .appendText(")");
     }
 
     public String stripSpace(String string) {

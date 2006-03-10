@@ -4,10 +4,10 @@ package org.hamcrest.object;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Description;
-import org.hamcrest.internal.StringDescription;
 import org.hamcrest.core.IsAnything;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsSame;
+import org.hamcrest.internal.StringDescription;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;

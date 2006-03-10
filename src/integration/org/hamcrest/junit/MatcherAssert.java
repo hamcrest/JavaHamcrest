@@ -2,19 +2,19 @@
  */
 package org.hamcrest.junit;
 
-import org.hamcrest.Matcher;
-import org.hamcrest.Description;
-import org.hamcrest.internal.StringDescription;
 import junit.framework.Assert;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.internal.StringDescription;
 
 public class MatcherAssert extends Assert {
 
     public void assertThat(Object actual, Matcher matcher) {
         if (!matcher.match(actual)) {
             Description description = new StringDescription();
-            description.append("\nExpected: ");
+            description.appendText("\nExpected: ");
             matcher.describeTo(description);
-            description.append("\n    got : ").append(actual).append('\n');
+            description.appendText("\n    got : ").appendValue(actual).appendValue('\n');
             fail(description.toString());
         }
     }

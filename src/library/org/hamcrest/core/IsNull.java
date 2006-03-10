@@ -2,8 +2,8 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 
 /**
@@ -15,7 +15,7 @@ public class IsNull implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("null");
+        description.appendText("null");
     }
 }
 

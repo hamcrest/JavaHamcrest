@@ -1,7 +1,7 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -33,10 +33,10 @@ public class IsMapContaining implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("map containing [");
+        description.appendText("map containing [");
         keyMatcher.describeTo(description);
-        description.append("->");
+        description.appendText("->");
         valueMatcher.describeTo(description);
-        description.append("]");
+        description.appendText("]");
     }
 }

@@ -1,7 +1,7 @@
 package org.hamcrest.object;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 public class HasToString implements Matcher {
     private final Matcher toStringMatcher;
@@ -15,8 +15,8 @@ public class HasToString implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("toString(");
+        description.appendText("toString(");
         toStringMatcher.describeTo(description);
-        description.append(")");
+        description.appendText(")");
     }
 }

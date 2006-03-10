@@ -2,8 +2,8 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 /**
  * Always evaluate to true or false (depending on what's passed into the constructor).
@@ -27,7 +27,7 @@ public class Always implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append(this.description);
+        description.appendText(this.description);
     }
 
 }

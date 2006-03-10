@@ -1,7 +1,7 @@
 package org.hamcrest.core;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 
 public class IsNothing implements Matcher {
@@ -21,6 +21,6 @@ public class IsNothing implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append(this.description);
+        description.appendText(this.description);
     }
 }

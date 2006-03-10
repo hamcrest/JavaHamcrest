@@ -1,7 +1,7 @@
 package org.hamcrest.core;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 public class IsCompatibleType implements Matcher {
     private final Class type;
@@ -15,6 +15,6 @@ public class IsCompatibleType implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("type < ").append(type.getName());
+        description.appendText("type < ").appendText(type.getName());
     }
 }

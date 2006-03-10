@@ -2,9 +2,8 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Formatting;
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 
 /**
@@ -28,8 +27,8 @@ public class IsSame implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("same(")
-                .append(Formatting.toReadableString(object))
-                .append(")");
+        description.appendText("same(")
+                .appendValue(object)
+                .appendText(")");
     }
 }

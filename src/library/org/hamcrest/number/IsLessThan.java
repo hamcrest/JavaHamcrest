@@ -2,9 +2,8 @@
  */
 package org.hamcrest.number;
 
-import org.hamcrest.Formatting;
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 
 /**
@@ -22,7 +21,7 @@ public class IsLessThan implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("a value less than ")
-                .append(Formatting.toReadableString(upperLimit));
+        description.appendText("a value less than ")
+                .appendValue(upperLimit);
     }
 }

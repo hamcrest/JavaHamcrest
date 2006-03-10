@@ -10,11 +10,11 @@ public interface Description {
     /**
      * Append some plain text to the description.
      */
-    Description append(String text);
+    Description appendText(String text);
 
     /**
      * Append an arbitary value to the description.
      */
-    Description append(Object object);
+    Description appendValue(Object value);
 
 }

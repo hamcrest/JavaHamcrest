@@ -2,8 +2,8 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 
 /**
@@ -21,7 +21,7 @@ public class IsNot implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("not ");
+        description.appendText("not ");
         matcher.describeTo(description);
     }
 }

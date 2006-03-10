@@ -1,7 +1,7 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -28,7 +28,7 @@ public class IsCollectionContaining implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("a collection containing ");
+        description.appendText("a collection containing ");
         elementMatcher.describeTo(description);
     }
 }

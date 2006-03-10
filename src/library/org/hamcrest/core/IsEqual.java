@@ -2,9 +2,8 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Formatting;
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 import java.lang.reflect.Array;
 
@@ -25,9 +24,9 @@ public class IsEqual implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("eq(")
-                .append(Formatting.toReadableString(object))
-                .append(")");
+        description.appendText("eq(")
+                .appendValue(object)
+                .appendText(")");
     }
 
     private static boolean areEqual(Object o1, Object o2) {

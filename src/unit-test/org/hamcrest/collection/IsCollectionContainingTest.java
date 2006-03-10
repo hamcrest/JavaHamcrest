@@ -1,14 +1,14 @@
 package org.hamcrest.collection;
 
+import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.hamcrest.core.IsEqual;
-import org.hamcrest.core.IsInTest;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
-public class IsCollectionContainingTest extends IsInTest {
+public class IsCollectionContainingTest extends AbstractMatcherTest {
     Matcher matcher = new IsCollectionContaining(new IsEqual("a"));
 
     public void testMatchesACollectionThatContainsAnElementMatchingTheGivenMatcher() {

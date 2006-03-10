@@ -1,7 +1,7 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 import java.lang.reflect.Array;
 
@@ -27,7 +27,7 @@ public class IsArrayContaining implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("an array containing ");
+        description.appendText("an array containing ");
         elementMatcher.describeTo(description);
     }
 }

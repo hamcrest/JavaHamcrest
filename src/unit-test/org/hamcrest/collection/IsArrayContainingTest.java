@@ -1,10 +1,10 @@
 package org.hamcrest.collection;
 
+import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.hamcrest.core.IsEqual;
-import org.hamcrest.core.IsInTest;
 
-public class IsArrayContainingTest extends IsInTest {
+public class IsArrayContainingTest extends AbstractMatcherTest {
     Matcher matcher = new IsArrayContaining(new IsEqual("a"));
 
     public void testMatchesAnArrayThatContainsAnElementMatchingTheGivenMatcher() {

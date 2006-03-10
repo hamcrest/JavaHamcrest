@@ -2,8 +2,8 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 
 /**
@@ -25,10 +25,10 @@ public class And implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("(");
+        description.appendText("(");
         left.describeTo(description);
-        description.append(" and ");
+        description.appendText(" and ");
         right.describeTo(description);
-        description.append(")");
+        description.appendText(")");
     }
 }

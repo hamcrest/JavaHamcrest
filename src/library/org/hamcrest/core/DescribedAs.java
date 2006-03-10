@@ -2,8 +2,8 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 /**
  * Provides a custom description to another matcher.
@@ -23,6 +23,6 @@ public class DescribedAs implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append(this.description);
+        description.appendText(this.description);
     }
 }

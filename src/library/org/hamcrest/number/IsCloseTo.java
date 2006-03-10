@@ -2,8 +2,8 @@
  */
 package org.hamcrest.number;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 
 /**
@@ -25,9 +25,9 @@ public class IsCloseTo implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.append("a numeric value within ")
-                .append(error)
-                .append(" of ")
-                .append(value);
+        description.appendText("a numeric value within ")
+                .appendValue(error)
+                .appendText(" of ")
+                .appendValue(value);
     }
 }

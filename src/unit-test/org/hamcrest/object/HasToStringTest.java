@@ -1,10 +1,10 @@
 package org.hamcrest.object;
 
 import junit.framework.TestCase;
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
-import org.hamcrest.internal.StringDescription;
+import org.hamcrest.Matcher;
 import org.hamcrest.core.IsEqual;
+import org.hamcrest.internal.StringDescription;
 
 public class HasToStringTest extends TestCase {
     private static final String TO_STRING_RESULT = "toString result";

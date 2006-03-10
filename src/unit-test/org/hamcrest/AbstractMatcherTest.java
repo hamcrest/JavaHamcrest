@@ -17,7 +17,7 @@ public abstract class AbstractMatcherTest extends TestCase {
         }
 
         public void describeTo(Description description) {
-            description.append("NEVER_EVALUATED");
+            description.appendText("NEVER_EVALUATED");
         }
     };
 
