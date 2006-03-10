@@ -9,7 +9,7 @@ import org.hamcrest.internal.StringDescription;
 
 public class MatcherAssert extends Assert {
 
-    public void assertThat(Object actual, Matcher matcher) {
+    public static void assertThat(Object actual, Matcher matcher) {
         if (!matcher.match(actual)) {
             Description description = new StringDescription();
             description.appendText("\nExpected: ");
@@ -19,35 +19,35 @@ public class MatcherAssert extends Assert {
         }
     }
 
-    public void assertThat(boolean actual, Matcher matcher) {
+    public static void assertThat(boolean actual, Matcher matcher) {
         assertThat(actual ? Boolean.TRUE : Boolean.FALSE, matcher);
     }
 
-    public void assertThat(byte actual, Matcher matcher) {
+    public static void assertThat(byte actual, Matcher matcher) {
         assertThat(new Byte(actual), matcher);
     }
 
-    public void assertThat(short actual, Matcher matcher) {
+    public static void assertThat(short actual, Matcher matcher) {
         assertThat(new Short(actual), matcher);
     }
 
-    public void assertThat(char actual, Matcher matcher) {
+    public static void assertThat(char actual, Matcher matcher) {
         assertThat(new Character(actual), matcher);
     }
 
-    public void assertThat(int actual, Matcher matcher) {
+    public static void assertThat(int actual, Matcher matcher) {
         assertThat(new Integer(actual), matcher);
     }
 
-    public void assertThat(long actual, Matcher matcher) {
+    public static void assertThat(long actual, Matcher matcher) {
         assertThat(new Long(actual), matcher);
     }
 
-    public void assertThat(float actual, Matcher matcher) {
+    public static void assertThat(float actual, Matcher matcher) {
         assertThat(new Float(actual), matcher);
     }
 
-    public void assertThat(double actual, Matcher matcher) {
+    public static void assertThat(double actual, Matcher matcher) {
         assertThat(new Double(actual), matcher);
     }
 
