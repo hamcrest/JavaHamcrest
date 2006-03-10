@@ -16,6 +16,7 @@
 * Added MatcherSugar class with static helpers for syntactic sugar (based on jmock MockObjectSupportTestCase).
 - Added MatcherSugar.IS_TRUE and MatcherSugar.IS_FALSE.
 - Added Always matcher (based upon NMock2 AlwaysMatcher).
+- Removed IsNothing (superceded by Always).
 - Added DescribedAs matcher (based upon NMock2 DescriptionOverride).
 - Added IsEqualsIgnoringCase matcher (based upon NMock1 IsEqualIgnoreCase). 
 - Added IsEqualsIgnoringWhiteSpace matcher (based upon NMock1 IsEqualIgnoreWhiteSpace).
