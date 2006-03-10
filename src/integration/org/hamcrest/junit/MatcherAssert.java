@@ -14,7 +14,7 @@ public class MatcherAssert extends Assert {
             Description description = new StringDescription();
             description.appendText("\nExpected: ");
             matcher.describeTo(description);
-            description.appendText("\n    got : ").appendValue(actual).appendValue('\n');
+            description.appendText("\n    got : ").appendValue(actual).appendText("\n");
             fail(description.toString());
         }
     }
