@@ -32,3 +32,5 @@
 * ComparisonMatcher (See NMock2)
 
 * Sugar for new matchers
+
+* NOT_NULL, IS_ANYTHING, etc -> notNull(), isAnything(), etc.

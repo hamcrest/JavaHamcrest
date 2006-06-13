@@ -1,0 +1,19 @@
+/*  Copyright (c) 2000-2006 hamcrest.org
+ */
+package org.hamcrest;
+
+import org.hamcrest.internal.StringDescription;
+
+public class MatcherAssert {
+
+    public static <T> void assertThat(T actual, Matcher<T> matcher) {
+        if (!matcher.match(actual)) {
+            Description description = new StringDescription();
+            description.appendText("\nExpected: ");
+            matcher.describeTo(description);
+            description.appendText("\n    got : ").appendValue(actual).appendText("\n");
+            throw new java.lang.AssertionError(description.toString());
+        }
+    }
+
+}

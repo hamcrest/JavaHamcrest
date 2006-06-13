@@ -6,7 +6,15 @@ import java.lang.reflect.Array;
 
 public class StringDescription implements Description {
 
-    private final StringBuffer buffer = new StringBuffer();
+    private final StringBuffer buffer;
+
+    public StringDescription() {
+        this(new StringBuffer());
+    }
+
+    public StringDescription(StringBuffer buffer) {
+        this.buffer = buffer;
+    }
 
     public Description appendText(String text) {
         buffer.append(text);
@@ -20,7 +28,7 @@ public class StringDescription implements Description {
             toJavaSyntax(buffer, (String) value);
         } else if (value instanceof Character) {
             buffer.append('"');
-            toJavaSyntax(buffer, ((Character) value).charValue());
+            toJavaSyntax(buffer, (Character) value);
             buffer.append('"');
         } else if (value instanceof Short) {
             buffer.append('<').append(value).append("s>");

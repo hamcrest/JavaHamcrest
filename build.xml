@@ -15,9 +15,11 @@
         <java-to-jar srcdir="src/library" destjar="build/hamcrest-library-${version}.jar"
                      classpath="build/hamcrest-api-${version}.jar"/>
         <java-to-jar srcdir="src/integration" destjar="build/hamcrest-integration-${version}.jar"
-                     classpath="build/hamcrest-api-${version}.jar"/>
-        <java-to-jar srcdir="src/unit-test" destjar="build/hamcrest-unit-test-${version}.jar"
                      classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar"/>
+        <java-to-jar srcdir="src/unit-test" destjar="build/hamcrest-unit-test-${version}.jar"
+                     classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar;build/hamcrest-integration-${version}.jar"/>
+        <java-to-jar srcdir="src/examples" destjar="build/hamcrest-examples-${version}.jar"
+                     classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar;build/hamcrest-integration-${version}.jar"/>
     </target>
 
     <target name="test" description="Test project">
@@ -45,10 +47,20 @@
         <attribute name="destjar" description="Path to Jar"/>
         <attribute name="classpath" description="Anything additional to add on the classpath" default=""/>
         <sequential>
+            <echo message="* Java source (@{srcdir}) -> Jar (@{destjar})"/>
             <mkdir dir="build/temp/@{destjar}.contents"/>
-            <javac srcdir="@{srcdir}" destdir="build/temp/@{destjar}.contents" classpath="@{classpath}"/>
+            <javac srcdir="@{srcdir}" destdir="build/temp/@{destjar}.contents">
+                <classpath>
+                    <fileset dir="lib/integration">
+                        <include name="*.jar"/>
+                    </fileset>
+                    <pathelement path="@{classpath}"/>
+                </classpath>
+            </javac>
             <jar jarfile="@{destjar}">
                 <fileset dir="build/temp/@{destjar}.contents"/>
+                <fileset dir="@{srcdir}"/>
+                <!-- Also put Java source in Jar for user's convenience. -->
             </jar>
         </sequential>
     </macrodef>
