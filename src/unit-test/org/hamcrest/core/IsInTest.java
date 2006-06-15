@@ -10,8 +10,8 @@ public class IsInTest extends AbstractMatcherTest {
     String[] elements = {"a", "b", "c"};
 
     public void testReturnsTrueIfArgumentIsInCollection() {
-        Collection collection = Arrays.asList(elements);
-        Matcher in = new IsIn(collection);
+        Collection<String> collection = Arrays.asList(elements);
+        Matcher<String> in = new IsIn<String>(collection);
 
         assertMatches("a", in, "a");
         assertMatches("b", in, "b");
@@ -20,7 +20,7 @@ public class IsInTest extends AbstractMatcherTest {
     }
 
     public void testReturnsTrueIfArgumentIsInArray() {
-        Matcher in = new IsIn(elements);
+        Matcher<String> in = new IsIn<String>(elements);
 
         assertMatches("a", in, "a");
         assertMatches("b", in, "b");
@@ -29,7 +29,7 @@ public class IsInTest extends AbstractMatcherTest {
     }
 
     public void testHasReadableDescription() {
-        Matcher in = new IsIn(elements);
+        Matcher<String> in = new IsIn<String>(elements);
 
         assertDescription("one of {\"a\", \"b\", \"c\"}", in);
     }

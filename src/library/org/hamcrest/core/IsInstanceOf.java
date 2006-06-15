@@ -9,7 +9,7 @@ import org.hamcrest.Matcher;
 /**
  * Tests whether the value is an instance of a class.
  */
-public class IsInstanceOf implements Matcher {
+public class IsInstanceOf implements Matcher<Class> {
     private final Class theClass;
 
     /**
@@ -22,8 +22,8 @@ public class IsInstanceOf implements Matcher {
         this.theClass = theClass;
     }
 
-    public boolean match(Object arg) {
-        return theClass.isInstance(arg);
+    public boolean match(Class cls) {
+        return theClass.isInstance(cls);
     }
 
     public void describeTo(Description description) {

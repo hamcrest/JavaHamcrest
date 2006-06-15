@@ -24,11 +24,11 @@ public abstract class AbstractMatcherTest extends TestCase {
     protected static final Object ARGUMENT_IGNORED = new Object();
     protected static final Object ANY_NON_NULL_ARGUMENT = new Object();
 
-    public void assertMatches(String message, Matcher c, Object arg) {
+    public <T> void assertMatches(String message, Matcher<T> c, T arg) {
         assertTrue(message, c.match(arg));
     }
 
-    public void assertDoesNotMatch(String message, Matcher c, Object arg) {
+    public <T> void assertDoesNotMatch(String message, Matcher<T> c, T arg) {
         assertFalse(message, c.match(arg));
     }
 

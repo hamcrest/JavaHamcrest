@@ -2,9 +2,6 @@
  */
 package org.hamcrest;
 
-import org.hamcrest.collection.IsArrayContaining;
-import org.hamcrest.collection.IsCollectionContaining;
-import org.hamcrest.collection.IsMapContaining;
 import org.hamcrest.core.And;
 import org.hamcrest.core.IsAnything;
 import org.hamcrest.core.IsCompatibleType;
@@ -144,80 +141,6 @@ public class Matchers {
 
     public static IsIn isIn(Object[] array) {
         return new IsIn(array);
-    }
-
-    public static IsCollectionContaining collectionContaining(Matcher elementMatcher) {
-        return new IsCollectionContaining(elementMatcher);
-    }
-
-    public static IsCollectionContaining collectionContaining(Object element) {
-        return collectionContaining(eq(element));
-    }
-
-    public static IsArrayContaining arrayContaining(Matcher elementMatcher) {
-        return new IsArrayContaining(elementMatcher);
-    }
-
-    public static IsArrayContaining arrayContaining(Object element) {
-        return arrayContaining(eq(element));
-    }
-
-    public static IsArrayContaining arrayContaining(boolean element) {
-        // Avoid newing Boolean objects.
-        // Boolean.valueOf() not available on JDK 1.3.
-        return arrayContaining(element ? Boolean.TRUE : Boolean.FALSE);
-    }
-
-    public static IsArrayContaining arrayContaining(byte element) {
-        return arrayContaining(new Byte(element));
-    }
-
-    public static IsArrayContaining arrayContaining(short element) {
-        return arrayContaining(new Short(element));
-    }
-
-    public static IsArrayContaining arrayContaining(char element) {
-        return arrayContaining(new Character(element));
-    }
-
-    public static IsArrayContaining arrayContaining(int element) {
-        return arrayContaining(new Integer(element));
-    }
-
-    public static IsArrayContaining arrayContaining(long element) {
-        return arrayContaining(new Long(element));
-    }
-
-    public static IsArrayContaining arrayContaining(float element) {
-        return arrayContaining(new Float(element));
-    }
-
-    public static IsArrayContaining arrayContaining(double element) {
-        return arrayContaining(new Double(element));
-    }
-
-    public static IsMapContaining mapContaining(Matcher keyMatcher, Matcher valueMatcher) {
-        return new IsMapContaining(keyMatcher, valueMatcher);
-    }
-
-    public static IsMapContaining mapContaining(Object key, Object value) {
-        return mapContaining(eq(key), eq(value));
-    }
-
-    public static IsMapContaining mapWithKey(Object key) {
-        return mapWithKey(eq(key));
-    }
-
-    public static IsMapContaining mapWithKey(Matcher keyMatcher) {
-        return new IsMapContaining(keyMatcher, ANYTHING);
-    }
-
-    public static IsMapContaining mapWithValue(Object value) {
-        return mapWithValue(eq(value));
-    }
-
-    public static IsMapContaining mapWithValue(Matcher valueMatcher) {
-        return new IsMapContaining(ANYTHING, valueMatcher);
     }
 
     /**

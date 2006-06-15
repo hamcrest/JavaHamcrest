@@ -3,26 +3,21 @@
 package org.hamcrest.core;
 
 import org.hamcrest.AbstractMatcherTest;
-
+import static org.hamcrest.core.IsAnything.anything;
 
 public class IsAnythingTest extends AbstractMatcherTest {
     public void testAlwaysEvaluatesToTrue() {
-        IsAnything isAnything = new IsAnything();
-
-        assertTrue(isAnything.match(null));
-        assertTrue(isAnything.match(new Object()));
+        assertMatches("should have matched null", anything(), null);
+        assertMatches("should have matched new Object()", anything(), new Object());
+        assertMatches("should have matched string", anything(), "hi");
     }
 
     public void testHasUsefulDefaultDescription() {
-        IsAnything isAnything = new IsAnything();
-
-        assertDescription("ANYTHING", isAnything);
+        assertDescription("ANYTHING", anything());
     }
 
     public void testCanOverrideDescription() {
         String description = "description";
-        IsAnything isAnything = new IsAnything(description);
-
-        assertDescription(description, isAnything);
+        assertDescription(description, anything(description));
     }
 }

@@ -4,6 +4,7 @@ package org.hamcrest.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 import java.lang.reflect.Array;
 
@@ -12,14 +13,14 @@ import java.lang.reflect.Array;
  * Is the value equal to another value, as tested by the
  * {@link java.lang.Object#equals} invokedMethod?
  */
-public class IsEqual implements Matcher {
+public class IsEqual<T> implements Matcher<T> {
     private final Object object;
 
-    public IsEqual(Object equalArg) {
+    public IsEqual(T equalArg) {
         object = equalArg;
     }
 
-    public boolean match(Object arg) {
+    public boolean match(T arg) {
         return areEqual(object, arg);
     }
 
@@ -58,4 +59,10 @@ public class IsEqual implements Matcher {
     private static boolean isArray(Object o) {
         return o.getClass().isArray();
     }
+
+    @Factory
+    public static <T> Matcher<T> eq(T operand) {
+        return new IsEqual<T>(operand);
+    }
+
 }

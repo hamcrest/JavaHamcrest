@@ -11,17 +11,17 @@ import org.hamcrest.Matcher;
  * shortcut, so that the second matcher is not called if the first
  * matcher returns <code>true</code>.
  */
-public class Or implements Matcher {
+public class Or<T> implements Matcher<T> {
 
-    private final Matcher left;
-    private final Matcher right;
+    private final Matcher<T> left;
+    private final Matcher<T> right;
 
-    public Or(Matcher left, Matcher right) {
+    public Or(Matcher<T> left, Matcher<T> right) {
         this.left = left;
         this.right = right;
     }
 
-    public boolean match(Object o) {
+    public boolean match(T o) {
         return left.match(o) || right.match(o);
     }
 

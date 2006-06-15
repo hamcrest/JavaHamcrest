@@ -8,17 +8,17 @@ import org.hamcrest.Matcher;
 /**
  * Provides a custom description to another matcher.
  */
-public class DescribedAs implements Matcher {
+public class DescribedAs<T> implements Matcher<T> {
 
     private final String description;
-    private final Matcher matcher;
+    private final Matcher<T> matcher;
 
-    public DescribedAs(String description, Matcher matcher) {
+    public DescribedAs(String description, Matcher<T> matcher) {
         this.description = description;
         this.matcher = matcher;
     }
 
-    public boolean match(Object o) {
+    public boolean match(T o) {
         return matcher.match(o);
     }
 

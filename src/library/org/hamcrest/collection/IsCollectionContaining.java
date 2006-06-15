@@ -2,27 +2,28 @@ package org.hamcrest.collection;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
+import static org.hamcrest.core.IsEqual.eq;
 
 import java.util.Collection;
-import java.util.Iterator;
 
-public class IsCollectionContaining implements Matcher {
-    private final Matcher elementMatcher;
+public class IsCollectionContaining<T> implements Matcher<Collection<T>> {
+    private final Matcher<T> elementMatcher;
+//Comparator<? super T> c
+    //int binarySearch(List<? extends Comparable<? super T>> list, T key) {
 
-    public IsCollectionContaining(Matcher elementMatcher) {
+    public IsCollectionContaining(Matcher<T> elementMatcher) {
         this.elementMatcher = elementMatcher;
     }
 
-    public boolean match(Object o) {
-        return o != null
-                && o instanceof Collection
-                && collectionContainsMatchingElement((Collection) o);
-    }
-
-    private boolean collectionContainsMatchingElement(Collection collection) {
-        Iterator i = collection.iterator();
-        while (i.hasNext()) {
-            if (elementMatcher.match(i.next())) return true;
+    public boolean match(Collection<T> collection) {
+        if (collection == null) {
+            return false;
+        }
+        for (T item : collection) {
+            if (elementMatcher.match(item)){
+                return true;
+            }
         }
         return false;
     }
@@ -31,4 +32,15 @@ public class IsCollectionContaining implements Matcher {
         description.appendText("a collection containing ");
         elementMatcher.describeTo(description);
     }
+
+    @Factory
+    public static <T> Matcher<Collection<T>> collectionContaining(Matcher<T> elementMatcher) {
+        return new IsCollectionContaining<T>(elementMatcher);
+    }
+
+    @Factory
+    public static <T> Matcher<Collection<T>> collectionContaining(T element) {
+        return collectionContaining(eq(element));
+    }
+
 }

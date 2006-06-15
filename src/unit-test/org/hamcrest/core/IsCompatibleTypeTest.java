@@ -43,9 +43,9 @@ public class IsCompatibleTypeTest extends AbstractMatcherTest {
         assertDoesNotMatch("should not match incompatible types", new IsCompatibleType(String.class), Integer.class);
     }
 
-    public void testDoesNotMatchObjectsThatAreNotClasses() {
-        assertDoesNotMatch("should not match", new IsCompatibleType(BaseClass.class), "a string");
-    }
+//    public void testDoesNotMatchObjectsThatAreNotClasses() {
+//        assertDoesNotMatch("should not match", new IsCompatibleType(BaseClass.class), "a string");
+//    }
 
     public void testHasReadableDescription() {
         assertDescription("type < java.lang.Runnable",

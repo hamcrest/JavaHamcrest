@@ -9,7 +9,7 @@ import org.hamcrest.Matcher;
 /**
  * Is the value the same object as another value?
  */
-public class IsSame implements Matcher {
+public class IsSame<T> implements Matcher<T> {
     private final Object object;
 
     /**
@@ -18,7 +18,7 @@ public class IsSame implements Matcher {
      * @param object The predicate evaluates to true only when the argument is
      *               this object.
      */
-    public IsSame(Object object) {
+    public IsSame(T object) {
         this.object = object;
     }
 

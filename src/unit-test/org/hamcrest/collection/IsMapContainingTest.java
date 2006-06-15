@@ -1,43 +1,42 @@
 package org.hamcrest.collection;
 
 import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
-import org.hamcrest.core.IsAnything;
-import org.hamcrest.core.IsEqual;
+import static org.hamcrest.collection.IsMapContaining.mapContaining;
+import static org.hamcrest.core.IsAnything.anything;
+import static org.hamcrest.core.IsEqual.eq;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class IsMapContainingTest extends AbstractMatcherTest {
-    private static final IsAnything ANYTHING = IsAnything.INSTANCE;
 
     public void testMatchesMapContainingMatchingKeyAndValue() {
-        Map map = new HashMap();
-        map.put("a", "A");
-        map.put("b", "B");
+        Map<String,Integer> map = new HashMap<String,Integer>();
+        map.put("a", 1);
+        map.put("b", 2);
 
-        Matcher matcherA = new IsMapContaining(new IsEqual("a"), new IsEqual("A"));
-        Matcher matcherB = new IsMapContaining(new IsEqual("b"), new IsEqual("B"));
-        Matcher matcherC = new IsMapContaining(new IsEqual("c"), new IsEqual("C"));
-
-        assertMatches("matcherA", matcherA, map);
-        assertMatches("matcherB", matcherB, map);
-        assertDoesNotMatch("matcherC", matcherC, map);
-    }
-
-    public void testDoesNotMatchAnObjectThatIsNotAMap() {
-        assertDoesNotMatch("should not match a string",
-                new IsMapContaining(ANYTHING, ANYTHING), "not a map");
+        assertMatches("matcherA", mapContaining(eq("a"), eq(1)), map);
+        assertMatches("matcherB", mapContaining(eq("b"), eq(2)), map);
+        assertDoesNotMatch("matcherC", mapContaining(eq("c"), eq(3)), map);
     }
 
     public void testDoesNotMatchNull() {
-        assertDoesNotMatch("should not match a string",
-                new IsMapContaining(ANYTHING, ANYTHING), null);
+        assertDoesNotMatch("should not match null",
+                mapContaining(anything(), anything()), null);
     }
 
     public void testHasReadableDescription() {
-        Matcher matcher = new IsMapContaining(new IsEqual("a"), new IsEqual("A"));
-
-        assertDescription("map containing [eq(\"a\")->eq(\"A\")]", matcher);
+        assertDescription("map containing [eq(\"a\")->eq(<2>)]",
+                mapContaining(eq("a"), (eq(2))));
     }
+
+    // Remaining code no longer compiles, thanks to generics. I think that's a good thing, but
+    // I still need to investigate how this behaves with code that doesn't use generics.
+    // I expect ClassCastExceptions will be thrown.
+    // -Joe.
+    
+//    public void testDoesNotMatchAnObjectThatIsNotAMap() {
+//        assertDoesNotMatch("should not match a string",
+//                mapContaining(ANYTHING, ANYTHING), "not a map");
+//    }
 }

@@ -9,14 +9,14 @@ import org.hamcrest.Matcher;
 /**
  * Calculates the logical negation of a matcher.
  */
-public class IsNot implements Matcher {
-    private final Matcher matcher;
+public class IsNot<T> implements Matcher<T> {
+    private final Matcher<T> matcher;
 
-    public IsNot(Matcher matcher) {
+    public IsNot(Matcher<T> matcher) {
         this.matcher = matcher;
     }
 
-    public boolean match(Object arg) {
+    public boolean match(T arg) {
         return !matcher.match(arg);
     }
 

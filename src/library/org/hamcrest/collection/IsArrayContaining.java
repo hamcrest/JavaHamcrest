@@ -2,26 +2,29 @@ package org.hamcrest.collection;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
+import static org.hamcrest.core.IsEqual.eq;
 
 import java.lang.reflect.Array;
 
-public class IsArrayContaining implements Matcher {
-    private final Matcher elementMatcher;
+public class IsArrayContaining<T> implements Matcher<T[]> {
 
-    public IsArrayContaining(Matcher elementMatcher) {
+    private final Matcher<T> elementMatcher;
+
+    public IsArrayContaining(Matcher<T> elementMatcher) {
         this.elementMatcher = elementMatcher;
     }
 
-    public boolean match(Object o) {
-        return o != null
-                && o.getClass().isArray()
-                && arrayContainsMatchingElement(o);
-    }
-
-    private boolean arrayContainsMatchingElement(Object array) {
+    @SuppressWarnings({"unchecked"})
+    public boolean match(T[] array) {
+        if (array == null) {
+            return false;
+        }
         int size = Array.getLength(array);
         for (int i = 0; i < size; i++) {
-            if (elementMatcher.match(Array.get(array, i))) return true;
+            if (elementMatcher.match((T)Array.get(array, i))) {
+                return true;
+            }
         }
         return false;
     }
@@ -30,4 +33,15 @@ public class IsArrayContaining implements Matcher {
         description.appendText("an array containing ");
         elementMatcher.describeTo(description);
     }
+
+    @Factory
+    public static <T> Matcher<T[]> arrayContaining(Matcher<T> elementMatcher) {
+        return new IsArrayContaining<T>(elementMatcher);
+    }
+
+    @Factory
+    public static <T> Matcher<T[]> arrayContaining(T element) {
+        return arrayContaining(eq(element));
+    }
+
 }
