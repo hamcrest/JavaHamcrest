@@ -13,8 +13,6 @@
   - iterables (jdk 1.5)
 
 * String matchers
-  - case insensitive
-  - whitespace insensitive
   - reg exp matching
 
 * XML
@@ -33,4 +31,7 @@
 
 * Sugar for new matchers
 
-* NOT_NULL, IS_ANYTHING, etc -> notNull(), isAnything(), etc.
+* And/Or(Matcher... )
+
+* and(hasProperty(),eq())
+

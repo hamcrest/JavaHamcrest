@@ -2,14 +2,18 @@
  */
 package org.hamcrest.core;
 
+import static org.hamcrest.core.IsNot.not;
 import org.hamcrest.AbstractMatcherTest;
-
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsNull.isNull;
+import static org.hamcrest.core.IsNull.isNotNull;
 
 public class IsNullTest extends AbstractMatcherTest {
     public void testEvaluatesToTrueIfArgumentIsNull() {
-        IsNull isNull = new IsNull();
+        assertThat(null, isNull());
+        assertThat(ANY_NON_NULL_ARGUMENT, not(isNull()));
 
-        assertTrue(isNull.match(null));
-        assertFalse(isNull.match(ANY_NON_NULL_ARGUMENT));
+        assertThat(ANY_NON_NULL_ARGUMENT, isNotNull());
+        assertThat(null, not(isNotNull()));
     }
 }

@@ -2,7 +2,10 @@
  */
 package org.hamcrest.core;
 
+import static org.hamcrest.core.IsSame.same;
+import static org.hamcrest.core.IsNot.not;
 import org.hamcrest.AbstractMatcherTest;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class IsSameTest extends AbstractMatcherTest {
@@ -10,19 +13,15 @@ public class IsSameTest extends AbstractMatcherTest {
         Object o1 = new Object();
         Object o2 = new Object();
 
-        IsSame isSame = new IsSame(o1);
-
-        assertTrue(isSame.match(o1));
-        assertFalse(isSame.match(o2));
+        assertThat(o1, same(o1));
+        assertThat(o2, not(same(o1)));
     }
 
     public void testReturnsReadableDescriptionFromToString() {
-        IsSame isSame = new IsSame("ARG");
-        assertDescription("same(\"ARG\")", isSame);
+        assertDescription("same(\"ARG\")", same("ARG"));
     }
 
     public void testReturnsReadableDescriptionFromToStringWhenInitialisedWithNull() {
-        IsSame isSame = new IsSame(null);
-        assertDescription("same(null)", isSame);
+        assertDescription("same(null)", same(null));
     }
 }

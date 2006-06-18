@@ -3,33 +3,36 @@
 package org.hamcrest.core;
 
 import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Always.alwaysFails;
+import static org.hamcrest.core.Always.alwaysPasses;
+import static org.hamcrest.core.IsNot.not;
 
 public class AlwaysTest extends AbstractMatcherTest {
 
     public void testAlwaysReturnsFixedBooleanValueFromMatchesMethod() {
-        Matcher matcher = new Always(true);
-        assertTrue(matcher.match("something"));
-        assertTrue(matcher.match("something else"));
-        assertTrue(matcher.match(null));
-        assertTrue(matcher.match(1));
-        assertTrue(matcher.match(1.0));
-        assertTrue(matcher.match(new Object()));
+        assertThat("something", alwaysPasses());
+        assertThat("something else", alwaysPasses());
+        assertThat(null, alwaysPasses());
+        assertThat(1, alwaysPasses());
+        assertThat(1.0, alwaysPasses());
+        assertThat(new Object(), alwaysPasses());
 
-        matcher = new Always(false);
-        assertFalse(matcher.match("something"));
-        assertFalse(matcher.match("something else"));
-        assertFalse(matcher.match(null));
-        assertFalse(matcher.match(1));
-        assertFalse(matcher.match(1.0));
-        assertFalse(matcher.match(new Object()));
+        assertThat("something", not(alwaysFails()));
+        assertThat("something else", not(alwaysFails()));
+        assertThat(null, not(alwaysFails()));
+        assertThat(1, not(alwaysFails()));
+        assertThat(1.0, not(alwaysFails()));
+        assertThat(new Object(), not(alwaysFails()));
     }
 
     public void testIsGivenADescription() {
         String description = "DESCRIPTION";
-        boolean irrelevantFlag = false;
 
-        assertDescription(description, new Always(irrelevantFlag, description));
+        assertDescription("always passes", alwaysPasses());
+        assertDescription("always fails", alwaysFails());
+        assertDescription(description, alwaysPasses(description));
+        assertDescription(description, alwaysFails(description));
     }
 
 }

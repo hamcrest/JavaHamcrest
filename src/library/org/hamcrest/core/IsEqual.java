@@ -60,16 +60,26 @@ public class IsEqual<T> implements Matcher<T> {
         return o.getClass().isArray();
     }
 
+    /**
+     * Is the value equal to another value, as tested by the
+     * {@link java.lang.Object#equals} invokedMethod?
+     */
     @Factory
     public static <T> Matcher<T> eq(T operand) {
         return new IsEqual<T>(operand);
     }
 
+    /**
+     * Is the value true?
+     */
     @Factory
     public static Matcher<Boolean> isTrue() {
         return eq(true);
     }
 
+    /**
+     * Is the value false?
+     */
     @Factory
     public static Matcher<Boolean> isFalse() {
         return eq(false);

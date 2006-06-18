@@ -1,6 +1,8 @@
 package org.hamcrest.core;
 
 import org.hamcrest.AbstractMatcherTest;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsCompatibleType.compatibleType;
 
 public class IsCompatibleTypeTest extends AbstractMatcherTest {
     public static class BaseClass {
@@ -19,36 +21,31 @@ public class IsCompatibleTypeTest extends AbstractMatcherTest {
     }
 
     public void testMatchesSameClass() {
-        assertMatches("should match", new IsCompatibleType(BaseClass.class), BaseClass.class);
+        assertThat(BaseClass.class, compatibleType(BaseClass.class));
     }
 
     public void testMatchesSameInterface() {
-        assertMatches("should match", new IsCompatibleType(BaseInterface.class), BaseInterface.class);
+        assertThat(BaseInterface.class, compatibleType(BaseInterface.class));
     }
 
     public void testMatchesExtendedClass() {
-        assertMatches("should match", new IsCompatibleType(BaseClass.class), ExtendedClass.class);
+        assertThat(ExtendedClass.class, compatibleType(BaseClass.class));
     }
 
     public void testMatchesClassImplementingInterface() {
-        assertMatches("should match", new IsCompatibleType(BaseInterface.class), ClassImplementingBaseInterface.class);
+        assertThat(ClassImplementingBaseInterface.class, compatibleType(BaseInterface.class));
     }
 
     public void testMatchesExtendedInterface() {
-        assertMatches("should match", new IsCompatibleType(BaseInterface.class), ExtendedInterface.class);
+        assertThat(ExtendedInterface.class, compatibleType(BaseInterface.class));
     }
 
-    public void testDoesNotMatchIncompatibleTypes() {
-        assertDoesNotMatch("should not match base type", new IsCompatibleType(ExtendedClass.class), BaseClass.class);
-        assertDoesNotMatch("should not match incompatible types", new IsCompatibleType(String.class), Integer.class);
-    }
-
-//    public void testDoesNotMatchObjectsThatAreNotClasses() {
-//        assertDoesNotMatch("should not match", new IsCompatibleType(BaseClass.class), "a string");
+//    public void testDoesNotMatchIncompatibleTypes() {
+//        assertThat(BaseClass.class, not(compatibleType(ExtendedClass.class)));
+//        assertThat(Integer.class, not(compatibleType(String.class)));
 //    }
 
     public void testHasReadableDescription() {
-        assertDescription("type < java.lang.Runnable",
-                new IsCompatibleType(Runnable.class));
+        assertDescription("type < java.lang.Runnable", compatibleType(Runnable.class));
     }
 }

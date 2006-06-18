@@ -13,29 +13,39 @@ import org.hamcrest.Factory;
  * matcher returns <code>false</code>.
  */
 public class And<T> implements Matcher<T> {
-    private final Matcher<T> left;
-    private final Matcher<T> right;
+    private final Matcher<T>[] matchers;
 
-    public And(Matcher<T> left, Matcher<T> right) {
-        this.left = left;
-        this.right = right;
+
+    public And(Matcher<T>[] matchers) {
+        this.matchers = matchers;
     }
 
     public boolean match(T o) {
-        return left.match(o) && right.match(o);
+        for (Matcher<T> matcher : matchers) {
+            if (!matcher.match(o)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void describeTo(Description description) {
         description.appendText("(");
-        left.describeTo(description);
-        description.appendText(" and ");
-        right.describeTo(description);
+        boolean seenFirst = false;
+        for (Matcher<T> matcher : matchers) {
+            if (seenFirst) {
+                description.appendText(" and ");
+            } else {
+                seenFirst = true;
+            }
+            matcher.describeTo(description);
+        }
         description.appendText(")");
     }
 
     @Factory
-    public static <T> Matcher<T> and(Matcher<T> left, Matcher<T> right) {
-        return new And<T>(left, right);
+    public static <T> Matcher<T> and(Matcher<T>... matchers) {
+        return new And<T>(matchers);
     }
 
 }

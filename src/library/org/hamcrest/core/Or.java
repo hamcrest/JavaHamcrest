@@ -14,29 +14,38 @@ import org.hamcrest.Factory;
  */
 public class Or<T> implements Matcher<T> {
 
-    private final Matcher<T> left;
-    private final Matcher<T> right;
+    private final Matcher<T>[] matchers;
 
-    public Or(Matcher<T> left, Matcher<T> right) {
-        this.left = left;
-        this.right = right;
+    public Or(Matcher<T>... matchers) {
+        this.matchers = matchers;
     }
 
     public boolean match(T o) {
-        return left.match(o) || right.match(o);
+        for (Matcher<T> matcher : matchers) {
+            if (matcher.match(o)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void describeTo(Description description) {
         description.appendText("(");
-        left.describeTo(description);
-        description.appendText(" or ");
-        right.describeTo(description);
+        boolean seenFirst = false;
+        for (Matcher<T> matcher : matchers) {
+            if (seenFirst) {
+                description.appendText(" or ");
+            } else {
+                seenFirst = true;
+            }
+            matcher.describeTo(description);
+        }
         description.appendText(")");
     }
 
     @Factory
-    public static <T> Matcher<T> or(Matcher<T> left, Matcher<T> right) {
-        return new Or<T>(left, right);
+    public static <T> Matcher<T> or(Matcher<T>... matchers) {
+        return new Or<T>(matchers);
     }
 
 }

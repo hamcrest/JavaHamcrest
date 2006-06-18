@@ -4,6 +4,7 @@ package org.hamcrest.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 /**
  * Provides a custom description to another matcher.
@@ -24,5 +25,10 @@ public class DescribedAs<T> implements Matcher<T> {
 
     public void describeTo(Description description) {
         description.appendText(this.description);
+    }
+
+    @Factory
+    public static <T> Matcher<T> describedAs(String description, Matcher<T> matcher) {
+        return new DescribedAs<T>(description, matcher);
     }
 }

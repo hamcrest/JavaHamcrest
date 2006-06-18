@@ -2,6 +2,7 @@ package org.hamcrest.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,10 +12,6 @@ public class IsIn<T> implements Matcher<T> {
 
     public IsIn(Collection<T> collection) {
         this.collection = collection;
-    }
-
-    public IsIn(T... elements) {
-        collection = Arrays.asList(elements);
     }
 
     public boolean match(T o) {
@@ -34,4 +31,15 @@ public class IsIn<T> implements Matcher<T> {
         }
         description.appendText("}");
     }
+
+    @Factory 
+    public static <T> Matcher<T> isInCollection(Collection<T> elements) {
+        return new IsIn<T>(elements);
+    }
+
+    @Factory
+    public static <T> Matcher<T> isIn(T... elements) {
+        return isInCollection(Arrays.asList(elements));
+    }
+
 }

@@ -3,18 +3,24 @@
 package org.hamcrest.core;
 
 import org.hamcrest.AbstractMatcherTest;
-
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.Or.or;
 
 public class OrTest extends AbstractMatcherTest {
-    public void testEvaluatesToTheTheLogicalDisjunctionOfTwoOtherMatcher() {
-        assertTrue(new Or(TRUE_MATCHER, TRUE_MATCHER).match(ARGUMENT_IGNORED));
-        assertTrue(new Or(FALSE_MATCHER, TRUE_MATCHER).match(ARGUMENT_IGNORED));
-        assertTrue(new Or(TRUE_MATCHER, FALSE_MATCHER).match(ARGUMENT_IGNORED));
-        assertFalse(new Or(FALSE_MATCHER, FALSE_MATCHER).match(ARGUMENT_IGNORED));
+
+    public void testEvaluatesToTheTheLogicalDisjunctionOfTwoOtherMatchers() {
+        assertThat("good", or(eq("bad"), eq("good")));
+        assertThat("good", or(eq("good"), eq("good")));
+        assertThat("good", or(eq("good"), eq("bad")));
+
+        assertThat("good", not(or(eq("bad"), eq("bad"))));
     }
 
-
-    public void testEvaluatesArgumentsLeftToRightAndShortCircuitsEvaluation() {
-        assertTrue(new Or(TRUE_MATCHER, NEVER_EVALUATED).match(ARGUMENT_IGNORED));
+    public void testEvaluatesToTheTheLogicalDisjunctionOfManyOtherMatchers() {
+        assertThat("good", or(eq("bad"), eq("good"), eq("bad"), eq("bad"), eq("bad")));
+        assertThat("good", not(or(eq("bad"), eq("bad"), eq("bad"), eq("bad"), eq("bad"))));
     }
+
 }

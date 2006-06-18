@@ -27,8 +27,8 @@ public class IsNot<T> implements Matcher<T> {
     }
 
     @Factory
-    public static <T> Matcher<T> not(Matcher<T> c) {
-        return new IsNot<T>(c);
+    public static <T> Matcher<T> not(Matcher<T> matcher) {
+        return new IsNot<T>(matcher);
     }
 
 }

@@ -11,19 +11,13 @@ import org.hamcrest.Factory;
  * Is the value the same object as another value?
  */
 public class IsSame<T> implements Matcher<T> {
-    private final Object object;
+    private final T object;
 
-    /**
-     * Creates a new instance of IsSame
-     *
-     * @param object The predicate evaluates to true only when the argument is
-     *               this object.
-     */
     public IsSame(T object) {
         this.object = object;
     }
 
-    public boolean match(Object arg) {
+    public boolean match(T arg) {
         return arg == object;
     }
 
@@ -31,9 +25,15 @@ public class IsSame<T> implements Matcher<T> {
         description.appendText("same(") .appendValue(object) .appendText(")");
     }
 
+    /**
+     * Creates a new instance of IsSame
+     *
+     * @param object The predicate evaluates to true only when the argument is
+     *               this object.
+     */
     @Factory
-    public static <T> Matcher<T> same(T operand) {
-        return new IsSame<T>(operand);
+    public static <T> Matcher<T> same(T object) {
+        return new IsSame<T>(object);
     }
 
 }
