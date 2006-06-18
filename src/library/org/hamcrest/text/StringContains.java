@@ -22,7 +22,7 @@ public class StringContains extends SubstringMatcher {
     }
 
     @Factory
-    public static Matcher<String> stringContains(String substring) {
+    public static Matcher<String> containsString(String substring) {
         return new StringContains(substring);
     }
 

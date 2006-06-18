@@ -2,7 +2,7 @@
  */
 package org.hamcrest.text;
 
-import static org.hamcrest.text.StringContains.stringContains;
+import static org.hamcrest.text.StringContains.containsString;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
@@ -10,7 +10,7 @@ import org.hamcrest.Matcher;
 public class StringContainsTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
 
-    Matcher<String> stringContains = stringContains(EXCERPT);
+    Matcher<String> stringContains = containsString(EXCERPT);
 
     public void testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring() {
         assertTrue("should be true if excerpt at beginning",
