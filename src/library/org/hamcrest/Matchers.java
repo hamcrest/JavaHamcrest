@@ -12,7 +12,6 @@ import org.hamcrest.core.IsNot;
 import org.hamcrest.core.IsNull;
 import org.hamcrest.core.IsSame;
 import org.hamcrest.core.Or;
-import org.hamcrest.number.IsCloseTo;
 import org.hamcrest.object.HasProperty;
 import org.hamcrest.object.HasPropertyWithValue;
 import org.hamcrest.object.HasToString;
@@ -79,10 +78,6 @@ public class Matchers {
         return eq(new Double(operand));
     }
 
-    public static IsCloseTo eq(double operand, double error) {
-        return new IsCloseTo(operand, error);
-    }
-
     public static IsSame same(Object operand) {
         return new IsSame(operand);
     }
@@ -107,16 +102,16 @@ public class Matchers {
         return new StringEndsWith(substring);
     }
 
-    public static IsNot not(Matcher c) {
-        return new IsNot(c);
+    public static <T> Matcher<T> not(Matcher<T> c) {
+        return new IsNot<T>(c);
     }
 
-    public static And and(Matcher left, Matcher right) {
-        return new And(left, right);
+    public static <T> Matcher<T> and(Matcher<T> left, Matcher<T> right) {
+        return new And<T>(left, right);
     }
 
-    public static Or or(Matcher left, Matcher right) {
-        return new Or(left, right);
+    public static <T> Matcher<T> or(Matcher<T> left, Matcher<T> right) {
+        return new Or<T>(left, right);
     }
 
     public static HasPropertyWithValue hasProperty(String propertyName, Matcher expectation) {

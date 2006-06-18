@@ -3,30 +3,20 @@
 package org.hamcrest.number;
 
 import org.hamcrest.AbstractMatcherTest;
-
+import org.hamcrest.Matcher;
+import static org.hamcrest.number.IsCloseTo.eq;
 
 public class IsCloseToTest extends AbstractMatcherTest {
 
     public void testEvaluatesToTrueIfArgumentIsEqualToADoubleValueWithinSomeError() {
-        IsCloseTo p = new IsCloseTo(1.0, 0.5);
+        Matcher<Double> p = eq(1.0, 0.5);
 
-        assertTrue(p.match(new Double(1.0)));
-        assertTrue(p.match(new Double(0.5)));
-        assertTrue(p.match(new Double(1.5)));
+        assertTrue(p.match(1.0));
+        assertTrue(p.match(0.5d));
+        assertTrue(p.match(1.5d));
 
-        assertTrue(p.match(new Float(1.0)));
-        assertTrue(p.match(new Integer(1)));
-
-        assertTrue("number too large", !p.match(new Double(2.0)));
-        assertTrue("number too small", !p.match(new Double(0.0)));
-
-        try {
-            p.match("wrong type");
-            fail("ClassCastException expected for wrong type of argument");
-        }
-        catch (ClassCastException ex) {
-            // expected
-        }
+        assertTrue("number too large", !p.match(2.0));
+        assertTrue("number too small", !p.match(0.0));
     }
 
 }

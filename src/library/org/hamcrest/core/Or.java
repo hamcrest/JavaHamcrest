@@ -4,6 +4,7 @@ package org.hamcrest.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 
 /**
@@ -32,4 +33,10 @@ public class Or<T> implements Matcher<T> {
         right.describeTo(description);
         description.appendText(")");
     }
+
+    @Factory
+    public static <T> Matcher<T> or(Matcher<T> left, Matcher<T> right) {
+        return new Or<T>(left, right);
+    }
+
 }

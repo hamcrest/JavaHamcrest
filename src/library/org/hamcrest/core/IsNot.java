@@ -4,6 +4,7 @@ package org.hamcrest.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 
 /**
@@ -24,4 +25,10 @@ public class IsNot<T> implements Matcher<T> {
         description.appendText("not ");
         matcher.describeTo(description);
     }
+
+    @Factory
+    public static <T> Matcher<T> not(Matcher<T> c) {
+        return new IsNot<T>(c);
+    }
+
 }

@@ -4,13 +4,14 @@ package org.hamcrest.number;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 
 /**
  * Is the value a number equal to a value within some range of
  * acceptable error?
  */
-public class IsCloseTo implements Matcher {
+public class IsCloseTo implements Matcher<Double> {
     private final double error;
     private final double value;
 
@@ -19,9 +20,8 @@ public class IsCloseTo implements Matcher {
         this.value = value;
     }
 
-    public boolean match(Object arg) {
-        double argValue = ((Number) arg).doubleValue();
-        return Math.abs((argValue - value)) <= error;
+    public boolean match(Double item) {
+        return Math.abs((item - value)) <= error;
     }
 
     public void describeTo(Description description) {
@@ -30,4 +30,11 @@ public class IsCloseTo implements Matcher {
                 .appendText(" of ")
                 .appendValue(value);
     }
+
+    @Factory
+    public static Matcher<Double> eq(double operand, double error) {
+        return new IsCloseTo(operand, error);
+    }
+
+
 }
