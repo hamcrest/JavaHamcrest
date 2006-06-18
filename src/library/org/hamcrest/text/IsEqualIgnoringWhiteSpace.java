@@ -4,11 +4,15 @@ package org.hamcrest.text;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 /**
  * Tests if a string is equal to another string, ignoring any changes in whitespace.
  */
-public class IsEqualIgnoringWhiteSpace implements Matcher {
+public class IsEqualIgnoringWhiteSpace implements Matcher<String> {
+
+    // TODO: Replace String with CharSequence to allow for easy interopability between
+    //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
 
     private final String string;
 
@@ -19,13 +23,11 @@ public class IsEqualIgnoringWhiteSpace implements Matcher {
         this.string = string;
     }
 
-    public boolean match(Object o) {
-        if (o == null) {
-            return false;
-        } else if (!(o instanceof String)) {
+    public boolean match(String item) {
+        if (item == null) {
             return false;
         } else {
-            return stripSpace(string).equalsIgnoreCase(stripSpace((String) o));
+            return stripSpace(string).equalsIgnoreCase(stripSpace(item));
         }
     }
 
@@ -36,7 +38,7 @@ public class IsEqualIgnoringWhiteSpace implements Matcher {
     }
 
     public String stripSpace(String string) {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         boolean lastWasSpace = true;
         for (int i = 0; i < string.length(); i++) {
             char c = string.charAt(i);
@@ -51,6 +53,11 @@ public class IsEqualIgnoringWhiteSpace implements Matcher {
             }
         }
         return result.toString().trim();
+    }
+
+    @Factory
+    public static Matcher<String> eqIgnoringWhiteSpace(String string) {
+        return new IsEqualIgnoringWhiteSpace(string);
     }
 
 }

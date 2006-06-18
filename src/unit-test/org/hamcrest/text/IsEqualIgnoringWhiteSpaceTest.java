@@ -2,34 +2,35 @@
  */
 package org.hamcrest.text;
 
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.eqIgnoringWhiteSpace;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsNot;
 
 public class IsEqualIgnoringWhiteSpaceTest extends AbstractMatcherTest {
 
-    private final Matcher matcher = new IsEqualIgnoringWhiteSpace("Hello World   how\n are we? ");
+    private final Matcher<String> matcher = eqIgnoringWhiteSpace("Hello World   how\n are we? ");
 
     public void testPassesIfWordsAreSameButWhitespaceDiffers() {
-        assertTrue(matcher.match("Hello World how are we?"));
-        assertTrue(matcher.match("   Hello World   how are \n\n\twe?"));
+        assertThat("Hello World how are we?", matcher);
+        assertThat("   Hello World   how are \n\n\twe?", matcher);
     }
 
     public void testFailsIfTextOtherThanWhitespaceDiffers() {
-        assertFalse(matcher.match("Hello PLANET how are we?"));
-        assertFalse(matcher.match("Hello World how are we"));
+        assertThat("Hello PLANET how are we?", not(matcher));
+        assertThat("Hello World how are we", not(matcher));
     }
 
     public void testFailsIfWhitespaceIsAddedOrRemovedInMidWord() {
-        assertFalse(matcher.match("HelloWorld how are we?"));
-        assertFalse(matcher.match("Hello Wo rld how are we?"));
-    }
-
-    public void testFailsIfNotMatchingAgainstString() {
-        assertFalse(matcher.match(new Object()));
+        assertThat("HelloWorld how are we?", not(matcher));
+        assertThat("Hello Wo rld how are we?", not(matcher));
     }
 
     public void testFailsIfMatchingAgainstNull() {
-        assertFalse(matcher.match(null));
+        assertThat(null, not(matcher));
     }
 
     public void testRequiresNonNullStringToBeConstructed() {

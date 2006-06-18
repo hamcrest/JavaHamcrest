@@ -11,6 +11,9 @@ import org.hamcrest.Factory;
  */
 public class IsEqualIgnoringCase implements Matcher<String> {
 
+    // TODO: Replace String with CharSequence to allow for easy interopability between
+    //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
+
     private final String string;
 
     public IsEqualIgnoringCase(String string) {
