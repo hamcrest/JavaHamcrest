@@ -2,7 +2,11 @@
  */
 package org.hamcrest.object;
 
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.object.IsEventFrom.isEventFrom;
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
 import java.util.EventObject;
 
@@ -13,13 +17,10 @@ public class IsEventFromTest extends AbstractMatcherTest {
         EventObject ev = new EventObject(o);
         EventObject ev2 = new EventObject(new Object());
 
-        IsEventFrom p = new IsEventFrom(o);
+        Matcher<EventObject> isEventMatcher = isEventFrom(o);
 
-        assertTrue(p.match(ev));
-        assertTrue("p should match to false for an event not from o",
-                !p.match(ev2));
-        assertTrue("p should match to false for objects that are not events",
-                !p.match(o));
+        assertThat(ev, isEventMatcher);
+        assertThat(ev2, not(isEventMatcher));
     }
 
     private static class DerivedEvent extends EventObject {
@@ -32,20 +33,16 @@ public class IsEventFromTest extends AbstractMatcherTest {
 
     public void testCanTestForSpecificEventClasses() {
         Object o = new Object();
-        DerivedEvent good_ev = new DerivedEvent(o);
-        DerivedEvent wrong_source = new DerivedEvent(new Object());
-        EventObject wrong_type = new EventObject(o);
-        EventObject wrong_source_and_type = new EventObject(new Object());
+        DerivedEvent goodEv = new DerivedEvent(o);
+        DerivedEvent wrongSource = new DerivedEvent(new Object());
+        EventObject wrongType = new EventObject(o);
+        EventObject wrongSourceAndType = new EventObject(new Object());
 
-        IsEventFrom p = new IsEventFrom(DerivedEvent.class, o);
+        Matcher<EventObject> isEventMatcher = isEventFrom(DerivedEvent.class, o);
 
-        assertTrue(p.match(good_ev));
-        assertTrue("p should match to false for an event not from o",
-                !p.match(wrong_source));
-        assertTrue("p should match to false for an event of the wrong type",
-                !p.match(wrong_type));
-        assertTrue("p should match to false for an event of the wrong type " +
-                "and from the wrong source",
-                !p.match(wrong_source_and_type));
+        assertThat(goodEv, isEventMatcher);
+        assertThat(wrongSource, not(isEventMatcher));
+        assertThat(wrongType, not(isEventMatcher));
+        assertThat(wrongSourceAndType, not(isEventMatcher));
     }
 }
