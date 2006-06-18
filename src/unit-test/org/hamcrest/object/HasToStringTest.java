@@ -3,10 +3,14 @@ package org.hamcrest.object;
 import junit.framework.TestCase;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.IsEqual;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsNot.not;
 import org.hamcrest.internal.StringDescription;
+import static org.hamcrest.object.HasToString.asString;
 
 public class HasToStringTest extends TestCase {
+
     private static final String TO_STRING_RESULT = "toString result";
     private static final Object ARG = new Object() {
         public String toString() {
@@ -15,18 +19,15 @@ public class HasToStringTest extends TestCase {
     };
 
     public void testPassesResultOfToStringToNestedMatcher() {
-        Matcher passingMatcher = new HasToString(new IsEqual(TO_STRING_RESULT));
-        Matcher failingMatcher = new HasToString(new IsEqual("OTHER STRING"));
-
-        assertTrue("should pass", passingMatcher.match(ARG));
-        assertFalse("should fail", failingMatcher.match(ARG));
+        assertThat(ARG, asString(eq(TO_STRING_RESULT)));
+        assertThat(ARG, not(asString(eq("OTHER STRING"))));
     }
 
     public void testHasReadableDescription() {
-        Matcher toStringMatcher = new IsEqual(TO_STRING_RESULT);
-        Matcher matcher = new HasToString(toStringMatcher);
+        Matcher<String> toStringMatcher = eq(TO_STRING_RESULT);
+        Matcher matcher = asString(toStringMatcher);
 
-        assertEquals("toString(" + descriptionOf(toStringMatcher) + ")", descriptionOf(matcher));
+        assertEquals("asString(" + descriptionOf(toStringMatcher) + ")", descriptionOf(matcher));
     }
 
     private String descriptionOf(Matcher matcher) {
@@ -34,4 +35,5 @@ public class HasToStringTest extends TestCase {
         matcher.describeTo(description);
         return description.toString();
     }
+
 }

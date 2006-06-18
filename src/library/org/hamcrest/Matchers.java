@@ -10,11 +10,7 @@ import org.hamcrest.core.IsIn;
 import org.hamcrest.core.IsInstanceOf;
 import org.hamcrest.core.IsNot;
 import org.hamcrest.core.IsNull;
-import org.hamcrest.core.IsSame;
 import org.hamcrest.core.Or;
-import org.hamcrest.object.HasProperty;
-import org.hamcrest.object.HasPropertyWithValue;
-import org.hamcrest.object.HasToString;
 import org.hamcrest.internal.StringDescription;
 
 import java.util.Collection;
@@ -89,10 +85,6 @@ public class Matchers {
 
     public static <T> Matcher<T> or(Matcher<T> left, Matcher<T> right) {
         return new Or<T>(left, right);
-    }
-
-    public static HasToString toString(Matcher toStringMatcher) {
-        return new HasToString(toStringMatcher);
     }
 
     public static IsCompatibleType compatibleType(Class baseType) {
