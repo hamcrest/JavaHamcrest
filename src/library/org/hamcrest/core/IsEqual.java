@@ -65,4 +65,14 @@ public class IsEqual<T> implements Matcher<T> {
         return new IsEqual<T>(operand);
     }
 
+    @Factory
+    public static Matcher<Boolean> isTrue() {
+        return eq(true);
+    }
+
+    @Factory
+    public static Matcher<Boolean> isFalse() {
+        return eq(false);
+    }
+
 }

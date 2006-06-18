@@ -1,7 +1,7 @@
 package org.hamcrest.integration;
 
 import junit.framework.TestCase;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.core.IsEqual.eq;
 import org.hamcrest.Matcher;
 import org.hamcrest.Description;
 import org.easymock.IArgumentMatcher;
