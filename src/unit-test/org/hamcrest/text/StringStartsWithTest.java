@@ -2,17 +2,15 @@
  */
 package org.hamcrest.text;
 
+import static org.hamcrest.text.StringStartsWith.startsWith;
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
 
 public class StringStartsWithTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
 
-    StringStartsWith stringStartsWith;
-
-    public void setUp() {
-        stringStartsWith = new StringStartsWith(EXCERPT);
-    }
+    Matcher<String> stringStartsWith = startsWith(EXCERPT);
 
     public void testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring() {
         assertTrue("should be true if excerpt at beginning",

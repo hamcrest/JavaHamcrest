@@ -2,17 +2,15 @@
  */
 package org.hamcrest.text;
 
+import static org.hamcrest.text.StringContains.stringContains;
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
 
 public class StringContainsTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
 
-    StringContains stringContains;
-
-    public void setUp() {
-        stringContains = new StringContains(EXCERPT);
-    }
+    Matcher<String> stringContains = stringContains(EXCERPT);
 
     public void testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring() {
         assertTrue("should be true if excerpt at beginning",

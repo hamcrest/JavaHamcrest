@@ -15,9 +15,6 @@ import org.hamcrest.core.Or;
 import org.hamcrest.object.HasProperty;
 import org.hamcrest.object.HasPropertyWithValue;
 import org.hamcrest.object.HasToString;
-import org.hamcrest.text.StringContains;
-import org.hamcrest.text.StringEndsWith;
-import org.hamcrest.text.StringStartsWith;
 import org.hamcrest.internal.StringDescription;
 
 import java.util.Collection;
@@ -84,22 +81,6 @@ public class Matchers {
 
     public static IsInstanceOf isA(Class operandClass) {
         return new IsInstanceOf(operandClass);
-    }
-
-    public static StringContains stringContains(String substring) {
-        return new StringContains(substring);
-    }
-
-    public static StringContains contains(String substring) {
-        return stringContains(substring);
-    }
-
-    public static StringStartsWith startsWith(String substring) {
-        return new StringStartsWith(substring);
-    }
-
-    public static StringEndsWith endsWith(String substring) {
-        return new StringEndsWith(substring);
     }
 
     public static <T> Matcher<T> not(Matcher<T> c) {

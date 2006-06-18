@@ -2,17 +2,15 @@
  */
 package org.hamcrest.text;
 
+import static org.hamcrest.text.StringEndsWith.endsWith;
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
 
 public class StringEndsWithTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
 
-    StringEndsWith stringEndsWith;
-
-    public void setUp() {
-        stringEndsWith = new StringEndsWith(EXCERPT);
-    }
+    Matcher<String> stringEndsWith = endsWith(EXCERPT);
 
     public void testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring() {
         assertFalse("should be false if excerpt at beginning",

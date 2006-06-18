@@ -3,7 +3,7 @@ package org.hamcrest.examples.junit4;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isTwoXs;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.stringContains;
+import static org.hamcrest.text.StringContains.stringContains;
 import org.junit.Test;
 
 /**

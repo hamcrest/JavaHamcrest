@@ -3,6 +3,7 @@ package org.hamcrest.examples.junit3;
 import junit.framework.TestCase;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.text.StringContains.stringContains;
 
 /**
  * Demonstrates how HamCrest matchers can be used with assertThat()
