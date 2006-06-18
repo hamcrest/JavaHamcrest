@@ -4,6 +4,7 @@ package org.hamcrest.object;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -64,24 +65,24 @@ import java.lang.reflect.Method;
  * @author Steve Freeman
  * @since 1.1.0
  */
-public class HasPropertyWithValue implements Matcher {
+public class HasPropertyWithValue<T> implements Matcher<T> {
 
     private static final Object[] NO_ARGUMENTS = new Object[0];
 
     private final String propertyName;
-    private final Matcher expectation;
+    private final Matcher value;
 
-    public HasPropertyWithValue(String propertyName, Matcher expectation) {
+    public HasPropertyWithValue(String propertyName, Matcher value) {
         this.propertyName = propertyName;
-        this.expectation = expectation;
+        this.value = value;
     }
 
+    @SuppressWarnings({"unchecked"})
     public boolean match(Object argument) {
         try {
             Method readMethod = getReadMethod(argument);
             return readMethod != null
-                    && expectation.match(readMethod.invoke(argument, NO_ARGUMENTS));
-
+                    && value.match(readMethod.invoke(argument, NO_ARGUMENTS));
         } catch (IntrospectionException e) {
             return false;
         } catch (IllegalArgumentException e) {
@@ -99,10 +100,16 @@ public class HasPropertyWithValue implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.appendText("hasProperty(\"");
-        description.appendText(propertyName);
-        description.appendText("\", ");
-        expectation.describeTo(description);
+        description.appendText("hasProperty(");
+        description.appendValue(propertyName);
+        description.appendText(", ");
+        value.describeTo(description);
         description.appendText(")");
     }
+
+    @Factory
+    public static <T> Matcher<T> hasProperty(String propertyName, Matcher value) {
+        return new HasPropertyWithValue<T>(propertyName, value);
+    }
+
 }

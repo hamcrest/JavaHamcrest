@@ -4,6 +4,7 @@ package org.hamcrest.object;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 import java.beans.IntrospectionException;
 
@@ -17,7 +18,7 @@ import java.beans.IntrospectionException;
  * @author Steve Freeman
  * @since 1.1.0
  */
-public class HasProperty implements Matcher {
+public class HasProperty<T> implements Matcher<T> {
 
     private final String propertyName;
 
@@ -35,9 +36,12 @@ public class HasProperty implements Matcher {
     }
 
     public void describeTo(Description description) {
-        description.appendText("hasProperty(\"");
-        description.appendText(propertyName);
-        description.appendText("\")");
+        description.appendText("hasProperty(").appendValue(propertyName).appendText(")");
+    }
+
+    @Factory
+    public static <T> Matcher<T> hasProperty(String propertyName) {
+        return new HasProperty<T>(propertyName);
     }
 
 }

@@ -75,10 +75,6 @@ public class Matchers {
         return eq(new Double(operand));
     }
 
-    public static IsSame same(Object operand) {
-        return new IsSame(operand);
-    }
-
     public static IsInstanceOf isA(Class operandClass) {
         return new IsInstanceOf(operandClass);
     }
@@ -93,14 +89,6 @@ public class Matchers {
 
     public static <T> Matcher<T> or(Matcher<T> left, Matcher<T> right) {
         return new Or<T>(left, right);
-    }
-
-    public static HasPropertyWithValue hasProperty(String propertyName, Matcher expectation) {
-        return new HasPropertyWithValue(propertyName, expectation);
-    }
-
-    public static HasProperty hasProperty(String propertyName) {
-        return new HasProperty(propertyName);
     }
 
     public static HasToString toString(Matcher toStringMatcher) {

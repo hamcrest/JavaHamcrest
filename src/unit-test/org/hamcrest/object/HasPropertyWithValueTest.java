@@ -2,11 +2,16 @@
  */
 package org.hamcrest.object;
 
+import static org.hamcrest.core.IsAnything.anything;
+import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.object.HasPropertyWithValue.hasProperty;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.core.IsAnything;
 import org.hamcrest.core.IsEqual;
-import org.hamcrest.core.IsSame;
 import org.hamcrest.internal.StringDescription;
 
 import java.beans.IntrospectionException;
@@ -20,39 +25,35 @@ import java.beans.SimpleBeanInfo;
  * @since 1.1.0
  */
 public class HasPropertyWithValueTest extends AbstractMatcherTest {
-    final private BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected");
-    final private BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");
-    final private BeanWithInfo beanWithInfo = new BeanWithInfo("with info");
+
+    private final BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected");
+    private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");
+    private final BeanWithInfo beanWithInfo = new BeanWithInfo("with info");
 
     public void testMatchesInfolessBeanWithMatchedNamedProperty() {
-        HasPropertyWithValue hasProperty = new HasPropertyWithValue("property", new IsSame("is expected"));
-
-        assertTrue(hasProperty.match(shouldMatch));
-        assertFalse(hasProperty.match(shouldNotMatch));
+        assertThat(shouldMatch, hasProperty("property", eq("is expected")));
+        assertThat(shouldNotMatch, not(hasProperty("property", eq("is expected"))));
     }
 
     public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
-        HasPropertyWithValue hasProperty = new HasPropertyWithValue("property", new IsSame("with info"));
-        assertTrue(hasProperty.match(beanWithInfo));
+        assertThat(beanWithInfo, hasProperty("property", eq("with info")));
     }
 
     public void testDoesNotMatchInfolessBeanWithoutMatchedNamedProperty() {
-        HasPropertyWithValue hasProperty = new HasPropertyWithValue("nonExistentProperty", new IsAnything());
-        assertFalse(hasProperty.match(shouldNotMatch));
+        assertThat(shouldNotMatch, not(hasProperty("nonExistentProperty", anything())));
     }
 
     public void testDoesNotMatchWriteOnlyProperty() {
-        HasPropertyWithValue hasProperty = new HasPropertyWithValue("writeOnlyProperty", new IsAnything());
-        assertFalse(hasProperty.match(shouldNotMatch));
+        assertThat(shouldNotMatch, not(hasProperty("writeOnlyProperty", anything())));
     }
 
     public void testDescribeTo() {
-        IsEqual isEqual = new IsEqual(Boolean.TRUE);
+        Matcher matcher = eq(true);
         Description isEqualDescription = new StringDescription();
-        isEqual.describeTo(isEqualDescription);
-        HasPropertyWithValue hasProperty = new HasPropertyWithValue("property", new IsEqual(Boolean.TRUE));
+        matcher.describeTo(isEqualDescription);
 
-        assertDescription("hasProperty(\"property\", " + isEqualDescription + ")", hasProperty);
+        assertDescription("hasProperty(\"property\", " + isEqualDescription + ")",
+                hasProperty("property", matcher));
     }
 
     public static class BeanWithoutInfo {

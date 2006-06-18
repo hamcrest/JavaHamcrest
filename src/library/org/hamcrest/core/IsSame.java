@@ -4,6 +4,7 @@ package org.hamcrest.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 
 /**
@@ -27,8 +28,12 @@ public class IsSame<T> implements Matcher<T> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("same(")
-                .appendValue(object)
-                .appendText(")");
+        description.appendText("same(") .appendValue(object) .appendText(")");
     }
+
+    @Factory
+    public static <T> Matcher<T> same(T operand) {
+        return new IsSame<T>(operand);
+    }
+
 }

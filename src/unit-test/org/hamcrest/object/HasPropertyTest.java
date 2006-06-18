@@ -2,9 +2,10 @@
  */
 package org.hamcrest.object;
 
-import junit.framework.TestCase;
-import org.hamcrest.Description;
-import org.hamcrest.internal.StringDescription;
+import org.hamcrest.AbstractMatcherTest;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.object.HasProperty.hasProperty;
 
 /**
  * @author Iain McGinniss
@@ -12,27 +13,20 @@ import org.hamcrest.internal.StringDescription;
  * @author Steve Freeman
  * @since 1.1.0
  */
-public class HasPropertyTest extends TestCase {
+public class HasPropertyTest extends AbstractMatcherTest {
 
-    private final HasPropertyWithValueTest.BeanWithoutInfo bean = new HasPropertyWithValueTest.BeanWithoutInfo("a bean");
+    private final HasPropertyWithValueTest.BeanWithoutInfo bean
+            = new HasPropertyWithValueTest.BeanWithoutInfo("a bean");
 
     public void testReturnsTrueIfPropertyExists() {
-        HasProperty hasProperty = new HasProperty("writeOnlyProperty");
-
-        assertTrue(hasProperty.match(bean));
+        assertThat(bean, hasProperty("writeOnlyProperty"));
     }
 
     public void testReturnsFalseIfPropertyDoesNotExist() {
-        HasProperty hasProperty = new HasProperty("aNonExistentProp");
-
-        assertFalse(hasProperty.match(bean));
+        assertThat(bean, not(hasProperty("aNonExistentProp")));
     }
 
     public void testDescribeTo() {
-        HasProperty hasProperty = new HasProperty("property");
-        Description description = new StringDescription();
-        hasProperty.describeTo(description);
-
-        assertEquals("hasProperty(\"property\")", description.toString());
+        assertDescription("hasProperty(\"property\")", hasProperty("property"));
     }
 }
