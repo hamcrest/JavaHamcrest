@@ -37,40 +37,6 @@ public class Matchers {
         return new IsEqual(operand);
     }
 
-    public static IsEqual eq(boolean operand) {
-        // Avoid newing Boolean objects.
-        // Boolean.valueOf() not available on JDK 1.3.
-        return eq(operand ? Boolean.TRUE : Boolean.FALSE);
-    }
-
-    public static IsEqual eq(byte operand) {
-        return eq(new Byte(operand));
-    }
-
-    public static IsEqual eq(short operand) {
-        return eq(new Short(operand));
-    }
-
-    public static IsEqual eq(char operand) {
-        return eq(new Character(operand));
-    }
-
-    public static IsEqual eq(int operand) {
-        return eq(new Integer(operand));
-    }
-
-    public static IsEqual eq(long operand) {
-        return eq(new Long(operand));
-    }
-
-    public static IsEqual eq(float operand) {
-        return eq(new Float(operand));
-    }
-
-    public static IsEqual eq(double operand) {
-        return eq(new Double(operand));
-    }
-
     public static IsInstanceOf isA(Class operandClass) {
         return new IsInstanceOf(operandClass);
     }
