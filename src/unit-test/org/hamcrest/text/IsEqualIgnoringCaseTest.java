@@ -3,36 +3,32 @@
 package org.hamcrest.text;
 
 import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.text.IsEqualIgnoringCase.eqIgnoringCase;
 
 public class IsEqualIgnoringCaseTest extends AbstractMatcherTest {
 
-    private final Matcher matcher = new IsEqualIgnoringCase("heLLo");
-
     public void testIgnoresCaseOfCharsInString() {
-        assertTrue(matcher.match("HELLO"));
-        assertTrue(matcher.match("hello"));
-        assertTrue(matcher.match("HelLo"));
+        assertThat("HELLO", eqIgnoringCase("heLLo"));
+        assertThat("hello", eqIgnoringCase("heLLo"));
+        assertThat("HelLo", eqIgnoringCase("heLLo"));
 
-        assertFalse(matcher.match("abcde"));
+        assertThat("bye", not(eqIgnoringCase("heLLo")));
     }
 
     public void testFailsIfAdditionalWhitespaceIsPresent() {
-        assertFalse(matcher.match(" heLLo"));
-        assertFalse(matcher.match("heLLo "));
-    }
-
-    public void testFailsIfNotMatchingAgainstString() {
-        assertFalse(matcher.match(new Object()));
+        assertThat("heLLo ", not(eqIgnoringCase("heLLo")));
+        assertThat(" heLLo", not(eqIgnoringCase("heLLo")));
     }
 
     public void testFailsIfMatchingAgainstNull() {
-        assertFalse(matcher.match(null));
+        assertThat(null, not(eqIgnoringCase("heLLo")));
     }
 
     public void testRequiresNonNullStringToBeConstructed() {
         try {
-            new IsEqualIgnoringCase(null);
+            eqIgnoringCase(null);
             fail("Expected exception");
         } catch (IllegalArgumentException goodException) {
             // expected!
@@ -40,6 +36,6 @@ public class IsEqualIgnoringCaseTest extends AbstractMatcherTest {
     }
 
     public void testDescribesItselfAsCaseInsensitive() {
-        assertDescription("eqIgnoringCase(\"heLLo\")", matcher);
+        assertDescription("eqIgnoringCase(\"heLLo\")", eqIgnoringCase("heLLo"));
     }
 }

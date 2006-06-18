@@ -4,11 +4,12 @@ package org.hamcrest.text;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Factory;
 
 /**
  * Tests if a string is equal to another string, regardless of the case.
  */
-public class IsEqualIgnoringCase implements Matcher {
+public class IsEqualIgnoringCase implements Matcher<String> {
 
     private final String string;
 
@@ -19,13 +20,11 @@ public class IsEqualIgnoringCase implements Matcher {
         this.string = string;
     }
 
-    public boolean match(Object o) {
-        if (o == null) {
-            return false;
-        } else if (!(o instanceof String)) {
+    public boolean match(String item) {
+        if (item == null) {
             return false;
         } else {
-            return string.equalsIgnoreCase((String) o);
+            return string.equalsIgnoreCase(item);
         }
     }
 
@@ -34,4 +33,10 @@ public class IsEqualIgnoringCase implements Matcher {
                 .appendValue(string)
                 .appendText(")");
     }
+
+    @Factory
+    public static Matcher<String> eqIgnoringCase(String string) {
+        return new IsEqualIgnoringCase(string);
+    }
+
 }
