@@ -1,6 +1,6 @@
 /*  Copyright (c) 2000-2006 hamcrest.org
  */
-package org.hamcrest.object;
+package org.hamcrest.beans;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;

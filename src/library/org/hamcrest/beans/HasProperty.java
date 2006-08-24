@@ -1,6 +1,6 @@
 /*  Copyright (c) 2000-2006 hamcrest.org
  */
-package org.hamcrest.object;
+package org.hamcrest.beans;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -26,7 +26,7 @@ public class HasProperty<T> implements Matcher<T> {
         this.propertyName = propertyName;
     }
 
-    public boolean match(Object obj) {
+    public boolean match(T obj) {
         try {
             return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null;
         } catch (IntrospectionException e) {

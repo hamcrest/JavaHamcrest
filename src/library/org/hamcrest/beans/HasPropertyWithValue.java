@@ -1,6 +1,6 @@
 /*  Copyright (c) 2000-2006 hamcrest.org
  */
-package org.hamcrest.object;
+package org.hamcrest.beans;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -78,7 +78,7 @@ public class HasPropertyWithValue<T> implements Matcher<T> {
     }
 
     @SuppressWarnings({"unchecked"})
-    public boolean match(Object argument) {
+    public boolean match(T argument) {
         try {
             Method readMethod = getReadMethod(argument);
             return readMethod != null
@@ -111,5 +111,4 @@ public class HasPropertyWithValue<T> implements Matcher<T> {
     public static <T> Matcher<T> hasProperty(String propertyName, Matcher value) {
         return new HasPropertyWithValue<T>(propertyName, value);
     }
-
 }

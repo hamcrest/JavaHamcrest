@@ -1,11 +1,13 @@
 /*  Copyright (c) 2000-2006 hamcrest.org
  */
-package org.hamcrest.object;
+package org.hamcrest.beans;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.beans.HasPropertyWithValueTest.BeanWithoutInfo;
+
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.beans.HasProperty.hasProperty;
 import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.object.HasProperty.hasProperty;
 
 /**
  * @author Iain McGinniss

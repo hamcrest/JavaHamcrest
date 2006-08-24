@@ -1,22 +1,21 @@
 /*  Copyright (c) 2000-2006 hamcrest.org
  */
-package org.hamcrest.object;
+package org.hamcrest.beans;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.eq;
 import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.object.HasPropertyWithValue.hasProperty;
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.core.IsAnything;
-import org.hamcrest.core.IsEqual;
-import org.hamcrest.internal.StringDescription;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
+
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.internal.StringDescription;
 
 /**
  * @author Iain McGinniss

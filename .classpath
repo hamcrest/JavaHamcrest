@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/api"/>
+	<classpathentry kind="src" path="src/examples"/>
+	<classpathentry kind="src" path="src/integration"/>
+	<classpathentry kind="src" path="src/library"/>
+	<classpathentry kind="src" path="src/unit-test"/>
+	<classpathentry kind="lib" path="lib/integration/easymock-2.2.jar"/>
+	<classpathentry kind="lib" path="lib/integration/jmock-1.10RC1.jar"/>
+	<classpathentry kind="lib" path="lib/integration/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="lib/integration/junit-4.0.jar"/>
+	<classpathentry kind="lib" path="lib/integration/testng-4.6-jdk15.jar"/>
+	<classpathentry kind="lib" path="lib/library/jaxen-1.1-beta-4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

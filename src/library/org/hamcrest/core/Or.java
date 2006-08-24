@@ -47,5 +47,4 @@ public class Or<T> implements Matcher<T> {
     public static <T> Matcher<T> or(Matcher<T>... matchers) {
         return new Or<T>(matchers);
     }
-
 }

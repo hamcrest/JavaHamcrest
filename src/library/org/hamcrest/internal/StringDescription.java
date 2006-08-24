@@ -1,8 +1,9 @@
 package org.hamcrest.internal;
 
-import org.hamcrest.Description;
+import java.util.Arrays;
+import java.util.Iterator;
 
-import java.lang.reflect.Array;
+import org.hamcrest.Description;
 
 public class StringDescription implements Description {
 
@@ -37,21 +38,36 @@ public class StringDescription implements Description {
         } else if (value instanceof Float) {
             buffer.append('<').append(value).append("F>");
         } else if (value.getClass().isArray()) {
-            buffer.append('[');
-            for (int i = 0; i < Array.getLength(value); i++) {
-                if (i > 0) {
-                    buffer.append(", ");
-                }
-                appendValue(Array.get(value, i));
-            }
-            buffer.append(']');
+        	appendValueList("[",", ","]", new ArrayIterator(value));
         } else {
             buffer.append('<').append(value).append('>');
         }
         return this;
     }
+    
+    public <T> Description appendValueList(String start, String separator, String end, T... values) {
+        return appendValueList(start, separator, end, Arrays.asList(values));
+	}
+    
+	public <T> Description appendValueList(String start, String separator, String end, Iterable<T> values) {
+		return appendValueList(start, separator, end, values.iterator());
+	}
+	
+	private <T> Description appendValueList(String start, String separator, String end, Iterator<T> values) {
+		boolean separate = false;
+		
+        buffer.append(start);
+        while (values.hasNext()) {
+        	if (separate) buffer.append(separator);
+        	appendValue(values.next());
+        	separate = true;
+        }
+        buffer.append(end);
+        
+        return this;
+	}
 
-    private void toJavaSyntax(StringBuffer buffer, String unformatted) {
+	private void toJavaSyntax(StringBuffer buffer, String unformatted) {
         buffer.append('"');
         for (int i = 0; i < unformatted.length(); i++) {
             toJavaSyntax(buffer, unformatted.charAt(i));

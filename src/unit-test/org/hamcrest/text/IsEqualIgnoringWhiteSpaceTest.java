@@ -2,13 +2,11 @@
  */
 package org.hamcrest.text;
 
-import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.eqIgnoringWhiteSpace;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsNot;
 
 public class IsEqualIgnoringWhiteSpaceTest extends AbstractMatcherTest {
 

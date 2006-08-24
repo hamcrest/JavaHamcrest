@@ -11,16 +11,15 @@ import org.hamcrest.Factory;
 /**
  * Is the value less than or greater than another {@link java.lang.Comparable} value?
  */
-public class IsComparableTo<T extends Comparable> implements Matcher<T> {
-
+public class IsComparableTo<T extends Comparable<T>> implements Matcher<T> {
     public static enum Operator {
         LESS_THAN,
         GREATER_THAN
     }
-
+    
     private final Comparable<T> compareTo;
     private final Operator operator;
-
+    
     public IsComparableTo(Comparable<T> compareTo, Operator operator) {
         this.compareTo = compareTo;
         this.operator = operator;
@@ -38,27 +37,27 @@ public class IsComparableTo<T extends Comparable> implements Matcher<T> {
     }
 
     @Factory
-    public static <T extends Comparable> Matcher<Comparable<T>> greaterThan(Comparable<T> value) {
+    public static <T extends Comparable<T>> Matcher<T> greaterThan(T value) {
         return comparableTo(value, Operator.GREATER_THAN);
     }
 
     @Factory
-    public static <T extends Comparable> Matcher<Comparable<T>> greaterThanOrEqualTo(Comparable<T> value) {
+    public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
         return or(greaterThan(value), eq(value));
     }
-
+    
     @Factory
-    public static <T extends Comparable> Matcher<Comparable<T>> lessThan(Comparable<T> value) {
+    public static <T extends Comparable<T>> Matcher<T> lessThan(T value) {
         return comparableTo(value, Operator.LESS_THAN);
     }
 
     @Factory
-    public static <T extends Comparable> Matcher<Comparable<T>> lessThanOrEqualTo(Comparable<T> value) {
+    public static <T extends Comparable<T>> Matcher<T> lessThanOrEqualTo(T value) {
         return or(lessThan(value), eq(value));
     }
-
-    private static <T extends Comparable> Matcher<Comparable<T>> comparableTo(Comparable<T> value, Operator operator) {
-        return new IsComparableTo(value, operator);
+    
+    private static <T extends Comparable<T>> Matcher<T> comparableTo(T value, Operator operator) {
+        return new IsComparableTo<T>(value, operator);
     }
 
 }
