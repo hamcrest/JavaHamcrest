@@ -3,9 +3,10 @@
 package org.hamcrest;
 
 /**
- * A matcher over acceptable values. A matcher should be able to describe itself to give feedback when it fails.
+ * A matcher over acceptable values. 
+ * A matcher is able to describe itself to give feedback when it fails.
  */
-public interface Matcher<T> {
+public interface Matcher<T> extends SelfDescribing {
     /**
      * Evaluates the matcher for argument <var>item</var>.
      *
@@ -13,9 +14,4 @@ public interface Matcher<T> {
      * @return <code>true</code> if <var>item</var> matches, otherwise <code>false</code>.
      */
     boolean match(T item);
-
-    /**
-     * Describes this matcher.
-     */
-    void describeTo(Description description);
 }
