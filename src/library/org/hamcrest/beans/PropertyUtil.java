@@ -17,16 +17,16 @@ import java.beans.PropertyDescriptor;
  * @since 1.1.0
  */
 public class PropertyUtil {
-
     /**
      * Returns the description of the property with the provided
      * name on the provided object's interface.
      *
-     * @return the description of the property, or null if the
-     *         property does not exist.
-     * @throws IntrospectionException if an error occured using
-     *                                the JavaBean Introspector class to query the properties
-     *                                of the provided class.
+     * @return 
+     *     the description of the property, or null if the property 
+     *     does not exist.
+     * @throws IntrospectionException 
+     *     if an error occured using the JavaBean Introspector class
+     *     to query the properties of the provided class.
      */
     public static PropertyDescriptor getPropertyDescriptor(String propertyName, Object fromObj) throws IntrospectionException {
         BeanInfo beanInfo = Introspector.getBeanInfo(fromObj.getClass());
