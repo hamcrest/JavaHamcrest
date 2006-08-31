@@ -1,12 +1,14 @@
-package org.hamcrest.internal;
+package org.hamcrest;
 
 import java.util.Arrays;
 import java.util.Iterator;
 
 import org.hamcrest.Description;
+import org.hamcrest.SelfDescribing;
+import org.hamcrest.internal.ArrayIterator;
+import org.hamcrest.internal.SelfDescribingValueIterator;
 
 public class StringDescription implements Description {
-
     private final StringBuffer buffer;
 
     public StringDescription() {
@@ -54,18 +56,25 @@ public class StringDescription implements Description {
 	}
 	
 	private <T> Description appendValueList(String start, String separator, String end, Iterator<T> values) {
-		boolean separate = false;
-		
+		return appendList(start, separator, end, new SelfDescribingValueIterator<T>(values));
+	}
+	
+    public Description appendList(String start, String separator, String end, Iterable<? extends SelfDescribing> values) {
+        return appendList(start, separator, end, values.iterator());
+    }
+
+    private Description appendList(String start, String separator, String end, Iterator<? extends SelfDescribing> i) {
+        boolean separate = false;
         buffer.append(start);
-        while (values.hasNext()) {
-        	if (separate) buffer.append(separator);
-        	appendValue(values.next());
-        	separate = true;
+        while (i.hasNext()) {
+            if (separate) buffer.append(separator);
+            i.next().describeTo(this);
+            separate = true;
         }
         buffer.append(end);
         
         return this;
-	}
+    }
 
 	private void toJavaSyntax(StringBuffer buffer, String unformatted) {
         buffer.append('"');

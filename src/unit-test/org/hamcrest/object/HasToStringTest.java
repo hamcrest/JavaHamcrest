@@ -3,10 +3,11 @@ package org.hamcrest.object;
 import junit.framework.TestCase;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.eq;
 import static org.hamcrest.core.IsNot.not;
-import org.hamcrest.internal.StringDescription;
 import static org.hamcrest.object.HasToString.asString;
 
 public class HasToStringTest extends TestCase {

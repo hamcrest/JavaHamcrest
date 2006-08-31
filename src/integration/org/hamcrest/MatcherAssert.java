@@ -2,7 +2,6 @@
  */
 package org.hamcrest;
 
-import org.hamcrest.internal.StringDescription;
 
 public class MatcherAssert {
 

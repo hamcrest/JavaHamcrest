@@ -2,8 +2,8 @@ package org.hamcrest.integration;
 
 import org.easymock.IArgumentMatcher;
 import org.easymock.EasyMock;
-import org.hamcrest.internal.StringDescription;
 import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
 
 /**
  * An adapter to allowing a Hamcrest {@link org.hamcrest.Matcher}

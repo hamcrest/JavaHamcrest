@@ -5,7 +5,6 @@ package org.hamcrest;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import org.hamcrest.core.Always;
-import org.hamcrest.internal.StringDescription;
 
 public abstract class AbstractMatcherTest extends TestCase {
     protected static final Matcher TRUE_MATCHER = new Always(true);

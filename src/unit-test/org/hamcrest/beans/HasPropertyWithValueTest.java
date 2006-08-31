@@ -15,7 +15,7 @@ import java.beans.SimpleBeanInfo;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.internal.StringDescription;
+import org.hamcrest.StringDescription;
 
 /**
  * @author Iain McGinniss
