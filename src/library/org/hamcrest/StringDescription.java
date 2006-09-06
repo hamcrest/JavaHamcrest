@@ -18,6 +18,12 @@ public class StringDescription implements Description {
     public StringDescription(StringBuffer buffer) {
         this.buffer = buffer;
     }
+    
+    public static String toString(SelfDescribing selfDescribing) {
+        StringDescription description = new StringDescription();
+        selfDescribing.describeTo(description);
+        return description.toString();
+    }
 
     public Description appendText(String text) {
         buffer.append(text);
