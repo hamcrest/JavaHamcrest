@@ -4,7 +4,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
 
-public class HasToString implements Matcher {
+public class HasToString<T> implements Matcher<T> {
 
     private final Matcher<String> toStringMatcher;
 
@@ -12,7 +12,7 @@ public class HasToString implements Matcher {
         this.toStringMatcher = toStringMatcher;
     }
 
-    public boolean match(Object item) {
+    public boolean match(T item) {
         return toStringMatcher.match(item.toString());
     }
 
@@ -21,10 +21,9 @@ public class HasToString implements Matcher {
         toStringMatcher.describeTo(description);
         description.appendText(")");
     }
-
+    
     @Factory
     public static <T> Matcher<T> asString(Matcher<String> toStringMatcher) {
-        return new HasToString(toStringMatcher);
+        return new HasToString<T>(toStringMatcher);
     }
-
 }

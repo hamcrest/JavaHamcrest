@@ -3,7 +3,8 @@ package org.hamcrest.collection;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import static org.hamcrest.core.IsAnything.anything;
+import org.hamcrest.core.IsAnything;
+
 import static org.hamcrest.core.IsEqual.eq;
 
 import java.util.Map;
@@ -51,7 +52,7 @@ public class IsMapContaining<K,V> implements Matcher<Map<K, V>> {
 
     @Factory
     public static <K,V> Matcher<Map<K,V>> mapWithKey(Matcher<K> keyMatcher) {
-        return mapContaining(keyMatcher, (Matcher<V>)anything());
+        return mapContaining(keyMatcher, IsAnything.<V>anything());
     }
 
     @Factory
@@ -61,12 +62,11 @@ public class IsMapContaining<K,V> implements Matcher<Map<K, V>> {
 
     @Factory
     public static <K,V> Matcher<Map<K,V>> mapWithValue(Matcher<V> valueMatcher) {
-        return mapContaining((Matcher<K>)anything(), valueMatcher);
+        return mapContaining(IsAnything.<K>anything(), valueMatcher);
     }
 
     @Factory
     public static <K,V> Matcher<Map<K,V>> mapWithValue(V value) {
         return mapWithValue(eq(value));
     }
-
 }

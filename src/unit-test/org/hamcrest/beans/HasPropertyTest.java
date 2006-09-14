@@ -2,12 +2,11 @@
  */
 package org.hamcrest.beans;
 
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.beans.HasPropertyWithValueTest.BeanWithoutInfo;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.beans.HasProperty.hasProperty;
 import static org.hamcrest.core.IsNot.not;
+
+import org.hamcrest.AbstractMatcherTest;
 
 /**
  * @author Iain McGinniss
