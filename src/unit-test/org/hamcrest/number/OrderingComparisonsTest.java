@@ -5,9 +5,9 @@ package org.hamcrest.number;
 import org.hamcrest.AbstractMatcherTest;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.number.IsComparableTo.*;
+import static org.hamcrest.number.OrderingComparisons.*;
 
-public class IsComparableToTest extends AbstractMatcherTest {
+public class OrderingComparisonsTest extends AbstractMatcherTest {
 
     public void testComparesObjectsForGreaterThan() {
         assertThat(2, greaterThan(1));
