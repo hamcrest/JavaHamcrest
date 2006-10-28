@@ -12,12 +12,14 @@
     <target name="build" description="Build project">
         <mkdir dir="build"/>
         <java-to-jar srcdir="src/api" destjar="build/hamcrest-api-${version}.jar"/>
+        <java-to-jar srcdir="src/generator" destjar="build/hamcrest-generator-${version}.jar"
+                     classpath="build/hamcrest-api-${version}.jar"/>
         <java-to-jar srcdir="src/library" destjar="build/hamcrest-library-${version}.jar"
                      classpath="build/hamcrest-api-${version}.jar"/>
         <java-to-jar srcdir="src/integration" destjar="build/hamcrest-integration-${version}.jar"
                      classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar"/>
         <java-to-jar srcdir="src/unit-test" destjar="build/hamcrest-unit-test-${version}.jar"
-                     classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar;build/hamcrest-integration-${version}.jar"/>
+                     classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar;build/hamcrest-integration-${version}.jar;build/hamcrest-generator-${version}.jar"/>
         <java-to-jar srcdir="src/examples" destjar="build/hamcrest-examples-${version}.jar"
                      classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar;build/hamcrest-integration-${version}.jar"/>
     </target>

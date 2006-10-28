@@ -7,7 +7,6 @@
 * Constraint renamed to Matcher.
 * Constraint.eval() renamed to Matcher.match().
 * Packages moved from org.jmock.core.matcher to org.hamcrest.
-* Merged SelfDescribing into Matcher interface.
 * SelfDescribing.describe() no longer returns a StringBuffer. Simpler for users to implement.
 * Introduced Description interface that acts as a domain centric abstraction over StringBuffer.
 
@@ -23,6 +22,7 @@
 
 [Integration Changes]
 * Added MatcherAssert, for assertThat(Object, Matcher) in JUnit.
+* Added syntactic sugar generator.
 
 [Misc]
 * Split code into different JARs

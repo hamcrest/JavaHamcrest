@@ -45,6 +45,7 @@ The complete source for Ham Crest is bundled. This includes:
  * Matcher API [src/api]
  * Matcher libary [src/library]
  * Matcher integrations [src/integration]
+ * Syntactic sugar generator [src/generator]
  * Unit tests [src/unit-test]
  * Ant build file [build.xml]
  * Dependencies [lib]
