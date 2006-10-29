@@ -28,7 +28,7 @@ public class DescribedAsTest extends AbstractMatcherTest {
         Matcher<Object> m1 = describedAs("irrelevant", alwaysPasses());
         Matcher<Object> m2 = describedAs("irrelevant", alwaysFails());
 
-        assertTrue(m1.match(new Object()));
-        assertFalse(m2.match("hi"));
+        assertTrue(m1.matches(new Object()));
+        assertFalse(m2.matches("hi"));
     }
 }

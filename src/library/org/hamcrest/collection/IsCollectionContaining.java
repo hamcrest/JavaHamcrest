@@ -17,9 +17,9 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Collection<T>> {
         this.elementMatcher = elementMatcher;
     }
 
-    public boolean matchSafely(Collection<T> collection) {
+    public boolean matchesSafely(Collection<T> collection) {
         for (T item : collection) {
-            if (elementMatcher.match(item)){
+            if (elementMatcher.matches(item)){
                 return true;
             }
         }

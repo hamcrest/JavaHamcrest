@@ -6,19 +6,19 @@ import static org.hamcrest.collection.IsArrayContaining.arrayContaining;
 public class IsArrayContainingTest extends AbstractMatcherTest {
 
     public void testMatchesAnArrayThatContainsAnElementMatchingTheGivenMatcher() {
-        assertMatches("should match array that contains 'a'",
+        assertMatches("should matches array that contains 'a'",
                 arrayContaining("a"), new String[]{"a", "b", "c"});
     }
 
     public void testDoesNotMatchAnArrayThatDoesntContainAnElementMatchingTheGivenMatcher() {
-        assertDoesNotMatch("should not match array that doesn't contain 'a'",
+        assertDoesNotMatch("should not matches array that doesn't contain 'a'",
                 arrayContaining("a"), new String[]{"b", "c"});
-        assertDoesNotMatch("should not match empty array",
+        assertDoesNotMatch("should not matches empty array",
                 arrayContaining("a"), new String[0]);
     }
 
     public void testDoesNotMatchNull() {
-        assertDoesNotMatch("should not match null",
+        assertDoesNotMatch("should not matches null",
                 arrayContaining("a"), null);
     }
 
@@ -32,7 +32,7 @@ public class IsArrayContainingTest extends AbstractMatcherTest {
     // -Joe.
 
 //    public void testDoesNotMatchObjectThatIsNotAnArray() {
-//        assertDoesNotMatch("should not match empty list",
+//        assertDoesNotMatch("should not matches empty list",
 //                arrayContaining("a"), "not a collection");
 //    }
 

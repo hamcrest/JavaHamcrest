@@ -53,7 +53,7 @@ import java.lang.reflect.Method;
  * If an exception is thrown by the getter method for a property, the property
  * does not exist, is not readable, or a reflection related exception is thrown
  * when trying to invoke it then this is treated as an evaluation failure and
- * the match method will return false.
+ * the matches method will return false.
  * <p/>
  * This matcher class will also work with JavaBean objects that have explicit
  * bean descriptions via an associated BeanInfo description class. See the
@@ -77,11 +77,11 @@ public class HasPropertyWithValue<T> extends TypeSafeMatcher<T> {
         this.value = value;
     }
 
-    public boolean matchSafely(T argument) {
+    public boolean matchesSafely(T argument) {
         try {
             Method readMethod = getReadMethod(argument);
             return readMethod != null
-                    && value.match(readMethod.invoke(argument, NO_ARGUMENTS));
+                    && value.matches(readMethod.invoke(argument, NO_ARGUMENTS));
         } catch (IntrospectionException e) {
             return false;
         } catch (IllegalArgumentException e) {

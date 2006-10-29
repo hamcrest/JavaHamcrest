@@ -24,7 +24,7 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
         this.string = string;
     }
 
-    public boolean matchSafely(String item) {
+    public boolean matchesSafely(String item) {
         return stripSpace(string).equalsIgnoreCase(stripSpace(item));
     }
 

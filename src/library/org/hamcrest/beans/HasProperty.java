@@ -26,7 +26,7 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
         this.propertyName = propertyName;
     }
 
-    public boolean matchSafely(T obj) {
+    public boolean matchesSafely(T obj) {
         try {
             return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null;
         } catch (IntrospectionException e) {

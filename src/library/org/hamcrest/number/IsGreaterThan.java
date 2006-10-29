@@ -15,7 +15,7 @@ public class IsGreaterThan<T extends Comparable<T>> extends TypeSafeMatcher<T> {
         this.compareTo = compareTo;
     }
     
-    public boolean matchSafely(T item) {
+    public boolean matchesSafely(T item) {
         return compareTo.compareTo(item) < 0;
     }
     

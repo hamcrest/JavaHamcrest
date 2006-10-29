@@ -22,7 +22,7 @@ public class IsAnything<T> implements Matcher<T> {
         this.description = description;
     }
 
-    public boolean match(Object o) {
+    public boolean matches(Object o) {
         return true;
     }
 

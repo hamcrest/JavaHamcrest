@@ -7,24 +7,24 @@ import org.hamcrest.AbstractMatcherTest;
 
 public class IsArrayTest extends AbstractMatcherTest {
     public void testMatchesAnArrayThatMatchingesAllTheElementMatchers() {
-        assertMatches("should match array that contains 'a'",
+        assertMatches("should matches array that contains 'a'",
                 array(eq("a"), eq("b"), eq("c")), new String[]{"a", "b", "c"});
     }
     
     public void testDoesNotMatchAnArrayWhenElementsDoNotMatch() {
-        assertDoesNotMatch("should not match array with different elements",
+        assertDoesNotMatch("should not matches array with different elements",
                 array(eq("a"), eq("b")), new String[]{"b", "c"});
     }
     
     public void testDoesNotMatchAnArrayOfDifferentSize() {
-        assertDoesNotMatch("should not match larger array",
+        assertDoesNotMatch("should not matches larger array",
                            array(eq("a"), eq("b")), new String[]{"a", "b", "c"});
-        assertDoesNotMatch("should not match smaller array",
+        assertDoesNotMatch("should not matches smaller array",
                            array(eq("a"), eq("b")), new String[]{"a"});
     }
     
     public void testDoesNotMatchNull() {
-        assertDoesNotMatch("should not match null",
+        assertDoesNotMatch("should not matches null",
                 array(eq("a")), null);
     }
     

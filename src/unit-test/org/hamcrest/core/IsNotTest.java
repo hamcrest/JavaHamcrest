@@ -8,7 +8,7 @@ import static org.hamcrest.core.IsNot.not;
 public class IsNotTest extends AbstractMatcherTest {
     @SuppressWarnings("unchecked")
 	public void testEvaluatesToTheTheLogicalNegationOfAnotherMatcher() {
-        assertFalse(not(TRUE_MATCHER).match(ARGUMENT_IGNORED));
-        assertTrue(not(FALSE_MATCHER).match(ARGUMENT_IGNORED));
+        assertFalse(not(TRUE_MATCHER).matches(ARGUMENT_IGNORED));
+        assertTrue(not(FALSE_MATCHER).matches(ARGUMENT_IGNORED));
     }
 }

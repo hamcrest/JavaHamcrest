@@ -12,7 +12,7 @@ public abstract class TypeSafeMatcher<T> implements Matcher<T> {
      * Subclasses should implement this. The item will already have been checked for
      * the specific type and will never be null.
      */
-    protected abstract boolean matchSafely(T item);
+    protected abstract boolean matchesSafely(T item);
 
     /**
      * Method made final to prevent accidental override.
@@ -20,8 +20,8 @@ public abstract class TypeSafeMatcher<T> implements Matcher<T> {
      * Instead, implement the Matcher interface directly.
      */
     @SuppressWarnings({"unchecked"})
-    public final boolean match(Object item) {
-        return item != null && matchSafely((T) item);
+    public final boolean matches(Object item) {
+        return item != null && matchesSafely((T) item);
     }
     
 }

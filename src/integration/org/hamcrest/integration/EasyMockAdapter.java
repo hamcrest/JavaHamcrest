@@ -33,7 +33,7 @@ public class EasyMockAdapter implements IArgumentMatcher {
 
     @SuppressWarnings({"unchecked"})
     public boolean matches(Object argument) {
-        return hamcrestMatcher.match(argument);
+        return hamcrestMatcher.matches(argument);
     }
 
     public void appendTo(StringBuffer buffer) {

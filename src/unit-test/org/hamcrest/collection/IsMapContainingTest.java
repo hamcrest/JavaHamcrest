@@ -21,7 +21,7 @@ public class IsMapContainingTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchNull() {
-        assertDoesNotMatch("should not match null",
+        assertDoesNotMatch("should not matches null",
                 mapContaining(anything(), anything()), null);
     }
 
@@ -36,7 +36,7 @@ public class IsMapContainingTest extends AbstractMatcherTest {
     // -Joe.
     
 //    public void testDoesNotMatchAnObjectThatIsNotAMap() {
-//        assertDoesNotMatch("should not match a string",
+//        assertDoesNotMatch("should not matches a string",
 //                mapContaining(ANYTHING, ANYTHING), "not a map");
 //    }
 }

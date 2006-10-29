@@ -13,11 +13,11 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
         this.elementMatchers = elementMatchers.clone();
     }
     
-    public boolean matchSafely(T[] array) {
+    public boolean matchesSafely(T[] array) {
         if (array.length != elementMatchers.length) return false;
         
         for (int i = 0; i < array.length; i++) {
-            if (!elementMatchers[i].match(array[i])) return false;
+            if (!elementMatchers[i].matches(array[i])) return false;
         }
         
         return true;

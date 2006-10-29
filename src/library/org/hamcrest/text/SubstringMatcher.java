@@ -14,7 +14,7 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
         this.substring = substring;
     }
 
-    public boolean matchSafely(String item) {
+    public boolean matchesSafely(String item) {
         return evalSubstringOf(item);
     }
 

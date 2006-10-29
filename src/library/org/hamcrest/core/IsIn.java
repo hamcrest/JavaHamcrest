@@ -15,7 +15,7 @@ public class IsIn<T> extends TypeSafeMatcher<T> {
         this.collection = collection;
     }
 
-    public boolean matchSafely(T item) {
+    public boolean matchesSafely(T item) {
         return collection.contains(item);
     }
 

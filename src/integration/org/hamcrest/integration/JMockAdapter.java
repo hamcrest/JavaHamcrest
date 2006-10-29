@@ -29,7 +29,7 @@ public class JMockAdapter implements Constraint {
 
     @SuppressWarnings({"unchecked"})
     public boolean eval(Object o) {
-        return hamcrestMatcher.match(o);
+        return hamcrestMatcher.matches(o);
     }
 
     public StringBuffer describeTo(StringBuffer buffer) {

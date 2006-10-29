@@ -21,9 +21,9 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
         this.valueMatcher = valueMatcher;
     }
 
-    public boolean matchSafely(Map<K, V> map) {
+    public boolean matchesSafely(Map<K, V> map) {
         for (Entry<K, V> entry : map.entrySet()) {
-            if (keyMatcher.match(entry.getKey()) && valueMatcher.match(entry.getValue())) {
+            if (keyMatcher.matches(entry.getKey()) && valueMatcher.matches(entry.getValue())) {
                 return true;
             }
         }

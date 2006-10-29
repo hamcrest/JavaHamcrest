@@ -39,7 +39,7 @@ public class HasXPath extends TypeSafeMatcher<Node> {
         }
     }
 
-    public boolean matchSafely(Node item) {
+    public boolean matchesSafely(Node item) {
         try {
             String result = (String) compiledXPath.evaluate(item, XPathConstants.STRING);
             if (result == null) {
@@ -47,7 +47,7 @@ public class HasXPath extends TypeSafeMatcher<Node> {
             } else if (valueMatcher == null) {
                 return !result.equals("");
             } else {
-                return valueMatcher.match(result);
+                return valueMatcher.matches(result);
             }
         } catch (XPathExpressionException e) {
             return false;

@@ -10,19 +10,19 @@ import static java.util.Arrays.asList;
 public class IsCollectionContainingTest extends AbstractMatcherTest {
 
     public void testMatchesACollectionThatContainsAnElementMatchingTheGivenMatcher() {
-        assertMatches("should match list that contains 'a'",
+        assertMatches("should matches list that contains 'a'",
                 collectionContaining(eq("a")), asList("a", "b", "c"));
     }
 
     public void testDoesNotMatchCollectionThatDoesntContainAnElementMatchingTheGivenMatcher() {
-        assertDoesNotMatch("should not match list that doesn't contain 'a'",
+        assertDoesNotMatch("should not matches list that doesn't contain 'a'",
                 collectionContaining(eq("a")), asList("b", "c"));
-        assertDoesNotMatch("should not match empty list",
+        assertDoesNotMatch("should not matches empty list",
                 collectionContaining(eq("a")), new ArrayList<String>());
     }
 
     public void testDoesNotMatchNull() {
-        assertDoesNotMatch("should not match null", collectionContaining(eq("a")), null);
+        assertDoesNotMatch("should not matches null", collectionContaining(eq("a")), null);
     }
 
     public void testHasAReadableDescription() {
@@ -35,7 +35,7 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     // -Joe.
 
 //    public void testDoesNotMatchObjectThatIsNotCollections() {
-//        assertDoesNotMatch("should not match empty list", collectionContaining(eq("a")), "not a collection");
+//        assertDoesNotMatch("should not matches empty list", collectionContaining(eq("a")), "not a collection");
 //    }
 
 }

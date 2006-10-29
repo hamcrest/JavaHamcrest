@@ -21,7 +21,7 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
         this.value = value;
     }
 
-    public boolean matchSafely(Double item) {
+    public boolean matchesSafely(Double item) {
         return Math.abs((item - value)) <= error;
     }
 

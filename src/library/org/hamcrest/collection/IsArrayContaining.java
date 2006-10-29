@@ -16,10 +16,10 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
         this.elementMatcher = elementMatcher;
     }
 
-    public boolean matchSafely(T[] array) {
+    public boolean matchesSafely(T[] array) {
         int size = Array.getLength(array);
         for (int i = 0; i < size; i++) {
-            if (elementMatcher.match(Array.get(array, i))) {
+            if (elementMatcher.matches(Array.get(array, i))) {
                 return true;
             }
         }

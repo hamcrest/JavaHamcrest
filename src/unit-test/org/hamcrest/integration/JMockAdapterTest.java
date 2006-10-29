@@ -20,7 +20,7 @@ public class JMockAdapterTest extends TestCase {
 
     public void testDelegatesDescriptionToUnderlyingMatcher() {
         Constraint jMockConstraint = new JMockAdapter(new Matcher() {
-            public boolean match(Object o) {
+            public boolean matches(Object o) {
                 return false;
             }
 

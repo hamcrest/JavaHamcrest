@@ -6,7 +6,7 @@ package org.hamcrest;
 public class MatcherAssert {
 
     public static <T> void assertThat(T actual, Matcher<T> matcher) {
-        if (!matcher.match(actual)) {
+        if (!matcher.matches(actual)) {
             Description description = new StringDescription();
             description.appendText("\nExpected: ");
             matcher.describeTo(description);

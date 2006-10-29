@@ -20,9 +20,9 @@ public class And<T> implements Matcher<T> {
         this.matchers = matchers;
     }
 
-    public boolean match(Object o) {
+    public boolean matches(Object o) {
         for (Matcher<T> matcher : matchers) {
-            if (!matcher.match(o)) {
+            if (!matcher.matches(o)) {
                 return false;
             }
         }

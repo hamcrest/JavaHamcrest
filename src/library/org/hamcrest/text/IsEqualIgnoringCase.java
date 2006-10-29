@@ -24,7 +24,7 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
         this.string = string;
     }
 
-    public boolean matchSafely(String item) {
+    public boolean matchesSafely(String item) {
         return string.equalsIgnoreCase(item);
     }
 

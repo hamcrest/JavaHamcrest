@@ -12,8 +12,8 @@ public class HasToString<T> implements Matcher<T> {
         this.toStringMatcher = toStringMatcher;
     }
 
-    public boolean match(Object item) {
-        return toStringMatcher.match(item.toString());
+    public boolean matches(Object item) {
+        return toStringMatcher.matches(item.toString());
     }
 
     public void describeTo(Description description) {

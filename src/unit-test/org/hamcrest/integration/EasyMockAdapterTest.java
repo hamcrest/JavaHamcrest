@@ -20,7 +20,7 @@ public class EasyMockAdapterTest extends TestCase {
 
     public void testDelegatesDescriptionToUnderlyingMatcher() {
         IArgumentMatcher easyMockMatcher = new EasyMockAdapter(new Matcher() {
-            public boolean match(Object o) {
+            public boolean matches(Object o) {
                 return false;
             }
 

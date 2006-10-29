@@ -9,7 +9,7 @@ public class Matchers {
      */
     public static Matcher<String> isTwoXs() {
         return new TypeSafeMatcher<String>() {
-            public boolean matchSafely(String string) {
+            public boolean matchesSafely(String string) {
                 return string.equals("xx");
             }
 
