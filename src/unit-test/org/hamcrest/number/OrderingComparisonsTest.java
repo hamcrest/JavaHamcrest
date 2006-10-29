@@ -3,11 +3,16 @@
 package org.hamcrest.number;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.number.OrderingComparisons.*;
 
 public class OrderingComparisonsTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return greaterThan(1);
+    }
 
     public void testComparesObjectsForGreaterThan() {
         assertThat(2, greaterThan(1));

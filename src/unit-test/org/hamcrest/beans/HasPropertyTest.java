@@ -7,6 +7,7 @@ import static org.hamcrest.beans.HasProperty.hasProperty;
 import static org.hamcrest.core.IsNot.not;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
 /**
  * @author Iain McGinniss
@@ -18,6 +19,10 @@ public class HasPropertyTest extends AbstractMatcherTest {
 
     private final HasPropertyWithValueTest.BeanWithoutInfo bean
             = new HasPropertyWithValueTest.BeanWithoutInfo("a bean");
+
+    protected Matcher<?> createMatcher() {
+        return hasProperty("irrelevant");
+    }
 
     public void testReturnsTrueIfPropertyExists() {
         assertThat(bean, hasProperty("writeOnlyProperty"));

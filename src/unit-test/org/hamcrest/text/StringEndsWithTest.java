@@ -12,6 +12,10 @@ public class StringEndsWithTest extends AbstractMatcherTest {
 
     Matcher<String> stringEndsWith = endsWith(EXCERPT);
 
+    protected Matcher<?> createMatcher() {
+        return stringEndsWith;
+    }
+
     public void testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring() {
         assertFalse("should be false if excerpt at beginning",
                 stringEndsWith.matches(EXCERPT + "END"));

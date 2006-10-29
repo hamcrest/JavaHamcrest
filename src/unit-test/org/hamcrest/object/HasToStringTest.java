@@ -1,16 +1,16 @@
 package org.hamcrest.object;
 
-import junit.framework.TestCase;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
+import org.hamcrest.AbstractMatcherTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.eq;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.object.HasToString.asString;
 
-public class HasToStringTest extends TestCase {
+public class HasToStringTest extends AbstractMatcherTest {
 
     private static final String TO_STRING_RESULT = "toString result";
     private static final Object ARG = new Object() {
@@ -18,6 +18,10 @@ public class HasToStringTest extends TestCase {
             return TO_STRING_RESULT;
         }
     };
+
+    protected Matcher<?> createMatcher() {
+        return asString(eq("irrelevant"));
+    }
 
     public void testPassesResultOfToStringToNestedMatcher() {
         assertThat(ARG, asString(eq(TO_STRING_RESULT)));

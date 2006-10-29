@@ -12,6 +12,10 @@ public class StringContainsTest extends AbstractMatcherTest {
 
     Matcher<String> stringContains = containsString(EXCERPT);
 
+    protected Matcher<?> createMatcher() {
+        return stringContains;
+    }
+
     public void testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring() {
         assertTrue("should be true if excerpt at beginning",
                 stringContains.matches(EXCERPT + "END"));

@@ -5,10 +5,16 @@ package org.hamcrest.core;
 import static org.hamcrest.core.IsSame.same;
 import static org.hamcrest.core.IsNot.not;
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class IsSameTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return same("irrelevant");
+    }
+
     public void testEvaluatesToTrueIfArgumentIsReferenceToASpecifiedObject() {
         Object o1 = new Object();
         Object o2 = new Object();

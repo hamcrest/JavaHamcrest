@@ -12,6 +12,11 @@ import java.util.EventObject;
 
 
 public class IsEventFromTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return isEventFrom(null);
+    }
+
     public void testEvaluatesToTrueIfArgumentIsAnEventObjectFiredByASpecifiedSource() {
         Object o = new Object();
         EventObject ev = new EventObject(o);

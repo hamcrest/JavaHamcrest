@@ -13,7 +13,7 @@ public class HasToString<T> implements Matcher<T> {
     }
 
     public boolean matches(Object item) {
-        return toStringMatcher.matches(item.toString());
+        return item != null && toStringMatcher.matches(item.toString());
     }
 
     public void describeTo(Description description) {

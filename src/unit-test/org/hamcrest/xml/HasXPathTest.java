@@ -1,6 +1,7 @@
 package org.hamcrest.xml;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.eq;
 import static org.hamcrest.core.IsNot.not;
@@ -26,6 +27,10 @@ public class HasXPathTest extends AbstractMatcherTest {
                 + "  <something id='b'><cheese>Cheddar</cheese></something>\n"
                 + "</root>\n"
         );
+    }
+
+    protected Matcher<?> createMatcher() {
+        return hasXPath("//irrelevant");
     }
 
     public void testAppliesMatcherToXPathInDocument() throws Exception {

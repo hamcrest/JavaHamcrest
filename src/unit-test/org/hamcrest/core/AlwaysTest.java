@@ -3,12 +3,17 @@
 package org.hamcrest.core;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Always.alwaysFails;
 import static org.hamcrest.core.Always.alwaysPasses;
 import static org.hamcrest.core.IsNot.not;
 
 public class AlwaysTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return alwaysPasses();
+    }
 
     public void testAlwaysReturnsFixedBooleanValueFromMatchesMethod() {
         assertThat("something", alwaysPasses());

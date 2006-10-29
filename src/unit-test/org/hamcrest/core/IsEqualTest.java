@@ -10,6 +10,11 @@ import org.hamcrest.Matcher;
 
 
 public class IsEqualTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return eq("irrelevant");
+    }
+
     public void testComparesObjectsUsingEqualsMethod() {
         assertThat("hi", eq("hi"));
         assertThat("bye", not(eq("hi")));

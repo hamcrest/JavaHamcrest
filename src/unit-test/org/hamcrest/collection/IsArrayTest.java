@@ -4,8 +4,14 @@ import static org.hamcrest.collection.IsArray.array;
 import static org.hamcrest.core.IsEqual.eq;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
 public class IsArrayTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return array(eq("irrelevant"));
+    }
+
     public void testMatchesAnArrayThatMatchingesAllTheElementMatchers() {
         assertMatches("should matches array that contains 'a'",
                 array(eq("a"), eq("b"), eq("c")), new String[]{"a", "b", "c"});

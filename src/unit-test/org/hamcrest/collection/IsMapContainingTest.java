@@ -1,6 +1,7 @@
 package org.hamcrest.collection;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 import static org.hamcrest.collection.IsMapContaining.mapContaining;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.eq;
@@ -9,6 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IsMapContainingTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return mapContaining("irrelevant", "irrelevant");
+    }
 
     public void testMatchesMapContainingMatchingKeyAndValue() {
         Map<String,Integer> map = new HashMap<String,Integer>();

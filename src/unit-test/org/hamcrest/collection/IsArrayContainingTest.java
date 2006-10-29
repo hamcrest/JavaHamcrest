@@ -1,9 +1,14 @@
 package org.hamcrest.collection;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 import static org.hamcrest.collection.IsArrayContaining.arrayContaining;
 
 public class IsArrayContainingTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return arrayContaining("irrelevant");
+    }
 
     public void testMatchesAnArrayThatContainsAnElementMatchingTheGivenMatcher() {
         assertMatches("should matches array that contains 'a'",

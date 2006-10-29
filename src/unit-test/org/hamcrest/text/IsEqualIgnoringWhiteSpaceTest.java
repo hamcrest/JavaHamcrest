@@ -12,6 +12,10 @@ public class IsEqualIgnoringWhiteSpaceTest extends AbstractMatcherTest {
 
     private final Matcher<String> matcher = eqIgnoringWhiteSpace("Hello World   how\n are we? ");
 
+    protected Matcher<?> createMatcher() {
+        return matcher;
+    }
+
     public void testPassesIfWordsAreSameButWhitespaceDiffers() {
         assertThat("Hello World how are we?", matcher);
         assertThat("   Hello World   how are \n\n\twe?", matcher);

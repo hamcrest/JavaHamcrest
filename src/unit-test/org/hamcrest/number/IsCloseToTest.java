@@ -8,6 +8,11 @@ import static org.hamcrest.number.IsCloseTo.eq;
 
 public class IsCloseToTest extends AbstractMatcherTest {
 
+    protected Matcher<?> createMatcher() {
+        double irrelevant = 0.1;
+        return eq(irrelevant, irrelevant);
+    }
+
     public void testEvaluatesToTrueIfArgumentIsEqualToADoubleValueWithinSomeError() {
         Matcher<Double> p = eq(1.0, 0.5);
 

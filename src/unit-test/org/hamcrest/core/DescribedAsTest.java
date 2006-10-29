@@ -9,6 +9,11 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 public class DescribedAsTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return describedAs("irrelevant", alwaysPasses());
+    }
+
     public void testOverridesDescriptionOfOtherMatcherWithThatPassedToConstructor() {
         Matcher m1 = describedAs("m1 description", alwaysPasses());
         Matcher m2 = describedAs("m2 description", alwaysFails());

@@ -12,6 +12,10 @@ public class StringStartsWithTest extends AbstractMatcherTest {
 
     Matcher<String> stringStartsWith = startsWith(EXCERPT);
 
+    protected Matcher<?> createMatcher() {
+        return stringStartsWith;
+    }
+
     public void testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring() {
         assertTrue("should be true if excerpt at beginning",
                 stringStartsWith.matches(EXCERPT + "END"));

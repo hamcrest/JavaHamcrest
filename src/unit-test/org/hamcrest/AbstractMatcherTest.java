@@ -2,23 +2,19 @@
  */
 package org.hamcrest;
 
-import junit.framework.AssertionFailedError;
+import static org.hamcrest.core.Always.alwaysPasses;
+import static org.hamcrest.core.Always.alwaysFails;
 import junit.framework.TestCase;
-import org.hamcrest.core.Always;
 
 public abstract class AbstractMatcherTest extends TestCase {
-    protected static final Matcher TRUE_MATCHER = new Always(true);
-    protected static final Matcher FALSE_MATCHER = new Always(false);
 
-    protected static final Matcher NEVER_EVALUATED = new Matcher() {
-        public boolean matches(Object o) {
-            throw new AssertionFailedError("matcher should not have been evaluated");
-        }
+    protected static final Matcher<Boolean> TRUE_MATCHER = alwaysPasses();
+    protected static final Matcher<Boolean> FALSE_MATCHER = alwaysFails();
 
-        public void describeTo(Description description) {
-            description.appendText("NEVER_EVALUATED");
-        }
-    };
+    /**
+     * Create an instance of the Matcher so some generic safety-net tests can be run on it.
+     */
+    protected abstract Matcher<?> createMatcher();
 
     protected static final Object ARGUMENT_IGNORED = new Object();
     protected static final Object ANY_NON_NULL_ARGUMENT = new Object();
@@ -36,4 +32,10 @@ public abstract class AbstractMatcherTest extends TestCase {
         matcher.describeTo(description);
         assertEquals(expected, description.toString());
     }
+
+    public void testIsNullSafe() {
+       // should not throw a NullPointerException
+       createMatcher().matches(null);
+    }
+
 }

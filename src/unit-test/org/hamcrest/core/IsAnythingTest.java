@@ -3,10 +3,16 @@
 package org.hamcrest.core;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsAnything.anything;
 
 public class IsAnythingTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return anything();
+    }
+
     public void testAlwaysEvaluatesToTrue() {
         assertThat(null, anything());
         assertThat(new Object(), anything());

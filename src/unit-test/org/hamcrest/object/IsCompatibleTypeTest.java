@@ -1,6 +1,7 @@
 package org.hamcrest.object;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.object.IsCompatibleType.compatibleType;
 
@@ -18,6 +19,10 @@ public class IsCompatibleTypeTest extends AbstractMatcherTest {
     }
 
     public static class ClassImplementingBaseInterface implements BaseInterface {
+    }
+
+    protected Matcher<?> createMatcher() {
+        return compatibleType(BaseClass.class);
     }
 
     public void testMatchesSameClass() {

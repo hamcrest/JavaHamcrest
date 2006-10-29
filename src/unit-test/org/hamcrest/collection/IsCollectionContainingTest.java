@@ -1,6 +1,7 @@
 package org.hamcrest.collection;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 import static org.hamcrest.collection.IsCollectionContaining.collectionContaining;
 import static org.hamcrest.core.IsEqual.eq;
 
@@ -8,6 +9,10 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 
 public class IsCollectionContainingTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return collectionContaining(eq("irrelevant"));
+    }
 
     public void testMatchesACollectionThatContainsAnElementMatchingTheGivenMatcher() {
         assertMatches("should matches list that contains 'a'",

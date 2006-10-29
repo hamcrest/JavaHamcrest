@@ -29,6 +29,10 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");
     private final BeanWithInfo beanWithInfo = new BeanWithInfo("with info");
 
+    protected Matcher<?> createMatcher() {
+        return hasProperty("irrelevant", anything());
+    }
+
     public void testMatchesInfolessBeanWithMatchedNamedProperty() {
         assertThat(shouldMatch, hasProperty("property", eq("is expected")));
         assertThat(shouldNotMatch, not(hasProperty("property", eq("is expected"))));

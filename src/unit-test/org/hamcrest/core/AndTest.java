@@ -3,6 +3,7 @@
 package org.hamcrest.core;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 import static org.hamcrest.core.And.and;
 import static org.hamcrest.core.IsEqual.eq;
 import static org.hamcrest.core.IsNot.not;
@@ -10,6 +11,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class AndTest extends AbstractMatcherTest {
+
+    protected Matcher<?> createMatcher() {
+        return and(eq("irrelevant"), eq("irrelevant"));
+    }
 
     public void testEvaluatesToTheTheLogicalConjunctionOfTwoOtherMatchers() {
         assertThat("good", and(eq("good"), eq("good")));
