@@ -38,4 +38,12 @@ public abstract class AbstractMatcherTest extends TestCase {
        createMatcher().matches(null);
     }
 
+    public void testCopesWithUnknownTypes() {
+        // should not throw ClassCastException
+        createMatcher().matches(new UnknownType());
+    }
+
+    public static class UnknownType {
+    }
+
 }
