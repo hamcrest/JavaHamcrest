@@ -1,34 +1,98 @@
 <project name="hamcrest" default="all">
 
-    <property name="version" value="SNAPSHOT"/>
+    <property name="version"
+              value="SNAPSHOT"
+              description="Version number to use in build files"/>
 
-    <target name="all" depends="clean, build,test,package"
-            description="Performs clean build, test and package for distribution"/>
+    <property name="haltonfailure"
+              value="true"
+              description="Whether to halt the build if the tests fail"/>
 
-    <target name="clean" description="Clean up all built files">
+    <target name="all"
+            depends="clean, package"
+            description="Performs clean build, runs tests and packages for distribution"/>
+
+    <target name="clean"
+            description="Clean up all built files">
         <delete dir="build"/>
     </target>
 
-    <target name="build" description="Build project">
-        <mkdir dir="build"/>
-        <java-to-jar srcdir="src/api" destjar="build/hamcrest-api-${version}.jar"/>
-        <java-to-jar srcdir="src/generator" destjar="build/hamcrest-generator-${version}.jar"
-                     classpath="build/hamcrest-api-${version}.jar"/>
-        <java-to-jar srcdir="src/library" destjar="build/hamcrest-library-${version}.jar"
-                     classpath="build/hamcrest-api-${version}.jar"/>
-        <java-to-jar srcdir="src/integration" destjar="build/hamcrest-integration-${version}.jar"
-                     classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar"/>
-        <java-to-jar srcdir="src/unit-test" destjar="build/hamcrest-unit-test-${version}.jar"
-                     classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar;build/hamcrest-integration-${version}.jar;build/hamcrest-generator-${version}.jar"/>
-        <java-to-jar srcdir="src/examples" destjar="build/hamcrest-examples-${version}.jar"
-                     classpath="build/hamcrest-api-${version}.jar;build/hamcrest-library-${version}.jar;build/hamcrest-integration-${version}.jar"/>
+    <target name="api"
+            description="Build API">
+        <java-to-jar srcdir="src/api"
+                     destjar="build/hamcrest-api-${version}.jar"/>
     </target>
 
-    <target name="test" description="Test project">
-        <!-- TODO -->
+    <target name="generator"
+            depends="api"
+            description="Build code generator tool">
+        <java-to-jar srcdir="src/generator"
+                     destjar="build/hamcrest-generator-${version}.jar"
+                     classpath="build/hamcrest-api-${version}.jar"/>
     </target>
 
-    <target name="package" depends="build" description="Package for distribution">
+    <target name="library"
+            depends="api"
+            description="Build library of matchers">
+        <java-to-jar srcdir="src/library"
+                     destjar="build/hamcrest-library-${version}.jar"
+                     classpath="build/hamcrest-api-${version}.jar"/>
+    </target>
+
+    <target name="integration"
+            depends="api, library"
+            description="Build integration with external tools">
+        <java-to-jar srcdir="src/integration"
+                     destjar="build/hamcrest-integration-${version}.jar"
+                     classpath="
+                        build/hamcrest-api-${version}.jar;
+                        build/hamcrest-library-${version}.jar"/>
+    </target>
+
+    <target name="unit-test"
+            depends="api, library, integration, generator"
+            description="Build and run unit tests.">
+        <java-to-jar srcdir="src/unit-test"
+                     destjar="build/hamcrest-unit-test-${version}.jar"
+                     classpath="
+                        build/hamcrest-api-${version}.jar;
+                        build/hamcrest-library-${version}.jar;
+                        build/hamcrest-integration-${version}.jar;
+                        build/hamcrest-generator-${version}.jar"/>
+        <junit printsummary="no" fork="no" haltonfailure="${haltonfailure}">
+            <formatter type="brief" usefile="no"/>
+            <classpath>
+                <fileset dir="lib/integration">
+                    <include name="*.jar"/>
+                </fileset>
+                <pathelement path="build/hamcrest-api-${version}.jar"/>
+                <pathelement path="build/hamcrest-library-${version}.jar"/>
+                <pathelement path="build/hamcrest-integration-${version}.jar"/>
+                <pathelement path="build/hamcrest-generator-${version}.jar"/>
+                <pathelement path="build/hamcrest-unit-test-${version}.jar"/>
+            </classpath>
+            <batchtest>
+                <fileset dir="src/unit-test">
+                    <exclude name="**/Abstract*"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="examples"
+            depends="api, library, integration"
+            description="Build and run unit tests.">
+        <java-to-jar srcdir="src/examples"
+                     destjar="build/hamcrest-examples-${version}.jar"
+                     classpath="
+                        build/hamcrest-api-${version}.jar;
+                        build/hamcrest-library-${version}.jar;
+                        build/hamcrest-integration-${version}.jar"/>
+    </target>
+
+    <target name="package"
+            depends="api,generator,library,integration,unit-test,examples"
+            description="Package for distribution">
         <zip zipfile="build/hamcrest-${version}.zip">
             <zipfileset dir="." prefix="hamcrest-${version}">
                 <include name="src/**"/>
@@ -44,12 +108,12 @@
         </zip>
     </target>
 
-    <macrodef name="java-to-jar" description="Compile Java source and build a Jar">
+    <macrodef name="java-to-jar"
+              description="Compile Java source and build a Jar">
         <attribute name="srcdir" description="Directory containg Java source"/>
         <attribute name="destjar" description="Path to Jar"/>
         <attribute name="classpath" description="Anything additional to add on the classpath" default=""/>
         <sequential>
-            <echo message="* Java source (@{srcdir}) -> Jar (@{destjar})"/>
             <mkdir dir="build/temp/@{destjar}.contents"/>
             <javac srcdir="@{srcdir}" destdir="build/temp/@{destjar}.contents">
                 <classpath>
@@ -62,7 +126,7 @@
             <jar jarfile="@{destjar}">
                 <fileset dir="build/temp/@{destjar}.contents"/>
                 <fileset dir="@{srcdir}"/>
-                <!-- Also put Java source in Jar for user's convenience. -->
+                <!-- Put Java source in Jars for user's convenience. -->
             </jar>
         </sequential>
     </macrodef>
