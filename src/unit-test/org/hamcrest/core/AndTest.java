@@ -10,9 +10,10 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
+@SuppressWarnings("unchecked")
 public class AndTest extends AbstractMatcherTest {
 
-    protected Matcher<?> createMatcher() {
+	protected Matcher<?> createMatcher() {
         return and(eq("irrelevant"), eq("irrelevant"));
     }
 

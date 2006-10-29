@@ -6,9 +6,10 @@ import static org.hamcrest.core.IsEqual.eq;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
+@SuppressWarnings("unchecked")
 public class IsArrayTest extends AbstractMatcherTest {
 
-    protected Matcher<?> createMatcher() {
+	protected Matcher<?> createMatcher() {
         return array(eq("irrelevant"));
     }
 

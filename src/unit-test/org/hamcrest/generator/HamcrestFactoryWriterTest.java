@@ -1,9 +1,9 @@
 package org.hamcrest.generator;
 
-import junit.framework.TestCase;
-
 import java.io.IOException;
 import java.io.StringWriter;
+
+import junit.framework.TestCase;
 
 public class HamcrestFactoryWriterTest extends TestCase {
 

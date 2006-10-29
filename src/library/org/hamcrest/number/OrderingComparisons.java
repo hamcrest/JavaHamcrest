@@ -8,13 +8,14 @@ import static org.hamcrest.core.DescribedAs.describedAs;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
+@SuppressWarnings("unchecked")
 public class OrderingComparisons {
     @Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThan(T value) {
         return new IsGreaterThan<T>(value);
     }
     
-    @Factory
+	@Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
         return describedAs("a value greater than or equal to %0", 
                            or(greaterThan(value), eq(value)),

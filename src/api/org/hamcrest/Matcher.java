@@ -6,7 +6,7 @@ package org.hamcrest;
  * A matcher over acceptable values. 
  * A matcher is able to describe itself to give feedback when it fails.
  */
-@SuppressWarnings({"UnusedDeclaration"})
+@SuppressWarnings("unused")
 public interface Matcher<T> extends SelfDescribing {
 
     /**

@@ -9,9 +9,10 @@ import static org.hamcrest.core.IsEqual.eq;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.Or.or;
 
+@SuppressWarnings("unchecked")
 public class OrTest extends AbstractMatcherTest {
 
-    protected Matcher<?> createMatcher() {
+	protected Matcher<?> createMatcher() {
         return or(eq("irrelevant"));
     }
 

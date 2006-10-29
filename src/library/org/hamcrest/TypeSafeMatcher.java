@@ -30,6 +30,10 @@ public abstract class TypeSafeMatcher<T> implements Matcher<T> {
             throw new Error("Cannot determine correct type for matchesSafely() method.");
         }
     }
+    
+    protected TypeSafeMatcher(Class<T> expectedType) {
+    	this.expectedType = expectedType;
+    }
 
     /**
      * Method made final to prevent accidental override.

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings({"UnusedDeclaration"})
+@SuppressWarnings("unused")
 public class ReflectiveFactoryReaderTest extends TestCase {
 
     public static class SimpleSetOfMatchers {
