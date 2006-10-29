@@ -23,7 +23,7 @@ public class IsInstanceOf<T> implements Matcher<T> {
         this.theClass = theClass;
     }
 
-    public boolean match(T item) {
+    public boolean match(Object item) {
         return theClass.isInstance(item);
     }
 

@@ -24,7 +24,7 @@ public class DescribedAs<T> implements Matcher<T> {
         this.values = values.clone();
     }
     
-    public boolean match(T o) {
+    public boolean match(Object o) {
         return matcher.match(o);
     }
 

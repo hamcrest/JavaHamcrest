@@ -5,6 +5,7 @@ package org.hamcrest.beans;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.TypeSafeMatcher;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -63,9 +64,8 @@ import java.lang.reflect.Method;
  * @author Iain McGinniss
  * @author Nat Pryce
  * @author Steve Freeman
- * @since 1.1.0
  */
-public class HasPropertyWithValue<T> implements Matcher<T> {
+public class HasPropertyWithValue<T> extends TypeSafeMatcher<T> {
 
     private static final Object[] NO_ARGUMENTS = new Object[0];
 
@@ -77,8 +77,7 @@ public class HasPropertyWithValue<T> implements Matcher<T> {
         this.value = value;
     }
 
-    @SuppressWarnings({"unchecked"})
-    public boolean match(T argument) {
+    public boolean matchSafely(T argument) {
         try {
             Method readMethod = getReadMethod(argument);
             return readMethod != null

@@ -5,6 +5,7 @@ package org.hamcrest.beans;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.TypeSafeMatcher;
 
 import java.beans.IntrospectionException;
 
@@ -16,9 +17,8 @@ import java.beans.IntrospectionException;
  * @author Iain McGinniss
  * @author Nat Pryce
  * @author Steve Freeman
- * @since 1.1.0
  */
-public class HasProperty<T> implements Matcher<T> {
+public class HasProperty<T> extends TypeSafeMatcher<T> {
 
     private final String propertyName;
 
@@ -26,7 +26,7 @@ public class HasProperty<T> implements Matcher<T> {
         this.propertyName = propertyName;
     }
 
-    public boolean match(T obj) {
+    public boolean matchSafely(T obj) {
         try {
             return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null;
         } catch (IntrospectionException e) {

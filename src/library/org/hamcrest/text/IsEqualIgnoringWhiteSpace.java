@@ -5,11 +5,12 @@ package org.hamcrest.text;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Tests if a string is equal to another string, ignoring any changes in whitespace.
  */
-public class IsEqualIgnoringWhiteSpace implements Matcher<String> {
+public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
 
     // TODO: Replace String with CharSequence to allow for easy interopability between
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
@@ -23,12 +24,8 @@ public class IsEqualIgnoringWhiteSpace implements Matcher<String> {
         this.string = string;
     }
 
-    public boolean match(String item) {
-        if (item == null) {
-            return false;
-        } else {
-            return stripSpace(string).equalsIgnoreCase(stripSpace(item));
-        }
+    public boolean matchSafely(String item) {
+        return stripSpace(string).equalsIgnoreCase(stripSpace(item));
     }
 
     public void describeTo(Description description) {

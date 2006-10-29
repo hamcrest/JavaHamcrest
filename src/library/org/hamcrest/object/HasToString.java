@@ -12,7 +12,7 @@ public class HasToString<T> implements Matcher<T> {
         this.toStringMatcher = toStringMatcher;
     }
 
-    public boolean match(T item) {
+    public boolean match(Object item) {
         return toStringMatcher.match(item.toString());
     }
 

@@ -17,7 +17,7 @@ public class IsNot<T> implements Matcher<T> {
         this.matcher = matcher;
     }
 
-    public boolean match(T arg) {
+    public boolean match(Object arg) {
         return !matcher.match(arg);
     }
 

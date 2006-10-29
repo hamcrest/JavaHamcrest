@@ -30,11 +30,10 @@ public class PropertyUtil {
      */
     public static PropertyDescriptor getPropertyDescriptor(String propertyName, Object fromObj) throws IntrospectionException {
         BeanInfo beanInfo = Introspector.getBeanInfo(fromObj.getClass());
-        PropertyDescriptor[] properties = beanInfo.getPropertyDescriptors();
 
-        for (int i = 0; i < properties.length; i++) {
-            if (properties[i].getName().equals(propertyName)) {
-                return properties[i];
+        for (PropertyDescriptor property : beanInfo.getPropertyDescriptors()) {
+            if (property.getName().equals(propertyName)) {
+                return property;
             }
         }
 

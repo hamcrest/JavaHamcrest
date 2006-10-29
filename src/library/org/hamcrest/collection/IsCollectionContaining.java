@@ -3,11 +3,12 @@ package org.hamcrest.collection;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.TypeSafeMatcher;
 import static org.hamcrest.core.IsEqual.eq;
 
 import java.util.Collection;
 
-public class IsCollectionContaining<T> implements Matcher<Collection<T>> {
+public class IsCollectionContaining<T> extends TypeSafeMatcher<Collection<T>> {
     private final Matcher<T> elementMatcher;
 //Comparator<? super T> c
     //int binarySearch(List<? extends Comparable<? super T>> list, T key) {
@@ -16,10 +17,7 @@ public class IsCollectionContaining<T> implements Matcher<Collection<T>> {
         this.elementMatcher = elementMatcher;
     }
 
-    public boolean match(Collection<T> collection) {
-        if (collection == null) {
-            return false;
-        }
+    public boolean matchSafely(Collection<T> collection) {
         for (T item : collection) {
             if (elementMatcher.match(item)){
                 return true;

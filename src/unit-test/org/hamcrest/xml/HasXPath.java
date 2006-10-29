@@ -3,6 +3,7 @@ package org.hamcrest.xml;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.w3c.dom.Node;
 
 import javax.xml.xpath.XPath;
@@ -16,7 +17,7 @@ import javax.xml.xpath.XPathFactory;
  *
  * @author Joe Walnes
  */
-public class HasXPath implements Matcher<Node> {
+public class HasXPath extends TypeSafeMatcher<Node> {
 
     private final Matcher<String> valueMatcher;
     private final XPathExpression compiledXPath;
@@ -38,7 +39,7 @@ public class HasXPath implements Matcher<Node> {
         }
     }
 
-    public boolean match(Node item) {
+    public boolean matchSafely(Node item) {
         try {
             String result = (String) compiledXPath.evaluate(item, XPathConstants.STRING);
             if (result == null) {

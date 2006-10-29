@@ -20,7 +20,7 @@ public class IsEqual<T> implements Matcher<T> {
         object = equalArg;
     }
 
-    public boolean match(T arg) {
+    public boolean match(Object arg) {
         return areEqual(object, arg);
     }
 

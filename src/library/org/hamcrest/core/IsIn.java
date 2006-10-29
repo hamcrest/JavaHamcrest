@@ -3,19 +3,20 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.TypeSafeMatcher;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-public class IsIn<T> implements Matcher<T> {
+public class IsIn<T> extends TypeSafeMatcher<T> {
     private final Collection<T> collection;
 
     public IsIn(Collection<T> collection) {
         this.collection = collection;
     }
 
-    public boolean match(T o) {
-        return collection.contains(o);
+    public boolean matchSafely(T item) {
+        return collection.contains(item);
     }
 
     public void describeTo(Description description) {

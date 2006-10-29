@@ -3,15 +3,16 @@ package org.hamcrest.object;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.TypeSafeMatcher;
 
-public class IsCompatibleType<T> implements Matcher<Class<?>> {
+public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
     private final Class<T> type;
     
     public IsCompatibleType(Class<T> type) {
         this.type = type;
     }
     
-    public boolean match(Class<?> cls) {
+    public boolean matchSafely(Class<?> cls) {
         return type.isAssignableFrom(cls);
     }
     

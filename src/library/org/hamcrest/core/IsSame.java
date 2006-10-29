@@ -17,7 +17,7 @@ public class IsSame<T> implements Matcher<T> {
         this.object = object;
     }
 
-    public boolean match(T arg) {
+    public boolean match(Object arg) {
         return arg == object;
     }
 

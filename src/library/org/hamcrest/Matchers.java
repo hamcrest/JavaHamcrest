@@ -8,8 +8,8 @@ public class Matchers {
      * Temporary Matcher... don't use this.. it will go away!
      */
     public static Matcher<String> isTwoXs() {
-        return new Matcher<String>() {
-            public boolean match(String string) {
+        return new TypeSafeMatcher<String>() {
+            public boolean matchSafely(String string) {
                 return string.equals("xx");
             }
 

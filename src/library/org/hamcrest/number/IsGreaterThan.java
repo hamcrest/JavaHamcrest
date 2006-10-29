@@ -3,19 +3,19 @@
 package org.hamcrest.number;
 
 import org.hamcrest.Description;
-import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Is the value less than or greater than another {@link java.lang.Comparable} value?
  */
-public class IsGreaterThan<T extends Comparable<T>> implements Matcher<T> {
+public class IsGreaterThan<T extends Comparable<T>> extends TypeSafeMatcher<T> {
     private final Comparable<T> compareTo;
     
     public IsGreaterThan(Comparable<T> compareTo) {
         this.compareTo = compareTo;
     }
     
-    public boolean match(T item) {
+    public boolean matchSafely(T item) {
         return compareTo.compareTo(item) < 0;
     }
     

@@ -11,7 +11,7 @@ import org.hamcrest.Factory;
  * Is the value null?
  */
 public class IsNull<T> implements Matcher<T> {
-    public boolean match(T o) {
+    public boolean match(Object o) {
         return o == null;
     }
 

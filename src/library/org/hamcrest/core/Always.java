@@ -23,7 +23,7 @@ public class Always<T> implements Matcher<T> {
         this.description = description;
     }
 
-    public boolean match(T o) {
+    public boolean match(Object o) {
         return pass;
     }
 

@@ -20,7 +20,7 @@ public class And<T> implements Matcher<T> {
         this.matchers = matchers;
     }
 
-    public boolean match(T o) {
+    public boolean match(Object o) {
         for (Matcher<T> matcher : matchers) {
             if (!matcher.match(o)) {
                 return false;

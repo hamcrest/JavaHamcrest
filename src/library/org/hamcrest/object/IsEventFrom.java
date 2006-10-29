@@ -5,6 +5,7 @@ package org.hamcrest.object;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.TypeSafeMatcher;
 
 import java.util.EventObject;
 
@@ -12,7 +13,7 @@ import java.util.EventObject;
 /**
  * Tests if the value is an event announced by a specific object.
  */
-public class IsEventFrom implements Matcher<EventObject> {
+public class IsEventFrom extends TypeSafeMatcher<EventObject> {
     private final Class eventClass;
     private final Object source;
 
@@ -21,7 +22,7 @@ public class IsEventFrom implements Matcher<EventObject> {
         this.source = source;
     }
 
-    public boolean match(EventObject item) {
+    public boolean matchSafely(EventObject item) {
         return eventClass.isInstance(item)
                 && eventHasSameSource(item);
     }

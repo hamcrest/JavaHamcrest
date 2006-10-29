@@ -1,9 +1,9 @@
 package org.hamcrest.text;
 
 import org.hamcrest.Description;
-import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
-public abstract class SubstringMatcher implements Matcher<String> {
+public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
 
     // TODO: Replace String with CharSequence to allow for easy interopability between
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
@@ -14,7 +14,7 @@ public abstract class SubstringMatcher implements Matcher<String> {
         this.substring = substring;
     }
 
-    public boolean match(String item) {
+    public boolean matchSafely(String item) {
         return evalSubstringOf(item);
     }
 
