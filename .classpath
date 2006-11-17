@@ -11,7 +11,6 @@
 	<classpathentry kind="lib" path="lib/integration/junit-3.8.1.jar"/>
 	<classpathentry kind="lib" path="lib/integration/junit-4.0.jar"/>
 	<classpathentry kind="lib" path="lib/integration/testng-4.6-jdk15.jar"/>
-	<classpathentry kind="lib" path="lib/library/jaxen-1.1-beta-4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

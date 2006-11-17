@@ -2,14 +2,13 @@
  */
 package org.hamcrest;
 
-import static org.hamcrest.core.Always.alwaysPasses;
-import static org.hamcrest.core.Always.alwaysFails;
+import org.hamcrest.core.Always;
 import junit.framework.TestCase;
 
 public abstract class AbstractMatcherTest extends TestCase {
 
-    protected static final Matcher<Boolean> TRUE_MATCHER = alwaysPasses();
-    protected static final Matcher<Boolean> FALSE_MATCHER = alwaysFails();
+    protected static final Matcher<Boolean> TRUE_MATCHER = Always.alwaysPasses();
+    protected static final Matcher<Boolean> FALSE_MATCHER = Always.alwaysFails();
 
     /**
      * Create an instance of the Matcher so some generic safety-net tests can be run on it.
