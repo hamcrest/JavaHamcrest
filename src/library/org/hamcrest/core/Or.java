@@ -2,10 +2,11 @@
  */
 package org.hamcrest.core;
 
+import static java.util.Arrays.asList;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
-
 
 /**
  * Calculates the logical disjunction of two matchers. Evaluation is
@@ -14,9 +15,9 @@ import org.hamcrest.Factory;
  */
 public class Or<T> implements Matcher<T> {
 
-    private final Matcher<T>[] matchers;
+    private final Iterable<Matcher<T>> matchers;
 
-    public Or(Matcher<T>... matchers) {
+    public Or(Iterable<Matcher<T>> matchers) {
         this.matchers = matchers;
     }
 
@@ -45,6 +46,11 @@ public class Or<T> implements Matcher<T> {
 
     @Factory
     public static <T> Matcher<T> or(Matcher<T>... matchers) {
+        return new Or<T>(asList(matchers));
+    }
+
+    @Factory
+    public static <T> Matcher<T> or(Iterable<Matcher<T>> matchers) {
         return new Or<T>(matchers);
     }
 }

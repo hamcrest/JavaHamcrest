@@ -6,6 +6,8 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
 
+import java.util.Arrays;
+
 
 /**
  * Calculates the logical conjunction of two matchers. Evaluation is
@@ -13,10 +15,9 @@ import org.hamcrest.Factory;
  * matcher returns <code>false</code>.
  */
 public class And<T> implements Matcher<T> {
-    private final Matcher<T>[] matchers;
+    private final Iterable<Matcher<T>> matchers;
 
-
-    public And(Matcher<T>[] matchers) {
+    public And(Iterable<Matcher<T>> matchers) {
         this.matchers = matchers;
     }
 
@@ -45,6 +46,11 @@ public class And<T> implements Matcher<T> {
 
     @Factory
     public static <T> Matcher<T> and(Matcher<T>... matchers) {
+        return and(Arrays.asList(matchers));
+    }
+
+    @Factory
+    public static <T> Matcher<T> and(Iterable<Matcher<T>> matchers) {
         return new And<T>(matchers);
     }
 

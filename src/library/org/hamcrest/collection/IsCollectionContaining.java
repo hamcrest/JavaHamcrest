@@ -1,5 +1,6 @@
 package org.hamcrest.collection;
 
+import static org.hamcrest.core.And.and;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
@@ -7,11 +8,10 @@ import org.hamcrest.TypeSafeMatcher;
 import static org.hamcrest.core.IsEqual.eq;
 
 import java.util.Collection;
+import java.util.ArrayList;
 
 public class IsCollectionContaining<T> extends TypeSafeMatcher<Collection<T>> {
     private final Matcher<T> elementMatcher;
-//Comparator<? super T> c
-    //int binarySearch(List<? extends Comparable<? super T>> list, T key) {
 
     public IsCollectionContaining(Matcher<T> elementMatcher) {
         this.elementMatcher = elementMatcher;
@@ -39,6 +39,15 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Collection<T>> {
     @Factory
     public static <T> Matcher<Collection<T>> collectionContaining(T element) {
         return collectionContaining(eq(element));
+    }
+
+    @Factory
+    public static <T> Matcher<Collection<T>> collectionContainingAllOf(Matcher<T>... elementMatchers) {
+        Collection<Matcher<Collection<T>>> all = new ArrayList<Matcher<Collection<T>>>(elementMatchers.length);
+        for (Matcher<T> elementMatcher : elementMatchers) {
+            all.add(collectionContaining(elementMatcher));
+        }
+        return and(all);
     }
 
 }

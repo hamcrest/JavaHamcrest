@@ -3,6 +3,7 @@ package org.hamcrest.collection;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import static org.hamcrest.collection.IsCollectionContaining.collectionContaining;
+import static org.hamcrest.collection.IsCollectionContaining.collectionContainingAllOf;
 import static org.hamcrest.core.IsEqual.eq;
 
 import java.util.ArrayList;
@@ -34,13 +35,18 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
         assertDescription("a collection containing eq(\"a\")", collectionContaining(eq("a")));
     }
 
-    // Remaining code no longer compiles, thanks to generics. I think that's a good thing, but
-    // I still need to investigate how this behaves with code that doesn't use generics.
-    // I expect ClassCastExceptions will be thrown.
-    // -Joe.
-
-//    public void testDoesNotMatchObjectThatIsNotCollections() {
-//        assertDoesNotMatch("should not matches empty list", collectionContaining(eq("a")), "not a collection");
-//    }
-
+    public void testMatchesAllItemsInCollection() {
+        assertMatches("should match list containing all of items",
+                collectionContainingAllOf(eq("a"), eq("b"), eq("c")),
+                asList("a", "b", "c"));
+        assertMatches("should match list containing all of items in any order",
+                collectionContainingAllOf(eq("a"), eq("b"), eq("c")),
+                asList("c", "b", "a"));
+        assertMatches("should match list containing all of items plus others",
+                collectionContainingAllOf(eq("a"), eq("b"), eq("c")),
+                asList("e", "c", "b", "a", "d"));
+        assertDoesNotMatch("should not match list unless it contains all items",
+                collectionContainingAllOf(eq("a"), eq("b"), eq("c")),
+                asList("e", "c", "b", "d")); // 'a' missing
+    }
 }
