@@ -5,6 +5,7 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
 import java.lang.reflect.Array;
 
@@ -13,7 +14,7 @@ import java.lang.reflect.Array;
  * Is the value equal to another value, as tested by the
  * {@link java.lang.Object#equals} invokedMethod?
  */
-public class IsEqual<T> implements Matcher<T> {
+public class IsEqual<T> extends BaseMatcher<T> {
     private final Object object;
 
     public IsEqual(T equalArg) {

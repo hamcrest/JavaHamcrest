@@ -1,10 +1,10 @@
 package org.hamcrest.integration;
 
 import junit.framework.TestCase;
-import static org.hamcrest.core.IsEqual.eq;
-import org.hamcrest.Matcher;
-import org.hamcrest.Description;
 import org.easymock.IArgumentMatcher;
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
+import static org.hamcrest.core.IsEqual.eq;
 
 public class EasyMockAdapterTest extends TestCase {
 
@@ -19,7 +19,7 @@ public class EasyMockAdapterTest extends TestCase {
     }
 
     public void testDelegatesDescriptionToUnderlyingMatcher() {
-        IArgumentMatcher easyMockMatcher = new EasyMockAdapter(new Matcher() {
+        IArgumentMatcher easyMockMatcher = new EasyMockAdapter(new BaseMatcher() {
             public boolean matches(Object o) {
                 return false;
             }

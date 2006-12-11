@@ -6,11 +6,12 @@ import static org.hamcrest.core.IsNot.not;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
 /**
  * Is the value null?
  */
-public class IsNull<T> implements Matcher<T> {
+public class IsNull<T> extends BaseMatcher<T> {
     public boolean matches(Object o) {
         return o == null;
     }

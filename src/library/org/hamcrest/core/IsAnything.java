@@ -5,12 +5,13 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
 
 /**
  * A matcher that always returns <code>true</code>.
  */
-public class IsAnything<T> implements Matcher<T> {
+public class IsAnything<T> extends BaseMatcher<T> {
 
     private final String description;
 

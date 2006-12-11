@@ -5,11 +5,12 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
 /**
  * Always passes or failes, ignoring what value is passed to it.
  */
-public class Always<T> implements Matcher<T> {
+public class Always<T> extends BaseMatcher<T> {
 
     private final boolean pass;
     private final String description;

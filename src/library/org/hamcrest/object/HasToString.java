@@ -3,8 +3,9 @@ package org.hamcrest.object;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
-public class HasToString<T> implements Matcher<T> {
+public class HasToString<T> extends BaseMatcher<T> {
 
     private final Matcher<String> toStringMatcher;
 

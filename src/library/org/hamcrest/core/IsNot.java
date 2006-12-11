@@ -5,12 +5,13 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
 
 /**
  * Calculates the logical negation of a matcher.
  */
-public class IsNot<T> implements Matcher<T> {
+public class IsNot<T> extends BaseMatcher<T> {
     private final Matcher<T> matcher;
 
     public IsNot(Matcher<T> matcher) {

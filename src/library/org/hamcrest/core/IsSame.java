@@ -5,12 +5,13 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
 
 /**
  * Is the value the same object as another value?
  */
-public class IsSame<T> implements Matcher<T> {
+public class IsSame<T> extends BaseMatcher<T> {
     private final T object;
 
     public IsSame(T object) {

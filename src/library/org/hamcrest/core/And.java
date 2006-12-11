@@ -5,6 +5,7 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
 import java.util.Arrays;
 
@@ -14,7 +15,7 @@ import java.util.Arrays;
  * shortcut, so that the second matcher is not called if the first
  * matcher returns <code>false</code>.
  */
-public class And<T> implements Matcher<T> {
+public class And<T> extends BaseMatcher<T> {
     private final Iterable<Matcher<T>> matchers;
 
     public And(Iterable<Matcher<T>> matchers) {

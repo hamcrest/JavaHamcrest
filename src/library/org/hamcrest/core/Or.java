@@ -7,13 +7,14 @@ import static java.util.Arrays.asList;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
 /**
  * Calculates the logical disjunction of two matchers. Evaluation is
  * shortcut, so that the second matcher is not called if the first
  * matcher returns <code>true</code>.
  */
-public class Or<T> implements Matcher<T> {
+public class Or<T> extends BaseMatcher<T> {
 
     private final Iterable<Matcher<T>> matchers;
 

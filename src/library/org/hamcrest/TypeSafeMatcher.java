@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
  *
  * @author Joe Walnes
  */
-public abstract class TypeSafeMatcher<T> implements Matcher<T> {
+public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
 
     private Class expectedType;
 

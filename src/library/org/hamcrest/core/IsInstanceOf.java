@@ -5,12 +5,13 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
 
 /**
  * Tests whether the value is an instance of a class.
  */
-public class IsInstanceOf<T> implements Matcher<T> {
+public class IsInstanceOf<T> extends BaseMatcher<T> {
     private final Class<T> theClass;
 
     /**

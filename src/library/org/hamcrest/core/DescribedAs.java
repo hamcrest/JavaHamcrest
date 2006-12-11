@@ -7,11 +7,12 @@ import java.util.regex.Pattern;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.BaseMatcher;
 
 /**
  * Provides a custom description to another matcher.
  */
-public class DescribedAs<T> implements Matcher<T> {
+public class DescribedAs<T> extends BaseMatcher<T> {
     private final String descriptionTemplate;
     private final Matcher<T> matcher;
     private final Object[] values;

@@ -1,9 +1,9 @@
 package org.hamcrest.integration;
 
 import junit.framework.TestCase;
-import static org.hamcrest.core.IsEqual.eq;
-import org.hamcrest.Matcher;
+import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import static org.hamcrest.core.IsEqual.eq;
 import org.jmock.core.Constraint;
 
 public class JMockAdapterTest extends TestCase {
@@ -19,7 +19,7 @@ public class JMockAdapterTest extends TestCase {
     }
 
     public void testDelegatesDescriptionToUnderlyingMatcher() {
-        Constraint jMockConstraint = new JMockAdapter(new Matcher() {
+        Constraint jMockConstraint = new JMockAdapter(new BaseMatcher() {
             public boolean matches(Object o) {
                 return false;
             }
