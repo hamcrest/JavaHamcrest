@@ -1,6 +1,6 @@
 package org.hamcrest.collection;
 
-import static org.hamcrest.core.And.and;
+import static org.hamcrest.core.AllOf.allOf;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
@@ -47,7 +47,7 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Collection<T>> {
         for (Matcher<T> elementMatcher : elementMatchers) {
             all.add(collectionContaining(elementMatcher));
         }
-        return and(all);
+        return allOf(all);
     }
 
 }

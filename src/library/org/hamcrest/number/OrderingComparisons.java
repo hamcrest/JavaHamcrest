@@ -1,8 +1,8 @@
 package org.hamcrest.number;
 
+import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.IsEqual.eq;
 import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.Or.or;
 import static org.hamcrest.core.DescribedAs.describedAs;
 
 import org.hamcrest.Factory;
@@ -18,7 +18,7 @@ public class OrderingComparisons {
 	@Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
         return describedAs("a value greater than or equal to %0", 
-                           or(greaterThan(value), eq(value)),
+                           anyOf(greaterThan(value), eq(value)),
                            value);
     }
     
