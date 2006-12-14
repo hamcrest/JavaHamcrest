@@ -107,8 +107,19 @@
                         build/hamcrest-integration-${version}.jar"/>
     </target>
 
+    <target name="bigjar"
+            depends="api, library, integration, generator"
+            description="Build a single Jar (hamcrest-all.jar) that contains api, library, generator and integration.">
+        <jar jarfile="build/hamcrest-all-${version}.jar" duplicate="preserve">
+            <fileset dir="build/temp/build/hamcrest-api-${version}.jar.contents"/>
+            <fileset dir="build/temp/build/hamcrest-library-${version}.jar.contents"/>
+            <fileset dir="build/temp/build/hamcrest-generator-${version}.jar.contents"/>
+            <fileset dir="build/temp/build/hamcrest-integration-${version}.jar.contents"/>
+        </jar>
+    </target>
+
     <target name="package"
-            depends="api,generator,library,integration,unit-test,examples"
+            depends="api,generator,library,integration,bigjar,unit-test,examples"
             description="Package for distribution">
         <zip zipfile="build/hamcrest-${version}.zip">
             <zipfileset dir="." prefix="hamcrest-${version}">
@@ -119,8 +130,10 @@
             </zipfileset>
             <zipfileset dir="build" prefix="hamcrest-${version}">
                 <include name="hamcrest-api-${version}.jar"/>
+                <include name="hamcrest-generator-${version}.jar"/>
                 <include name="hamcrest-library-${version}.jar"/>
                 <include name="hamcrest-integration-${version}.jar"/>
+                <include name="hamcrest-all-${version}.jar"/>
             </zipfileset>
         </zip>
     </target>
