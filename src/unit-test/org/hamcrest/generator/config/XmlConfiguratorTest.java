@@ -18,14 +18,12 @@ import java.util.List;
 public class XmlConfiguratorTest extends TestCase {
 
     private MockSugarConfiguration sugarConfiguration;
-    private StubClassLoader classLoader;
     private XmlConfigurator config;
 
     protected void setUp() throws Exception {
         super.setUp();
         sugarConfiguration = new MockSugarConfiguration();
-        classLoader = new StubClassLoader();
-        config = new XmlConfigurator(sugarConfiguration, classLoader);
+        config = new XmlConfigurator(sugarConfiguration, getClass().getClassLoader());
     }
 
     public void testAddsMatcherFactoryMethodsToConfiguration() throws Exception {
@@ -93,12 +91,6 @@ public class XmlConfiguratorTest extends TestCase {
 
         public List<FactoryMethod> factoryMethods() {
             return seenFactoryMethods;
-        }
-    }
-
-    private static class StubClassLoader extends ClassLoader {
-        public Class<?> loadClass(String name) throws ClassNotFoundException {
-            return super.loadClass(name);
         }
     }
 
