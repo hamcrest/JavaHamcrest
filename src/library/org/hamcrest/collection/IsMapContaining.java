@@ -6,7 +6,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsAnything;
 
-import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -45,7 +45,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
 
     @Factory
     public static <K,V> Matcher<Map<K,V>> mapContaining(K key, V value) {
-        return mapContaining(eq(key), eq(value));
+        return mapContaining(equalTo(key), equalTo(value));
     }
 
     @Factory
@@ -55,7 +55,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
 
     @Factory
     public static <K,V> Matcher<Map<K,V>> mapWithKey(K key) {
-        return mapWithKey(eq(key));
+        return mapWithKey(equalTo(key));
     }
 
     @Factory
@@ -65,6 +65,6 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
 
     @Factory
     public static <K,V> Matcher<Map<K,V>> mapWithValue(V value) {
-        return mapWithValue(eq(value));
+        return mapWithValue(equalTo(value));
     }
 }

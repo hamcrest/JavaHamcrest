@@ -53,7 +53,7 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
     }
 
     @Factory
-    public static Matcher<String> eqIgnoringWhiteSpace(String string) {
+    public static Matcher<String> equalToIgnoringWhiteSpace(String string) {
         return new IsEqualIgnoringWhiteSpace(string);
     }
 

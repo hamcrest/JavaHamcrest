@@ -5,7 +5,7 @@ package org.hamcrest.beans;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.hamcrest.core.IsAnything.anything;
-import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 
 import java.beans.IntrospectionException;
@@ -34,12 +34,12 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     }
 
     public void testMatchesInfolessBeanWithMatchedNamedProperty() {
-        assertThat(shouldMatch, hasProperty("property", eq("is expected")));
-        assertThat(shouldNotMatch, not(hasProperty("property", eq("is expected"))));
+        assertThat(shouldMatch, hasProperty("property", equalTo("is expected")));
+        assertThat(shouldNotMatch, not(hasProperty("property", equalTo("is expected"))));
     }
 
     public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
-        assertThat(beanWithInfo, hasProperty("property", eq("with info")));
+        assertThat(beanWithInfo, hasProperty("property", equalTo("with info")));
     }
 
     public void testDoesNotMatchInfolessBeanWithoutMatchedNamedProperty() {
@@ -51,7 +51,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     }
 
     public void testDescribeTo() {
-        Matcher matcher = eq(true);
+        Matcher matcher = equalTo(true);
         Description isEqualDescription = new StringDescription();
         matcher.describeTo(isEqualDescription);
 

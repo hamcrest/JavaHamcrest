@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 import org.easymock.IArgumentMatcher;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class EasyMockAdapterTest extends TestCase {
 
@@ -13,7 +13,7 @@ public class EasyMockAdapterTest extends TestCase {
     }
 
     public void testAdaptsHamcrestMatcherToEasyMockArgumentsMatcher() {
-        IArgumentMatcher easyMockMatcher = new EasyMockAdapter(eq("expected"));
+        IArgumentMatcher easyMockMatcher = new EasyMockAdapter(equalTo("expected"));
         assertTrue("Should have matched", easyMockMatcher.matches("expected"));
         assertFalse("Should not have matched", easyMockMatcher.matches("unexpected"));
     }

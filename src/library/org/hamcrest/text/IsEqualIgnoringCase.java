@@ -35,7 +35,7 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
     }
 
     @Factory
-    public static Matcher<String> eqIgnoringCase(String string) {
+    public static Matcher<String> equalToIgnoringCase(String string) {
         return new IsEqualIgnoringCase(string);
     }
 

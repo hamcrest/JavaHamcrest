@@ -35,3 +35,8 @@
 
 * and(hasProperty(),eq())
 
+* Naming
+ - eq -> equals
+ - lt -> less
+
+* Selector/Refiner?

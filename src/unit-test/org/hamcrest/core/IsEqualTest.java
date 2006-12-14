@@ -4,7 +4,7 @@ package org.hamcrest.core;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
@@ -12,22 +12,22 @@ import org.hamcrest.Matcher;
 public class IsEqualTest extends AbstractMatcherTest {
 
     protected Matcher<?> createMatcher() {
-        return eq("irrelevant");
+        return equalTo("irrelevant");
     }
 
     public void testComparesObjectsUsingEqualsMethod() {
-        assertThat("hi", eq("hi"));
-        assertThat("bye", not(eq("hi")));
+        assertThat("hi", equalTo("hi"));
+        assertThat("bye", not(equalTo("hi")));
 
-        assertThat(1, eq(1));
-        assertThat(1, not(eq(2)));
+        assertThat(1, equalTo(1));
+        assertThat(1, not(equalTo(2)));
     }
 
     public void testCanCompareNullValues() {
-        assertThat(null, eq(null));
+        assertThat(null, equalTo(null));
 
-        assertThat(null, not(eq("hi")));
-        assertThat("hi", not(eq(null)));
+        assertThat(null, not(equalTo("hi")));
+        assertThat("hi", not(equalTo(null)));
     }
 
     public void testComparesTheElementsOfAnObjectArray() {
@@ -36,10 +36,10 @@ public class IsEqualTest extends AbstractMatcherTest {
         String[] s3 = {"c", "d"};
         String[] s4 = {"a", "b", "c", "d"};
 
-        assertThat(s1, eq(s1));
-        assertThat(s2, eq(s1));
-        assertThat(s3, not(eq(s1)));
-        assertThat(s4, not(eq(s1)));
+        assertThat(s1, equalTo(s1));
+        assertThat(s2, equalTo(s1));
+        assertThat(s3, not(equalTo(s1)));
+        assertThat(s4, not(equalTo(s1)));
     }
 
     public void testComparesTheElementsOfAnArrayOfPrimitiveTypes() {
@@ -48,10 +48,10 @@ public class IsEqualTest extends AbstractMatcherTest {
         int[] i3 = new int[]{3, 4};
         int[] i4 = new int[]{1, 2, 3, 4};
 
-        assertThat(i1, eq(i1));
-        assertThat(i2, eq(i1));
-        assertThat(i3, not(eq(i1)));
-        assertThat(i4, not(eq(i1)));
+        assertThat(i1, equalTo(i1));
+        assertThat(i2, equalTo(i1));
+        assertThat(i3, not(equalTo(i1)));
+        assertThat(i4, not(equalTo(i1)));
     }
 
     public void testRecursivelyTestsElementsOfArrays() {
@@ -60,10 +60,10 @@ public class IsEqualTest extends AbstractMatcherTest {
         int[][] i3 = new int[][]{{5, 6}, {7, 8}};
         int[][] i4 = new int[][]{{1, 2, 3, 4}, {3, 4}};
 
-        assertThat(i1, eq(i1));
-        assertThat(i2, eq(i1));
-        assertThat(i3, not(eq(i1)));
-        assertThat(i4, not(eq(i1)));
+        assertThat(i1, equalTo(i1));
+        assertThat(i2, equalTo(i1));
+        assertThat(i3, not(equalTo(i1)));
+        assertThat(i4, not(equalTo(i1)));
     }
 
     public void testIncludesTheResultOfCallingToStringOnItsArgumentInTheDescription() {
@@ -73,16 +73,16 @@ public class IsEqualTest extends AbstractMatcherTest {
                 return argumentDescription;
             }
         };
-        assertDescription("eq(<" + argumentDescription + ">)", eq(argument));
+        assertDescription("eq(<" + argumentDescription + ">)", equalTo(argument));
     }
 
     public void testReturnsAnObviousDescriptionIfCreatedWithANestedMatcherByMistake() {
-        Matcher<String> innerMatcher = eq("NestedMatcher");
-        assertDescription("eq(<" + innerMatcher.toString() + ">)", eq(innerMatcher));
+        Matcher<String> innerMatcher = equalTo("NestedMatcher");
+        assertDescription("eq(<" + innerMatcher.toString() + ">)", equalTo(innerMatcher));
     }
 
     public void testReturnsGoodDescriptionIfCreatedWithNullReference() {
-        assertDescription("eq(null)", eq(null));
+        assertDescription("eq(null)", equalTo(null));
     }
 }
 

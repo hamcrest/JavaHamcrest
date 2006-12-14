@@ -4,13 +4,13 @@ package org.hamcrest.text;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.eqIgnoringWhiteSpace;
+import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 public class IsEqualIgnoringWhiteSpaceTest extends AbstractMatcherTest {
 
-    private final Matcher<String> matcher = eqIgnoringWhiteSpace("Hello World   how\n are we? ");
+    private final Matcher<String> matcher = equalToIgnoringWhiteSpace("Hello World   how\n are we? ");
 
     protected Matcher<?> createMatcher() {
         return matcher;

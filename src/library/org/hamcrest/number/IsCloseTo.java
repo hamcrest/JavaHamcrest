@@ -33,9 +33,8 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
     }
 
     @Factory
-    public static Matcher<Double> eq(double operand, double error) {
+    public static Matcher<Double> closeTo(double operand, double error) {
         return new IsCloseTo(operand, error);
     }
-
 
 }

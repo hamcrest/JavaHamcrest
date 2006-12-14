@@ -3,7 +3,7 @@ package org.hamcrest.integration;
 import junit.framework.TestCase;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsEqual.equalTo;
 import org.jmock.core.Constraint;
 
 public class JMockAdapterTest extends TestCase {
@@ -13,7 +13,7 @@ public class JMockAdapterTest extends TestCase {
     }
 
     public void testAdaptsHamcrestMatcherToJMockConstraint() {
-        Constraint jMockConstraint = new JMockAdapter(eq("expected"));
+        Constraint jMockConstraint = new JMockAdapter(equalTo("expected"));
         assertTrue("Should have matched", jMockConstraint.eval("expected"));
         assertFalse("Should not have matched", jMockConstraint.eval("unexpected"));
     }

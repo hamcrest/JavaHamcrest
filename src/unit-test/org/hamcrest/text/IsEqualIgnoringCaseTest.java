@@ -6,34 +6,34 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.text.IsEqualIgnoringCase.eqIgnoringCase;
+import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
 
 public class IsEqualIgnoringCaseTest extends AbstractMatcherTest {
 
     protected Matcher<?> createMatcher() {
-        return eqIgnoringCase("irrelevant");
+        return equalToIgnoringCase("irrelevant");
     }
 
     public void testIgnoresCaseOfCharsInString() {
-        assertThat("HELLO", eqIgnoringCase("heLLo"));
-        assertThat("hello", eqIgnoringCase("heLLo"));
-        assertThat("HelLo", eqIgnoringCase("heLLo"));
+        assertThat("HELLO", equalToIgnoringCase("heLLo"));
+        assertThat("hello", equalToIgnoringCase("heLLo"));
+        assertThat("HelLo", equalToIgnoringCase("heLLo"));
 
-        assertThat("bye", not(eqIgnoringCase("heLLo")));
+        assertThat("bye", not(equalToIgnoringCase("heLLo")));
     }
 
     public void testFailsIfAdditionalWhitespaceIsPresent() {
-        assertThat("heLLo ", not(eqIgnoringCase("heLLo")));
-        assertThat(" heLLo", not(eqIgnoringCase("heLLo")));
+        assertThat("heLLo ", not(equalToIgnoringCase("heLLo")));
+        assertThat(" heLLo", not(equalToIgnoringCase("heLLo")));
     }
 
     public void testFailsIfMatchingAgainstNull() {
-        assertThat(null, not(eqIgnoringCase("heLLo")));
+        assertThat(null, not(equalToIgnoringCase("heLLo")));
     }
 
     public void testRequiresNonNullStringToBeConstructed() {
         try {
-            eqIgnoringCase(null);
+            equalToIgnoringCase(null);
             fail("Expected exception");
         } catch (IllegalArgumentException goodException) {
             // expected!
@@ -41,6 +41,6 @@ public class IsEqualIgnoringCaseTest extends AbstractMatcherTest {
     }
 
     public void testDescribesItselfAsCaseInsensitive() {
-        assertDescription("eqIgnoringCase(\"heLLo\")", eqIgnoringCase("heLLo"));
+        assertDescription("eqIgnoringCase(\"heLLo\")", equalToIgnoringCase("heLLo"));
     }
 }

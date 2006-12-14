@@ -5,7 +5,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
-import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.Collection;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Collection<T>> {
 
     @Factory
     public static <T> Matcher<Collection<T>> collectionContaining(T element) {
-        return collectionContaining(eq(element));
+        return collectionContaining(equalTo(element));
     }
 
     @Factory

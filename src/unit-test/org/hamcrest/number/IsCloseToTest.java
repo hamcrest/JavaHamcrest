@@ -4,17 +4,17 @@ package org.hamcrest.number;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import static org.hamcrest.number.IsCloseTo.eq;
+import static org.hamcrest.number.IsCloseTo.closeTo;
 
 public class IsCloseToTest extends AbstractMatcherTest {
 
     protected Matcher<?> createMatcher() {
         double irrelevant = 0.1;
-        return eq(irrelevant, irrelevant);
+        return closeTo(irrelevant, irrelevant);
     }
 
     public void testEvaluatesToTrueIfArgumentIsEqualToADoubleValueWithinSomeError() {
-        Matcher<Double> p = eq(1.0, 0.5);
+        Matcher<Double> p = closeTo(1.0, 0.5);
 
         assertTrue(p.matches(1.0));
         assertTrue(p.matches(0.5d));

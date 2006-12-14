@@ -4,27 +4,27 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.AnyOf.anyOf;
-import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 
 @SuppressWarnings("unchecked")
 public class AnyOfTest extends AbstractMatcherTest {
 
 	protected Matcher<?> createMatcher() {
-        return anyOf(eq("irrelevant"));
+        return anyOf(equalTo("irrelevant"));
     }
 
     public void testEvaluatesToTheTheLogicalDisjunctionOfTwoOtherMatchers() {
-        assertThat("good", anyOf(eq("bad"), eq("good")));
-        assertThat("good", anyOf(eq("good"), eq("good")));
-        assertThat("good", anyOf(eq("good"), eq("bad")));
+        assertThat("good", anyOf(equalTo("bad"), equalTo("good")));
+        assertThat("good", anyOf(equalTo("good"), equalTo("good")));
+        assertThat("good", anyOf(equalTo("good"), equalTo("bad")));
 
-        assertThat("good", not(anyOf(eq("bad"), eq("bad"))));
+        assertThat("good", not(anyOf(equalTo("bad"), equalTo("bad"))));
     }
 
     public void testEvaluatesToTheTheLogicalDisjunctionOfManyOtherMatchers() {
-        assertThat("good", anyOf(eq("bad"), eq("good"), eq("bad"), eq("bad"), eq("bad")));
-        assertThat("good", not(anyOf(eq("bad"), eq("bad"), eq("bad"), eq("bad"), eq("bad"))));
+        assertThat("good", anyOf(equalTo("bad"), equalTo("good"), equalTo("bad"), equalTo("bad"), equalTo("bad")));
+        assertThat("good", not(anyOf(equalTo("bad"), equalTo("bad"), equalTo("bad"), equalTo("bad"), equalTo("bad"))));
     }
 
 }

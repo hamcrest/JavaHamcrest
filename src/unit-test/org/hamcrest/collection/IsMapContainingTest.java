@@ -4,7 +4,7 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import static org.hamcrest.collection.IsMapContaining.mapContaining;
 import static org.hamcrest.core.IsAnything.anything;
-import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,9 +20,9 @@ public class IsMapContainingTest extends AbstractMatcherTest {
         map.put("a", 1);
         map.put("b", 2);
 
-        assertMatches("matcherA", mapContaining(eq("a"), eq(1)), map);
-        assertMatches("matcherB", mapContaining(eq("b"), eq(2)), map);
-        assertDoesNotMatch("matcherC", mapContaining(eq("c"), eq(3)), map);
+        assertMatches("matcherA", mapContaining(equalTo("a"), equalTo(1)), map);
+        assertMatches("matcherB", mapContaining(equalTo("b"), equalTo(2)), map);
+        assertDoesNotMatch("matcherC", mapContaining(equalTo("c"), equalTo(3)), map);
     }
 
     public void testDoesNotMatchNull() {
@@ -32,7 +32,7 @@ public class IsMapContainingTest extends AbstractMatcherTest {
 
     public void testHasReadableDescription() {
         assertDescription("map containing [eq(\"a\")->eq(<2>)]",
-                mapContaining(eq("a"), (eq(2))));
+                mapContaining(equalTo("a"), (equalTo(2))));
     }
 
     // Remaining code no longer compiles, thanks to generics. I think that's a good thing, but

@@ -4,7 +4,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
-import static org.hamcrest.core.IsEqual.eq;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.lang.reflect.Array;
 
@@ -38,7 +38,7 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
 
     @Factory
     public static <T> Matcher<T[]> arrayContaining(T element) {
-        return arrayContaining(eq(element));
+        return arrayContaining(equalTo(element));
     }
 
 }
