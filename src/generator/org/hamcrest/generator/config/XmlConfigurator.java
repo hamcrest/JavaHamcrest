@@ -1,5 +1,7 @@
 package org.hamcrest.generator.config;
 
+import org.hamcrest.generator.HamcrestFactoryWriter;
+import org.hamcrest.generator.QuickReferenceWriter;
 import org.hamcrest.generator.ReflectiveFactoryReader;
 import org.hamcrest.generator.SugarConfiguration;
 import org.hamcrest.generator.SugarGenerator;
@@ -11,6 +13,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class XmlConfigurator {
@@ -47,8 +51,54 @@ public class XmlConfigurator {
         sugarConfiguration.addFactoryMethods(new ReflectiveFactoryReader(cls));
     }
 
+
     public static void main(String[] args) throws Exception {
-        XmlConfigurator config = new XmlConfigurator(new SugarGenerator(), XmlConfigurator.class.getClassLoader());
-        config.load(new InputSource("matchers.xml"));
+
+        if (args.length != 3) {
+            System.err.println("Args: config-file generated-class output-dir");
+            System.err.println("");
+            System.err.println("    config-file : Path to config file listing matchers to generate sugar for.");
+            System.err.println("                e.g. path/to/matchers.xml");
+            System.err.println("");
+            System.err.println("generated-class : Full name of class to generate.");
+            System.err.println("                e.g. org.myproject.MyMatchers");
+            System.err.println("");
+            System.err.println("     output-dir : Where to output generated code (package subdirs will be");
+            System.err.println("                  automatically created).");
+            System.err.println("                e.g. build/generated-code");
+            System.exit(-1);
+        }
+
+        String configFile = args[0];
+        String fullClassName = args[1];
+        File outputDir = new File(args[2]);
+
+        String fileName = fullClassName.replaceAll("\\.", File.separator) + ".java";
+        int dotIndex = fullClassName.lastIndexOf(".");
+        String packageName = dotIndex == -1 ? "" : fullClassName.substring(0, dotIndex);
+        String shortClassName = fullClassName.substring(dotIndex + 1);
+
+        if (!outputDir.isDirectory()) {
+            System.err.println("Output directory not found : " + outputDir.getAbsolutePath());
+            System.exit(-1);
+        }
+
+        File outputFile = new File(outputDir, fileName);
+        outputFile.getParentFile().mkdirs();
+
+        SugarGenerator sugarGenerator = new SugarGenerator();
+        try {
+            sugarGenerator.addWriter(new HamcrestFactoryWriter(
+                    packageName, shortClassName, new FileWriter(outputFile)));
+            sugarGenerator.addWriter(new QuickReferenceWriter(System.out));
+
+            XmlConfigurator xmlConfigurator = new XmlConfigurator(sugarGenerator, XmlConfigurator.class.getClassLoader());
+            xmlConfigurator.load(new InputSource(configFile));
+
+            System.out.println("Generating " + fullClassName);
+            sugarGenerator.generate();
+        } finally {
+            sugarGenerator.close();
+        }
     }
 }
