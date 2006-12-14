@@ -32,7 +32,7 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("a collection containing eq(\"a\")", collectionContaining(equalTo("a")));
+        assertDescription("a collection containing \"a\"", collectionContaining(equalTo("a")));
     }
 
     public void testMatchesAllItemsInCollection() {

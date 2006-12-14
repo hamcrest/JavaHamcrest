@@ -28,7 +28,7 @@ public class IsArrayContainingTest extends AbstractMatcherTest {
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("an array containing eq(\"a\")", arrayContaining("a"));
+        assertDescription("an array containing \"a\"", arrayContaining("a"));
     }
 
     // Remaining code no longer compiles, thanks to generics. I think that's a good thing, but

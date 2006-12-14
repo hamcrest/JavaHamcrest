@@ -31,7 +31,7 @@ public class IsMapContainingTest extends AbstractMatcherTest {
     }
 
     public void testHasReadableDescription() {
-        assertDescription("map containing [eq(\"a\")->eq(<2>)]",
+        assertDescription("map containing [\"a\"-><2>]",
                 mapContaining(equalTo("a"), (equalTo(2))));
     }
 

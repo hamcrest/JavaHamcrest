@@ -26,9 +26,7 @@ public class IsEqual<T> extends BaseMatcher<T> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("eq(")
-                .appendValue(object)
-                .appendText(")");
+        description.appendValue(object);
     }
 
     private static boolean areEqual(Object o1, Object o2) {

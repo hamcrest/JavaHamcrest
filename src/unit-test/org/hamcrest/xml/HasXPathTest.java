@@ -57,7 +57,7 @@ public class HasXPathTest extends AbstractMatcherTest {
     }
 
     public void testDescribesItself() throws Exception {
-        assertDescription("an XML document with XPath /some/path eq(\"Cheddar\")",
+        assertDescription("an XML document with XPath /some/path \"Cheddar\"",
                 hasXPath("/some/path", equalTo("Cheddar")));
         assertDescription("an XML document with XPath /some/path",
                 hasXPath("/some/path"));

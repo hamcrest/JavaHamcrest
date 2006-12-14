@@ -73,16 +73,16 @@ public class IsEqualTest extends AbstractMatcherTest {
                 return argumentDescription;
             }
         };
-        assertDescription("eq(<" + argumentDescription + ">)", equalTo(argument));
+        assertDescription("<" + argumentDescription + ">", equalTo(argument));
     }
 
     public void testReturnsAnObviousDescriptionIfCreatedWithANestedMatcherByMistake() {
         Matcher<String> innerMatcher = equalTo("NestedMatcher");
-        assertDescription("eq(<" + innerMatcher.toString() + ">)", equalTo(innerMatcher));
+        assertDescription("<" + innerMatcher.toString() + ">", equalTo(innerMatcher));
     }
 
     public void testReturnsGoodDescriptionIfCreatedWithNullReference() {
-        assertDescription("eq(null)", equalTo(null));
+        assertDescription("null", equalTo(null));
     }
 }
 

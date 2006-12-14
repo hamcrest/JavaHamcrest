@@ -36,6 +36,6 @@ public class IsArrayTest extends AbstractMatcherTest {
     }
     
     public void testHasAReadableDescription() {
-        assertDescription("[eq(\"a\"), eq(\"b\")]", array(equalTo("a"), equalTo("b")));
+        assertDescription("[\"a\", \"b\"]", array(equalTo("a"), equalTo("b")));
     }
 }
