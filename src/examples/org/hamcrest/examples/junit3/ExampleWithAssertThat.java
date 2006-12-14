@@ -7,7 +7,7 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.text.StringContains.containsString;
 
 /**
- * Demonstrates how HamCrest matchers can be used with assertThat()
+ * Demonstrates how Hamcrest matchers can be used with assertThat()
  * using JUnit 3.8.x.
  *
  * @author Joe Walnes

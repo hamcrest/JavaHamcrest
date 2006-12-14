@@ -7,7 +7,7 @@ import static org.hamcrest.text.StringContains.containsString;
 import org.testng.annotations.Test;
 
 /**
- * Demonstrates how HamCrest matchers can be used with assertThat()
+ * Demonstrates how Hamcrest matchers can be used with assertThat()
  * using TestNG.
  *
  * @author Joe Walnes

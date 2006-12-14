@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import org.testng.annotations.Configuration;
 
 /**
- * Demonstrates how HamCrest matchers can be used from EasyMock with
+ * Demonstrates how Hamcrest matchers can be used from EasyMock with
  * TestNG.
  *
  * @author Joe Walnes

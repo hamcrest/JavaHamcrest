@@ -1,6 +1,6 @@
 (BSD Style License)
 
-Copyright (c) 2000-2006, HamCrest.org
+Copyright (c) 2000-2006, Hamcrest.org
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -11,7 +11,7 @@ conditions and the following disclaimer. Redistributions in binary form must rep
 the above copyright notice, this list of conditions and the following disclaimer in
 the documentation and/or other materials provided with the distribution.
 
-Neither the name of HamCrest nor the names of its contributors may be used to endorse
+Neither the name of Hamcrest nor the names of its contributors may be used to endorse
 or promote products derived from this software without specific prior written
 permission.
 
