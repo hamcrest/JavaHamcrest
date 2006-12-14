@@ -31,7 +31,8 @@ public class HamcrestFactoryWriter implements FactoryWriter {
     }
 
     public void writeHeader() throws IOException {
-        output.append("package ").append(javaPackageName).append(';').append(newLine).append(newLine);
+        output.append("// Generated source.").append(newLine)
+                .append("package ").append(javaPackageName).append(';').append(newLine).append(newLine);
         output.append("public class ").append(javaClassName).append(" {").append(newLine).append(newLine);
     }
 

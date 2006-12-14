@@ -37,9 +37,6 @@ public class XmlConfigurator {
                     } catch (ClassNotFoundException e) {
                         throw new SAXException("Cannot find Matcher class : " + className);
                     }
-                } else {
-                    System.err.println("uri=" + uri + ", localname=" + localName + ", qname=" + qName);
-
                 }
             }
         });

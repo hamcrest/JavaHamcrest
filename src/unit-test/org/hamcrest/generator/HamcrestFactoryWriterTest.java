@@ -35,6 +35,7 @@ public class HamcrestFactoryWriterTest extends TestCase {
         factoryWriter.writeFooter();
 
         assertEquals("" +
+                "// Generated source.\n" +
                 "package com.some.package;\n" +
                 "\n" +
                 "public class SomeClass {\n" +
