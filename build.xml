@@ -32,12 +32,29 @@
     </target>
 
     <target name="library"
-            depends="api"
+            depends="api,generator"
             description="Build library of matchers">
         <java-to-jar srcdir="src/library"
                      destjar="build/hamcrest-library-${version}.jar"
                      classpath="build/hamcrest-api-${version}.jar"/>
-    </target>
+        <!-- Generate one class with all static imports -->
+        <mkdir dir="build/generated-code"/>
+        <java classname="org.hamcrest.generator.config.XmlConfigurator"
+              fork="yes"
+              classpath="
+                build/hamcrest-api-${version}.jar;
+                build/hamcrest-generator-${version}.jar;
+                build/hamcrest-library-${version}.jar
+              ">
+            <arg value="matchers.xml"/>
+            <arg value="org.hamcrest.Matchers"/>
+            <arg value="build/generated-code"/>
+        </java>
+        <!-- Append to library jar -->
+        <java-to-jar srcdir="build/generated-code"
+                     destjar="build/hamcrest-library-${version}.jar"
+                     classpath="build/hamcrest-api-${version}.jar"/>
+     </target>
 
     <target name="integration"
             depends="api, library"
@@ -123,10 +140,11 @@
                     <pathelement path="@{classpath}"/>
                 </classpath>
             </javac>
+            <copy file="LICENSE.txt" todir="build/temp/@{destjar}.contents"/>
+            <!-- Put Java source in Jars for user's convenience. -->
+            <copydir src="@{srcdir}" dest="build/temp/@{destjar}.contents"/>
             <jar jarfile="@{destjar}">
                 <fileset dir="build/temp/@{destjar}.contents"/>
-                <fileset dir="@{srcdir}"/>
-                <!-- Put Java source in Jars for user's convenience. -->
             </jar>
         </sequential>
     </macrodef>
