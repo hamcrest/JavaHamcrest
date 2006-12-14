@@ -127,6 +127,7 @@
                 <include name="lib/**"/>
                 <include name="*.txt"/>
                 <include name="build.xml"/>
+                <include name="matchers.xml"/>
             </zipfileset>
             <zipfileset dir="build" prefix="hamcrest-${version}">
                 <include name="hamcrest-api-${version}.jar"/>
