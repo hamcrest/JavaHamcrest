@@ -1,0 +1,45 @@
+<matchers>
+
+    <!-- Core -->
+    <factory class="org.hamcrest.core.AllOf"/>
+    <factory class="org.hamcrest.core.AnyOf"/>
+    <factory class="org.hamcrest.core.IsNot"/>
+    <factory class="org.hamcrest.core.IsEqual"/>
+    <factory class="org.hamcrest.core.IsSame"/>
+    <factory class="org.hamcrest.core.IsAnything"/>
+    <factory class="org.hamcrest.core.IsNull"/>
+    <factory class="org.hamcrest.core.IsIn"/>
+    <factory class="org.hamcrest.core.IsInstanceOf"/>
+    <factory class="org.hamcrest.core.Always"/>
+    <factory class="org.hamcrest.core.DescribedAs"/>
+
+    <!-- Collection -->
+    <factory class="org.hamcrest.collection.IsArray"/>
+    <factory class="org.hamcrest.collection.IsArrayContaining"/>
+    <factory class="org.hamcrest.collection.IsCollectionContaining"/>
+    <factory class="org.hamcrest.collection.IsMapContaining"/>
+
+    <!-- Number -->
+    <factory class="org.hamcrest.number.IsCloseTo"/>
+    <factory class="org.hamcrest.number.OrderingComparisons"/>
+
+    <!-- Text -->
+    <factory class="org.hamcrest.text.IsEqualIgnoringCase"/>
+    <factory class="org.hamcrest.text.IsEqualIgnoringWhiteSpace"/>
+    <factory class="org.hamcrest.text.StringContains"/>
+    <factory class="org.hamcrest.text.StringEndsWith"/>
+    <factory class="org.hamcrest.text.StringStartsWith"/>
+
+    <!-- Object -->
+    <factory class="org.hamcrest.object.HasToString"/>
+    <factory class="org.hamcrest.object.IsCompatibleType"/>
+    <factory class="org.hamcrest.object.IsEventFrom"/>
+
+    <!-- Beans -->
+    <factory class="org.hamcrest.beans.HasProperty"/>
+    <factory class="org.hamcrest.beans.HasPropertyWithValue"/>
+
+    <!-- XML -->
+    <factory class="org.hamcrest.xml.HasXPath"/>
+
+</matchers>

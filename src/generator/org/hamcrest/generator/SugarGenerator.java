@@ -43,7 +43,7 @@ import java.util.List;
  * @see HamcrestFactoryWriter
  * @see ReflectiveFactoryReader
  */
-public class SugarGenerator implements Closeable {
+public class SugarGenerator implements Closeable, SugarConfiguration {
 
     private final List<FactoryWriter> factoryWriters = new ArrayList<FactoryWriter>();
     private final List<FactoryMethod> factoryMethods = new ArrayList<FactoryMethod>();
