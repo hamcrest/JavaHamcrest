@@ -11,7 +11,7 @@ import org.hamcrest.StringDescription;
  *
  * @author Joe Walnes
  */
-public class EasyMockAdapter implements IArgumentMatcher {
+public class EasyMock2Adapter implements IArgumentMatcher {
 
     /**
      * Convenience factory method that will adapt a
@@ -20,14 +20,14 @@ public class EasyMockAdapter implements IArgumentMatcher {
      * report it to EasyMock so it can be kept track of.
      */
     public static IArgumentMatcher adapt(Matcher matcher) {
-        EasyMockAdapter easyMockMatcher = new EasyMockAdapter(matcher);
-        EasyMock.reportMatcher(easyMockMatcher);
-        return easyMockMatcher;
+        EasyMock2Adapter easyMock2Matcher = new EasyMock2Adapter(matcher);
+        EasyMock.reportMatcher(easyMock2Matcher);
+        return easyMock2Matcher;
     }
 
     private final Matcher hamcrestMatcher;
 
-    public EasyMockAdapter(Matcher matcher) {
+    public EasyMock2Adapter(Matcher matcher) {
         this.hamcrestMatcher = matcher;
     }
 

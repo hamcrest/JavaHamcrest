@@ -6,20 +6,20 @@ import org.hamcrest.Description;
 import static org.hamcrest.core.IsEqual.equalTo;
 import org.jmock.core.Constraint;
 
-public class JMockAdapterTest extends TestCase {
+public class JMock1AdapterTest extends TestCase {
 
     public static interface InterfaceToMock {
         void doStuff(String name, int number);
     }
 
     public void testAdaptsHamcrestMatcherToJMockConstraint() {
-        Constraint jMockConstraint = new JMockAdapter(equalTo("expected"));
+        Constraint jMockConstraint = new JMock1Adapter(equalTo("expected"));
         assertTrue("Should have matched", jMockConstraint.eval("expected"));
         assertFalse("Should not have matched", jMockConstraint.eval("unexpected"));
     }
 
     public void testDelegatesDescriptionToUnderlyingMatcher() {
-        Constraint jMockConstraint = new JMockAdapter(new BaseMatcher() {
+        Constraint jMockConstraint = new JMock1Adapter(new BaseMatcher() {
             public boolean matches(Object o) {
                 return false;
             }

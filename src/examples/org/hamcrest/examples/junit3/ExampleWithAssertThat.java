@@ -2,7 +2,7 @@ package org.hamcrest.examples.junit3;
 
 import junit.framework.TestCase;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.isTwoXs;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.text.StringContains.containsString;
 
@@ -15,8 +15,8 @@ import static org.hamcrest.text.StringContains.containsString;
 public class ExampleWithAssertThat extends TestCase {
 
     public void testUsingAssertThat() {
-        assertThat("xx", isTwoXs());
-        assertThat("yy", not(isTwoXs()));
+        assertThat("xx", equalTo("xx"));
+        assertThat("yy", not(equalTo("xx")));
         assertThat("i like cheese", containsString("cheese"));
     }
 

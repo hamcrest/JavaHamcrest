@@ -1,16 +1,16 @@
-package org.hamcrest.examples.junit4;
+package org.hamcrest.examples.junit3;
 
 import static org.easymock.EasyMock.*;
-import static org.hamcrest.EasyMockMatchers.*;
-import org.junit.Test;
+import static org.hamcrest.EasyMock2Matchers.*;
+import junit.framework.TestCase;
 
 /**
  * Demonstrates how HamCrest matchers can be used from EasyMock with
- * JUnit 4.x.
+ * JUnit 3.x.
  *
  * @author Joe Walnes
  */
-public class ExampleWithEasyMock {
+public class ExampleWithEasyMock2 extends TestCase {
 
     /* EasyMock (2) specific notes:
      *
@@ -19,7 +19,7 @@ public class ExampleWithEasyMock {
      *
      * This functionality is available for EasyMock 2.x but NOT EasyMock 1.x.
      *
-     * The class does not need to extend anything.
+     * The class extends the standard JUnit TestCase.
      *
      * The additional Hamcrest Matchers can be used by using a static import:
      *   import static org.hamcrest.EasyMockMatchers.*;
@@ -43,9 +43,8 @@ public class ExampleWithEasyMock {
      * This examples shows using a mock with a standard EasyMock2 matcher.
      * Hamcrest is not used here.
      */
-    @Test
-    public void usingAJMockConstraint() {
-        mock.doStuff(startsWith("i like"));
+    public void testUsingAnEasyMockMatcher() {
+        mock.doStuff(eq("i like cheese and stuff"));
         replay(mock);
         mock.doStuff("i like cheese and stuff");
         verify(mock);
@@ -55,9 +54,8 @@ public class ExampleWithEasyMock {
      * This examples shows using a mock with a Hamcrest matcher, adapted
      * to jMock.
      */
-    @Test
-    public void usingAHamcrestMatcher() {
-        mock.doStuff(isTwoXs());
+    public void testUsingAHamcrestMatcher() {
+        mock.doStuff(equalTo("xx"));
         replay(mock);
         mock.doStuff("xx");
         verify(mock);
@@ -67,18 +65,11 @@ public class ExampleWithEasyMock {
      * This examples shows using the standard jMock assertThat() method
      * with both jMock Constraints and Hamcrest Matchers.
      */
-    @Test
-    public void usingAssertThat() {
+    public void testUsingAssertThat() {
         // TODO(joe): This is a bit tricker with EasyMock.
-        //assertThat("xx", isTwoXs());
-        //assertThat("yy", not(isTwoXs()));
+        //assertThat("xx", equal("xx"));
+        //assertThat("yy", not(equal("xx")));
         //assertThat("i like cheese", startsWith("i like"));
     }
 
-    /**
-     * Allow JUnit 4 test to be run under JUnit 3.
-     */
-    public static junit.framework.Test suite() {
-        return new junit.framework.JUnit4TestAdapter(ExampleWithEasyMock.class);
-    }
 }

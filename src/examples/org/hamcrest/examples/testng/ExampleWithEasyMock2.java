@@ -1,6 +1,6 @@
 package org.hamcrest.examples.testng;
 
-import static org.hamcrest.EasyMockMatchers.*;
+import static org.hamcrest.EasyMock2Matchers.*;
 import static org.easymock.EasyMock.*;
 import org.testng.annotations.Test;
 import org.testng.annotations.Configuration;
@@ -12,7 +12,7 @@ import org.testng.annotations.Configuration;
  * @author Joe Walnes
  */
 @Test
-public class ExampleWithEasyMock {
+public class ExampleWithEasyMock2 {
 
     /* EasyMock (2) specific notes:
      *
@@ -51,8 +51,8 @@ public class ExampleWithEasyMock {
      * Hamcrest is not used here.
      */
     @Test
-    public void usingAJMockConstraint() {
-        mock.doStuff(startsWith("i like"));
+    public void usingAnEasyMockMatcher() {
+        mock.doStuff(eq("i like cheese and stuff"));
         replay(mock);
         mock.doStuff("i like cheese and stuff");
         verify(mock);
@@ -64,7 +64,7 @@ public class ExampleWithEasyMock {
      */
     @Test
     public void usingAHamcrestMatcher() {
-        mock.doStuff(isTwoXs());
+        mock.doStuff(equalTo("xx"));
         replay(mock);
         mock.doStuff("xx");
         verify(mock);

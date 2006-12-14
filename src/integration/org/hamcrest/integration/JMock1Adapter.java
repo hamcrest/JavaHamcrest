@@ -6,11 +6,13 @@ import org.hamcrest.StringDescription;
 
 /**
  * An adapter to allowing a Hamcrest {@link org.hamcrest.Matcher}
- * to act as an jMock {@link org.jmock.core.Constraint}.
+ * to act as an jMock1 {@link org.jmock.core.Constraint}.
+ * Note, this is not necessary for jMock2 as it supports Hamcrest
+ * out of the box.
  *
  * @author Joe Walnes
  */
-public class JMockAdapter implements Constraint {
+public class JMock1Adapter implements Constraint {
 
     /**
      * Convenience factory method that will adapt a
@@ -18,12 +20,12 @@ public class JMockAdapter implements Constraint {
      * jMock {@link org.jmock.core.Constraint}.
      */
     public static Constraint adapt(Matcher matcher) {
-        return new JMockAdapter(matcher);
+        return new JMock1Adapter(matcher);
     }
 
     private final Matcher hamcrestMatcher;
 
-    public JMockAdapter(Matcher matcher) {
+    public JMock1Adapter(Matcher matcher) {
         this.hamcrestMatcher = matcher;
     }
 

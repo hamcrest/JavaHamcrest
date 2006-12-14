@@ -6,20 +6,20 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class EasyMockAdapterTest extends TestCase {
+public class EasyMock2AdapterTest extends TestCase {
 
     public static interface InterfaceToMock {
         void doStuff(String name, int number);
     }
 
     public void testAdaptsHamcrestMatcherToEasyMockArgumentsMatcher() {
-        IArgumentMatcher easyMockMatcher = new EasyMockAdapter(equalTo("expected"));
+        IArgumentMatcher easyMockMatcher = new EasyMock2Adapter(equalTo("expected"));
         assertTrue("Should have matched", easyMockMatcher.matches("expected"));
         assertFalse("Should not have matched", easyMockMatcher.matches("unexpected"));
     }
 
     public void testDelegatesDescriptionToUnderlyingMatcher() {
-        IArgumentMatcher easyMockMatcher = new EasyMockAdapter(new BaseMatcher() {
+        IArgumentMatcher easyMockMatcher = new EasyMock2Adapter(new BaseMatcher() {
             public boolean matches(Object o) {
                 return false;
             }

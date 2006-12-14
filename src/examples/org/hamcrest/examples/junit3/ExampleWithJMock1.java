@@ -1,6 +1,6 @@
 package org.hamcrest.examples.junit3;
 
-import static org.hamcrest.JMockMatchers.isTwoXs;
+import static org.hamcrest.JMock1Matchers.equalTo;
 import org.jmock.Mock;
 import org.jmock.MockObjectTestCase;
 
@@ -9,13 +9,16 @@ import org.jmock.MockObjectTestCase;
  *
  * @author Joe Walnes
  */
-public class ExampleWithJMock extends MockObjectTestCase {
+public class ExampleWithJMock1 extends MockObjectTestCase {
 
     /* jMock specific notes:
      *
      * Important terminology:
      *   What jMock calls 'Constraints', Hamcrest calls 'Matchers'.
      *
+     * Note: This is only valid for jMock1. jMock2 supports Hamcrest out
+     * of the box.
+     * 
      * The class extends org.jmock.MockObjectTestCase as usual.
      * This provides:
      *  - The mock() methods and syntactic sugar for setting up mocks.
@@ -57,7 +60,7 @@ public class ExampleWithJMock extends MockObjectTestCase {
      */
     public void testUsingAHamcrestMatcher() {
         mock.expects(atLeastOnce()).method("doStuff")
-                .with(isTwoXs());
+                .with(equalTo("xx"));
 
         anInterface.doStuff("xx");
     }
@@ -68,8 +71,8 @@ public class ExampleWithJMock extends MockObjectTestCase {
      */
     public void testUsingAssertThat() {
         assertThat("i like cheese", stringContains("cheese")); // jMock Constraint.
-        assertThat("xx", isTwoXs()); // Hamcrest Matcher.
-        assertThat("yy", not(isTwoXs())); // Mixture of both.
+        assertThat("xx", equalTo("xx")); // Hamcrest Matcher.
+        assertThat("yy", not(equalTo("xx"))); // Mixture of both.
     }
 
 }
