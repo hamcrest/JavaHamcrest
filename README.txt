@@ -1,19 +1,19 @@
 
-                     *************
-********************** Ham Crest **********************
-                     *************
+                     ************
+********************** HamCrest **********************
+                     ************
 
                  "TODO: catchy phrase"
 
                  <http://hamcrest.org>
 
---[ What is Ham Crest? ]-------------------------------------
+--[ What is Hamcrest? ]-------------------------------------
 
 TODO
 
 --[ Binaries ]-----------------------------------------------
 
-Depending on how you intend to use Ham Crest, you should use
+Depending on how you intend to use Hamcrest, you should use
 different Jars.
 
  * [hamcrest-api.jar]
@@ -41,7 +41,7 @@ Documentation can be found at http://hamcrest.org/
 
 --[ Source ]-------------------------------------------------
 
-The complete source for Ham Crest is bundled. This includes:
+The complete source for Hamcrest is bundled. This includes:
  * Matcher API [src/api]
  * Matcher libary [src/library]
  * Matcher integrations [src/integration]
