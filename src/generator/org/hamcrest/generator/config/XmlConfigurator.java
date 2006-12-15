@@ -73,7 +73,7 @@ public class XmlConfigurator {
         String fullClassName = args[1];
         File outputDir = new File(args[2]);
 
-        String fileName = fullClassName.replaceAll("\\.", File.separator) + ".java";
+        String fileName = fullClassName.replace('.', File.separatorChar) + ".java";
         int dotIndex = fullClassName.lastIndexOf(".");
         String packageName = dotIndex == -1 ? "" : fullClassName.substring(0, dotIndex);
         String shortClassName = fullClassName.substring(dotIndex + 1);
