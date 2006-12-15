@@ -53,6 +53,19 @@ The complete source for Hamcrest is bundled. This includes:
 To build, please read BUILDING.txt
 
 -------------------------------------------------------------
--Nat Pryce and Joe Walnes
-http://hamcrest.org/
 
+Developers:
+- Joe Walnes
+- Nat Pryce
+- Steve Freeman
+
+Contributors:
+- Robert Chatley
+- Tom White
+- Neil Dunn
+- Dan North
+- Magne Rasmussen
+
+Also, thanks to everyone who has worked on DynaMock, nMock,
+jMock, EasyMock and MiniMock! These libraries inspired
+Hamcrest.
