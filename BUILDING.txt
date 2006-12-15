@@ -2,7 +2,7 @@
 ********************* Building Hamcrest *********************
                     **********************
 
---[ Build requirements ]---000-------------------------------
+--[ Build requirements ]-------------------------------------
 
 * JDK 1.5
   Note: that this is a buildtime dependency for 1.5 specific
@@ -37,9 +37,11 @@ It is possible to compile and test the source directly from
 popular IDEs, without resorting to the command line.
 
 Steps:
+  - Run 'ant library'. This generates additional Java coded
+    necessary to compile.
   - Create a new project.
-  - Add src/api, src/library and src/integration as source
-    directories.
+  - Add src/api, src/library, src/generator, src/integration
+    and build/generated-code as source directories.
   - Add src/unit-test as a test directory. If this is
     unsupported by the IDE, add it as another source
     directory.

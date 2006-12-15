@@ -1,29 +1,3 @@
-* Signifies major change.
-- Signifies minor change.
+== Version 1.0: Released Dec 15 2006 ==
 
-=== Changes since jMock fork ===
-
-[API Changes]
-* Constraint renamed to Matcher.
-* Constraint.eval() renamed to Matcher.match().
-* Packages moved from org.jmock.core.matcher to org.hamcrest.
-* SelfDescribing.describe() no longer returns a StringBuffer. Simpler for users to implement.
-* Introduced Description interface that acts as a domain centric abstraction over StringBuffer.
-
-[Library Changes]
-* Matchers categorised and broken into subpackages (core, collection, number, object, text).
-* Added MatcherSugar class with static helpers for syntactic sugar (based on jmock MockObjectSupportTestCase).
-- Added MatcherSugar.IS_TRUE and MatcherSugar.IS_FALSE.
-- Added Always matcher (based upon NMock2 AlwaysMatcher).
-- Removed IsNothing (superceded by Always).
-- Added DescribedAs matcher (based upon NMock2 DescriptionOverride).
-- Added IsEqualsIgnoringCase matcher (based upon NMock1 IsEqualIgnoreCase). 
-- Added IsEqualsIgnoringWhiteSpace matcher (based upon NMock1 IsEqualIgnoreWhiteSpace).
-
-[Integration Changes]
-* Added MatcherAssert, for assertThat(Object, Matcher) in JUnit.
-* Added syntactic sugar generator.
-
-[Misc]
-* Split code into different JARs
-* Simplified build and directory layout.
+Initial release.
