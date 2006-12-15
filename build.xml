@@ -8,6 +8,10 @@
               value="true"
               description="Whether to halt the build if the tests fail"/>
 
+    <property name="debug"
+              value="true"
+              description="Whether to build with debug information"/>
+
     <target name="all"
             depends="clean, package"
             description="Performs clean build, runs tests and packages for distribution"/>
@@ -54,7 +58,7 @@
         <java-to-jar srcdir="build/generated-code"
                      destjar="build/hamcrest-library-${version}.jar"
                      classpath="build/hamcrest-api-${version}.jar"/>
-     </target>
+    </target>
 
     <target name="integration"
             depends="api, library"
@@ -146,7 +150,7 @@
         <attribute name="classpath" description="Anything additional to add on the classpath" default=""/>
         <sequential>
             <mkdir dir="build/temp/@{destjar}.contents"/>
-            <javac srcdir="@{srcdir}" destdir="build/temp/@{destjar}.contents">
+            <javac srcdir="@{srcdir}" destdir="build/temp/@{destjar}.contents" debug="${debug}">
                 <classpath>
                     <fileset dir="lib/integration">
                         <include name="*.jar"/>
@@ -156,7 +160,9 @@
             </javac>
             <copy file="LICENSE.txt" todir="build/temp/@{destjar}.contents"/>
             <!-- Put Java source in Jars for user's convenience. -->
-            <copydir src="@{srcdir}" dest="build/temp/@{destjar}.contents"/>
+            <copy todir="build/temp/@{destjar}.contents">
+                <fileset dir="@{srcdir}"/>
+            </copy>
             <jar jarfile="@{destjar}">
                 <fileset dir="build/temp/@{destjar}.contents"/>
             </jar>
