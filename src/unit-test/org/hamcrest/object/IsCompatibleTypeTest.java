@@ -3,7 +3,7 @@ package org.hamcrest.object;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.object.IsCompatibleType.compatibleType;
+import static org.hamcrest.object.IsCompatibleType.classCompatibleWith;
 
 public class IsCompatibleTypeTest extends AbstractMatcherTest {
     public static class BaseClass {
@@ -22,27 +22,27 @@ public class IsCompatibleTypeTest extends AbstractMatcherTest {
     }
 
     protected Matcher<?> createMatcher() {
-        return compatibleType(BaseClass.class);
+        return classCompatibleWith(BaseClass.class);
     }
 
     public void testMatchesSameClass() {
-        assertThat(BaseClass.class, compatibleType(BaseClass.class));
+        assertThat(BaseClass.class, classCompatibleWith(BaseClass.class));
     }
 
     public void testMatchesSameInterface() {
-        assertThat(BaseInterface.class, compatibleType(BaseInterface.class));
+        assertThat(BaseInterface.class, classCompatibleWith(BaseInterface.class));
     }
 
     public void testMatchesExtendedClass() {
-        assertThat(ExtendedClass.class, compatibleType(BaseClass.class));
+        assertThat(ExtendedClass.class, classCompatibleWith(BaseClass.class));
     }
 
     public void testMatchesClassImplementingInterface() {
-        assertThat(ClassImplementingBaseInterface.class, compatibleType(BaseInterface.class));
+        assertThat(ClassImplementingBaseInterface.class, classCompatibleWith(BaseInterface.class));
     }
 
     public void testMatchesExtendedInterface() {
-        assertThat(ExtendedInterface.class, compatibleType(BaseInterface.class));
+        assertThat(ExtendedInterface.class, classCompatibleWith(BaseInterface.class));
     }
 
 //    public void testDoesNotMatchIncompatibleTypes() {
@@ -51,6 +51,6 @@ public class IsCompatibleTypeTest extends AbstractMatcherTest {
 //    }
 
     public void testHasReadableDescription() {
-        assertDescription("type < java.lang.Runnable", compatibleType(Runnable.class));
+        assertDescription("type < java.lang.Runnable", classCompatibleWith(Runnable.class));
     }
 }

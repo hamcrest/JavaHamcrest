@@ -21,7 +21,7 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
     }
     
     @Factory
-    public static <T> Matcher<Class<?>> compatibleType(Class<T> baseType) {
+    public static <T> Matcher<Class<?>> classCompatibleWith(Class<T> baseType) {
         return new IsCompatibleType<T>(baseType);
     }
 }
