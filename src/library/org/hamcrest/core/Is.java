@@ -1,5 +1,6 @@
 package org.hamcrest.core;
 
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -51,6 +52,17 @@ public class Is<T> extends BaseMatcher<T> {
     @Factory
     public static <T> Matcher<T> is(T value) {
         return is(equalTo(value));
+    }
+
+    /**
+     * This is a shortcut to the frequently used is(instanceOf(SomeClass.class)).
+     *
+     * eg. assertThat(cheese, is(instanceOf(Cheddar.class)))
+     * vs  assertThat(cheese, is(Cheddar.class))
+     */
+    @Factory
+    public static <T> Matcher<T> is(Class<T> type) {
+        return is(instanceOf(type));
     }
 
 }
