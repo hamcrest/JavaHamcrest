@@ -1,6 +1,7 @@
 <matchers>
 
     <!-- Core -->
+    <factory class="org.hamcrest.core.Is"/>
     <factory class="org.hamcrest.core.AllOf"/>
     <factory class="org.hamcrest.core.AnyOf"/>
     <factory class="org.hamcrest.core.IsNot"/>

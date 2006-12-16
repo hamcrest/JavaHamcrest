@@ -2,6 +2,7 @@
  */
 package org.hamcrest.core;
 
+import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
@@ -27,9 +28,23 @@ public class IsNot<T> extends BaseMatcher<T> {
         matcher.describeTo(description);
     }
 
+    /**
+     * Inverts the rule.
+     */
     @Factory
     public static <T> Matcher<T> not(Matcher<T> matcher) {
         return new IsNot<T>(matcher);
+    }
+
+    /**
+     * This is a shortcut to the frequently used not(equalTo(x)).
+     *
+     * eg. assertThat(cheese, is(not(equalTo(smelly))))
+     * vs  assertThat(cheese, is(not(smelly)))
+     */
+    @Factory
+    public static <T> Matcher<T> not(T value) {
+        return not(equalTo(value));
     }
 
 }
