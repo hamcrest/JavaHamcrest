@@ -9,7 +9,6 @@
     <factory class="org.hamcrest.core.IsSame"/>
     <factory class="org.hamcrest.core.IsAnything"/>
     <factory class="org.hamcrest.core.IsNull"/>
-    <factory class="org.hamcrest.core.IsIn"/>
     <factory class="org.hamcrest.core.IsInstanceOf"/>
     <factory class="org.hamcrest.core.DescribedAs"/>
 
