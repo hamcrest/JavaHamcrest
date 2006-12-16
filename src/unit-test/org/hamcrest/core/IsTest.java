@@ -8,7 +8,7 @@ import org.hamcrest.Matcher;
 public class IsTest extends AbstractMatcherTest {
 
     protected Matcher<?> createMatcher() {
-        return is(FALSE_MATCHER);
+        return is("something");
     }
 
 	public void testJustMatchesTheSameWayTheUnderylingMatcherDoes() {

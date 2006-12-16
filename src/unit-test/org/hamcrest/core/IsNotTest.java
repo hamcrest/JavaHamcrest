@@ -2,6 +2,7 @@
  */
 package org.hamcrest.core;
 
+import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import static org.hamcrest.core.IsNot.not;
@@ -9,12 +10,12 @@ import static org.hamcrest.core.IsNot.not;
 public class IsNotTest extends AbstractMatcherTest {
 
     protected Matcher<?> createMatcher() {
-        return not(FALSE_MATCHER);
+        return not("something");
     }
 
     public void testEvaluatesToTheTheLogicalNegationOfAnotherMatcher() {
-        assertFalse(not(TRUE_MATCHER).matches(ARGUMENT_IGNORED));
-        assertTrue(not(FALSE_MATCHER).matches(ARGUMENT_IGNORED));
+        assertMatches("should match", not(equalTo("A")), "B");
+        assertDoesNotMatch("should not match", not(equalTo("B")), "B");
     }
 
     public void testProvidesConvenientShortcutForNotEqualTo() {

@@ -45,6 +45,7 @@
         <mkdir dir="build/generated-code"/>
         <java classname="org.hamcrest.generator.config.XmlConfigurator"
               fork="yes"
+              failonerror="yes"
               classpath="
                 build/hamcrest-api-${version}.jar;
                 build/hamcrest-generator-${version}.jar;
