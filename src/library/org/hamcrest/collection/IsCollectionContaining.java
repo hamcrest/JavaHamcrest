@@ -50,4 +50,13 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
         return allOf(all);
     }
 
+    @Factory
+    public static <T> Matcher<Iterable<T>> hasItems(T... elements) {
+        Collection<Matcher<Iterable<T>>> all = new ArrayList<Matcher<Iterable<T>>>(elements.length);
+        for (T element : elements) {
+            all.add(hasItem(element));
+        }
+        return allOf(all);
+    }
+
 }

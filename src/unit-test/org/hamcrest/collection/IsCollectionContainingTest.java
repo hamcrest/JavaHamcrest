@@ -38,6 +38,9 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
         assertMatches("should match list containing all of items",
                 hasItems(equalTo("a"), equalTo("b"), equalTo("c")),
                 asList("a", "b", "c"));
+        assertMatches("should match list containing all of items (without matchers)",
+                hasItems("a", "b", "c"),
+                asList("a", "b", "c"));
         assertMatches("should match list containing all of items in any order",
                 hasItems(equalTo("a"), equalTo("b"), equalTo("c")),
                 asList("c", "b", "a"));
