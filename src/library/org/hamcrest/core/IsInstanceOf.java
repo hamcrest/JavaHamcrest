@@ -34,7 +34,7 @@ public class IsInstanceOf<T> extends BaseMatcher<T> {
     }
 
     @Factory
-    public static <T> Matcher<T> isA(Class<T> instanceOf) {
+    public static <T> Matcher<T> instanceOf(Class<T> instanceOf) {
         return new IsInstanceOf<T>(instanceOf);
     }
 
