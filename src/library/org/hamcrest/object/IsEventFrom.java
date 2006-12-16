@@ -43,7 +43,7 @@ public class IsEventFrom extends TypeSafeMatcher<EventObject> {
      * derived from <var>eventClass</var> announced by <var>source</var>.
      */
     @Factory
-    public static Matcher<EventObject> isEventFrom(Class<? extends EventObject> eventClass, Object source) {
+    public static Matcher<EventObject> eventFrom(Class<? extends EventObject> eventClass, Object source) {
         return new IsEventFrom(eventClass, source);
     }
 
@@ -53,7 +53,7 @@ public class IsEventFrom extends TypeSafeMatcher<EventObject> {
      * </var>.
      */
     @Factory
-    public static Matcher<EventObject> isEventFrom(Object source) {
-        return isEventFrom(EventObject.class, source);
+    public static Matcher<EventObject> eventFrom(Object source) {
+        return eventFrom(EventObject.class, source);
     }
 }

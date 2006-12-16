@@ -4,7 +4,7 @@ package org.hamcrest.object;
 
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.object.IsEventFrom.isEventFrom;
+import static org.hamcrest.object.IsEventFrom.eventFrom;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
@@ -14,7 +14,7 @@ import java.util.EventObject;
 public class IsEventFromTest extends AbstractMatcherTest {
 
     protected Matcher<?> createMatcher() {
-        return isEventFrom(null);
+        return eventFrom(null);
     }
 
     public void testEvaluatesToTrueIfArgumentIsAnEventObjectFiredByASpecifiedSource() {
@@ -22,7 +22,7 @@ public class IsEventFromTest extends AbstractMatcherTest {
         EventObject ev = new EventObject(o);
         EventObject ev2 = new EventObject(new Object());
 
-        Matcher<EventObject> isEventMatcher = isEventFrom(o);
+        Matcher<EventObject> isEventMatcher = eventFrom(o);
 
         assertThat(ev, isEventMatcher);
         assertThat(ev2, not(isEventMatcher));
@@ -43,7 +43,7 @@ public class IsEventFromTest extends AbstractMatcherTest {
         EventObject wrongType = new EventObject(o);
         EventObject wrongSourceAndType = new EventObject(new Object());
 
-        Matcher<EventObject> isEventMatcher = isEventFrom(DerivedEvent.class, o);
+        Matcher<EventObject> isEventMatcher = IsEventFrom.eventFrom(DerivedEvent.class, o);
 
         assertThat(goodEv, isEventMatcher);
         assertThat(wrongSource, not(isEventMatcher));
