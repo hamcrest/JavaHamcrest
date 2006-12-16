@@ -39,32 +39,32 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
     }
 
     @Factory
-    public static <K,V> Matcher<Map<K,V>> mapContaining(Matcher<K> keyMatcher, Matcher<V> valueMatcher) {
+    public static <K,V> Matcher<Map<K,V>> hasEntry(Matcher<K> keyMatcher, Matcher<V> valueMatcher) {
         return new IsMapContaining<K,V>(keyMatcher, valueMatcher);
     }
 
     @Factory
-    public static <K,V> Matcher<Map<K,V>> mapContaining(K key, V value) {
-        return mapContaining(equalTo(key), equalTo(value));
+    public static <K,V> Matcher<Map<K,V>> hasEntry(K key, V value) {
+        return hasEntry(equalTo(key), equalTo(value));
     }
 
     @Factory
-    public static <K,V> Matcher<Map<K,V>> mapWithKey(Matcher<K> keyMatcher) {
-        return mapContaining(keyMatcher, IsAnything.<V>anything());
+    public static <K,V> Matcher<Map<K,V>> hasKey(Matcher<K> keyMatcher) {
+        return hasEntry(keyMatcher, IsAnything.<V>anything());
     }
 
     @Factory
-    public static <K,V> Matcher<Map<K,V>> mapWithKey(K key) {
-        return mapWithKey(equalTo(key));
+    public static <K,V> Matcher<Map<K,V>> hasKey(K key) {
+        return hasKey(equalTo(key));
     }
 
     @Factory
-    public static <K,V> Matcher<Map<K,V>> mapWithValue(Matcher<V> valueMatcher) {
-        return mapContaining(IsAnything.<K>anything(), valueMatcher);
+    public static <K,V> Matcher<Map<K,V>> hasValue(Matcher<V> valueMatcher) {
+        return hasEntry(IsAnything.<K>anything(), valueMatcher);
     }
 
     @Factory
-    public static <K,V> Matcher<Map<K,V>> mapWithValue(V value) {
-        return mapWithValue(equalTo(value));
+    public static <K,V> Matcher<Map<K,V>> hasValue(V value) {
+        return hasValue(equalTo(value));
     }
 }
