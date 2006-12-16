@@ -6,20 +6,20 @@ import static org.hamcrest.core.IsNot.not;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNull.isNull;
-import static org.hamcrest.core.IsNull.isNotNull;
+import static org.hamcrest.core.IsNull.nullValue;
+import static org.hamcrest.core.IsNull.notNullValue;
 
 public class IsNullTest extends AbstractMatcherTest {
 
     protected Matcher<?> createMatcher() {
-        return isNull();
+        return nullValue();
     }
 
     public void testEvaluatesToTrueIfArgumentIsNull() {
-        assertThat(null, isNull());
-        assertThat(ANY_NON_NULL_ARGUMENT, not(isNull()));
+        assertThat(null, nullValue());
+        assertThat(ANY_NON_NULL_ARGUMENT, not(nullValue()));
 
-        assertThat(ANY_NON_NULL_ARGUMENT, isNotNull());
-        assertThat(null, not(isNotNull()));
+        assertThat(ANY_NON_NULL_ARGUMENT, notNullValue());
+        assertThat(null, not(notNullValue()));
     }
 }

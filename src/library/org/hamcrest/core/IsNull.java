@@ -20,14 +20,20 @@ public class IsNull<T> extends BaseMatcher<T> {
         description.appendText("null");
     }
 
+    /**
+     * Matches if value is null.
+     */
     @Factory
-    public static <T> Matcher<T> isNull() {
+    public static <T> Matcher<T> nullValue() {
         return new IsNull<T>();
     }
 
+    /**
+     * Matches if value is not null.
+     */
     @Factory
-    public static <T> Matcher<T> isNotNull() {
-        return not(IsNull.<T>isNull());
+    public static <T> Matcher<T> notNullValue() {
+        return not(IsNull.<T>nullValue());
     }
 }
 
