@@ -67,21 +67,5 @@ public class IsEqual<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> equalTo(T operand) {
         return new IsEqual<T>(operand);
     }
-
-    /**
-     * Is the value true?
-     */
-    @Factory
-    public static Matcher<Boolean> isTrue() {
-        return equalTo(true);
-    }
-
-    /**
-     * Is the value false?
-     */
-    @Factory
-    public static Matcher<Boolean> isFalse() {
-        return equalTo(false);
-    }
-
+    
 }
