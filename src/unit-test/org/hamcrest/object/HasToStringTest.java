@@ -8,7 +8,7 @@ import org.hamcrest.AbstractMatcherTest;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.object.HasToString.asString;
+import static org.hamcrest.object.HasToString.hasToString;
 
 public class HasToStringTest extends AbstractMatcherTest {
 
@@ -20,17 +20,17 @@ public class HasToStringTest extends AbstractMatcherTest {
     };
 
     protected Matcher<?> createMatcher() {
-        return asString(equalTo("irrelevant"));
+        return hasToString(equalTo("irrelevant"));
     }
 
     public void testPassesResultOfToStringToNestedMatcher() {
-        assertThat(ARG, asString(equalTo(TO_STRING_RESULT)));
-        assertThat(ARG, not(asString(equalTo("OTHER STRING"))));
+        assertThat(ARG, hasToString(equalTo(TO_STRING_RESULT)));
+        assertThat(ARG, not(hasToString(equalTo("OTHER STRING"))));
     }
 
     public void testHasReadableDescription() {
         Matcher<String> toStringMatcher = equalTo(TO_STRING_RESULT);
-        Matcher matcher = asString(toStringMatcher);
+        Matcher matcher = hasToString(toStringMatcher);
 
         assertEquals("asString(" + descriptionOf(toStringMatcher) + ")", descriptionOf(matcher));
     }

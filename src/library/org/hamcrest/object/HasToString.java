@@ -24,7 +24,7 @@ public class HasToString<T> extends BaseMatcher<T> {
     }
     
     @Factory
-    public static <T> Matcher<T> asString(Matcher<String> toStringMatcher) {
+    public static <T> Matcher<T> hasToString(Matcher<String> toStringMatcher) {
         return new HasToString<T>(toStringMatcher);
     }
 }
