@@ -142,6 +142,22 @@
                 <include name="hamcrest-all-${version}.jar"/>
             </zipfileset>
         </zip>
+        <tar tarfile="build/hamcrest-${version}.tgz" compression="gzip">
+            <tarfileset  dir="." prefix="hamcrest-${version}">
+                <include name="src/**"/>
+                <include name="lib/**"/>
+                <include name="*.txt"/>
+                <include name="build.xml"/>
+                <include name="matchers.xml"/>
+            </tarfileset>
+            <tarfileset dir="build" prefix="hamcrest-${version}">
+                <include name="hamcrest-api-${version}.jar"/>
+                <include name="hamcrest-generator-${version}.jar"/>
+                <include name="hamcrest-library-${version}.jar"/>
+                <include name="hamcrest-integration-${version}.jar"/>
+                <include name="hamcrest-all-${version}.jar"/>
+            </tarfileset>
+        </tar>
     </target>
 
     <macrodef name="java-to-jar"
