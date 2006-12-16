@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionContaining.collectionContainingAllOf;
+import static org.hamcrest.collection.IsCollectionContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.generator.FactoryMethod;
 import org.hamcrest.generator.FactoryWriter;
@@ -34,7 +34,7 @@ public class XmlConfiguratorTest extends TestCase {
                 "</matchers>"));
 
         assertThat(sugarConfiguration.factoryMethods(),
-                collectionContainingAllOf(
+                hasItems(
                         equalTo(new FactoryMethod(SomeMatcher.class.getName(), "matcher1")),
                         equalTo(new FactoryMethod(SomeMatcher.class.getName(), "matcher2")),
                         equalTo(new FactoryMethod(AnotherMatcher.class.getName(), "matcher3"))

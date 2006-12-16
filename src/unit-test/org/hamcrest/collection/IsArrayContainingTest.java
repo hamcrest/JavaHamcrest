@@ -2,33 +2,33 @@ package org.hamcrest.collection;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import static org.hamcrest.collection.IsArrayContaining.arrayContaining;
+import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 
 public class IsArrayContainingTest extends AbstractMatcherTest {
 
     protected Matcher<?> createMatcher() {
-        return arrayContaining("irrelevant");
+        return hasItemInArray("irrelevant");
     }
 
     public void testMatchesAnArrayThatContainsAnElementMatchingTheGivenMatcher() {
         assertMatches("should matches array that contains 'a'",
-                arrayContaining("a"), new String[]{"a", "b", "c"});
+                hasItemInArray("a"), new String[]{"a", "b", "c"});
     }
 
     public void testDoesNotMatchAnArrayThatDoesntContainAnElementMatchingTheGivenMatcher() {
         assertDoesNotMatch("should not matches array that doesn't contain 'a'",
-                arrayContaining("a"), new String[]{"b", "c"});
+                hasItemInArray("a"), new String[]{"b", "c"});
         assertDoesNotMatch("should not matches empty array",
-                arrayContaining("a"), new String[0]);
+                hasItemInArray("a"), new String[0]);
     }
 
     public void testDoesNotMatchNull() {
         assertDoesNotMatch("should not matches null",
-                arrayContaining("a"), null);
+                hasItemInArray("a"), null);
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("an array containing \"a\"", arrayContaining("a"));
+        assertDescription("an array containing \"a\"", hasItemInArray("a"));
     }
 
     // Remaining code no longer compiles, thanks to generics. I think that's a good thing, but

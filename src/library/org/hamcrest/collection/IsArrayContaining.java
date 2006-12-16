@@ -6,8 +6,6 @@ import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-import java.lang.reflect.Array;
-
 public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
 
     private final Matcher<T> elementMatcher;
@@ -17,9 +15,8 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
     }
 
     public boolean matchesSafely(T[] array) {
-        int size = Array.getLength(array);
-        for (int i = 0; i < size; i++) {
-            if (elementMatcher.matches(Array.get(array, i))) {
+        for (T item : array) {
+            if (elementMatcher.matches(item)) {
                 return true;
             }
         }
@@ -32,13 +29,13 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
     }
 
     @Factory
-    public static <T> Matcher<T[]> arrayContaining(Matcher<T> elementMatcher) {
+    public static <T> Matcher<T[]> hasItemInArray(Matcher<T> elementMatcher) {
         return new IsArrayContaining<T>(elementMatcher);
     }
 
     @Factory
-    public static <T> Matcher<T[]> arrayContaining(T element) {
-        return arrayContaining(equalTo(element));
+    public static <T> Matcher<T[]> hasItemInArray(T element) {
+        return hasItemInArray(equalTo(element));
     }
 
 }
