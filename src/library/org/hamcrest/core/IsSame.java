@@ -33,7 +33,7 @@ public class IsSame<T> extends BaseMatcher<T> {
      *               this object.
      */
     @Factory
-    public static <T> Matcher<T> same(T object) {
+    public static <T> Matcher<T> sameInstance(T object) {
         return new IsSame<T>(object);
     }
 
