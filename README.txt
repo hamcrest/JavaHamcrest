@@ -1,15 +1,15 @@
 
-                     ************
-********************** Hamcrest **********************
-                     ************
+                        ************
+************************* Hamcrest *************************
+                        ************
 
-                 "TODO: catchy phrase"
-
-                 <http://hamcrest.org>
+                    <http://hamcrest.org>
 
 --[ What is Hamcrest? ]-------------------------------------
 
-TODO
+Hamcrest is a library of matchers, which can be combined in
+to create flexible expressions of intent in tests.
+
 
 --[ Binaries ]-----------------------------------------------
 
@@ -22,10 +22,29 @@ different Jars.
    This API is stable and will rarely change.
 
  * [hamcrest-library.jar]
-   The ever-growing library of Matcher implementations.
-   This should be
+   The ever-growing library of Matcher implementations. This
+   will grow between releases.
 
-TODO: Finish this
+ * [hamcrest-generator.jar]
+   A tool to allow many Matcher implementations to be
+   combined into a single class so users don't have to
+   remember many classes/packages to import. Generates
+   code.
+
+ * [hamcrest-integration.jar]
+   Provides integration between Hamcrest and other testing
+   tools, including JUnit (3 and 4), TestNG, jMock and
+   EasyMock.
+
+Alternatively, if you don't care:
+
+ * [hamcrest-all.jar]
+   Includes all of the above.
+
+For convenience, all the Jars also include source code.
+
+
+--[ Dependencies ]-------------------------------------------
 
 All libraries in the 'lib' directory are used at build time,
 or are optional extras used for tighter integration with
@@ -36,7 +55,8 @@ ALL OF THE DEPENDENCIES ARE OPTIONAL.
 
 --[ Documentation ]------------------------------------------
 
-Documentation can be found at http://hamcrest.org/
+Documentation can be found at:
+  http://hamcrest.org/
 
 
 --[ Source ]-------------------------------------------------

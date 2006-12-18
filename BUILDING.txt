@@ -50,7 +50,3 @@ Steps:
   - If supported, run all tests under org.hamcrest from the
     IDEs JUnit runner.
 
-
--------------------------------------------------------------
--Nat Pryce and Joe Walnes
-http://hamcrest.org/

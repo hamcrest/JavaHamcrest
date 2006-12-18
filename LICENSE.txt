@@ -1,4 +1,4 @@
-(BSD Style License)
+BSD License
 
 Copyright (c) 2000-2006, www.hamcrest.org
 All rights reserved.
