@@ -23,14 +23,14 @@
 
     <target name="api"
             description="Build API">
-        <java-to-jar srcdir="src/api"
+        <java-to-jar srcdir="hamcrest-api/src/main/java"
                      destjar="build/hamcrest-api-${version}.jar"/>
     </target>
 
     <target name="generator"
             depends="api"
             description="Build code generator tool">
-        <java-to-jar srcdir="src/generator"
+        <java-to-jar srcdir="hamcrest-generator/src/main/java"
                      destjar="build/hamcrest-generator-${version}.jar"
                      classpath="build/hamcrest-api-${version}.jar"/>
     </target>
@@ -38,7 +38,7 @@
     <target name="library"
             depends="api,generator"
             description="Build library of matchers">
-        <java-to-jar srcdir="src/library"
+        <java-to-jar srcdir="hamcrest-library/src/main/java"
                      destjar="build/hamcrest-library-${version}.jar"
                      classpath="build/hamcrest-api-${version}.jar"/>
         <!-- Generate one class with all static imports -->
@@ -64,7 +64,7 @@
     <target name="integration"
             depends="api, library"
             description="Build integration with external tools">
-        <java-to-jar srcdir="src/integration"
+        <java-to-jar srcdir="hamcrest-integration/src/main/java"
                      destjar="build/hamcrest-integration-${version}.jar"
                      classpath="
                         build/hamcrest-api-${version}.jar;
@@ -74,7 +74,7 @@
     <target name="unit-test"
             depends="api, library, integration, generator"
             description="Build and run unit tests.">
-        <java-to-jar srcdir="src/unit-test"
+        <java-to-jar srcdir="hamcrest-unit-test/src/main/java"
                      destjar="build/hamcrest-unit-test-${version}.jar"
                      classpath="
                         build/hamcrest-api-${version}.jar;
@@ -94,7 +94,7 @@
                 <pathelement path="build/hamcrest-unit-test-${version}.jar"/>
             </classpath>
             <batchtest>
-                <fileset dir="src/unit-test">
+                <fileset dir="hamcrest-unit-test/src/main/java">
                     <exclude name="**/Abstract*"/>
                 </fileset>
             </batchtest>
@@ -104,7 +104,7 @@
     <target name="examples"
             depends="api, library, integration"
             description="Build and run unit tests.">
-        <java-to-jar srcdir="src/examples"
+        <java-to-jar srcdir="hamcrest-examples/src/main/java"
                      destjar="build/hamcrest-examples-${version}.jar"
                      classpath="
                         build/hamcrest-api-${version}.jar;
@@ -142,9 +142,9 @@
                 <include name="hamcrest-all-${version}.jar"/>
             </zipfileset>
         </zip>
-        <tar tarfile="build/hamcrest-${version}.tgz" compression="gzip">
+        <tar tarfile="build/hamcrest-${version}.tgz" compression="gzip" longfile="gnu">
             <tarfileset  dir="." prefix="hamcrest-${version}">
-                <include name="src/**"/>
+                <include name="hamcrest-*/**"/>
                 <include name="lib/**"/>
                 <include name="*.txt"/>
                 <include name="build.xml"/>

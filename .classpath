@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/api"/>
-	<classpathentry kind="src" path="src/generator"/>
-	<classpathentry kind="src" path="src/examples"/>
-	<classpathentry kind="src" path="src/integration"/>
-	<classpathentry kind="src" path="src/library"/>
-	<classpathentry kind="src" path="src/unit-test"/>
+	<classpathentry kind="src" path="hamcrest-api/src/main/java"/>
+	<classpathentry kind="src" path="hamcrest-generator/src/main/java"/>
+	<classpathentry kind="src" path="hamcrest-examples/src/main/java"/>
+	<classpathentry kind="src" path="hamcrest-integration/src/main/java"/>
+	<classpathentry kind="src" path="hamcrest-library/src/main/java"/>
+	<classpathentry kind="src" path="hamcrest-unit-test/src/main/java"/>
 	<classpathentry kind="lib" path="lib/integration/easymock-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/integration/jmock-1.10RC1.jar"/>
 	<classpathentry kind="lib" path="lib/integration/junit-3.8.1.jar"/>
