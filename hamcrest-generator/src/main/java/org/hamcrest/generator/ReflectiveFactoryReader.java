@@ -82,7 +82,7 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
         return isStatic(javaMethod.getModifiers())
                 && isPublic(javaMethod.getModifiers())
                 && javaMethod.getAnnotation(Factory.class) != null
-                && javaMethod.getReturnType().isAssignableFrom(Matcher.class);
+                && Matcher.class.isAssignableFrom(javaMethod.getReturnType());
     }
 
     private FactoryMethod buildFactoryMethod(Method javaMethod) {

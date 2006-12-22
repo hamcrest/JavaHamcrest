@@ -1,6 +1,7 @@
 package org.hamcrest.generator;
 
 import junit.framework.TestCase;
+import org.hamcrest.BaseMatcher;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -243,6 +244,17 @@ public class ReflectiveFactoryReaderTest extends TestCase {
         assertEquals("java.util.Map<T, V[]>", method.getGenerifiedType());
         assertEquals("java.util.Set<T>", method.getParameters().get(0).getType());
         assertEquals("V", method.getParameters().get(1).getType());
+    }
+
+    public static class SubclassOfMatcher {
+        @Factory
+        public static BaseMatcher subclassMethod() {
+            return null;
+        }
+    }
+
+    public void testCatchesSubclasses() {
+        assertNotNull(readMethod(SubclassOfMatcher.class, "subclassMethod"));
     }
 
     private FactoryMethod readMethod(Class cls, String methodName) {

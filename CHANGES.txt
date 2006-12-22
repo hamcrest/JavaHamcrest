@@ -1,3 +1,8 @@
+== Version 1.1: In Development ==
+
+* Generator recognizes @Factory methods that return subclass of Matcher.
+  (Fix by David Saff)
+
 == Version 1.0: Released Dec 15 2006 ==
 
 Initial release.

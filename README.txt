@@ -85,6 +85,7 @@ Contributors:
 - Neil Dunn
 - Dan North
 - Magne Rasmussen
+- David Saff
 
 Also, thanks to everyone who has worked on DynaMock, nMock,
 jMock, EasyMock and MiniMock! These libraries inspired
