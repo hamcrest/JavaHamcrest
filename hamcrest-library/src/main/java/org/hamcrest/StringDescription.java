@@ -8,6 +8,9 @@ import org.hamcrest.SelfDescribing;
 import org.hamcrest.internal.ArrayIterator;
 import org.hamcrest.internal.SelfDescribingValueIterator;
 
+/**
+ * A {@link Description} that is stored as a string.
+ */
 public class StringDescription implements Description {
     private final StringBuffer buffer;
 
@@ -19,6 +22,14 @@ public class StringDescription implements Description {
         this.buffer = buffer;
     }
     
+    /**
+     * Return the description of a {@link SelfDescribing} object as a String.
+     * 
+     * @param selfDescribing
+     *   The object to be described.
+     * @return
+     *   The description of the object.
+     */
     public static String toString(SelfDescribing selfDescribing) {
         StringDescription description = new StringDescription();
         selfDescribing.describeTo(description);
@@ -109,6 +120,9 @@ public class StringDescription implements Description {
         }
     }
 
+    /**
+     * Returns the description as a string.
+     */
     public String toString() {
         return buffer.toString();
     }

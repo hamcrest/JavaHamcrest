@@ -160,6 +160,32 @@
         </tar>
     </target>
 
+	<target name="javadoc" depends="library">
+		<mkdir dir="build/javadoc"/>
+		<javadoc destdir="build/javadoc" source="1.5" failonerror="yes"
+			overview="overview.html">
+			
+            <classpath>
+                <fileset dir="lib/integration">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+
+			<packageset dir="hamcrest-api/src/main/java"/>
+			<packageset dir="hamcrest-library/src/main/java" excludes="org/hamcrest/internal"/>
+			<packageset dir="hamcrest-integration/src/main/java"/>
+			<packageset dir="build/generated-code"/>
+			
+			<group title="Hamcrest API and Utility Classes" packages="org.hamcrest"/>
+			<group title="Matcher Library" packages="org.hamcrest.*"/>
+			<group title="Integration" packages="org.hamcrest.integration, org.hamcrest.integration.*"/>
+			
+			<link offline="false" href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+			<link offline="false" href="http://www.junit.org/junit/javadoc/3.8.1/"/>
+			<link offline="false" href="http://junit.sourceforge.net/javadoc_40/"/>
+		</javadoc>
+	</target>
+
     <macrodef name="java-to-jar"
               description="Compile Java source and build a Jar">
         <attribute name="srcdir" description="Directory containg Java source"/>

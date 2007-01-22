@@ -6,7 +6,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
 /**
- * An adapter to allowing a Hamcrest {@link org.hamcrest.Matcher}
+ * An adapter allowing a Hamcrest {@link org.hamcrest.Matcher}
  * to act as an EasyMock {@link org.easymock.IArgumentMatcher}.
  *
  * @author Joe Walnes

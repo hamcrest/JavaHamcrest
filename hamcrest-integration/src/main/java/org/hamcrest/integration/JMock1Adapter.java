@@ -5,7 +5,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
 /**
- * An adapter to allowing a Hamcrest {@link org.hamcrest.Matcher}
+ * An adapter allowing a Hamcrest {@link org.hamcrest.Matcher}
  * to act as an jMock1 {@link org.jmock.core.Constraint}.
  * Note, this is not necessary for jMock2 as it supports Hamcrest
  * out of the box.
