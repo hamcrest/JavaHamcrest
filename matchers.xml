@@ -17,7 +17,8 @@
     <factory class="org.hamcrest.collection.IsArrayContaining"/>
     <factory class="org.hamcrest.collection.IsCollectionContaining"/>
     <factory class="org.hamcrest.collection.IsMapContaining"/>
-
+    <factory class="org.hamcrest.collection.IsIn"/>
+    
     <!-- Number -->
     <factory class="org.hamcrest.number.IsCloseTo"/>
     <factory class="org.hamcrest.number.OrderingComparisons"/>
