@@ -19,16 +19,25 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
     protected abstract boolean matchesSafely(T item);
 
     protected TypeSafeMatcher() {
-        // Determine what T actually is.
-        for (Method method : getClass().getMethods()) {
-            if (method.getName().equals("matchesSafely") && !method.isSynthetic()) {
-                expectedType = method.getParameterTypes()[0];
-                break;
+        expectedType = findExpectedType(getClass());
+    }
+    
+    private static Class<?> findExpectedType(Class<?> fromClass) {
+        for (Class<?> c = fromClass; c != Object.class; c = c.getSuperclass()) {
+            for (Method method : c.getDeclaredMethods()) {
+                if (isMatchesSafelyMethod(method)) {
+                    return method.getParameterTypes()[0];
+                }
             }
         }
-        if (expectedType == null) {
-            throw new Error("Cannot determine correct type for matchesSafely() method.");
-        }
+        
+        throw new Error("Cannot determine correct type for matchesSafely() method.");
+    }
+    
+    private static boolean isMatchesSafelyMethod(Method method) {
+        return method.getName().equals("matchesSafely") 
+            && method.getParameterTypes().length == 1
+            && !method.isSynthetic(); 
     }
     
     protected TypeSafeMatcher(Class<T> expectedType) {
