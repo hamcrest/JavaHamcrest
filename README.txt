@@ -16,10 +16,12 @@ to create flexible expressions of intent in tests.
 Depending on how you intend to use Hamcrest, you should use
 different Jars.
 
- * [hamcrest-api.jar]
+ * [hamcrest-core.jar]
    This is the core API to be used by third-party framework
-   providers. This excludes the implementations of Matchers.
-   This API is stable and will rarely change.
+   providers. This includes the a foundation set of matcher
+   implementations for common operations.
+   This API is stable and will rarely change. You will need
+   this library as a minimum.
 
  * [hamcrest-library.jar]
    The ever-growing library of Matcher implementations. This
@@ -62,7 +64,7 @@ Documentation can be found at:
 --[ Source ]-------------------------------------------------
 
 The complete source for Hamcrest is bundled. This includes:
- * Matcher API [src/api]
+ * Matcher core classes [src/core]
  * Matcher libary [src/library]
  * Matcher integrations [src/integration]
  * Syntactic sugar generator [src/generator]

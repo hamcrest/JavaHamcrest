@@ -31,11 +31,19 @@ public class IsAnything<T> extends BaseMatcher<T> {
         description.appendText(this.description);
     }
 
+    /**
+     * This matcher always evaluates to true.
+     */
     @Factory
     public static <T> Matcher<T> anything() {
         return new IsAnything<T>();
     }
 
+    /**
+     * This matcher always evaluates to true.
+     *
+     * @param description A meaningful string used when describing itself.
+     */
     @Factory
     public static <T> Matcher<T> anything(String description) {
         return new IsAnything<T>(description);

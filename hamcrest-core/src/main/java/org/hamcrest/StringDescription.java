@@ -1,10 +1,10 @@
 package org.hamcrest;
 
+import static java.lang.String.valueOf;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.io.IOException;
 
-import org.hamcrest.Description;
-import org.hamcrest.SelfDescribing;
 import org.hamcrest.internal.ArrayIterator;
 import org.hamcrest.internal.SelfDescribingValueIterator;
 
@@ -12,14 +12,15 @@ import org.hamcrest.internal.SelfDescribingValueIterator;
  * A {@link Description} that is stored as a string.
  */
 public class StringDescription implements Description {
-    private final StringBuffer buffer;
+
+    private final Appendable out;
 
     public StringDescription() {
-        this(new StringBuffer());
+        this(new StringBuilder());
     }
 
-    public StringDescription(StringBuffer buffer) {
-        this.buffer = buffer;
+    public StringDescription(Appendable out) {
+        this.out = out;
     }
     
     /**
@@ -37,29 +38,37 @@ public class StringDescription implements Description {
     }
 
     public Description appendText(String text) {
-        buffer.append(text);
+        append(text);
         return this;
     }
 
     public Description appendValue(Object value) {
         if (value == null) {
-            buffer.append("null");
+            append("null");
         } else if (value instanceof String) {
-            toJavaSyntax(buffer, (String) value);
+            toJavaSyntax((String) value);
         } else if (value instanceof Character) {
-            buffer.append('"');
-            toJavaSyntax(buffer, (Character) value);
-            buffer.append('"');
+            append('"');
+            toJavaSyntax((Character) value);
+            append('"');
         } else if (value instanceof Short) {
-            buffer.append('<').append(value).append("s>");
+            append('<');
+            append(valueOf(value));
+            append("s>");
         } else if (value instanceof Long) {
-            buffer.append('<').append(value).append("L>");
+            append('<');
+            append(valueOf(value));
+            append("L>");
         } else if (value instanceof Float) {
-            buffer.append('<').append(value).append("F>");
+            append('<');
+            append(valueOf(value));
+            append("F>");
         } else if (value.getClass().isArray()) {
         	appendValueList("[",", ","]", new ArrayIterator(value));
         } else {
-            buffer.append('<').append(value).append('>');
+            append('<');
+            append(valueOf(value));
+            append('>');
         }
         return this;
     }
@@ -82,41 +91,57 @@ public class StringDescription implements Description {
 
     private Description appendList(String start, String separator, String end, Iterator<? extends SelfDescribing> i) {
         boolean separate = false;
-        buffer.append(start);
+        append(start);
         while (i.hasNext()) {
-            if (separate) buffer.append(separator);
+            if (separate) append(separator);
             i.next().describeTo(this);
             separate = true;
         }
-        buffer.append(end);
-        
+        append(end);
+
         return this;
     }
 
-	private void toJavaSyntax(StringBuffer buffer, String unformatted) {
-        buffer.append('"');
-        for (int i = 0; i < unformatted.length(); i++) {
-            toJavaSyntax(buffer, unformatted.charAt(i));
+    private void append(String str) {
+        try {
+            out.append(str);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not write description", e);
         }
-        buffer.append('"');
     }
 
-    private void toJavaSyntax(StringBuffer buffer, char ch) {
+    private void append(char c) {
+        try {
+            out.append(c);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not write description", e);
+        }
+    }
+
+    private void toJavaSyntax(String unformatted) {
+        append('"');
+        for (int i = 0; i < unformatted.length(); i++) {
+            toJavaSyntax(unformatted.charAt(i));
+        }
+        append('"');
+    }
+
+    private void toJavaSyntax(char ch) {
         switch (ch) {
             case '"':
-                buffer.append("\\\"");
+                append("\\\"");
                 break;
             case '\n':
-                buffer.append("\\n");
+                append("\\n");
                 break;
             case '\r':
-                buffer.append("\\r");
+                append("\\r");
                 break;
             case '\t':
-                buffer.append("\\t");
+                append("\\t");
                 break;
             default:
-                buffer.append(ch);
+                append(ch);
         }
     }
 
@@ -124,6 +149,6 @@ public class StringDescription implements Description {
      * Returns the description as a string.
      */
     public String toString() {
-        return buffer.toString();
+        return out.toString();
     }
 }

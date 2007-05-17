@@ -1,6 +1,5 @@
 package org.hamcrest.generator;
 
-
 import java.util.ArrayList;
 import static java.util.Collections.unmodifiableList;
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
  *
  * @author Joe Walnes
  * @see SugarGenerator
- * @see org.hamcrest.Factory
  */
 public class FactoryMethod {
 
@@ -110,6 +108,7 @@ public class FactoryMethod {
         return javaDoc;
     }
 
+    @SuppressWarnings({"RedundantIfStatement"})
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -165,7 +164,7 @@ public class FactoryMethod {
     public static class Parameter {
 
         private final String type;
-        private final String name;
+        private String name;
 
         public Parameter(String type, String name) {
             this.type = type;
@@ -187,6 +186,11 @@ public class FactoryMethod {
             return name;
         }
 
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @SuppressWarnings({"RedundantIfStatement"})
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;

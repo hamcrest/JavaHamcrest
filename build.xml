@@ -21,63 +21,84 @@
         <delete dir="build"/>
     </target>
 
-    <target name="api"
-            description="Build API">
-        <java-to-jar srcdir="hamcrest-api/src/main/java"
-                     destjar="build/hamcrest-api-${version}.jar"/>
-    </target>
-
     <target name="generator"
-            depends="api"
             description="Build code generator tool">
         <java-to-jar srcdir="hamcrest-generator/src/main/java"
                      destjar="build/hamcrest-generator-${version}.jar"
-                     classpath="build/hamcrest-api-${version}.jar"/>
+                     classpath="
+                       build/hamcrest-core-${version}.jar;
+                     "/>
     </target>
 
-    <target name="library"
-            depends="api,generator"
-            description="Build library of matchers">
-        <java-to-jar srcdir="hamcrest-library/src/main/java"
-                     destjar="build/hamcrest-library-${version}.jar"
-                     classpath="build/hamcrest-api-${version}.jar"/>
+    <target name="core"
+            depends="generator"
+            description="Build core Hamcrest library">
+        <java-to-jar srcdir="hamcrest-core/src/main/java"
+                     destjar="build/hamcrest-core-${version}.jar"/>
         <!-- Generate one class with all static imports -->
-        <mkdir dir="build/generated-code"/>
+        <mkdir dir="build/hamcrest-core/generated-code"/>
         <java classname="org.hamcrest.generator.config.XmlConfigurator"
               fork="yes"
               failonerror="yes"
               classpath="
-                build/hamcrest-api-${version}.jar;
+                build/hamcrest-core-${version}.jar;
                 build/hamcrest-generator-${version}.jar;
-                build/hamcrest-library-${version}.jar
+              ">
+            <arg value="core-matchers.xml"/>
+            <arg value="hamcrest-core/src/main/java"/>
+            <arg value="org.hamcrest.CoreMatchers"/>
+            <arg value="build/hamcrest-core/generated-code"/>
+        </java>
+        <!-- Append to core jar -->
+        <java-to-jar srcdir="build/hamcrest-core/generated-code"
+                     destjar="build/hamcrest-core-${version}.jar"
+                     classpath="build/hamcrest-core-${version}.jar"/>
+    </target>
+
+    <target name="library"
+            depends="core,generator"
+            description="Build library of matchers">
+        <java-to-jar srcdir="hamcrest-library/src/main/java"
+                     destjar="build/hamcrest-library-${version}.jar"
+                     classpath="build/hamcrest-core-${version}.jar"/>
+        <!-- Generate one class with all static imports -->
+        <mkdir dir="build/hamcrest-library/generated-code"/>
+        <java classname="org.hamcrest.generator.config.XmlConfigurator"
+              fork="yes"
+              failonerror="yes"
+              classpath="
+                build/hamcrest-core-${version}.jar;
+                build/hamcrest-generator-${version}.jar;
+                build/hamcrest-library-${version}.jar;
               ">
             <arg value="matchers.xml"/>
+            <arg value="hamcrest-library/src/main/java"/>
             <arg value="org.hamcrest.Matchers"/>
-            <arg value="build/generated-code"/>
+            <arg value="build/hamcrest-library/generated-code"/>
         </java>
         <!-- Append to library jar -->
-        <java-to-jar srcdir="build/generated-code"
+        <java-to-jar srcdir="build/hamcrest-library/generated-code"
                      destjar="build/hamcrest-library-${version}.jar"
-                     classpath="build/hamcrest-api-${version}.jar"/>
+                     classpath="build/hamcrest-core-${version}.jar"/>
     </target>
 
     <target name="integration"
-            depends="api, library"
+            depends="core, library"
             description="Build integration with external tools">
         <java-to-jar srcdir="hamcrest-integration/src/main/java"
                      destjar="build/hamcrest-integration-${version}.jar"
                      classpath="
-                        build/hamcrest-api-${version}.jar;
+                        build/hamcrest-core-${version}.jar;
                         build/hamcrest-library-${version}.jar"/>
     </target>
 
     <target name="unit-test"
-            depends="api, library, integration, generator"
+            depends="core, library, integration, generator"
             description="Build and run unit tests.">
         <java-to-jar srcdir="hamcrest-unit-test/src/main/java"
                      destjar="build/hamcrest-unit-test-${version}.jar"
                      classpath="
-                        build/hamcrest-api-${version}.jar;
+                        build/hamcrest-core-${version}.jar;
                         build/hamcrest-library-${version}.jar;
                         build/hamcrest-integration-${version}.jar;
                         build/hamcrest-generator-${version}.jar"/>
@@ -87,7 +108,7 @@
                 <fileset dir="lib/integration">
                     <include name="*.jar"/>
                 </fileset>
-                <pathelement path="build/hamcrest-api-${version}.jar"/>
+                <pathelement path="build/hamcrest-core-${version}.jar"/>
                 <pathelement path="build/hamcrest-library-${version}.jar"/>
                 <pathelement path="build/hamcrest-integration-${version}.jar"/>
                 <pathelement path="build/hamcrest-generator-${version}.jar"/>
@@ -102,21 +123,21 @@
     </target>
 
     <target name="examples"
-            depends="api, library, integration"
+            depends="core, library, integration"
             description="Build and run unit tests.">
         <java-to-jar srcdir="hamcrest-examples/src/main/java"
                      destjar="build/hamcrest-examples-${version}.jar"
                      classpath="
-                        build/hamcrest-api-${version}.jar;
+                        build/hamcrest-core-${version}.jar;
                         build/hamcrest-library-${version}.jar;
                         build/hamcrest-integration-${version}.jar"/>
     </target>
 
     <target name="bigjar"
-            depends="api, library, integration, generator"
-            description="Build a single Jar (hamcrest-all.jar) that contains api, library, generator and integration.">
+            depends="core, library, integration, generator"
+            description="Build a single Jar (hamcrest-all.jar) that contains core, library, generator and integration.">
         <jar jarfile="build/hamcrest-all-${version}.jar" duplicate="preserve">
-            <fileset dir="build/temp/build/hamcrest-api-${version}.jar.contents"/>
+            <fileset dir="build/temp/build/hamcrest-core-${version}.jar.contents"/>
             <fileset dir="build/temp/build/hamcrest-library-${version}.jar.contents"/>
             <fileset dir="build/temp/build/hamcrest-generator-${version}.jar.contents"/>
             <fileset dir="build/temp/build/hamcrest-integration-${version}.jar.contents"/>
@@ -124,7 +145,7 @@
     </target>
 
     <target name="package"
-            depends="api,generator,library,integration,bigjar,unit-test,examples"
+            depends="core,generator,library,integration,bigjar,unit-test,examples"
             description="Package for distribution">
         <zip zipfile="build/hamcrest-${version}.zip">
             <zipfileset dir="." prefix="hamcrest-${version}">
@@ -135,7 +156,7 @@
                 <include name="matchers.xml"/>
             </zipfileset>
             <zipfileset dir="build" prefix="hamcrest-${version}">
-                <include name="hamcrest-api-${version}.jar"/>
+                <include name="hamcrest-core-${version}.jar"/>
                 <include name="hamcrest-generator-${version}.jar"/>
                 <include name="hamcrest-library-${version}.jar"/>
                 <include name="hamcrest-integration-${version}.jar"/>
@@ -151,7 +172,7 @@
                 <include name="matchers.xml"/>
             </tarfileset>
             <tarfileset dir="build" prefix="hamcrest-${version}">
-                <include name="hamcrest-api-${version}.jar"/>
+                <include name="hamcrest-core-${version}.jar"/>
                 <include name="hamcrest-generator-${version}.jar"/>
                 <include name="hamcrest-library-${version}.jar"/>
                 <include name="hamcrest-integration-${version}.jar"/>
@@ -171,7 +192,7 @@
                 </fileset>
             </classpath>
 
-			<packageset dir="hamcrest-api/src/main/java"/>
+			<packageset dir="hamcrest-core/src/main/java"/>
 			<packageset dir="hamcrest-library/src/main/java" excludes="org/hamcrest/internal"/>
 			<packageset dir="hamcrest-integration/src/main/java"/>
 			<packageset dir="build/generated-code"/>

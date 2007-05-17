@@ -1,5 +1,13 @@
 == Version 1.1: In Development ==
 
+* Created hamcrest-core.jar (and removed hamcrest-api.jar).
+  Moved core set of matchers (and, eq, not, etc) to this package to make
+  it more practical for external libraries to embed hamcrest.
+
+* Created CoreMatchers (static import sugar) in hamcrest-core.jar.
+
+* StringBuilder can use any Appendable (not just StringBuffer).
+
 * Generator recognizes @Factory methods that return subclass of Matcher.
   (Fix by David Saff)
 

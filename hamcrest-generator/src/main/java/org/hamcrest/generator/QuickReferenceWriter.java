@@ -1,10 +1,7 @@
 package org.hamcrest.generator;
 
-import org.hamcrest.generator.FactoryWriter;
-import org.hamcrest.generator.FactoryMethod;
-
-import java.io.PrintStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 /**
  * Dumps a quick list of factory methods. Designed to be read by users, as a cheatsheet.
