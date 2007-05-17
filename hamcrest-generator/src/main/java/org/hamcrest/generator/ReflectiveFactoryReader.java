@@ -1,8 +1,5 @@
 package org.hamcrest.generator;
 
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
-
 import java.lang.reflect.Method;
 import static java.lang.reflect.Modifier.isPublic;
 import static java.lang.reflect.Modifier.isStatic;
@@ -32,8 +29,11 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
 
     private final Class cls;
 
+    private final ClassLoader classLoader;
+
     public ReflectiveFactoryReader(Class cls) {
         this.cls = cls;
+        this.classLoader = cls.getClassLoader();
     }
 
     public Iterator<FactoryMethod> iterator() {
@@ -79,10 +79,22 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
      * <p>To use another set of rules, override this method.
      */
     protected boolean isFactoryMethod(Method javaMethod) {
+        // We dynamically load these classes, to avoid a compile time
+        // dependency on org.hamcrest.{Factory,Matcher}. This gets around
+        // a circular bootstrap issue (because generator is required to
+        // compile core).
+        Class factoryCls;
+        Class matcherCls;
+        try {
+            factoryCls = classLoader.loadClass("org.hamcrest.Factory");
+            matcherCls = classLoader.loadClass("org.hamcrest.Matcher");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Cannot load hamcrest core", e);
+        }
         return isStatic(javaMethod.getModifiers())
                 && isPublic(javaMethod.getModifiers())
-                && javaMethod.getAnnotation(Factory.class) != null
-                && Matcher.class.isAssignableFrom(javaMethod.getReturnType());
+                && javaMethod.getAnnotation(factoryCls) != null
+                && matcherCls.isAssignableFrom(javaMethod.getReturnType());
     }
 
     private FactoryMethod buildFactoryMethod(Method javaMethod) {

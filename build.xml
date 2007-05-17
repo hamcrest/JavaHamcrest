@@ -45,7 +45,6 @@
                 build/hamcrest-generator-${version}.jar;
               ">
             <arg value="core-matchers.xml"/>
-            <arg value="hamcrest-core/src/main/java"/>
             <arg value="org.hamcrest.CoreMatchers"/>
             <arg value="build/hamcrest-core/generated-code"/>
         </java>
@@ -72,7 +71,6 @@
                 build/hamcrest-library-${version}.jar;
               ">
             <arg value="matchers.xml"/>
-            <arg value="hamcrest-library/src/main/java"/>
             <arg value="org.hamcrest.Matchers"/>
             <arg value="build/hamcrest-library/generated-code"/>
         </java>
