@@ -16,7 +16,7 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
      * Subclasses should implement this. The item will already have been checked for
      * the specific type and will never be null.
      */
-    protected abstract boolean matchesSafely(T item);
+    public abstract boolean matchesSafely(T item);
 
     protected TypeSafeMatcher() {
         expectedType = findExpectedType(getClass());
