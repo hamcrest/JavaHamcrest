@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 public class TypeSafeMatcherTest extends TestCase {
     public static class TypeSafeMatcherSubclass extends TypeSafeMatcher<String> {
         @Override
-        protected boolean matchesSafely(String item) {
+        public boolean matchesSafely(String item) {
             return false;
         }
 
