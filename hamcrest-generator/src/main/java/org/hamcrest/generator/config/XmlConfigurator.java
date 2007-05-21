@@ -1,11 +1,12 @@
 package org.hamcrest.generator.config;
 
 import org.hamcrest.generator.HamcrestFactoryWriter;
+import org.hamcrest.generator.QDoxFactoryReader;
 import org.hamcrest.generator.QuickReferenceWriter;
 import org.hamcrest.generator.ReflectiveFactoryReader;
 import org.hamcrest.generator.SugarConfiguration;
 import org.hamcrest.generator.SugarGenerator;
-import org.hamcrest.generator.QDoxFactoryReader;
+import org.hamcrest.generator.QDox;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -18,26 +19,23 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.thoughtworks.qdox.JavaDocBuilder;
-import com.thoughtworks.qdox.model.JavaClass;
-
 public class XmlConfigurator {
 
     private final SugarConfiguration sugarConfiguration;
     private final ClassLoader classLoader;
     private final SAXParserFactory saxParserFactory;
-    private final JavaDocBuilder javaDocBuilder;
+    private final QDox qdox;
 
     public XmlConfigurator(SugarConfiguration sugarConfiguration, ClassLoader classLoader) {
         this.sugarConfiguration = sugarConfiguration;
         this.classLoader = classLoader;
         saxParserFactory = SAXParserFactory.newInstance();
         saxParserFactory.setNamespaceAware(true);
-        javaDocBuilder = new JavaDocBuilder();
+        qdox = new QDox();
     }
 
     public void addSourceDir(File sourceDir) {
-        javaDocBuilder.addSourceTree(sourceDir);
+        qdox.addSourceTree(sourceDir);
     }
 
     public void load(InputSource inputSource)
@@ -59,9 +57,8 @@ public class XmlConfigurator {
 
     private void addClass(String className) throws ClassNotFoundException {
         Class cls = classLoader.loadClass(className);
-        JavaClass classSource = javaDocBuilder.getClassByName(className);
         sugarConfiguration.addFactoryMethods(
-                new QDoxFactoryReader(new ReflectiveFactoryReader(cls), classSource));
+                new QDoxFactoryReader(new ReflectiveFactoryReader(cls), qdox, className));
     }
 
 

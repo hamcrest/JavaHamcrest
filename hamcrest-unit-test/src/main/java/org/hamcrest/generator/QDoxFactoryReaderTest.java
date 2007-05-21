@@ -1,8 +1,5 @@
 package org.hamcrest.generator;
 
-import com.thoughtworks.qdox.JavaDocBuilder;
-import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.JavaSource;
 import junit.framework.TestCase;
 
 import java.io.StringReader;
@@ -21,7 +18,7 @@ public class QDoxFactoryReaderTest extends TestCase {
                 "class SomeClass {\n" +
                 "  Matcher someMethod(String realParamName) { ... } \n" +
                 "}\n";
-        FactoryMethod factoryMethod = wrapUsingQDoxedSource(method, input);
+        FactoryMethod factoryMethod = wrapUsingQDoxedSource(method, "org.SomeClass", input);
 
         assertEquals("java.lang.String", factoryMethod.getParameters().get(0).getType());
         assertEquals("realParamName", factoryMethod.getParameters().get(0).getName());
@@ -34,33 +31,29 @@ public class QDoxFactoryReaderTest extends TestCase {
                 "package org;\n" +
                 "class SomeClass {\n" +
                 "  /**\n" +
-                "   * This class\n" +
-                "   * does something.\n" +
+                "   * This class does something.\n" +
                 "   *\n" +
                 "   * @return stuff.\n" +
                 "   */\n" +
                 "  Matcher someMethod() { ... } \n" +
                 "}\n";
-        FactoryMethod factoryMethod = wrapUsingQDoxedSource(method, input);
+        FactoryMethod factoryMethod = wrapUsingQDoxedSource(method, "org.SomeClass", input);
 
         assertEquals("This class does something.\n\n@return stuff.\n",
                 factoryMethod.getJavaDoc());
     }
 
-    private FactoryMethod wrapUsingQDoxedSource(FactoryMethod originalMethod, String input) {
+    private FactoryMethod wrapUsingQDoxedSource(FactoryMethod originalMethod,
+                                                String className, String input) {
         List<FactoryMethod> originalMethods = new ArrayList<FactoryMethod>();
         originalMethods.add(originalMethod);
 
-        JavaClass javaClass = parseSource(input);
+        QDox qdox = new QDox();
+        qdox.addSource(new StringReader(input));
 
-        QDoxFactoryReader qDoxFactoryReader = new QDoxFactoryReader(originalMethods, javaClass);
+        QDoxFactoryReader qDoxFactoryReader = new QDoxFactoryReader(
+                originalMethods, qdox, className);
         return getFirstFactoryMethod(qDoxFactoryReader);
-    }
-
-    private JavaClass parseSource(String input) {
-        JavaDocBuilder javaDocBuilder = new JavaDocBuilder();
-        JavaSource javaSource = javaDocBuilder.addSource(new StringReader(input));
-        return javaSource.getClasses()[0];
     }
 
     private FactoryMethod getFirstFactoryMethod(QDoxFactoryReader qDoxFactoryReader) {

@@ -26,9 +26,9 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
     private static final Pattern GENERIC_REGEX = Pattern.compile("<.*>");
     private static final Pattern VARARGS_REGEX = Pattern.compile("...", Pattern.LITERAL);
 
-    public QDoxFactoryReader(Iterable<FactoryMethod> wrapped, JavaClass classSource) {
+    public QDoxFactoryReader(Iterable<FactoryMethod> wrapped, QDox qdox, String className) {
         this.wrapped = wrapped;
-        this.classSource = classSource;
+        this.classSource = qdox.getClassByName(className);
     }
 
     public Iterator<FactoryMethod> iterator() {

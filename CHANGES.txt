@@ -1,5 +1,8 @@
 == Version 1.1: In Development ==
 
+* Hamcrest Generator now includes JavaDoc and parameter names in generated code
+  by using QDox to parse the source code.
+
 * Created hamcrest-core.jar (and removed hamcrest-api.jar).
   Moved core set of matchers (and, eq, not, etc) to this package to make
   it more practical for external libraries to embed hamcrest.

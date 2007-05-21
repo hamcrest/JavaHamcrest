@@ -45,8 +45,8 @@ Steps:
       hamcrest-library/src/main/java
       hamcrest-generator/src/main/java
       hamcrest-integration/src/main/java
-      build/hamcrest-core/generated-code
-      build/hamcrest-library/generated-code
+      build/temp/hamcrest-core/generated-code
+      build/temp/hamcrest-library/generated-code
   - Add hamcrest-unit-test/src/main/java as a test directory.
     If this is unsupported by the IDE, add it as another source
     directory.
