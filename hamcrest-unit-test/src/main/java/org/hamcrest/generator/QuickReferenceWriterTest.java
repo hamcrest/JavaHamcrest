@@ -33,7 +33,7 @@ public class QuickReferenceWriterTest extends TestCase {
         anotherMethod.setGenerifiedType("int");
         writer.writeMethod("anotherMethod", anotherMethod);
 
-        expected.println("        [String] namedMethod(Cheese, int)");
+        expected.println("        [String] namedMethod(Cheese a, int b)");
         expected.println("           [int] anotherMethod()");
         verify();
     }
@@ -45,7 +45,7 @@ public class QuickReferenceWriterTest extends TestCase {
         namedMethod.setGenerifiedType("java.lang.Cheese");
         writer.writeMethod("namedMethod", namedMethod);
 
-        expected.println("        [Cheese] namedMethod(Foo, Cheese<Zoo>)");
+        expected.println("        [Cheese] namedMethod(Foo a, Cheese<Zoo> b)");
         verify();
     }
 

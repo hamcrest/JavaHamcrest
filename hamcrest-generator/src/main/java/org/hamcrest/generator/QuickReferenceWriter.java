@@ -44,6 +44,8 @@ public class QuickReferenceWriter implements FactoryWriter {
                 seenFirst = true;
             }
             out.append(removePackageNames(parameter.getType()));
+            out.append(' ');
+            out.append(parameter.getName());
         }
         out.append(')');
         out.println();
