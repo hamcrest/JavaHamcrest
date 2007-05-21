@@ -16,4 +16,8 @@ public abstract class BaseMatcher<T> implements Matcher<T> {
         // See Matcher interface for an explanation of this method.
     }
 
+    @Override
+    public String toString() {
+        return StringDescription.toString(this);
+    }
 }

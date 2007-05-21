@@ -11,6 +11,11 @@
 
 * StringBuilder can use any Appendable (not just StringBuffer).
 
+* Added sensible toString() method to BaseMatcher.
+
+* Created StringDescription.asString() alias (because toString() caused issues
+  with static imports). 
+
 * Generator recognizes @Factory methods that return subclass of Matcher.
   (Fix by David Saff)
 

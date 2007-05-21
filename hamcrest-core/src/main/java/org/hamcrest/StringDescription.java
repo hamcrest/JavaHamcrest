@@ -37,6 +37,13 @@ public class StringDescription implements Description {
         return description.toString();
     }
 
+    /**
+     * Alias for {@link #toString(SelfDescribing)}.
+     */
+    public static String asString(SelfDescribing selfDescribing) {
+        return toString(selfDescribing);
+    }
+
     public Description appendText(String text) {
         append(text);
         return this;
