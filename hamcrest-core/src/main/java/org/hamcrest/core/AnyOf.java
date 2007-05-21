@@ -43,11 +43,17 @@ public class AnyOf<T> extends BaseMatcher<T> {
         description.appendText(")");
     }
 
+    /**
+     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     */
     @Factory
     public static <T> Matcher<T> anyOf(Matcher<T>... matchers) {
         return anyOf(Arrays.asList(matchers));
     }
 
+    /**
+     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     */
     @Factory
     public static <T> Matcher<T> anyOf(Iterable<Matcher<T>> matchers) {
         return new AnyOf<T>(matchers);

@@ -44,7 +44,10 @@ public class DescribedAs<T> extends BaseMatcher<T> {
             description.appendText(descriptionTemplate.substring(textStart));
         }
     }
-    
+
+    /**
+     * Wraps an existing matcher and overrides the description when it fails.
+     */
     @Factory
     public static <T> Matcher<T> describedAs(String description, Matcher<T> matcher, Object... values) {
         return new DescribedAs<T>(description, matcher, values);

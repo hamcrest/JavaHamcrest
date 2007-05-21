@@ -33,9 +33,12 @@ public class IsInstanceOf<T> extends BaseMatcher<T> {
                 .appendText(theClass.getName());
     }
 
+    /**
+     * Is the value an instance of a particular type?
+     */
     @Factory
-    public static <T> Matcher<T> instanceOf(Class<T> instanceOf) {
-        return new IsInstanceOf<T>(instanceOf);
+    public static <T> Matcher<T> instanceOf(Class<T> type) {
+        return new IsInstanceOf<T>(type);
     }
 
 }

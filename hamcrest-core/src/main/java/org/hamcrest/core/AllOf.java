@@ -42,11 +42,17 @@ public class AllOf<T> extends BaseMatcher<T> {
         description.appendText(")");
     }
 
+    /**
+     * MM Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     */
     @Factory
     public static <T> Matcher<T> allOf(Matcher<T>... matchers) {
         return allOf(Arrays.asList(matchers));
     }
 
+    /**
+     * IM Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     */
     @Factory
     public static <T> Matcher<T> allOf(Iterable<Matcher<T>> matchers) {
         return new AllOf<T>(matchers);
