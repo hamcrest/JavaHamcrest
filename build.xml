@@ -27,6 +27,7 @@
                      destjar="build/hamcrest-generator-${version}.jar"
                      classpath="
                        build/hamcrest-core-${version}.jar;
+                       lib/generator/qdox-1.6.1.jar;
                      "/>
     </target>
 
@@ -43,8 +44,10 @@
               classpath="
                 build/hamcrest-core-${version}.jar;
                 build/hamcrest-generator-${version}.jar;
+                lib/generator/qdox-1.6.1.jar;
               ">
             <arg value="core-matchers.xml"/>
+            <arg value="hamcrest-core/src/main/java"/>
             <arg value="org.hamcrest.CoreMatchers"/>
             <arg value="build/hamcrest-core/generated-code"/>
         </java>
@@ -69,8 +72,10 @@
                 build/hamcrest-core-${version}.jar;
                 build/hamcrest-generator-${version}.jar;
                 build/hamcrest-library-${version}.jar;
+                lib/generator/qdox-1.6.1.jar;
               ">
             <arg value="matchers.xml"/>
+            <arg value="hamcrest-core/src/main/java,hamcrest-library/src/main/java"/>
             <arg value="org.hamcrest.Matchers"/>
             <arg value="build/hamcrest-library/generated-code"/>
         </java>
