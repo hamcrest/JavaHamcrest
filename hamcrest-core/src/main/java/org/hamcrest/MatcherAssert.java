@@ -8,10 +8,10 @@ public class MatcherAssert {
         assertThat("", actual, matcher);
     }
     
-    public static <T> void assertThat(String name, T actual, Matcher<T> matcher) {
+    public static <T> void assertThat(String reason, T actual, Matcher<T> matcher) {
         if (!matcher.matches(actual)) {
             Description description = new StringDescription();
-            description.appendText(name);
+            description.appendText(reason);
             description.appendText("\nExpected: ");
             matcher.describeTo(description);
             description.appendText("\n     got: ").appendValue(actual).appendText("\n");
