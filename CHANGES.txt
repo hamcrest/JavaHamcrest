@@ -17,6 +17,9 @@
 * Created StringDescription.asString() alias (because toString() caused issues
   with static imports).
 
+* Relaxed isInstanceOf() matcher generic type so it can be used on any kind of
+  object. e.g. assertThat(someUnknownObject, isInstanceOf(String.class));
+
 * TypeSafeMatcher.matchesSafely() is now public.
 
 * Generator recognizes @Factory methods that return subclass of Matcher.

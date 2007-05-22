@@ -29,4 +29,10 @@ public class IsTest extends AbstractMatcherTest {
         assertDoesNotMatch("should not match", is("B"), "A");
         assertDescription("is \"A\"", is("A"));
     }
+
+    public void testProvidesConvenientShortcutForIsInstanceOf() {
+        assertMatches("should match", is(String.class), "A");
+        assertDoesNotMatch("should not match", is(Integer.class), "A");
+        assertDoesNotMatch("should not match", is(Integer.class), null);
+    }
 }

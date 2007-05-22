@@ -18,6 +18,7 @@ public class IsInstanceOfTest extends AbstractMatcherTest {
         assertThat(1, instanceOf(Number.class));
         assertThat(1.0, instanceOf(Number.class));
         assertThat(null, not(instanceOf(Number.class)));
+        assertThat("hello", not(instanceOf(Number.class)));
     }
-    
+
 }
