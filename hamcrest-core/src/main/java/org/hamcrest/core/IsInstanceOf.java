@@ -11,8 +11,8 @@ import org.hamcrest.BaseMatcher;
 /**
  * Tests whether the value is an instance of a class.
  */
-public class IsInstanceOf<T> extends BaseMatcher<T> {
-    private final Class<T> theClass;
+public class IsInstanceOf extends BaseMatcher<Object> {
+    private final Class<?> theClass;
 
     /**
      * Creates a new instance of IsInstanceOf
@@ -20,7 +20,7 @@ public class IsInstanceOf<T> extends BaseMatcher<T> {
      * @param theClass The predicate evaluates to true for instances of this class
      *                 or one of its subclasses.
      */
-    public IsInstanceOf(Class<T> theClass) {
+    public IsInstanceOf(Class<?> theClass) {
         this.theClass = theClass;
     }
 
@@ -37,14 +37,8 @@ public class IsInstanceOf<T> extends BaseMatcher<T> {
      * Is the value an instance of a particular type?
      */
     @Factory
-    public static <T> Matcher<T> instanceOf2(Class<T> type) {
-        return new IsInstanceOf<T>(type);
-    }
-
-    @Factory
-    @SuppressWarnings({"unchecked"})
-    public static Matcher<Object> instanceOf(Class type) {
-        return new IsInstanceOf<Object>(type);
+    public static Matcher<Object> instanceOf(Class<?> type) {
+        return new IsInstanceOf(type);
     }
 
 }
