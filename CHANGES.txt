@@ -4,7 +4,7 @@
   by using QDox to parse the source code.
 
 * Created hamcrest-core.jar (and removed hamcrest-api.jar).
-  Moved core set of matchers (and, eq, not, etc) and assertThat()
+  Moved core set of matchers (and, eq, not, etc)
   to this package to make it more practical for external libraries
   to embed Hamcrest.
 
