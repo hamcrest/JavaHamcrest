@@ -128,6 +128,7 @@
             </classpath>
             <batchtest>
                 <fileset dir="hamcrest-unit-test/src/main/java">
+                    <include name="**/*Test*"/>
                     <exclude name="**/Abstract*"/>
                 </fileset>
             </batchtest>

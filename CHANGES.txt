@@ -20,6 +20,8 @@
 * Relaxed isInstanceOf() matcher generic type so it can be used on any kind of
   object. e.g. assertThat(someUnknownObject, isInstanceOf(String.class));
 
+* Modified anyOf() and allOf() to accept mixed-types.
+
 * TypeSafeMatcher.matchesSafely() is now public.
 
 * Generator recognizes @Factory methods that return subclass of Matcher.

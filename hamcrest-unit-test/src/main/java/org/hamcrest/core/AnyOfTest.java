@@ -7,10 +7,9 @@ import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 
-@SuppressWarnings("unchecked")
 public class AnyOfTest extends AbstractMatcherTest {
 
-	protected Matcher<?> createMatcher() {
+    protected Matcher<?> createMatcher() {
         return anyOf(equalTo("irrelevant"));
     }
 
@@ -25,6 +24,19 @@ public class AnyOfTest extends AbstractMatcherTest {
     public void testEvaluatesToTheTheLogicalDisjunctionOfManyOtherMatchers() {
         assertThat("good", anyOf(equalTo("bad"), equalTo("good"), equalTo("bad"), equalTo("bad"), equalTo("bad")));
         assertThat("good", not(anyOf(equalTo("bad"), equalTo("bad"), equalTo("bad"), equalTo("bad"), equalTo("bad"))));
+    }
+
+    public void testSupportsMixedTypes() {
+        assertThat(new SampleBaseClass("good"), anyOf(
+                equalTo(new SampleBaseClass("bad")),
+                equalTo(new SampleBaseClass("good")),
+                equalTo(new SampleSubClass("ugly"))
+        ));
+        assertThat(new SampleSubClass("good"), anyOf(
+                equalTo(new SampleBaseClass("bad")),
+                equalTo(new SampleBaseClass("good")),
+                equalTo(new SampleSubClass("ugly"))
+        ));
     }
 
 }

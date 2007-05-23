@@ -11,9 +11,9 @@ import java.util.Collection;
 import java.util.ArrayList;
 
 public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
-    private final Matcher<T> elementMatcher;
+    private final Matcher<? extends T> elementMatcher;
 
-    public IsCollectionContaining(Matcher<T> elementMatcher) {
+    public IsCollectionContaining(Matcher<? extends T> elementMatcher) {
         this.elementMatcher = elementMatcher;
     }
 
@@ -32,7 +32,7 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
     }
 
     @Factory
-    public static <T> Matcher<Iterable<T>> hasItem(Matcher<T> elementMatcher) {
+    public static <T> Matcher<Iterable<T>> hasItem(Matcher<? extends T> elementMatcher) {
         return new IsCollectionContaining<T>(elementMatcher);
     }
 
@@ -42,9 +42,10 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
     }
 
     @Factory
-    public static <T> Matcher<Iterable<T>> hasItems(Matcher<T>... elementMatchers) {
-        Collection<Matcher<Iterable<T>>> all = new ArrayList<Matcher<Iterable<T>>>(elementMatchers.length);
-        for (Matcher<T> elementMatcher : elementMatchers) {
+    public static <T> Matcher<Iterable<T>> hasItems(Matcher<? extends T>... elementMatchers) {
+        Collection<Matcher<? extends Iterable<T>>> all
+                = new ArrayList<Matcher<? extends Iterable<T>>>(elementMatchers.length);
+        for (Matcher<? extends T> elementMatcher : elementMatchers) {
             all.add(hasItem(elementMatcher));
         }
         return allOf(all);
@@ -52,7 +53,8 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
 
     @Factory
     public static <T> Matcher<Iterable<T>> hasItems(T... elements) {
-        Collection<Matcher<Iterable<T>>> all = new ArrayList<Matcher<Iterable<T>>>(elements.length);
+        Collection<Matcher<? extends Iterable<T>>> all
+                = new ArrayList<Matcher<? extends Iterable<T>>>(elements.length);
         for (T element : elements) {
             all.add(hasItem(element));
         }

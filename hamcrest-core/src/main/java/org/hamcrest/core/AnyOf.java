@@ -14,14 +14,14 @@ import java.util.Arrays;
  */
 public class AnyOf<T> extends BaseMatcher<T> {
 
-    private final Iterable<Matcher<T>> matchers;
+    private final Iterable<Matcher<? extends T>> matchers;
 
-    public AnyOf(Iterable<Matcher<T>> matchers) {
+    public AnyOf(Iterable<Matcher<? extends T>> matchers) {
         this.matchers = matchers;
     }
 
     public boolean matches(Object o) {
-        for (Matcher<T> matcher : matchers) {
+        for (Matcher<? extends T> matcher : matchers) {
             if (matcher.matches(o)) {
                 return true;
             }
@@ -32,7 +32,7 @@ public class AnyOf<T> extends BaseMatcher<T> {
     public void describeTo(Description description) {
         description.appendText("(");
         boolean seenFirst = false;
-        for (Matcher<T> matcher : matchers) {
+        for (Matcher<? extends T> matcher : matchers) {
             if (seenFirst) {
                 description.appendText(" or ");
             } else {
@@ -47,7 +47,7 @@ public class AnyOf<T> extends BaseMatcher<T> {
      * Evaluates to true if ANY of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> anyOf(Matcher<T>... matchers) {
+    public static <T> Matcher<T> anyOf(Matcher<? extends T>... matchers) {
         return anyOf(Arrays.asList(matchers));
     }
 
@@ -55,7 +55,7 @@ public class AnyOf<T> extends BaseMatcher<T> {
      * Evaluates to true if ANY of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> anyOf(Iterable<Matcher<T>> matchers) {
+    public static <T> Matcher<T> anyOf(Iterable<Matcher<? extends T>> matchers) {
         return new AnyOf<T>(matchers);
     }
 }

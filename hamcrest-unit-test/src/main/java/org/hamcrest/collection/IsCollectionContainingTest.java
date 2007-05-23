@@ -1,5 +1,6 @@
 package org.hamcrest.collection;
 
+import static org.hamcrest.collection.IsCollectionContaining.hasItem;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import static org.hamcrest.collection.IsCollectionContaining.hasItems;
@@ -11,27 +12,27 @@ import static java.util.Arrays.asList;
 public class IsCollectionContainingTest extends AbstractMatcherTest {
 
     protected Matcher<?> createMatcher() {
-        return IsCollectionContaining.hasItem(equalTo("irrelevant"));
+        return hasItem(equalTo("irrelevant"));
     }
 
     public void testMatchesACollectionThatContainsAnElementMatchingTheGivenMatcher() {
         assertMatches("should matches list that contains 'a'",
-                IsCollectionContaining.hasItem(equalTo("a")), asList("a", "b", "c"));
+                hasItem(equalTo("a")), asList("a", "b", "c"));
     }
 
     public void testDoesNotMatchCollectionThatDoesntContainAnElementMatchingTheGivenMatcher() {
         assertDoesNotMatch("should not matches list that doesn't contain 'a'",
-                IsCollectionContaining.hasItem(equalTo("a")), asList("b", "c"));
+                hasItem(equalTo("a")), asList("b", "c"));
         assertDoesNotMatch("should not matches empty list",
-                IsCollectionContaining.hasItem(equalTo("a")), new ArrayList<String>());
+                hasItem(equalTo("a")), new ArrayList<String>());
     }
 
     public void testDoesNotMatchNull() {
-        assertDoesNotMatch("should not matches null", IsCollectionContaining.hasItem(equalTo("a")), null);
+        assertDoesNotMatch("should not matches null", hasItem(equalTo("a")), null);
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("a collection containing \"a\"", IsCollectionContaining.hasItem(equalTo("a")));
+        assertDescription("a collection containing \"a\"", hasItem(equalTo("a")));
     }
 
     public void testMatchesAllItemsInCollection() {

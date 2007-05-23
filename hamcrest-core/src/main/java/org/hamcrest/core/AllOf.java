@@ -13,14 +13,14 @@ import java.util.Arrays;
  * matcher returns <code>false</code>.
  */
 public class AllOf<T> extends BaseMatcher<T> {
-    private final Iterable<Matcher<T>> matchers;
+    private final Iterable<Matcher<? extends T>> matchers;
 
-    public AllOf(Iterable<Matcher<T>> matchers) {
+    public AllOf(Iterable<Matcher<? extends T>> matchers) {
         this.matchers = matchers;
     }
 
     public boolean matches(Object o) {
-        for (Matcher<T> matcher : matchers) {
+        for (Matcher<? extends T> matcher : matchers) {
             if (!matcher.matches(o)) {
                 return false;
             }
@@ -31,7 +31,7 @@ public class AllOf<T> extends BaseMatcher<T> {
     public void describeTo(Description description) {
         description.appendText("(");
         boolean seenFirst = false;
-        for (Matcher<T> matcher : matchers) {
+        for (Matcher<? extends T> matcher : matchers) {
             if (seenFirst) {
                 description.appendText(" and ");
             } else {
@@ -43,18 +43,18 @@ public class AllOf<T> extends BaseMatcher<T> {
     }
 
     /**
-     * MM Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Matcher<T>... matchers) {
+    public static <T> Matcher<T> allOf(Matcher<? extends T>... matchers) {
         return allOf(Arrays.asList(matchers));
     }
 
     /**
-     * IM Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Iterable<Matcher<T>> matchers) {
+    public static <T> Matcher<T> allOf(Iterable<Matcher<? extends T>> matchers) {
         return new AllOf<T>(matchers);
     }
 
