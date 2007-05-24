@@ -47,7 +47,7 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
     /**
      * Method made final to prevent accidental override.
      * If you need to override this, there's no point on extending TypeSafeMatcher.
-     * Instead, implement the Matcher interface directly.
+     * Instead, extend the {@link BaseMatcher}.
      */
     @SuppressWarnings({"unchecked"})
     public final boolean matches(Object item) {
@@ -55,5 +55,4 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
                 && expectedType.isInstance(item)
                 && matchesSafely((T) item);
     }
-
 }
