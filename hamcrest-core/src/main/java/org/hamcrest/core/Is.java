@@ -27,10 +27,9 @@ public class Is<T> extends BaseMatcher<T> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("is ");
-        matcher.describeTo(description);
+        description.appendText("is ").appendDescriptionOf(matcher);
     }
-
+    
     /**
      * Decorates another Matcher, retaining the behavior but allowing tests
      * to be slightly more expressive.

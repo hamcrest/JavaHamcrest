@@ -11,10 +11,13 @@ public class MatcherAssert {
     public static <T> void assertThat(String reason, T actual, Matcher<T> matcher) {
         if (!matcher.matches(actual)) {
             Description description = new StringDescription();
-            description.appendText(reason);
-            description.appendText("\nExpected: ");
-            matcher.describeTo(description);
-            description.appendText("\n     got: ").appendValue(actual).appendText("\n");
+            description.appendText(reason)
+                       .appendText("\nExpected: ")
+                       .appendDescriptionOf(matcher)
+                       .appendText("\n     got: ")
+                       .appendValue(actual)
+                       .appendText("\n");
+            
             throw new java.lang.AssertionError(description.toString());
         }
     }

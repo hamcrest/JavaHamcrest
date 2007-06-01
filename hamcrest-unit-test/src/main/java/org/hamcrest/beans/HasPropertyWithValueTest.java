@@ -13,7 +13,6 @@ import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
 
 import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
@@ -52,11 +51,9 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
     public void testDescribeTo() {
         Matcher matcher = equalTo(true);
-        Description isEqualDescription = new StringDescription();
-        matcher.describeTo(isEqualDescription);
-
-        assertDescription("hasProperty(\"property\", " + isEqualDescription + ")",
-                hasProperty("property", matcher));
+        
+        assertDescription("hasProperty(\"property\", " + StringDescription.asString(matcher) + ")",
+                		  hasProperty("property", matcher));
     }
 
     public static class BeanWithoutInfo {

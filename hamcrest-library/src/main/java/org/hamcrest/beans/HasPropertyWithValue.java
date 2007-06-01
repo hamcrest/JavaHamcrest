@@ -102,7 +102,7 @@ public class HasPropertyWithValue<T> extends TypeSafeMatcher<T> {
         description.appendText("hasProperty(");
         description.appendValue(propertyName);
         description.appendText(", ");
-        value.describeTo(description);
+        description.appendDescriptionOf(value);
         description.appendText(")");
     }
 

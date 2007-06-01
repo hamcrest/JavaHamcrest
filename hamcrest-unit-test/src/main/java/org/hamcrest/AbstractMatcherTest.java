@@ -24,7 +24,7 @@ public abstract class AbstractMatcherTest extends TestCase {
 
     public void assertDescription(String expected, Matcher matcher) {
         Description description = new StringDescription();
-        matcher.describeTo(description);
+        description.appendDescriptionOf(matcher);
         assertEquals(expected, description.toString());
     }
 

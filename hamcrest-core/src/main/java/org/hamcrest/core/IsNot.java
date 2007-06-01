@@ -24,8 +24,7 @@ public class IsNot<T> extends BaseMatcher<T> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("not ");
-        matcher.describeTo(description);
+        description.appendText("not ").appendDescriptionOf(matcher);
     }
 
     /**

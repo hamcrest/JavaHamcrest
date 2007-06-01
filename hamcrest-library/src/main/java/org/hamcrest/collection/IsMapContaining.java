@@ -31,11 +31,11 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("map containing [");
-        keyMatcher.describeTo(description);
-        description.appendText("->");
-        valueMatcher.describeTo(description);
-        description.appendText("]");
+        description.appendText("map containing [")
+                   .appendDescriptionOf(keyMatcher)
+                   .appendText("->")
+			       .appendDescriptionOf(valueMatcher)
+			       .appendText("]");
     }
 
     @Factory

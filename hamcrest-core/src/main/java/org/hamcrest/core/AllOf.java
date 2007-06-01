@@ -29,17 +29,7 @@ public class AllOf<T> extends BaseMatcher<T> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("(");
-        boolean seenFirst = false;
-        for (Matcher<? extends T> matcher : matchers) {
-            if (seenFirst) {
-                description.appendText(" and ");
-            } else {
-                seenFirst = true;
-            }
-            matcher.describeTo(description);
-        }
-        description.appendText(")");
+    	description.appendList("(", " and ", ")", matchers);
     }
 
     /**

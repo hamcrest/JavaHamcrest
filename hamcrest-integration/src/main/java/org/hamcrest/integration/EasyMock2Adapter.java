@@ -39,5 +39,4 @@ public class EasyMock2Adapter implements IArgumentMatcher {
     public void appendTo(StringBuffer buffer) {
         hamcrestMatcher.describeTo(new StringDescription(buffer));
     }
-
 }

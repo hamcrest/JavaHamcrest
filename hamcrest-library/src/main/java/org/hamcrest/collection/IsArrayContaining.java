@@ -24,8 +24,9 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("an array containing ");
-        elementMatcher.describeTo(description);
+        description
+        	.appendText("an array containing ")
+        	.appendDescriptionOf(elementMatcher);
     }
 
     @Factory

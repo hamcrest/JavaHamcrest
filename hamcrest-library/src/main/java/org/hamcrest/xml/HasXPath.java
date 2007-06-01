@@ -57,11 +57,10 @@ public class HasXPath extends TypeSafeMatcher<Node> {
     public void describeTo(Description description) {
         description.appendText("an XML document with XPath ").appendText(xpathString);
         if (valueMatcher != null) {
-            description.appendText(" ");
-            valueMatcher.describeTo(description);
+            description.appendText(" ").appendDescriptionOf(valueMatcher);
         }
     }
-
+    
     @Factory
     public static Matcher<Node> hasXPath(String xPath, Matcher<String> valueMatcher) {
         return new HasXPath(xPath, valueMatcher);

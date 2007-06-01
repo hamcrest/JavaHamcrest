@@ -24,10 +24,8 @@ public class StringDescription extends BaseDescription {
      * @return
      *   The description of the object.
      */
-    public static String toString(SelfDescribing selfDescribing) {
-        StringDescription description = new StringDescription();
-        selfDescribing.describeTo(description);
-        return description.toString();
+    public static String toString(SelfDescribing value) {
+    	return new StringDescription().appendDescriptionOf(value).toString();
     }
 
     /**
@@ -36,7 +34,6 @@ public class StringDescription extends BaseDescription {
     public static String asString(SelfDescribing selfDescribing) {
         return toString(selfDescribing);
     }
-
 
     protected void append(String str) {
         try {

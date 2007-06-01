@@ -1,14 +1,13 @@
 package org.hamcrest.object;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.StringDescription;
-import org.hamcrest.AbstractMatcherTest;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.object.HasToString.hasToString;
+
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
 
 public class HasToStringTest extends AbstractMatcherTest {
 
@@ -36,9 +35,6 @@ public class HasToStringTest extends AbstractMatcherTest {
     }
 
     private String descriptionOf(Matcher matcher) {
-        Description description = new StringDescription();
-        matcher.describeTo(description);
-        return description.toString();
+    	return StringDescription.asString(matcher);
     }
-
 }

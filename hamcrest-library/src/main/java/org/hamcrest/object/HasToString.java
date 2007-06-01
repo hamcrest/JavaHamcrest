@@ -18,9 +18,10 @@ public class HasToString<T> extends BaseMatcher<T> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("asString(");
-        toStringMatcher.describeTo(description);
-        description.appendText(")");
+        description
+	        .appendText("asString(")
+	        .appendDescriptionOf(toStringMatcher)
+	        .appendText(")");
     }
     
     @Factory
