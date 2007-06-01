@@ -14,6 +14,11 @@ public interface Description {
     Description appendText(String text);
     
     /**
+     * Appends the description of a {@link SelfDescribing} value to this description.
+     */
+    Description appendDescriptionOf(SelfDescribing value);
+    
+    /**
      * Appends an arbitary value to the description.
      */
     Description appendValue(Object value);

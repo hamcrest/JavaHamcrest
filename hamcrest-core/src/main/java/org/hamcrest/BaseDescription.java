@@ -16,7 +16,12 @@ public abstract class BaseDescription implements Description {
         append(text);
         return this;
     }
-
+    
+    public Description appendDescriptionOf(SelfDescribing value) {
+    	value.describeTo(this);
+    	return this;
+    }
+    
     public Description appendValue(Object value) {
         if (value == null) {
             append("null");
@@ -66,14 +71,15 @@ public abstract class BaseDescription implements Description {
 
     private Description appendList(String start, String separator, String end, Iterator<? extends SelfDescribing> i) {
         boolean separate = false;
+        
         append(start);
         while (i.hasNext()) {
             if (separate) append(separator);
-            i.next().describeTo(this);
+            appendDescriptionOf(i.next());
             separate = true;
         }
         append(end);
-
+        
         return this;
     }
 
@@ -87,7 +93,7 @@ public abstract class BaseDescription implements Description {
     		append(str.charAt(i));
     	}
     }
-
+    
     protected abstract void append(char c);
 
     private void toJavaSyntax(String unformatted) {
