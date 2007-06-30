@@ -20,6 +20,9 @@
 * Relaxed isInstanceOf() matcher generic type so it can be used on any kind of
   object. e.g. assertThat(someUnknownObject, isInstanceOf(String.class));
 
+* Added any(Class<T>), null(Class<T>) and notNull(Class<T>) matchers, which returns
+  Matcher<T>. Helpful when the compiler struggles with type inference.
+
 * Modified anyOf() and allOf() to accept mixed-types.
 
 * TypeSafeMatcher.matchesSafely() is now public.

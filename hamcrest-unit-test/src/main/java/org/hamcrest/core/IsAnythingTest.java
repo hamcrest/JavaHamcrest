@@ -2,6 +2,7 @@
  */
 package org.hamcrest.core;
 
+import static org.hamcrest.core.IsAnything.any;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -26,5 +27,13 @@ public class IsAnythingTest extends AbstractMatcherTest {
     public void testCanOverrideDescription() {
         String description = "description";
         assertDescription(description, anything(description));
+    }
+
+    public void testSupportsStaticTyping() {
+        requiresStringMatcher(any(String.class));
+    }
+
+    private void requiresStringMatcher(Matcher<String> arg) {
+        // no-op
     }
 }

@@ -48,4 +48,12 @@ public class IsAnything<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> anything(String description) {
         return new IsAnything<T>(description);
     }
+
+    /**
+     * This matcher always evaluates to true. With type inference.
+     */
+    @Factory
+    public static <T> Matcher<T> any(@SuppressWarnings("unused")Class<T> type) {
+        return new IsAnything<T>();
+    }
 }

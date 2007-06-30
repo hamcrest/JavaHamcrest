@@ -35,5 +35,21 @@ public class IsNull<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> notNullValue() {
         return not(IsNull.<T>nullValue());
     }
+
+    /**
+     * Matches if value is null. With type inference.
+     */
+    @Factory
+    public static <T> Matcher<T> nullValue(@SuppressWarnings("unused") Class<T> type) {
+        return nullValue();
+    }
+
+    /**
+     * Matches if value is not null. With type inference.
+     */
+    @Factory
+    public static <T> Matcher<T> notNullValue(@SuppressWarnings("unused") Class<T> type) {
+        return notNullValue();
+    }
 }
 
