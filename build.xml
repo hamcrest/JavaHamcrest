@@ -179,7 +179,7 @@
                 <include name="lib/**"/>
                 <include name="*.txt"/>
                 <include name="build.xml"/>
-                <include name="matchers.xml"/>
+                <include name="*matchers.xml"/>
             </zipfileset>
             <zipfileset dir="build" prefix="hamcrest-${version}">
                 <include name="hamcrest-core-${version}.jar"/>
@@ -195,7 +195,7 @@
                 <include name="lib/**"/>
                 <include name="*.txt"/>
                 <include name="build.xml"/>
-                <include name="matchers.xml"/>
+                <include name="*matchers.xml"/>
             </tarfileset>
             <tarfileset dir="build" prefix="hamcrest-${version}">
                 <include name="hamcrest-core-${version}.jar"/>

@@ -1,4 +1,6 @@
-== Version 1.1: In Development ==
+== Version 1.2: In Development ==
+
+== Version 1.1: Released Jun 30 2007 ==
 
 * Hamcrest Generator now includes JavaDoc and parameter names in generated code
   by using QDox to parse the source code.
