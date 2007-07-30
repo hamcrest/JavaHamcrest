@@ -40,7 +40,7 @@ public class MatcherAssertTest extends TestCase {
     }
     
     public void testCanTestBooleanDirectly() {
-    	assertThat("reason message", true);
+    	assertThat("success reason message", true);
     	
     	try {
     		assertThat("failing reason message", false);

@@ -18,13 +18,13 @@ public class MatcherAssert {
                        .appendValue(actual)
                        .appendText("\n");
             
-            throw new java.lang.AssertionError(description.toString());
+            throw new AssertionError(description.toString());
         }
     }
     
     public static void assertThat(String reason, boolean assertion) {
     	if (!assertion) {
-    		throw new java.lang.AssertionError(reason);
+    		throw new AssertionError(reason);
     	}
     }
 }
