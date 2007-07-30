@@ -175,7 +175,7 @@
             description="Package for distribution">
         <zip zipfile="build/hamcrest-${version}.zip">
             <zipfileset dir="." prefix="hamcrest-${version}">
-                <include name="src/**"/>
+                <include name="hamcrest-*/**"/>
                 <include name="lib/**"/>
                 <include name="*.txt"/>
                 <include name="build.xml"/>
