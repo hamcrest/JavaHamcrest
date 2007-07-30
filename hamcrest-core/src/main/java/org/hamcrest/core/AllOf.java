@@ -13,9 +13,9 @@ import java.util.Arrays;
  * matcher returns <code>false</code>.
  */
 public class AllOf<T> extends BaseMatcher<T> {
-    private final Iterable<Matcher<? extends T>> matchers;
+    private final Iterable<? extends Matcher<? extends T>> matchers;
 
-    public AllOf(Iterable<Matcher<? extends T>> matchers) {
+    public AllOf(Iterable<? extends Matcher<? extends T>> matchers) {
         this.matchers = matchers;
     }
 
@@ -44,8 +44,7 @@ public class AllOf<T> extends BaseMatcher<T> {
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Iterable<Matcher<? extends T>> matchers) {
+    public static <T> Matcher<T> allOf(Iterable<? extends Matcher<? extends T>> matchers) {
         return new AllOf<T>(matchers);
     }
-
 }

@@ -14,9 +14,9 @@ import java.util.Arrays;
  */
 public class AnyOf<T> extends BaseMatcher<T> {
 
-    private final Iterable<Matcher<? extends T>> matchers;
+    private final Iterable<? extends Matcher<? extends T>> matchers;
 
-    public AnyOf(Iterable<Matcher<? extends T>> matchers) {
+    public AnyOf(Iterable<? extends Matcher<? extends T>> matchers) {
         this.matchers = matchers;
     }
 
@@ -45,7 +45,7 @@ public class AnyOf<T> extends BaseMatcher<T> {
      * Evaluates to true if ANY of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> anyOf(Iterable<Matcher<? extends T>> matchers) {
+    public static <T> Matcher<T> anyOf(Iterable<? extends Matcher<? extends T>> matchers) {
         return new AnyOf<T>(matchers);
     }
 }
