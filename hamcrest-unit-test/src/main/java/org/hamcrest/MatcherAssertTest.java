@@ -16,7 +16,10 @@ public class MatcherAssertTest extends TestCase {
         }
         catch (AssertionError e) {
             assertEquals(expectedMessage, e.getMessage());
+            return;
         }
+        
+        fail("should have failed");
     }
 
     public void testDescriptionCanBeElided() {
@@ -30,7 +33,23 @@ public class MatcherAssertTest extends TestCase {
         }
         catch (AssertionError e) {
             assertEquals(expectedMessage, e.getMessage());
+            return;
         }
+        
+        fail("should have failed");
+    }
+    
+    public void testCanTestBooleanDirectly() {
+    	assertThat("reason message", true);
+    	
+    	try {
+    		assertThat("failing reason message", false);
+    	}
+    	catch (AssertionError e) {
+    		assertEquals("failing reason message", e.getMessage());
+    		return;
+    	}
+    	
+    	fail("should have failed");
     }
 }
-

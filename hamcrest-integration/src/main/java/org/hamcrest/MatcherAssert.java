@@ -21,4 +21,10 @@ public class MatcherAssert {
             throw new java.lang.AssertionError(description.toString());
         }
     }
+    
+    public static void assertThat(String reason, boolean assertion) {
+    	if (!assertion) {
+    		throw new java.lang.AssertionError(reason);
+    	}
+    }
 }
