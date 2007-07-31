@@ -3,12 +3,13 @@
 package org.hamcrest.core;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
 import static org.hamcrest.core.IsNot.not;
 
-public class IsNotTest extends AbstractMatcherTest {
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
+import org.hamcrest.introspection.Modifier;
 
+public class IsNotTest extends AbstractMatcherTest {
     protected Matcher<?> createMatcher() {
         return not("something");
     }
@@ -25,5 +26,11 @@ public class IsNotTest extends AbstractMatcherTest {
         assertDoesNotMatch("should not match", not("B"), "B");
         assertDescription("not \"A\"", not("A"));
     }
-
+    
+    public void testCanBeIntrospected() {
+    	Matcher<String> complemented = equalTo("A");
+		Matcher<String> complement = not(complemented);
+		
+		assertSame(complemented, ((Modifier)complement).modified());
+    }
 }

@@ -4,6 +4,7 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Matcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.introspection.Combination;
 
 import java.util.Arrays;
 
@@ -12,7 +13,7 @@ import java.util.Arrays;
  * shortcut, so that the second matcher is not called if the first
  * matcher returns <code>false</code>.
  */
-public class AllOf<T> extends BaseMatcher<T> {
+public class AllOf<T> extends BaseMatcher<T> implements Combination {
     private final Iterable<? extends Matcher<? extends T>> matchers;
 
     public AllOf(Iterable<? extends Matcher<? extends T>> matchers) {
@@ -31,8 +32,12 @@ public class AllOf<T> extends BaseMatcher<T> {
     public void describeTo(Description description) {
     	description.appendList("(", " and ", ")", matchers);
     }
+    
+	public Iterable<? extends Matcher<?>> combined() {
+		return matchers;
+	}
 
-    /**
+	/**
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory

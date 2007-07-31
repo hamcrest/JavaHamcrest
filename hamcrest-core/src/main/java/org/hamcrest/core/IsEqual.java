@@ -2,19 +2,20 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.Factory;
-import org.hamcrest.BaseMatcher;
-
 import java.lang.reflect.Array;
+
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.introspection.Comparison;
 
 
 /**
  * Is the value equal to another value, as tested by the
  * {@link java.lang.Object#equals} invokedMethod?
  */
-public class IsEqual<T> extends BaseMatcher<T> {
+public class IsEqual<T> extends BaseMatcher<T> implements Comparison {
     private final Object object;
 
     public IsEqual(T equalArg) {
@@ -28,8 +29,12 @@ public class IsEqual<T> extends BaseMatcher<T> {
     public void describeTo(Description description) {
         description.appendValue(object);
     }
+    
+	public Object operand() {
+		return object;
+	}
 
-    private static boolean areEqual(Object o1, Object o2) {
+	private static boolean areEqual(Object o1, Object o2) {
         if (o1 == null || o2 == null) {
             return o1 == null && o2 == null;
         } else if (isArray(o1)) {

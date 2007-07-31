@@ -1,19 +1,19 @@
 package org.hamcrest.core;
 
+import java.util.Arrays;
+
 import org.hamcrest.BaseMatcher;
-import org.hamcrest.Matcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
-
-import java.util.Arrays;
+import org.hamcrest.Matcher;
+import org.hamcrest.introspection.Combination;
 
 /**
  * Calculates the logical disjunction of two matchers. Evaluation is
  * shortcut, so that the second matcher is not called if the first
  * matcher returns <code>true</code>.
  */
-public class AnyOf<T> extends BaseMatcher<T> {
-
+public class AnyOf<T> extends BaseMatcher<T> implements Combination {
     private final Iterable<? extends Matcher<? extends T>> matchers;
 
     public AnyOf(Iterable<? extends Matcher<? extends T>> matchers) {
@@ -28,12 +28,16 @@ public class AnyOf<T> extends BaseMatcher<T> {
         }
         return false;
     }
-
+    
     public void describeTo(Description description) {
     	description.appendList("(", " or ", ")", matchers);
     }
-
-    /**
+    
+	public Iterable<? extends Matcher<?>> combined() {
+		return matchers;
+	}
+	
+	/**
      * Evaluates to true if ANY of the passed in matchers evaluate to true.
      */
     @Factory
