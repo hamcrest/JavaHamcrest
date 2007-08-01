@@ -8,8 +8,7 @@ import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.hamcrest.core.IsNull.notNullValue;
-import static org.hamcrest.core.IsNull.*;
-import static org.hamcrest.core.IsAnything.any;
+
 
 public class IsNullTest extends AbstractMatcherTest {
 

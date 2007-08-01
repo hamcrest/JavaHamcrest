@@ -29,12 +29,12 @@ public class HasToStringTest extends AbstractMatcherTest {
 
     public void testHasReadableDescription() {
         Matcher<String> toStringMatcher = equalTo(TO_STRING_RESULT);
-        Matcher matcher = hasToString(toStringMatcher);
+        Matcher<Matcher<String>> matcher = hasToString(toStringMatcher);
 
         assertEquals("asString(" + descriptionOf(toStringMatcher) + ")", descriptionOf(matcher));
     }
 
-    private String descriptionOf(Matcher matcher) {
+    private String descriptionOf(Matcher<?> matcher) {
     	return StringDescription.asString(matcher);
     }
 }

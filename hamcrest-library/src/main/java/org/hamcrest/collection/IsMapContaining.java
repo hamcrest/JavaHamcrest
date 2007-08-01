@@ -4,7 +4,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsAnything;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 

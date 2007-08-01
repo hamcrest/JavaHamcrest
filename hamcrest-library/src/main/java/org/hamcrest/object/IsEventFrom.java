@@ -14,10 +14,10 @@ import java.util.EventObject;
  * Tests if the value is an event announced by a specific object.
  */
 public class IsEventFrom extends TypeSafeMatcher<EventObject> {
-    private final Class eventClass;
+    private final Class<?> eventClass;
     private final Object source;
 
-    public IsEventFrom(Class eventClass, Object source) {
+    public IsEventFrom(Class<?> eventClass, Object source) {
         this.eventClass = eventClass;
         this.source = source;
     }

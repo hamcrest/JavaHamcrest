@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
  */
 public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
 
-    private Class expectedType;
+    private Class<?> expectedType;
 
     /**
      * Subclasses should implement this. The item will already have been checked for

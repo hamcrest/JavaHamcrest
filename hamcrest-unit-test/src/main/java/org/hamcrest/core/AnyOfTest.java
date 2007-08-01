@@ -7,7 +7,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.introspection.Combination;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
