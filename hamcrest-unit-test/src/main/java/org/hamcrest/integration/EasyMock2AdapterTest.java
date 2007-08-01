@@ -19,7 +19,7 @@ public class EasyMock2AdapterTest extends TestCase {
     }
 
     public void testDelegatesDescriptionToUnderlyingMatcher() {
-        IArgumentMatcher easyMockMatcher = new EasyMock2Adapter(new BaseMatcher() {
+        IArgumentMatcher easyMockMatcher = new EasyMock2Adapter(new BaseMatcher<Object>() {
             public boolean matches(Object o) {
                 return false;
             }

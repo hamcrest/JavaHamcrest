@@ -22,10 +22,10 @@ public abstract class AbstractMatcherTest extends TestCase {
         assertFalse(message, c.matches(arg));
     }
 
-    public void assertDescription(String expected, Matcher matcher) {
+    public void assertDescription(String expected, Matcher<?> matcher) {
         Description description = new StringDescription();
         description.appendDescriptionOf(matcher);
-        assertEquals(expected, description.toString());
+        assertEquals("Expected description", expected, description.toString());
     }
 
     public void testIsNullSafe() {

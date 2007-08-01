@@ -48,23 +48,4 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
         return hasEntry(equalTo(key), equalTo(value));
     }
 
-    @Factory
-    public static <K,V> Matcher<Map<K,V>> hasKey(Matcher<K> keyMatcher) {
-        return hasEntry(keyMatcher, IsAnything.<V>anything());
-    }
-
-    @Factory
-    public static <K,V> Matcher<Map<K,V>> hasKey(K key) {
-        return hasKey(equalTo(key));
-    }
-
-    @Factory
-    public static <K,V> Matcher<Map<K,V>> hasValue(Matcher<V> valueMatcher) {
-        return hasEntry(IsAnything.<K>anything(), valueMatcher);
-    }
-
-    @Factory
-    public static <K,V> Matcher<Map<K,V>> hasValue(V value) {
-        return hasValue(equalTo(value));
-    }
 }

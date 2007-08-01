@@ -248,7 +248,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
 
     public static class SubclassOfMatcher {
         @Factory
-        public static BaseMatcher subclassMethod() {
+        public static BaseMatcher<?> subclassMethod() {
             return null;
         }
     }

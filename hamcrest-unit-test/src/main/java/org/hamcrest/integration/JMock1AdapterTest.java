@@ -19,7 +19,7 @@ public class JMock1AdapterTest extends TestCase {
     }
 
     public void testDelegatesDescriptionToUnderlyingMatcher() {
-        Constraint jMockConstraint = new JMock1Adapter(new BaseMatcher() {
+        Constraint jMockConstraint = new JMock1Adapter(new BaseMatcher<Object>() {
             public boolean matches(Object o) {
                 return false;
             }

@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 public class BaseMatcherTest extends TestCase {
 
     public void testDescribesItselfWithToStringMethod() {
-        Matcher someMatcher = new BaseMatcher() {
+        Matcher<Object> someMatcher = new BaseMatcher<Object>() {
             public boolean matches(Object item) {
                 throw new UnsupportedOperationException();
             }
