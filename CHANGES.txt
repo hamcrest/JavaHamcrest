@@ -4,6 +4,10 @@
   generics bug in hasKey and hasValue static factories previously declared
   in IsMapContaining (ngd)
 
+* Added IsCollectionOnlyContaining which matches collections with
+  items only matching a specified item. E.g onlyContains(3,4,5) or
+  onlyContains(lessThan(9))
+
 == Version 1.1: Released Jun 30 2007 ==
 
 * Hamcrest Generator now includes JavaDoc and parameter names in generated code
