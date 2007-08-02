@@ -15,7 +15,9 @@
     <!-- Collection -->
     <factory class="org.hamcrest.collection.IsArray"/>
     <factory class="org.hamcrest.collection.IsArrayContaining"/>
+    <factory class="org.hamcrest.collection.IsArrayOnlyContaining"/>
     <factory class="org.hamcrest.collection.IsCollectionContaining"/>
+    <factory class="org.hamcrest.collection.IsCollectionOnlyContaining"/>
     <factory class="org.hamcrest.collection.IsMapContaining"/>
     <factory class="org.hamcrest.collection.IsMapContainingKey"/>
     <factory class="org.hamcrest.collection.IsMapContainingValue"/>

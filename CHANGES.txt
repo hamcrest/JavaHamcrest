@@ -4,9 +4,9 @@
   generics bug in hasKey and hasValue static factories previously declared
   in IsMapContaining (ngd)
 
-* Added IsCollectionOnlyContaining which matches collections with
-  items only matching a specified item. E.g onlyContains(3,4,5) or
-  onlyContains(lessThan(9))
+* Added IsCollectionOnlyContaining and IsArrayOnlyContaining which matches 
+  collections (and arrays) where all match a given matcher. E.g onlyContains(3,4,5) 
+  or onlyContains(lessThan(9))
 
 == Version 1.1: Released Jun 30 2007 ==
 
