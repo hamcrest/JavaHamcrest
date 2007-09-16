@@ -25,7 +25,7 @@
     
     <!-- Number -->
     <factory class="org.hamcrest.number.IsCloseTo"/>
-    <factory class="org.hamcrest.number.OrderingComparisons"/>
+    <factory class="org.hamcrest.number.OrderingComparison"/>
 
     <!-- Text -->
     <factory class="org.hamcrest.text.IsEqualIgnoringCase"/>

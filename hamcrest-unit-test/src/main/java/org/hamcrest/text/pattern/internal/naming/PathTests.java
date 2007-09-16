@@ -1,7 +1,5 @@
 package org.hamcrest.text.pattern.internal.naming;
 
-import org.hamcrest.text.pattern.internal.naming.Path;
-
 import junit.framework.TestCase;
 
 public class PathTests extends TestCase {

@@ -1,11 +1,9 @@
 package org.hamcrest.collection;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import static org.hamcrest.collection.IsArrayOnlyContaining.isArrayOnlyContaining;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import static org.hamcrest.collection.IsArrayOnlyContaining.isArrayOnlyContaining;
 
 public class IsArrayOnlyContainingTest extends AbstractMatcherTest {
 

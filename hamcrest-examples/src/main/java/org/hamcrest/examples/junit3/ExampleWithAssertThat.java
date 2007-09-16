@@ -1,8 +1,10 @@
 package org.hamcrest.examples.junit3;
 
-import junit.framework.TestCase;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import junit.framework.TestCase;
 
 /**
  * Demonstrates how Hamcrest matchers can be used with assertThat()

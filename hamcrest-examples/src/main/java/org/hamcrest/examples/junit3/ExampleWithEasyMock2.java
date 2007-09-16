@@ -1,7 +1,10 @@
 package org.hamcrest.examples.junit3;
 
-import static org.easymock.EasyMock.*;
-import static org.hamcrest.EasyMock2Matchers.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.hamcrest.EasyMock2Matchers.equalTo;
 import junit.framework.TestCase;
 
 /**

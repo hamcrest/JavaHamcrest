@@ -1,6 +1,7 @@
 package org.hamcrest.examples.junit3;
 
-import static org.hamcrest.JMock1Matchers.*;
+import static org.hamcrest.JMock1Matchers.equalTo;
+
 import org.jmock.Mock;
 import org.jmock.MockObjectTestCase;
 

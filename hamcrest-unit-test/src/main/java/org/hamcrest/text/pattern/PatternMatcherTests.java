@@ -21,10 +21,6 @@ import static org.hamcrest.text.pattern.Patterns.valueOf;
 import static org.hamcrest.text.pattern.Patterns.zeroOrMore;
 import junit.framework.TestCase;
 
-import org.hamcrest.text.pattern.Parse;
-import org.hamcrest.text.pattern.PatternMatchException;
-import org.hamcrest.text.pattern.PatternMatcher;
-
 public class PatternMatcherTests extends TestCase {
 	public void testMatchesPlainText() {
 		PatternMatcher matcher = new PatternMatcher(
