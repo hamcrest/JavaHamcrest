@@ -1,19 +1,20 @@
 package org.hamcrest.collection;
 
 import static org.hamcrest.core.AllOf.allOf;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.Factory;
-import org.hamcrest.TypeSafeMatcher;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-import java.util.Collection;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
-    private final Matcher<? extends T> elementMatcher;
+    private final Matcher<? super T> elementMatcher;
 
-    public IsCollectionContaining(Matcher<? extends T> elementMatcher) {
+    public IsCollectionContaining(Matcher<? super T> elementMatcher) {
         this.elementMatcher = elementMatcher;
     }
 
@@ -33,7 +34,7 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
     }
 
     @Factory
-    public static <T> Matcher<Iterable<T>> hasItem(Matcher<? extends T> elementMatcher) {
+    public static <T> Matcher<Iterable<T>> hasItem(Matcher<? super T> elementMatcher) {
         return new IsCollectionContaining<T>(elementMatcher);
     }
 
@@ -43,23 +44,25 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
     }
 
     @Factory
-    public static <T> Matcher<Iterable<T>> hasItems(Matcher<? extends T>... elementMatchers) {
-        Collection<Matcher<? extends Iterable<T>>> all
-                = new ArrayList<Matcher<? extends Iterable<T>>>(elementMatchers.length);
-        for (Matcher<? extends T> elementMatcher : elementMatchers) {
-            all.add(hasItem(elementMatcher));
+    public static <T> Matcher<Iterable<T>> hasItems(Matcher<? super T>... elementMatchers) {
+        List<Matcher<? super Iterable<T>>> all = new ArrayList<Matcher<? super Iterable<T>>>(elementMatchers.length);
+        
+        for (Matcher<? super T> elementMatcher : elementMatchers) {
+            Matcher<? super Iterable<T>> itemMatcher = hasItem(elementMatcher);
+            all.add(itemMatcher);
         }
+        
         return allOf(all);
     }
-
+    
     @Factory
     public static <T> Matcher<Iterable<T>> hasItems(T... elements) {
-        Collection<Matcher<? extends Iterable<T>>> all
-                = new ArrayList<Matcher<? extends Iterable<T>>>(elements.length);
+        List<Matcher<? super Iterable<T>>> all = new ArrayList<Matcher<? super Iterable<T>>>(elements.length);
+        
         for (T element : elements) {
             all.add(hasItem(element));
         }
+        
         return allOf(all);
     }
-
 }

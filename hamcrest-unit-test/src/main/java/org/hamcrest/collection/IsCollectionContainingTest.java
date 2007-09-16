@@ -11,21 +11,26 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 public class IsCollectionContainingTest extends AbstractMatcherTest {
-
     protected Matcher<?> createMatcher() {
         return hasItem(equalTo("irrelevant"));
     }
 
     public void testMatchesACollectionThatContainsAnElementMatchingTheGivenMatcher() {
-        assertMatches("should matches list that contains 'a'",
-                hasItem(equalTo("a")), asList("a", "b", "c"));
+        Matcher<Iterable<String>> itemMatcher = hasItem(equalTo("a"));
+        
+        assertMatches("should match list that contains 'a'",
+                itemMatcher, asList("a", "b", "c"));
     }
 
     public void testDoesNotMatchCollectionThatDoesntContainAnElementMatchingTheGivenMatcher() {
-        assertDoesNotMatch("should not matches list that doesn't contain 'a'",
-                hasItem(equalTo("a")), asList("b", "c"));
-        assertDoesNotMatch("should not matches empty list",
-                hasItem(equalTo("a")), new ArrayList<String>());
+        final Matcher<Iterable<String>> matcher1 = hasItem(equalTo("a"));
+        assertDoesNotMatch("should not match list that doesn't contain 'a'",
+                matcher1, asList("b", "c"));
+        
+        
+        final Matcher<Iterable<String>> matcher2 = hasItem(equalTo("a"));
+        assertDoesNotMatch("should not match the empty list",
+                matcher2, new ArrayList<String>());
     }
 
     public void testDoesNotMatchNull() {
@@ -37,20 +42,29 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     }
 
     public void testMatchesAllItemsInCollection() {
-        assertMatches("should match list containing all of items",
-                hasItems(equalTo("a"), equalTo("b"), equalTo("c")),
+        final Matcher<Iterable<String>> matcher1 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));
+        assertMatches("should match list containing all items",
+                matcher1,
                 asList("a", "b", "c"));
-        assertMatches("should match list containing all of items (without matchers)",
-                hasItems("a", "b", "c"),
+        
+        final Matcher<Iterable<String>> matcher2 = hasItems("a", "b", "c");
+        assertMatches("should match list containing all items (without matchers)",
+                matcher2,
                 asList("a", "b", "c"));
-        assertMatches("should match list containing all of items in any order",
-                hasItems(equalTo("a"), equalTo("b"), equalTo("c")),
+        
+        final Matcher<Iterable<String>> matcher3 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));
+        assertMatches("should match list containing all items in any order",
+                matcher3,
                 asList("c", "b", "a"));
-        assertMatches("should match list containing all of items plus others",
-                hasItems(equalTo("a"), equalTo("b"), equalTo("c")),
+        
+        final Matcher<Iterable<String>> matcher4 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));
+        assertMatches("should match list containing all items plus others",
+                matcher4,
                 asList("e", "c", "b", "a", "d"));
+        
+        final Matcher<Iterable<String>> matcher5 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));
         assertDoesNotMatch("should not match list unless it contains all items",
-                hasItems(equalTo("a"), equalTo("b"), equalTo("c")),
+                matcher5,
                 asList("e", "c", "b", "d")); // 'a' missing
     }
 }

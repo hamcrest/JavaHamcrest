@@ -1,9 +1,9 @@
 package org.hamcrest.core;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.AllOf.allOf;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
 
 import java.util.Iterator;
 
@@ -12,11 +12,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.introspection.Combination;
 
 public class AllOfTest extends AbstractMatcherTest {
-
-	protected Matcher<?> createMatcher() {
-        return allOf(equalTo("irrelevant"), equalTo("irrelevant"));
-    }
-
     public void testEvaluatesToTheTheLogicalConjunctionOfTwoOtherMatchers() {
         assertThat("good", allOf(equalTo("good"), equalTo("good")));
 
@@ -31,16 +26,13 @@ public class AllOfTest extends AbstractMatcherTest {
     }
     
     public void testSupportsMixedTypes() {
-        assertThat(new SampleBaseClass("good"), not(allOf(
+        final Matcher<SampleSubClass> all = allOf(
                 equalTo(new SampleBaseClass("bad")),
                 equalTo(new SampleBaseClass("good")),
-                equalTo(new SampleSubClass("ugly")))
-        ));
-        assertThat(new SampleSubClass("good"), not(allOf(
-                equalTo(new SampleBaseClass("bad")),
-                equalTo(new SampleBaseClass("good")),
-                equalTo(new SampleSubClass("ugly")))
-        ));
+                equalTo(new SampleSubClass("ugly")));
+        final Matcher<SampleSubClass> negated = not(all);
+        
+        assertThat(new SampleSubClass("good"), negated);
     }
     
     public void testCanIntrospectOnTheCombinedMatchers() {
@@ -55,5 +47,9 @@ public class AllOfTest extends AbstractMatcherTest {
     	assertSame(m2, iterator.next());
     	assertSame(m3, iterator.next());
     	assertFalse(iterator.hasNext());
+    }
+
+    protected Matcher<?> createMatcher() {
+        return allOf(equalTo("irrelevant"), equalTo("irrelevant"));
     }
 }

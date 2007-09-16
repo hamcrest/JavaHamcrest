@@ -1,15 +1,15 @@
 package org.hamcrest.core;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.AnyOf.anyOf;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
+
 import java.util.Iterator;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.hamcrest.introspection.Combination;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.AnyOf.anyOf;
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNot.not;
 
 public class AnyOfTest extends AbstractMatcherTest {
 
@@ -31,16 +31,13 @@ public class AnyOfTest extends AbstractMatcherTest {
     }
 
     public void testSupportsMixedTypes() {
-        assertThat(new SampleBaseClass("good"), anyOf(
+        final Matcher<SampleSubClass> combined = anyOf(
                 equalTo(new SampleBaseClass("bad")),
                 equalTo(new SampleBaseClass("good")),
                 equalTo(new SampleSubClass("ugly"))
-        ));
-        assertThat(new SampleSubClass("good"), anyOf(
-                equalTo(new SampleBaseClass("bad")),
-                equalTo(new SampleBaseClass("good")),
-                equalTo(new SampleSubClass("ugly"))
-        ));
+        );
+        
+        assertThat(new SampleSubClass("good"), combined);
     }
     
     public void testCanIntrospectOnTheCombinedMatchers() {

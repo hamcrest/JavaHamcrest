@@ -70,11 +70,11 @@
     <target name="library"
             depends="core,generator"
             description="Build library of matchers">
+        <mkdir dir="build/temp/hamcrest-library/generated-code"/>
         <java-to-jar srcdir="hamcrest-library/src/main/java"
                      destjar="build/hamcrest-library-${version}.jar"
                      classpath="build/hamcrest-core-${version}.jar"/>
         <!-- Generate one class with all static imports -->
-        <mkdir dir="build/temp/hamcrest-library/generated-code"/>
         <java classname="org.hamcrest.generator.config.XmlConfigurator"
               fork="yes"
               failonerror="yes"

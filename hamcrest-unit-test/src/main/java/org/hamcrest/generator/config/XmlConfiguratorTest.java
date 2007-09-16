@@ -1,19 +1,20 @@
 package org.hamcrest.generator.config;
 
-import junit.framework.TestCase;
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsCollectionContaining.hasItems;
-import static org.hamcrest.core.IsEqual.equalTo;
-import org.hamcrest.generator.FactoryMethod;
-import org.hamcrest.generator.FactoryWriter;
-import org.hamcrest.generator.SugarConfiguration;
-import org.xml.sax.InputSource;
+import static org.hamcrest.Matchers.hasItem;
 
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import junit.framework.TestCase;
+
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.generator.FactoryMethod;
+import org.hamcrest.generator.FactoryWriter;
+import org.hamcrest.generator.SugarConfiguration;
+import org.xml.sax.InputSource;
 
 public class XmlConfiguratorTest extends TestCase {
 
@@ -34,11 +35,11 @@ public class XmlConfiguratorTest extends TestCase {
                 "</matchers>"));
 
         assertThat(sugarConfiguration.factoryMethods(),
-                hasItems(
-                        equalTo(new FactoryMethod(SomeMatcher.class.getName(), "matcher1")),
-                        equalTo(new FactoryMethod(SomeMatcher.class.getName(), "matcher2")),
-                        equalTo(new FactoryMethod(AnotherMatcher.class.getName(), "matcher3"))
-                ));
+            hasItem(new FactoryMethod(SomeMatcher.class.getName(), "matcher1")));
+        assertThat(sugarConfiguration.factoryMethods(),
+            hasItem(new FactoryMethod(SomeMatcher.class.getName(), "matcher2")));
+        assertThat(sugarConfiguration.factoryMethods(),
+            hasItem(new FactoryMethod(AnotherMatcher.class.getName(), "matcher3")));
     }
 
     private InputSource createXml(String xml) {

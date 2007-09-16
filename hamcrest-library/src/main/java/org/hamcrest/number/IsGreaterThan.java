@@ -8,6 +8,7 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Is the value less than or greater than another {@link java.lang.Comparable} value?
  */
+@Deprecated
 public class IsGreaterThan<T extends Comparable<T>> extends TypeSafeMatcher<T> {
     private final Comparable<T> compareTo;
     

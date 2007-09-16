@@ -20,25 +20,18 @@ public class OrderingComparisonsTest extends AbstractMatcherTest {
     }
 
     public void testComparesObjectsForLessThan() {
-        assertThat(2, not(lessThan(1)));
+        assertThat(2, lessThan(3));
         assertThat(0, lessThan(1));
     }
 
     public void testAllowsForInclusiveComparisons() {
-        assertThat(1, not(lessThan(1)));
-        assertThat(1, not(greaterThan(1)));
-
         assertThat(1, lessThanOrEqualTo(1));
         assertThat(1, greaterThanOrEqualTo(1));
     }
 
     public void testSupportsDifferentTypesOfComparableObjects() {
         assertThat(1.1, greaterThan(1.0));
-        assertThat(1.0, not(greaterThan(1.0)));
-        assertThat(0.9, not(greaterThan(1.0)));
 
         assertThat("cc", greaterThan("bb"));
-        assertThat("bb", not(greaterThan("bb")));
-        assertThat("aa", not(greaterThan("bb")));
     }
 }

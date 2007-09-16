@@ -5,6 +5,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
@@ -26,9 +27,9 @@ import org.hamcrest.TypeSafeMatcher;
  */
 public class IsCollectionOnlyContaining<T> extends TypeSafeMatcher<Collection<T>> {
 
-	private final Matcher<T> matcher;
+	private final Matcher<? super T> matcher;
 
-	public IsCollectionOnlyContaining(Matcher<T> matcher) {
+	public IsCollectionOnlyContaining(Matcher<? super T> matcher) {
 		this.matcher = matcher;
 	}
 	
@@ -53,7 +54,7 @@ public class IsCollectionOnlyContaining<T> extends TypeSafeMatcher<Collection<T>
 	
 	@Factory
 	public static <T> Matcher<Collection<T>> onlyContains(T... items) {
-		Collection<Matcher<T>> matchers = new ArrayList<Matcher<T>>();
+		List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
 		for (T item : items) {
 			matchers.add(equalTo(item));
 		}
@@ -61,7 +62,7 @@ public class IsCollectionOnlyContaining<T> extends TypeSafeMatcher<Collection<T>
 	}
 
 	@Factory 
-	public static <T> Matcher<Collection<T>> onlyContains(Matcher<T>... matchers) {		
+	public static <T> Matcher<Collection<T>> onlyContains(Matcher<? super T>... matchers) {		
 		return new IsCollectionOnlyContaining<T>(anyOf(matchers));
 	}
 }
