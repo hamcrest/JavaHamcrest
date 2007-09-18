@@ -3,31 +3,29 @@ package org.hamcrest.core;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.introspection.Combination;
 
-abstract class ShortcutCombination<T> extends BaseMatcher<T> implements Combination {
+abstract class ShortcutCombination<T> extends BaseMatcher<T> {
     private final Iterable<Matcher<? super T>> matchers;
 
     public ShortcutCombination(Iterable<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }
-
-    public boolean matches(Object o) {
+    
+    public abstract boolean matches(Object o);
+    
+    public abstract void describeTo(Description description);
+    
+    
+    protected boolean matches(Object o, boolean shortcut) {
         for (Matcher<? super T> matcher : matchers) {
-            if (matcher.matches(o) == shortcut()) {
-                return shortcut();
+            if (matcher.matches(o) == shortcut) {
+                return shortcut;
             }
         }
-        return !shortcut();
+        return !shortcut;
     }
     
-    protected abstract boolean shortcut();
-    
-    public void describeTo(Description description) {
-        description.appendList("(", " and ", ")", matchers);
-    }
-    
-    public Iterable<? extends Matcher<? super T>> combined() {
-        return matchers;
+    public void describeTo(Description description, String operator) {
+        description.appendList("(", " " + operator + " ", ")", matchers);
     }
 }

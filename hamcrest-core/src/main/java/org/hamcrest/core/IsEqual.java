@@ -8,14 +8,13 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.introspection.Comparison;
 
 
 /**
  * Is the value equal to another value, as tested by the
  * {@link java.lang.Object#equals} invokedMethod?
  */
-public class IsEqual<T> extends BaseMatcher<T> implements Comparison {
+public class IsEqual<T> extends BaseMatcher<T> {
     private final Object object;
 
     public IsEqual(T equalArg) {
@@ -30,10 +29,6 @@ public class IsEqual<T> extends BaseMatcher<T> implements Comparison {
         description.appendValue(object);
     }
     
-	public Object operand() {
-		return object;
-	}
-
 	private static boolean areEqual(Object o1, Object o2) {
         if (o1 == null || o2 == null) {
             return o1 == null && o2 == null;

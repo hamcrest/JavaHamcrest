@@ -7,7 +7,6 @@ import static org.hamcrest.core.IsNot.not;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import org.hamcrest.introspection.Modifier;
 
 public class IsNotTest extends AbstractMatcherTest {
     protected Matcher<?> createMatcher() {
@@ -25,12 +24,5 @@ public class IsNotTest extends AbstractMatcherTest {
         assertDoesNotMatch("should not match", not("A"), "A");
         assertDoesNotMatch("should not match", not("B"), "B");
         assertDescription("not \"A\"", not("A"));
-    }
-    
-    public void testCanBeIntrospected() {
-    	Matcher<String> complemented = equalTo("A");
-		Matcher<String> complement = not(complemented);
-		
-		assertSame(complemented, ((Modifier)complement).modified());
     }
 }

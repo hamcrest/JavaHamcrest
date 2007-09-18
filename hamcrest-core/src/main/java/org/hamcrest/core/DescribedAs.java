@@ -8,12 +8,11 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.introspection.Modifier;
 
 /**
  * Provides a custom description to another matcher.
  */
-public class DescribedAs<T> extends BaseMatcher<T> implements Modifier {
+public class DescribedAs<T> extends BaseMatcher<T> {
     private final String descriptionTemplate;
     private final Matcher<T> matcher;
     private final Object[] values;
@@ -45,10 +44,6 @@ public class DescribedAs<T> extends BaseMatcher<T> implements Modifier {
             description.appendText(descriptionTemplate.substring(textStart));
         }
     }
-
-    public Matcher<?> modified() {
-		return matcher;
-	}
 
     /**
      * Wraps an existing matcher and overrides the description when it fails.

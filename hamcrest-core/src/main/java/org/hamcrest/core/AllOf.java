@@ -2,6 +2,7 @@ package org.hamcrest.core;
 
 import java.util.Arrays;
 
+import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -15,9 +16,15 @@ public class AllOf<T> extends ShortcutCombination<T> {
         super(matchers);
     }
 
+    
     @Override
-    protected boolean shortcut() {
-        return false;
+    public boolean matches(Object o) {
+        return matches(o, false);
+    }
+    
+    @Override
+    public void describeTo(Description description) {
+        describeTo(description, "and");
     }
     
 	/**

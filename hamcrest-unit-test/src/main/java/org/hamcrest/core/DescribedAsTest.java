@@ -8,7 +8,6 @@ import static org.hamcrest.core.IsNot.not;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import org.hamcrest.introspection.Modifier;
 
 public class DescribedAsTest extends AbstractMatcherTest {
     protected Matcher<?> createMatcher() {
@@ -36,12 +35,5 @@ public class DescribedAsTest extends AbstractMatcherTest {
 
         assertTrue(m1.matches(new Object()));
         assertFalse(m2.matches("hi"));
-    }
-    
-    public void testCanBeIntrospected() {
-    	Matcher<String> described = anything();
-		Matcher<String> descriptor = describedAs("something", described);
-		
-		assertSame(described, ((Modifier)descriptor).modified());
     }
 }

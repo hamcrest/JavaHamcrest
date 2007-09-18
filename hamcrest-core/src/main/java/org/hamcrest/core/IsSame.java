@@ -2,17 +2,16 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.Factory;
 import org.hamcrest.BaseMatcher;
-import org.hamcrest.introspection.Comparison;
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 
 
 /**
  * Is the value the same object as another value?
  */
-public class IsSame<T> extends BaseMatcher<T> implements Comparison {
+public class IsSame<T> extends BaseMatcher<T> {
     private final T object;
     
     public IsSame(T object) {
@@ -27,10 +26,6 @@ public class IsSame<T> extends BaseMatcher<T> implements Comparison {
         description.appendText("same(") .appendValue(object) .appendText(")");
     }
     
-	public Object operand() {
-		return object;
-	}
-	
 	/**
      * Creates a new instance of IsSame
      *

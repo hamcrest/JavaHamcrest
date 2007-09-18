@@ -2,6 +2,7 @@ package org.hamcrest.core;
 
 import java.util.Arrays;
 
+import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -14,11 +15,18 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     public AnyOf(Iterable<Matcher<? super T>> matchers) {
         super(matchers);
     }
-
+    
     @Override
-    protected boolean shortcut() {
-        return true;
+    public boolean matches(Object o) {
+        return matches(o, true);
     }
+    
+    @Override
+    public void describeTo(Description description) {
+        describeTo(description, "or");
+    }
+    
+
     
 	/**
      * Evaluates to true if ANY of the passed in matchers evaluate to true.

@@ -8,13 +8,12 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.introspection.Modifier;
 
 
 /**
  * Calculates the logical negation of a matcher.
  */
-public class IsNot<T> extends BaseMatcher<T> implements Modifier {
+public class IsNot<T> extends BaseMatcher<T>  {
     private final Matcher<T> matcher;
 
     public IsNot(Matcher<T> matcher) {
@@ -30,10 +29,6 @@ public class IsNot<T> extends BaseMatcher<T> implements Modifier {
     }
 
     
-	public Matcher<?> modified() {
-		return matcher;
-	}
-	
     /**
      * Inverts the rule.
      */

@@ -6,13 +6,12 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.introspection.Comparison;
 
 
 /**
  * Tests whether the value is an instance of a class.
  */
-public class IsInstanceOf extends BaseMatcher<Object> implements Comparison {
+public class IsInstanceOf extends BaseMatcher<Object> {
     private final Class<?> theClass;
 
     /**
@@ -33,10 +32,6 @@ public class IsInstanceOf extends BaseMatcher<Object> implements Comparison {
         description.appendText("an instance of ")
                 .appendText(theClass.getName());
     }
-
-	public Class<?> operand() {
-		return theClass;
-	}
 
 	/**
      * Is the value an instance of a particular type?
