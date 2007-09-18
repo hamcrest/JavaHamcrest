@@ -27,11 +27,11 @@ import java.util.Iterator;
  */
 public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
 
-    private final Class cls;
+    private final Class<?> cls;
 
     private final ClassLoader classLoader;
 
-    public ReflectiveFactoryReader(Class cls) {
+    public ReflectiveFactoryReader(Class<?> cls) {
         this.cls = cls;
         this.classLoader = cls.getClassLoader();
     }
@@ -137,7 +137,7 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
             result.addParameter(type, "param" + (++paramNumber));
         }
 
-        for (Class exception : javaMethod.getExceptionTypes()) {
+        for (Class<?> exception : javaMethod.getExceptionTypes()) {
             result.addException(typeToString(exception));
         }
 
@@ -151,8 +151,8 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
      * across implementations. Rock on Liskov.
      */
     private String typeToString(Type type) {
-        if (type instanceof Class) {
-            Class cls = (Class) type;
+        if (type instanceof Class<?>) {
+            Class<?> cls = (Class<?>) type;
             if (cls.isArray()) {
                 return cls.getComponentType().getName() + "[]";
             } else {

@@ -69,22 +69,6 @@ public class EasyMock2FactoryWriter implements FactoryWriter {
         output.append('}').append(newLine).append(newLine);
     }
 
-    private void writeGenericTypeParameters(FactoryMethod factoryMethod) {
-        if (!factoryMethod.getGenericTypeParameters().isEmpty()) {
-            output.append('<');
-            boolean seenFirst = false;
-            for (String type : factoryMethod.getGenericTypeParameters()) {
-                if (seenFirst) {
-                    output.append(", ");
-                } else {
-                    seenFirst = true;
-                }
-                output.append(type);
-            }
-            output.append("> ");
-        }
-    }
-
     private void writeMethodBody(FactoryMethod factoryMethod) {
         indent();
         output.append("org.hamcrest.integration.EasyMockAdapter.adapt(").append(newLine);

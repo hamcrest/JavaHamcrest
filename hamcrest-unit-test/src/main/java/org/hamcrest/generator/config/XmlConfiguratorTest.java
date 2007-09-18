@@ -48,6 +48,7 @@ public class XmlConfiguratorTest extends TestCase {
 
     // Sample Matchers
 
+    @SuppressWarnings("unchecked")
     public static class SomeMatcher {
         @Factory
         public static Matcher matcher1() {
@@ -60,6 +61,7 @@ public class XmlConfiguratorTest extends TestCase {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static class AnotherMatcher {
         @Factory
         public static Matcher matcher3() {

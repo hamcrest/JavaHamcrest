@@ -19,17 +19,16 @@ public class JMock1Adapter implements Constraint {
      * Hamcrest {@link org.hamcrest.Matcher} to act as an
      * jMock {@link org.jmock.core.Constraint}.
      */
-    public static Constraint adapt(Matcher matcher) {
+    public static Constraint adapt(Matcher<?> matcher) {
         return new JMock1Adapter(matcher);
     }
 
-    private final Matcher hamcrestMatcher;
+    private final Matcher<?> hamcrestMatcher;
 
-    public JMock1Adapter(Matcher matcher) {
+    public JMock1Adapter(Matcher<?> matcher) {
         this.hamcrestMatcher = matcher;
     }
 
-    @SuppressWarnings({"unchecked"})
     public boolean eval(Object o) {
         return hamcrestMatcher.matches(o);
     }
@@ -38,5 +37,4 @@ public class JMock1Adapter implements Constraint {
         hamcrestMatcher.describeTo(new StringDescription(buffer));
         return buffer;
     }
-
 }

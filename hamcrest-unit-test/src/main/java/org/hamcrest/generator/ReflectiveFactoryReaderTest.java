@@ -19,12 +19,12 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     public static class SimpleSetOfMatchers {
 
         @Factory
-        public static Matcher firstMethod() {
+        public static Matcher<String> firstMethod() {
             return null;
         }
 
         @Factory
-        public static Matcher secondMethod() {
+        public static Matcher<String> secondMethod() {
             return null;
         }
 
@@ -50,21 +50,21 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     public static class MatchersWithDodgySignatures {
 
         @Factory
-        public Matcher notStatic() {
+        public Matcher<String> notStatic() {
             return null;
         }
 
         @Factory
-        static Matcher notPublic() {
+        static Matcher<String> notPublic() {
             return null;
         }
 
-        public static Matcher noAnnotation() {
+        public static Matcher<String> noAnnotation() {
             return null;
         }
 
         @Factory
-        public static Matcher goodMethod() {
+        public static Matcher<String> goodMethod() {
             return null;
         }
 
@@ -96,10 +96,11 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     public static class GenerifiedMatchers {
 
         @Factory
-        public static Matcher<Comparator> generifiedType() {
+        public static Matcher<Comparator<String>> generifiedType() {
             return null;
         }
 
+        @SuppressWarnings("unchecked")
         @Factory
         public static Matcher noGenerifiedType() {
             return null;
@@ -114,7 +115,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
 
     public void testReadsFullyQualifiedGenericType() {
         FactoryMethod method = readMethod(GenerifiedMatchers.class, "generifiedType");
-        assertEquals("java.util.Comparator", method.getGenerifiedType());
+        assertEquals("java.util.Comparator<java.lang.String>", method.getGenerifiedType());
     }
 
     public void testReadsNullGenerifiedTypeIfNotPresent() {
@@ -132,22 +133,22 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     public static class ParamterizedMatchers {
 
         @Factory
-        public static Matcher withParam(String someString, int[] numbers, Collection things) {
+        public static Matcher<String> withParam(String someString, int[] numbers, Collection<Object> things) {
             return null;
         }
 
         @Factory
-        public static Matcher withArray(String[] array) {
+        public static Matcher<String> withArray(String[] array) {
             return null;
         }
 
         @Factory
-        public static Matcher withVarArgs(String... things) {
+        public static Matcher<String> withVarArgs(String... things) {
             return null;
         }
 
         @Factory
-        public static Matcher withGenerifiedParam(Collection<? extends Comparable> things, Set<String[]>[] x) {
+        public static Matcher<String> withGenerifiedParam(Collection<? extends Comparable<String>> things, Set<String[]>[] x) {
             return null;
         }
 
@@ -160,7 +161,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
 
         assertEquals("java.lang.String", params.get(0).getType());
         assertEquals("int[]", params.get(1).getType());
-        assertEquals("java.util.Collection", params.get(2).getType());
+        assertEquals("java.util.Collection<java.lang.Object>", params.get(2).getType());
     }
 
     public void testReadsArrayAndVarArgParameterTypes() {
@@ -173,7 +174,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
 
     public void testReadsGenerifiedParameterTypes() {
         FactoryMethod method = readMethod(ParamterizedMatchers.class, "withGenerifiedParam");
-        assertEquals("java.util.Collection<? extends java.lang.Comparable>",
+        assertEquals("java.util.Collection<? extends java.lang.Comparable<java.lang.String>>",
                 method.getParameters().get(0).getType());
         assertEquals("java.util.Set<java.lang.String[]>[]",
                 method.getParameters().get(1).getType());
@@ -191,7 +192,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     public static class ExceptionalMatchers {
 
         @Factory
-        public static Matcher withExceptions() throws Error, IOException, RuntimeException {
+        public static Matcher<String> withExceptions() throws Error, IOException, RuntimeException {
             return null;
         }
 
@@ -215,14 +216,14 @@ public class ReflectiveFactoryReaderTest extends TestCase {
          * @return something
          */
         @Factory
-        public static Matcher documented() {
+        public static Matcher<String> documented() {
             return null;
         }
 
     }
 
     public void testCannotReadJavaDoc() {
-        // JavaDoc informatation is not available through reflection alone.
+        // JavaDoc information is not available through reflection alone.
         FactoryMethod method = readMethod(WithJavaDoc.class, "documented");
         assertEquals(null, method.getJavaDoc());
     }
@@ -257,7 +258,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
         assertNotNull(readMethod(SubclassOfMatcher.class, "subclassMethod"));
     }
 
-    private FactoryMethod readMethod(Class cls, String methodName) {
+    private FactoryMethod readMethod(Class<?> cls, String methodName) {
         for (FactoryMethod method : new ReflectiveFactoryReader(cls)) {
             if (method.getName().equals(methodName)) {
                 return method;

@@ -41,6 +41,7 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
         assertDescription("a collection containing \"a\"", hasItem(equalTo("a")));
     }
 
+    @SuppressWarnings("unchecked")
     public void testMatchesAllItemsInCollection() {
         final Matcher<Iterable<String>> matcher1 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));
         assertMatches("should match list containing all items",

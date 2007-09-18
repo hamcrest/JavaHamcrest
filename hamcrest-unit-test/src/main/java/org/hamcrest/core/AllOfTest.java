@@ -9,6 +9,7 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 public class AllOfTest extends AbstractMatcherTest {
+    @SuppressWarnings("unchecked")
     public void testEvaluatesToTheTheLogicalConjunctionOfTwoOtherMatchers() {
         assertThat("good", allOf(equalTo("good"), equalTo("good")));
 
@@ -17,11 +18,13 @@ public class AllOfTest extends AbstractMatcherTest {
         assertThat("good", not(allOf(equalTo("bad"), equalTo("bad"))));
     }
 
+    @SuppressWarnings("unchecked")
     public void testEvaluatesToTheTheLogicalConjunctionOfManyOtherMatchers() {
         assertThat("good", allOf(equalTo("good"), equalTo("good"), equalTo("good"), equalTo("good"), equalTo("good")));
         assertThat("good", not(allOf(equalTo("good"), equalTo("good"), equalTo("bad"), equalTo("good"), equalTo("good"))));
     }
     
+    @SuppressWarnings("unchecked")
     public void testSupportsMixedTypes() {
         final Matcher<SampleSubClass> all = allOf(
                 equalTo(new SampleBaseClass("bad")),
@@ -32,6 +35,7 @@ public class AllOfTest extends AbstractMatcherTest {
         assertThat(new SampleSubClass("good"), negated);
     }
     
+    @SuppressWarnings("unchecked")
     protected Matcher<?> createMatcher() {
         return allOf(equalTo("irrelevant"), equalTo("irrelevant"));
     }

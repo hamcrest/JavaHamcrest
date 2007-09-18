@@ -70,9 +70,9 @@ public class HasPropertyWithValue<T> extends TypeSafeMatcher<T> {
     private static final Object[] NO_ARGUMENTS = new Object[0];
 
     private final String propertyName;
-    private final Matcher value;
+    private final Matcher<?> value;
 
-    public HasPropertyWithValue(String propertyName, Matcher value) {
+    public HasPropertyWithValue(String propertyName, Matcher<?> value) {
         this.propertyName = propertyName;
         this.value = value;
     }
@@ -107,7 +107,7 @@ public class HasPropertyWithValue<T> extends TypeSafeMatcher<T> {
     }
 
     @Factory
-    public static <T> Matcher<T> hasProperty(String propertyName, Matcher value) {
+    public static <T> Matcher<T> hasProperty(String propertyName, Matcher<?> value) {
         return new HasPropertyWithValue<T>(propertyName, value);
     }
 }

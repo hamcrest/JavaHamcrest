@@ -56,7 +56,7 @@ public class XmlConfigurator {
     }
 
     private void addClass(String className) throws ClassNotFoundException {
-        Class cls = classLoader.loadClass(className);
+        Class<?> cls = classLoader.loadClass(className);
         sugarConfiguration.addFactoryMethods(
                 new QDoxFactoryReader(new ReflectiveFactoryReader(cls), qdox, className));
     }

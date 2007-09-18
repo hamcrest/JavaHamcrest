@@ -50,7 +50,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     }
 
     public void testDescribeTo() {
-        Matcher matcher = equalTo(true);
+        Matcher<?> matcher = equalTo(true);
         
         assertDescription("hasProperty(\"property\", " + StringDescription.asString(matcher) + ")",
                 		  hasProperty("property", matcher));
