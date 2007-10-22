@@ -30,6 +30,22 @@ public class IsEqualTest extends AbstractMatcherTest {
         assertThat("hi", not(equalTo(null)));
     }
 
+    public void testHonoursIsEqualImplementationEvenWithNullValues() {
+        Object alwaysEqual = new Object() {
+            public boolean equals(Object obj) {
+                return true;
+            }
+        };
+        Object neverEqual = new Object() {
+            public boolean equals(Object obj) {
+                return false;
+            }
+        };
+
+        assertThat(alwaysEqual, equalTo(null));
+        assertThat(neverEqual, not(equalTo(null)));
+    }
+    
     public void testComparesTheElementsOfAnObjectArray() {
         String[] s1 = {"a", "b"};
         String[] s2 = {"a", "b"};

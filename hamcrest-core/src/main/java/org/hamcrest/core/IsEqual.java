@@ -22,7 +22,7 @@ public class IsEqual<T> extends BaseMatcher<T> {
     }
 
     public boolean matches(Object arg) {
-        return areEqual(object, arg);
+        return areEqual(arg, object);
     }
 
     public void describeTo(Description description) {
@@ -30,8 +30,8 @@ public class IsEqual<T> extends BaseMatcher<T> {
     }
     
 	private static boolean areEqual(Object o1, Object o2) {
-        if (o1 == null || o2 == null) {
-            return o1 == null && o2 == null;
+        if (o1 == null) {
+            return o2 == null;
         } else if (isArray(o1)) {
             return isArray(o2) && areArraysEqual(o1, o2);
         } else {
