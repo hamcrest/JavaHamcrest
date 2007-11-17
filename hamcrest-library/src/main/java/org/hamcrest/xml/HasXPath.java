@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.w3c.dom.Node;
 
+import javax.xml.namespace.NamespaceContext;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -29,8 +30,22 @@ public class HasXPath extends TypeSafeMatcher<Node> {
      *                     May be null to specify that the XPath must exist but the value is irrelevant.
      */
     public HasXPath(String xPathExpression, Matcher<String> valueMatcher) {
+	    this(xPathExpression, null, valueMatcher);
+	}
+
+    /**
+     * @param xPathExpression XPath expression.
+	 * @param namespaceContext Resolves XML namespace prefixes in the XPath expression
+     * @param valueMatcher Matcher to use at given XPath.
+     *                     May be null to specify that the XPath must exist but the value is irrelevant.
+     */
+    public HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
         try {
             XPath xPath = XPathFactory.newInstance().newXPath();
+			if (namespaceContext != null)
+			{
+				xPath.setNamespaceContext(namespaceContext);
+			}
             compiledXPath = xPath.compile(xPathExpression);
             this.xpathString = xPathExpression;
             this.valueMatcher = valueMatcher;
@@ -63,12 +78,21 @@ public class HasXPath extends TypeSafeMatcher<Node> {
     
     @Factory
     public static Matcher<Node> hasXPath(String xPath, Matcher<String> valueMatcher) {
-        return new HasXPath(xPath, valueMatcher);
+        return hasXPath(xPath, null, valueMatcher);
+    }
+
+	@Factory
+    public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
+        return new HasXPath(xPath, namespaceContext, valueMatcher);
     }
 
     @Factory
     public static Matcher<Node> hasXPath(String xPath) {
-        return hasXPath(xPath, null);
+        return hasXPath(xPath, null, null);
     }
 
+	@Factory
+    public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext) {
+        return hasXPath(xPath, namespaceContext, null);
+    }
 }
