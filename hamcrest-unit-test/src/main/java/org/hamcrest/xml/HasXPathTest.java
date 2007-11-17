@@ -61,7 +61,7 @@ public class HasXPathTest extends AbstractMatcherTest {
 			    return ("http://cheese.com".equals(namespaceURI) ? "cheese" : null);
 			}
 
-			public Iterator getPrefixes(String namespaceURI) {
+			public Iterator<String> getPrefixes(String namespaceURI) {
 			    HashSet<String> prefixes = new HashSet<String>();
 				String prefix = getPrefix(namespaceURI);
 				if (prefix != null)	{
@@ -71,8 +71,8 @@ public class HasXPathTest extends AbstractMatcherTest {
 			}
 		};
 
-        assertThat(xml, hasXPath("//cheese:foreignSomething", ns));
-		assertThat(xml, hasXPath("//cheese:foreignSomething/@milk", ns, equalTo("camel")));
+		assertThat(xml, hasXPath("//cheese:foreignSomething", ns));
+        assertThat(xml, hasXPath("//cheese:foreignSomething/@milk", ns, equalTo("camel")));
         assertThat(xml, hasXPath("//cheese:foreignSomething/text()", ns, equalTo("Caravane")));
 	}
 
