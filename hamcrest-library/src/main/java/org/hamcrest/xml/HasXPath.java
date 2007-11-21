@@ -7,6 +7,7 @@ import org.hamcrest.TypeSafeMatcher;
 import org.w3c.dom.Node;
 
 import javax.xml.namespace.NamespaceContext;
+import javax.xml.namespace.QName;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -20,9 +21,10 @@ import javax.xml.xpath.XPathFactory;
  */
 public class HasXPath extends TypeSafeMatcher<Node> {
 
-    private final Matcher<String> valueMatcher;
+    private final Matcher<?> valueMatcher;
     private final XPathExpression compiledXPath;
     private final String xpathString;
+    private final QName evaluationMode;
 
     /**
      * @param xPathExpression XPath expression.
@@ -40,27 +42,31 @@ public class HasXPath extends TypeSafeMatcher<Node> {
      *                     May be null to specify that the XPath must exist but the value is irrelevant.
      */
     public HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
-        try {
-            XPath xPath = XPathFactory.newInstance().newXPath();
-			if (namespaceContext != null)
-			{
-				xPath.setNamespaceContext(namespaceContext);
-			}
-            compiledXPath = xPath.compile(xPathExpression);
-            this.xpathString = xPathExpression;
-            this.valueMatcher = valueMatcher;
-        } catch (XPathExpressionException e) {
-            throw new IllegalArgumentException("Invalid XPath : " + xPathExpression, e);
+      this(xPathExpression, namespaceContext, valueMatcher, XPathConstants.STRING);
+    }
+
+    private HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<?> valueMatcher, QName mode) {
+      try {
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        if (namespaceContext != null) {
+            xPath.setNamespaceContext(namespaceContext);
         }
+        compiledXPath = xPath.compile(xPathExpression);
+        this.xpathString = xPathExpression;
+        this.valueMatcher = valueMatcher;
+        this.evaluationMode = mode;
+      } catch (XPathExpressionException e) {
+        throw new IllegalArgumentException("Invalid XPath : " + xPathExpression, e);
+      }
     }
 
     public boolean matchesSafely(Node item) {
         try {
-            String result = (String) compiledXPath.evaluate(item, XPathConstants.STRING);
+            Object result = compiledXPath.evaluate(item, evaluationMode);
             if (result == null) {
                 return false;
             } else if (valueMatcher == null) {
-                return !result.equals("");
+                return true;
             } else {
                 return valueMatcher.matches(result);
             }
@@ -75,7 +81,7 @@ public class HasXPath extends TypeSafeMatcher<Node> {
             description.appendText(" ").appendDescriptionOf(valueMatcher);
         }
     }
-    
+
     @Factory
     public static Matcher<Node> hasXPath(String xPath, Matcher<String> valueMatcher) {
         return hasXPath(xPath, null, valueMatcher);
@@ -83,16 +89,16 @@ public class HasXPath extends TypeSafeMatcher<Node> {
 
 	@Factory
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
-        return new HasXPath(xPath, namespaceContext, valueMatcher);
+        return new HasXPath(xPath, namespaceContext, valueMatcher, XPathConstants.STRING);
     }
 
     @Factory
     public static Matcher<Node> hasXPath(String xPath) {
-        return hasXPath(xPath, null, null);
+        return hasXPath(xPath, (NamespaceContext) null);
     }
 
 	@Factory
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext) {
-        return hasXPath(xPath, namespaceContext, null);
+        return new HasXPath(xPath, namespaceContext, null, XPathConstants.NODE);
     }
 }

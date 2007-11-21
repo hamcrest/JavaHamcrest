@@ -21,6 +21,7 @@ import java.util.Iterator;
  */
 public class HasXPathTest extends AbstractMatcherTest {
     private Document xml;
+    private NamespaceContext ns;
 
     protected void setUp() throws Exception {
         super.setUp();
@@ -29,8 +30,28 @@ public class HasXPathTest extends AbstractMatcherTest {
                 + "  <something id='a'><cheese>Edam</cheese></something>\n"
                 + "  <something id='b'><cheese>Cheddar</cheese></something>\n"
 				+ "  <f:foreignSomething xmlns:f=\"http://cheese.com\" milk=\"camel\">Caravane</f:foreignSomething>\n"
+				+ "  <emptySomething />\n"
+				+ "  <f:emptySomething xmlns:f=\"http://cheese.com\" />"
                 + "</root>\n"
         );
+        ns = new NamespaceContext() {
+          public String getNamespaceURI(String prefix) {
+              return ("cheese".equals(prefix) ? "http://cheese.com" : null);
+          }
+
+          public String getPrefix(String namespaceURI) {
+              return ("http://cheese.com".equals(namespaceURI) ? "cheese" : null);
+          }
+
+          public Iterator<String> getPrefixes(String namespaceURI) {
+              HashSet<String> prefixes = new HashSet<String>();
+              String prefix = getPrefix(namespaceURI);
+              if (prefix != null) {
+                  prefixes.add(prefix);
+              }
+              return prefixes.iterator();
+          }
+      };
     }
 
     protected Matcher<?> createMatcher() {
@@ -46,31 +67,25 @@ public class HasXPathTest extends AbstractMatcherTest {
         assertThat(xml, hasXPath("//something[@id='b']/cheese"));
     }
 
+    public void testMatchesEmptyElement() throws Exception {
+        assertThat(xml, hasXPath("//emptySomething"));
+    }
+
+    public void testMatchesEmptyElementInNamespace() throws Exception {
+      assertThat(xml, hasXPath("//cheese:emptySomething", ns));
+    }
+
     public void testFailsIfNodeIsMissing() throws Exception {
-        assertThat(xml, not(hasXPath("/root/something[3]/cheese", equalTo("Cheddar"))));
-        assertThat(xml, not(hasXPath("//something[@id='c']/cheese")));
+        assertThat(xml, not(hasXPath("/root/something[3]/cheese", ns, equalTo("Cheddar"))));
+        assertThat(xml, not(hasXPath("//something[@id='c']/cheese", ns)));
+    }
+
+    public void testFailsIfNodeIsMissingInNamespace() throws Exception {
+      assertThat(xml, not(hasXPath("//cheese:foreignSomething", equalTo("Badger"))));
+      assertThat(xml, not(hasXPath("//cheese:foreignSomething")));
     }
 
 	public void testMatchesWithNamespace() throws Exception {
-		NamespaceContext ns = new NamespaceContext() {
-            public String getNamespaceURI(String prefix) {
-			    return ("cheese".equals(prefix) ? "http://cheese.com" : null);
-			}
-
-			public String getPrefix(String namespaceURI) {
-			    return ("http://cheese.com".equals(namespaceURI) ? "cheese" : null);
-			}
-
-			public Iterator<String> getPrefixes(String namespaceURI) {
-			    HashSet<String> prefixes = new HashSet<String>();
-				String prefix = getPrefix(namespaceURI);
-				if (prefix != null)	{
-					prefixes.add(prefix);
-				}
-				return prefixes.iterator();
-			}
-		};
-
 		assertThat(xml, hasXPath("//cheese:foreignSomething", ns));
         assertThat(xml, hasXPath("//cheese:foreignSomething/@milk", ns, equalTo("camel")));
         assertThat(xml, hasXPath("//cheese:foreignSomething/text()", ns, equalTo("Caravane")));
