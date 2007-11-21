@@ -1,5 +1,7 @@
 == Version 1.2: In Development ==
 
+== Version 1.1: Released ==
+
 * Added IsMapContainingKey and IsMapContainingValue matchers to resolve a 
   generics bug in hasKey and hasValue static factories previously declared
   in IsMapContaining (ngd)
@@ -43,3 +45,5 @@
 == Version 1.0: Released Dec 15 2006 ==
 
 Initial release.
+* Support for namespaces in HasXPath
+* Bug fix for matching empty elements with HasXPath
