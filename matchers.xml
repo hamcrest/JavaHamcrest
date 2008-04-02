@@ -15,9 +15,18 @@
     <!-- Collection -->
     <factory class="org.hamcrest.collection.IsArray"/>
     <factory class="org.hamcrest.collection.IsArrayContaining"/>
-    <factory class="org.hamcrest.collection.IsArrayOnlyContaining"/>
+    <factory class="org.hamcrest.collection.IsArrayContainingInOrder"/>
+    <factory class="org.hamcrest.collection.IsArrayContainingInAnyOrder"/>
+    <factory class="org.hamcrest.collection.IsArrayContainingSingleItem"/>
+	<factory class="org.hamcrest.collection.IsArrayWithSize"/>
     <factory class="org.hamcrest.collection.IsCollectionContaining"/>
-    <factory class="org.hamcrest.collection.IsCollectionOnlyContaining"/>
+    <factory class="org.hamcrest.collection.IsCollectionWithSize"/>
+	<factory class="org.hamcrest.collection.IsEmptyCollection"/>    	
+	<factory class="org.hamcrest.collection.IsEmptyIterable"/>    
+    <factory class="org.hamcrest.collection.IsIterableContainingInOrder"/>
+    <factory class="org.hamcrest.collection.IsIterableContainingInAnyOrder"/>
+    <factory class="org.hamcrest.collection.IsIterableContainingSingleItem"/>
+	<factory class="org.hamcrest.collection.IsIterableWithSize"/>   	 	
     <factory class="org.hamcrest.collection.IsMapContaining"/>
     <factory class="org.hamcrest.collection.IsMapContainingKey"/>
     <factory class="org.hamcrest.collection.IsMapContainingValue"/>
