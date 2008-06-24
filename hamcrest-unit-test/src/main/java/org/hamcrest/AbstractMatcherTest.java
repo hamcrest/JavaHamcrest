@@ -14,15 +14,15 @@ public abstract class AbstractMatcherTest extends TestCase {
     protected static final Object ARGUMENT_IGNORED = new Object();
     protected static final Object ANY_NON_NULL_ARGUMENT = new Object();
 
-    public <T> void assertMatches(String message, Matcher<T> c, T arg) {
+    public static <T> void assertMatches(String message, Matcher<T> c, T arg) {
         assertTrue(message, c.matches(arg));
     }
 
-    public <T> void assertDoesNotMatch(String message, Matcher<T> c, T arg) {
+    public static <T> void assertDoesNotMatch(String message, Matcher<T> c, T arg) {
         assertFalse(message, c.matches(arg));
     }
 
-    public void assertDescription(String expected, Matcher<?> matcher) {
+    public static void assertDescription(String expected, Matcher<?> matcher) {
         Description description = new StringDescription();
         description.appendDescriptionOf(matcher);
         assertEquals("Expected description", expected, description.toString());
