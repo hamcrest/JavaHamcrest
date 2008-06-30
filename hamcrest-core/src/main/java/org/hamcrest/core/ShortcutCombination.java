@@ -5,6 +5,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
 abstract class ShortcutCombination<T> extends BaseMatcher<T> {
+
     private final Iterable<Matcher<? super T>> matchers;
 
     public ShortcutCombination(Iterable<Matcher<? super T>> matchers) {
@@ -14,7 +15,6 @@ abstract class ShortcutCombination<T> extends BaseMatcher<T> {
     public abstract boolean matches(Object o);
     
     public abstract void describeTo(Description description);
-    
     
     protected boolean matches(Object o, boolean shortcut) {
         for (Matcher<? super T> matcher : matchers) {

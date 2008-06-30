@@ -9,11 +9,11 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 /**
- * Calculates the logical conjunction of two matchers. Evaluation is
- * shortcut, so that the second matcher is not called if the first
- * matcher returns <code>false</code>.
+ * Calculates the logical conjunction of multiple matchers. Evaluation is shortcut, so
+ * subsequent matchers are not called if an earlier matcher returns <code>false</code>.
  */
 public class AllOf<T> extends ShortcutCombination<T> {
+
     public AllOf(Iterable<Matcher<? super T>> matchers) {
         super(matchers);
     }
@@ -71,12 +71,12 @@ public class AllOf<T> extends ShortcutCombination<T> {
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> forth) {
+    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth) {
     	List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>(4);
     	matchers.add(first);
     	matchers.add(second);
     	matchers.add(third);
-    	matchers.add(forth);
+    	matchers.add(fourth);
         return allOf(matchers);
     }
 
@@ -84,12 +84,12 @@ public class AllOf<T> extends ShortcutCombination<T> {
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> forth, Matcher<? super T> fifth) {
+    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth) {
     	List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>(5);
     	matchers.add(first);
     	matchers.add(second);
     	matchers.add(third);
-    	matchers.add(forth);
+    	matchers.add(fourth);
     	matchers.add(fifth);
         return allOf(matchers);
     }
@@ -98,12 +98,12 @@ public class AllOf<T> extends ShortcutCombination<T> {
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> forth, Matcher<? super T> fifth, Matcher<? super T> sixth) {
+    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth, Matcher<? super T> sixth) {
     	List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>(6);
     	matchers.add(first);
     	matchers.add(second);
     	matchers.add(third);
-    	matchers.add(forth);
+    	matchers.add(fourth);
     	matchers.add(sixth);
         return allOf(matchers);
     }
