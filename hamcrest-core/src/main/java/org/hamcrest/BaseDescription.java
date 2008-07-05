@@ -12,6 +12,7 @@ import org.hamcrest.internal.SelfDescribingValueIterator;
  * A {@link Description} that is stored as a string.
  */
 public abstract class BaseDescription implements Description {
+
     public Description appendText(String text) {
         append(text);
         return this;
@@ -83,10 +84,10 @@ public abstract class BaseDescription implements Description {
         return this;
     }
 
-
-    /** Append the String <var>str</var> to the description.  
-     *  The default implementation passes every character to {@link #append(char)}.  
-     *  Override in subclasses to provide an efficient implementation.
+    /**
+     * Append the String <var>str</var> to the description.  
+     * The default implementation passes every character to {@link #append(char)}.  
+     * Override in subclasses to provide an efficient implementation.
      */
     protected void append(String str) {
     	for (int i = 0; i < str.length(); i++) {
@@ -94,7 +95,8 @@ public abstract class BaseDescription implements Description {
     	}
     }
     
-    /** Append the char <var>c</var> to the description.  
+    /**
+     * Append the char <var>c</var> to the description.  
      */
     protected abstract void append(char c);
 

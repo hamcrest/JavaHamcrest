@@ -9,7 +9,6 @@ import org.hamcrest.Matcher;
 
 public class StringStartsWithTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
-
     Matcher<String> stringStartsWith = startsWith(EXCERPT);
 
     protected Matcher<?> createMatcher() {
@@ -35,5 +34,9 @@ public class StringStartsWithTest extends AbstractMatcherTest {
     public void testEvaluatesToTrueIfArgumentIsEqualToSubstring() {
         assertTrue("should be true if excerpt is entire string",
                 stringStartsWith.matches(EXCERPT));
+    }
+
+    public void testHasAReadableDescription() {
+        assertDescription("a string starting with \"EXCERPT\"", stringStartsWith);
     }
 }

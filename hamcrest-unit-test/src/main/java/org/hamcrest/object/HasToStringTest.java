@@ -10,7 +10,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
 public class HasToStringTest extends AbstractMatcherTest {
-
     private static final String TO_STRING_RESULT = "toString result";
     private static final Object ARG = new Object() {
         public String toString() {
@@ -25,6 +24,11 @@ public class HasToStringTest extends AbstractMatcherTest {
     public void testPassesResultOfToStringToNestedMatcher() {
         assertThat(ARG, hasToString(equalTo(TO_STRING_RESULT)));
         assertThat(ARG, not(hasToString(equalTo("OTHER STRING"))));
+    }
+
+    public void testProvidesConvenientShortcutForHasToStringEqualTo() {
+        assertThat(ARG, hasToString(TO_STRING_RESULT));
+        assertThat(ARG, not(hasToString("OTHER STRING")));
     }
 
     public void testHasReadableDescription() {

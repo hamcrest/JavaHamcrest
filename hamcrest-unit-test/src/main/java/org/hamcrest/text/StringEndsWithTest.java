@@ -9,7 +9,6 @@ import org.hamcrest.Matcher;
 
 public class StringEndsWithTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
-
     Matcher<String> stringEndsWith = endsWith(EXCERPT);
 
     protected Matcher<?> createMatcher() {
@@ -35,5 +34,9 @@ public class StringEndsWithTest extends AbstractMatcherTest {
     public void testEvaluatesToTrueIfArgumentIsEqualToSubstring() {
         assertTrue("should be true if excerpt is entire string",
                 stringEndsWith.matches(EXCERPT));
+    }
+
+    public void testHasAReadableDescription() {
+        assertDescription("a string ending with \"EXCERPT\"", stringEndsWith);
     }
 }

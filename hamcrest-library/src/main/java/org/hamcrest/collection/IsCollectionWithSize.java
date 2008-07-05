@@ -9,6 +9,9 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+/**
+ * Matches if collection size satisfies a nested matcher.
+ */
 public class IsCollectionWithSize<E> extends TypeSafeMatcher<Collection<E>> {
 	private final Matcher<Integer> sizeMatcher;
 
@@ -26,13 +29,22 @@ public class IsCollectionWithSize<E> extends TypeSafeMatcher<Collection<E>> {
 			.appendDescriptionOf(sizeMatcher);
 	}
 
-	@Factory
-	public static <E> Matcher<Collection<E>> hasSize(int size) {
-		return hasSize(equalTo(size));
-	}
-
+    /**
+     * Does collection size satisfy a given matcher?
+     */
 	@Factory
 	public static <E> Matcher<Collection<E>> hasSize(Matcher<Integer> size) {
 		return new IsCollectionWithSize<E>(size);
+	}
+
+    /**
+     * This is a shortcut to the frequently used hasSize(equalTo(x)).
+     *
+     * For example,  assertThat(hasSize(equal_to(x)))
+     *          vs.  assertThat(hasSize(x))
+     */
+	@Factory
+	public static <E> Matcher<Collection<E>> hasSize(int size) {
+		return hasSize(equalTo(size));
 	}
 }

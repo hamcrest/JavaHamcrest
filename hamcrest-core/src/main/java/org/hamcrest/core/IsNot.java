@@ -40,8 +40,8 @@ public class IsNot<T> extends BaseMatcher<T>  {
     /**
      * This is a shortcut to the frequently used not(equalTo(x)).
      *
-     * eg. assertThat(cheese, is(not(equalTo(smelly))))
-     * vs  assertThat(cheese, is(not(smelly)))
+     * For example:  assertThat(cheese, is(not(equalTo(smelly))))
+     *          vs.  assertThat(cheese, is(not(smelly)))
      */
     @Factory
     public static <T> Matcher<T> not(T value) {

@@ -9,7 +9,12 @@ import org.hamcrest.StringDescription;
 
 public class IsInTest extends AbstractMatcherTest {
     String[] elements = {"a", "b", "c"};
-    
+
+    @Override
+    protected Matcher<?> createMatcher() {
+        return new IsIn<String>(elements);
+    }
+
     public void testReturnsTrueIfArgumentIsInCollection() {
         Collection<String> collection = Arrays.asList(elements);
         Matcher<String> isIn = new IsIn<String>(collection);
@@ -35,10 +40,5 @@ public class IsInTest extends AbstractMatcherTest {
         assertEquals("description", 
             "one of {\"a\", \"b\", \"c\"}", 
             StringDescription.toString(isIn));
-    }
-
-    @Override
-    protected Matcher<?> createMatcher() {
-        return new IsIn<String>(elements);
     }
 }

@@ -30,12 +30,12 @@ public class IsIterableWithSize<E> extends TypeSafeMatcher<Iterable<E>> {
 	}
 
 	@Factory
-	public static <E> Matcher<Iterable<E>> iterableWithSize(int size) {
-		return iterableWithSize(equalTo(size));
+	public static <E> Matcher<Iterable<E>> iterableWithSize(Matcher<Integer> sizeMatcher) {
+		return new IsIterableWithSize<E>(sizeMatcher);
 	}
 
 	@Factory
-	public static <E> Matcher<Iterable<E>> iterableWithSize(Matcher<Integer> sizeMatcher) {
-		return new IsIterableWithSize<E>(sizeMatcher);
+	public static <E> Matcher<Iterable<E>> iterableWithSize(int size) {
+		return iterableWithSize(equalTo(size));
 	}
 }

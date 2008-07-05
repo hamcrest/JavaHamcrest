@@ -21,4 +21,7 @@ public class IsInstanceOfTest extends AbstractMatcherTest {
         assertThat("hello", not(instanceOf(Number.class)));
     }
 
+    public void testHasAReadableDescription() {
+        assertDescription("an instance of java.lang.Number", instanceOf(Number.class));
+    }
 }

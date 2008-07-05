@@ -9,7 +9,6 @@ import org.hamcrest.Matcher;
 
 public class StringContainsTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
-
     Matcher<String> stringContains = containsString(EXCERPT);
 
     protected Matcher<?> createMatcher() {
@@ -35,5 +34,9 @@ public class StringContainsTest extends AbstractMatcherTest {
     public void testEvaluatesToTrueIfArgumentIsEqualToSubstring() {
         assertTrue("should be true if excerpt is entire string",
                 stringContains.matches(EXCERPT));
+    }
+
+    public void testHasAReadableDescription() {
+        assertDescription("a string containing \"EXCERPT\"", stringContains);
     }
 }

@@ -44,7 +44,7 @@ public class IsEqualIgnoringWhiteSpaceTest extends AbstractMatcherTest {
         }
     }
 
-    public void testDescribesItselfAsCaseInsensitive() {
+    public void testHasAReadableDescription() {
         assertDescription("eqIgnoringWhiteSpace(\"Hello World   how\\n are we? \")", matcher);
     }
 }

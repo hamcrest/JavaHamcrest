@@ -9,6 +9,11 @@ import static org.hamcrest.collection.IsMapContainingKey.hasKey;
 
 public class IsMapContainingKeyTest extends AbstractMatcherTest {
 
+	@Override
+	protected Matcher<?> createMatcher() {
+		return hasKey("foo");
+	}
+
 	public void testMatchesSingletonMapContainingKey() {
 		Map<String,Integer> map = new HashMap<String, Integer>();
 		map.put("a", 1);
@@ -42,11 +47,4 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
 		
 		assertDoesNotMatch("Map without matching key", hasKey("d"), map);
 	}
-	
-	
-	@Override
-	protected Matcher<?> createMatcher() {
-		return hasKey("foo");
-	}
-
 }

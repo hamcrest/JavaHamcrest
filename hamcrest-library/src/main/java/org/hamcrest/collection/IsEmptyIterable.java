@@ -5,7 +5,11 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+/**
+ * Tests if collection is empty.
+ */
 public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<E>> {
+
 	@Override
 	public boolean matchesSafely(Iterable<E> iterable) {
 		return !iterable.iterator().hasNext();
@@ -15,6 +19,9 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<E>> {
 		description.appendText("is an empty iterable");
 	}
 
+    /**
+     * Matches an empty iterable.
+     */
 	@Factory
 	public static <E> Matcher<Iterable<E>> emptyIterable() {
 		return new IsEmptyIterable<E>();

@@ -8,6 +8,10 @@ import org.hamcrest.Matcher;
 
 public class StringContainsInOrderTest extends AbstractMatcherTest {
     StringContainsInOrder m = new StringContainsInOrder(asList("a", "b", "c"));
+
+    protected Matcher<?> createMatcher() {
+        return m;
+    }
     
     public void testMatchesOnlyIfStringContainsGivenSubstringsInTheSameOrder() {
         assertMatches("substrings in order", m, "abc");
@@ -19,11 +23,7 @@ public class StringContainsInOrderTest extends AbstractMatcherTest {
         assertDoesNotMatch("empty string", m, "");
     }
     
-    public void testDescribesItselfHelpfully() {
+    public void testHasAReadableDescription() {
         assertDescription("a string containing \"a\", \"b\", \"c\" in order", m);
-    }
-    
-    protected Matcher<?> createMatcher() {
-        return m;
     }
 }

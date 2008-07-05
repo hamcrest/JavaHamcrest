@@ -9,6 +9,11 @@ import static org.hamcrest.collection.IsMapContainingValue.hasValue;
 
 public class IsMapContainingValueTest extends AbstractMatcherTest {
 
+	@Override
+	protected Matcher<?> createMatcher() {
+		return hasValue("foo");
+	}
+
 	public void testHasReadableDescription() {
 		assertDescription("map with value \"a\"", hasValue("a"));
 	}
@@ -34,10 +39,4 @@ public class IsMapContainingValueTest extends AbstractMatcherTest {
 		assertMatches("hasValue 1", hasValue(1), map);		
 		assertMatches("hasValue 3", hasValue(3), map);		
 	}
-	
-	@Override
-	protected Matcher<?> createMatcher() {
-		return hasValue("foo");
-	}
-
 }
