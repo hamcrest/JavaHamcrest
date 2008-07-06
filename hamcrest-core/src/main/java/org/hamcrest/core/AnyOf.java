@@ -28,14 +28,6 @@ public class AnyOf<T> extends ShortcutCombination<T> {
         describeTo(description, "or");
     }
 
-	/**
-     * Evaluates to true if ANY of the passed in matchers evaluate to true.
-     */
-    @Factory
-    public static <T> Matcher<T> anyOf(Matcher<? super T>... matchers) {
-        return anyOf(Arrays.asList(matchers));
-    }
-
     /**
      * Evaluates to true if ANY of the passed in matchers evaluate to true.
      */
@@ -44,6 +36,14 @@ public class AnyOf<T> extends ShortcutCombination<T> {
         return new AnyOf<T>(matchers);
     }
     
+	/**
+     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     */
+    @Factory
+    public static <T> Matcher<T> anyOf(Matcher<? super T>... matchers) {
+        return anyOf(Arrays.asList(matchers));
+    }
+
     /**
      * Evaluates to true if ANY of the passed in matchers evaluate to true.
      */

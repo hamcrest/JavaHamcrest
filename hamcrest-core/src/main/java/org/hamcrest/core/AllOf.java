@@ -28,20 +28,20 @@ public class AllOf<T> extends ShortcutCombination<T> {
         describeTo(description, "and");
     }
 
-	/**
-     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
-     */
-    @Factory
-    public static <T> Matcher<T> allOf(Matcher<? super T>... matchers) {
-        return allOf(Arrays.asList(matchers));
-    }
-
     /**
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
     public static <T> Matcher<T> allOf(Iterable<Matcher<? super T>> matchers) {
         return new AllOf<T>(matchers);
+    }
+
+	/**
+     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     */
+    @Factory
+    public static <T> Matcher<T> allOf(Matcher<? super T>... matchers) {
+        return allOf(Arrays.asList(matchers));
     }
 
     /**
