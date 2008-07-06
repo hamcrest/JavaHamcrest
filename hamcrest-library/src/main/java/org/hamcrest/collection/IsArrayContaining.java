@@ -6,8 +6,10 @@ import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
 import static org.hamcrest.core.IsEqual.equalTo;
 
+/**
+ * Matches if an array contains an item satisfying a nested matcher.
+ */
 public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
-
     private final Matcher<T> elementMatcher;
 
     public IsArrayContaining(Matcher<T> elementMatcher) {
@@ -29,14 +31,22 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
         	.appendDescriptionOf(elementMatcher);
     }
 
+    /**
+     * Evaluates to true if any item in an array satisfies the given matcher.
+     */
     @Factory
     public static <T> Matcher<T[]> hasItemInArray(Matcher<T> elementMatcher) {
         return new IsArrayContaining<T>(elementMatcher);
     }
 
+    /**
+     * This is a shortcut to the frequently used hasItemInArray(equalTo(x)).
+     *
+     * For example,  assertThat(hasItemInArray(equal_to(x)))
+     *          vs.  assertThat(hasItemInArray(x))
+     */
     @Factory
     public static <T> Matcher<T[]> hasItemInArray(T element) {
         return hasItemInArray(equalTo(element));
     }
-
 }

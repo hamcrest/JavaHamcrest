@@ -6,6 +6,10 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+/**
+ * Matcher for array whose elements satisfy a sequence of matchers.
+ * The array size must equal the number of element matchers.
+ */
 public class IsArray<T> extends TypeSafeMatcher<T[]> {
     private final Matcher<T>[] elementMatchers;
     
@@ -58,6 +62,9 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
         return "]";
     }
     
+    /**
+     * Evaluates to true only if each matcher[i] is satisfied by array[i].
+     */
     public static <T> IsArray<T> array(Matcher<T>... elementMatchers) {
         return new IsArray<T>(elementMatchers);
     }
