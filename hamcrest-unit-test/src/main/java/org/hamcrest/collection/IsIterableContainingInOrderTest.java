@@ -36,4 +36,8 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
 	public void testDoesNotMatchIfOneOfMultipleItemsMismatch() throws Exception {
 		assertDoesNotMatch("Multiple item iterable mismatches", contains(1, 2, 3), asList(1, 2, 4));
 	}
+
+    public void testHasAReadableDescription() {
+        assertDescription("iterable over [<1>, <2>]", contains(1, 2));
+    }
 }

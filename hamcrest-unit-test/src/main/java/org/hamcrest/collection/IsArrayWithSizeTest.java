@@ -30,7 +30,7 @@ public class IsArrayWithSizeTest extends AbstractMatcherTest {
     }
 
 	public void testHasAReadableDescription() {
-        assertDescription("is array with size <3>", arrayWithSize(equalTo(3)));
-        assertDescription("is an empty array", emptyArray());
+        assertDescription("an array with size <3>", arrayWithSize(equalTo(3)));
+        assertDescription("an empty array", emptyArray());
 	}
 }

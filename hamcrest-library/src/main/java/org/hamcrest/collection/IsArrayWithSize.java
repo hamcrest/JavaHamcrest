@@ -24,7 +24,7 @@ public class IsArrayWithSize<E> extends TypeSafeMatcher<E[]> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("is array with size ")
+		description.appendText("an array with size ")
 			.appendDescriptionOf(sizeMatcher);
 	}
 
@@ -53,6 +53,6 @@ public class IsArrayWithSize<E> extends TypeSafeMatcher<E[]> {
 	@Factory
 	public static <E> Matcher<E[]> emptyArray() {
 		Matcher<E[]> isEmpty = arrayWithSize(0);
-		return describedAs("is an empty array", isEmpty);
+		return describedAs("an empty array", isEmpty);
 	}
 }

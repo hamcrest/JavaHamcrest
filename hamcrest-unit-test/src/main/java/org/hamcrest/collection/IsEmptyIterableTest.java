@@ -23,6 +23,6 @@ public class IsEmptyIterableTest extends AbstractMatcherTest {
 	}
 
 	public void testHasAReadableDescription() {
-        assertDescription("is an empty iterable", emptyIterable());
+        assertDescription("an empty iterable", emptyIterable());
 	}
 }

@@ -29,4 +29,8 @@ public class IsIterableWithSizeTest extends AbstractMatcherTest {
 	public void testDoesNotMatchIncorrectSize() throws Exception {
 		assertDoesNotMatch("Incorrect size", iterableWithSize(3), Arrays.<Object>asList(1));
 	}
+
+    public void testHasAReadableDescription() {
+        assertDescription("an iterable with size <4>", iterableWithSize(4));
+    }
 }

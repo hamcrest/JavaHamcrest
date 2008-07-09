@@ -30,4 +30,8 @@ public class IsIterableContainingSingleItemTest extends AbstractMatcherTest {
 	public void testDoesNotMatchMultipleItemList() throws Exception {
 		assertDoesNotMatch("multiple item list", hasSingleItem(4), asList(4, 3));
 	}
+
+    public void testHasAReadableDescription() {
+        assertDescription("a singleton iterable with [<4>]", hasSingleItem(4));
+    }
 }

@@ -24,9 +24,9 @@ public class IsArrayContainingSingleItem<E> extends TypeSafeMatcher<E[]> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("is a singleton array with: [ ")
+		description.appendText("a singleton array with [")
 			.appendDescriptionOf(itemMatcher)
-			.appendText(" ]");
+			.appendText("]");
 	}
 	
 	@Factory

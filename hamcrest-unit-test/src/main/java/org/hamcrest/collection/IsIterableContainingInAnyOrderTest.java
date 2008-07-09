@@ -39,4 +39,8 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
 	public void testDoesNotMatchIfThereAreMoreMatchersThanElements() throws Exception {
 		assertDoesNotMatch("More matchers than elements", containsInAnyOrder(1, 2, 3, 4), asList(1, 2, 3));
 	}
+
+    public void testHasAReadableDescription() {
+        assertDescription("iterable over [<1>, <2>] in any order", containsInAnyOrder(1, 2));
+    }
 }

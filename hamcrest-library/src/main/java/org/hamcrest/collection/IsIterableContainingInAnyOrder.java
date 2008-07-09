@@ -50,8 +50,9 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeMatcher<Iterable<
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("is iterable containing in any order: ")
-			.appendList("[ ", ", ", " ]", matchers);
+		description.appendText("iterable over ")
+			.appendList("[", ", ", "]", matchers)
+            .appendText(" in any order");
 	}
 
 	@Factory

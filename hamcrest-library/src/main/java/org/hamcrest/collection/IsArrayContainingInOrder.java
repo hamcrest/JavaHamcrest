@@ -27,8 +27,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("is array containing in order: ")
-			.appendList("[ ", ", ", " ]", matchers);
+		description.appendList("[", ", ", "]", matchers);
 	}
 
 	@Factory

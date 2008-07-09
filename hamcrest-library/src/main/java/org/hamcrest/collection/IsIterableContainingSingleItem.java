@@ -26,9 +26,9 @@ public class IsIterableContainingSingleItem<E> extends TypeSafeMatcher<Iterable<
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("is a singleton iterable with: [ ")
+		description.appendText("a singleton iterable with [")
 			.appendDescriptionOf(matcher)
-			.appendText(" ]");
+			.appendText("]");
 	}
 	
 	@Factory

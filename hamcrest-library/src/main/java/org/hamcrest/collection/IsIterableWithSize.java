@@ -25,7 +25,7 @@ public class IsIterableWithSize<E> extends TypeSafeMatcher<Iterable<E>> {
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("is iterable with size ")
+		description.appendText("an iterable with size ")
 			.appendDescriptionOf(sizeMatcher);
 	}
 

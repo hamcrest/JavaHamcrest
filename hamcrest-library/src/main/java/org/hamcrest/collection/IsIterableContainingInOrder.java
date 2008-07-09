@@ -36,8 +36,8 @@ public class IsIterableContainingInOrder<E> extends TypeSafeMatcher<Iterable<E>>
 	}
 
 	public void describeTo(Description description) {
-		description.appendText("is iterable containing in order: ")
-			.appendList("[ ", ", ", " ]", matchers);
+		description.appendText("iterable over ")
+			.appendList("[", ", ", "]", matchers);
 	}
 
 	@Factory
