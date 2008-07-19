@@ -23,7 +23,9 @@ public class IsSame<T> extends BaseMatcher<T> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("same(") .appendValue(object) .appendText(")");
+        description.appendText("sameInstance(")
+                .appendValue(object)
+                .appendText(")");
     }
     
 	/**

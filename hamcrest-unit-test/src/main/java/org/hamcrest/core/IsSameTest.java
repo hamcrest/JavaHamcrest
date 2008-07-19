@@ -24,10 +24,10 @@ public class IsSameTest extends AbstractMatcherTest {
     }
 
     public void testReturnsReadableDescriptionFromToString() {
-        assertDescription("same(\"ARG\")", sameInstance("ARG"));
+        assertDescription("sameInstance(\"ARG\")", sameInstance("ARG"));
     }
 
     public void testReturnsReadableDescriptionFromToStringWhenInitialisedWithNull() {
-        assertDescription("same(null)", sameInstance(null));
+        assertDescription("sameInstance(null)", sameInstance(null));
     }
 }

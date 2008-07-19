@@ -29,7 +29,7 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("eqIgnoringCase(")
+        description.appendText("equalToIgnoringCase(")
                 .appendValue(string)
                 .appendText(")");
     }

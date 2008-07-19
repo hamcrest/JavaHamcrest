@@ -29,7 +29,7 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
     }
 
     public void describeTo(Description description) {
-        description.appendText("eqIgnoringWhiteSpace(")
+        description.appendText("equalToIgnoringWhiteSpace(")
                 .appendValue(string)
                 .appendText(")");
     }
