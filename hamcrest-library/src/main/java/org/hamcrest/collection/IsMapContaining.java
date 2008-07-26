@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
-
     private final Matcher<K> keyMatcher;
     private final Matcher<V> valueMatcher;
 
@@ -33,8 +32,8 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
         description.appendText("map containing [")
                    .appendDescriptionOf(keyMatcher)
                    .appendText("->")
-			       .appendDescriptionOf(valueMatcher)
-			       .appendText("]");
+                   .appendDescriptionOf(valueMatcher)
+                   .appendText("]");
     }
 
     @Factory
@@ -46,5 +45,4 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
     public static <K,V> Matcher<Map<K,V>> hasEntry(K key, V value) {
         return hasEntry(equalTo(key), equalTo(value));
     }
-
 }

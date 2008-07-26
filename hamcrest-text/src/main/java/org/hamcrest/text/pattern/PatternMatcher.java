@@ -14,49 +14,49 @@ public class PatternMatcher extends TypeSafeMatcher<String> implements PatternCo
     private Pattern pattern;
 
     public PatternMatcher(PatternComponent root) {
-	this.root = root;
-	this.pattern = compile(root, groups);
+        this.root = root;
+        this.pattern = compile(root, groups);
     }
 
     @Factory
     public static PatternMatcher matchesPattern(PatternComponent pattern) {
-	return new PatternMatcher(pattern);
+        return new PatternMatcher(pattern);
     }
 
     @Factory
     public static PatternMatcher matchesPattern(PatternMatcher pattern) {
-	return pattern;
+        return pattern;
     }
 
     public String toString() {
-	return pattern.toString();
+        return pattern.toString();
     }
 
     public void describeTo(Description description) {
-	description.appendText("a string matching ");
-	description.appendValue(this.toString());
+        description.appendText("a string matching ");
+        description.appendValue(this.toString());
     }
 
     public boolean matchesSafely(String s) {
-	return pattern.matcher(s).matches();
+        return pattern.matcher(s).matches();
     }
 
     public Parse parse(String input) throws PatternMatchException {
-	Matcher matcher = pattern.matcher(input);
-	if (matcher.matches()) {
-	    return new Parse(groups, matcher);
-	} else {
-	    throw new PatternMatchException("did not match input: " + input);
-	}
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.matches()) {
+            return new Parse(groups, matcher);
+        } else {
+            throw new PatternMatchException("did not match input: " + input);
+        }
     }
 
     public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-	root.buildRegex(builder, groups);
+        root.buildRegex(builder, groups);
     }
 
     private static Pattern compile(PatternComponent root, GroupNamespace groups) {
-	StringBuilder builder = new StringBuilder();
-	root.buildRegex(builder, groups);
-	return Pattern.compile(builder.toString());
+        StringBuilder builder = new StringBuilder();
+        root.buildRegex(builder, groups);
+        return Pattern.compile(builder.toString());
     }
 }

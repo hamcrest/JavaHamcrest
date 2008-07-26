@@ -39,6 +39,6 @@ public class HasToStringTest extends AbstractMatcherTest {
     }
 
     private String descriptionOf(Matcher<?> matcher) {
-    	return StringDescription.asString(matcher);
+        return StringDescription.asString(matcher);
     }
 }

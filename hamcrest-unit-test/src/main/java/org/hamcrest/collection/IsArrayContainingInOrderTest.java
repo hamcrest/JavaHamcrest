@@ -8,13 +8,13 @@ import org.hamcrest.Matcher;
 
 public class IsArrayContainingInOrderTest extends AbstractMatcherTest {
 
-	@Override
-	protected Matcher<?> createMatcher() {
-		return arrayContaining(equalTo(1), equalTo(2));
-	}
+    @Override
+    protected Matcher<?> createMatcher() {
+        return arrayContaining(equalTo(1), equalTo(2));
+    }
 
-	public void testHasAReadableDescription() {
+    public void testHasAReadableDescription() {
         assertDescription("[<1>, <2>]",
                             arrayContaining(equalTo(1), equalTo(2)));
-	}
+    }
 }

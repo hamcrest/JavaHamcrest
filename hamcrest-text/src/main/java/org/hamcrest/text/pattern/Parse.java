@@ -9,12 +9,12 @@ public class Parse {
     private final MatchResult result;
 
     public Parse(GroupNamespace groups, MatchResult result) {
-	this.groups = groups;
-	this.result = result;
+        this.groups = groups;
+        this.result = result;
     }
 
     public String get(String name) {
-	int groupIndex = groups.resolve(name);
-	return result.group(groupIndex);
+        int groupIndex = groups.resolve(name);
+        return result.group(groupIndex);
     }
 }

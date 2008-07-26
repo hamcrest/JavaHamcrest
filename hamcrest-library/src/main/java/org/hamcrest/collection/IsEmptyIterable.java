@@ -10,20 +10,20 @@ import org.hamcrest.TypeSafeMatcher;
  */
 public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<E>> {
 
-	@Override
-	public boolean matchesSafely(Iterable<E> iterable) {
-		return !iterable.iterator().hasNext();
-	}
+    @Override
+    public boolean matchesSafely(Iterable<E> iterable) {
+        return !iterable.iterator().hasNext();
+    }
 
-	public void describeTo(Description description) {
-		description.appendText("an empty iterable");
-	}
+    public void describeTo(Description description) {
+        description.appendText("an empty iterable");
+    }
 
     /**
      * Matches an empty iterable.
      */
-	@Factory
-	public static <E> Matcher<Iterable<E>> emptyIterable() {
-		return new IsEmptyIterable<E>();
-	}
+    @Factory
+    public static <E> Matcher<Iterable<E>> emptyIterable() {
+        return new IsEmptyIterable<E>();
+    }
 }

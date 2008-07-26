@@ -28,7 +28,7 @@ public class IsSame<T> extends BaseMatcher<T> {
                 .appendText(")");
     }
     
-	/**
+    /**
      * Creates a new instance of IsSame
      *
      * @param object The predicate evaluates to true only when the argument is
@@ -38,5 +38,4 @@ public class IsSame<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> sameInstance(T object) {
         return new IsSame<T>(object);
     }
-
 }

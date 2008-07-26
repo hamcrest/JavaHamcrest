@@ -29,9 +29,9 @@ public class HasXPathTest extends AbstractMatcherTest {
                 + "<root type='food'>\n"
                 + "  <something id='a'><cheese>Edam</cheese></something>\n"
                 + "  <something id='b'><cheese>Cheddar</cheese></something>\n"
-				+ "  <f:foreignSomething xmlns:f=\"http://cheese.com\" milk=\"camel\">Caravane</f:foreignSomething>\n"
-				+ "  <emptySomething />\n"
-				+ "  <f:emptySomething xmlns:f=\"http://cheese.com\" />"
+                + "  <f:foreignSomething xmlns:f=\"http://cheese.com\" milk=\"camel\">Caravane</f:foreignSomething>\n"
+                + "  <emptySomething />\n"
+                + "  <f:emptySomething xmlns:f=\"http://cheese.com\" />"
                 + "</root>\n"
         );
         ns = new NamespaceContext() {
@@ -85,11 +85,11 @@ public class HasXPathTest extends AbstractMatcherTest {
       assertThat(xml, not(hasXPath("//cheese:foreignSomething")));
     }
 
-	public void testMatchesWithNamespace() throws Exception {
-		assertThat(xml, hasXPath("//cheese:foreignSomething", ns));
+    public void testMatchesWithNamespace() throws Exception {
+        assertThat(xml, hasXPath("//cheese:foreignSomething", ns));
         assertThat(xml, hasXPath("//cheese:foreignSomething/@milk", ns, equalTo("camel")));
         assertThat(xml, hasXPath("//cheese:foreignSomething/text()", ns, equalTo("Caravane")));
-	}
+    }
 
     public void testThrowsIllegalArgumentExceptionIfGivenIllegalExpression() {
         try {
@@ -109,7 +109,7 @@ public class HasXPathTest extends AbstractMatcherTest {
 
     private Document parse(String xml) throws Exception {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-		documentBuilderFactory.setNamespaceAware(true);
+        documentBuilderFactory.setNamespaceAware(true);
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
         return documentBuilder.parse(new ByteArrayInputStream(xml.getBytes()));
     }

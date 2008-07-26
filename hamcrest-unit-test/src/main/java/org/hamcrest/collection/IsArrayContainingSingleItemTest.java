@@ -8,13 +8,13 @@ import org.hamcrest.Matcher;
 
 public class IsArrayContainingSingleItemTest extends AbstractMatcherTest {
 
-	@Override
-	protected Matcher<?> createMatcher() {
-		return arrayWithSingleItem(equalTo(1));
-	}
+    @Override
+    protected Matcher<?> createMatcher() {
+        return arrayWithSingleItem(equalTo(1));
+    }
 
-	public void testHasAReadableDescription() {
+    public void testHasAReadableDescription() {
         assertDescription("a singleton array with [<1>]",
                         arrayWithSingleItem(equalTo(1)));
-	}
+    }
 }

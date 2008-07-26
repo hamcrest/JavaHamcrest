@@ -7,10 +7,10 @@ public class CharacterInUnicodeCategory implements PatternComponent {
     private final String categoryName;
 
     public CharacterInUnicodeCategory(String categoryName) {
-	this.categoryName = categoryName;
+        this.categoryName = categoryName;
     }
 
     public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-	builder.append("\\p{Is").append(categoryName).append("}");
+        builder.append("\\p{Is").append(categoryName).append("}");
     }
 }

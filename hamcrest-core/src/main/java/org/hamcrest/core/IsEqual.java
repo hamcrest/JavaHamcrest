@@ -29,7 +29,7 @@ public class IsEqual<T> extends BaseMatcher<T> {
         description.appendValue(object);
     }
     
-	private static boolean areEqual(Object o1, Object o2) {
+    private static boolean areEqual(Object o1, Object o2) {
         if (o1 == null) {
             return o2 == null;
         } else if (isArray(o1)) {
@@ -67,5 +67,4 @@ public class IsEqual<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> equalTo(T operand) {
         return new IsEqual<T>(operand);
     }
-    
 }

@@ -7,10 +7,10 @@ public class NullPatternComponent implements PatternComponent {
     public static final PatternComponent INSTANCE = new NullPatternComponent();
 
     private NullPatternComponent() {
-	// Private so you have to use the only INSTANCE
+        // Private so you have to use the only INSTANCE
     }
 
     public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-	// Do nothing
+        // Do nothing
     }
 }

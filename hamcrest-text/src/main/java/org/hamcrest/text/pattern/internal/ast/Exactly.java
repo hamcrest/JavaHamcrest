@@ -9,15 +9,14 @@ public class Exactly implements PatternComponent {
     private PatternComponent repeatedPattern;
 
     public Exactly(int requiredNumber, PatternComponent repeatedPattern) {
-	this.requiredNumber = requiredNumber;
-	this.repeatedPattern = repeatedPattern;
+        this.requiredNumber = requiredNumber;
+        this.repeatedPattern = repeatedPattern;
     }
 
     public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-	repeatedPattern.buildRegex(builder, groups);
-	builder.append("{");
-	builder.append(requiredNumber);
-	builder.append("}");
-
+        repeatedPattern.buildRegex(builder, groups);
+        builder.append("{");
+        builder.append(requiredNumber);
+        builder.append("}");
     }
 }

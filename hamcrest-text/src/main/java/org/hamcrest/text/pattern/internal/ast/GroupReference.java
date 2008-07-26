@@ -7,10 +7,10 @@ public class GroupReference implements PatternComponent {
     private final String name;
 
     public GroupReference(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-	builder.append("\\").append(groups.resolve(name));
+        builder.append("\\").append(groups.resolve(name));
     }
 }

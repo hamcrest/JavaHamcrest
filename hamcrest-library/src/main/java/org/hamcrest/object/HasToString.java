@@ -20,9 +20,9 @@ public class HasToString<T> extends BaseMatcher<T> {
 
     public void describeTo(Description description) {
         description
-	        .appendText("asString(")
-	        .appendDescriptionOf(toStringMatcher)
-	        .appendText(")");
+            .appendText("asString(")
+            .appendDescriptionOf(toStringMatcher)
+            .appendText(")");
     }
 
     /**

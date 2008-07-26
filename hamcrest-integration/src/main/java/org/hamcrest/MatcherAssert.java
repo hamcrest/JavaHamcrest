@@ -23,8 +23,8 @@ public class MatcherAssert {
     }
     
     public static void assertThat(String reason, boolean assertion) {
-    	if (!assertion) {
-    		throw new AssertionError(reason);
-    	}
+        if (!assertion) {
+            throw new AssertionError(reason);
+        }
     }
 }

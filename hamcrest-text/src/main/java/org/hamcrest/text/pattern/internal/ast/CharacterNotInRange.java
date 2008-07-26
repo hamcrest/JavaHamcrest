@@ -7,10 +7,10 @@ public class CharacterNotInRange implements PatternComponent {
     private final String range;
 
     public CharacterNotInRange(String range) {
-	this.range = range;
+        this.range = range;
     }
 
     public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-	builder.append("[^").append(range).append("]");
+        builder.append("[^").append(range).append("]");
     }
 }

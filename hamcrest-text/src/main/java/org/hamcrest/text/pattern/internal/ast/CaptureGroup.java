@@ -8,14 +8,14 @@ public class CaptureGroup implements PatternComponent {
     private PatternComponent pattern;
 
     public CaptureGroup(String name, PatternComponent pattern) {
-	this.name = name;
-	this.pattern = pattern;
+        this.name = name;
+        this.pattern = pattern;
     }
 
     public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-	GroupNamespace subgroups = groups.create(name);
-	builder.append("(");
-	pattern.buildRegex(builder, subgroups);
-	builder.append(")");
+        GroupNamespace subgroups = groups.create(name);
+        builder.append("(");
+        pattern.buildRegex(builder, subgroups);
+        builder.append(")");
     }
 }

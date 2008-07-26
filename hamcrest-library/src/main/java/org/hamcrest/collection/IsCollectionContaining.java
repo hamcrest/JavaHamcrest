@@ -29,8 +29,8 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
 
     public void describeTo(Description description) {
         description
-        	.appendText("a collection containing ")
-        	.appendDescriptionOf(elementMatcher);
+            .appendText("a collection containing ")
+            .appendDescriptionOf(elementMatcher);
     }
 
     @Factory

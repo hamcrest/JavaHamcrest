@@ -10,6 +10,6 @@ public class AnyCharacter implements PatternComponent {
     }
 
     public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-	builder.append(".");
+        builder.append(".");
     }
 }

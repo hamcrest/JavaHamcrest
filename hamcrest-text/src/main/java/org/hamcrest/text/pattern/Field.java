@@ -9,19 +9,18 @@ public class Field implements PatternComponent {
     private PatternComponent sequence;
 
     public Field(String name, PatternComponent pattern) {
-	this.name = name;
-	// TODO: clean this up and make the delimiter changeable
-	Object[] args = new Object[] { "\"", new CaptureGroup(name, pattern),
-		new Literal("\"") };
-	this.sequence = Patterns.sequence(args);
+        this.name = name;
+        // TODO: clean this up and make the delimiter changeable
+        Object[] args = new Object[] { "\"", new CaptureGroup(name, pattern),
+                                        new Literal("\"") };
+        this.sequence = Patterns.sequence(args);
     }
 
     public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-	sequence.buildRegex(builder, groups);
+        sequence.buildRegex(builder, groups);
     }
 
     public String getName() {
-	return name;
+        return name;
     }
-
 }

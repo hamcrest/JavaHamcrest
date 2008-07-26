@@ -36,7 +36,7 @@ public class AnyOf<T> extends ShortcutCombination<T> {
         return new AnyOf<T>(matchers);
     }
     
-	/**
+    /**
      * Evaluates to true if ANY of the passed in matchers evaluate to true.
      */
     @Factory
@@ -49,9 +49,9 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      */
     @Factory
     public static <T> Matcher<T> anyOf(Matcher<T> first, Matcher<? super T> second) {
-    	List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
-    	matchers.add(first);
-    	matchers.add(second);
+        List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
+        matchers.add(first);
+        matchers.add(second);
         return anyOf(matchers);
     }
 
@@ -60,10 +60,10 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      */
     @Factory
     public static <T> Matcher<T> anyOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third) {
-    	List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
-    	matchers.add(first);
-    	matchers.add(second);
-    	matchers.add(third);
+        List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
+        matchers.add(first);
+        matchers.add(second);
+        matchers.add(third);
         return anyOf(matchers);
     }
 
@@ -72,12 +72,12 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      */
     @Factory
     public static <T> Matcher<T> anyOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth) {
-    	List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
-    	matchers.add(first);
-    	matchers.add(second);
-    	matchers.add(third);
-    	matchers.add(fourth);
-    	return anyOf(matchers);
+        List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
+        matchers.add(first);
+        matchers.add(second);
+        matchers.add(third);
+        matchers.add(fourth);
+        return anyOf(matchers);
     }
 
     /**
@@ -85,12 +85,12 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      */
     @Factory
     public static <T> Matcher<T> anyOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth) {
-    	List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
-    	matchers.add(first);
-    	matchers.add(second);
-    	matchers.add(third);
-    	matchers.add(fourth);
-    	matchers.add(fifth);
+        List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
+        matchers.add(first);
+        matchers.add(second);
+        matchers.add(third);
+        matchers.add(fourth);
+        matchers.add(fifth);
         return anyOf(matchers);
     }
 
@@ -99,13 +99,13 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      */
     @Factory
     public static <T> Matcher<T> anyOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth, Matcher<? super T> sixth) {
-    	List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
-    	matchers.add(first);
-    	matchers.add(second);
-    	matchers.add(third);
-    	matchers.add(fourth);
-    	matchers.add(fifth);
-    	matchers.add(sixth);
+        List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
+        matchers.add(first);
+        matchers.add(second);
+        matchers.add(third);
+        matchers.add(fourth);
+        matchers.add(fifth);
+        matchers.add(sixth);
         return anyOf(matchers);
     }
 }

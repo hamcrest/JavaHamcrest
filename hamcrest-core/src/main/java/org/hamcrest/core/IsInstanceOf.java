@@ -33,12 +33,11 @@ public class IsInstanceOf extends BaseMatcher<Object> {
                 .appendText(theClass.getName());
     }
 
-	/**
+    /**
      * Is the value an instance of a particular type?
      */
     @Factory
     public static Matcher<Object> instanceOf(Class<?> type) {
         return new IsInstanceOf(type);
     }
-
 }

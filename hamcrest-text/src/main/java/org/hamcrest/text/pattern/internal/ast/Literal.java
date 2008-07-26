@@ -9,10 +9,10 @@ public class Literal implements PatternComponent {
     private String literal;
 
     public Literal(String literal) {
-	this.literal = literal;
+        this.literal = literal;
     }
 
     public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-	builder.append(Pattern.quote(literal));
+        builder.append(Pattern.quote(literal));
     }
 }

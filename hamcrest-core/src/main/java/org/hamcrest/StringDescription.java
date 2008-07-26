@@ -25,7 +25,7 @@ public class StringDescription extends BaseDescription {
      *   The description of the object.
      */
     public static String toString(SelfDescribing selfDescribing) {
-    	return new StringDescription().appendDescriptionOf(selfDescribing).toString();
+        return new StringDescription().appendDescriptionOf(selfDescribing).toString();
     }
 
     /**

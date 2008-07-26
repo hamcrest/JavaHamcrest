@@ -21,16 +21,16 @@ package org.hamcrest;
  * @param <T> The type of object being matched.
  */
 public abstract class CustomMatcher<T> extends BaseMatcher<T> {
-	private final String fixedDescription;
+    private final String fixedDescription;
 
-	public CustomMatcher(String description) {
-		if (description == null) {
-			throw new IllegalArgumentException("Description should be non null!");
-		}
-		this.fixedDescription = description;
-	}
+    public CustomMatcher(String description) {
+        if (description == null) {
+            throw new IllegalArgumentException("Description should be non null!");
+        }
+        this.fixedDescription = description;
+    }
 
-	public final void describeTo(Description description) {
-		description.appendText(fixedDescription);
-	}
+    public final void describeTo(Description description) {
+        description.appendText(fixedDescription);
+    }
 }

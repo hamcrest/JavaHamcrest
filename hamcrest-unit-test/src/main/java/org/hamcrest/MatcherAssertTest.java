@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.equalTo;
 import junit.framework.TestCase;
 
 public class MatcherAssertTest extends TestCase {
+
     public void testIncludesDescriptionOfTestedValueInErrorMessage() {
         String expected = "expected";
         String actual = "actual";
@@ -40,16 +41,16 @@ public class MatcherAssertTest extends TestCase {
     }
     
     public void testCanTestBooleanDirectly() {
-    	assertThat("success reason message", true);
-    	
-    	try {
-    		assertThat("failing reason message", false);
-    	}
-    	catch (AssertionError e) {
-    		assertEquals("failing reason message", e.getMessage());
-    		return;
-    	}
-    	
-    	fail("should have failed");
+        assertThat("success reason message", true);
+        
+        try {
+            assertThat("failing reason message", false);
+        }
+        catch (AssertionError e) {
+            assertEquals("failing reason message", e.getMessage());
+            return;
+        }
+        
+        fail("should have failed");
     }
 }

@@ -9,7 +9,6 @@ import java.lang.reflect.Method;
  * @author Joe Walnes
  */
 public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
-
     private Class<?> expectedType;
 
     /**
@@ -41,7 +40,7 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
     }
     
     protected TypeSafeMatcher(Class<T> expectedType) {
-    	this.expectedType = expectedType;
+        this.expectedType = expectedType;
     }
 
     /**

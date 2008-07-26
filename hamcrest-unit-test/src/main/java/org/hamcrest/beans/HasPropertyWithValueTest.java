@@ -23,7 +23,6 @@ import org.hamcrest.StringDescription;
  * @since 1.1.0
  */
 public class HasPropertyWithValueTest extends AbstractMatcherTest {
-
     private final BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected");
     private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");
     private final BeanWithInfo beanWithInfo = new BeanWithInfo("with info");
@@ -53,7 +52,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
         Matcher<?> matcher = equalTo(true);
         
         assertDescription("hasProperty(\"property\", " + StringDescription.asString(matcher) + ")",
-                		  hasProperty("property", matcher));
+                          hasProperty("property", matcher));
     }
 
     public static class BeanWithoutInfo {

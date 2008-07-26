@@ -9,7 +9,7 @@ import org.hamcrest.Matcher;
 @SuppressWarnings("unchecked")
 public class IsArrayTest extends AbstractMatcherTest {
 
-	protected Matcher<?> createMatcher() {
+    protected Matcher<?> createMatcher() {
         return array(equalTo("irrelevant"));
     }
 

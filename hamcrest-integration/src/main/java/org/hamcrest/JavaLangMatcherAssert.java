@@ -10,9 +10,9 @@ package org.hamcrest;
  * @author Neil Dunn
  */
 public class JavaLangMatcherAssert {
-	private JavaLangMatcherAssert() {};
+    private JavaLangMatcherAssert() {};
 
     public static <T> boolean that(T argument, Matcher<? super T> matcher) {
-    	return matcher.matches(argument);
+        return matcher.matches(argument);
     }
 }

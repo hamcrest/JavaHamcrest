@@ -27,8 +27,8 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
 
     public void describeTo(Description description) {
         description
-        	.appendText("an array containing ")
-        	.appendDescriptionOf(elementMatcher);
+            .appendText("an array containing ")
+            .appendDescriptionOf(elementMatcher);
     }
 
     /**

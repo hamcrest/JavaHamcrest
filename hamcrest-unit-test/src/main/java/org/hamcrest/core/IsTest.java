@@ -11,7 +11,7 @@ public class IsTest extends AbstractMatcherTest {
         return is("something");
     }
 
-	public void testJustMatchesTheSameWayTheUnderylingMatcherDoes() {
+    public void testJustMatchesTheSameWayTheUnderylingMatcherDoes() {
         assertMatches("should match", is(equalTo(true)), true);
         assertMatches("should match", is(equalTo(false)), false);
         assertDoesNotMatch("should not match", is(equalTo(true)), false);
