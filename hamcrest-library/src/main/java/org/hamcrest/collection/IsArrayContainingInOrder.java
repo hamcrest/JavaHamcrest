@@ -14,10 +14,10 @@ import org.hamcrest.TypeSafeMatcher;
 
 public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     private final Collection<Matcher<? super E>> matchers;
-    private final IsIterableContainingInAnyOrder<E> iterableMatcher;
+    private final IsIterableContainingInOrder<E> iterableMatcher;
 
     public IsArrayContainingInOrder(Collection<Matcher<? super E>> matchers) {
-        this.iterableMatcher = new IsIterableContainingInAnyOrder<E>(matchers);
+        this.iterableMatcher = new IsIterableContainingInOrder<E>(matchers);
         this.matchers = matchers;
     }
 
