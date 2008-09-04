@@ -38,6 +38,12 @@ public abstract class AbstractMatcherTest extends TestCase {
         createMatcher().matches(new UnknownType());
     }
 
+    public void testDoesNotHaveAnEmptyDescription() throws Exception {
+      Description description = new StringDescription();
+      description.appendDescriptionOf(createMatcher());
+      assertFalse(description.toString().length() == 0);
+    }
+
     public static class UnknownType {
     }
 

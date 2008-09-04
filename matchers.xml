@@ -39,6 +39,7 @@
     <!-- Text -->
     <factory class="org.hamcrest.text.IsEqualIgnoringCase"/>
     <factory class="org.hamcrest.text.IsEqualIgnoringWhiteSpace"/>
+    <factory class="org.hamcrest.text.IsEmptyOrNullString"/>
     <factory class="org.hamcrest.text.StringContains"/>
     <factory class="org.hamcrest.text.StringEndsWith"/>
     <factory class="org.hamcrest.text.StringStartsWith"/>
