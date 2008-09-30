@@ -35,6 +35,7 @@ public class StringDescription extends BaseDescription {
         return toString(selfDescribing);
     }
 
+    @Override
     protected void append(String str) {
         try {
             out.append(str);
@@ -43,6 +44,7 @@ public class StringDescription extends BaseDescription {
         }
     }
 
+    @Override
     protected void append(char c) {
         try {
             out.append(c);
@@ -54,6 +56,7 @@ public class StringDescription extends BaseDescription {
     /**
      * Returns the description as a string.
      */
+    @Override
     public String toString() {
         return out.toString();
     }

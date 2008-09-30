@@ -1,11 +1,5 @@
 package org.hamcrest.xml;
 
-import org.hamcrest.Description;
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
-import org.w3c.dom.Node;
-
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.namespace.QName;
 import javax.xml.xpath.XPath;
@@ -14,12 +8,18 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
+import org.w3c.dom.Node;
+
 /**
  * Applies a Matcher to a given XML Node in an existing XML Node tree, specified by an XPath expression.
  *
  * @author Joe Walnes
  */
-public class HasXPath extends TypeSafeMatcher<Node> {
+public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     private final Matcher<?> valueMatcher;
     private final XPathExpression compiledXPath;
     private final String xpathString;
@@ -59,15 +59,22 @@ public class HasXPath extends TypeSafeMatcher<Node> {
         }
     }
 
-    public boolean matchesSafely(Node item) {
+    @Override
+	public boolean matchesSafely(Node item, Description mismatchDescription) {
         try {
             Object result = compiledXPath.evaluate(item, evaluationMode);
             if (result == null) {
-                return false;
+            	  mismatchDescription.appendText("xpath returned no results.");
+            	  return false;
             } else if (valueMatcher == null) {
                 return true;
             } else {
-                return valueMatcher.matches(result);
+            	  boolean valueMatched = valueMatcher.matches(result);
+            	  if (!valueMatched) {
+                  mismatchDescription.appendText("xpath result ");
+            	    valueMatcher.describeMismatch(result, mismatchDescription);
+            	  }
+            	  return valueMatched;
             }
         } catch (XPathExpressionException e) {
             return false;

@@ -12,12 +12,14 @@ import org.hamcrest.StringDescription;
 public class HasToStringTest extends AbstractMatcherTest {
     private static final String TO_STRING_RESULT = "toString result";
     private static final Object ARG = new Object() {
-        public String toString() {
+        @Override
+		public String toString() {
             return TO_STRING_RESULT;
         }
     };
 
-    protected Matcher<?> createMatcher() {
+    @Override
+	protected Matcher<?> createMatcher() {
         return hasToString(equalTo("irrelevant"));
     }
 
@@ -37,6 +39,11 @@ public class HasToStringTest extends AbstractMatcherTest {
 
         assertEquals("asString(" + descriptionOf(toStringMatcher) + ")", descriptionOf(matcher));
     }
+
+    public void testMismatchContainsToStringValue() {
+    	String expectedMismatchString = "toString() was \"Cheese\"";
+        assertMismatchDescription(expectedMismatchString, hasToString(TO_STRING_RESULT), "Cheese");
+	}
 
     private String descriptionOf(Matcher<?> matcher) {
         return StringDescription.asString(matcher);

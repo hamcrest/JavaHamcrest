@@ -2,20 +2,31 @@ package org.hamcrest.object;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
-import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
-public class HasToString<T> extends BaseMatcher<T> {
+public class HasToString<T> extends DiagnosingMatcher<T> {
     private final Matcher<String> toStringMatcher;
 
     public HasToString(Matcher<String> toStringMatcher) {
         this.toStringMatcher = toStringMatcher;
     }
 
-    public boolean matches(Object item) {
-        return item != null && toStringMatcher.matches(item.toString());
+    @Override
+    public boolean matches(Object item, Description mismatchDescription) {
+        if (item == null) {
+            mismatchDescription.appendText("item was null");
+            return false;
+        }
+        String toString = item.toString();
+        if (!toStringMatcher.matches(toString)) {
+            mismatchDescription.appendText("toString() ");
+            toStringMatcher.describeMismatch(toString, mismatchDescription);
+            return false;
+        }
+        return true;
     }
 
     public void describeTo(Description description) {

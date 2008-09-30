@@ -17,6 +17,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
         this.elementMatchers = elementMatchers.clone();
     }
     
+    @Override
     public boolean matchesSafely(T[] array) {
         if (array.length != elementMatchers.length) return false;
         

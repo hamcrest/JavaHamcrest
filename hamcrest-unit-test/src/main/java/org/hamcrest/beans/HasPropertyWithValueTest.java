@@ -27,7 +27,8 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");
     private final BeanWithInfo beanWithInfo = new BeanWithInfo("with info");
 
-    protected Matcher<?> createMatcher() {
+    @Override
+	protected Matcher<?> createMatcher() {
         return hasProperty("irrelevant", anything());
     }
 
@@ -50,10 +51,18 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
     public void testDescribeTo() {
         Matcher<?> matcher = equalTo(true);
-        
+
         assertDescription("hasProperty(\"property\", " + StringDescription.asString(matcher) + ")",
                           hasProperty("property", matcher));
     }
+
+    public void testDescribesMissingPropertyMismatch() {
+		assertMismatchDescription("property \"honk\" was missing.", hasProperty("honk", anything()), shouldNotMatch);
+	}
+
+    public void testDescribesMismatchingPropertyValueMismatch() {
+    	assertMismatchDescription("property \"property\" was \"not expected\".", hasProperty("property", equalTo("foo")), shouldNotMatch);
+	}
 
     public static class BeanWithoutInfo {
         private String property;
@@ -73,13 +82,14 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
         public void setWriteOnlyProperty(float property) {
         }
 
-        public String toString() {
+        @Override
+		public String toString() {
             return "[Person: " + property + "]";
         }
     }
 
     public static class BeanWithInfo {
-        private String propertyValue;
+        private final String propertyValue;
 
         public BeanWithInfo(String propertyValue) {
             this.propertyValue = propertyValue;
@@ -91,7 +101,8 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     }
 
     public static class BeanWithInfoBeanInfo extends SimpleBeanInfo {
-        public PropertyDescriptor[] getPropertyDescriptors() {
+        @Override
+		public PropertyDescriptor[] getPropertyDescriptors() {
             try {
                 return new PropertyDescriptor[]{
                         new PropertyDescriptor("property", BeanWithInfo.class, "property", null)

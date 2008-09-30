@@ -2,12 +2,12 @@
  */
 package org.hamcrest.beans;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.Factory;
-import org.hamcrest.TypeSafeMatcher;
-
 import java.beans.IntrospectionException;
+
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Matcher that checks that an object has a JavaBean property
@@ -26,7 +26,9 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
         this.propertyName = propertyName;
     }
 
-    public boolean matchesSafely(T obj) {
+    @Override
+	public boolean matchesSafely(T obj) {
+    	// TODO(ngd): this is not type safe.
         try {
             return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null;
         } catch (IntrospectionException e) {

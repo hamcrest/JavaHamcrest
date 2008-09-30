@@ -16,7 +16,8 @@ public class MatcherAssert {
                        .appendDescriptionOf(matcher)
                        .appendText("\n     got: ")
                        .appendValue(actual)
-                       .appendText("\n");
+                       .appendText("\nmismatch: ");
+            matcher.describeMismatch(actual, description);
             
             throw new AssertionError(description.toString());
         }

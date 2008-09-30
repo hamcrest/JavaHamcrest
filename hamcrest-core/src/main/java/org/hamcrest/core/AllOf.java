@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.hamcrest.Description;
+import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -12,20 +13,28 @@ import org.hamcrest.Matcher;
  * Calculates the logical conjunction of multiple matchers. Evaluation is shortcut, so
  * subsequent matchers are not called if an earlier matcher returns <code>false</code>.
  */
-public class AllOf<T> extends ShortcutCombination<T> {
+public class AllOf<T> extends DiagnosingMatcher<T> {
+
+	private final Iterable<Matcher<? super T>> matchers;
 
     public AllOf(Iterable<Matcher<? super T>> matchers) {
-        super(matchers);
+    	this.matchers = matchers;
     }
 
     @Override
-    public boolean matches(Object o) {
-        return matches(o, false);
+    protected boolean matches(Object o, Description mismatchDescription) {
+    	for (Matcher<? super T> matcher : matchers) {
+            if (!matcher.matches(o)) {
+            	mismatchDescription.appendDescriptionOf(matcher).appendText(" ");
+            	matcher.describeMismatch(o, mismatchDescription);
+              return false;
+            }
+        }
+    	return true;
     }
 
-    @Override
     public void describeTo(Description description) {
-        describeTo(description, "and");
+    	description.appendList("(", " " + "and" + " ", ")", matchers);
     }
 
     /**

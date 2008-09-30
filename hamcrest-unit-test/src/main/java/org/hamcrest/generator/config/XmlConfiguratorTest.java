@@ -21,6 +21,7 @@ public class XmlConfiguratorTest extends TestCase {
     private MockSugarConfiguration sugarConfiguration;
     private XmlConfigurator config;
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         sugarConfiguration = new MockSugarConfiguration();

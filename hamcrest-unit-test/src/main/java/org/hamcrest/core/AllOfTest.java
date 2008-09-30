@@ -10,12 +10,12 @@ import org.hamcrest.Matcher;
 
 public class AllOfTest extends AbstractMatcherTest {
 
+    @Override
     @SuppressWarnings("unchecked")
     protected Matcher<?> createMatcher() {
         return allOf(equalTo("irrelevant"));
     }
     
-    @SuppressWarnings("unchecked")
     public void testEvaluatesToTheTheLogicalConjunctionOfTwoOtherMatchers() {
         assertThat("good", allOf(equalTo("good"), equalTo("good")));
 
@@ -24,7 +24,6 @@ public class AllOfTest extends AbstractMatcherTest {
         assertThat("good", not(allOf(equalTo("bad"), equalTo("bad"))));
     }
 
-    @SuppressWarnings("unchecked")
     public void testEvaluatesToTheTheLogicalConjunctionOfManyOtherMatchers() {
         assertThat("good", allOf(equalTo("good"), equalTo("good"), equalTo("good"), equalTo("good"), equalTo("good")));
         assertThat("good", not(allOf(equalTo("good"), equalTo("good"), equalTo("bad"), equalTo("good"), equalTo("good"))));
@@ -45,4 +44,8 @@ public class AllOfTest extends AbstractMatcherTest {
         assertDescription("(\"good\" and \"bad\" and \"ugly\")",
                 allOf(equalTo("good"), equalTo("bad"), equalTo("ugly")));
     }
+
+    public void testMismatchDescriptionDescribesFirstFailingMatch() {
+    	assertMismatchDescription("\"good\" was \"bad\"", allOf(equalTo("bad"), equalTo("good")), "bad");
+	}
 }

@@ -1,20 +1,22 @@
 package org.hamcrest.xml;
 
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.text.StringContains.containsString;
 import static org.hamcrest.xml.HasXPath.hasXPath;
-import org.w3c.dom.Document;
+
+import java.io.ByteArrayInputStream;
+import java.util.HashSet;
+import java.util.Iterator;
 
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.ByteArrayInputStream;
-import java.util.HashSet;
-import java.util.Iterator;
+
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
+import org.w3c.dom.Document;
 
 /**
  * @author Joe Walnes
@@ -23,7 +25,8 @@ public class HasXPathTest extends AbstractMatcherTest {
     private Document xml;
     private NamespaceContext ns;
 
-    protected void setUp() throws Exception {
+    @Override
+	protected void setUp() throws Exception {
         super.setUp();
         xml = parse(""
                 + "<root type='food'>\n"
@@ -54,7 +57,8 @@ public class HasXPathTest extends AbstractMatcherTest {
       };
     }
 
-    protected Matcher<?> createMatcher() {
+    @Override
+	protected Matcher<?> createMatcher() {
         return hasXPath("//irrelevant");
     }
 
@@ -106,6 +110,14 @@ public class HasXPathTest extends AbstractMatcherTest {
         assertDescription("an XML document with XPath /some/path",
                 hasXPath("/some/path"));
     }
+
+    public void testDescribesMissingNodeMismatch() {
+    	assertMismatchDescription("xpath returned no results.", hasXPath("//honky"), xml);
+	}
+
+    public void testDescribesIncorrectNodeValueMismatch() {
+    	assertMismatchDescription("xpath result was \"Edam\"", hasXPath("//something[1]/cheese", equalTo("parmesan")), xml);
+	}
 
     private Document parse(String xml) throws Exception {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();

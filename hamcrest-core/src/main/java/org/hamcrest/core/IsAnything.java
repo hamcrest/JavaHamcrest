@@ -13,14 +13,14 @@ import org.hamcrest.BaseMatcher;
  */
 public class IsAnything<T> extends BaseMatcher<T> {
 
-    private final String description;
+    private final String message;
 
     public IsAnything() {
         this("ANYTHING");
     }
 
-    public IsAnything(String description) {
-        this.description = description;
+    public IsAnything(String message) {
+        this.message = message;
     }
 
     public boolean matches(Object o) {
@@ -28,7 +28,7 @@ public class IsAnything<T> extends BaseMatcher<T> {
     }
 
     public void describeTo(Description description) {
-        description.appendText(this.description);
+        description.appendText(message);
     }
 
     /**

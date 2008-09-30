@@ -16,6 +16,10 @@ public abstract class BaseMatcher<T> implements Matcher<T> {
         // See Matcher interface for an explanation of this method.
     }
 
+    public void describeMismatch(Object item, Description description) {
+    	description.appendText("was ").appendValue(item);
+    }
+
     @Override
     public String toString() {
         return StringDescription.toString(this);

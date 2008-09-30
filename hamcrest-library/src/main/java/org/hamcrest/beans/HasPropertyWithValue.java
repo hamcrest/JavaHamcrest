@@ -2,15 +2,15 @@
  */
 package org.hamcrest.beans;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.Factory;
-import org.hamcrest.TypeSafeMatcher;
-
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * Matcher that asserts that a JavaBean property on an argument passed to the
@@ -65,7 +65,7 @@ import java.lang.reflect.Method;
  * @author Nat Pryce
  * @author Steve Freeman
  */
-public class HasPropertyWithValue<T> extends TypeSafeMatcher<T> {
+public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
 
     private static final Object[] NO_ARGUMENTS = new Object[0];
 
@@ -77,11 +77,22 @@ public class HasPropertyWithValue<T> extends TypeSafeMatcher<T> {
         this.value = value;
     }
 
-    public boolean matchesSafely(T argument) {
+    @Override
+	public boolean matchesSafely(T argument, Description mismatchDescription) {
         try {
+            mismatchDescription.appendText("property \"" + propertyName + "\" "); 
             Method readMethod = getReadMethod(argument);
-            return readMethod != null
-                    && value.matches(readMethod.invoke(argument, NO_ARGUMENTS));
+            if (readMethod == null) {
+            	mismatchDescription.appendText("was missing.");
+            	return false;
+            }
+            Object propertyValue = readMethod.invoke(argument, NO_ARGUMENTS);
+            boolean valueMatches = value.matches(propertyValue);
+            if (!valueMatches) {
+            	value.describeMismatch(propertyValue, mismatchDescription);
+            	mismatchDescription.appendText(".");
+            }
+            return valueMatches;
         } catch (IntrospectionException e) {
             return false;
         } catch (IllegalArgumentException e) {
