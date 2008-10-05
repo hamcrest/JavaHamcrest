@@ -9,9 +9,9 @@ public class MatcherAssertTest extends TestCase {
     public void testIncludesDescriptionOfTestedValueInErrorMessage() {
         String expected = "expected";
         String actual = "actual";
-
-        String expectedMessage = "identifier\nExpected: \"expected\"\n     got: \"actual\"\n";
-
+        
+        String expectedMessage = "identifier\nExpected: \"expected\"\n     but: was \"actual\"";
+        
         try {
             assertThat("identifier", actual, equalTo(expected));
         }
@@ -19,16 +19,16 @@ public class MatcherAssertTest extends TestCase {
             assertTrue(e.getMessage().startsWith(expectedMessage));
             return;
         }
-
+        
         fail("should have failed");
     }
 
     public void testDescriptionCanBeElided() {
         String expected = "expected";
         String actual = "actual";
-
-        String expectedMessage = "\nExpected: \"expected\"\n     got: \"actual\"\n";
-
+        
+        String expectedMessage = "\nExpected: \"expected\"\n     but: was \"actual\"";
+        
         try {
             assertThat(actual, equalTo(expected));
         }
@@ -36,13 +36,13 @@ public class MatcherAssertTest extends TestCase {
             assertTrue(e.getMessage().startsWith(expectedMessage));
             return;
         }
-
+        
         fail("should have failed");
     }
-
+    
     public void testCanTestBooleanDirectly() {
         assertThat("success reason message", true);
-
+        
         try {
             assertThat("failing reason message", false);
         }
@@ -50,7 +50,7 @@ public class MatcherAssertTest extends TestCase {
             assertEquals("failing reason message", e.getMessage());
             return;
         }
-
+        
         fail("should have failed");
     }
 

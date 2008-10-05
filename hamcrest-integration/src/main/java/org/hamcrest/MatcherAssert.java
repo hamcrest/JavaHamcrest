@@ -14,9 +14,7 @@ public class MatcherAssert {
             description.appendText(reason)
                        .appendText("\nExpected: ")
                        .appendDescriptionOf(matcher)
-                       .appendText("\n     got: ")
-                       .appendValue(actual)
-                       .appendText("\nmismatch: ");
+                       .appendText("\n     but: ");
             matcher.describeMismatch(actual, description);
             
             throw new AssertionError(description.toString());
