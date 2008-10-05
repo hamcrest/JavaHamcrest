@@ -70,7 +70,7 @@ public class MatcherAssertTest extends TestCase {
         }
       };
 
-      String expectedMessage = "\nExpected: Something cool\n     got: \"Value\"\nmismatch: Not cool";
+      String expectedMessage = "\nExpected: Something cool\n     but: Not cool";
 
       try {
         assertThat("Value", matcherWithCustomMismatchDescription);
