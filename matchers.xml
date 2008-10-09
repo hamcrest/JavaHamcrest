@@ -2,6 +2,7 @@
 
     <!-- Core -->
     <factory class="org.hamcrest.core.Is"/>
+    <factory class="org.hamcrest.core.IsCollectionContaining"/>
     <factory class="org.hamcrest.core.IsNot"/>
     <factory class="org.hamcrest.core.IsEqual"/>
     <factory class="org.hamcrest.core.IsInstanceOf"/>
@@ -11,6 +12,9 @@
     <factory class="org.hamcrest.core.IsAnything"/>
     <factory class="org.hamcrest.core.IsNull"/>
     <factory class="org.hamcrest.core.DescribedAs"/>
+    <factory class="org.hamcrest.core.StringContains"/>
+    <factory class="org.hamcrest.core.StringEndsWith"/>
+    <factory class="org.hamcrest.core.StringStartsWith"/>
 
     <!-- Collection -->
     <factory class="org.hamcrest.collection.IsArray"/>
@@ -18,15 +22,14 @@
     <factory class="org.hamcrest.collection.IsArrayContainingInOrder"/>
     <factory class="org.hamcrest.collection.IsArrayContainingInAnyOrder"/>
     <factory class="org.hamcrest.collection.IsArrayContainingSingleItem"/>
-	<factory class="org.hamcrest.collection.IsArrayWithSize"/>
-    <factory class="org.hamcrest.collection.IsCollectionContaining"/>
+  	<factory class="org.hamcrest.collection.IsArrayWithSize"/>
     <factory class="org.hamcrest.collection.IsCollectionWithSize"/>
-	<factory class="org.hamcrest.collection.IsEmptyCollection"/>    	
-	<factory class="org.hamcrest.collection.IsEmptyIterable"/>    
+    <factory class="org.hamcrest.collection.IsEmptyCollection"/>    	
+    <factory class="org.hamcrest.collection.IsEmptyIterable"/>    
     <factory class="org.hamcrest.collection.IsIterableContainingInOrder"/>
     <factory class="org.hamcrest.collection.IsIterableContainingInAnyOrder"/>
     <factory class="org.hamcrest.collection.IsIterableContainingSingleItem"/>
-	<factory class="org.hamcrest.collection.IsIterableWithSize"/>   	 	
+    <factory class="org.hamcrest.collection.IsIterableWithSize"/>   	 	
     <factory class="org.hamcrest.collection.IsMapContaining"/>
     <factory class="org.hamcrest.collection.IsMapContainingKey"/>
     <factory class="org.hamcrest.collection.IsMapContainingValue"/>
@@ -39,9 +42,6 @@
     <!-- Text -->
     <factory class="org.hamcrest.text.IsEqualIgnoringCase"/>
     <factory class="org.hamcrest.text.IsEqualIgnoringWhiteSpace"/>
-    <factory class="org.hamcrest.text.StringContains"/>
-    <factory class="org.hamcrest.text.StringEndsWith"/>
-    <factory class="org.hamcrest.text.StringStartsWith"/>
 
     <!-- Object -->
     <factory class="org.hamcrest.object.HasToString"/>

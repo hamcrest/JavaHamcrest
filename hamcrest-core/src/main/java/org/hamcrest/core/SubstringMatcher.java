@@ -1,4 +1,4 @@
-package org.hamcrest.text;
+package org.hamcrest.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
@@ -14,6 +14,7 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
         this.substring = substring;
     }
 
+    @Override
     public boolean matchesSafely(String item) {
         return evalSubstringOf(item);
     }

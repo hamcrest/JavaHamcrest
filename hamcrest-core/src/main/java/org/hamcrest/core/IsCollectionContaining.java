@@ -1,4 +1,4 @@
-package org.hamcrest.collection;
+package org.hamcrest.core;
 
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -18,6 +18,7 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
         this.elementMatcher = elementMatcher;
     }
 
+    @Override
     public boolean matchesSafely(Iterable<T> collection) {
         for (T item : collection) {
             if (elementMatcher.matches(item)){

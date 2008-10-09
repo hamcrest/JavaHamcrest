@@ -28,6 +28,7 @@ public class PatternMatcher extends TypeSafeMatcher<String> implements PatternCo
         return pattern;
     }
 
+    @Override
     public String toString() {
         return pattern.toString();
     }
@@ -37,6 +38,7 @@ public class PatternMatcher extends TypeSafeMatcher<String> implements PatternCo
         description.appendValue(this.toString());
     }
 
+    @Override
     public boolean matchesSafely(String s) {
         return pattern.matcher(s).matches();
     }
@@ -45,13 +47,13 @@ public class PatternMatcher extends TypeSafeMatcher<String> implements PatternCo
         Matcher matcher = pattern.matcher(input);
         if (matcher.matches()) {
             return new Parse(groups, matcher);
-        } else {
-            throw new PatternMatchException("did not match input: " + input);
         }
+        
+        throw new PatternMatchException("did not match input: " + input);
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-        root.buildRegex(builder, groups);
+    public void buildRegex(StringBuilder builder, GroupNamespace regExGroup) {
+        root.buildRegex(builder, regExGroup);
     }
 
     private static Pattern compile(PatternComponent root, GroupNamespace groups) {

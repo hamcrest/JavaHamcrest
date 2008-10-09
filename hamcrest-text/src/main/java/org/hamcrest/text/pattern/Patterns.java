@@ -90,10 +90,6 @@ public abstract class Patterns {
     }
 
     public static PatternComponent toPattern(Object object) {
-        if (object instanceof PatternComponent) {
-            return (PatternComponent) object;
-        } else {
-            return text(object.toString());
-        }
+        return (object instanceof PatternComponent) ? (PatternComponent) object : text(object.toString());
     }
 }

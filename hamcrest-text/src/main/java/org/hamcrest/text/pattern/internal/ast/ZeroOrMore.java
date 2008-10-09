@@ -8,6 +8,7 @@ public class ZeroOrMore extends PatternModifier {
         super(pattern);
     }
 
+    @Override
     protected void appendModifier(StringBuilder builder) {
         builder.append("*");
     }

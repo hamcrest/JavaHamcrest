@@ -1,8 +1,8 @@
 package org.hamcrest.collection;
 
 import static java.util.Arrays.asList;
-import static org.hamcrest.collection.IsCollectionContaining.hasItem;
-import static org.hamcrest.collection.IsCollectionContaining.hasItems;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
+import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 public class IsCollectionContainingTest extends AbstractMatcherTest {
+    @Override
     protected Matcher<?> createMatcher() {
         return hasItem(equalTo("irrelevant"));
     }

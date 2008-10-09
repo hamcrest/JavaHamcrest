@@ -2,7 +2,8 @@
  */
 package org.hamcrest.text;
 
-import static org.hamcrest.text.StringContains.containsString;
+import static org.hamcrest.core.StringContains.containsString;
+
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 

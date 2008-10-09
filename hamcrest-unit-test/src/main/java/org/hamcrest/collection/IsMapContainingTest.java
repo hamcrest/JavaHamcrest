@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class IsMapContainingTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return IsMapContaining.hasEntry("irrelevant", "irrelevant");
     }

@@ -2,7 +2,8 @@
  */
 package org.hamcrest.text;
 
-import static org.hamcrest.text.StringEndsWith.endsWith;
+import static org.hamcrest.core.StringEndsWith.endsWith;
+
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 

@@ -1,7 +1,7 @@
 package org.hamcrest;
 
 import static org.hamcrest.JavaLangMatcherAssert.that;
-import static org.hamcrest.text.StringStartsWith.startsWith;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 import junit.framework.TestCase;
 
 public class JavaLangMatcherAssertTest extends TestCase {

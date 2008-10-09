@@ -23,7 +23,7 @@ public class ListOf implements SeparablePatternComponent {
             .buildRegex(builder, groups);
     }
 
-    public PatternComponent separatedBy(Object separator) {
-        return new ListOf(element, toPattern(separator));
+    public PatternComponent separatedBy(Object aSeparator) {
+        return new ListOf(element, toPattern(aSeparator));
     }
 }

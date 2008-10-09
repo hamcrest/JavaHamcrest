@@ -24,6 +24,7 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
         this.string = string;
     }
 
+    @Override
     public boolean matchesSafely(String item) {
         return stripSpace(string).equalsIgnoreCase(stripSpace(item));
     }
@@ -34,11 +35,11 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
                 .appendText(")");
     }
 
-    public String stripSpace(String string) {
+    public String stripSpace(String toBeStripped) {
         StringBuilder result = new StringBuilder();
         boolean lastWasSpace = true;
-        for (int i = 0; i < string.length(); i++) {
-            char c = string.charAt(i);
+        for (int i = 0; i < toBeStripped.length(); i++) {
+            char c = toBeStripped.charAt(i);
             if (Character.isWhitespace(c)) {
                 if (!lastWasSpace) {
                     result.append(' ');

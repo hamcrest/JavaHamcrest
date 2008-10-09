@@ -2,7 +2,8 @@
  */
 package org.hamcrest.text;
 
-import static org.hamcrest.text.StringStartsWith.startsWith;
+import static org.hamcrest.core.StringStartsWith.startsWith;
+
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 

@@ -10,7 +10,7 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 public class DescribedAsTest extends AbstractMatcherTest {
-    protected Matcher<?> createMatcher() {
+    @Override protected Matcher<?> createMatcher() {
         return describedAs("irrelevant", anything());
     }
 

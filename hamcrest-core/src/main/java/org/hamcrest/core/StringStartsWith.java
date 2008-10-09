@@ -1,6 +1,6 @@
 /*  Copyright (c) 2000-2006 hamcrest.org
  */
-package org.hamcrest.text;
+package org.hamcrest.core;
 
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -13,10 +13,12 @@ public class StringStartsWith extends SubstringMatcher {
         super(substring);
     }
 
+    @Override
     protected boolean evalSubstringOf(String s) {
         return s.startsWith(substring);
     }
 
+    @Override
     protected String relationship() {
         return "starting with";
     }

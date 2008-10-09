@@ -8,6 +8,7 @@ public class Optional extends PatternModifier implements PatternComponent {
         super(pattern);
     }
 
+    @Override
     protected void appendModifier(StringBuilder builder) {
         builder.append("?");
     }
