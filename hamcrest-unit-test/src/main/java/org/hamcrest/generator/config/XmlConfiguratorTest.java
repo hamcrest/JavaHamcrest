@@ -11,6 +11,7 @@ import junit.framework.TestCase;
 
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.core.CombinableMatcher;
 import org.hamcrest.generator.FactoryMethod;
 import org.hamcrest.generator.FactoryWriter;
 import org.hamcrest.generator.SugarConfiguration;
@@ -36,11 +37,11 @@ public class XmlConfiguratorTest extends TestCase {
                 "</matchers>"));
 
         assertThat(sugarConfiguration.factoryMethods(),
-            hasItem(new FactoryMethod(SomeMatcher.class.getName(), "matcher1")));
+            hasItem(new FactoryMethod(SomeMatcher.class.getName(), "matcher1", "org.hamcrest.Matcher")));
         assertThat(sugarConfiguration.factoryMethods(),
-            hasItem(new FactoryMethod(SomeMatcher.class.getName(), "matcher2")));
+            hasItem(new FactoryMethod(SomeMatcher.class.getName(), "matcher2", "org.hamcrest.Matcher")));
         assertThat(sugarConfiguration.factoryMethods(),
-            hasItem(new FactoryMethod(AnotherMatcher.class.getName(), "matcher3")));
+            hasItem(new FactoryMethod(AnotherMatcher.class.getName(), "matcher3", "org.hamcrest.CombinableMatcher")));
     }
 
     private InputSource createXml(String xml) {
@@ -65,7 +66,7 @@ public class XmlConfiguratorTest extends TestCase {
     @SuppressWarnings("unchecked")
     public static class AnotherMatcher {
         @Factory
-        public static Matcher matcher3() {
+        public static CombinableMatcher matcher3() {
             return null;
         }
     }

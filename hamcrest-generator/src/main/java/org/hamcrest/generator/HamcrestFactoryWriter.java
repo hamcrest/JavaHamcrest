@@ -54,7 +54,7 @@ public class HamcrestFactoryWriter implements FactoryWriter {
         indent();
         output.append("public static ");
         writeGenericTypeParameters(factoryMethodToDelegateTo);
-        output.append("org.hamcrest.Matcher");
+        output.append(factoryMethodToDelegateTo.getReturnType());
         if (factoryMethodToDelegateTo.getGenerifiedType() != null) {
             output.append('<').append(factoryMethodToDelegateTo.getGenerifiedType()).append('>');
         }

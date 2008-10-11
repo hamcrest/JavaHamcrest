@@ -16,7 +16,7 @@ public class EasyMock2FactoryWriterTest extends TestCase {
     }
 
     public void testWritesMethodDelegationMethodWrappedInAdapter() throws IOException {
-        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "anyObject");
+        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "anyObject", "unusedReturnType");
 
         factoryWriter.writeMethod(method.getName(), method);
         assertEquals("" +
@@ -30,7 +30,7 @@ public class EasyMock2FactoryWriterTest extends TestCase {
     }
 
     public void testWritesReturnType() throws IOException {
-        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "anyString");
+        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "anyString", "unusedReturnType");
         method.setGenerifiedType("String");
 
         factoryWriter.writeMethod(method.getName(), method);
@@ -45,7 +45,7 @@ public class EasyMock2FactoryWriterTest extends TestCase {
     }
 
     public void testWritesAdvancedGenerifiedMatcherType() throws IOException {
-        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "weirdThing");
+        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "weirdThing", "unusedReturnType");
         method.setGenerifiedType("java.util.Map<com.Foo<Cheese>,?>");
 
         factoryWriter.writeMethod(method.getName(), method);
@@ -60,7 +60,7 @@ public class EasyMock2FactoryWriterTest extends TestCase {
     }
 
     public void testWritesParameters() throws IOException {
-        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "between");
+        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "between", "unusedReturnType");
         method.addParameter("int[]", "lower");
         method.addParameter("com.blah.Cheesable<Long>...", "upper");
 
@@ -76,7 +76,7 @@ public class EasyMock2FactoryWriterTest extends TestCase {
     }
 
     public void testWritesExceptions() throws IOException {
-        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "tricky");
+        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "tricky", "unusedReturnType");
         method.addException("java.io.IOException");
         method.addException("com.foo.CheeselessException");
 

@@ -13,6 +13,7 @@ public class QuickReferenceWriterTest extends TestCase {
     private PrintStream expected;
     private QuickReferenceWriter writer;
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         actualBuffer = new ByteArrayOutputStream();
@@ -23,13 +24,13 @@ public class QuickReferenceWriterTest extends TestCase {
     }
 
     public void testWritesSimplifiedSummaryOfMatchers() throws IOException {
-        FactoryMethod namedMethod = new FactoryMethod("SomeClass", "someMethod");
+        FactoryMethod namedMethod = new FactoryMethod("SomeClass", "someMethod", "unusedReturnType");
         namedMethod.addParameter("Cheese", "a");
         namedMethod.addParameter("int", "b");
         namedMethod.setGenerifiedType("String");
         writer.writeMethod("namedMethod", namedMethod);
 
-        FactoryMethod anotherMethod = new FactoryMethod("SomeClass", "anotherMethod");
+        FactoryMethod anotherMethod = new FactoryMethod("SomeClass", "anotherMethod", "unusedReturnType");
         anotherMethod.setGenerifiedType("int");
         writer.writeMethod("anotherMethod", anotherMethod);
 
@@ -39,7 +40,7 @@ public class QuickReferenceWriterTest extends TestCase {
     }
 
     public void testRemovesPackageNames() throws IOException {
-        FactoryMethod namedMethod = new FactoryMethod("SomeClass", "someMethod");
+        FactoryMethod namedMethod = new FactoryMethod("SomeClass", "someMethod", "unusedReturnType");
         namedMethod.addParameter("com.blah.Foo", "a");
         namedMethod.addParameter("com.foo.Cheese<x.y.Zoo>", "b");
         namedMethod.setGenerifiedType("java.lang.Cheese");

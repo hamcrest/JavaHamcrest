@@ -10,7 +10,7 @@ import java.util.List;
 public class QDoxFactoryReaderTest extends TestCase {
 
     public void testExtractsOriginalParameterNamesFromSource() {
-        FactoryMethod method = new FactoryMethod("org.SomeClass", "someMethod");
+        FactoryMethod method = new FactoryMethod("org.SomeClass", "someMethod", "unusedReturnType");
         method.addParameter("java.lang.String", "badParamName");
 
         String input = "" +
@@ -25,7 +25,7 @@ public class QDoxFactoryReaderTest extends TestCase {
     }
 
     public void testExtractsOriginalJavaDocFromSource() {
-        FactoryMethod method = new FactoryMethod("org.SomeClass", "someMethod");
+        FactoryMethod method = new FactoryMethod("org.SomeClass", "someMethod", "unusedReturnType");
 
         String input = "" +
                 "package org;\n" +

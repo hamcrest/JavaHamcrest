@@ -18,6 +18,7 @@ public class FactoryMethod {
 
     private final String matcherClass;
     private final String factoryMethod;
+    private final String returnType;
 
     private String generifiedType;
     private List<Parameter> parameters = new ArrayList<Parameter>();
@@ -25,9 +26,10 @@ public class FactoryMethod {
     private List<String> genericTypeParameters = new ArrayList<String>();
     private String javaDoc;
 
-    public FactoryMethod(String matcherClass, String factoryMethod) {
+    public FactoryMethod(String matcherClass, String factoryMethod, String returnType) {
         this.matcherClass = matcherClass;
         this.factoryMethod = factoryMethod;
+        this.returnType = returnType;
     }
 
     /**
@@ -37,6 +39,14 @@ public class FactoryMethod {
         return matcherClass;
     }
 
+    /**
+     * @return The fully qualified name of the type returned by the method. This should be a
+     * subclass of org.hamcrest.Matcher.
+     */
+    public String getReturnType() {
+      return returnType;
+    }
+    
     /**
      * Original name of factory method.
      */

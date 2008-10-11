@@ -101,7 +101,8 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
     private FactoryMethod buildFactoryMethod(Method javaMethod) {
         FactoryMethod result = new FactoryMethod(
                 javaMethod.getDeclaringClass().getName(),
-                javaMethod.getName());
+                javaMethod.getName(), 
+                javaMethod.getReturnType().getName());
 
         for (TypeVariable<Method> typeVariable : javaMethod.getTypeParameters()) {
             boolean hasBound = false;
