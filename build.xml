@@ -94,16 +94,6 @@
                      classpath="build/hamcrest-core-${version}.jar"/>
     </target>
 
-    <target name="text"
-            depends="core, library"
-            description="Build text pattern matcher">
-        <java-to-jar srcdir="hamcrest-text/src/main/java"
-                     destjar="build/hamcrest-text-${version}.jar"
-                     classpath="
-                        build/hamcrest-core-${version}.jar;
-                        build/hamcrest-library-${version}.jar"/>
-    </target>
-	
     <target name="integration"
             depends="core, library"
             description="Build integration with external tools">
@@ -115,14 +105,13 @@
     </target>
 	
     <target name="unit-test"
-            depends="core, library, text, integration, generator"
+            depends="core, library, integration, generator"
             description="Build and run unit tests.">
         <java-to-jar srcdir="hamcrest-unit-test/src/main/java"
                      destjar="build/hamcrest-unit-test-${version}.jar"
                      classpath="
                         build/hamcrest-core-${version}.jar;
                         build/hamcrest-library-${version}.jar;
-        				build/hamcrest-text-${version}.jar;
                         build/hamcrest-integration-${version}.jar;
                         build/hamcrest-generator-${version}.jar"/>
         <junit printsummary="no" fork="no" haltonfailure="${haltonfailure}">
@@ -133,7 +122,6 @@
                 </fileset>
                 <pathelement path="build/hamcrest-core-${version}.jar"/>
                 <pathelement path="build/hamcrest-library-${version}.jar"/>
-                <pathelement path="build/hamcrest-text-${version}.jar"/>
                 <pathelement path="build/hamcrest-integration-${version}.jar"/>
                 <pathelement path="build/hamcrest-generator-${version}.jar"/>
                 <pathelement path="build/hamcrest-unit-test-${version}.jar"/>
@@ -159,19 +147,18 @@
     </target>
 
     <target name="bigjar"
-            depends="core, library, text, integration, generator"
+            depends="core, library, integration, generator"
             description="Build a single Jar (hamcrest-all.jar) that contains core, library, generator and integration.">
         <jar jarfile="build/hamcrest-all-${version}.jar" duplicate="preserve">
             <zipfileset src="build/hamcrest-core-${version}.jar"/>
             <zipfileset src="build/hamcrest-library-${version}.jar"/>
-            <zipfileset src="build/hamcrest-text-${version}.jar"/>
             <zipfileset src="build/hamcrest-generator-${version}.jar"/>
             <zipfileset src="build/hamcrest-integration-${version}.jar"/>
         </jar>
     </target>
 
     <target name="package"
-            depends="core, generator, library, text, integration, bigjar, unit-test, examples"
+            depends="core, generator, library, integration, bigjar, unit-test, examples"
             description="Package for distribution">
         <zip zipfile="build/hamcrest-${version}.zip">
             <zipfileset dir="." prefix="hamcrest-${version}">
@@ -220,7 +207,6 @@
 
 			<packageset dir="hamcrest-core/src/main/java"/>
 			<packageset dir="hamcrest-library/src/main/java" excludes="org/hamcrest/internal"/>
-			<packageset dir="hamcrest-text/src/main/java" excludes="**/internal/**"/>
 			<packageset dir="hamcrest-integration/src/main/java"/>
 			<packageset dir="build/generated-code"/>
 			
