@@ -22,6 +22,7 @@ public class IsEventFrom extends TypeSafeMatcher<EventObject> {
         this.source = source;
     }
 
+    @Override
     public boolean matchesSafely(EventObject item) {
         return eventClass.isInstance(item)
                 && eventHasSameSource(item);

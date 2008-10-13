@@ -10,6 +10,7 @@ import static org.hamcrest.core.IsNot.not;
 
 public class IsInstanceOfTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return instanceOf(Number.class);
     }

@@ -12,6 +12,7 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
         this.type = type;
     }
     
+    @Override
     public boolean matchesSafely(Class<?> cls) {
         return type.isAssignableFrom(cls);
     }

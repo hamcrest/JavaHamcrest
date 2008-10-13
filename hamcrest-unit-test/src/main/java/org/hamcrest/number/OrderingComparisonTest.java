@@ -9,11 +9,14 @@ import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
 import static org.hamcrest.number.OrderingComparison.lessThan;
 import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
 
+import java.math.BigDecimal;
+
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 public class OrderingComparisonTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return greaterThan(1);
     }
@@ -37,5 +40,11 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
         assertThat(1.1, greaterThan(1.0));
 
         assertThat("cc", greaterThan("bb"));
+    }
+    
+    public void testComparesBigDecimalsWithDifferentScalesCorrectlyForIssue20() {
+      assertThat(new BigDecimal("10.0"), greaterThanOrEqualTo(new BigDecimal("10")));
+      assertThat(new BigDecimal(10), greaterThanOrEqualTo(new BigDecimal("10.0")));
+
     }
 }
