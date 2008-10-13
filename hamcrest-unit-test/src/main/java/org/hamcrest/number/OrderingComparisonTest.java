@@ -4,6 +4,7 @@ package org.hamcrest.number;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.number.OrderingComparison.comparesEqualTo;
 import static org.hamcrest.number.OrderingComparison.greaterThan;
 import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
 import static org.hamcrest.number.OrderingComparison.lessThan;
@@ -31,6 +32,12 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
         assertThat(0, lessThan(1));
     }
 
+
+    public void testComparesObjectsForEquality() {
+      assertThat(3, comparesEqualTo(3));
+      assertThat("aa", comparesEqualTo("aa"));
+    }
+
     public void testAllowsForInclusiveComparisons() {
         assertThat(1, lessThanOrEqualTo(1));
         assertThat(1, greaterThanOrEqualTo(1));
@@ -38,13 +45,12 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
 
     public void testSupportsDifferentTypesOfComparableObjects() {
         assertThat(1.1, greaterThan(1.0));
-
         assertThat("cc", greaterThan("bb"));
     }
     
     public void testComparesBigDecimalsWithDifferentScalesCorrectlyForIssue20() {
       assertThat(new BigDecimal("10.0"), greaterThanOrEqualTo(new BigDecimal("10")));
       assertThat(new BigDecimal(10), greaterThanOrEqualTo(new BigDecimal("10.0")));
-
+      assertThat(new BigDecimal("2"), comparesEqualTo(new BigDecimal("2.000")));
     }
 }

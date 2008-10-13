@@ -42,6 +42,14 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
     }
 
     /**
+     * Is value = expected?
+     */
+    @Factory
+    public static <T extends Comparable<T>> Matcher<T> comparesEqualTo(T value) {
+        return new OrderingComparison<T>(value, 0, 0);
+    }
+
+    /**
      * Is value > expected?
      */
     @Factory
