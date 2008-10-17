@@ -1,15 +1,5 @@
 == Version 1.2: In Development ==
 
-== Version 1.1: Released ==
-
-* Added IsMapContainingKey and IsMapContainingValue matchers to resolve a 
-  generics bug in hasKey and hasValue static factories previously declared
-  in IsMapContaining (ngd)
-
-* Added IsCollectionOnlyContaining and IsArrayOnlyContaining which matches 
-  collections (and arrays) where all match a given matcher. E.g onlyContains(3,4,5) 
-  or onlyContains(lessThan(9))
-
 == Version 1.1: Released Jun 30 2007 ==
 
 * Hamcrest Generator now includes JavaDoc and parameter names in generated code
