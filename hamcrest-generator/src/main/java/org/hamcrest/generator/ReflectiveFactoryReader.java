@@ -3,9 +3,12 @@ package org.hamcrest.generator;
 import java.lang.reflect.Method;
 import static java.lang.reflect.Modifier.isPublic;
 import static java.lang.reflect.Modifier.isStatic;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -28,11 +31,13 @@ import java.util.Iterator;
 public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
 
     private final Class<?> cls;
+    private final String target;
 
     private final ClassLoader classLoader;
 
-    public ReflectiveFactoryReader(Class<?> cls) {
+    public ReflectiveFactoryReader(Class<?> cls, String target) {
         this.cls = cls;
+        this.target = target;
         this.classLoader = cls.getClassLoader();
     }
 
@@ -86,16 +91,37 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
         // compile core).
         Class factoryCls;
         Class matcherCls;
+        Method excludeMet;
         try {
             factoryCls = classLoader.loadClass("org.hamcrest.Factory");
             matcherCls = classLoader.loadClass("org.hamcrest.Matcher");
+            excludeMet = factoryCls.getMethod("excludes");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Cannot load hamcrest core", e);
+        } catch (SecurityException e) {
+            throw new RuntimeException("Cannot load hamcrest core", e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException("Cannot load hamcrest core", e);       
         }
+        Annotation annot;
         return isStatic(javaMethod.getModifiers())
                 && isPublic(javaMethod.getModifiers())
-                && javaMethod.getAnnotation(factoryCls) != null
+                && (annot = javaMethod.getAnnotation(factoryCls)) != null
+                && checkExcludes(excludeMet, annot)
                 && matcherCls.isAssignableFrom(javaMethod.getReturnType());
+    }
+    
+    private boolean checkExcludes(Method m, Annotation annot) {
+        try {
+            String[] excludes = (String[]) m.invoke(annot);
+            return excludes == null || !Arrays.asList(excludes).contains(target);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Cannot load hamcrest core", e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Cannot load hamcrest core", e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException("Cannot load hamcrest core", e);
+        }
     }
 
     private FactoryMethod buildFactoryMethod(Method javaMethod) {

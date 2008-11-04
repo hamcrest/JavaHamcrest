@@ -2,12 +2,11 @@
  */
 package org.hamcrest.core;
 
-import java.lang.reflect.Array;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.internal.ArrayAccess;
 
 
 /**
@@ -45,12 +44,12 @@ public class IsEqual<T> extends BaseMatcher<T> {
     }
 
     private static boolean areArrayLengthsEqual(Object o1, Object o2) {
-        return Array.getLength(o1) == Array.getLength(o2);
+        return ArrayAccess.getLength(o1) == ArrayAccess.getLength(o2);
     }
 
     private static boolean areArrayElementsEqual(Object o1, Object o2) {
-        for (int i = 0; i < Array.getLength(o1); i++) {
-            if (!areEqual(Array.get(o1, i), Array.get(o2, i))) return false;
+        for (int i = 0; i < ArrayAccess.getLength(o1); i++) {
+            if (!areEqual(ArrayAccess.get(o1, i), ArrayAccess.get(o2, i))) return false;
         }
         return true;
     }

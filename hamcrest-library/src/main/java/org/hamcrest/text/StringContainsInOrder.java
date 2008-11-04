@@ -1,9 +1,9 @@
 package org.hamcrest.text;
 
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.StringMatcher;
 
-public class StringContainsInOrder extends TypeSafeMatcher<String> {
+public class StringContainsInOrder extends StringMatcher {
     private final Iterable<String> substrings;
 
     public StringContainsInOrder(Iterable<String> substrings) {

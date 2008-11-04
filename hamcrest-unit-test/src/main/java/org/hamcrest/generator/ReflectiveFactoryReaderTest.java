@@ -31,7 +31,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     }
 
     public void testIteratesOverFactoryMethods() {
-        Iterable<FactoryMethod> reader = new ReflectiveFactoryReader(SimpleSetOfMatchers.class);
+        Iterable<FactoryMethod> reader = new ReflectiveFactoryReader(SimpleSetOfMatchers.class, "all");
         Iterator<FactoryMethod> methods = reader.iterator();
 
         assertTrue("Expected first method", methods.hasNext());
@@ -81,7 +81,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     }
 
     public void testOnlyReadsPublicStaticAnnotatedMethodsThatReturnMatcher() {
-        Iterable<FactoryMethod> reader = new ReflectiveFactoryReader(MatchersWithDodgySignatures.class);
+        Iterable<FactoryMethod> reader = new ReflectiveFactoryReader(MatchersWithDodgySignatures.class, "all");
         Iterator<FactoryMethod> methods = reader.iterator();
 
         assertTrue("Expected first method", methods.hasNext());
@@ -259,7 +259,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     }
 
     private FactoryMethod readMethod(Class<?> cls, String methodName) {
-        for (FactoryMethod method : new ReflectiveFactoryReader(cls)) {
+        for (FactoryMethod method : new ReflectiveFactoryReader(cls, "all")) {
             if (method.getName().equals(methodName)) {
                 return method;
             }

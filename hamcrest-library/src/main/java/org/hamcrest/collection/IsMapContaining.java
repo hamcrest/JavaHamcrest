@@ -3,14 +3,13 @@ package org.hamcrest.collection;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
+public class IsMapContaining<K, V> extends MapTypeSafeMatcher<Map<K, V>> {
     private final Matcher<K> keyMatcher;
     private final Matcher<V> valueMatcher;
 
@@ -19,6 +18,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
         this.valueMatcher = valueMatcher;
     }
 
+    @Override
     public boolean matchesSafely(Map<K, V> map) {
         for (Entry<K, V> entry : map.entrySet()) {
             if (keyMatcher.matches(entry.getKey()) && valueMatcher.matches(entry.getValue())) {

@@ -7,12 +7,11 @@ import java.util.Collection;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Matches if collection size satisfies a nested matcher.
  */
-public class IsCollectionWithSize<E> extends TypeSafeMatcher<Collection<E>> {
+public class IsCollectionWithSize<E> extends CollectionMatcher<E> {
     private final Matcher<Integer> sizeMatcher;
 
     public IsCollectionWithSize(Matcher<Integer> sizeMatcher) {

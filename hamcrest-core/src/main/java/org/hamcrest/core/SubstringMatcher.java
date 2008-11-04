@@ -1,9 +1,8 @@
 package org.hamcrest.core;
 
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeMatcher;
 
-public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
+public abstract class SubstringMatcher extends StringMatcher {
 
     // TODO: Replace String with CharSequence to allow for easy interopability between
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).

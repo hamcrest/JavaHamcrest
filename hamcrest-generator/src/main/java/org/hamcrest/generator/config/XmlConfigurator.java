@@ -23,12 +23,14 @@ public class XmlConfigurator {
 
     private final SugarConfiguration sugarConfiguration;
     private final ClassLoader classLoader;
+    protected final String target;
     private final SAXParserFactory saxParserFactory;
     private final QDox qdox;
 
-    public XmlConfigurator(SugarConfiguration sugarConfiguration, ClassLoader classLoader) {
+    public XmlConfigurator(SugarConfiguration sugarConfiguration, ClassLoader classLoader, String target) {
         this.sugarConfiguration = sugarConfiguration;
         this.classLoader = classLoader;
+        this.target = target;
         saxParserFactory = SAXParserFactory.newInstance();
         saxParserFactory.setNamespaceAware(true);
         qdox = new QDox();
@@ -43,7 +45,7 @@ public class XmlConfigurator {
         SAXParser saxParser = saxParserFactory.newSAXParser();
         saxParser.parse(inputSource, new DefaultHandler() {
             public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-                if (localName.equals("factory")) {
+                if (localName.equals("factory") && !exclude(attributes)) {
                     String className = attributes.getValue("class");
                     try {
                         addClass(className);
@@ -52,20 +54,31 @@ public class XmlConfigurator {
                     }
                 }
             }
+            private boolean exclude(Attributes attributes) {
+                String excludes = attributes.getValue("excludes");
+                if (excludes != null && (excludes = excludes.trim()).length() > 0) {
+                    for (String t : excludes.split("\\s*,\\s*")) {
+                        if (t.equals(target)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
         });
     }
 
     private void addClass(String className) throws ClassNotFoundException {
         Class<?> cls = classLoader.loadClass(className);
         sugarConfiguration.addFactoryMethods(
-                new QDoxFactoryReader(new ReflectiveFactoryReader(cls), qdox, className));
+                new QDoxFactoryReader(new ReflectiveFactoryReader(cls, target), qdox, className));
     }
 
 
     public static void main(String[] args) throws Exception {
 
-        if (args.length != 4) {
-            System.err.println("Args: config-file source-dir generated-class output-dir");
+        if (args.length != 4 && args.length != 5) {
+            System.err.println("Args: config-file source-dir generated-class output-dir [target]");
             System.err.println("");
             System.err.println("    config-file : Path to config file listing matchers to generate sugar for.");
             System.err.println("                  e.g. path/to/matchers.xml");
@@ -80,6 +93,9 @@ public class XmlConfigurator {
             System.err.println("     output-dir : Where to output generated code (package subdirs will be");
             System.err.println("                  automatically created).");
             System.err.println("                  e.g. build/generated-code");
+            System.err.println("");
+            System.err.println("     target     : The jar target this is for (see org.hamcrest.Factory)");
+            System.err.println("                  (default is \"all\")");
             System.exit(-1);
         }
 
@@ -87,6 +103,7 @@ public class XmlConfigurator {
         String srcDirs = args[1];
         String fullClassName = args[2];
         File outputDir = new File(args[3]);
+        String target = args.length > 4 ? args[4] : "all";
 
         String fileName = fullClassName.replace('.', File.separatorChar) + ".java";
         int dotIndex = fullClassName.lastIndexOf(".");
@@ -108,7 +125,7 @@ public class XmlConfigurator {
             sugarGenerator.addWriter(new QuickReferenceWriter(System.out));
 
             XmlConfigurator xmlConfigurator
-                    = new XmlConfigurator(sugarGenerator, XmlConfigurator.class.getClassLoader());
+                    = new XmlConfigurator(sugarGenerator, XmlConfigurator.class.getClassLoader(), target);
 
             if (srcDirs.trim().length() > 0) {
                 for (String srcDir : srcDirs.split(",")) {

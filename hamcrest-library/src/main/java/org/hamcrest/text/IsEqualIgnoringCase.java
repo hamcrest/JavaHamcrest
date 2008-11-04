@@ -5,12 +5,12 @@ package org.hamcrest.text;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.StringMatcher;
 
 /**
  * Tests if a string is equal to another string, regardless of the case.
  */
-public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
+public class IsEqualIgnoringCase extends StringMatcher {
 
     // TODO: Replace String with CharSequence to allow for easy interopability between
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).

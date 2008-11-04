@@ -6,12 +6,11 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Matches if array size satisfies a nested matcher.
  */
-public class IsArrayWithSize<E> extends TypeSafeMatcher<E[]> {
+public class IsArrayWithSize<E> extends ArrayMatcher<E> {
     private final Matcher<Integer> sizeMatcher;
 
     public IsArrayWithSize(Matcher<Integer> sizeMatcher) {

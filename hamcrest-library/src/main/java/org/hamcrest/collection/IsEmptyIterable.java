@@ -3,16 +3,21 @@ package org.hamcrest.collection;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.DiagnosingIterableMatcher;
 
 /**
  * Tests if collection is empty.
  */
-public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<E>> {
+public class IsEmptyIterable<E> extends DiagnosingIterableMatcher<E> {
 
     @Override
-    public boolean matchesSafely(Iterable<E> iterable) {
-        return !iterable.iterator().hasNext();
+    public boolean matchesSafely(Iterable<E> iterable, Description mismatchDescription) {
+        if (iterable.iterator().hasNext()) {
+            mismatchDescription.appendValue(iterable);
+            mismatchDescription.appendText(" was not empty.");
+            return false;
+        }
+        return true;
     }
 
     public void describeTo(Description description) {

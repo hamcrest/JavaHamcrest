@@ -10,9 +10,8 @@ import java.util.List;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
-public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
+public class IsArrayContainingInOrder<E> extends ArrayMatcher<E> {
     private final Collection<Matcher<? super E>> matchers;
     private final IsIterableContainingInOrder<E> iterableMatcher;
 

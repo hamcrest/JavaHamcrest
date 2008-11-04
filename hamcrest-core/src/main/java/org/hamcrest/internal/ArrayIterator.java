@@ -1,6 +1,5 @@
 package org.hamcrest.internal;
 
-import java.lang.reflect.Array;
 import java.util.Iterator;
 
 public class ArrayIterator implements Iterator<Object> {
@@ -15,11 +14,11 @@ public class ArrayIterator implements Iterator<Object> {
     }
     
     public boolean hasNext() {
-        return currentIndex < Array.getLength(array);
+        return currentIndex < ArrayAccess.getLength(array);
     }
 
     public Object next() {
-        return Array.get(array, currentIndex++);
+        return ArrayAccess.get(array, currentIndex++);
     }
     
     public void remove() {
