@@ -93,7 +93,7 @@ public class IsEqualTest extends AbstractMatcherTest {
     }
 
     public void testReturnsAnObviousDescriptionIfCreatedWithANestedMatcherByMistake() {
-        Matcher<String> innerMatcher = equalTo("NestedMatcher");
+        Matcher<? super String> innerMatcher = equalTo("NestedMatcher");
         assertDescription("<" + innerMatcher.toString() + ">", equalTo(innerMatcher));
     }
 

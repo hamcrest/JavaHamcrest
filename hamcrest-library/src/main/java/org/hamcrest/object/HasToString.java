@@ -8,9 +8,9 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 public class HasToString<T> extends DiagnosingMatcher<T> {
-    private final Matcher<String> toStringMatcher;
+    private final Matcher<? super String> toStringMatcher;
 
-    public HasToString(Matcher<String> toStringMatcher) {
+    public HasToString(Matcher<? super String> toStringMatcher) {
         this.toStringMatcher = toStringMatcher;
     }
 
@@ -40,7 +40,7 @@ public class HasToString<T> extends DiagnosingMatcher<T> {
      * Evaluates whether item.toString() satisfies a given matcher.
      */
     @Factory
-    public static <T> Matcher<T> hasToString(Matcher<String> toStringMatcher) {
+    public static <T> Matcher<T> hasToString(Matcher<? super String> toStringMatcher) {
         return new HasToString<T>(toStringMatcher);
     }
 

@@ -9,9 +9,9 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * Matches if an array contains an item satisfying a nested matcher.
  */
 public class IsArrayContaining<T> extends ArrayMatcher<T> {
-    private final Matcher<T> elementMatcher;
+    private final Matcher<? super T> elementMatcher;
 
-    public IsArrayContaining(Matcher<T> elementMatcher) {
+    public IsArrayContaining(Matcher<? super T> elementMatcher) {
         this.elementMatcher = elementMatcher;
     }
 
@@ -35,7 +35,7 @@ public class IsArrayContaining<T> extends ArrayMatcher<T> {
      * Evaluates to true if any item in an array satisfies the given matcher.
      */
     @Factory
-    public static <T> Matcher<T[]> hasItemInArray(Matcher<T> elementMatcher) {
+    public static <T> Matcher<T[]> hasItemInArray(Matcher<? super T> elementMatcher) {
         return new IsArrayContaining<T>(elementMatcher);
     }
 
@@ -47,6 +47,7 @@ public class IsArrayContaining<T> extends ArrayMatcher<T> {
      */
     @Factory
     public static <T> Matcher<T[]> hasItemInArray(T element) {
-        return hasItemInArray(equalTo(element));
+        Matcher<? super T> matcher = equalTo(element);
+        return IsArrayContaining.<T>hasItemInArray(matcher);
     }
 }

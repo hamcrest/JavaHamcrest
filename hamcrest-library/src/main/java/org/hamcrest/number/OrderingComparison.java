@@ -44,7 +44,7 @@ public class OrderingComparison<T extends Comparable<T>> extends ComparableMatch
      * Is value = expected?
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<T> comparesEqualTo(T value) {
+    public static <T extends Comparable<T>> Matcher<? super T> comparesEqualTo(T value) {
         return new OrderingComparison<T>(value, 0, 0);
     }
 
@@ -52,7 +52,7 @@ public class OrderingComparison<T extends Comparable<T>> extends ComparableMatch
      * Is value > expected?
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<T> greaterThan(T value) {
+    public static <T extends Comparable<T>> Matcher<? super T> greaterThan(T value) {
         return new OrderingComparison<T>(value, -1, -1);
     }
 
@@ -60,7 +60,7 @@ public class OrderingComparison<T extends Comparable<T>> extends ComparableMatch
      * Is value >= expected?
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
+    public static <T extends Comparable<T>> Matcher<? super T> greaterThanOrEqualTo(T value) {
         return new OrderingComparison<T>(value, -1, 0);
     }
 
@@ -68,7 +68,7 @@ public class OrderingComparison<T extends Comparable<T>> extends ComparableMatch
      * Is value < expected?
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<T> lessThan(T value) {
+    public static <T extends Comparable<T>> Matcher<? super T> lessThan(T value) {
         return new OrderingComparison<T>(value, 1, 1);
     }
 
@@ -76,7 +76,7 @@ public class OrderingComparison<T extends Comparable<T>> extends ComparableMatch
      * Is value <= expected?
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<T> lessThanOrEqualTo(T value) {
+    public static <T extends Comparable<T>> Matcher<? super T> lessThanOrEqualTo(T value) {
         return new OrderingComparison<T>(value, 0, 1);
     }
 }

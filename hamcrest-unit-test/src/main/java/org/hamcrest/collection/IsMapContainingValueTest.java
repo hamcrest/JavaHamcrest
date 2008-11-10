@@ -29,7 +29,16 @@ public class IsMapContainingValueTest extends AbstractMatcherTest {
         
         assertMatches("Singleton map", hasValue(1), map);
     }
-    
+
+//    No longer compiles -- SF
+//    @SuppressWarnings("unchecked")
+//    public void testMatchesSingletonMapContainingValueWithoutGenerics() {
+//        Map map = new HashMap();
+//        map.put("a", 1);
+//
+//        assertMatches("Singleton map", hasValue(1), map);
+//    }
+
     public void testMatchesMapContainingValue() {
         Map<String,Integer> map = new HashMap<String,Integer>();
         map.put("a", 1);

@@ -34,7 +34,7 @@ public class HasToStringTest extends AbstractMatcherTest {
     }
 
     public void testHasReadableDescription() {
-        Matcher<String> toStringMatcher = equalTo(TO_STRING_RESULT);
+        Matcher<? super String> toStringMatcher = equalTo(TO_STRING_RESULT);
         Matcher<Matcher<String>> matcher = hasToString(toStringMatcher);
 
         assertEquals("asString(" + descriptionOf(toStringMatcher) + ")", descriptionOf(matcher));

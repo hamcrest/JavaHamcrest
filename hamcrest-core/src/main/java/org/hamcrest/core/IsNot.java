@@ -44,7 +44,7 @@ public class IsNot<T> extends BaseMatcher<T>  {
      *          vs.  assertThat(cheese, is(not(smelly)))
      */
     @Factory
-    public static <T> Matcher<T> not(T value) {
+    public static <T> Matcher<? super T> not(T value) {
         return not(equalTo(value));
     }
 }

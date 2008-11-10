@@ -44,7 +44,7 @@ public class CombinableMatcher<T> extends BaseMatcher<T> {
    * </pre>
    */
 	@Factory
-  public static <LHS> CombinableMatcher<LHS> both(Matcher<LHS> matcher) {
+  public static <LHS> CombinableMatcher<LHS> both(Matcher<? super LHS> matcher) {
     return new CombinableMatcher<LHS>(matcher);
   }
   
@@ -55,7 +55,7 @@ public class CombinableMatcher<T> extends BaseMatcher<T> {
    * </pre>
    */
 	@Factory
-  public static <LHS> CombinableMatcher<LHS> either(Matcher<LHS> matcher) {
+  public static <LHS> CombinableMatcher<LHS> either(Matcher<? super LHS> matcher) {
     return new CombinableMatcher<LHS>(matcher);
   } 
 

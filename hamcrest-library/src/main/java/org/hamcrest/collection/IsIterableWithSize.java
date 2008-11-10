@@ -10,9 +10,9 @@ import org.hamcrest.Matcher;
 import org.hamcrest.core.DiagnosingIterableMatcher;
 
 public class IsIterableWithSize<E> extends DiagnosingIterableMatcher<E> {
-    private final Matcher<Integer> sizeMatcher;
+    private final Matcher<? super Integer> sizeMatcher;
 
-    public IsIterableWithSize(Matcher<Integer> sizeMatcher) {
+    public IsIterableWithSize(Matcher<? super Integer> sizeMatcher) {
         this.sizeMatcher = sizeMatcher;
     }
 
@@ -35,7 +35,7 @@ public class IsIterableWithSize<E> extends DiagnosingIterableMatcher<E> {
     }
 
     @Factory
-    public static <E> Matcher<Iterable<E>> iterableWithSize(Matcher<Integer> sizeMatcher) {
+    public static <E> Matcher<Iterable<E>> iterableWithSize(Matcher<? super Integer> sizeMatcher) {
         return new IsIterableWithSize<E>(sizeMatcher);
     }
 

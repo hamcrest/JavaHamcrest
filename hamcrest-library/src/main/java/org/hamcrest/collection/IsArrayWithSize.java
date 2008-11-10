@@ -11,9 +11,9 @@ import org.hamcrest.Matcher;
  * Matches if array size satisfies a nested matcher.
  */
 public class IsArrayWithSize<E> extends ArrayMatcher<E> {
-    private final Matcher<Integer> sizeMatcher;
+    private final Matcher<? super Integer> sizeMatcher;
 
-    public IsArrayWithSize(Matcher<Integer> sizeMatcher) {
+    public IsArrayWithSize(Matcher<? super Integer> sizeMatcher) {
         this.sizeMatcher = sizeMatcher;
     }
 
@@ -31,7 +31,7 @@ public class IsArrayWithSize<E> extends ArrayMatcher<E> {
      * Does array size satisfy a given matcher?
      */
     @Factory
-    public static <E> Matcher<E[]> arrayWithSize(Matcher<Integer> sizeMatcher) {
+    public static <E> Matcher<E[]> arrayWithSize(Matcher<? super Integer> sizeMatcher) {
         return new IsArrayWithSize<E>(sizeMatcher);
     }
 

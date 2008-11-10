@@ -20,7 +20,7 @@ import org.w3c.dom.Node;
  * @author Joe Walnes
  */
 public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
-    private final Matcher<?> valueMatcher;
+    private final Matcher<? super String> valueMatcher;
     private final XPathExpression compiledXPath;
     private final String xpathString;
     private final QName evaluationMode;
@@ -30,7 +30,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * @param valueMatcher Matcher to use at given XPath.
      *                     May be null to specify that the XPath must exist but the value is irrelevant.
      */
-    public HasXPath(String xPathExpression, Matcher<String> valueMatcher) {
+    public HasXPath(String xPathExpression, Matcher<? super String> valueMatcher) {
         this(xPathExpression, null, valueMatcher);
     }
 
@@ -40,11 +40,11 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * @param valueMatcher Matcher to use at given XPath.
      *                     May be null to specify that the XPath must exist but the value is irrelevant.
      */
-    public HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
+    public HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<? super String> valueMatcher) {
         this(xPathExpression, namespaceContext, valueMatcher, XPathConstants.STRING);
     }
 
-    private HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<?> valueMatcher, QName mode) {
+    private HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<? super String> valueMatcher, QName mode) {
         try {
             XPath xPath = XPathFactory.newInstance().newXPath();
             if (namespaceContext != null) {
@@ -89,12 +89,12 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     }
 
     @Factory
-    public static Matcher<Node> hasXPath(String xPath, Matcher<String> valueMatcher) {
+    public static Matcher<Node> hasXPath(String xPath, Matcher<? super String> valueMatcher) {
         return hasXPath(xPath, null, valueMatcher);
     }
 
     @Factory
-    public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
+    public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext, Matcher<? super String> valueMatcher) {
         return new HasXPath(xPath, namespaceContext, valueMatcher, XPathConstants.STRING);
     }
 

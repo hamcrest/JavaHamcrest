@@ -3,6 +3,7 @@ package org.hamcrest.generator;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.StringTokenizer;
 
 /**
  * {@link FactoryWriter} that outputs Java code which simply delegates all
@@ -88,7 +89,30 @@ public class HamcrestFactoryWriter implements FactoryWriter {
     private void writeMethodBody(FactoryMethod factoryMethod) {
         indent();
         output.append("return ").append(factoryMethod.getMatcherClass());
-        output.append('.').append(factoryMethod.getName());
+        output.append('.');
+
+        // lets write the generic types
+        if (!factoryMethod.getGenericTypeParameters().isEmpty()) {
+            output.append('<');
+            boolean seenFirst = false;
+            for (String type : factoryMethod.getGenericTypeParameters()) {
+                if (seenFirst) {
+                    output.append(",");
+                } else {
+                    seenFirst = true;
+                }
+                // lets only print the first word of the type
+                // so if its 'T extends Cheese' we just print T
+                //output.append(type);
+
+                StringTokenizer iter = new StringTokenizer(type);
+                iter.hasMoreElements();
+                output.append(iter.nextToken());
+            }
+            output.append(">");
+        }
+
+        output.append(factoryMethod.getName());
         output.append('(');
         boolean seenFirst = false;
         for (FactoryMethod.Parameter parameter : factoryMethod.getParameters()) {

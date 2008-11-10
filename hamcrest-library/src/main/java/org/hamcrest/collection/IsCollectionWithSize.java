@@ -7,19 +7,20 @@ import java.util.Collection;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Matches if collection size satisfies a nested matcher.
  */
-public class IsCollectionWithSize<E> extends CollectionMatcher<E> {
-    private final Matcher<Integer> sizeMatcher;
+public class IsCollectionWithSize<E> extends TypeSafeMatcher<Collection<? extends E>> {
+    private final Matcher<? super Integer> sizeMatcher;
 
-    public IsCollectionWithSize(Matcher<Integer> sizeMatcher) {
+    public IsCollectionWithSize(Matcher<? super Integer> sizeMatcher) {
         this.sizeMatcher = sizeMatcher;
     }
 
     @Override
-    public boolean matchesSafely(Collection<E> item) {
+    public boolean matchesSafely(Collection<? extends E> item) {
         return sizeMatcher.matches(item.size());
     }
 
@@ -32,9 +33,10 @@ public class IsCollectionWithSize<E> extends CollectionMatcher<E> {
      * Does collection size satisfy a given matcher?
      */
     @Factory
-    public static <E> Matcher<Collection<E>> hasSize(Matcher<Integer> size) {
+    public static <E> Matcher<? super Collection<? extends E>> hasSize(Matcher<? super Integer> size) {
         return new IsCollectionWithSize<E>(size);
     }
+
 
     /**
      * This is a shortcut to the frequently used hasSize(equalTo(x)).
@@ -43,7 +45,8 @@ public class IsCollectionWithSize<E> extends CollectionMatcher<E> {
      *          vs.  assertThat(hasSize(x))
      */
     @Factory
-    public static <E> Matcher<Collection<E>> hasSize(int size) {
-        return hasSize(equalTo(size));
+    public static <E> Matcher<? super Collection<? extends E>> hasSize(int size) {
+        Matcher<? super Integer> matcher = equalTo(size);
+        return IsCollectionWithSize.<E>hasSize(matcher);
     }
 }

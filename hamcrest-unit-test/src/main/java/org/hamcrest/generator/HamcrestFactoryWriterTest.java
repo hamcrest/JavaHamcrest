@@ -116,7 +116,7 @@ public class HamcrestFactoryWriterTest extends TestCase {
         factoryWriter.writeMethod(method.getName(), method);
         assertEquals("" +
                 "  public static <T, V extends String & Cheese> matcher.ReturnType tricky(T t, List<V> v) {\n" +
-                "    return com.example.MyMatcher.tricky(t, v);\n" +
+                "    return com.example.MyMatcher.<T,V>tricky(t, v);\n" +
                 "  }\n" +
                 "\n",
                 output.toString());

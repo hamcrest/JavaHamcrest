@@ -6,10 +6,10 @@ import org.hamcrest.Matcher;
 import static org.hamcrest.core.IsEqual.equalTo;
 import java.util.Map;
 
-public class IsMapContainingValue<V> extends MapTypeSafeMatcher<Map<?, V>> {
-    private final Matcher<V> valueMatcher;
+public class IsMapContainingValue<V> extends MapTypeSafeMatcher<Map<?,V>>{
+    private final Matcher<? super V> valueMatcher;
 
-    public IsMapContainingValue(Matcher<V> valueMatcher) {
+    public IsMapContainingValue(Matcher<? super V> valueMatcher) {
         this.valueMatcher = valueMatcher;
     }
     
@@ -29,12 +29,12 @@ public class IsMapContainingValue<V> extends MapTypeSafeMatcher<Map<?, V>> {
     }
     
     @Factory
-    public static <V> Matcher<Map<?, V>> hasValue(V value) {
-        return hasValue(equalTo(value)); 
+    public static <V> Matcher<? super Map<?,V>> hasValue(V value) {
+        return IsMapContainingValue.<V>hasValue(equalTo(value));
     }
     
     @Factory
-    public static <V> Matcher<Map<?, V>> hasValue(Matcher<V> valueMatcher) {
+    public static <V> Matcher<? super Map<?,V>> hasValue(Matcher<? super V> valueMatcher) {
         return new IsMapContainingValue<V>(valueMatcher);
     }
 }

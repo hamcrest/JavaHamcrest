@@ -27,6 +27,17 @@ public class IsMapContainingTest extends AbstractMatcherTest {
         assertDoesNotMatch("matcherC", hasEntry(equalTo("c"), equalTo(3)), map);
     }
 
+//    no longer compiles. SF
+//    public void testMatchesMapContainingMatchingKeyAndValueWithoutGenerics() {
+//        Map map = new HashMap();
+//        map.put("a", 1);
+//        map.put("b", 2);
+//
+//        assertMatches("matcherA", hasEntry(equalTo("a"), equalTo(1)), map);
+//        assertMatches("matcherB", hasEntry(equalTo("b"), equalTo(2)), map);
+//        assertDoesNotMatch("matcherC", hasEntry(equalTo("c"), equalTo(3)), map);
+//    }
+//
     public void testDoesNotMatchNull() {
         assertDoesNotMatch("should not matches null",
                 hasEntry(anything(), anything()), null);

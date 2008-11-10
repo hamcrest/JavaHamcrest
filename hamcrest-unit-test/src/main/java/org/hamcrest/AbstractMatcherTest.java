@@ -14,11 +14,11 @@ public abstract class AbstractMatcherTest extends TestCase {
     protected static final Object ARGUMENT_IGNORED = new Object();
     protected static final Object ANY_NON_NULL_ARGUMENT = new Object();
 
-    public static <T> void assertMatches(String message, Matcher<T> c, T arg) {
+    public static <T> void assertMatches(String message, Matcher<? super T> c, T arg) {
         assertTrue(message, c.matches(arg));
     }
 
-    public static <T> void assertDoesNotMatch(String message, Matcher<T> c, T arg) {
+    public static <T> void assertDoesNotMatch(String message, Matcher<? super T> c, T arg) {
         assertFalse(message, c.matches(arg));
     }
 
@@ -28,7 +28,7 @@ public abstract class AbstractMatcherTest extends TestCase {
         assertEquals("Expected description", expected, description.toString());
     }
 
-    public static <T> void assertMismatchDescription(String expected, Matcher<T> matcher, T arg) {
+    public static <T> void assertMismatchDescription(String expected, Matcher<? super T> matcher, T arg) {
         Description description = new StringDescription();
         assertFalse("Precondtion: Matcher should not match item.", matcher.matches(arg));
         matcher.describeMismatch(arg, description);
