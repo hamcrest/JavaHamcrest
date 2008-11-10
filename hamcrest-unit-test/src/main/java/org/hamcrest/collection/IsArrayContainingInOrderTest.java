@@ -14,7 +14,7 @@ public class IsArrayContainingInOrderTest extends AbstractMatcherTest {
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("[<<1>>, <<2>>]",
+        assertDescription("[<1>, <2>]",
                             arrayContaining(equalTo(1), equalTo(2)));
     }
 }
