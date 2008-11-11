@@ -9,8 +9,9 @@ import java.util.List;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
-public class IsCollectionContaining<T> extends DiagnosingIterableMatcher<T> {
+public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<T>> {
     private final Matcher<? super T> elementMatcher;
 
     public IsCollectionContaining(Matcher<? super T> elementMatcher) {
@@ -18,14 +19,12 @@ public class IsCollectionContaining<T> extends DiagnosingIterableMatcher<T> {
     }
 
     @Override
-    public boolean matchesSafely(Iterable<T> collection, Description mismatchDescription) {
+    public boolean matchesSafely(Iterable<T> collection) {
         for (T item : collection) {
             if (elementMatcher.matches(item)){
                 return true;
             }
         }
-        mismatchDescription.appendText("did not contain an element that matched ");
-        elementMatcher.describeTo(mismatchDescription);
         return false;
     }
 

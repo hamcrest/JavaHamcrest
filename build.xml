@@ -12,10 +12,6 @@
               value="true"
               description="Whether to build with debug information"/>
 
-    <property name="gwtvalidate"
-              value="true"
-              description="Whether to validate the GWT distribution"/>
-
     <target name="all"
             depends="clean, package"
             description="Performs clean build, runs tests and packages for distribution"/>
@@ -64,7 +60,6 @@
             <arg value="hamcrest-core/src/main/java"/>
             <arg value="org.hamcrest.CoreMatchers"/>
             <arg value="build/temp/hamcrest-core/generated-code"/>
-            <arg value="core"/>
         </java>
         <!-- Append to core jar -->
         <java-to-jar srcdir="build/temp/hamcrest-core/generated-code"
@@ -92,7 +87,6 @@
             <arg value="hamcrest-core/src/main/java,hamcrest-library/src/main/java"/>
             <arg value="org.hamcrest.Matchers"/>
             <arg value="build/temp/hamcrest-library/generated-code"/>
-            <arg value="library"/>
         </java>
         <!-- Append to library jar -->
         <java-to-jar srcdir="build/temp/hamcrest-library/generated-code"
@@ -108,82 +102,6 @@
                      classpath="
                         build/hamcrest-core-${version}.jar;
                         build/hamcrest-library-${version}.jar"/>
-    </target>
-
-    <target name="gwt" depends="gwt-setup, gwt-lib, gwt-validate" />
-    <target name="gwt-setup">
-        <condition property="dogwtvalidate">
-            <and>
-                <not>
-                    <isset property="nogwt" />
-                </not>
-                <istrue value="${gwtvalidate}" />
-            </and>
-        </condition>
-    </target>
-    <target name="gwt-lib"
-            depends="gwt-setup, core, library"
-            description="Build GWT Hamcrest library"
-            unless="nogwt">
-        <java-to-jar-no-compile srcdir="hamcrest-gwt/src/main/java"
-                     destjar="build/hamcrest-gwt-${version}.jar"/>
-        <!-- Generate classes with all static imports. -->
-        <mkdir dir="build/temp/hamcrest-gwt/generated-code/org/hamcrest/translatable"/>
-        <java classname="org.hamcrest.generator.config.XmlConfigurator"
-              fork="yes"
-              failonerror="yes"
-              classpath="
-                build/hamcrest-core-${version}.jar;
-                build/hamcrest-generator-${version}.jar;
-              ">
-            <arg value="core-matchers.xml"/>
-            <arg value="hamcrest-core/src/main/java/"/>
-            <arg value="org.hamcrest.CoreMatchers"/>
-            <arg value="build/temp/hamcrest-gwt/generated-code/org/hamcrest/translatable"/>
-            <arg value="gwt"/>
-        </java>
-        <java classname="org.hamcrest.generator.config.XmlConfigurator"
-              fork="yes"
-              failonerror="yes"
-              classpath="
-                build/hamcrest-core-${version}.jar;
-                build/hamcrest-library-${version}.jar;
-                build/hamcrest-generator-${version}.jar;
-              ">
-        	<arg value="matchers.xml"/>
-            <arg value="hamcrest-core/src/main/java/"/>
-            <arg value="org.hamcrest.Matchers"/>
-            <arg value="build/temp/hamcrest-gwt/generated-code/org/hamcrest/translatable"/>
-            <arg value="gwt"/>
-        </java>
-        <!-- Copy over org.hamcrest.* java files into translatable, to deal with
-             wierdness in how GWT's source tag works. -->
-        <copy todir="build/temp/hamcrest-gwt/generated-code/org/hamcrest/translatable/org/hamcrest">
-            <fileset dir="hamcrest-core/src/main/java/org/hamcrest">
-                <include name="*.java"/>
-                <exclude name="CustomTypeSafeMatcher.java"/>
-                <exclude name="StringDescription.java"/>
-                <exclude name="TypeSafeDiagnosingMatcher.java"/>
-                <exclude name="TypeSafeMatcher.java"/>
-            </fileset>
-        </copy>
-        <copy todir="build/temp/hamcrest-gwt/generated-code/org/hamcrest/translatable/org/hamcrest">
-            <fileset dir="hamcrest-library/src/main/java/org/hamcrest">
-                <include name="*.java"/>
-
-            </fileset>
-        </copy>
-        <!-- Copy in GWT README file. -->
-        <copy file="hamcrest-gwt/README.txt" tofile="build/temp/hamcrest-gwt/generated-code/README.txt"/>
-        <!-- Append to gwt jar. -->
-        <java-to-jar-no-compile srcdir="build/temp/hamcrest-gwt/generated-code"
-                                destjar="build/hamcrest-gwt-${version}.jar"/>
-    </target>
-    <target name="gwt-validate"
-            depends="gwt-setup, gwt-lib"
-            description="Validate a test app to verify integrity of build."
-            if="dogwtvalidate">
-        <gwt-validate src="hamcrest-gwt/src/test/java" module="org.hamcrest.gwt.test.HamcrestTest"/>
     </target>
 	
     <target name="unit-test"
@@ -240,7 +158,7 @@
     </target>
 
     <target name="package"
-            depends="core, generator, library, integration, gwt, bigjar, unit-test, examples"
+            depends="core, generator, library, integration, bigjar, unit-test, examples"
             description="Package for distribution">
         <zip zipfile="build/hamcrest-${version}.zip">
             <zipfileset dir="." prefix="hamcrest-${version}">
@@ -255,12 +173,11 @@
                 <include name="hamcrest-generator-${version}.jar"/>
                 <include name="hamcrest-library-${version}.jar"/>
                 <include name="hamcrest-integration-${version}.jar"/>
-                <include name="hamcrest-gwt-${version}.jar"/>
                 <include name="hamcrest-all-${version}.jar"/>
             </zipfileset>
         </zip>
         <tar tarfile="build/hamcrest-${version}.tgz" compression="gzip" longfile="gnu">
-            <tarfileset dir="." prefix="hamcrest-${version}">
+            <tarfileset  dir="." prefix="hamcrest-${version}">
                 <include name="hamcrest-*/**"/>
                 <include name="lib/**"/>
                 <include name="*.txt"/>
@@ -272,35 +189,36 @@
                 <include name="hamcrest-generator-${version}.jar"/>
                 <include name="hamcrest-library-${version}.jar"/>
                 <include name="hamcrest-integration-${version}.jar"/>
-                <include name="hamcrest-gwt-${version}.jar"/>
                 <include name="hamcrest-all-${version}.jar"/>
             </tarfileset>
         </tar>
     </target>
 
-    <target name="javadoc" depends="library">
-        <mkdir dir="build/javadoc"/>
-        <javadoc destdir="build/javadoc" source="1.5" failonerror="yes"
-            overview="overview.html">
+	<target name="javadoc" depends="library">
+		<mkdir dir="build/javadoc"/>
+		<javadoc destdir="build/javadoc" source="1.5" failonerror="yes"
+			overview="overview.html">
+			
             <classpath>
                 <fileset dir="lib/integration">
                     <include name="*.jar"/>
                 </fileset>
             </classpath>
-            <packageset dir="hamcrest-core/src/main/java"/>
-            <packageset dir="hamcrest-library/src/main/java" excludes="org/hamcrest/internal"/>
-            <packageset dir="hamcrest-integration/src/main/java"/>
-            <packageset dir="build/generated-code"/>
 
-            <group title="Hamcrest API and Utility Classes" packages="org.hamcrest"/>
-            <group title="Matcher Library" packages="org.hamcrest.*"/>
-            <group title="Integration" packages="org.hamcrest.integration, org.hamcrest.integration.*"/>
-
-            <link offline="false" href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
-            <link offline="false" href="http://www.junit.org/junit/javadoc/3.8.1/"/>
-            <link offline="false" href="http://junit.sourceforge.net/javadoc_40/"/>
-      </javadoc>
-    </target>
+			<packageset dir="hamcrest-core/src/main/java"/>
+			<packageset dir="hamcrest-library/src/main/java" excludes="org/hamcrest/internal"/>
+			<packageset dir="hamcrest-integration/src/main/java"/>
+			<packageset dir="build/generated-code"/>
+			
+			<group title="Hamcrest API and Utility Classes" packages="org.hamcrest"/>
+			<group title="Matcher Library" packages="org.hamcrest.*"/>
+			<group title="Integration" packages="org.hamcrest.integration, org.hamcrest.integration.*"/>
+			
+			<link offline="false" href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+			<link offline="false" href="http://www.junit.org/junit/javadoc/3.8.1/"/>
+			<link offline="false" href="http://junit.sourceforge.net/javadoc_40/"/>
+		</javadoc>
+	</target>
 
     <macrodef name="java-to-jar"
               description="Compile Java source and build a Jar">
@@ -327,64 +245,5 @@
             </jar>
         </sequential>
     </macrodef>
-
-     <macrodef name="java-to-jar-no-compile"
-               description="Build a Jar file, but do not compile">
-         <attribute name="srcdir" description="Directory containg Java source"/>
-         <attribute name="destjar" description="Path to Jar"/>
-         <sequential>
-             <mkdir dir="build/temp/@{destjar}.contents"/>
-             <copy file="LICENSE.txt" todir="build/temp/@{destjar}.contents"/>
-             <!-- Put Java source in Jars for user's convenience. -->
-             <copy todir="build/temp/@{destjar}.contents">
-                 <fileset dir="@{srcdir}"/>
-             </copy>
-             <jar jarfile="@{destjar}">
-                 <fileset dir="build/temp/@{destjar}.contents"/>
-             </jar>
-         </sequential>
-     </macrodef>
-
-     <macrodef name="gwt-validate" description="Validates a GWT module can be compiled to JavaScript">
-         <attribute name="src" description="The source you wish to validate"/>
-         <attribute name="module" description="The fully qualified name of the module to validate"/>
-         <sequential>
-             <echo message="Running GWT Validator..."/>
-             <!-- Platform identification -->
-             <condition property="gwt.dev" value="gwt-dev-linux.jar">
-                 <and>
-                     <os family="unix"/>
-                     <not>
-                         <contains string="${os.name}" substring="mac" casesensitive="false"/>
-                     </not>
-                 </and>
-             </condition>
-             <condition property="gwt.dev" value="gwt-dev-mac.jar">
-                 <and>
-                     <os family="unix" />
-                     <contains string="${os.name}" substring="mac" casesensitive="false" />
-                 </and>
-             </condition>
-             <condition property="gwt.dev" value="gwt-dev-windows.jar">
-                 <os family="windows" />
-             </condition>
-             <fail unless="gwt.dev" message="Validating GWT on ${os.name} is not supported" />
-             <java dir="build/temp/hamcrest-gwt"
-                   fork="yes"
-                   failonerror="true"
-                   classname="com.google.gwt.dev.GWTCompiler"
-                   classpath="
-                     @{src};
-                     build/hamcrest-core-${version}.jar;
-                     build/hamcrest-library-${version}.jar;
-                     build/hamcrest-gwt-${version}.jar;
-                     lib/gwt/gwt-user.jar;lib/gwt/${gwt.dev}
-                   ">
-                 <jvmarg value="-Xmx256M"/>
-                 <arg value="-validateOnly"/>
-                 <arg value="@{module}"/>
-             </java>
-         </sequential>
-     </macrodef>
 
 </project>

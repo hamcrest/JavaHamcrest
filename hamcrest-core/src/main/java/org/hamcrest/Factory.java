@@ -14,8 +14,4 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target({METHOD})
 public @interface Factory {
-    /**
-     * The targets from which to exclude this constructor.
-     */
-    public String[] excludes() default {};
 }

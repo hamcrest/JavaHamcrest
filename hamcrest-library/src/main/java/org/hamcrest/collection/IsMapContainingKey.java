@@ -5,9 +5,11 @@ import java.util.Map;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class IsMapContainingKey<K> extends MapTypeSafeMatcher<Map<K,?>> {
+
+public class IsMapContainingKey<K> extends TypeSafeMatcher<Map<K,?>> {
     private final Matcher<K> keyMatcher;
     
     public IsMapContainingKey(Matcher<K> keyMatcher) {
@@ -30,12 +32,12 @@ public class IsMapContainingKey<K> extends MapTypeSafeMatcher<Map<K,?>> {
     }
 
     @Factory
-    public static <K> Matcher<Map<K,?>> hasKey(K key) {
-        return hasKey(equalTo(key));
+    public static <K> Matcher<? super Map<K,?>> hasKey(K key) {
+        return IsMapContainingKey.<K>hasKey(equalTo(key));
     }
     
     @Factory
-    public static <K> Matcher<Map<K,?>> hasKey(Matcher<K> keyMatcher) {
+    public static <K> Matcher<? super Map<K,?>> hasKey(Matcher<K> keyMatcher) {
         return new IsMapContainingKey<K>(keyMatcher);
     }
 }

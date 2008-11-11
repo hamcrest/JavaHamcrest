@@ -5,12 +5,12 @@ package org.hamcrest.text;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
-import org.hamcrest.core.StringMatcher;
+import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Tests if a string is equal to another string, ignoring any changes in whitespace.
  */
-public class IsEqualIgnoringWhiteSpace extends StringMatcher {
+public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
 
     // TODO: Replace String with CharSequence to allow for easy interopability between
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
@@ -40,7 +40,7 @@ public class IsEqualIgnoringWhiteSpace extends StringMatcher {
         boolean lastWasSpace = true;
         for (int i = 0; i < toBeStripped.length(); i++) {
             char c = toBeStripped.charAt(i);
-            if (isWhitespace(c)) {
+            if (Character.isWhitespace(c)) {
                 if (!lastWasSpace) {
                     result.append(' ');
                 }

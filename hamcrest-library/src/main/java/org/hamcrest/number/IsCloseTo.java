@@ -5,13 +5,14 @@ package org.hamcrest.number;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.TypeSafeMatcher;
 
 
 /**
  * Is the value a number equal to a value within some range of
  * acceptable error?
  */
-public class IsCloseTo extends DoubleMatcher {
+public class IsCloseTo extends TypeSafeMatcher<Double> {
     private final double error;
     private final double value;
 

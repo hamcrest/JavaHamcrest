@@ -10,7 +10,7 @@
     <factory class="org.hamcrest.core.IsAnything"/>
     <factory class="org.hamcrest.core.IsCollectionContaining"/>
     <factory class="org.hamcrest.core.IsEqual"/>
-    <factory class="org.hamcrest.core.IsInstanceOf" excludes="gwt"/>
+    <factory class="org.hamcrest.core.IsInstanceOf"/>
     <factory class="org.hamcrest.core.IsNot"/>
     <factory class="org.hamcrest.core.IsNull"/>
     <factory class="org.hamcrest.core.IsSame"/>
@@ -23,7 +23,7 @@
     <factory class="org.hamcrest.collection.IsArrayContaining"/>
     <factory class="org.hamcrest.collection.IsArrayContainingInOrder"/>
     <factory class="org.hamcrest.collection.IsArrayContainingInAnyOrder"/>
-    <factory class="org.hamcrest.collection.IsArrayWithSize"/>
+  	<factory class="org.hamcrest.collection.IsArrayWithSize"/>
     <factory class="org.hamcrest.collection.IsCollectionWithSize"/>
     <factory class="org.hamcrest.collection.IsEmptyCollection"/>    	
     <factory class="org.hamcrest.collection.IsEmptyIterable"/>    
@@ -44,15 +44,15 @@
     <factory class="org.hamcrest.text.IsEqualIgnoringWhiteSpace"/>
 
     <!-- Object -->
-    <factory class="org.hamcrest.object.HasToString" excludes="gwt"/>
-    <factory class="org.hamcrest.object.IsCompatibleType" excludes="gwt"/>
-    <factory class="org.hamcrest.object.IsEventFrom" excludes="gwt"/>
+    <factory class="org.hamcrest.object.HasToString"/>
+    <factory class="org.hamcrest.object.IsCompatibleType"/>
+    <factory class="org.hamcrest.object.IsEventFrom"/>
 
     <!-- Beans -->
-    <factory class="org.hamcrest.beans.HasProperty" excludes="gwt"/>
-    <factory class="org.hamcrest.beans.HasPropertyWithValue" excludes="gwt"/>
+    <factory class="org.hamcrest.beans.HasProperty"/>
+    <factory class="org.hamcrest.beans.HasPropertyWithValue"/>
 
     <!-- XML -->
-    <factory class="org.hamcrest.xml.HasXPath" excludes="gwt"/>
+    <factory class="org.hamcrest.xml.HasXPath"/>
 
 </matchers>

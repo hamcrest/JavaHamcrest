@@ -7,9 +7,9 @@ import java.util.Iterator;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.DiagnosingIterableMatcher;
+import org.hamcrest.TypeSafeMatcher;
 
-public class IsIterableWithSize<E> extends DiagnosingIterableMatcher<E> {
+public class IsIterableWithSize<E> extends TypeSafeMatcher<Iterable<E>> {
     private final Matcher<? super Integer> sizeMatcher;
 
     public IsIterableWithSize(Matcher<? super Integer> sizeMatcher) {
@@ -17,16 +17,11 @@ public class IsIterableWithSize<E> extends DiagnosingIterableMatcher<E> {
     }
 
     @Override
-    public boolean matchesSafely(Iterable<E> iterable, Description mismatchDescription) {
+    public boolean matchesSafely(Iterable<E> iterable) {
         Iterator<E> iterator = iterable.iterator();
         int size = 0;
         for (; iterator.hasNext(); iterator.next(), size++) {}
-        if (!sizeMatcher.matches(size)) {
-            mismatchDescription.appendText("The size did not match.");
-            sizeMatcher.describeMismatch(size, mismatchDescription);
-            return false;
-        }
-        return true;
+        return sizeMatcher.matches(size);
     }
 
     public void describeTo(Description description) {

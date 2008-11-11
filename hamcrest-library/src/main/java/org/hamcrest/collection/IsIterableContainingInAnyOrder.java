@@ -11,9 +11,9 @@ import java.util.List;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.DiagnosingIterableMatcher;
+import org.hamcrest.TypeSafeMatcher;
 
-public class IsIterableContainingInAnyOrder<T> extends DiagnosingIterableMatcher<T> {
+public class IsIterableContainingInAnyOrder<T> extends TypeSafeMatcher<Iterable<T>> {
     private final Collection<Matcher<? super T>> matchers;
 
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
@@ -24,7 +24,7 @@ public class IsIterableContainingInAnyOrder<T> extends DiagnosingIterableMatcher
     }
 
     @Override
-    public boolean matchesSafely(Iterable<T> iterable, Description mismatchDescription) {
+    public boolean matchesSafely(Iterable<T> iterable) {
         Iterator<T> items = iterable.iterator();
         List<Matcher<? super T>> currentMatchers = copyOfMatchers();
         while (items.hasNext() && !currentMatchers.isEmpty()) {
@@ -38,21 +38,7 @@ public class IsIterableContainingInAnyOrder<T> extends DiagnosingIterableMatcher
                 }
             }
         }
-        boolean result = true;
-        if (!currentMatchers.isEmpty()) {
-            mismatchDescription.appendList("The following matchers did not match an element: ", ", ", ".", currentMatchers);
-            result = false;
-        }
-        if (items.hasNext()) {
-            mismatchDescription.appendText("The following items did not match any matcher: ");
-            mismatchDescription.appendValue(items.next());
-            while (items.hasNext()) {
-                mismatchDescription.appendText(", ");
-                mismatchDescription.appendValue(items.next());
-            }
-            result = false;
-        }
-        return result;
+        return currentMatchers.isEmpty() && !items.hasNext();
     }
 
     private List<Matcher<? super T>> copyOfMatchers() {

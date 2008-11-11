@@ -3,8 +3,9 @@ package org.hamcrest.number;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
-public class OrderingComparison<T extends Comparable<T>> extends ComparableMatcher<T> {
+public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher<T> {
     private final T value;
     private final int minCompare, maxCompare;
 

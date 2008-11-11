@@ -5,13 +5,14 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 import java.util.Collection;
 
 /**
  * Matches if collection size satisfies a nested matcher.
  */
-public class IsCollectionWithSize<E> extends CollectionMatcher<Collection<? extends E>> {
+public class IsCollectionWithSize<E> extends TypeSafeMatcher<Collection<? extends E>> {
     private final Matcher<? super Integer> sizeMatcher;
 
     public IsCollectionWithSize(Matcher<? super Integer> sizeMatcher) {

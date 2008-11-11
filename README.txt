@@ -38,11 +38,6 @@ different Jars.
    tools, including JUnit (3 and 4), TestNG, jMock and
    EasyMock.
 
- * [hamcrest-gwt.jar]
-   Use this with the core and (optionally) library jars
-   to use Hamcrest in the Google Web Toolkit. (See
-   http://code.google.com/webtoolkit/)
-
 Alternatively, if you don't care:
 
  * [hamcrest-all.jar]

@@ -65,7 +65,7 @@ public class Is<T> extends BaseMatcher<T> {
      * For example:  assertThat(cheese, is(instanceOf(Cheddar.class)))
      *          vs.  assertThat(cheese, is(Cheddar.class))
      */
-    @Factory(excludes = { "gwt" })
+    @Factory
     public static Matcher<Object> is(Class<?> type) {
         return is(instanceOf(type));
     }

@@ -1,8 +1,0 @@
-<module>
-  <inherits name="com.google.gwt.user.User" />
-  <inherits name="org.hamcrest.Hamcrest" />
-
-  <entry-point class="org.hamcrest.gwt.test.client.HamcrestTest" />
-
-  <source path="client" />
-</module>

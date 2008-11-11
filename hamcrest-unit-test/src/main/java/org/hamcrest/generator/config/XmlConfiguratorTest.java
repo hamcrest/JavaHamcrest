@@ -26,7 +26,7 @@ public class XmlConfiguratorTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         sugarConfiguration = new MockSugarConfiguration();
-        config = new XmlConfigurator(sugarConfiguration, getClass().getClassLoader(), "all");
+        config = new XmlConfigurator(sugarConfiguration, getClass().getClassLoader());
     }
 
     public void testAddsMatcherFactoryMethodsToConfiguration() throws Exception {

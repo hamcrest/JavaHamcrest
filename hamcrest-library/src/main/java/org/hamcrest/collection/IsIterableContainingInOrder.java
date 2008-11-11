@@ -11,9 +11,9 @@ import java.util.List;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.DiagnosingIterableMatcher;
+import org.hamcrest.TypeSafeMatcher;
 
-public class IsIterableContainingInOrder<E> extends DiagnosingIterableMatcher<E> {
+public class IsIterableContainingInOrder<E> extends TypeSafeMatcher<Iterable<E>> {
     private final Collection<Matcher<? super E>> matchers;
 
     public IsIterableContainingInOrder(Collection<Matcher<? super E>> contents) {
@@ -24,37 +24,15 @@ public class IsIterableContainingInOrder<E> extends DiagnosingIterableMatcher<E>
     }
 
     @Override
-    public boolean matchesSafely(Iterable<E> iterable, Description mismatchDescription) {
+    public boolean matchesSafely(Iterable<E> iterable) {
         Iterator<E> items = iterable.iterator();
         Iterator<Matcher<? super E>> matchersIterator = matchers.iterator();
         while (items.hasNext() && matchersIterator.hasNext()) {
-            E item = items.next();
-            Matcher<? super E> matcher = matchersIterator.next();
-            if (!matcher.matches(item)) {
-                matcher.describeMismatch(item, mismatchDescription);
+            if (!matchersIterator.next().matches(items.next())) {
                 return false;
             }
         }
-        boolean result = true;
-        if (items.hasNext()) {
-            mismatchDescription.appendText("The following items did not match any matcher: ");
-            mismatchDescription.appendValue(items.next());
-            while (items.hasNext()) {
-                mismatchDescription.appendText(", ");
-                mismatchDescription.appendValue(items.next());
-            }
-            result = false;
-        }
-        if (matchersIterator.hasNext()) {
-            mismatchDescription.appendText("The following matchers did not match any item: ");
-            matchersIterator.next().describeTo(mismatchDescription);
-            while (matchersIterator.hasNext()) {
-                mismatchDescription.appendText(", ");
-                matchersIterator.next().describeTo(mismatchDescription);
-            }
-            result = false;
-        }
-        return result;
+        return !items.hasNext() && !matchersIterator.hasNext();
     }
 
     public void describeTo(Description description) {
