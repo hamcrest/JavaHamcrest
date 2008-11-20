@@ -11,9 +11,9 @@ import org.hamcrest.TypeSafeMatcher;
  * The array size must equal the number of element matchers.
  */
 public class IsArray<T> extends TypeSafeMatcher<T[]> {
-    private final Matcher<T>[] elementMatchers;
+    private final Matcher<? super T>[] elementMatchers;
     
-    public IsArray(Matcher<T>[] elementMatchers) {
+    public IsArray(Matcher<? super T>[] elementMatchers) {
         this.elementMatchers = elementMatchers.clone();
     }
     
@@ -66,7 +66,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
     /**
      * Evaluates to true only if each matcher[i] is satisfied by array[i].
      */
-    public static <T> IsArray<T> array(Matcher<T>... elementMatchers) {
+    public static <T> IsArray<T> array(Matcher<? super T>... elementMatchers) {
         return new IsArray<T>(elementMatchers);
     }
 }

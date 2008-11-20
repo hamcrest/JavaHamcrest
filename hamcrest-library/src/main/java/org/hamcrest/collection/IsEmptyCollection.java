@@ -1,11 +1,11 @@
 package org.hamcrest.collection;
 
+import java.util.Collection;
+
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-
-import java.util.Collection;
 
 /**
  * Tests if collection is empty.

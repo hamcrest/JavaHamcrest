@@ -64,7 +64,7 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * {@link java.lang.Object#equals} invokedMethod?
      */
     @Factory
-    public static <T> Matcher<T> equalTo(T operand) {
+    public static <T> Matcher<? super T> equalTo(T operand) {
         return new IsEqual<T>(operand);
     }
 }
