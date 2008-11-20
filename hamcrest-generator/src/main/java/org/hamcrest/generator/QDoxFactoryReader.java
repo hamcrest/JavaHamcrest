@@ -83,13 +83,8 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
             type = VARARGS_REGEX.matcher(type).replaceAll("");
             types[i] = new Type(type);
         }
-        JavaMethod[] methods = classSource.getMethodsBySignature(
-                factoryMethod.getName(), types, false);
-        if (methods.length == 1) {
-            return methods[0];
-        } else {
-            return null;
-        }
+        JavaMethod[] methods = classSource.getMethodsBySignature(factoryMethod.getName(), types, false);
+        return methods.length == 1 ?  methods[0] : null;
     }
 
     /**

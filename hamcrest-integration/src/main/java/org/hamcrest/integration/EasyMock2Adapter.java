@@ -31,7 +31,6 @@ public class EasyMock2Adapter implements IArgumentMatcher {
         this.hamcrestMatcher = matcher;
     }
 
-    @SuppressWarnings({"unchecked"})
     public boolean matches(Object argument) {
         return hamcrestMatcher.matches(argument);
     }

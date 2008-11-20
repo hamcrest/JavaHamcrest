@@ -9,6 +9,7 @@ import org.hamcrest.Matcher;
 public class StringContainsInOrderTest extends AbstractMatcherTest {
     StringContainsInOrder m = new StringContainsInOrder(asList("a", "b", "c"));
 
+    @Override
     protected Matcher<?> createMatcher() {
         return m;
     }

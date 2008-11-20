@@ -12,6 +12,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
 public class IsNullTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return nullValue();
     }

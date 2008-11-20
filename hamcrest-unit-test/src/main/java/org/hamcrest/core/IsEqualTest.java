@@ -11,6 +11,7 @@ import org.hamcrest.Matcher;
 
 public class IsEqualTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return equalTo("irrelevant");
     }
@@ -32,11 +33,13 @@ public class IsEqualTest extends AbstractMatcherTest {
 
     public void testHonoursIsEqualImplementationEvenWithNullValues() {
         Object alwaysEqual = new Object() {
+            @Override
             public boolean equals(Object obj) {
                 return true;
             }
         };
         Object neverEqual = new Object() {
+            @Override
             public boolean equals(Object obj) {
                 return false;
             }
@@ -85,6 +88,7 @@ public class IsEqualTest extends AbstractMatcherTest {
     public void testIncludesTheResultOfCallingToStringOnItsArgumentInTheDescription() {
         final String argumentDescription = "ARGUMENT DESCRIPTION";
         Object argument = new Object() {
+            @Override
             public String toString() {
                 return argumentDescription;
             }

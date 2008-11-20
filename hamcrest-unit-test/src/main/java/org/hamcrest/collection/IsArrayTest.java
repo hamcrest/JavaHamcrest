@@ -9,6 +9,7 @@ import org.hamcrest.Matcher;
 @SuppressWarnings("unchecked")
 public class IsArrayTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return array(equalTo("irrelevant"));
     }

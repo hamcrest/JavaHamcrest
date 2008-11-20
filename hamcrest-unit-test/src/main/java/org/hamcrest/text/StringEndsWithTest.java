@@ -12,6 +12,7 @@ public class StringEndsWithTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
     Matcher<String> stringEndsWith = endsWith(EXCERPT);
 
+    @Override
     protected Matcher<?> createMatcher() {
         return stringEndsWith;
     }

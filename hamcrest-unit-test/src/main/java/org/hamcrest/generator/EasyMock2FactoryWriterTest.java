@@ -10,6 +10,7 @@ public class EasyMock2FactoryWriterTest extends TestCase {
     private FactoryWriter factoryWriter;
     private StringWriter output = new StringWriter();
 
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         factoryWriter = new EasyMock2FactoryWriter(output, "com.blah", "EasyMatchers");

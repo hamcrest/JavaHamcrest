@@ -9,6 +9,7 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 public class IsNotTest extends AbstractMatcherTest {
+    @Override
     protected Matcher<?> createMatcher() {
         return not("something");
     }

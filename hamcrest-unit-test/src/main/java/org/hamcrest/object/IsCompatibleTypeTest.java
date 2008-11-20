@@ -21,6 +21,7 @@ public class IsCompatibleTypeTest extends AbstractMatcherTest {
     public static class ClassImplementingBaseInterface implements BaseInterface {
     }
 
+    @Override
     protected Matcher<?> createMatcher() {
         return typeCompatibleWith(BaseClass.class);
     }

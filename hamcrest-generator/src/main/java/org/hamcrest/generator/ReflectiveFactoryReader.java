@@ -145,23 +145,18 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
         return result;
     }
 
-    /**
+    /*
      * Get String representation of Type (e.g. java.lang.String or Map&lt;Stuff,? extends Cheese&gt;).
      * <p/>
      * Annoyingly this method wouldn't be needed if java.lang.reflect.Type.toString() behaved consistently
      * across implementations. Rock on Liskov.
      */
-    private String typeToString(Type type) {
-        if (type instanceof Class<?>) {
-            Class<?> cls = (Class<?>) type;
-            if (cls.isArray()) {
-                return cls.getComponentType().getName() + "[]";
-            } else {
-                return cls.getName();
-            }
-        } else {
-            return type.toString();
-        }
+    private static String typeToString(Type type) {
+        return type instanceof Class<?> ?  classToString((Class<?>) type): type.toString();
+    }
+
+    private static String classToString(Class<?> cls) {
+      return cls.isArray() ? cls.getComponentType().getName() + "[]" : cls.getName();
     }
 
 }

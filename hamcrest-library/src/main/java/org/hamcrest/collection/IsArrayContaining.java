@@ -16,6 +16,7 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
         this.elementMatcher = elementMatcher;
     }
 
+    @Override
     public boolean matchesSafely(T[] array) {
         for (T item : array) {
             if (elementMatcher.matches(item)) {

@@ -12,6 +12,7 @@ public class IsEqualIgnoringWhiteSpaceTest extends AbstractMatcherTest {
 
     private final Matcher<String> matcher = equalToIgnoringWhiteSpace("Hello World   how\n are we? ");
 
+    @Override
     protected Matcher<?> createMatcher() {
         return matcher;
     }

@@ -7,6 +7,7 @@ import org.hamcrest.Matcher;
 
 public class IsTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return is("something");
     }
@@ -31,8 +32,8 @@ public class IsTest extends AbstractMatcherTest {
     }
 
     public void testProvidesConvenientShortcutForIsInstanceOf() {
-        assertMatches("should match", is(String.class), "A");
-        assertDoesNotMatch("should not match", is(Integer.class), "A");
-        assertDoesNotMatch("should not match", is(Integer.class), null);
+        assertTrue("should match", is(String.class).matches("A"));
+        assertFalse("should not match", is(Integer.class).matches(new Object()));
+        assertFalse("should not match", is(Integer.class).matches(null));
     }
 }

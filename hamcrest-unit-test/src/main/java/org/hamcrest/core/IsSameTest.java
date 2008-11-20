@@ -11,6 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class IsSameTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return sameInstance("irrelevant");
     }

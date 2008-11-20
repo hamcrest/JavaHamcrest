@@ -10,6 +10,7 @@ import static org.hamcrest.core.IsAnything.anything;
 
 public class IsAnythingTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return anything();
     }

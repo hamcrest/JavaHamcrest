@@ -8,7 +8,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
-import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,12 +15,7 @@ public class CombinableTest {
   private static final CombinableMatcher<Integer> EITHER_3_OR_4 = CombinableMatcher.<Integer>either(equalTo(3)).or(equalTo(4));
   private static final CombinableMatcher<Integer> NOT_3_AND_NOT_4 = CombinableMatcher.<Integer>both(not(equalTo(3))).and(not(equalTo(4)));
 
-    public void dummy() throws Exception {
-        Matcher<? super Integer> matcher = equalTo(3);
-        CombinableMatcher<Integer> EITHER_3_OR_4 = CombinableMatcher.<Integer>either(matcher).or(equalTo(4));
-    }
-
-    @Test
+  @Test
   public void bothAcceptsAndRejects() {
     assertThat(2, NOT_3_AND_NOT_4);
     assertThat(3, not(NOT_3_AND_NOT_4));

@@ -13,6 +13,7 @@ import java.util.EventObject;
 
 public class IsEventFromTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return eventFrom(null);
     }

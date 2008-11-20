@@ -7,10 +7,12 @@ public class SampleBaseClass {
         this.value = value;
     }
 
+    @Override
     public String toString() {
         return value;
     }
 
+    @Override
     public boolean equals(Object obj) {
         return obj instanceof SampleBaseClass && value.equals(((SampleBaseClass) obj).value);
     }

@@ -16,6 +16,7 @@ public class AnyOfTest extends AbstractMatcherTest {
         return anyOf(equalTo("irrelevant"));
     }
 
+    @SuppressWarnings("unchecked")
     public void testEvaluatesToTheTheLogicalDisjunctionOfTwoOtherMatchers() {
         assertThat("good", anyOf(equalTo("bad"), equalTo("good")));
         assertThat("good", anyOf(equalTo("good"), equalTo("good")));
@@ -24,6 +25,7 @@ public class AnyOfTest extends AbstractMatcherTest {
         assertThat("good", not(anyOf(equalTo("bad"), equalTo("bad"))));
     }
 
+    @SuppressWarnings("unchecked")
     public void testEvaluatesToTheTheLogicalDisjunctionOfManyOtherMatchers() {
         assertThat("good", anyOf(equalTo("bad"), equalTo("good"), equalTo("bad"), equalTo("bad"), equalTo("bad")));
         assertThat("good", not(anyOf(equalTo("bad"), equalTo("bad"), equalTo("bad"), equalTo("bad"), equalTo("bad"))));
@@ -40,6 +42,7 @@ public class AnyOfTest extends AbstractMatcherTest {
         assertThat(new SampleSubClass("good"), combined);
     }    
     
+    @SuppressWarnings("unchecked")
     public void testHasAReadableDescription() {
         assertDescription("(\"good\" or \"bad\" or \"ugly\")",
                 anyOf(equalTo("good"), equalTo("bad"), equalTo("ugly")));

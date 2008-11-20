@@ -20,6 +20,7 @@ public class HasPropertyTest extends AbstractMatcherTest {
     private final HasPropertyWithValueTest.BeanWithoutInfo bean
             = new HasPropertyWithValueTest.BeanWithoutInfo("a bean");
 
+    @Override
     protected Matcher<?> createMatcher() {
         return hasProperty("irrelevant");
     }

@@ -8,6 +8,7 @@ import static org.hamcrest.number.IsCloseTo.closeTo;
 
 public class IsCloseToTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         double irrelevant = 0.1;
         return closeTo(irrelevant, irrelevant);

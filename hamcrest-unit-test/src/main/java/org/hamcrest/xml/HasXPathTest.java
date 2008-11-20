@@ -119,7 +119,7 @@ public class HasXPathTest extends AbstractMatcherTest {
     	assertMismatchDescription("xpath result was \"Edam\"", hasXPath("//something[1]/cheese", equalTo("parmesan")), xml);
 	}
 
-    private Document parse(String xml) throws Exception {
+    private static Document parse(String xml) throws Exception {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         documentBuilderFactory.setNamespaceAware(true);
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();

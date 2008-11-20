@@ -12,6 +12,7 @@ public class StringStartsWithTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
     Matcher<String> stringStartsWith = startsWith(EXCERPT);
 
+    @Override
     protected Matcher<?> createMatcher() {
         return stringStartsWith;
     }

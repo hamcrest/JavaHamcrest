@@ -36,8 +36,9 @@ public class IsInstanceOf extends BaseMatcher<Object> {
     /**
      * Is the value an instance of a particular type?
      */
+    @SuppressWarnings("unchecked")
     @Factory
-    public static Matcher<Object> instanceOf(Class<?> type) {
-        return new IsInstanceOf(type);
+    public static <T> Matcher<T> instanceOf(Class<T> type) {
+        return (Matcher<T>) new IsInstanceOf(type);
     }
 }

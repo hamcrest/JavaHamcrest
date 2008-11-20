@@ -42,6 +42,7 @@ public class XmlConfigurator {
             throws ParserConfigurationException, SAXException, IOException {
         SAXParser saxParser = saxParserFactory.newSAXParser();
         saxParser.parse(inputSource, new DefaultHandler() {
+            @Override
             public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
                 if (localName.equals("factory")) {
                     String className = attributes.getValue("class");

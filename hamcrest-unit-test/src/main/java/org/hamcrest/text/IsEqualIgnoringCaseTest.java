@@ -10,6 +10,7 @@ import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
 
 public class IsEqualIgnoringCaseTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return equalToIgnoringCase("irrelevant");
     }

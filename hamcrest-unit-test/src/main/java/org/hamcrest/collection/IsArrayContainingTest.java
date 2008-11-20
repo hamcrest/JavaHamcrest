@@ -6,6 +6,7 @@ import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 
 public class IsArrayContainingTest extends AbstractMatcherTest {
 
+    @Override
     protected Matcher<?> createMatcher() {
         return hasItemInArray("irrelevant");
     }

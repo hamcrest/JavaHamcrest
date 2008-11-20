@@ -12,6 +12,7 @@ public class StringContainsTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
     Matcher<String> stringContains = containsString(EXCERPT);
 
+    @Override
     protected Matcher<?> createMatcher() {
         return stringContains;
     }

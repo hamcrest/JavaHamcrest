@@ -25,4 +25,16 @@ public class IsInstanceOfTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("an instance of java.lang.Number", instanceOf(Number.class));
     }
+    
+    public void testWillReturnCorrectTypeForUseInJMock() {
+      @SuppressWarnings("unused")
+      Integer anInteger = with(instanceOf(Integer.class));
+    }
+    
+    
+    private static <T> T with(Matcher<T> matcher) {
+      return null;
+  }
+    
 }
+
