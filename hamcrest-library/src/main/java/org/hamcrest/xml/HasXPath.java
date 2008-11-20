@@ -62,20 +62,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     @Override
 	public boolean matchesSafely(Node item, Description mismatchDescription) {
         try {
-            Object result = compiledXPath.evaluate(item, evaluationMode);
-            if (result == null) {
-            	  mismatchDescription.appendText("xpath returned no results.");
-            	  return false;
-            } else if (valueMatcher == null) {
-                return true;
-            } else {
-            	  boolean valueMatched = valueMatcher.matches(result);
-            	  if (!valueMatched) {
-                  mismatchDescription.appendText("xpath result ");
-            	    valueMatcher.describeMismatch(result, mismatchDescription);
-            	  }
-            	  return valueMatched;
-            }
+            return matchesResult(compiledXPath.evaluate(item, evaluationMode), mismatchDescription);
         } catch (XPathExpressionException e) {
             return false;
         }
@@ -86,6 +73,22 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
         if (valueMatcher != null) {
             description.appendText(" ").appendDescriptionOf(valueMatcher);
         }
+    }
+
+    private boolean matchesResult(Object result, Description mismatchDescription) {
+      if (result == null) {
+          mismatchDescription.appendText("xpath returned no results.");
+          return false;
+      } else if (valueMatcher == null) {
+          return true;
+      } else {
+          boolean valueMatched = valueMatcher.matches(result);
+          if (!valueMatched) {
+            mismatchDescription.appendText("xpath result ");
+            valueMatcher.describeMismatch(result, mismatchDescription);
+          }
+          return valueMatched;
+      }
     }
 
     @Factory
