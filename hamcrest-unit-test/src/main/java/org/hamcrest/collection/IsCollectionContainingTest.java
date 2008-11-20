@@ -6,9 +6,12 @@ import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 
 public class IsCollectionContainingTest extends AbstractMatcherTest {
     @Override
@@ -41,6 +44,13 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("a collection containing \"a\"", hasItem(equalTo("a")));
     }
+    
+    public void testCanMatchItemWhenCollectionHoldsSuperclass() // Issue 24
+    {
+      final Set<Number> s = new HashSet<Number>();
+      s.add(Integer.valueOf(2));
+      MatcherAssert.assertThat(s, hasItem(Integer.valueOf(2)));
+    }
 
     @SuppressWarnings("unchecked")
     public void testMatchesAllItemsInCollection() {
@@ -70,3 +80,4 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
                 asList("e", "c", "b", "d")); // 'a' missing
     }
 }
+
