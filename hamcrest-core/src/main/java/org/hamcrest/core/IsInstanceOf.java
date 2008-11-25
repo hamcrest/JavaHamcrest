@@ -34,11 +34,26 @@ public class IsInstanceOf extends BaseMatcher<Object> {
     }
 
     /**
-     * Is the value an instance of a particular type?
+     * Is the value an instance of a particular type? 
+     * This version assumes no relationship between the required type and
+     * the signature of the method that sets it up, for example in
+     * <code>assertThat(anObject, instanceOf(Thing.class));</code>
      */
     @SuppressWarnings("unchecked")
     @Factory
-    public static <T> Matcher<T> instanceOf(Class<T> type) {
+    public static <T> Matcher<T> instanceOf(Class<?> type) {
         return (Matcher<T>) new IsInstanceOf(type);
     }
+    
+    /**
+     * Is the value an instance of a particular type? 
+     * Use this version to make generics conform, for example in 
+     * the JMock clause <code>with(any(Thing.class))</code> 
+     */
+    @SuppressWarnings("unchecked")
+    @Factory
+    public static <T> Matcher<T> any(Class<T> type) {
+        return (Matcher<T>) new IsInstanceOf(type);
+    }
+
 }

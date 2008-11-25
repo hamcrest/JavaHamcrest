@@ -1,6 +1,7 @@
 package org.hamcrest.collection;
 
 import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -11,7 +12,8 @@ import java.util.Set;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsCollectionContaining;
+import org.hamcrest.core.IsEqual;
 
 public class IsCollectionContainingTest extends AbstractMatcherTest {
     @Override
@@ -20,19 +22,19 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     }
 
     public void testMatchesACollectionThatContainsAnElementMatchingTheGivenMatcher() {
-        Matcher<Iterable<String>> itemMatcher = hasItem(equalTo("a"));
+        Matcher<Iterable<? super String>> itemMatcher = hasItem(equalTo("a"));
         
         assertMatches("should match list that contains 'a'",
                 itemMatcher, asList("a", "b", "c"));
     }
 
     public void testDoesNotMatchCollectionThatDoesntContainAnElementMatchingTheGivenMatcher() {
-        final Matcher<Iterable<String>> matcher1 = hasItem(equalTo("a"));
+        final Matcher<Iterable<? super String>> matcher1 = hasItem(equalTo("a"));
         assertDoesNotMatch("should not match list that doesn't contain 'a'",
                 matcher1, asList("b", "c"));
         
         
-        final Matcher<Iterable<String>> matcher2 = hasItem(equalTo("a"));
+        final Matcher<Iterable<? super String>> matcher2 = hasItem(equalTo("a"));
         assertDoesNotMatch("should not match the empty list",
                 matcher2, new ArrayList<String>());
     }
@@ -49,7 +51,8 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     {
       final Set<Number> s = new HashSet<Number>();
       s.add(Integer.valueOf(2));
-      MatcherAssert.assertThat(s, hasItem(Integer.valueOf(2)));
+      assertThat(s, new IsCollectionContaining<Number>(new IsEqual<Object>(Integer.valueOf(2))));
+      assertThat(s, IsCollectionContaining.hasItem(Integer.valueOf(2)));
     }
 
     @SuppressWarnings("unchecked")

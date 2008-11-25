@@ -62,7 +62,6 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
         // very ugly version!
         assertThat(map, IsMapContainingKey.<Number>hasKey(Integer.valueOf(1)));
 
-        // this can be complex to compile! :)
         assertThat(map, hasKey(Integer.valueOf(1)));
     }
 

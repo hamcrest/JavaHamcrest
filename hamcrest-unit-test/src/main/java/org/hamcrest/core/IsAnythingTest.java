@@ -2,11 +2,11 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.core.IsAnything.any;
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsAnything.anything;
+
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
 public class IsAnythingTest extends AbstractMatcherTest {
 
@@ -30,11 +30,4 @@ public class IsAnythingTest extends AbstractMatcherTest {
         assertDescription(description, anything(description));
     }
 
-    public void testSupportsStaticTyping() {
-        requiresStringMatcher(any(String.class));
-    }
-
-    private void requiresStringMatcher(Matcher<String> arg) {
-        // no-op
-    }
 }

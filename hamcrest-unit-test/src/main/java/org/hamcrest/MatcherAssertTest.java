@@ -80,4 +80,12 @@ public class MatcherAssertTest extends TestCase {
         assertEquals(expectedMessage, e.getMessage());
       }
     }
+    
+    
+    public void testCanAssertSubtypes() {
+      Integer aSub = new Integer(1);
+      Number aSuper = aSub;
+      
+      assertThat(aSub, equalTo(aSuper));
+    }
 }

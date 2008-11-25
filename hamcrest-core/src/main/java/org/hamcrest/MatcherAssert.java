@@ -4,12 +4,11 @@ package org.hamcrest;
 
 
 public class MatcherAssert {
-
-    public static <T,K extends T,V extends T> void assertThat(K actual, Matcher<V> matcher) {
+    public static <T> void assertThat(T actual, Matcher<? super T> matcher) {
         assertThat("", actual, matcher);
     }
-
-    public static<T,K extends T,V extends T> void assertThat(String reason, K actual, Matcher<V> matcher) {
+    
+    public static <T> void assertThat(String reason, T actual, Matcher<? super T> matcher) {
         if (!matcher.matches(actual)) {
             Description description = new StringDescription();
             description.appendText(reason)
