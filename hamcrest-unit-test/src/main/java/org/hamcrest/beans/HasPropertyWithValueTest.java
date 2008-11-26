@@ -13,6 +13,7 @@ import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 import org.hamcrest.core.IsEqual;
@@ -38,8 +39,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   public void testMatchesInfolessBeanWithMatchedNamedProperty() {
     assertThat(shouldMatch, hasProperty("property", equalTo("is expected")));
-    assertThat(shouldNotMatch, not(hasProperty("property",
-        equalTo("is expected"))));
+    assertThat(shouldNotMatch, not(hasProperty("property", equalTo("is expected"))));
   }
 
   public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
@@ -47,8 +47,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   }
 
   public void testDoesNotMatchInfolessBeanWithoutMatchedNamedProperty() {
-    assertThat(shouldNotMatch, not(hasProperty("nonExistentProperty",
-        anything())));
+    assertThat(shouldNotMatch, not(hasProperty("nonExistentProperty", anything())));
   }
 
   public void testDoesNotMatchWriteOnlyProperty() {
@@ -60,17 +59,23 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     Matcher<?> matcher = equalTo(true);
 
     assertDescription("hasProperty(\"property\", "
-        + StringDescription.asString(matcher) + ")", hasProperty("property",
-        matcher));
+        + StringDescription.asString(matcher) + ")", hasProperty("property", matcher));
+  }
+
+  public void testDoesNotWriteMismatchIfPropertyMatches() {
+    HasPropertyWithValue<Object> matcher = hasProperty( "property", anything());
+    assertTrue("Precondtion: Matcher should match item.", matcher.matches(beanWithInfo));
+    Description description = new StringDescription();
+    matcher.describeMismatch(beanWithInfo, description);
+    assertEquals("Expected mismatch description", "", description.toString());
   }
 
   public void testDescribesMissingPropertyMismatch() {
-    assertMismatchDescription("property \"honk\" was missing.", hasProperty(
-        "honk", anything()), shouldNotMatch);
+    assertMismatchDescription("missing.", hasProperty( "honk", anything()), shouldNotMatch);
   }
 
   public void testDescribesMismatchingPropertyValueMismatch() {
-    assertMismatchDescription("property \"property\" was \"not expected\".",
+    assertMismatchDescription("was \"not expected\".",
         hasProperty("property", equalTo("foo")), shouldNotMatch);
   }
 

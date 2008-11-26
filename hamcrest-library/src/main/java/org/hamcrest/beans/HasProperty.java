@@ -6,7 +6,6 @@ import java.beans.IntrospectionException;
 
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
@@ -42,7 +41,7 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
     }
 
     @Factory
-    public static <T> Matcher<T> hasProperty(String propertyName) {
+    public static <T> HasProperty<T> hasProperty(String propertyName) {
         return new HasProperty<T>(propertyName);
     }
 

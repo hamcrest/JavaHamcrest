@@ -80,10 +80,9 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     @Override
 	public boolean matchesSafely(T argument, Description mismatchDescription) {
         try {
-            mismatchDescription.appendText("property \"" + propertyName + "\" "); 
             Method readMethod = getReadMethod(argument);
             if (readMethod == null) {
-            	mismatchDescription.appendText("was missing.");
+              mismatchDescription.appendText("missing.");
             	return false;
             }
             Object propertyValue = readMethod.invoke(argument, NO_ARGUMENTS);
@@ -118,7 +117,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     }
 
     @Factory
-    public static <T> Matcher<T> hasProperty(String propertyName, Matcher<?> value) {
+    public static <T> HasPropertyWithValue<T> hasProperty(String propertyName, Matcher<?> value) {
         return new HasPropertyWithValue<T>(propertyName, value);
     }
 }
