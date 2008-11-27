@@ -17,13 +17,13 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.hamcrest.core.IsEqual;
 
-public class HasSamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
+public class WithSamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
   private final T expectedBean;
   private final Set<String> propertyNames;
   private final List<PropertyMatcher> propertyMatchers;
 
 
-  public HasSamePropertyValuesAs(T expectedBean) {
+  public WithSamePropertyValuesAs(T expectedBean) {
     PropertyDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
     this.expectedBean = expectedBean;
     this.propertyNames = propertyNamesFrom(descriptors);
@@ -66,7 +66,8 @@ public class HasSamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
   }
 
   public void describeTo(Description description) {
-    description.appendList("has same property values: [", ", ", "]", propertyMatchers);
+    description.appendText("with same property values as " + expectedBean.getClass().getSimpleName())
+               .appendList(" [", ", ", "]", propertyMatchers);
   }
   
   private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, PropertyDescriptor[] descriptors) {
@@ -120,8 +121,8 @@ public class HasSamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
   }
   
   @Factory
-  public static <T> Matcher<T> hasSamePropertyValuesAs(T expectedBean) {
-    return new HasSamePropertyValuesAs<T>(expectedBean);
+  public static <T> Matcher<T> withSamePropertyValuesAs(T expectedBean) {
+    return new WithSamePropertyValuesAs<T>(expectedBean);
   }
 
 }

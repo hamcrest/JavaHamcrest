@@ -2,12 +2,12 @@
  */
 package org.hamcrest.beans;
 
-import static org.hamcrest.beans.HasSamePropertyValuesAs.hasSamePropertyValuesAs;
+import static org.hamcrest.beans.WithSamePropertyValuesAs.withSamePropertyValuesAs;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class HasSamePropertyValuesAsTest extends AbstractMatcherTest {
+public class WithSamePropertyValuesAsTest extends AbstractMatcherTest {
   private static final Value aValue = new Value("expected");
   private static final ExampleBean expectedBean = new ExampleBean("same", 1, aValue);
   private static final ExampleBean actualBean = new ExampleBean("same", 1, aValue);
@@ -15,39 +15,39 @@ public class HasSamePropertyValuesAsTest extends AbstractMatcherTest {
   
   @Override
   protected Matcher<?> createMatcher() {
-    return hasSamePropertyValuesAs(expectedBean);
+    return withSamePropertyValuesAs(expectedBean);
   }
 
   public void testReportsMatchWhenAllPropertiesMatch() {
-    assertMatches("matched properties", hasSamePropertyValuesAs(expectedBean), actualBean);
+    assertMatches("matched properties", withSamePropertyValuesAs(expectedBean), actualBean);
   }
   
   public void testReportsMismatchWhenActualTypeIsNotAssignableToExpectedType() {
     assertMismatchDescription("is incompatible type: ExampleBean", 
-                              hasSamePropertyValuesAs((Object)aValue), actualBean);
+                              withSamePropertyValuesAs((Object)aValue), actualBean);
   }
 
   public void testReportsMisatchOnFirstPropertyDifference() {
     assertMismatchDescription("string was \"different\"", 
-        hasSamePropertyValuesAs(expectedBean), new ExampleBean("different", 1, aValue));
+        withSamePropertyValuesAs(expectedBean), new ExampleBean("different", 1, aValue));
     assertMismatchDescription("int was <2>", 
-        hasSamePropertyValuesAs(expectedBean), new ExampleBean("same", 2, aValue));
+        withSamePropertyValuesAs(expectedBean), new ExampleBean("same", 2, aValue));
     assertMismatchDescription("value was <Value other>", 
-        hasSamePropertyValuesAs(expectedBean), new ExampleBean("same", 1, new Value("other")));
+        withSamePropertyValuesAs(expectedBean), new ExampleBean("same", 1, new Value("other")));
   }
 
   public void testMatchesBeansWithInheritanceButNoExtraProperties() {
     assertMatches("sub type with same properties", 
-        hasSamePropertyValuesAs(expectedBean), new SubBeanWithNoExtraProperties("same", 1, aValue));
+        withSamePropertyValuesAs(expectedBean), new SubBeanWithNoExtraProperties("same", 1, aValue));
   }
 
   public void testRejectsSubTypeThatHasExtraProperties() {
     assertMismatchDescription("has extra properties called [extra]", 
-        hasSamePropertyValuesAs(expectedBean), new SubBeanWithExtraProperty("same", 1, aValue));
+        withSamePropertyValuesAs(expectedBean), new SubBeanWithExtraProperty("same", 1, aValue));
   }
   
   public void testDescribesItself() {
-    assertDescription("has same property values: [int: <1>, string: \"same\", value: <Value expected>]", hasSamePropertyValuesAs(expectedBean));
+    assertDescription("with same property values as ExampleBean [int: <1>, string: \"same\", value: <Value expected>]", withSamePropertyValuesAs(expectedBean));
   }
 
   public static class Value {
