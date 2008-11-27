@@ -2,7 +2,6 @@
  */
 package org.hamcrest.beans;
 
-import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -14,6 +13,7 @@ import java.beans.PropertyDescriptor;
  * more information on JavaBeans.
  *
  * @author Iain McGinniss
+ * @author Steve Freeman
  * @since 1.1.0
  */
 public class PropertyUtil {
@@ -21,17 +21,11 @@ public class PropertyUtil {
      * Returns the description of the property with the provided
      * name on the provided object's interface.
      *
-     * @return 
-     *     the description of the property, or null if the property 
-     *     does not exist.
-     * @throws IntrospectionException 
-     *     if an error occured using the JavaBean Introspector class
-     *     to query the properties of the provided class.
+     * @return the descriptor of the property, or null if the property does not exist.
+     * @throws IllegalArgumentException if there's a introspection failure
      */
-    public static PropertyDescriptor getPropertyDescriptor(String propertyName, Object fromObj) throws IntrospectionException {
-        BeanInfo beanInfo = Introspector.getBeanInfo(fromObj.getClass());
-
-        for (PropertyDescriptor property : beanInfo.getPropertyDescriptors()) {
+    public static PropertyDescriptor getPropertyDescriptor(String propertyName, Object fromObj) throws IllegalArgumentException {
+        for (PropertyDescriptor property : propertyDescriptorsFor(fromObj, null)) {
             if (property.getName().equals(propertyName)) {
                 return property;
             }
@@ -39,4 +33,22 @@ public class PropertyUtil {
 
         return null;
     }
+
+    /**
+     * Returns all the property descriptors for the class associated with the given object
+     * 
+     * @param fromObj Use the class of this object
+     * @param stopClass TODO
+     * @return Property descriptors
+     * @throws IllegalArgumentException if there's a introspection failure
+     */
+    public static PropertyDescriptor[] propertyDescriptorsFor(Object fromObj, Class<Object> stopClass) throws IllegalArgumentException {
+      try {
+        return Introspector.getBeanInfo(fromObj.getClass(), stopClass).getPropertyDescriptors();
+      } catch (IntrospectionException e) {
+        throw new IllegalArgumentException("Could not get property descriptors for " + fromObj.getClass(), e);
+      }
+    }
+
+    public static final Object[] NO_ARGUMENTS = new Object[0];
 }

@@ -63,7 +63,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   }
 
   public void testDoesNotWriteMismatchIfPropertyMatches() {
-    HasPropertyWithValue<Object> matcher = hasProperty( "property", anything());
+    Matcher<Object> matcher = hasProperty( "property", anything());
     assertTrue("Precondtion: Matcher should match item.", matcher.matches(beanWithInfo));
     Description description = new StringDescription();
     matcher.describeMismatch(beanWithInfo, description);
