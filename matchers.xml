@@ -51,6 +51,7 @@
     <!-- Beans -->
     <factory class="org.hamcrest.beans.HasProperty"/>
     <factory class="org.hamcrest.beans.HasPropertyWithValue"/>
+    <factory class="org.hamcrest.beans.HasSamePropertyValuesAs"/>
 
     <!-- XML -->
     <factory class="org.hamcrest.xml.HasXPath"/>
