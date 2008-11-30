@@ -1,4 +1,30 @@
-== Version 1.2: In Development ==
+== Version 1.2: RC2 ==
+
+* Added mismatch reporting
+
+* Added WithSamePropertyValuesAs matcher
+
+* Moved any() from IsAnything to IsInstanceOf. It now checks the type of the matched object
+
+* Moved MatcherAssert from integration to core
+
+* Tightened up generics.  
+
+* Added IsMapContainingKey and IsMapContainingValue matchers to resolve a 
+  generics bug in hasKey and hasValue static factories previously declared
+  in IsMapContaining (ngd)
+
+* Added IsCollectionOnlyContaining and IsArrayOnlyContaining which matches 
+  collections (and arrays) where all match a given matcher. E.g onlyContains(3,4,5) 
+  or onlyContains(lessThan(9))
+
+* text module moved to separate project, hamcrest-text-patterns
+
+* added more colection matchers: xContainingInAnyOrder, xContainingInOrder, xWithSize
+
+* new text Matcher: IsEmptyString
+
+* hamcrest generator uses method return type 
 
 == Version 1.1: Released Jun 30 2007 ==
 
