@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
  *
  * @param <T>
  * @author Neil Dunn
+ * @author Nat Pryce
  */
 public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
     private final Class<?> expectedType;
@@ -31,28 +32,31 @@ public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
             && matchesSafely((T) item, new Description.NullDescription());
     }
 
-    @SuppressWarnings("unchecked")
     @Override
+    @SuppressWarnings("unchecked")
     public final void describeMismatch(Object item, Description mismatchDescription) {
         matchesSafely((T) item, mismatchDescription);
     }
-
-    private static Class<?> findExpectedType(Class<?> fromClass) {
+    
+    private Class<?> findExpectedType(Class<?> fromClass) {
         for (Class<?> c = fromClass; c != Object.class; c = c.getSuperclass()) {
             for (Method method : c.getDeclaredMethods()) {
-                if (isMatchesSafelyMethod(method)) {
-                    return method.getParameterTypes()[0];
+                if (canObtainExpectedTypeFrom(method)) {
+                    return obtainExpectedTypeFrom(method);
                 }
             }
         }
-
+        
         throw new Error("Cannot determine correct type for matchesSafely() method.");
     }
-
-    private static boolean isMatchesSafelyMethod(Method method) {
+    
+    protected boolean canObtainExpectedTypeFrom(Method method) {
         return method.getName().equals("matchesSafely")
                 && method.getParameterTypes().length == 2
                 && !method.isSynthetic();
     }
-
+    
+    protected Class<?> obtainExpectedTypeFrom(Method method) {
+        return method.getParameterTypes()[0];
+    }
 }
