@@ -28,6 +28,11 @@ public abstract class FeatureMatcher<T, U> extends TypeSafeDiagnosingMatcher<T> 
     this.featureName = featureName;
   }
   
+  /**
+   * Implement this to extract the interesting feature.
+   * @param actual the target object
+   * @return the feature to be matched
+   */
   protected abstract U featureValueOf(T actual);
 
   @Override
