@@ -24,6 +24,11 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
         return true;
     }
     
+    @Override
+    public void describeMismatchSafely(String item, Description mismatchDescription) {
+        mismatchDescription.appendText("string was \"").appendText(item).appendText("\"");
+    }
+    
     public void describeTo(Description description) {
         description.appendText("a string containing ")
                    .appendValueList("", ", ", "", substrings)

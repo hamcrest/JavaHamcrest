@@ -18,7 +18,11 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
     public boolean matchesSafely(String item) {
         return evalSubstringOf(item);
     }
-
+    @Override
+    public void describeMismatchSafely(String item, Description mismatchDescription) {
+      mismatchDescription.appendText("was \"").appendText(item).appendText("\"");
+    }
+    
     public void describeTo(Description description) {
         description.appendText("a string ")
                 .appendText(relationship())

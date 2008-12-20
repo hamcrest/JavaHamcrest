@@ -24,7 +24,7 @@ public class IsMapContainingTest extends AbstractMatcherTest {
 
         assertMatches("matcherA", hasEntry(equalTo("a"), equalTo(1)), map);
         assertMatches("matcherB", hasEntry(equalTo("b"), equalTo(2)), map);
-        assertDoesNotMatch("matcherC", hasEntry(equalTo("c"), equalTo(3)), map);
+        assertMismatchDescription("map was [<a=1>, <b=2>]", hasEntry(equalTo("c"), equalTo(3)), map);
     }
 
 //    no longer compiles. SF
@@ -39,13 +39,11 @@ public class IsMapContainingTest extends AbstractMatcherTest {
 //    }
 //
     public void testDoesNotMatchNull() {
-        assertDoesNotMatch("should not matches null",
-                hasEntry(anything(), anything()), null);
+        assertMismatchDescription("was null", hasEntry(anything(), anything()), null);
     }
 
     public void testHasReadableDescription() {
-        assertDescription("map containing [\"a\"-><2>]",
-                hasEntry(equalTo("a"), (equalTo(2))));
+        assertDescription("map containing [\"a\"-><2>]", hasEntry(equalTo("a"), (equalTo(2))));
     }
 
     // Remaining code no longer compiles, thanks to generics. I think that's a good thing, but

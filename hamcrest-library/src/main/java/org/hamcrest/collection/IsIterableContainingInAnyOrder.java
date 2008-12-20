@@ -28,25 +28,29 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeMatcher<Iterable<
         Iterator<T> items = iterable.iterator();
         List<Matcher<? super T>> currentMatchers = copyOfMatchers();
         while (items.hasNext() && !currentMatchers.isEmpty()) {
-            T item = items.next();
-            Iterator<Matcher<? super T>> availableMatchers = currentMatchers.iterator();
-            while (availableMatchers.hasNext()) {
-                Matcher<? super T> matcher = availableMatchers.next();
-                if (matcher.matches(item)) {
-                    availableMatchers.remove();
-                    break;
-                }
-            }
+            removeFirstMatcherThatMatchesItem(currentMatchers, items.next());
         }
         return currentMatchers.isEmpty() && !items.hasNext();
     }
 
+    private void removeFirstMatcherThatMatchesItem(List<Matcher<? super T>> currentMatchers, T item) {
+      Iterator<Matcher<? super T>> availableMatchers = currentMatchers.iterator();
+      while (availableMatchers.hasNext()) {
+          Matcher<? super T> matcher = availableMatchers.next();
+          if (matcher.matches(item)) {
+              availableMatchers.remove();
+              break;
+          }
+      }
+    }
+
+    @Override
+    public void describeMismatchSafely(Iterable<T> actual, Description mismatchDescription) {
+      mismatchDescription.appendText("iterable was ").appendValueList("[", ", ", "]", actual);
+    }
+    
     private List<Matcher<? super T>> copyOfMatchers() {
-        List<Matcher<? super T>> availableMatchersForIteration = new ArrayList<Matcher<? super T>>();
-        for (Matcher<? super T> matcher : matchers) {
-            availableMatchersForIteration.add(matcher);
-        }
-        return availableMatchersForIteration;
+        return new ArrayList<Matcher<? super T>>(matchers);
     }
 
     public void describeTo(Description description) {

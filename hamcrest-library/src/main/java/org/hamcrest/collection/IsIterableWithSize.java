@@ -4,29 +4,24 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.Iterator;
 
-import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
-public class IsIterableWithSize<E> extends TypeSafeMatcher<Iterable<E>> {
-    private final Matcher<? super Integer> sizeMatcher;
+public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> {
 
     public IsIterableWithSize(Matcher<? super Integer> sizeMatcher) {
-        this.sizeMatcher = sizeMatcher;
+        super(sizeMatcher, "an iterable with size", "iterable size");
     }
+    
 
     @Override
-    public boolean matchesSafely(Iterable<E> iterable) {
-        Iterator<E> iterator = iterable.iterator();
-        int size = 0;
-        for (; iterator.hasNext(); iterator.next(), size++) {}
-        return sizeMatcher.matches(size);
-    }
-
-    public void describeTo(Description description) {
-        description.appendText("an iterable with size ")
-            .appendDescriptionOf(sizeMatcher);
+    protected Integer featureValueOf(Iterable<E> actual) {
+      int size = 0;
+      for (Iterator<E> iterator = actual.iterator(); iterator.hasNext(); iterator.next()) {
+        size++;
+      }
+      return size;
     }
 
     @Factory

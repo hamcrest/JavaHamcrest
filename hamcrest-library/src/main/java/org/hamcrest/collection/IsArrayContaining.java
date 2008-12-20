@@ -1,5 +1,7 @@
 package org.hamcrest.collection;
 
+import java.util.Arrays;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
@@ -25,6 +27,11 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
         }
         return false;
     }
+    
+    @Override
+    public void describeMismatchSafely(T[] item, Description mismatchDescription) {
+      super.describeMismatch(Arrays.asList(item), mismatchDescription);
+    };
 
     public void describeTo(Description description) {
         description

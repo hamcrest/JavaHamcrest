@@ -4,29 +4,21 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.Collection;
 
-import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Matches if collection size satisfies a nested matcher.
  */
-public class IsCollectionWithSize<E> extends TypeSafeMatcher<Collection<? extends E>> {
-    private final Matcher<? super Integer> sizeMatcher;
-
+public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends E>, Integer> {
     public IsCollectionWithSize(Matcher<? super Integer> sizeMatcher) {
-        this.sizeMatcher = sizeMatcher;
+      super(sizeMatcher, "a collection with size", "collection size");
     }
 
     @Override
-    public boolean matchesSafely(Collection<? extends E> item) {
-        return sizeMatcher.matches(item.size());
-    }
-
-    public void describeTo(Description description) {
-        description.appendText("a collection with size ")
-            .appendDescriptionOf(sizeMatcher);
+    protected Integer featureValueOf(Collection<? extends E> actual) {
+      return actual.size();
     }
 
     /**
@@ -49,4 +41,5 @@ public class IsCollectionWithSize<E> extends TypeSafeMatcher<Collection<? extend
         Matcher<? super Integer> matcher = equalTo(size);
         return IsCollectionWithSize.<E>hasSize(matcher);
     }
+
 }

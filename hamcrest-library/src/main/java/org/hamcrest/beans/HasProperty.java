@@ -25,7 +25,7 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
     }
 
     @Override
-	public boolean matchesSafely(T obj) {
+	  public boolean matchesSafely(T obj) {
     	// TODO(ngd): this is not type safe.
         try {
             return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null;
@@ -34,6 +34,11 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
             return false;
         }
     }
+    
+    @Override
+    public void describeMismatchSafely(T item, Description mismatchDescription) {
+      mismatchDescription.appendText("no ").appendValue(propertyName).appendText(" in ").appendValue(item);
+    };
 
     public void describeTo(Description description) {
         description.appendText("hasProperty(").appendValue(propertyName).appendText(")");

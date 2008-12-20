@@ -28,6 +28,11 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<? super 
         return false;
     }
 
+    @Override
+    public void describeMismatchSafely(Iterable<? super T> item, Description mismatchDescription) {
+      mismatchDescription.appendValue(item);
+    }
+    
     public void describeTo(Description description) {
         description
             .appendText("a collection containing ")

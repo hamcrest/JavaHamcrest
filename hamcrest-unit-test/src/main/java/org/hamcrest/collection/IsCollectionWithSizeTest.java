@@ -22,48 +22,48 @@ public class IsCollectionWithSizeTest extends AbstractMatcherTest {
 
     public void testMatchesWhenSizeIsCorrect() {
         assertMatches("correct size", hasSize(equalTo(2)), asList(null, null));
-        assertDoesNotMatch("incorrect size", hasSize(equalTo(2)), asList(null, null, null));
+        assertMismatchDescription("collection size was <3>", hasSize(equalTo(2)), asList(null, null, null));
     }
 
     public void testMatchesCollectionWhenSizeIsCorrectUsingObjectElementType() {
         Collection<Object> list = asList(null, null);
         assertMatches("correct size", hasSize(equalTo(2)), list);
-        assertDoesNotMatch("incorrect size", hasSize(equalTo(3)), list);
+        assertMismatchDescription("collection size was <2>", hasSize(equalTo(3)), list);
     }
 
     public void testMatchesCollectionWhenSizeIsCorrectUsingStringElementType() {
         Collection<String> list = asList("a", "b");
         assertMatches("correct size", hasSize(equalTo(2)), list);
-        assertDoesNotMatch("incorrect size", hasSize(equalTo(3)), list);
+        assertMismatchDescription("collection size was <2>", hasSize(equalTo(3)), list);
     }
 
     public void testMatchesCollectionWhenSizeIsCorrectUsingWildcardElementType() {
         Collection<?> list = asList("a", "b");
         assertMatches("correct size", hasSize(equalTo(2)), list);
-        assertDoesNotMatch("incorrect size", hasSize(equalTo(3)), list);
+        assertMismatchDescription("collection size was <2>", hasSize(equalTo(3)), list);
     }
 
     public void testMatchesListWhenSizeIsCorrectUsingObjectElementType() {
         List<Object> list = asList(null, null);
         assertMatches("correct size", hasSize(equalTo(2)), list);
-        assertDoesNotMatch("incorrect size", hasSize(equalTo(3)), list);
+        assertMismatchDescription("collection size was <2>", hasSize(equalTo(3)), list);
     }
 
     public void testMatchesListWhenSizeIsCorrectUsingStringElementType() {
         List<String> list = asList("a", "b");
         assertMatches("correct size", hasSize(equalTo(2)), list);
-        assertDoesNotMatch("incorrect size", hasSize(equalTo(3)), list);
+        assertMismatchDescription("collection size was <2>", hasSize(equalTo(3)), list);
     }
 
     public void testMatchesListWhenSizeIsCorrectUsingWildcardElementType() {
         List<?> list = asList("a", "b");
         assertMatches("correct size", hasSize(equalTo(2)), list);
-        assertDoesNotMatch("incorrect size", hasSize(equalTo(3)), list);
+        assertMismatchDescription("collection size was <2>", hasSize(equalTo(3)), list);
     }
 
     public void testProvidesConvenientShortcutForHasSizeEqualTo() {
         assertMatches("correct size", hasSize(2), asList(null, null));
-        assertDoesNotMatch("incorrect size", hasSize(2), asList(null, null, null));
+        assertMismatchDescription("collection size was <3>", hasSize(2), asList(null, null, null));
     }
 
     public void testHasAReadableDescription() {

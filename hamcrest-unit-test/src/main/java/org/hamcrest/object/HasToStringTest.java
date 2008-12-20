@@ -37,7 +37,7 @@ public class HasToStringTest extends AbstractMatcherTest {
         Matcher<? super String> toStringMatcher = equalTo(TO_STRING_RESULT);
         Matcher<Matcher<String>> matcher = hasToString(toStringMatcher);
 
-        assertEquals("asString(" + descriptionOf(toStringMatcher) + ")", descriptionOf(matcher));
+        assertEquals("with toString() " + descriptionOf(toStringMatcher), descriptionOf(matcher));
     }
 
     public void testMismatchContainsToStringValue() {

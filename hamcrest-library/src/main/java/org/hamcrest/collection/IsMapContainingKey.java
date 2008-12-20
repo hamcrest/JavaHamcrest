@@ -25,6 +25,11 @@ public class IsMapContainingKey<K> extends TypeSafeMatcher<Map<? super K,?>> {
         return false;
     }
 
+    @Override
+    public void describeMismatchSafely(Map<? super K, ?> map, Description mismatchDescription) {
+      mismatchDescription.appendText("map was ").appendValueList("[", ", ", "]", map.entrySet());
+    }
+
     public void describeTo(Description description) {
         description.appendText("map with key ")
                    .appendDescriptionOf(keyMatcher);

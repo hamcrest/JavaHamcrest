@@ -21,8 +21,10 @@ public class IsCloseToTest extends AbstractMatcherTest {
         assertTrue(p.matches(0.5d));
         assertTrue(p.matches(1.5d));
 
-        assertTrue("number too large", !p.matches(2.0));
-        assertTrue("number too small", !p.matches(0.0));
+        assertDoesNotMatch("too large", p, 2.0);
+        assertMismatchDescription("<2.0> differed by <0.5>", p, 2.0);
+        assertDoesNotMatch("number too small", p, 0.0);
+        assertMismatchDescription("<0.0> differed by <0.5>", p, 0.0);
     }
 
 }

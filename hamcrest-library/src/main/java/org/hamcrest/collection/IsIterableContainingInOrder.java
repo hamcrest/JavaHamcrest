@@ -35,6 +35,11 @@ public class IsIterableContainingInOrder<E> extends TypeSafeMatcher<Iterable<E>>
         return !items.hasNext() && !matchersIterator.hasNext();
     }
 
+    @Override
+    public void describeMismatchSafely(Iterable<E> actual, Description mismatchDescription) {
+      mismatchDescription.appendText("iterable was ").appendValueList("[", ", ", "]", actual);
+    }
+
     public void describeTo(Description description) {
         description.appendText("iterable over ")
             .appendList("[", ", ", "]", matchers);

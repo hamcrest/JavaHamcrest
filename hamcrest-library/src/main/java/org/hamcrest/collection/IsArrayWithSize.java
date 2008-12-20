@@ -3,30 +3,22 @@ package org.hamcrest.collection;
 import static org.hamcrest.core.DescribedAs.describedAs;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-import org.hamcrest.Description;
 import org.hamcrest.Factory;
+import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Matches if array size satisfies a nested matcher.
  */
-public class IsArrayWithSize<E> extends TypeSafeMatcher<E[]> {
-    private final Matcher<? super Integer> sizeMatcher;
-
+public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
     public IsArrayWithSize(Matcher<? super Integer> sizeMatcher) {
-        this.sizeMatcher = sizeMatcher;
+        super(sizeMatcher, "an array with size","array size");
     }
 
     @Override
-    public boolean matchesSafely(E[] item) {
-        return sizeMatcher.matches(item.length);
-    }
-
-    public void describeTo(Description description) {
-        description.appendText("an array with size ")
-            .appendDescriptionOf(sizeMatcher);
-    }
+    protected Integer featureValueOf(E[] actual) {
+      return actual.length;
+    };
 
     /**
      * Does array size satisfy a given matcher?

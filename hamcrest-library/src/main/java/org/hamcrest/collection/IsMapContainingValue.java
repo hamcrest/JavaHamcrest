@@ -24,6 +24,11 @@ public class IsMapContainingValue<V> extends TypeSafeMatcher<Map<?, V>>{
         return false;
     }
 
+    @Override
+    public void describeMismatchSafely(Map<?, V> map, Description mismatchDescription) {
+      mismatchDescription.appendText("map was ").appendValueList("[", ", ", "]", map.entrySet());
+    }
+
     public void describeTo(Description description) {
         description.appendText("map with value ")
                    .appendDescriptionOf(valueMatcher);

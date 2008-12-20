@@ -17,6 +17,11 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
         return type.isAssignableFrom(cls);
     }
     
+    @Override
+    public void describeMismatchSafely(Class<?> cls, Description mismatchDescription) {
+      mismatchDescription.appendValue(cls.getName());
+    }
+    
     public void describeTo(Description description) {
         description.appendText("type < ").appendText(type.getName());
     }

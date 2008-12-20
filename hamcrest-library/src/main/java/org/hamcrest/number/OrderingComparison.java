@@ -21,6 +21,12 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
         return minCompare <= compare && compare <= maxCompare;
     }
 
+    @Override
+    public void describeMismatchSafely(T item, Description mismatchDescription) {
+      mismatchDescription.appendValue(value) .appendText(" was ")
+                         .appendText(comparison(value.compareTo(item))).appendText(" ").appendValue(item);
+    };
+    
     public void describeTo(Description description) {
         description.appendText("a value ").appendText(comparison(minCompare));
         if (minCompare != maxCompare) {

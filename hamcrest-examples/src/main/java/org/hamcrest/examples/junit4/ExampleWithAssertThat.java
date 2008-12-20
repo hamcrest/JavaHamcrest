@@ -62,6 +62,11 @@ public class ExampleWithAssertThat {
           // TODO Auto-generated method stub
           return false;
         }
+        @Override
+        public void describeMismatchSafely(ComplicatedClass item, Description mismatchDescription) {
+          // TODO Auto-generated method stub
+          
+        }
       };
     }
 

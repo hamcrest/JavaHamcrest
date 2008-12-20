@@ -20,7 +20,7 @@ public class IsMapContainingValueTest extends AbstractMatcherTest {
     
     public void testDoesNotMatchEmptyMap() {
         Map<String,Integer> map = new HashMap<String,Integer>();
-        assertDoesNotMatch("Empty map", hasValue(1), map);
+        assertMismatchDescription("map was []", hasValue(1), map);
     }
     
     public void testMatchesSingletonMapContainingValue() {
@@ -47,5 +47,6 @@ public class IsMapContainingValueTest extends AbstractMatcherTest {
         
         assertMatches("hasValue 1", hasValue(1), map);      
         assertMatches("hasValue 3", hasValue(3), map);      
+        assertMismatchDescription("map was [<a=1>, <c=3>, <b=2>]", hasValue(4), map);      
     }
 }

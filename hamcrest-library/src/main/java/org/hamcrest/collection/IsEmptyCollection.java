@@ -17,7 +17,12 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<E>> {
 		return item.isEmpty();
 	}
 
-    public void describeTo(Description description) {
+	@Override
+	public void describeMismatchSafely(Collection<E> item, Description mismatchDescription) {
+	  mismatchDescription.appendValue(item);
+	}
+	
+  public void describeTo(Description description) {
 		description.appendText("an empty collection");
 	}
 

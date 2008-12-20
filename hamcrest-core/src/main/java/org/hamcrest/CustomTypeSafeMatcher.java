@@ -9,6 +9,9 @@ package org.hamcrest;
  *   public boolean matchesSafely(String string) {
  *     return !string.isEmpty();
  *   }
+ *   public void describeMismatchSafely(String string, Description mismatchDescription) {
+ *     mismatchDescription.appendText("was empty");
+ *   }
  * };
  * </pre>
  * This is a variant of {@link CustomMatcher} that first type checks

@@ -11,11 +11,20 @@ public class CustomTypeSafeMatcherTest extends AbstractMatcherTest {
             public boolean matchesSafely(String item) {
                 return false;
             }
+
+            @Override
+            public void describeMismatchSafely(String item, Description mismatchDescription) {
+              mismatchDescription.appendText("an " + item);
+            }
         };
     }
 
     public void testUsesStaticDescription() throws Exception {
         assertDescription(STATIC_DESCRIPTION, customMatcher);
+    }
+
+    public void testReportsMismatch() {
+      assertMismatchDescription("an item", customMatcher, "item");
     }
 
     @Override

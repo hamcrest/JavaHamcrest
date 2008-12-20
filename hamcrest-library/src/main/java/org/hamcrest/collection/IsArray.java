@@ -27,7 +27,21 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
         
         return true;
     }
-    
+
+    @Override
+    public void describeMismatchSafely(T[] actual, Description mismatchDescription) {
+      if (actual.length != elementMatchers.length) {
+        mismatchDescription.appendText("array length was " + actual.length);
+        return;
+      }
+      for (int i = 0; i < actual.length; i++) {
+        if (!elementMatchers[i].matches(actual[i])) {
+          mismatchDescription.appendText("element " + i + " was ").appendValue(actual[i]);
+          return;
+        }
+      }
+    }
+
     public void describeTo(Description description) {
         description.appendList(descriptionStart(), descriptionSeparator(), descriptionEnd(), 
                                Arrays.asList(elementMatchers));
@@ -69,4 +83,5 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
     public static <T> IsArray<T> array(Matcher<? super T>... elementMatchers) {
         return new IsArray<T>(elementMatchers);
     }
+
 }

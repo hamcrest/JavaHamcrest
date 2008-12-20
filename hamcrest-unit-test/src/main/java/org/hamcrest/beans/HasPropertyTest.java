@@ -30,7 +30,9 @@ public class HasPropertyTest extends AbstractMatcherTest {
     }
 
     public void testReturnsFalseIfPropertyDoesNotExist() {
-        assertThat(bean, not(hasProperty("aNonExistentProp")));
+        final Matcher<Object> hasProperty = hasProperty("aNonExistentProp");
+        assertThat(bean, not(hasProperty));
+        assertMismatchDescription("no \"aNonExistentProp\" in <[Person: a bean]>", hasProperty, bean);
     }
 
     public void testDescribeTo() {

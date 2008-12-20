@@ -17,7 +17,7 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
     }   
     
     public void testDoesNotMatchEmpty() throws Exception {
-        assertDoesNotMatch("Should not match an empty collection", containsInAnyOrder(1, 2), Collections.<Integer>emptyList());
+        assertMismatchDescription("iterable was []", containsInAnyOrder(1, 2), Collections.<Integer>emptyList());
     }
     
     public void testMatchesIterableOutOfOrder() throws Exception {
@@ -29,15 +29,15 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
     }
     
     public void testDoesNotMatchIfOneOfMultipleElementsMismatches() throws Exception {
-        assertDoesNotMatch("One element mismatches", containsInAnyOrder(1, 2, 3), asList(1, 2, 4));
+        assertMismatchDescription("iterable was [<1>, <2>, <4>]", containsInAnyOrder(1, 2, 3), asList(1, 2, 4));
     }
     
     public void testDoesNotMatchIfThereAreMoreElementsThanMatchers() throws Exception {
-        assertDoesNotMatch("More elements than matchers", containsInAnyOrder(1, 2, 3), asList(1, 2, 3, 4));
+        assertMismatchDescription("iterable was [<1>, <2>, <3>, <4>]", containsInAnyOrder(1, 2, 3), asList(1, 2, 3, 4));
     }
     
     public void testDoesNotMatchIfThereAreMoreMatchersThanElements() throws Exception {
-        assertDoesNotMatch("More matchers than elements", containsInAnyOrder(1, 2, 3, 4), asList(1, 2, 3));
+        assertMismatchDescription("iterable was [<1>, <2>, <3>]", containsInAnyOrder(1, 2, 3, 4), asList(1, 2, 3));
     }
 
     public void testHasAReadableDescription() {

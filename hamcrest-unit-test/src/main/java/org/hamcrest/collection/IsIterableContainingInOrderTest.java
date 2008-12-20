@@ -22,19 +22,19 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     }
     
     public void testDoesNotMatchWithMoreElementsThanExpected() throws Exception {
-        assertDoesNotMatch("More elements than expected", contains(1, 2, 3), asList(1, 2, 3, 4));
+        assertMismatchDescription("iterable was [<1>, <2>, <3>, <4>]", contains(1, 2, 3), asList(1, 2, 3, 4));
     }
     
     public void testDoesNotMatchWithLessElementsThanExpected() throws Exception {
-        assertDoesNotMatch("Less elements than expected", contains(1, 2, 3), asList(1, 2));
+        assertMismatchDescription("iterable was [<1>, <2>]", contains(1, 2, 3), asList(1, 2));
     }
     
     public void testDoesNotMatchIfSingleItemMismatches() throws Exception {
-        assertDoesNotMatch("Single item iterable mismatches", contains(3), asList(2));  
+        assertMismatchDescription("iterable was [<2>]", contains(3), asList(2));  
     }
     
     public void testDoesNotMatchIfOneOfMultipleItemsMismatch() throws Exception {
-        assertDoesNotMatch("Multiple item iterable mismatches", contains(1, 2, 3), asList(1, 2, 4));
+        assertMismatchDescription("iterable was [<1>, <2>, <4>]", contains(1, 2, 3), asList(1, 2, 4));
     }
 
     public void testHasAReadableDescription() {
