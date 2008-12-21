@@ -38,7 +38,7 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
     }
     
     @Factory
-    public static Matcher<String> stringContainsInAnyOrder(Iterable<String> substrings) {
+    public static Matcher<String> stringContainsInOrder(Iterable<String> substrings) {
         return new StringContainsInOrder(substrings);
     }
 }
