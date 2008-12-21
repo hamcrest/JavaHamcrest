@@ -1,6 +1,8 @@
 package org.hamcrest.text;
 
 import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 public class StringContainsInOrder extends TypeSafeMatcher<String> {
@@ -33,5 +35,10 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
         description.appendText("a string containing ")
                    .appendValueList("", ", ", "", substrings)
                    .appendText(" in order");
+    }
+    
+    @Factory
+    public static Matcher<String> stringContainsInAnyOrder(Iterable<String> substrings) {
+        return new StringContainsInOrder(substrings);
     }
 }
