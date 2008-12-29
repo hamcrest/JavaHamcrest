@@ -1,14 +1,14 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
 
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class IsMapContainingTest extends AbstractMatcherTest {
 
@@ -18,7 +18,7 @@ public class IsMapContainingTest extends AbstractMatcherTest {
     }
 
     public void testMatchesMapContainingMatchingKeyAndValue() {
-        Map<String,Integer> map = new HashMap<String,Integer>();
+        Map<String,Integer> map = new TreeMap<String,Integer>();
         map.put("a", 1);
         map.put("b", 2);
 

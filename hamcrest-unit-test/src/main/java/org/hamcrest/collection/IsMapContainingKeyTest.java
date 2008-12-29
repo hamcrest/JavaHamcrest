@@ -1,12 +1,14 @@
 package org.hamcrest.collection;
 
-import java.util.HashMap;
-import java.util.Map;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.collection.IsMapContainingKey.hasKey;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsMapContainingKey.hasKey;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class IsMapContainingKeyTest extends AbstractMatcherTest {
 
@@ -74,11 +76,11 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
     }
     
     public void testDoesNotMatchMapMissingKey() {
-        Map<String,Integer> map = new HashMap<String, Integer>();
+        Map<String,Integer> map = new TreeMap<String, Integer>();
         map.put("a", 1);
         map.put("b", 2);
         map.put("c", 3);
         
-        assertMismatchDescription("map was [<a=1>, <c=3>, <b=2>]", hasKey("d"), map);
+        assertMismatchDescription("map was [<a=1>, <b=2>, <c=3>]", hasKey("d"), map);
     }
 }
