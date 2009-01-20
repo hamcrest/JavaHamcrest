@@ -17,9 +17,6 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeMatcher<Iterable<
     private final Collection<Matcher<? super T>> matchers;
 
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
-        if (matchers.size() < 2) {
-            throw new IllegalArgumentException("Must specify at least two expected elements!");
-        }
         this.matchers = matchers;
     }
 
