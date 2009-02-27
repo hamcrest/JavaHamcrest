@@ -10,8 +10,8 @@
 	<classpathentry kind="src" path="build/temp/hamcrest-library/generated-code"/>
 	<classpathentry kind="lib" path="lib/integration/easymock-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/integration/jmock-1.10RC1.jar"/>
-	<classpathentry kind="lib" path="lib/integration/junit-4.0.jar"/>
 	<classpathentry kind="lib" path="lib/integration/testng-4.6-jdk15.jar"/>
+	<classpathentry kind="lib" path="lib/integration/junit-dep-4.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
