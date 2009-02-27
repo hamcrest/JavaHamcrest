@@ -4,45 +4,82 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-public class IsIterableContainingInOrder<E> extends TypeSafeMatcher<Iterable<E>> {
-    private final Collection<Matcher<? super E>> matchers;
+public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<E>> {
+    private final List<Matcher<? super E>> matchers;
 
-    public IsIterableContainingInOrder(Collection<Matcher<? super E>> contents) {
-        if (contents.isEmpty()) {
-            throw new IllegalArgumentException("Should specify at least one expected element");
-        }
-        this.matchers = contents;
+    public IsIterableContainingInOrder(List<Matcher<? super E>> matchers) {
+      this.matchers = matchers;
     }
-
+    
     @Override
-    public boolean matchesSafely(Iterable<E> iterable) {
-        Iterator<E> items = iterable.iterator();
-        Iterator<Matcher<? super E>> matchersIterator = matchers.iterator();
-        while (items.hasNext() && matchersIterator.hasNext()) {
-            if (!matchersIterator.next().matches(items.next())) {
-                return false;
-            }
+    protected boolean matchesSafely(Iterable<E> iterable, Description mismatchDescription) {
+      MatchSeries<E> matching = new MatchSeries<E>(matchers, mismatchDescription);
+      for (E item : iterable) {
+        if (! matching.matches(item)) {
+          return false;
         }
-        return !items.hasNext() && !matchersIterator.hasNext();
-    }
-
-    @Override
-    public void describeMismatchSafely(Iterable<E> actual, Description mismatchDescription) {
-      mismatchDescription.appendText("iterable was ").appendValueList("[", ", ", "]", actual);
+      }
+      
+      return matching.isFinished();
     }
 
     public void describeTo(Description description) {
-        description.appendText("iterable over ")
-            .appendList("[", ", ", "]", matchers);
+        description.appendText("iterable over ").appendList("[", ", ", "]", matchers);
+    }
+
+    private static class MatchSeries<F> {
+      public final List<Matcher<? super F>> matchers;
+      private final Description mismatchDescription;
+      public int nextMatchIx = 0;
+      
+      public MatchSeries(List<Matcher<? super F>> matchers, Description mismatchDescription) {
+        this.mismatchDescription = mismatchDescription;
+        if (matchers.isEmpty()) {
+          throw new IllegalArgumentException("Should specify at least one expected element");
+        }
+        this.matchers = matchers;
+      }
+
+      public boolean matches(F item) {
+        return isNotSurplus(item) && isMatched(item);
+      }
+
+      private boolean isMatched(F item) {
+        Matcher<? super F> matcher = matchers.get(nextMatchIx);
+        if (!matcher.matches(item)) {
+          describeMismatch(matcher, item);
+          return false;
+        }
+        nextMatchIx++;
+        return true;
+      }
+
+      private boolean isNotSurplus(F item) {
+        if (matchers.size() <= nextMatchIx) {
+          mismatchDescription.appendText("surplus item: ").appendValue(item);
+          return false;          
+        }
+        return true;
+      }
+      
+      public boolean isFinished() {
+        if (nextMatchIx < matchers.size()) {
+          mismatchDescription.appendText("surplus matcher: ").appendDescriptionOf(matchers.get(nextMatchIx));
+          return false;
+        }
+        return true;
+      }
+      private void describeMismatch(Matcher<? super F> matcher, F item) {
+        mismatchDescription.appendText("item " + nextMatchIx + ": ");
+        matcher.describeMismatch(item, mismatchDescription);
+      }
     }
 
     @Factory
@@ -160,7 +197,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeMatcher<Iterable<E>>
     }
 
     @Factory
-    public static <E> Matcher<Iterable<E>> contains(Collection<Matcher<? super E>> contents) {
+    public static <E> Matcher<Iterable<E>> contains(List<Matcher<? super E>> contents) {
         return new IsIterableContainingInOrder<E>(contents);
     }
 }

@@ -16,7 +16,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     private final Collection<Matcher<? super E>> matchers;
     private final IsIterableContainingInOrder<E> iterableMatcher;
 
-    public IsArrayContainingInOrder(Collection<Matcher<? super E>> matchers) {
+    public IsArrayContainingInOrder(List<Matcher<? super E>> matchers) {
         this.iterableMatcher = new IsIterableContainingInOrder<E>(matchers);
         this.matchers = matchers;
     }
@@ -100,7 +100,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     }
 
     @Factory
-    public static <E> Matcher<E[]> arrayContaining(Collection<Matcher<? super E>> matchers) {
+    public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> matchers) {
         return new IsArrayContainingInOrder<E>(matchers);
     }
 
