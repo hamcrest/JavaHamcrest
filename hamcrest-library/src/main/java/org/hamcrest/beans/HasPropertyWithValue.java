@@ -68,26 +68,25 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  */
 public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     private final String propertyName;
-    private final Matcher<?> value;
+    private final Matcher<?> valueMatcher;
 
-    public HasPropertyWithValue(String propertyName, Matcher<?> value) {
+    public HasPropertyWithValue(String propertyName, Matcher<?> valueMatcher) {
         this.propertyName = propertyName;
-        this.value = value;
+        this.valueMatcher = valueMatcher;
     }
 
     @Override
-	public boolean matchesSafely(T argument, Description mismatchDescription) {
+	public boolean matchesSafely(T bean, Description mismatchDescription) {
         try {
-            Method readMethod = getReadMethod(argument);
+            Method readMethod = findReadMethod(bean, mismatchDescription);
             if (readMethod == null) {
-              mismatchDescription.appendText("missing.");
             	return false;
             }
-            Object propertyValue = readMethod.invoke(argument, NO_ARGUMENTS);
-            boolean valueMatches = value.matches(propertyValue);
+            Object propertyValue = readMethod.invoke(bean, NO_ARGUMENTS);
+            boolean valueMatches = valueMatcher.matches(propertyValue);
             if (!valueMatches) {
-            	value.describeMismatch(propertyValue, mismatchDescription);
-            	mismatchDescription.appendText(".");
+              mismatchDescription.appendText("property \"" + propertyName + "\" ");
+            	valueMatcher.describeMismatch(propertyValue, mismatchDescription);
             }
             return valueMatches;
         } catch (IllegalArgumentException e) {
@@ -99,16 +98,24 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         }
     }
 
-    private Method getReadMethod(Object argument) throws IllegalArgumentException {
+    private Method findReadMethod(Object argument, Description mismatchDescription) throws IllegalArgumentException {
         PropertyDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, argument);
-        return property == null ? null : property.getReadMethod();
+        if (null == property) {
+          mismatchDescription.appendText("No property \"" + propertyName + "\"");
+          return null;
+        }
+        Method readMethod = property.getReadMethod();
+        if (null == readMethod) {
+          mismatchDescription.appendText("property \"" + propertyName + "\" is not readable");
+        }
+        return readMethod;
     }
 
     public void describeTo(Description description) {
         description.appendText("hasProperty(");
         description.appendValue(propertyName);
         description.appendText(", ");
-        description.appendDescriptionOf(value);
+        description.appendDescriptionOf(valueMatcher);
         description.appendText(")");
     }
 

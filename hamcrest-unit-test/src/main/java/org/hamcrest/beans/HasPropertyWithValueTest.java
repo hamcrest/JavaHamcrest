@@ -6,7 +6,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNot.not;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -38,45 +37,43 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   }
 
   public void testMatchesInfolessBeanWithMatchedNamedProperty() {
-    assertThat(shouldMatch, hasProperty("property", equalTo("is expected")));
-    assertThat(shouldNotMatch, not(hasProperty("property", equalTo("is expected"))));
+    assertMatches("with property", hasProperty("property", equalTo("is expected")), shouldMatch);
+    assertMismatchDescription("property \"property\" was \"not expected\"", 
+                              hasProperty("property", equalTo("is expected")), shouldNotMatch);
   }
 
   public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
-    assertThat(beanWithInfo, hasProperty("property", equalTo("with info")));
+    assertMatches("with bean info", hasProperty("property", equalTo("with info")), beanWithInfo);
+    assertMismatchDescription("property \"property\" was \"with info\"", 
+        hasProperty("property", equalTo("without info")), beanWithInfo);
   }
 
   public void testDoesNotMatchInfolessBeanWithoutMatchedNamedProperty() {
-    assertThat(shouldNotMatch, not(hasProperty("nonExistentProperty", anything())));
-  }
+    assertMismatchDescription("No property \"nonExistentProperty\"", 
+                              hasProperty("nonExistentProperty", anything()), shouldNotMatch);
+   }
 
   public void testDoesNotMatchWriteOnlyProperty() {
-    assertThat(shouldNotMatch,
-        not(hasProperty("writeOnlyProperty", anything())));
+    assertMismatchDescription("property \"writeOnlyProperty\" is not readable",
+                              hasProperty("writeOnlyProperty", anything()), shouldNotMatch); 
   }
 
   public void testDescribeTo() {
-    Matcher<?> matcher = equalTo(true);
-
-    assertDescription("hasProperty(\"property\", "
-        + StringDescription.asString(matcher) + ")", hasProperty("property", matcher));
+    assertDescription("hasProperty(\"property\", <true>)", hasProperty("property", equalTo(true)));
   }
 
+  public void testMatchesPropertyAndValue() {
+    assertMatches("property with value", hasProperty( "property", anything()), beanWithInfo);
+  }
+  
   public void testDoesNotWriteMismatchIfPropertyMatches() {
-    Matcher<Object> matcher = hasProperty( "property", anything());
-    assertTrue("Precondtion: Matcher should match item.", matcher.matches(beanWithInfo));
     Description description = new StringDescription();
-    matcher.describeMismatch(beanWithInfo, description);
+    hasProperty( "property", anything()).describeMismatch(beanWithInfo, description);
     assertEquals("Expected mismatch description", "", description.toString());
   }
 
   public void testDescribesMissingPropertyMismatch() {
-    assertMismatchDescription("missing.", hasProperty( "honk", anything()), shouldNotMatch);
-  }
-
-  public void testDescribesMismatchingPropertyValueMismatch() {
-    assertMismatchDescription("was \"not expected\".",
-        hasProperty("property", equalTo("foo")), shouldNotMatch);
+    assertMismatchDescription("No property \"honk\"", hasProperty( "honk", anything()), shouldNotMatch);
   }
 
   public void testCanAccessAnAnonymousInnerClass() {
@@ -133,8 +130,9 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     @Override
     public PropertyDescriptor[] getPropertyDescriptors() {
       try {
-        return new PropertyDescriptor[] { new PropertyDescriptor("property",
-            BeanWithInfo.class, "property", null) };
+        return new PropertyDescriptor[] { 
+            new PropertyDescriptor("property", BeanWithInfo.class, "property", null) 
+          };
       } catch (IntrospectionException e) {
         throw new RuntimeException("Introspection exception: " + e.getMessage());
       }
