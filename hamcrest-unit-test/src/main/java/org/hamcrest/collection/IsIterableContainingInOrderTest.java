@@ -26,14 +26,13 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     }
     
     public void testDoesNotMatchWithMoreElementsThanExpected() throws Exception {
-        assertMismatchDescription("surplus item: <4>", contains(1, 2, 3), asList(1, 2, 3, 4));
+        assertMismatchDescription("Not matched: <4>", contains(1, 2, 3), asList(1, 2, 3, 4));
     }
     
     public void testDoesNotMatchWithFewerElementsThanExpected() throws Exception {
-        assertMismatchDescription("surplus matcher: value with <3>", contains(value(1), value(2), value(3)), asList(make(1), make(2)));
+        assertMismatchDescription("No item: value with <3>", contains(value(1), value(2), value(3)), asList(make(1), make(2)));
     }
     
-    @SuppressWarnings("unchecked")
     public void testDoesNotMatchIfSingleItemMismatches() throws Exception {
         assertMismatchDescription("item 0: value was <3>", contains(value(4)), asList(make(3)));  
     }
@@ -42,9 +41,8 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
         assertMismatchDescription("item 2: value was <4>", contains(value(1), value(2), value(3)), asList(make(1), make(2), make(4)));
     }
 
-    @SuppressWarnings("unchecked")
     public void testDoesNotMatchEmptyIterable() throws Exception {
-        assertMismatchDescription("surplus matcher: value with <4>", contains(value(4)), new ArrayList<WithValue>());  
+        assertMismatchDescription("No item: value with <4>", contains(value(4)), new ArrayList<WithValue>());  
     }
 
     public void testHasAReadableDescription() {
@@ -55,13 +53,14 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
       private final int value;
       public WithValue(int value) { this.value = value; }
       public int getValue() { return value; }
+      @Override public String toString() { return "WithValue " + value; }
     }
     
-    private static WithValue make(int value) {
+    public static WithValue make(int value) {
       return new WithValue(value);
     }
     
-    private static Matcher<WithValue> value(int value) {
+    public static Matcher<WithValue> value(int value) {
       return new FeatureMatcher<WithValue, Integer>(equalTo(value), "value with", "value") {
         @Override protected Integer featureValueOf(WithValue actual) { return actual.getValue(); }
       };

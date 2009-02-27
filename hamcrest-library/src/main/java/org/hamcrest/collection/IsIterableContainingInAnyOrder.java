@@ -5,55 +5,85 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-public class IsIterableContainingInAnyOrder<T> extends TypeSafeMatcher<Iterable<T>> {
+public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher<Iterable<T>> {
     private final Collection<Matcher<? super T>> matchers;
 
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }
-
-    @Override
-    public boolean matchesSafely(Iterable<T> iterable) {
-        Iterator<T> items = iterable.iterator();
-        List<Matcher<? super T>> currentMatchers = copyOfMatchers();
-        while (items.hasNext() && !currentMatchers.isEmpty()) {
-            removeFirstMatcherThatMatchesItem(currentMatchers, items.next());
-        }
-        return currentMatchers.isEmpty() && !items.hasNext();
-    }
-
-    private void removeFirstMatcherThatMatchesItem(List<Matcher<? super T>> currentMatchers, T item) {
-      Iterator<Matcher<? super T>> availableMatchers = currentMatchers.iterator();
-      while (availableMatchers.hasNext()) {
-          Matcher<? super T> matcher = availableMatchers.next();
-          if (matcher.matches(item)) {
-              availableMatchers.remove();
-              break;
-          }
-      }
-    }
-
-    @Override
-    public void describeMismatchSafely(Iterable<T> actual, Description mismatchDescription) {
-      mismatchDescription.appendText("iterable was ").appendValueList("[", ", ", "]", actual);
-    }
     
-    private List<Matcher<? super T>> copyOfMatchers() {
-        return new ArrayList<Matcher<? super T>>(matchers);
+    @Override
+    protected boolean matchesSafely(Iterable<T> items, Description mismatchDescription) {
+      Matching<T> matching = new Matching<T>(matchers, mismatchDescription);
+      for (T item : items) {
+        if (! matching.matches(item)) {
+          return false;
+        }
+      }
+      
+      return matching.isFinished(items);
     }
 
     public void describeTo(Description description) {
-        description.appendText("iterable over ")
-            .appendList("[", ", ", "]", matchers)
-            .appendText(" in any order");
+      description.appendText("iterable over ")
+          .appendList("[", ", ", "]", matchers)
+          .appendText(" in any order");
+    }
+
+    private static class Matching<S> {
+      private final Collection<Matcher<? super S>> matchers;
+      private final Description mismatchDescription;
+
+      public Matching(Collection<Matcher<? super S>> matchers, Description mismatchDescription) {
+        this.matchers = new ArrayList<Matcher<? super S>>(matchers);;
+        this.mismatchDescription = mismatchDescription;
+      }
+      
+      public boolean matches(S item) {
+        return isNotSurplus(item) && isMatched(item);
+      }
+
+      public boolean isFinished(Iterable<S> items) {
+        if (matchers.isEmpty()) {
+          return true;
+        }
+        mismatchDescription
+          .appendText("No item matches: ").appendList("", ", ", "", matchers)
+          .appendText(" in ").appendValueList("[", ", ", "]", items);
+        return false;
+      }
+      
+      private boolean isNotSurplus(S item) {
+        if (matchers.isEmpty()) {
+          mismatchDescription.appendText("Not matched: ").appendValue(item);
+          return false;
+        }
+        return true;
+      }
+
+      private boolean isMatched(S item) {
+        for (Matcher<? super S>  matcher : matchers) {
+          if (matcher.matches(item)) {
+            matchers.remove(matcher);
+            return true;
+          }
+        }
+        mismatchDescription.appendText("Not matched: ").appendValue(item);
+        return false;
+      }
+
+    }
+
+    @Factory
+    public static <E> Matcher<Iterable<E>> containsInAnyOrder(final Matcher<E> item) {
+        return containsInAnyOrder(new ArrayList<Matcher<? super E>>() {{ add(item); }});
     }
 
     @Factory
@@ -175,3 +205,4 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeMatcher<Iterable<
         return new IsIterableContainingInAnyOrder<T>(matchers);
     }
 }
+

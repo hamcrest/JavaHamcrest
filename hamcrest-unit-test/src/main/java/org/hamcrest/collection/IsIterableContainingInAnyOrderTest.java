@@ -1,13 +1,14 @@
 package org.hamcrest.collection;
 
+import static java.util.Arrays.asList;
+import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
+import static org.hamcrest.collection.IsIterableContainingInOrderTest.make;
+import static org.hamcrest.collection.IsIterableContainingInOrderTest.value;
+
 import java.util.Collections;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-
-import static org.hamcrest.collection.IsIterableContainingInAnyOrder.*;
-
-import static java.util.Arrays.asList;
 
 public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
 
@@ -21,7 +22,7 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchEmpty() {
-        assertMismatchDescription("iterable was []", containsInAnyOrder(1, 2), Collections.<Integer>emptyList());
+        assertMismatchDescription("No item matches: <1>, <2> in []", containsInAnyOrder(1, 2), Collections.<Integer>emptyList());
     }
     
     public void testMatchesIterableOutOfOrder() {
@@ -33,18 +34,24 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
     }
     
     public void testDoesNotMatchIfOneOfMultipleElementsMismatches() {
-        assertMismatchDescription("iterable was [<1>, <2>, <4>]", containsInAnyOrder(1, 2, 3), asList(1, 2, 4));
+        assertMismatchDescription("Not matched: <4>", containsInAnyOrder(1, 2, 3), asList(1, 2, 4));
     }
     
     public void testDoesNotMatchIfThereAreMoreElementsThanMatchers() {
-        assertMismatchDescription("iterable was [<1>, <2>, <3>, <4>]", containsInAnyOrder(1, 2, 3), asList(1, 2, 3, 4));
+        assertMismatchDescription("Not matched: <WithValue 2>", containsInAnyOrder(value(1), value(3)), asList(make(1), make(2), make(3)));
     }
     
     public void testDoesNotMatchIfThereAreMoreMatchersThanElements() {
-        assertMismatchDescription("iterable was [<1>, <2>, <3>]", containsInAnyOrder(1, 2, 3, 4), asList(1, 2, 3));
+        assertMismatchDescription("No item matches: <4> in [<1>, <2>, <3>]", containsInAnyOrder(1, 2, 3, 4), asList(1, 2, 3));
     }
 
     public void testHasAReadableDescription() {
         assertDescription("iterable over [<1>, <2>] in any order", containsInAnyOrder(1, 2));
     }
+    
+    public void testDoesNotMatchIfSingleItemMismatches() throws Exception {
+      assertMismatchDescription("Not matched: <WithValue 3>", containsInAnyOrder(value(4)), asList(make(3)));  
+  }
+  
+
 }

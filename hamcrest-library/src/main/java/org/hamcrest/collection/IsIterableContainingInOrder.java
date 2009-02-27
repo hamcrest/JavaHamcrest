@@ -20,14 +20,14 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     
     @Override
     protected boolean matchesSafely(Iterable<E> iterable, Description mismatchDescription) {
-      MatchSeries<E> matching = new MatchSeries<E>(matchers, mismatchDescription);
+      MatchSeries<E> matchSeries = new MatchSeries<E>(matchers, mismatchDescription);
       for (E item : iterable) {
-        if (! matching.matches(item)) {
+        if (! matchSeries.matches(item)) {
           return false;
         }
       }
       
-      return matching.isFinished();
+      return matchSeries.isFinished();
     }
 
     public void describeTo(Description description) {
@@ -51,6 +51,14 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
         return isNotSurplus(item) && isMatched(item);
       }
 
+      public boolean isFinished() {
+        if (nextMatchIx < matchers.size()) {
+          mismatchDescription.appendText("No item: ").appendDescriptionOf(matchers.get(nextMatchIx));
+          return false;
+        }
+        return true;
+      }
+
       private boolean isMatched(F item) {
         Matcher<? super F> matcher = matchers.get(nextMatchIx);
         if (!matcher.matches(item)) {
@@ -63,19 +71,12 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
 
       private boolean isNotSurplus(F item) {
         if (matchers.size() <= nextMatchIx) {
-          mismatchDescription.appendText("surplus item: ").appendValue(item);
+          mismatchDescription.appendText("Not matched: ").appendValue(item);
           return false;          
         }
         return true;
       }
       
-      public boolean isFinished() {
-        if (nextMatchIx < matchers.size()) {
-          mismatchDescription.appendText("surplus matcher: ").appendDescriptionOf(matchers.get(nextMatchIx));
-          return false;
-        }
-        return true;
-      }
       private void describeMismatch(Matcher<? super F> matcher, F item) {
         mismatchDescription.appendText("item " + nextMatchIx + ": ");
         matcher.describeMismatch(item, mismatchDescription);
@@ -139,6 +140,11 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
         matchers.add(equalTo(fifth));
         matchers.add(equalTo(sixth));
         return contains(matchers);
+    }
+
+    @Factory
+    public static <E> Matcher<Iterable<E>> contains(final Matcher<E> item) {
+        return contains(new ArrayList<Matcher<? super E>>() {{ add(item); }});
     }
 
     @Factory
