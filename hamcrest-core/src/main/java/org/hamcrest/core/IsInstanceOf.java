@@ -2,8 +2,8 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -11,7 +11,7 @@ import org.hamcrest.Matcher;
 /**
  * Tests whether the value is an instance of a class.
  */
-public class IsInstanceOf extends BaseMatcher<Object> {
+public class IsInstanceOf extends DiagnosingMatcher<Object> {
     private final Class<?> theClass;
 
     /**
@@ -24,8 +24,19 @@ public class IsInstanceOf extends BaseMatcher<Object> {
         this.theClass = theClass;
     }
 
-    public boolean matches(Object item) {
-        return theClass.isInstance(item);
+    @Override
+    protected boolean matches(Object item, Description mismatchDescription) {
+      if (null == item) {
+        mismatchDescription.appendText("null");
+        return false;
+      }
+      
+      if (!theClass.isInstance(item)) {
+        mismatchDescription.appendText("[" + item.getClass().getSimpleName() + "] ").appendValue(item);
+        return false;
+      }
+      
+      return true;
     }
 
     public void describeTo(Description description) {
