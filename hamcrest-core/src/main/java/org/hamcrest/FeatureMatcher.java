@@ -3,7 +3,7 @@ package org.hamcrest;
 import org.hamcrest.internal.ReflectiveTypeFinder;
 
 /**
- * Supporting class for matching a feature of an object. Implement <code>valueOfPartIn()</code>
+ * Supporting class for matching a feature of an object. Implement <code>featureValueOf()</code>
  * in a subclass to pull out the feature to be matched against. 
  *
  * @param <T> The type of the object to be matched
