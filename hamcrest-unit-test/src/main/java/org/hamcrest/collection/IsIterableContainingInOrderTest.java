@@ -10,7 +10,9 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
+@SuppressWarnings("unchecked")
 public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
+    private final Matcher<Iterable<WithValue>> contains123 = contains(value(1), value(2), value(3));
 
     @Override
     protected Matcher<?> createMatcher() {
@@ -29,18 +31,16 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
         assertMismatchDescription("Not matched: <4>", contains(1, 2, 3), asList(1, 2, 3, 4));
     }
     
-    @SuppressWarnings("unchecked")
     public void testDoesNotMatchWithFewerElementsThanExpected() throws Exception {
-        assertMismatchDescription("No item: value with <3>", contains(value(1), value(2), value(3)), asList(make(1), make(2)));
+        assertMismatchDescription("No item: value with <3>", contains123, asList(make(1), make(2)));
     }
     
     public void testDoesNotMatchIfSingleItemMismatches() throws Exception {
         assertMismatchDescription("item 0: value was <3>", contains(value(4)), asList(make(3)));  
     }
     
-    @SuppressWarnings("unchecked")
     public void testDoesNotMatchIfOneOfMultipleItemsMismatch() throws Exception {
-        assertMismatchDescription("item 2: value was <4>", contains(value(1), value(2), value(3)), asList(make(1), make(2), make(4)));
+        assertMismatchDescription("item 2: value was <4>", contains123, asList(make(1), make(2), make(4)));
     }
 
     public void testDoesNotMatchEmptyIterable() throws Exception {

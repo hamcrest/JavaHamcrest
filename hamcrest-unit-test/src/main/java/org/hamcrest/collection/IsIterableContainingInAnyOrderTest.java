@@ -9,6 +9,7 @@ import java.util.Collections;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.hamcrest.collection.IsIterableContainingInOrderTest.WithValue;
 
 public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
 
@@ -37,9 +38,9 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
         assertMismatchDescription("Not matched: <4>", containsInAnyOrder(1, 2, 3), asList(1, 2, 4));
     }
     
-    @SuppressWarnings("unchecked")
     public void testDoesNotMatchIfThereAreMoreElementsThanMatchers() {
-        assertMismatchDescription("Not matched: <WithValue 2>", containsInAnyOrder(value(1), value(3)), asList(make(1), make(2), make(3)));
+        Matcher<Iterable<WithValue>> helpTheCompilerOut = containsInAnyOrder(value(1), value(3));
+        assertMismatchDescription("Not matched: <WithValue 2>", helpTheCompilerOut, asList(make(1), make(2), make(3)));
     }
     
     public void testDoesNotMatchIfThereAreMoreMatchersThanElements() {
