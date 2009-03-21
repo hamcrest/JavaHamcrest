@@ -93,56 +93,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     }
 
     @Factory
-    public static <E> Matcher<Iterable<E>> contains(E first, E second) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(equalTo(first));
-        matchers.add(equalTo(second));
-        return contains(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<Iterable<E>> contains(E first, E second, E third) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(equalTo(first));
-        matchers.add(equalTo(second));
-        matchers.add(equalTo(third));
-        return contains(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<Iterable<E>> contains(E first, E second, E third, E forth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(equalTo(first));
-        matchers.add(equalTo(second));
-        matchers.add(equalTo(third));
-        matchers.add(equalTo(forth));
-        return contains(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<Iterable<E>> contains(E first, E second, E third, E forth, E fifth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(equalTo(first));
-        matchers.add(equalTo(second));
-        matchers.add(equalTo(third));
-        matchers.add(equalTo(forth));
-        matchers.add(equalTo(fifth));
-        return contains(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<Iterable<E>> contains(E first, E second, E third, E forth, E fifth, E sixth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(equalTo(first));
-        matchers.add(equalTo(second));
-        matchers.add(equalTo(third));
-        matchers.add(equalTo(forth));
-        matchers.add(equalTo(fifth));
-        matchers.add(equalTo(sixth));
-        return contains(matchers);
-    }
-
-    @Factory
     public static <E> Matcher<Iterable<E>> contains(final Matcher<E> item) {
         return contains(new ArrayList<Matcher<? super E>>() {{ add(item); }});
     }
@@ -150,56 +100,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     @Factory
     public static <E> Matcher<Iterable<E>> contains(Matcher<? super E>... items) {
         return contains(Arrays.asList(items));
-    }
-
-    @Factory
-    public static <E> Matcher<Iterable<E>> contains(Matcher<E> first, Matcher<? super E> second) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(first);
-        matchers.add(second);
-        return contains(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<Iterable<E>> contains(Matcher<E> first, Matcher<? super E> second, Matcher<? super E> third) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(first);
-        matchers.add(second);
-        matchers.add(third);
-        return contains(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<Iterable<E>> contains(Matcher<E> first, Matcher<? super E> second, Matcher<? super E> third, Matcher<? super E> forth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(first);
-        matchers.add(second);
-        matchers.add(third);
-        matchers.add(forth);
-        return contains(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<Iterable<E>> contains(Matcher<E> first, Matcher<? super E> second, Matcher<? super E> third, Matcher<? super E> forth, Matcher<? super E> fifth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(first);
-        matchers.add(second);
-        matchers.add(third);
-        matchers.add(forth);
-        matchers.add(fifth);
-        return contains(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<Iterable<E>> contains(Matcher<E> first, Matcher<? super E> second, Matcher<? super E> third, Matcher<? super E> forth, Matcher<? super E> fifth, Matcher<? super E> sixth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(first);
-        matchers.add(second);
-        matchers.add(third);
-        matchers.add(forth);
-        matchers.add(fifth);
-        matchers.add(sixth);
-        return contains(matchers);
     }
 
     @Factory

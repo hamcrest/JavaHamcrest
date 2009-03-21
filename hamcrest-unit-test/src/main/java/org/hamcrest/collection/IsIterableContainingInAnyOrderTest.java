@@ -37,6 +37,7 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
         assertMismatchDescription("Not matched: <4>", containsInAnyOrder(1, 2, 3), asList(1, 2, 4));
     }
     
+    @SuppressWarnings("unchecked")
     public void testDoesNotMatchIfThereAreMoreElementsThanMatchers() {
         assertMismatchDescription("Not matched: <WithValue 2>", containsInAnyOrder(value(1), value(3)), asList(make(1), make(2), make(3)));
     }

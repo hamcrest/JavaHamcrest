@@ -45,56 +45,6 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     }
 
     @Factory
-    public static <E> Matcher<E[]> arrayContaining(E first, E second) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(equalTo(first));
-        matchers.add(equalTo(second));
-        return arrayContaining(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<E[]> arrayContaining(E first, E second, E third) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(equalTo(first));
-        matchers.add(equalTo(second));
-        matchers.add(equalTo(third));
-        return arrayContaining(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<E[]> arrayContaining(E first, E second, E third, E forth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(equalTo(first));
-        matchers.add(equalTo(second));
-        matchers.add(equalTo(third));
-        matchers.add(equalTo(forth));
-        return arrayContaining(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<E[]> arrayContaining(E first, E second, E third, E forth, E fifth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(equalTo(first));
-        matchers.add(equalTo(second));
-        matchers.add(equalTo(third));
-        matchers.add(equalTo(forth));
-        matchers.add(equalTo(fifth));
-        return arrayContaining(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<E[]> arrayContaining(E first, E second, E third, E forth, E fifth, E sixth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(equalTo(first));
-        matchers.add(equalTo(second));
-        matchers.add(equalTo(third));
-        matchers.add(equalTo(forth));
-        matchers.add(equalTo(fifth));
-        matchers.add(equalTo(sixth));
-        return arrayContaining(matchers);
-    }
-
-    @Factory
     public static <E> Matcher<E[]> arrayContaining(Matcher<? super E>... matchers) {
         return arrayContaining(Arrays.asList(matchers));
     }
@@ -102,55 +52,5 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     @Factory
     public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> matchers) {
         return new IsArrayContainingInOrder<E>(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<E[]> arrayContaining(Matcher<E> first, Matcher<? super E> second) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(first);
-        matchers.add(second);
-        return arrayContaining(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<E[]> arrayContaining(Matcher<E> first, Matcher<? super E> second, Matcher<? super E> third) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(first);
-        matchers.add(second);
-        matchers.add(third);
-        return arrayContaining(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<E[]> arrayContaining(Matcher<E> first, Matcher<? super E> second, Matcher<? super E> third, Matcher<? super E> forth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(first);
-        matchers.add(second);
-        matchers.add(third);
-        matchers.add(forth);
-        return arrayContaining(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<E[]> arrayContaining(Matcher<E> first, Matcher<? super E> second, Matcher<? super E> third, Matcher<? super E> forth, Matcher<? super E> fifth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(first);
-        matchers.add(second);
-        matchers.add(third);
-        matchers.add(forth);
-        matchers.add(fifth);
-        return arrayContaining(matchers);
-    }
-
-    @Factory
-    public static <E> Matcher<E[]> arrayContaining(Matcher<E> first, Matcher<? super E> second, Matcher<? super E> third, Matcher<? super E> forth, Matcher<? super E> fifth, Matcher<? super E> sixth) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
-        matchers.add(first);
-        matchers.add(second);
-        matchers.add(third);
-        matchers.add(forth);
-        matchers.add(fifth);
-        matchers.add(sixth);
-        return arrayContaining(matchers);
     }
 }
