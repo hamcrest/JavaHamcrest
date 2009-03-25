@@ -27,7 +27,7 @@ public class IsInstanceOfTest extends AbstractMatcherTest {
     }
 
     public void testDecribesActualClassInMismatchMessage() {
-      assertMismatchDescription("[String] \"some text\"", instanceOf(Number.class), "some text");
+      assertMismatchDescription("\"some text\" is a java.lang.String", instanceOf(Number.class), "some text");
     }
     
     public void testInstanceOfRequiresACastToReturnTheCorrectTypeForUseInJMock() {

@@ -32,7 +32,7 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
       }
       
       if (!theClass.isInstance(item)) {
-        mismatchDescription.appendText("[" + item.getClass().getSimpleName() + "] ").appendValue(item);
+        mismatchDescription.appendValue(item).appendText(" is a " + item.getClass().getName());
         return false;
       }
       
