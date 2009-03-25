@@ -10,18 +10,33 @@ import org.hamcrest.Matcher;
 
 /**
  * Tests whether the value is an instance of a class.
+ * Classes of basic types will be converted to the relevant "Object" classes
  */
 public class IsInstanceOf extends DiagnosingMatcher<Object> {
-    private final Class<?> theClass;
+    private final Class<?> expectedClass;
+    private final Class<?> matchableClass;
 
     /**
      * Creates a new instance of IsInstanceOf
      *
-     * @param theClass The predicate evaluates to true for instances of this class
+     * @param expectedClass The predicate evaluates to true for instances of this class
      *                 or one of its subclasses.
      */
-    public IsInstanceOf(Class<?> theClass) {
-        this.theClass = theClass;
+    public IsInstanceOf(Class<?> expectedClass) {
+        this.expectedClass = expectedClass;
+        this.matchableClass = matchableClass(expectedClass);
+    }
+
+    private static Class<?> matchableClass(Class<?> expectedClass) {
+      if (boolean.class.equals(expectedClass)) return Boolean.class; 
+      if (byte.class.equals(expectedClass)) return Byte.class; 
+      if (char.class.equals(expectedClass)) return Character.class; 
+      if (double.class.equals(expectedClass)) return Double.class; 
+      if (float.class.equals(expectedClass)) return Float.class; 
+      if (int.class.equals(expectedClass)) return Integer.class; 
+      if (long.class.equals(expectedClass)) return Long.class; 
+      if (short.class.equals(expectedClass)) return Short.class; 
+      return expectedClass;
     }
 
     @Override
@@ -31,7 +46,7 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
         return false;
       }
       
-      if (!theClass.isInstance(item)) {
+      if (!matchableClass.isInstance(item)) {
         mismatchDescription.appendValue(item).appendText(" is a " + item.getClass().getName());
         return false;
       }
@@ -41,7 +56,7 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
 
     public void describeTo(Description description) {
         description.appendText("an instance of ")
-                .appendText(theClass.getName());
+                .appendText(expectedClass.getName());
     }
 
     /**

@@ -1,4 +1,4 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
+/*  Copyright (c) 2000-2009 hamcrest.org
  */
 package org.hamcrest.core;
 
@@ -29,12 +29,23 @@ public class IsInstanceOfTest extends AbstractMatcherTest {
     public void testDecribesActualClassInMismatchMessage() {
       assertMismatchDescription("\"some text\" is a java.lang.String", instanceOf(Number.class), "some text");
     }
+
+    public void testMatchesPrimitiveTypes() {
+      assertThat(true, any(boolean.class));
+      assertThat((byte)1, any(byte.class));
+      assertThat('x', any(char.class));
+      assertThat(5.0, any(double.class));
+      assertThat(5.0f, any(float.class));
+      assertThat(2, any(int.class));
+      assertThat(4L, any(long.class));
+      assertThat((short)1, any(short.class));
+    }
     
     public void testInstanceOfRequiresACastToReturnTheCorrectTypeForUseInJMock() {
       @SuppressWarnings("unused")
       Integer anInteger = (Integer)with(instanceOf(Integer.class));
     }
-
+    
     public void testAnyWillReturnTheCorrectTypeForUseInJMock() {
       @SuppressWarnings("unused")
       Integer anInteger = with(any(Integer.class));
