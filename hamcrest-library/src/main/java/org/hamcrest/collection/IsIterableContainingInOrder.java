@@ -53,7 +53,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
 
       public boolean isFinished() {
         if (nextMatchIx < matchers.size()) {
-          mismatchDescription.appendText("No item: ").appendDescriptionOf(matchers.get(nextMatchIx));
+          mismatchDescription.appendText("No item matched: ").appendDescriptionOf(matchers.get(nextMatchIx));
           return false;
         }
         return true;
