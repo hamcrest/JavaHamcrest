@@ -21,22 +21,22 @@ public class IsArrayContainingInOrderTest extends AbstractMatcherTest {
     }
     
     public void testMatchesItemsInOrder() {
-      assertMatches("in order", arrayContainingInAnyOrder(1, 2, 3), new Integer[] {1, 2, 3});
-      assertMatches("single", arrayContainingInAnyOrder(1), new Integer[] {1});
+      assertMatches("in order", arrayContaining(1, 2, 3), new Integer[] {1, 2, 3});
+      assertMatches("single", arrayContaining(1), new Integer[] {1});
     }
 
     @SuppressWarnings("unchecked")
-    public void testAppliesMatchersInAnyOrder() {
-      assertMatches("in order", arrayContainingInAnyOrder(equalTo(1), equalTo(2), equalTo(3)), new Integer[] {1, 2, 3});
-      assertMatches("single", arrayContainingInAnyOrder(equalTo(1)), new Integer[] {1});
+    public void testAppliesMatchersInOrder() {
+      assertMatches("in order", arrayContaining(equalTo(1), equalTo(2), equalTo(3)), new Integer[] {1, 2, 3});
+      assertMatches("single", arrayContaining(equalTo(1)), new Integer[] {1});
     }
     
-    public void testMismatchesItemsInAnyOrder() {
-      Matcher<Integer[]> matcher = arrayContainingInAnyOrder(1, 2, 3);
+    public void testMismatchesItemsInOrder() {
+      Matcher<Integer[]> matcher = arrayContaining(1, 2, 3);
       assertMismatchDescription("was null", matcher, null);
-      assertMismatchDescription("No item matches: <1>, <2>, <3> in []", matcher, new Integer[] {});
-      assertMismatchDescription("No item matches: <2>, <3> in [<1>]", matcher, new Integer[] {1});
-      assertMismatchDescription("Not matched: <4>", matcher, new Integer[] {4,3,2,1});
-      assertMismatchDescription("Not matched: <4>", matcher, new Integer[] {1,2, 4});
+      assertMismatchDescription("No item matched: <1>", matcher, new Integer[] {});
+      assertMismatchDescription("No item matched: <2>", matcher, new Integer[] {1});
+      assertMismatchDescription("item 0: was <4>", matcher, new Integer[] {4,3,2,1});
+      assertMismatchDescription("item 2: was <4>", matcher, new Integer[] {1,2, 4});
     }
 }
