@@ -9,9 +9,9 @@ import java.util.List;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<? super T>> {
+public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
     private final Matcher<? super T> elementMatcher;
 
     public IsCollectionContaining(Matcher<? super T> elementMatcher) {
@@ -19,20 +19,21 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<? super 
     }
 
     @Override
-    public boolean matchesSafely(Iterable<? super T> collection) {
+    protected boolean matchesSafely(Iterable<? super T> collection, Description mismatchDescription) {
+        boolean isPastFirst = false;
         for (Object item : collection) {
             if (elementMatcher.matches(item)){
                 return true;
             }
+            if (isPastFirst) {
+              mismatchDescription.appendText(", ");
+            }
+            elementMatcher.describeMismatch(item, mismatchDescription);
+            isPastFirst = true;
         }
         return false;
     }
 
-    @Override
-    public void describeMismatchSafely(Iterable<? super T> item, Description mismatchDescription) {
-      mismatchDescription.appendValue(item);
-    }
-    
     public void describeTo(Description description) {
         description
             .appendText("a collection containing ")
@@ -71,4 +72,5 @@ public class IsCollectionContaining<T> extends TypeSafeMatcher<Iterable<? super 
         
         return allOf(all);
     }
+
 }

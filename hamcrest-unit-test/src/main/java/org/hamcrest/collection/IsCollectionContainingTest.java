@@ -11,7 +11,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.hamcrest.core.IsCollectionContaining;
 import org.hamcrest.core.IsEqual;
 
@@ -29,14 +31,12 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchCollectionThatDoesntContainAnElementMatchingTheGivenMatcher() {
-        final Matcher<Iterable<? super String>> matcher1 = hasItem(equalTo("a"));
-        assertDoesNotMatch("should not match list that doesn't contain 'a'",
-                matcher1, asList("b", "c"));
+        final Matcher<Iterable<? super String>> matcher1 = hasItem(mismatchable("a"));
+        assertMismatchDescription("mismatched: b, mismatched: c", matcher1, asList("b", "c"));
         
         
         final Matcher<Iterable<? super String>> matcher2 = hasItem(equalTo("a"));
-        assertDoesNotMatch("should not match the empty list",
-                matcher2, new ArrayList<String>());
+        assertMismatchDescription("", matcher2, new ArrayList<String>());
     }
 
     public void testDoesNotMatchNull() {
@@ -81,6 +81,24 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
         assertDoesNotMatch("should not match list unless it contains all items",
                 matcher5,
                 asList("e", "c", "b", "d")); // 'a' missing
+    }
+    
+    
+    private Matcher<? super String> mismatchable(final String string) {
+      return new TypeSafeDiagnosingMatcher<String>() {
+        @Override
+        protected boolean matchesSafely(String item, Description mismatchDescription) {
+          if (string.equals(item)) 
+            return true;
+          
+          mismatchDescription.appendText("mismatched: " + item);
+          return false;
+        }
+
+        public void describeTo(Description description) {
+          description.appendText("mismatchable: " + string);
+        }
+      };
     }
 }
 
