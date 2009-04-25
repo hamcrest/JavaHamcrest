@@ -39,7 +39,8 @@ public abstract class FeatureMatcher<T, U> extends TypeSafeDiagnosingMatcher<T> 
   protected boolean matchesSafely(T actual, Description mismatchDescription) {
     final U featureValue = featureValueOf(actual);
     if (!subMatcher.matches(featureValue)) {
-      mismatchDescription.appendText(featureName).appendText(" was ").appendValue(featureValue);
+      mismatchDescription.appendText(featureName).appendText(" was ");
+      subMatcher.describeMismatch(featureValue, mismatchDescription);
       return false;
     }
     return true;
