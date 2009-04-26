@@ -16,7 +16,7 @@ public class FeatureMatcherTest extends TestCase {
   }
   
   public void testMismatchesPartOfAnObject() {
-    assertMismatchDescription("result was mismatch-description", resultMatcher, new Thingy("foo"));
+    assertMismatchDescription("result mismatch-description", resultMatcher, new Thingy("foo"));
   }
    
   public void testDoesNotThrowNullPointerException() {
