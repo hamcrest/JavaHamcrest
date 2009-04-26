@@ -3,6 +3,7 @@ package org.hamcrest.collection;
 import java.util.Arrays;
 
 import org.hamcrest.Description;
+import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -80,6 +81,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
     /**
      * Evaluates to true only if each matcher[i] is satisfied by array[i].
      */
+    @Factory
     public static <T> IsArray<T> array(Matcher<? super T>... elementMatchers) {
         return new IsArray<T>(elementMatchers);
     }
