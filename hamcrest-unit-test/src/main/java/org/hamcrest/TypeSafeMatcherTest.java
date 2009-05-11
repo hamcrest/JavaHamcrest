@@ -28,7 +28,7 @@ public class TypeSafeMatcherTest extends TestCase {
     
     public void testDescribesMismatches() {
       assertMismatchDescription("was null", null);
-      assertMismatchDescription("was <3>", new Integer(3));
+      assertMismatchDescription("was a java.lang.Integer (<3>)", new Integer(3));
       assertMismatchDescription("The mismatch", "a string");
     }
 

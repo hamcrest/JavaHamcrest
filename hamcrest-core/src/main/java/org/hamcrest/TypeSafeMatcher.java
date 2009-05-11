@@ -7,25 +7,20 @@ import org.hamcrest.internal.ReflectiveTypeFinder;
  * This simply implements the null check, checks the type and then casts.
  *
  * @author Joe Walnes
+ * @author Steve Freeman
+ * @author Nat Pryce
  */
 public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
-    private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("matchesSafely", 1, 0); 
+    private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("matchesSafely", 1, 0);
+    
     final private Class<?> expectedType;
 
-    /**
-     * Subclasses should implement these. The item will already have been checked for
-     * the specific type and will never be null.
-     */
-    protected abstract boolean matchesSafely(T item);
-    protected abstract void describeMismatchSafely(T item, Description mismatchDescription);
-    
     /**
      * The default constructor for simple sub types
      */
     protected TypeSafeMatcher() {
         this(TYPE_FINDER);
     }
-    
    
     /**
      * Use this constructor if the subclass that implements <code>matchesSafely</code> 
@@ -35,7 +30,6 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
     protected TypeSafeMatcher(Class<?> expectedType) {
         this.expectedType = expectedType;
     }
-
     
     /**
      * Use this constructor if the subclass that implements <code>matchesSafely</code> 
@@ -46,6 +40,20 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
       this.expectedType = typeFinder.findExpectedType(getClass()); 
     }
  
+    /**
+     * Subclasses should implement this. The item will already have been checked for
+     * the specific type and will never be null.
+     */
+    protected abstract boolean matchesSafely(T item);
+    
+    /**
+     * Subclasses should override this. The item will already have been checked for
+     * the specific type and will never be null.
+     */
+    protected void describeMismatchSafely(T item, Description mismatchDescription) {
+        super.describeMismatch(item, mismatchDescription);
+    }
+    
     /**
      * Methods made final to prevent accidental override.
      * If you need to override this, there's no point on extending TypeSafeMatcher.
@@ -61,10 +69,16 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
     @SuppressWarnings("unchecked")
     @Override
     final public void describeMismatch(Object item, Description description) {
-      if (item == null || ! expectedType.isInstance(item)) {
-        super.describeMismatch(item, description);
-      } else {
-        describeMismatchSafely((T)item, description);
-      }
+        if (item == null) {
+            super.describeMismatch(item, description);
+        } else if (! expectedType.isInstance(item)) {
+            description.appendText("was a ")
+                       .appendText(item.getClass().getName())
+                       .appendText(" (")
+                       .appendValue(item)
+                       .appendText(")");
+        } else {
+            describeMismatchSafely((T)item, description);
+        }
     }
 }
