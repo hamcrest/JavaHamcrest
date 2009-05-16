@@ -1,8 +1,11 @@
 package org.hamcrest.collection;
 
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
@@ -19,10 +22,14 @@ public class IsEmptyCollectionTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchACollectionWithAnItem() {
-        assertDoesNotMatch("collection with an item", empty(), Arrays.<Object>asList(1));
+        assertMismatchDescription("<[one, three]>", is(empty()), collectionOfValues());
     }
 
     public void testHasAReadableDescription() {
         assertDescription("an empty collection", empty());
+    }
+
+    private Collection<Object> collectionOfValues() {
+      return new ArrayList<Object>() {{ add("one"); add("three"); }};
     }
 }
