@@ -20,6 +20,12 @@ public class CombinableTest {
     assertThat(2, NOT_3_AND_NOT_4);
     assertThat(3, not(NOT_3_AND_NOT_4));
   }
+  
+  @Test
+  public void bothAcceptsAndRejectsInline() {
+    assertThat(2, CombinableMatcher.both(not(equalTo(3))).and(not(equalTo(4))));
+    assertThat(3, not(CombinableMatcher.both(not(equalTo(3))).and(not(equalTo(4)))));
+  }
 
   @Test
   public void acceptsAndRejectsThreeAnds() {
