@@ -16,7 +16,6 @@ public class AllOfTest extends AbstractMatcherTest {
         return allOf(equalTo("irrelevant"));
     }
     
-    @SuppressWarnings("unchecked")
     public void testEvaluatesToTheTheLogicalConjunctionOfTwoOtherMatchers() {
         assertThat("good", allOf(equalTo("good"), equalTo("good")));
 
@@ -25,30 +24,26 @@ public class AllOfTest extends AbstractMatcherTest {
         assertThat("good", not(allOf(equalTo("bad"), equalTo("bad"))));
     }
 
-    @SuppressWarnings("unchecked")
     public void testEvaluatesToTheTheLogicalConjunctionOfManyOtherMatchers() {
         assertThat("good", allOf(equalTo("good"), equalTo("good"), equalTo("good"), equalTo("good"), equalTo("good")));
         assertThat("good", not(allOf(equalTo("good"), equalTo("good"), equalTo("bad"), equalTo("good"), equalTo("good"))));
     }
     
-    @SuppressWarnings("unchecked")
     public void testSupportsMixedTypes() {
-        final Matcher<SampleSubClass> all = allOf(
+        final Matcher<Object> all = allOf(
                 equalTo(new SampleBaseClass("bad")),
                 equalTo(new SampleBaseClass("good")),
                 equalTo(new SampleSubClass("ugly")));
-        final Matcher<SampleSubClass> negated = not(all);
+        final Matcher<Object> negated = not(all);
         
         assertThat(new SampleSubClass("good"), negated);
     }
     
-    @SuppressWarnings("unchecked")
     public void testHasAReadableDescription() {
         assertDescription("(\"good\" and \"bad\" and \"ugly\")",
                 allOf(equalTo("good"), equalTo("bad"), equalTo("ugly")));
     }
 
-    @SuppressWarnings("unchecked")
     public void testMismatchDescriptionDescribesFirstFailingMatch() {
     	assertMismatchDescription("\"good\" was \"bad\"", allOf(equalTo("bad"), equalTo("good")), "bad");
 	}

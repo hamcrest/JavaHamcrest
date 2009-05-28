@@ -94,7 +94,7 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
     public PropertyMatcher(PropertyDescriptor descriptor, Object expectedObject) {
       this.propertyName = descriptor.getDisplayName();
       this.readMethod = descriptor.getReadMethod();
-      this.matcher = new IsEqual<Object>(readProperty(readMethod, expectedObject));
+      this.matcher = new IsEqual(readProperty(readMethod, expectedObject));
     }
     @Override
     public boolean matches(Object actual, Description mismatchDescription) {

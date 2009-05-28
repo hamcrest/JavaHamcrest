@@ -51,7 +51,7 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     {
       final Set<Number> s = new HashSet<Number>();
       s.add(Integer.valueOf(2));
-      assertThat(s, new IsCollectionContaining<Number>(new IsEqual<Object>(Integer.valueOf(2))));
+      assertThat(s, new IsCollectionContaining<Number>(new IsEqual(Integer.valueOf(2))));
       assertThat(s, IsCollectionContaining.hasItem(Integer.valueOf(2)));
     }
 
