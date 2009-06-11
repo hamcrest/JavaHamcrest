@@ -28,9 +28,9 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
 
     @Override
     public void describeMismatchSafely(T actual, Description mismatchDescription) {
-      mismatchDescription.appendValue(expected) .appendText(" was ")
+      mismatchDescription.appendValue(actual) .appendText(" was ")
                          .appendText(comparison(actual.compareTo(expected)))
-                         .appendText(" ").appendValue(actual);
+                         .appendText(" ").appendValue(expected);
     };
     
     public void describeTo(Description description) {

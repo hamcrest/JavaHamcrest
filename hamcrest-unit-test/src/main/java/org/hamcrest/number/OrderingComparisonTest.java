@@ -31,9 +31,9 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
     }
 
     public void testMismatchDescriptions() {
-      assertMismatchDescription("<1> was less than <0>", greaterThan(1), 0);
+      assertMismatchDescription("<0> was less than <1>", greaterThan(1), 0);
       assertMismatchDescription("<1> was equal to <1>", greaterThan(1), 1);
-      assertMismatchDescription("<0> was greater than <1>", lessThan(0), 1);
+      assertMismatchDescription("<1> was greater than <0>", lessThan(0), 1);
     }
     
     public void testComparesObjectsForGreaterThan() {
