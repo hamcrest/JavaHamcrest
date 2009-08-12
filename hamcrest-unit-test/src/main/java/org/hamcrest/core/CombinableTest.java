@@ -1,6 +1,5 @@
 package org.hamcrest.core;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -21,18 +20,7 @@ public class CombinableTest {
     assertThat(2, NOT_3_AND_NOT_4);
     assertThat(3, not(NOT_3_AND_NOT_4));
   }
-  
-  @Test
-  public void bothCompilesWithEqualTo() {
-    assertThat(2, CombinableMatcher.both(not(equalTo(3))).and(not(equalTo(4))));
-    assertThat(3, not(CombinableMatcher.both(not(equalTo(3))).and(not(equalTo(4)))));
-  }
 
-  @Test
-  public void bothCompilesWithIs() {
-	assertThat(3, CombinableMatcher.both(is(3)).and(is(Integer.class)));
-  }
-	
   @Test
   public void acceptsAndRejectsThreeAnds() {
     final CombinableMatcher<? super Integer> tripleAnd = NOT_3_AND_NOT_4.and(equalTo(2));

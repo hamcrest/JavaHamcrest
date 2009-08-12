@@ -14,10 +14,10 @@ import org.hamcrest.Matcher;
  * Is the value equal to another value, as tested by the
  * {@link java.lang.Object#equals} invokedMethod?
  */
-public class IsEqual extends BaseMatcher<Object> {
+public class IsEqual<T> extends BaseMatcher<T> {
     private final Object object;
 
-    public IsEqual(Object equalArg) {
+    public IsEqual(T equalArg) {
         object = equalArg;
     }
 
@@ -64,7 +64,7 @@ public class IsEqual extends BaseMatcher<Object> {
      * {@link java.lang.Object#equals} invokedMethod?
      */
     @Factory
-    public static Matcher<Object> equalTo(Object operand) {
-        return new IsEqual(operand);
+    public static <T> Matcher<? super T> equalTo(T operand) {
+        return new IsEqual<T>(operand);
     }
 }
