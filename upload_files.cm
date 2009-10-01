@@ -2,7 +2,7 @@
 
 VERSION=${1}${2}
 echo "Version: $VERSION"
-CREDENTIALS="-u username -w password"
+CREDENTIALS="-u ${3} -w ${4}"
 echo "Credentials: ${CREDENTIALS}"
 
 # Hmmm. multiple labels don't seem to work properly.
