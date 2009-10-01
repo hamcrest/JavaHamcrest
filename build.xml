@@ -227,7 +227,7 @@
         <attribute name="classpath" description="Anything additional to add on the classpath" default=""/>
         <sequential>
             <mkdir dir="build/temp/@{destjar}.contents"/>
-            <javac srcdir="@{srcdir}" destdir="build/temp/@{destjar}.contents" debug="${debug}">
+            <javac srcdir="@{srcdir}" destdir="build/temp/@{destjar}.contents" debug="${debug}" target="1.5">
                 <classpath>
                     <fileset dir="lib/integration">
                         <include name="*.jar"/>

@@ -41,7 +41,7 @@ public class IsEqual<T> extends BaseMatcher<T> {
 
     private static boolean areArraysEqual(Object o1, Object o2) {
         return areArrayLengthsEqual(o1, o2)
-                && areArrayElementsEqual(o1, o2);
+            && areArrayElementsEqual(o1, o2);
     }
 
     private static boolean areArrayLengthsEqual(Object o1, Object o2) {
@@ -64,7 +64,7 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * {@link java.lang.Object#equals} invokedMethod?
      */
     @Factory
-    public static <T> Matcher<? super T> equalTo(T operand) {
+    public static <T> Matcher<T> equalTo(T operand) {
         return new IsEqual<T>(operand);
     }
 }
