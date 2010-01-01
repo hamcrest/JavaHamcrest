@@ -1,4 +1,4 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
+/*  Copyright (c) 2000-2010 hamcrest.org
  */
 package org.hamcrest.core;
 
@@ -24,16 +24,16 @@ public class IsNull<T> extends BaseMatcher<T> {
      * Matches if value is null.
      */
     @Factory
-    public static <T> Matcher<T> nullValue() {
-        return new IsNull<T>();
+    public static Matcher<Object> nullValue() {
+        return new IsNull<Object>();
     }
 
     /**
      * Matches if value is not null.
      */
     @Factory
-    public static <T> Matcher<T> notNullValue() {
-        return not(IsNull.<T>nullValue());
+    public static Matcher<Object> notNullValue() {
+        return not(nullValue());
     }
 
     /**
@@ -41,15 +41,15 @@ public class IsNull<T> extends BaseMatcher<T> {
      */
     @Factory
     public static <T> Matcher<T> nullValue(@SuppressWarnings("unused") Class<T> type) {
-        return nullValue();
+        return new IsNull<T>();
     }
 
     /**
      * Matches if value is not null. With type inference.
      */
     @Factory
-    public static <T> Matcher<T> notNullValue(@SuppressWarnings("unused") Class<T> type) {
-        return notNullValue();
+    public static <T> Matcher<T> notNullValue(Class<T> type) {
+        return not(nullValue(type));
     }
 }
 

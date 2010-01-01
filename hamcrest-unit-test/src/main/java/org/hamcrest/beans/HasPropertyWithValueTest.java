@@ -1,4 +1,4 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
+/*  Copyright (c) 2000-20010 hamcrest.org
  */
 package org.hamcrest.beans;
 
@@ -105,7 +105,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
       this.property = property;
     }
 
-    public void setWriteOnlyProperty(float property) {
+    public void setWriteOnlyProperty(@SuppressWarnings("unused") float property) {
     }
 
     @Override

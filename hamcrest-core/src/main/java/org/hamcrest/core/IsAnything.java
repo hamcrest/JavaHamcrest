@@ -35,8 +35,8 @@ public class IsAnything<T> extends BaseMatcher<T> {
      * This matcher always evaluates to true.
      */
     @Factory
-    public static <T> Matcher<T> anything() {
-        return new IsAnything<T>();
+    public static Matcher<Object> anything() {
+        return new IsAnything<Object>();
     }
 
     /**
@@ -45,7 +45,7 @@ public class IsAnything<T> extends BaseMatcher<T> {
      * @param description A meaningful string used when describing itself.
      */
     @Factory
-    public static <T> Matcher<T> anything(String description) {
-        return new IsAnything<T>(description);
+    public static Matcher<Object> anything(String description) {
+        return new IsAnything<Object>(description);
     }
 }

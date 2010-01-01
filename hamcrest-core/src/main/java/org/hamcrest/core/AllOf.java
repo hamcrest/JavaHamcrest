@@ -113,6 +113,7 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
         matchers.add(second);
         matchers.add(third);
         matchers.add(fourth);
+        matchers.add(fifth);
         matchers.add(sixth);
         return allOf(matchers);
     }

@@ -1,3 +1,5 @@
+/*  Copyright (c) 2000-2010 hamcrest.org
+ */
 package org.hamcrest.examples.junit4;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -49,24 +51,13 @@ public class ExampleWithAssertThat {
       assertThat(complicated, shouldBe("the wrong thing"));
     }
 
-    private Matcher<ComplicatedClass> shouldBe(String string) {
+    private Matcher<ComplicatedClass> shouldBe(@SuppressWarnings("unused") String string) {
       return new TypeSafeMatcher<ComplicatedClass>() {
-
-        public void describeTo(Description description) {
-          // TODO Auto-generated method stub
-          
-        }
-
+        public void describeTo(Description description) { } // no op
         @Override
-        public boolean matchesSafely(ComplicatedClass item) {
-          // TODO Auto-generated method stub
-          return false;
-        }
+        public boolean matchesSafely(ComplicatedClass item) { return false; }
         @Override
-        public void describeMismatchSafely(ComplicatedClass item, Description mismatchDescription) {
-          // TODO Auto-generated method stub
-          
-        }
+        public void describeMismatchSafely(ComplicatedClass item, Description mismatchDescription) {} // no op
       };
     }
 

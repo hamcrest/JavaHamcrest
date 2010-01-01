@@ -10,10 +10,7 @@ public abstract class AbstractMatcherTest extends TestCase {
      * Create an instance of the Matcher so some generic safety-net tests can be run on it.
      */
     protected abstract Matcher<?> createMatcher();
-
-    protected static final Object ARGUMENT_IGNORED = new Object();
-    protected static final Object ANY_NON_NULL_ARGUMENT = new Object();
-
+    
     public static <T> void assertMatches(String message, Matcher<? super T> c, T arg) {
         assertTrue(message, c.matches(arg));
     }

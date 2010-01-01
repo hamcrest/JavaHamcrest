@@ -117,40 +117,52 @@ public class FactoryMethod {
     public String getJavaDoc() {
         return javaDoc;
     }
-
-    @SuppressWarnings({"RedundantIfStatement"})
+    
+    // Generated in Eclipse...
+    // n.b. Doesn't include returnType
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        FactoryMethod that = (FactoryMethod) o;
-
-        if (exceptions != null ? !exceptions.equals(that.exceptions) : that.exceptions != null) return false;
-        if (factoryMethod != null ? !factoryMethod.equals(that.factoryMethod) : that.factoryMethod != null)
-            return false;
-        if (genericTypeParameters != null ? !genericTypeParameters.equals(that.genericTypeParameters) : that.genericTypeParameters != null)
-            return false;
-        if (generifiedType != null ? !generifiedType.equals(that.generifiedType) : that.generifiedType != null)
-            return false;
-        if (javaDoc != null ? !javaDoc.equals(that.javaDoc) : that.javaDoc != null) return false;
-        if (matcherClass != null ? !matcherClass.equals(that.matcherClass) : that.matcherClass != null) return false;
-        if (parameters != null ? !parameters.equals(that.parameters) : that.parameters != null) return false;
-
-        return true;
+    public boolean equals(Object obj) {
+      if (this == obj) return true;
+      if (obj == null) return false;
+      if (getClass() != obj.getClass()) return false;
+      FactoryMethod other = (FactoryMethod) obj;
+      if (exceptions == null) {
+        if (other.exceptions != null) return false;
+      } else if (!exceptions.equals(other.exceptions)) return false;
+      if (factoryMethod == null) {
+        if (other.factoryMethod != null) return false;
+      } else if (!factoryMethod.equals(other.factoryMethod)) return false;
+      if (genericTypeParameters == null) {
+        if (other.genericTypeParameters != null) return false;
+      } else if (!genericTypeParameters.equals(other.genericTypeParameters)) return false;
+      if (generifiedType == null) {
+        if (other.generifiedType != null) return false;
+      } else if (!generifiedType.equals(other.generifiedType)) return false;
+      if (javaDoc == null) {
+        if (other.javaDoc != null) return false;
+      } else if (!javaDoc.equals(other.javaDoc)) return false;
+      if (matcherClass == null) {
+        if (other.matcherClass != null) return false;
+      } else if (!matcherClass.equals(other.matcherClass)) return false;
+      if (parameters == null) {
+        if (other.parameters != null) return false;
+      } else if (!parameters.equals(other.parameters)) return false;
+      return true;
     }
 
+    // Generated in Eclipse...
     @Override
     public int hashCode() {
-        int result;
-        result = (matcherClass != null ? matcherClass.hashCode() : 0);
-        result = 31 * result + (factoryMethod != null ? factoryMethod.hashCode() : 0);
-        result = 31 * result + (generifiedType != null ? generifiedType.hashCode() : 0);
-        result = 31 * result + (parameters != null ? parameters.hashCode() : 0);
-        result = 31 * result + (exceptions != null ? exceptions.hashCode() : 0);
-        result = 31 * result + (genericTypeParameters != null ? genericTypeParameters.hashCode() : 0);
-        result = 31 * result + (javaDoc != null ? javaDoc.hashCode() : 0);
-        return result;
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((exceptions == null) ? 0 : exceptions.hashCode());
+      result = prime * result + ((factoryMethod == null) ? 0 : factoryMethod.hashCode());
+      result = prime * result + ((genericTypeParameters == null) ? 0 : genericTypeParameters.hashCode());
+      result = prime * result + ((generifiedType == null) ? 0 : generifiedType.hashCode());
+      result = prime * result + ((javaDoc == null) ? 0 : javaDoc.hashCode());
+      result = prime * result + ((matcherClass == null) ? 0 : matcherClass.hashCode());
+      result = prime * result + ((parameters == null) ? 0 : parameters.hashCode());
+      return result;
     }
 
     @Override
@@ -200,32 +212,37 @@ public class FactoryMethod {
             this.name = name;
         }
 
-        @SuppressWarnings({"RedundantIfStatement"})
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Parameter parameter = (Parameter) o;
-
-            if (name != null ? !name.equals(parameter.name) : parameter.name != null) return false;
-            if (type != null ? !type.equals(parameter.type) : parameter.type != null) return false;
-
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            int result;
-            result = (type != null ? type.hashCode() : 0);
-            result = 31 * result + (name != null ? name.hashCode() : 0);
-            return result;
-        }
-
         @Override
         public String toString() {
             return type + " " + name;
         }
+
+        // Generated in Eclipse...
+        @Override
+        public int hashCode() {
+          final int prime = 31;
+          int result = 1;
+          result = prime * result + ((name == null) ? 0 : name.hashCode());
+          result = prime * result + ((type == null) ? 0 : type.hashCode());
+          return result;
+        }
+
+        // Generated in Eclipse...
+        @Override
+        public boolean equals(Object obj) {
+          if (this == obj) return true;
+          if (obj == null) return false;
+          if (getClass() != obj.getClass()) return false;
+          Parameter other = (Parameter) obj;
+          if (name == null) {
+            if (other.name != null) return false;
+          } else if (!name.equals(other.name)) return false;
+          if (type == null) {
+            if (other.type != null) return false;
+          } else if (!type.equals(other.type)) return false;
+          return true;
+        }
+
     }
 
 }

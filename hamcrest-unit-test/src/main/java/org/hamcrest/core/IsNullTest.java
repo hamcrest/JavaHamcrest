@@ -1,16 +1,20 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
+/*  Copyright (c) 2000-20010 hamcrest.org
  */
 package org.hamcrest.core;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.IsNull.nullValue;
+
+import java.math.BigDecimal;
+
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNull.nullValue;
-import static org.hamcrest.core.IsNull.notNullValue;
 
 
 public class IsNullTest extends AbstractMatcherTest {
+    private static final BigDecimal ANY_NON_NULL_ARGUMENT = new BigDecimal(66);
 
     @Override
     protected Matcher<?> createMatcher() {
@@ -30,7 +34,7 @@ public class IsNullTest extends AbstractMatcherTest {
         requiresStringMatcher(notNullValue(String.class));
     }
 
-    private void requiresStringMatcher(Matcher<String> arg) {
+    private void requiresStringMatcher(@SuppressWarnings("unused") Matcher<String> arg) {
         // no-op
     }    
 }

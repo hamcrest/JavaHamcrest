@@ -1,4 +1,4 @@
-/*  Copyright (c) 2000-2009 hamcrest.org
+/*  Copyright (c) 2000-2010 hamcrest.org
  */
 package org.hamcrest.core;
 
@@ -52,7 +52,7 @@ public class IsInstanceOfTest extends AbstractMatcherTest {
     }
     
     
-    private static <T> T with(Matcher<T> matcher) {
+    private static <T> T with(@SuppressWarnings("unused") Matcher<T> matcher) {
       return null;
     }
     

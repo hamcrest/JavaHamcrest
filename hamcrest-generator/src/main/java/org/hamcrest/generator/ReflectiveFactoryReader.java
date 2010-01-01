@@ -54,17 +54,19 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
             }
 
             public FactoryMethod next() {
-                if (currentMethod >= 0 && currentMethod < allMethods.length) {
-                    return buildFactoryMethod(allMethods[currentMethod]);
-                } else {
-                    throw new IllegalStateException("next() called without hasNext() check.");
+                if (outsideArrayBounds()) {
+                  throw new IllegalStateException("next() called without hasNext() check.");
                 }
+                return buildFactoryMethod(allMethods[currentMethod]);
             }
 
             public void remove() {
                 throw new UnsupportedOperationException();
             }
 
+            private boolean outsideArrayBounds() {
+              return currentMethod < 0 || allMethods.length <= currentMethod;
+            }
         };
     }
 

@@ -2,6 +2,7 @@ package org.hamcrest.beans;
 
 import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
 import static org.hamcrest.beans.PropertyUtil.propertyDescriptorsFor;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
@@ -15,7 +16,6 @@ import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
-import org.hamcrest.core.IsEqual;
 
 public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
   private final T expectedBean;
@@ -94,7 +94,7 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
     public PropertyMatcher(PropertyDescriptor descriptor, Object expectedObject) {
       this.propertyName = descriptor.getDisplayName();
       this.readMethod = descriptor.getReadMethod();
-      this.matcher = new IsEqual(readProperty(readMethod, expectedObject));
+      this.matcher = equalTo(readProperty(readMethod, expectedObject));
     }
     @Override
     public boolean matches(Object actual, Description mismatchDescription) {

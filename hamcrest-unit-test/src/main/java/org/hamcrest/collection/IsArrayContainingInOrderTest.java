@@ -1,6 +1,5 @@
 package org.hamcrest.collection;
 
-import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.hamcrest.collection.IsArrayContainingInOrder.arrayContaining;
 import static org.hamcrest.core.IsEqual.equalTo;
 
