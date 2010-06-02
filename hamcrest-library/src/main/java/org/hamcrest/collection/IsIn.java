@@ -1,12 +1,12 @@
 package org.hamcrest.collection;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 public class IsIn<T> extends BaseMatcher<T> {
     private final Collection<T> collection;
@@ -19,6 +19,7 @@ public class IsIn<T> extends BaseMatcher<T> {
         collection = Arrays.asList(elements);
     }
     
+    @SuppressWarnings({"SuspiciousMethodCalls"})
     public boolean matches(Object o) {
         return collection.contains(o);
     }

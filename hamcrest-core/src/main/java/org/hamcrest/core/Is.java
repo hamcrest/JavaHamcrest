@@ -1,12 +1,12 @@
 package org.hamcrest.core;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
 /**
  * Decorates another Matcher, retaining the behavior but allowing tests
@@ -55,7 +55,7 @@ public class Is<T> extends BaseMatcher<T> {
      *          vs.  assertThat(cheese, is(smelly))
      */
     @Factory
-    public static <T> Matcher<? super T> is(T value) {
+    public static <T> Matcher<T> is(T value) {
         return is(equalTo(value));
     }
 
@@ -64,9 +64,20 @@ public class Is<T> extends BaseMatcher<T> {
      *
      * For example:  assertThat(cheese, is(instanceOf(Cheddar.class)))
      *          vs.  assertThat(cheese, is(Cheddar.class))
+     *
+     * @deprecated use isA(Class<T> type) instead.
      */
     @Factory
-    public static <T> Matcher<? super T> is(Class<T> type) {
-        return is(instanceOf(type));
+    @Deprecated
+    public static <T> Matcher<T> is(Class<T> type) {
+        final Matcher<T> typeMatcher = instanceOf(type);
+        return is(typeMatcher);
+    }
+
+    @Factory
+    @Deprecated
+    public static <T> Matcher<T> isA(Class<T> type) {
+        final Matcher<T> typeMatcher = instanceOf(type);
+        return is(typeMatcher);
     }
 }

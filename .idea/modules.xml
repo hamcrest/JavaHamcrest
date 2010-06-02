@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-core/src/main/hamcrest-core.iml" filepath="$PROJECT_DIR$/hamcrest-core/src/main/hamcrest-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-examples/src/main/hamcrest-examples.iml" filepath="$PROJECT_DIR$/hamcrest-examples/src/main/hamcrest-examples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-generator/src/main/hamcrest-generator.iml" filepath="$PROJECT_DIR$/hamcrest-generator/src/main/hamcrest-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-integration/src/main/hamcrest-integration.iml" filepath="$PROJECT_DIR$/hamcrest-integration/src/main/hamcrest-integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-library/src/main/hamcrest-library.iml" filepath="$PROJECT_DIR$/hamcrest-library/src/main/hamcrest-library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/hamcrest-unit-tests.iml" filepath="$PROJECT_DIR$/hamcrest-unit-test/src/main/hamcrest-unit-tests.iml" />
+    </modules>
+  </component>
+</project>
+

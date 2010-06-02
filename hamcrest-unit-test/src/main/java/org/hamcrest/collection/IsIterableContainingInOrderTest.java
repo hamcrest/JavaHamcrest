@@ -1,19 +1,19 @@
 package org.hamcrest.collection;
 
-import static java.util.Arrays.asList;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
-
-import java.util.ArrayList;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
+import java.util.ArrayList;
+
+import static java.util.Arrays.asList;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+
 @SuppressWarnings("unchecked")
 public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
-    private final Matcher<Iterable<WithValue>> contains123 = contains(value(1), value(2), value(3));
-
+    private final Matcher<Iterable<? extends WithValue>> contains123 = contains(value(1), value(2), value(3));
+    
     @Override
     protected Matcher<?> createMatcher() {
         return contains(1, 2);
@@ -38,7 +38,7 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     public void testDoesNotMatchIfSingleItemMismatches() throws Exception {
         assertMismatchDescription("item 0: value was <3>", contains(value(4)), asList(make(3)));  
     }
-    
+
     public void testDoesNotMatchIfOneOfMultipleItemsMismatch() throws Exception {
         assertMismatchDescription("item 2: value was <4>", contains123, asList(make(1), make(2), make(4)));
     }
@@ -48,7 +48,7 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("iterable over [<1>, <2>]", contains(1, 2));
+        assertDescription("iterable containing [<1>, <2>]", contains(1, 2));
     }
     
     public static class WithValue {

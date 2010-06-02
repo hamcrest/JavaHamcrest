@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="integration">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/integration/testng-4.6-jdk15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/integration/easymock-2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/integration/junit-dep-4.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/integration/jmock-1.10RC1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/integration/junit-3.8.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

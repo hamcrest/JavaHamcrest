@@ -49,6 +49,7 @@
                      destjar="build/hamcrest-core-${version}.jar"/>
         <!-- Generate one class with all static imports -->
         <mkdir dir="build/temp/hamcrest-core/generated-code"/>
+
         <java classname="org.hamcrest.generator.config.XmlConfigurator"
               fork="yes"
               failonerror="yes"

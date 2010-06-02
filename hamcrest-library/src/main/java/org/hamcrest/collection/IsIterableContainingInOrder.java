@@ -1,17 +1,17 @@
 package org.hamcrest.collection;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<E>> {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.hamcrest.core.IsEqual.equalTo;
+
+public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
     private final List<Matcher<? super E>> matchers;
 
     public IsIterableContainingInOrder(List<Matcher<? super E>> matchers) {
@@ -19,7 +19,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     }
     
     @Override
-    protected boolean matchesSafely(Iterable<E> iterable, Description mismatchDescription) {
+    protected boolean matchesSafely(Iterable<? extends E> iterable, Description mismatchDescription) {
       MatchSeries<E> matchSeries = new MatchSeries<E>(matchers, mismatchDescription);
       for (E item : iterable) {
         if (! matchSeries.matches(item)) {
@@ -31,7 +31,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     }
 
     public void describeTo(Description description) {
-        description.appendText("iterable over ").appendList("[", ", ", "]", matchers);
+        description.appendText("iterable containing ").appendList("[", ", ", "]", matchers);
     }
 
     private static class MatchSeries<F> {
@@ -84,7 +84,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     }
 
     @Factory
-    public static <E> Matcher<Iterable<E>> contains(E... items) {
+    public static <E> Matcher<Iterable<? extends E>> contains(E... items) {
         List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
         for (E item : items) {
             matchers.add(equalTo(item));
@@ -93,17 +93,17 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     }
 
     @Factory
-    public static <E> Matcher<Iterable<E>> contains(final Matcher<E> item) {
-        return contains(new ArrayList<Matcher<? super E>>() {{ add(item); }});
+    public static <E> Matcher<Iterable<? extends E>> contains(final Matcher<E> item) {
+        return contains(new ArrayList<Matcher<? super E>>(Arrays.asList(item)));
     }
 
     @Factory
-    public static <E> Matcher<Iterable<E>> contains(Matcher<? super E>... items) {
+    public static <E> Matcher<Iterable<? extends E>> contains(Matcher<? super E>... items) {
         return contains(Arrays.asList(items));
     }
 
     @Factory
-    public static <E> Matcher<Iterable<E>> contains(List<Matcher<? super E>> contents) {
+    public static <E> Matcher<Iterable<? extends E>> contains(List<Matcher<? super E>> contents) {
         return new IsIterableContainingInOrder<E>(contents);
     }
 }

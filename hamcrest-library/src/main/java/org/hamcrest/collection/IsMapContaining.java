@@ -5,10 +5,11 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import java.util.Map;
 import java.util.Map.Entry;
+
+import static org.hamcrest.core.IsAnything.anything;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? extends V>> {
     private final Matcher<? super K> keyMatcher;
@@ -49,6 +50,26 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
 
     @Factory
     public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(K key, V value) {
-        return IsMapContaining.<K,V>hasEntry(equalTo(key), equalTo(value));
+        return new IsMapContaining<K,V>(equalTo(key), equalTo(value));
+    }
+    
+    @Factory
+    public static <K> Matcher<Map<? extends K, ?>> hasKey(Matcher<? super K> keyMatcher) {
+        return new IsMapContaining<K,Object>(keyMatcher, anything());
+    }
+
+    @Factory
+    public static <K> Matcher<Map<? extends K, ?>> hasKey(K key) {
+        return new IsMapContaining<K,Object>(equalTo(key), anything());
+    }
+
+    @Factory
+    public static <V> Matcher<Map<?, ? extends V>> hasValue(Matcher<? super V> valueMatcher) {
+        return new IsMapContaining<Object,V>(anything(), valueMatcher);
+    }
+
+    @Factory
+    public static <V> Matcher<Map<?, ? extends V>> hasValue(V value) {
+        return new IsMapContaining<Object,V>(anything(), equalTo(value));
     }
 }

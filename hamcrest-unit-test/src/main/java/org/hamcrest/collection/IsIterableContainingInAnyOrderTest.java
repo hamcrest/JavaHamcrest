@@ -1,15 +1,15 @@
 package org.hamcrest.collection;
 
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
+import org.hamcrest.collection.IsIterableContainingInOrderTest.WithValue;
+
+import java.util.Collections;
+
 import static java.util.Arrays.asList;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.collection.IsIterableContainingInOrderTest.make;
 import static org.hamcrest.collection.IsIterableContainingInOrderTest.value;
-
-import java.util.Collections;
-
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
-import org.hamcrest.collection.IsIterableContainingInOrderTest.WithValue;
 
 public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
 
@@ -37,10 +37,10 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
     public void testDoesNotMatchIfOneOfMultipleElementsMismatches() {
         assertMismatchDescription("Not matched: <4>", containsInAnyOrder(1, 2, 3), asList(1, 2, 4));
     }
-    
+
     @SuppressWarnings("unchecked")
     public void testDoesNotMatchIfThereAreMoreElementsThanMatchers() {
-        Matcher<Iterable<WithValue>> helpTheCompilerOut = containsInAnyOrder(value(1), value(3));
+        Matcher<Iterable<? extends WithValue>> helpTheCompilerOut = containsInAnyOrder(value(1), value(3));
         assertMismatchDescription("Not matched: <WithValue 2>", helpTheCompilerOut, asList(make(1), make(2), make(3)));
     }
     

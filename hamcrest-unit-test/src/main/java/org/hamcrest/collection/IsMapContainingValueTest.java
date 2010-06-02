@@ -1,6 +1,5 @@
 package org.hamcrest.collection;
 
-import static org.hamcrest.collection.IsMapContainingValue.hasValue;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
@@ -8,6 +7,8 @@ import org.hamcrest.Matcher;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
+import static org.hamcrest.collection.IsMapContaining.hasValue;
 
 public class IsMapContainingValueTest extends AbstractMatcherTest {
 
@@ -17,7 +18,7 @@ public class IsMapContainingValueTest extends AbstractMatcherTest {
     }
 
     public void testHasReadableDescription() {
-        assertDescription("map with value \"a\"", hasValue("a"));
+        assertDescription("map containing [ANYTHING->\"a\"]", hasValue("a"));
     }
     
     public void testDoesNotMatchEmptyMap() {
@@ -31,15 +32,6 @@ public class IsMapContainingValueTest extends AbstractMatcherTest {
         
         assertMatches("Singleton map", hasValue(1), map);
     }
-
-//    No longer compiles -- SF
-//    @SuppressWarnings("unchecked")
-//    public void testMatchesSingletonMapContainingValueWithoutGenerics() {
-//        Map map = new HashMap();
-//        map.put("a", 1);
-//
-//        assertMatches("Singleton map", hasValue(1), map);
-//    }
 
     public void testMatchesMapContainingValue() {
         Map<String,Integer> map = new TreeMap<String,Integer>();
