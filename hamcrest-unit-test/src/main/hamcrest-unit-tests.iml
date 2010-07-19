@@ -7,6 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="hamcrest-core" />
     <orderEntry type="library" name="integration" level="project" />
     <orderEntry type="library" name="ant-output" level="project" />
   </component>
