@@ -1,38 +1,34 @@
 package org.hamcrest.core;
 
-import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.CombinableMatcher.both;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.number.OrderingComparison.greaterThan;
 import static org.junit.Assert.assertEquals;
 
 public class CombinableTest {
     private static final CombinableMatcher<Integer> EITHER_3_OR_4 = CombinableMatcher.<Integer>either(equalTo(3)).or(equalTo(4));
     private static final CombinableMatcher<Integer> NOT_3_AND_NOT_4 = CombinableMatcher.<Integer>both(not(equalTo(3))).and(not(equalTo(4)));
 
-  @Test
-  public void bothAcceptsAndRejects() {
-    assertThat(2, NOT_3_AND_NOT_4);
-    assertThat(3, not(NOT_3_AND_NOT_4));
-  }
-
-  @Test
-  public void acceptsAndRejectsThreeAnds() {
-    final CombinableMatcher<? super Integer> tripleAnd = NOT_3_AND_NOT_4.and(equalTo(2));
-    assertThat(2, tripleAnd);
-    assertThat(3, not(tripleAnd));
-  }
+    @Test
+    public void bothAcceptsAndRejects() {
+        assertThat(2, NOT_3_AND_NOT_4);
+        assertThat(3, not(NOT_3_AND_NOT_4));
+    }
 
     @Test
-    public void bothCompilesWithIs() {
-        // Yuck!
-        assertThat(3, CombinableMatcher.<Integer>both(is(3)).and(isA(Integer.class)));
+    public void acceptsAndRejectsThreeAnds() {
+        CombinableMatcher<? super Integer> tripleAnd = NOT_3_AND_NOT_4.and(equalTo(2));
+        assertThat(2, tripleAnd);
+        assertThat(3, not(tripleAnd));
     }
+
 
     @Test
     public void bothDescribesItself() {
@@ -51,8 +47,7 @@ public class CombinableTest {
 
     @Test
     public void acceptsAndRejectsThreeOrs() {
-        final CombinableMatcher<Integer> orTriple = EITHER_3_OR_4.or(Matchers
-                .greaterThan(10));
+        final CombinableMatcher<Integer> orTriple = EITHER_3_OR_4.or(greaterThan(10));
         assertThat(11, orTriple);
         assertThat(9, not(orTriple));
     }

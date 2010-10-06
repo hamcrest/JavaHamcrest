@@ -2,16 +2,16 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.core.AllOf.allOf;
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.StringStartsWith.startsWith;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.AllOf.allOf;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 
 public class AllOfTest extends AbstractMatcherTest {
 

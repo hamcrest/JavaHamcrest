@@ -14,10 +14,10 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     private final Collection<Matcher<? super E>> matchers;
-    private final IsIterableContainingInOrder<E,Iterable<E>> iterableMatcher;
+    private final IsIterableContainingInOrder<E> iterableMatcher;
 
     public IsArrayContainingInOrder(List<Matcher<? super E>> matchers) {
-        this.iterableMatcher = new IsIterableContainingInOrder<E,Iterable<E>>(matchers);
+        this.iterableMatcher = new IsIterableContainingInOrder<E>(matchers);
         this.matchers = matchers;
     }
 

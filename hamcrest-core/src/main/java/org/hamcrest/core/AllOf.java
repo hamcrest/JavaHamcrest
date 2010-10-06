@@ -1,13 +1,13 @@
 package org.hamcrest.core;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.hamcrest.Description;
 import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Calculates the logical conjunction of multiple matchers. Evaluation is shortcut, so
@@ -57,7 +57,7 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second) {
+    public static <T> Matcher<T> allOf(Matcher<? super T> first, Matcher<? super T> second) {
         List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>(2);
         matchers.add(first);
         matchers.add(second);
@@ -68,7 +68,7 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third) {
+    public static <T> Matcher<T> allOf(Matcher<? super T> first, Matcher<? super T> second, Matcher<? super T> third) {
         List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>(3);
         matchers.add(first);
         matchers.add(second);
@@ -80,7 +80,7 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth) {
+    public static <T> Matcher<T> allOf(Matcher<? super T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth) {
         List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>(4);
         matchers.add(first);
         matchers.add(second);
@@ -93,7 +93,7 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth) {
+    public static <T> Matcher<T> allOf(Matcher<? super T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth) {
         List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>(5);
         matchers.add(first);
         matchers.add(second);
@@ -107,7 +107,7 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
     @Factory
-    public static <T> Matcher<T> allOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth, Matcher<? super T> sixth) {
+    public static <T> Matcher<T> allOf(Matcher<? super T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth, Matcher<? super T> sixth) {
         List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>(6);
         matchers.add(first);
         matchers.add(second);

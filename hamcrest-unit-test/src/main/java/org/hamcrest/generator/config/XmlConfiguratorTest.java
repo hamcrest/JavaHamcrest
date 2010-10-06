@@ -1,14 +1,6 @@
 package org.hamcrest.generator.config;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import junit.framework.TestCase;
-
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.core.CombinableMatcher;
@@ -16,6 +8,13 @@ import org.hamcrest.generator.FactoryMethod;
 import org.hamcrest.generator.FactoryWriter;
 import org.hamcrest.generator.SugarConfiguration;
 import org.xml.sax.InputSource;
+
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 public class XmlConfiguratorTest extends TestCase {
 

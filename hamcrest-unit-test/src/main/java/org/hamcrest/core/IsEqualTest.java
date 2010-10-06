@@ -2,11 +2,12 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
 
 
 public class IsEqualTest extends AbstractMatcherTest {
@@ -59,6 +60,11 @@ public class IsEqualTest extends AbstractMatcherTest {
         assertThat(s2, equalTo(s1));
         assertThat(s3, not(equalTo(s1)));
         assertThat(s4, not(equalTo(s1)));
+    }
+
+    public void testComparesArraysToNull() {
+        assertThat(new String[]{"a", "b"}, not(equalTo(null)));
+        assertThat(null, not(equalTo(new String[]{"a", "b"})));
     }
 
     public void testComparesTheElementsOfAnArrayOfPrimitiveTypes() {

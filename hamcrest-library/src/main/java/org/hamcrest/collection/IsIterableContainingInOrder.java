@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class IsIterableContainingInOrder<E, C extends Iterable<? extends E>> extends TypeSafeDiagnosingMatcher<C> {
+public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
     private final List<Matcher<? super E>> matchers;
 
     public IsIterableContainingInOrder(List<Matcher<? super E>> matchers) {
@@ -19,7 +19,7 @@ public class IsIterableContainingInOrder<E, C extends Iterable<? extends E>> ext
     }
 
     @Override
-    protected boolean matchesSafely(C iterable, Description mismatchDescription) {
+    protected boolean matchesSafely(Iterable<? extends E> iterable, Description mismatchDescription) {
         MatchSeries<E> matchSeries = new MatchSeries<E>(matchers, mismatchDescription);
         for (E item : iterable) {
             if (!matchSeries.matches(item)) {
@@ -89,21 +89,23 @@ public class IsIterableContainingInOrder<E, C extends Iterable<? extends E>> ext
         for (E item : items) {
             matchers.add(equalTo(item));
         }
+
         return contains(matchers);
     }
 
     @Factory
-    public static <E, C extends Iterable<? extends E>> Matcher<C> contains(final Matcher<E> item) {
+    public static <E> Matcher<Iterable<? extends E>> contains(final Matcher<? super E> item) {
         return contains(new ArrayList<Matcher<? super E>>(Arrays.asList(item)));
     }
 
     @Factory
-    public static <E, C extends Iterable<? extends E>> Matcher<C> contains(Matcher<? super E>... items) {
-        return contains(Arrays.asList(items));
+    public static <E> Matcher<Iterable<? extends E>> contains(Matcher<? super E>... matchers) {
+        List<Matcher<? super E>> matcherList = Arrays.asList(matchers);
+        return contains(matcherList);
     }
 
     @Factory
-    public static <E, C extends Iterable<? extends E>> Matcher<C> contains(List<Matcher<? super E>> contents) {
-        return new IsIterableContainingInOrder<E, C>(contents);
+    public static <E> Matcher<Iterable<? extends E>> contains(List<Matcher<? super E>> contents) {
+        return new IsIterableContainingInOrder<E>(contents);
     }
 }

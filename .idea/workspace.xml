@@ -1,44 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ChangeListManager" verified="true">
-    <list default="true" readonly="true" id="a7a68868-e842-40fc-be0a-f367011acf62" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsMapContainingValue.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/integration.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hamcrest-generator/src/main/hamcrest-generator.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hamcrest-library/src/main/hamcrest-library.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsMapContainingKey.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsMapContainingValueTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsMapContainingValueTest.java" />
+  <component name="ChangeListManager">
+    <list readonly="true" id="a7a68868-e842-40fc-be0a-f367011acf62" name="Default" comment="" />
+    <list default="true" id="566f2a45-f9d6-460d-9675-4a40d446397b" name="array null problem" comment="fixing array null problem&#10;making it compile again">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/object/HasToString.java" afterPath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/object/HasToString.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/AllOfTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/AllOfTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/IsNotTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/IsNotTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/generator/config/XmlConfiguratorTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/generator/config/XmlConfiguratorTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/beans/HasProperty.java" afterPath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/beans/HasProperty.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/MatcherAssertTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/MatcherAssertTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInOrderTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInOrderTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIn.java" afterPath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIn.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/generator.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/number/OrderingComparison.java" afterPath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/number/OrderingComparison.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInAnyOrderTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInAnyOrderTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hamcrest-examples/src/main/hamcrest-examples.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/Is.java" afterPath="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/Is.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/ant_output.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsMapContainingKeyTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsMapContainingKeyTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIterableContainingInAnyOrder.java" afterPath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIterableContainingInAnyOrder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/hamcrest-unit-tests.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java" afterPath="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hamcrest-core/src/main/hamcrest-core.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/AllOf.java" afterPath="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/AllOf.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/EveryTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/EveryTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/number/OrderingComparisonTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/number/OrderingComparisonTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/hamcrest-unit-tests.iml" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/hamcrest-unit-tests.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIterableContainingInOrder.java" afterPath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIterableContainingInOrder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/matchers.xml" afterPath="$PROJECT_DIR$/matchers.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsMapContaining.java" afterPath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsMapContaining.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hamcrest-integration/src/main/hamcrest-integration.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsEmptyCollectionTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsEmptyCollectionTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/IsEqual.java" afterPath="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/IsEqual.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/IsEqualTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/IsEqualTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/number/OrderingComparison.java" afterPath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/number/OrderingComparison.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsArrayContainingInOrder.java" afterPath="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsArrayContainingInOrder.java" />
     </list>
     <ignored path="hamcrest-java.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -103,37 +86,32 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="IsMapContainingValueTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsMapContainingValueTest.java">
+      <file leaf-file-name="IsIterableContainingInOrderTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInOrderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="52" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="21" column="5" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1286396803000" expanded="true" signature="41:356" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderingComparison.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/number/OrderingComparison.java">
+      <file leaf-file-name="IsEqualTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/IsEqualTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="12" column="13" selection-start="304" selection-end="304" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1286396803000" expanded="false" signature="80:288" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IsMapContainingKeyTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsMapContainingKeyTest.java">
+      <file leaf-file-name="IsEqual.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/IsEqual.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="50" selection-start="2058" selection-end="2058" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CombinableTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="0" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.71428573">
+            <state line="40" column="0" selection-start="979" selection-end="979" vertical-scroll-proportion="0.47201946">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -141,46 +119,59 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="IsIterableContainingInOrder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIterableContainingInOrder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="101" column="53" selection-start="3416" selection-end="3416" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractMatcherTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/AbstractMatcherTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="87" selection-start="977" selection-end="977" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EasyMock2AdapterTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/integration/EasyMock2AdapterTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="47" selection-start="495" selection-end="495" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CombinableTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="0" selection-start="1152" selection-end="1152" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1286396803000" expanded="true" signature="35:480" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CombinableMatcher.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="5" selection-start="734" selection-end="734" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Is.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/Is.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="0" selection-start="1422" selection-end="1422" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IsInstanceOf.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/IsInstanceOf.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="33" selection-start="2430" selection-end="2430" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IsIterableContainingInOrderTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInOrderTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="30" selection-start="2133" selection-end="2133" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IsIterableContainingInAnyOrderTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInAnyOrderTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="86" selection-start="1632" selection-end="1632" vertical-scroll-proportion="0.0">
+            <state line="69" column="12" selection-start="2031" selection-end="2031" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -193,25 +184,29 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="Git.Settings">
+    <option name="GIT_EXECUTABLE" value="/usr/bin/git" />
+    <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsArrayContaining.java" />
-        <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/number/IsCloseTo.java" />
-        <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/number/OrderingComparison.java" />
-        <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIn.java" />
-        <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsMapContainingKey.java" />
-        <option value="$PROJECT_DIR$/matchers.xml" />
-        <option value="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/IsEqual.java" />
+        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/generator/config/XmlConfiguratorTest.java" />
+        <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/beans/HasProperty.java" />
+        <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/object/HasToString.java" />
         <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsMapContaining.java" />
-        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInAnyOrderTest.java" />
+        <option value="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/AllOf.java" />
         <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIterableContainingInOrder.java" />
-        <option value="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java" />
-        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInOrderTest.java" />
-        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsMapContainingKeyTest.java" />
-        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsMapContainingValueTest.java" />
-        <option value="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/Is.java" />
+        <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsArrayContainingInOrder.java" />
+        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/AllOfTest.java" />
+        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsEmptyCollectionTest.java" />
+        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/IsNotTest.java" />
+        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/EveryTest.java" />
+        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/MatcherAssertTest.java" />
+        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/JavaLangMatcherAssertTest.java" />
         <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java" />
+        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInOrderTest.java" />
+        <option value="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/IsEqual.java" />
       </list>
     </option>
   </component>
@@ -250,10 +245,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -272,18 +264,117 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hamcrest-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hamcrest-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hamcrest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xml" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hamcrest-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hamcrest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="text" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hamcrest-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hamcrest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hamcrest-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hamcrest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="80" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="50" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="30" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="65" />
+    <property name="options.splitter.main.proportions" value="0.3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
@@ -304,7 +395,9 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="61" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="678" />
+    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
@@ -313,6 +406,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
   </component>
   <component name="Regex">
@@ -326,7 +420,7 @@
     <option name="referencePos" value="0" />
     <option name="showLabels" value="true" />
   </component>
-  <component name="RunManager" selected="JUnit.IsIterableContainingInOrderTest">
+  <component name="RunManager" selected="JUnit.IsEqualTest">
     <configuration default="false" name="OrderingComparisonTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="snapshooter" />
       <module name="hamcrest-unit-tests" />
@@ -356,6 +450,28 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="org.hamcrest.collection" />
       <option name="MAIN_CLASS_NAME" value="org.hamcrest.collection.IsIterableContainingInOrderTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="IsEqualTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="snapshooter" />
+      <module name="hamcrest-unit-tests" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.hamcrest.core" />
+      <option name="MAIN_CLASS_NAME" value="org.hamcrest.core.IsEqualTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -446,9 +562,10 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="JUnit.OrderingComparisonTest" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.IsIterableContainingInOrderTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.IsEqualTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -456,7 +573,7 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="LAST_MERGED_REVISION" />
@@ -466,6 +583,7 @@
     <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
     <option name="IGNORE_SPACES_IN_MERGE" value="false" />
     <option name="DETECT_NESTED_COPIES" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <configuration useDefault="false">$PROJECT_DIR$/../../.subversion</configuration>
@@ -519,27 +637,27 @@
     </option>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1024" height="743" extended-state="1" />
+    <frame x="-4" y="28" width="1280" height="772" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26863354" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29983792" sideWeight="0.41025642" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39708266" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29968944" sideWeight="0.41025642" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3089268" sideWeight="0.25686592" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39959016" sideWeight="0.6597444" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.308779" sideWeight="0.68881685" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31570512" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Regex" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30843374" sideWeight="0.7204969" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3152174" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Regex" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
@@ -552,8 +670,10 @@
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
     <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="true" />
+    <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Extensive audit of type signatures and generic wildcards, esp. for matchers of iterable &amp; collection types, to ensure that they are consistent and meaningful." />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing array null problem&#10;making it compile again" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -567,6 +687,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.69518715" />
     <MESSAGE value="Extensive audit of type signatures and generic wildcards, esp. for matchers of iterable &amp; collection types, to ensure that they are consistent and meaningful." />
+    <MESSAGE value="fixing array null problem&#10;making it compile again" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -584,86 +705,122 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIterableContainingInOrder.java">
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/AllOfTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="51" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.41825095" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/BaseMatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="22" selection-start="317" selection-end="317" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="11" selection-start="299" selection-end="299" vertical-scroll-proportion="-1.8027681" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/AbstractMatcherTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="22" selection-start="90" selection-end="90" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/integration/easymock-2.2.jar!/org/easymock/internal/EqualsMatcher.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="159" selection-end="159" vertical-scroll-proportion="0.20833333" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/build/hamcrest-core-SNAPSHOT.jar!/org/hamcrest/MatcherAssert.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="27" selection-start="255" selection-end="255" vertical-scroll-proportion="0.4152249" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/build/hamcrest-core-SNAPSHOT.jar!/org/hamcrest/core/CombinableMatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="47" selection-start="1426" selection-end="1426" vertical-scroll-proportion="0.3323442">
+        <state line="40" column="17" selection-start="1599" selection-end="1599" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsMapContainingValueTest.java">
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsEmptyCollectionTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="52" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0" />
+        <state line="2" column="26" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/number/OrderingComparison.java">
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/IsNotTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="30" column="58" selection-start="1053" selection-end="1053" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsMapContainingKeyTest.java">
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/EveryTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="50" selection-start="2058" selection-end="2058" vertical-scroll-proportion="0.0" />
+        <state line="24" column="53" selection-start="831" selection-end="831" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/MatcherAssertTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="45" selection-start="528" selection-end="528" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/JavaLangMatcherAssertTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="34" selection-start="57" selection-end="57" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/integration/EasyMock2AdapterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="47" selection-start="495" selection-end="495" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/Is.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="1422" selection-end="1422" vertical-scroll-proportion="0.0" />
+        <state line="69" column="12" selection-start="2031" selection-end="2031" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/IsInstanceOf.java">
+    <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="33" selection-start="2430" selection-end="2430" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInOrderTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="30" selection-start="2133" selection-end="2133" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInAnyOrderTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="86" selection-start="1632" selection-end="1632" vertical-scroll-proportion="0.0" />
+        <state line="26" column="5" selection-start="734" selection-end="734" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="0" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.71428573">
+        <state line="30" column="0" selection-start="1152" selection-end="1152" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1286396803000" expanded="true" signature="35:480" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/AbstractMatcherTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="87" selection-start="977" selection-end="977" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIterableContainingInOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="53" selection-start="3416" selection-end="3416" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsIterableContainingInOrderTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="5" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1286396803000" expanded="true" signature="41:356" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/build/hamcrest-unit-test-SNAPSHOT.jar!/org/hamcrest/core/IsEqualTest.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="16" selection-start="531" selection-end="531" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/IsEqualTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="13" selection-start="304" selection-end="304" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1286396803000" expanded="false" signature="80:288" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/IsEqual.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="0" selection-start="979" selection-end="979" vertical-scroll-proportion="0.47201946">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

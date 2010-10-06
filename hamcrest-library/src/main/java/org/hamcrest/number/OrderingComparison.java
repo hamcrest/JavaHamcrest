@@ -15,9 +15,9 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
     private final int minCompare, maxCompare;
 
     private static final String[] comparisonDescriptions = {
-        "less than",
-        "equal to",
-        "greater than"
+            "less than",
+            "equal to",
+            "greater than"
     };
 
     private OrderingComparison(T expected, int minCompare, int maxCompare) {
@@ -34,11 +34,11 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
 
     @Override
     public void describeMismatchSafely(T actual, Description mismatchDescription) {
-      mismatchDescription.appendValue(actual) .appendText(" was ")
-                         .appendText(asText(actual.compareTo(expected)))
-                         .appendText(" ").appendValue(expected);
+        mismatchDescription.appendValue(actual).appendText(" was ")
+                .appendText(asText(actual.compareTo(expected)))
+                .appendText(" ").appendValue(expected);
     }
-    
+
     public void describeTo(Description description) {
         description.appendText("a value ").appendText(asText(minCompare));
         if (minCompare != maxCompare) {
@@ -46,16 +46,16 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
         }
         description.appendText(" ").appendValue(expected);
     }
-    
+
     private String asText(int comparison) {
-        return comparisonDescriptions[comparison+1];
+        return comparisonDescriptions[comparison + 1];
     }
 
     /**
-     * Is value = expected?
+     * @return Is value = expected?
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<? super T> comparesEqualTo(T value) {
+    public static <T extends Comparable<T>> Matcher<T> comparesEqualTo(T value) {
         return new OrderingComparison<T>(value, EQUAL, EQUAL);
     }
 
@@ -63,7 +63,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * Is value > expected?
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<? super T> greaterThan(T value) {
+    public static <T extends Comparable<T>> Matcher<T> greaterThan(T value) {
         return new OrderingComparison<T>(value, GREATER_THAN, GREATER_THAN);
     }
 
@@ -71,7 +71,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * Is value >= expected?
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<? super T> greaterThanOrEqualTo(T value) {
+    public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
         return new OrderingComparison<T>(value, EQUAL, GREATER_THAN);
     }
 
@@ -79,7 +79,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * Is value < expected?
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<? super T> lessThan(T value) {
+    public static <T extends Comparable<T>> Matcher<T> lessThan(T value) {
         return new OrderingComparison<T>(value, LESS_THAN, LESS_THAN);
     }
 
@@ -87,7 +87,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * Is value <= expected?
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<? super T> lessThanOrEqualTo(T value) {
+    public static <T extends Comparable<T>> Matcher<T> lessThanOrEqualTo(T value) {
         return new OrderingComparison<T>(value, LESS_THAN, EQUAL);
     }
 }

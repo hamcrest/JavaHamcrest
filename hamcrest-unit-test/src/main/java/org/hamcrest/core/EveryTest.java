@@ -1,15 +1,15 @@
 package org.hamcrest.core;
 
-import static java.util.Arrays.asList;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
+import org.hamcrest.StringDescription;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
-import org.hamcrest.StringDescription;
-import org.junit.Test;
+import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.StringContains.containsString;
+import static org.junit.Assert.assertEquals;
 
 public class EveryTest {
 	@Test public void isTrueWhenEveryValueMatches() {

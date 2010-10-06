@@ -2,12 +2,12 @@
  */
 package org.hamcrest.core;
 
-import java.lang.reflect.Array;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+
+import java.lang.reflect.Array;
 
 
 /**
@@ -32,7 +32,7 @@ public class IsEqual<T> extends BaseMatcher<T> {
     private static boolean areEqual(Object o1, Object o2) {
         if (o1 == null) {
             return o2 == null;
-        } else if (isArray(o1)) {
+        } else if (o2 != null && isArray(o1)) {
             return isArray(o2) && areArraysEqual(o1, o2);
         } else {
             return o1.equals(o2);

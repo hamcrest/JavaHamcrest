@@ -1,10 +1,10 @@
 package org.hamcrest.object;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import org.hamcrest.Factory;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
+
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class HasToString<T> extends FeatureMatcher<T, String> {
     public HasToString(Matcher<? super String> toStringMatcher) {
@@ -14,7 +14,7 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
     @Override
     protected String featureValueOf(T actual) {
       return actual.toString();
-    };
+    }
 
     /**
      * Evaluates whether item.toString() satisfies a given matcher.
