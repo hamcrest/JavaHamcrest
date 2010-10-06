@@ -12,6 +12,7 @@
     <orderEntry type="module" module-name="hamcrest-generator" />
     <orderEntry type="module" module-name="hamcrest-integration" />
     <orderEntry type="library" name="integration" level="project" />
+    <orderEntry type="library" scope="TEST" name="ant-output" level="project" />
   </component>
 </module>
 

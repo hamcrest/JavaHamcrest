@@ -2,12 +2,12 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+
+import static org.hamcrest.core.IsEqual.equalTo;
 
 
 /**
@@ -44,7 +44,7 @@ public class IsNot<T> extends BaseMatcher<T>  {
      *          vs.  assertThat(cheese, is(not(smelly)))
      */
     @Factory
-    public static <T> Matcher<? super T> not(T value) {
+    public static <T> Matcher<T> not(T value) {
         return not(equalTo(value));
     }
 }
