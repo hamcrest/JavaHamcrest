@@ -1,16 +1,18 @@
 #!/bin/bash
 
-VERSION=${1}${2}
+VERSION=${1:?no version}${2:?no release-candidate flag (can be an empty string)}
 echo "Version: $VERSION"
-CREDENTIALS="-u ${3} -w ${4}"
+CREDENTIALS="-u ${3:?no Google Code username} -w ${4:?mp Google Code password}"
 echo "Credentials: ${CREDENTIALS}"
 
+LABELS="Type-Archive,OpSys-All,${1},${2}"
+
 # Hmmm. multiple labels don't seem to work properly.
-./googlecode_upload.py -s "Full Hamcrest distribution (tgz)" -p hamcrest ${CREDENTIALS} -l "Type-Archive ${1} ${2}" build/hamcrest-$VERSION.tgz
-./googlecode_upload.py -s "Full Hamcrest distribution (zip)" -p hamcrest ${CREDENTIALS} -l "Type-Archive ${1} ${2}" build/hamcrest-$VERSION.zip
-./googlecode_upload.py -s "Hamcrest core Jar (bare-bones minimum)" -p hamcrest ${CREDENTIALS} -l "Type-Archive ${1} ${2}" build/hamcrest-core-$VERSION.jar
-./googlecode_upload.py -s "Hamcrest all-in-one Jar" -p hamcrest ${CREDENTIALS} -l "Type-Archive ${1} ${2}" build/hamcrest-all-$VERSION.jar
-./googlecode_upload.py -s "Hamcrest code generator tool" -p hamcrest ${CREDENTIALS} -l "Type-Archive ${1} ${2}" build/hamcrest-generator-$VERSION.jar
-./googlecode_upload.py -s "Hamcrest testing library integration" -p hamcrest ${CREDENTIALS} -l "Type-Archive ${1} ${2}" build/hamcrest-integration-$VERSION.jar
-./googlecode_upload.py -s "Hamcrest additional library of matchers" -p hamcrest ${CREDENTIALS} -l "Type-Archive ${1} ${2}" build/hamcrest-library-$VERSION.jar
+./googlecode_upload.py -s "Full Hamcrest distribution (tgz)" -p hamcrest ${CREDENTIALS} -l "$LABELS" build/hamcrest-$VERSION.tgz
+./googlecode_upload.py -s "Full Hamcrest distribution (zip)" -p hamcrest ${CREDENTIALS} -l "$LABELS" build/hamcrest-$VERSION.zip
+./googlecode_upload.py -s "Hamcrest core Jar (bare-bones minimum)" -p hamcrest ${CREDENTIALS} -l "$LABELS" build/hamcrest-core-$VERSION.jar
+./googlecode_upload.py -s "Hamcrest all-in-one Jar" -p hamcrest ${CREDENTIALS} -l "$LABELS" build/hamcrest-all-$VERSION.jar
+./googlecode_upload.py -s "Hamcrest code generator tool" -p hamcrest ${CREDENTIALS} -l "$LABELS" build/hamcrest-generator-$VERSION.jar
+./googlecode_upload.py -s "Hamcrest testing library integration" -p hamcrest ${CREDENTIALS} -l "$LABELS" build/hamcrest-integration-$VERSION.jar
+./googlecode_upload.py -s "Hamcrest additional library of matchers" -p hamcrest ${CREDENTIALS} -l "$LABELS" build/hamcrest-library-$VERSION.jar
 
