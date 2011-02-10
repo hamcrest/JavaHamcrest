@@ -2,12 +2,12 @@
  */
 package org.hamcrest.core;
 
-import java.util.regex.Pattern;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+
+import java.util.regex.Pattern;
 
 /**
  * Provides a custom description to another matcher.
@@ -43,6 +43,11 @@ public class DescribedAs<T> extends BaseMatcher<T> {
         if (textStart < descriptionTemplate.length()) {
             description.appendText(descriptionTemplate.substring(textStart));
         }
+    }
+    
+    @Override
+    public void describeMismatch(Object item, Description description) {
+        matcher.describeMismatch(item, description);
     }
 
     /**
