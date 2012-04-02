@@ -20,10 +20,12 @@ public class JMock1AdapterTest extends TestCase {
 
     public void testDelegatesDescriptionToUnderlyingMatcher() {
         Constraint jMockConstraint = new JMock1Adapter(new BaseMatcher<Object>() {
+            @Override
             public boolean matches(Object o) {
                 return false;
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText("is like ");
                 description.appendValue("cheese");

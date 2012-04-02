@@ -31,10 +31,12 @@ public class EasyMock2Adapter implements IArgumentMatcher {
         this.hamcrestMatcher = matcher;
     }
 
+    @Override
     public boolean matches(Object argument) {
         return hamcrestMatcher.matches(argument);
     }
 
+    @Override
     public void appendTo(StringBuffer buffer) {
         hamcrestMatcher.describeTo(new StringDescription(buffer));
     }

@@ -16,6 +16,7 @@ public class TypeSafeMatcherTest extends TestCase {
           mismatchDescription.appendText("The mismatch");
         }
 
+        @Override
         public void describeTo(Description description) {
         }
 

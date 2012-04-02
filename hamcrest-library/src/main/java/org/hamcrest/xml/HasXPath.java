@@ -68,6 +68,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
         }
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("an XML document with XPath ").appendText(xpathString);
         if (valueMatcher != null) {

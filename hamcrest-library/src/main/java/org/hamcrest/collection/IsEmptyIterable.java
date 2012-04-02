@@ -19,6 +19,7 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<E>> {
         mismatchDescription.appendValueList("[", ",", "]", iter);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("an empty iterable");
     }

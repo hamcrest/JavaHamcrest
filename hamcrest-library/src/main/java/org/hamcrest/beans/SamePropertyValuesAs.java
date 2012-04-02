@@ -65,6 +65,7 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
     return true;
   }
 
+  @Override
   public void describeTo(Description description) {
     description.appendText("same property values as " + expectedBean.getClass().getSimpleName())
                .appendList(" [", ", ", "]", propertyMatchers);
@@ -107,6 +108,7 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
       return true;
     }
 
+    @Override
     public void describeTo(Description description) {
       description.appendText(propertyName + ": ").appendDescriptionOf(matcher);
     }

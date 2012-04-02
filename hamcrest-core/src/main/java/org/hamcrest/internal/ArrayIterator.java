@@ -14,14 +14,17 @@ public class ArrayIterator implements Iterator<Object> {
         this.array = array;
     }
     
+    @Override
     public boolean hasNext() {
         return currentIndex < Array.getLength(array);
     }
 
+    @Override
     public Object next() {
         return Array.get(array, currentIndex++);
     }
     
+    @Override
     public void remove() {
         throw new UnsupportedOperationException("cannot remove items from an array");
     }

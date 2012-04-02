@@ -33,6 +33,7 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     	return true;
     }
 
+    @Override
     public void describeTo(Description description) {
     	description.appendList("(", " " + "and" + " ", ")", matchers);
     }

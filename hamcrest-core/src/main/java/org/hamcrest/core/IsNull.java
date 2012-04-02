@@ -12,10 +12,12 @@ import org.hamcrest.BaseMatcher;
  * Is the value null?
  */
 public class IsNull<T> extends BaseMatcher<T> {
+    @Override
     public boolean matches(Object o) {
         return o == null;
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("null");
     }
@@ -40,7 +42,7 @@ public class IsNull<T> extends BaseMatcher<T> {
      * Matches if value is null. With type inference.
      */
     @Factory
-    public static <T> Matcher<T> nullValue(@SuppressWarnings("unused") Class<T> type) {
+    public static <T> Matcher<T> nullValue(Class<T> type) {
         return new IsNull<T>();
     }
 

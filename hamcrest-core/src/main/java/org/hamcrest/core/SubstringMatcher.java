@@ -23,6 +23,7 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
       mismatchDescription.appendText("was \"").appendText(item).appendText("\"");
     }
     
+    @Override
     public void describeTo(Description description) {
         description.appendText("a string ")
                 .appendText(relationship())

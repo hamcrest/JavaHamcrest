@@ -25,10 +25,12 @@ public class DescribedAs<T> extends BaseMatcher<T> {
         this.values = values.clone();
     }
     
+    @Override
     public boolean matches(Object o) {
         return matcher.matches(o);
     }
 
+    @Override
     public void describeTo(Description description) {
         java.util.regex.Matcher arg = ARG_PATTERN.matcher(descriptionTemplate);
         

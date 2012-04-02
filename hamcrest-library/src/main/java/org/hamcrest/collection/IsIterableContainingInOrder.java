@@ -6,9 +6,9 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
@@ -30,6 +30,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
         return matchSeries.isFinished();
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("iterable containing ").appendList("[", ", ", "]", matchers);
     }
@@ -93,15 +94,15 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
         return contains(matchers);
     }
 
+    @SuppressWarnings("unchecked")
     @Factory
     public static <E> Matcher<Iterable<? extends E>> contains(final Matcher<? super E> item) {
-        return contains(new ArrayList<Matcher<? super E>>(Arrays.asList(item)));
+        return contains(new ArrayList<Matcher<? super E>>(asList(item)));
     }
 
     @Factory
     public static <E> Matcher<Iterable<? extends E>> contains(Matcher<? super E>... matchers) {
-        List<Matcher<? super E>> matcherList = Arrays.asList(matchers);
-        return contains(matcherList);
+        return contains(asList(matchers));
     }
 
     @Factory

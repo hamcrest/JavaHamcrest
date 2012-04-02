@@ -31,6 +31,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
       iterableMatcher.describeMismatch(asList(item), mismatchDescription);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendList("[", ", ", "]", matchers);
     }

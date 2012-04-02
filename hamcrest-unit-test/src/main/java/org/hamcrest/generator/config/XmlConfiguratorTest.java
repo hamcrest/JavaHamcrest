@@ -49,7 +49,7 @@ public class XmlConfiguratorTest extends TestCase {
 
     // Sample Matchers
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public static class SomeMatcher {
         @Factory
         public static Matcher matcher1() {
@@ -62,7 +62,7 @@ public class XmlConfiguratorTest extends TestCase {
         }
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public static class AnotherMatcher {
         @Factory
         public static CombinableMatcher matcher3() {
@@ -79,14 +79,17 @@ public class XmlConfiguratorTest extends TestCase {
         private final List<FactoryMethod> seenFactoryMethods = new ArrayList<FactoryMethod>();
         private final List<FactoryWriter> seenFactoryWriters = new ArrayList<FactoryWriter>();
 
+        @Override
         public void addWriter(FactoryWriter factoryWriter) {
             seenFactoryWriters.add(factoryWriter);
         }
 
+        @Override
         public void addFactoryMethod(FactoryMethod method) {
             seenFactoryMethods.add(method);
         }
 
+        @Override
         public void addFactoryMethods(Iterable<FactoryMethod> methods) {
             for (FactoryMethod method : methods) {
                 addFactoryMethod(method);

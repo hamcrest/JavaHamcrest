@@ -10,6 +10,7 @@ public class SelfDescribingValue<T> implements SelfDescribing {
         this.value = value;
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendValue(value);
     }

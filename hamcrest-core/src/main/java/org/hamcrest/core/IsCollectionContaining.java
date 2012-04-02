@@ -34,6 +34,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
         return false;
     }
 
+    @Override
     public void describeTo(Description description) {
         description
             .appendText("a collection containing ")

@@ -20,10 +20,12 @@ public class IsNot<T> extends BaseMatcher<T>  {
         this.matcher = matcher;
     }
 
+    @Override
     public boolean matches(Object arg) {
         return !matcher.matches(arg);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("not ").appendDescriptionOf(matcher);
     }

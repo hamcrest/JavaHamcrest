@@ -40,6 +40,7 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
       mismatchDescription.appendText("no ").appendValue(propertyName).appendText(" in ").appendValue(item);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("hasProperty(").appendValue(propertyName).appendText(")");
     }

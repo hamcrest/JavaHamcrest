@@ -95,6 +95,7 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
           return false;
         }
 
+        @Override
         public void describeTo(Description description) {
           description.appendText("mismatchable: " + string);
         }

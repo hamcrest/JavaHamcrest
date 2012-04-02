@@ -78,6 +78,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   public void testCanAccessAnAnonymousInnerClass() {
     class X implements IX {
+      @Override
       public int getTest() {
         return 1;
       }
@@ -105,7 +106,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
       this.property = property;
     }
 
-    public void setWriteOnlyProperty(@SuppressWarnings("unused") float property) {
+    public void setWriteOnlyProperty(float property) {
     }
 
     @Override

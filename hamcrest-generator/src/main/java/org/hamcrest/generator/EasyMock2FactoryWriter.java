@@ -30,23 +30,28 @@ public class EasyMock2FactoryWriter implements FactoryWriter {
         this.output = new PrintWriter(output);
     }
 
+    @Override
     public void writeHeader() throws IOException {
         output.append("package ").append(javaPackageName).append(';').append(newLine).append(newLine);
         output.append("public class ").append(javaClassName).append(" {").append(newLine).append(newLine);
     }
 
+    @Override
     public void writeFooter() throws IOException {
         output.append('}').append(newLine);
     }
 
+    @Override
     public void close() throws IOException {
         output.close();
     }
 
+    @Override
     public void flush() throws IOException {
         output.flush();
     }
 
+    @Override
     public void writeMethod(String generatedMethodName, FactoryMethod factoryMethodToDelegateTo)
             throws IOException {
         writeJavaDoc(factoryMethodToDelegateTo);

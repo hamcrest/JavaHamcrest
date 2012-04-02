@@ -57,10 +57,12 @@ public class MatcherAssertTest extends TestCase {
 
     public void testIncludesMismatchDescription() {
       Matcher<String> matcherWithCustomMismatchDescription = new BaseMatcher<String>() {
+        @Override
         public boolean matches(Object item) {
           return false;
         }
 
+        @Override
         public void describeTo(Description description) {
           description.appendText("Something cool");
         }

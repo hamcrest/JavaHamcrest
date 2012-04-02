@@ -25,9 +25,11 @@ public class QuickReferenceWriter implements FactoryWriter {
         this.columnPosition = columnPosition;
     }
     
+    @Override
     public void writeHeader() throws IOException {
     }
 
+    @Override
     public void writeMethod(String generatedMethodName, FactoryMethod factoryMethod) throws IOException {
         String actsOn = removePackageNames(factoryMethod.getGenerifiedType());
         for (int i = actsOn.length(); i < columnPosition; i++) {
@@ -56,12 +58,15 @@ public class QuickReferenceWriter implements FactoryWriter {
         return in == null ? "" : in.replaceAll("[^<>]*\\.([^\\.])", "$1");
     }
 
+    @Override
     public void writeFooter() throws IOException {
     }
 
+    @Override
     public void close() throws IOException {
     }
 
+    @Override
     public void flush() throws IOException {
     }
 }

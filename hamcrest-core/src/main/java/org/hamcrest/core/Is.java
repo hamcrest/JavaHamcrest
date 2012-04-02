@@ -22,10 +22,12 @@ public class Is<T> extends BaseMatcher<T> {
         this.matcher = matcher;
     }
 
+    @Override
     public boolean matches(Object arg) {
         return matcher.matches(arg);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("is ").appendDescriptionOf(matcher);
     }

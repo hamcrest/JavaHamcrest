@@ -29,10 +29,12 @@ public class JMock1Adapter implements Constraint {
         this.hamcrestMatcher = matcher;
     }
 
+    @Override
     public boolean eval(Object o) {
         return hamcrestMatcher.matches(o);
     }
 
+    @Override
     public StringBuffer describeTo(StringBuffer buffer) {
         hamcrestMatcher.describeTo(new StringDescription(buffer));
         return buffer;

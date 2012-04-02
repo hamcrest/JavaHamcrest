@@ -14,10 +14,12 @@ public class CombinableMatcher<T> extends BaseMatcher<T> {
         this.matcher = matcher;
     }
 
+    @Override
     public boolean matches(Object item) {
         return matcher.matches(item);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendDescriptionOf(matcher);
     }

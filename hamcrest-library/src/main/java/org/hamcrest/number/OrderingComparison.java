@@ -39,6 +39,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
                 .appendText(" ").appendValue(expected);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("a value ").appendText(asText(minCompare));
         if (minCompare != maxCompare) {

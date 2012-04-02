@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
@@ -31,6 +32,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
       return matching.isFinished(items);
     }
     
+    @Override
     public void describeTo(Description description) {
       description.appendText("iterable over ")
           .appendList("[", ", ", "]", matchers)
@@ -81,9 +83,10 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
 
     }
 
+    @SuppressWarnings("unchecked")
     @Factory
     public static <E> Matcher<Iterable<? extends E>> containsInAnyOrder(final Matcher<? super E> item) {
-        return containsInAnyOrder(new ArrayList<Matcher<? super E>>(Arrays.asList(item)));
+        return containsInAnyOrder(new ArrayList<Matcher<? super E>>(asList(item)));
     }
 
     @Factory

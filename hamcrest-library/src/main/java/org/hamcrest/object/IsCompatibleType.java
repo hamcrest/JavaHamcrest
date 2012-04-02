@@ -22,6 +22,7 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
       mismatchDescription.appendValue(cls.getName());
     }
     
+    @Override
     public void describeTo(Description description) {
         description.appendText("type < ").appendText(type.getName());
     }

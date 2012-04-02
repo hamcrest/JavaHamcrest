@@ -31,17 +31,21 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
         this.classSource = qdox.getClassByName(className);
     }
 
+    @Override
     public Iterator<FactoryMethod> iterator() {
         final Iterator<FactoryMethod> iterator = wrapped.iterator();
         return new Iterator<FactoryMethod>() {
+            @Override
             public boolean hasNext() {
                 return iterator.hasNext();
             }
 
+            @Override
             public FactoryMethod next() {
                 return enhance(iterator.next());
             }
 
+            @Override
             public void remove() {
                 iterator.remove();
             }

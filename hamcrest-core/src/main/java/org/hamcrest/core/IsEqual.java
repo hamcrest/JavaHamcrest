@@ -21,10 +21,12 @@ public class IsEqual<T> extends BaseMatcher<T> {
         object = equalArg;
     }
 
+    @Override
     public boolean matches(Object arg) {
         return areEqual(arg, object);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendValue(object);
     }

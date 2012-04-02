@@ -51,6 +51,7 @@ public class SugarGenerator implements Closeable, SugarConfiguration {
     /**
      * Add a writer of factories.
      */
+    @Override
     public void addWriter(FactoryWriter factoryWriter) {
         factoryWriters.add(factoryWriter);
     }
@@ -61,6 +62,7 @@ public class SugarGenerator implements Closeable, SugarConfiguration {
      * @see ReflectiveFactoryReader
      * @see FactoryMethod
      */
+    @Override
     public void addFactoryMethod(FactoryMethod method) {
         factoryMethods.add(method);
     }
@@ -70,6 +72,7 @@ public class SugarGenerator implements Closeable, SugarConfiguration {
      *
      * @see #addFactoryMethod(FactoryMethod)
      */
+    @Override
     public void addFactoryMethods(Iterable<FactoryMethod> methods) {
         for (FactoryMethod method : methods) {
             addFactoryMethod(method);
@@ -96,6 +99,7 @@ public class SugarGenerator implements Closeable, SugarConfiguration {
      * Close all underlying streams. Calling this means you don't have to explicitly
      * keep track of all the File streams and close them.
      */
+    @Override
     public void close() throws IOException {
         for (FactoryWriter factoryWriter : factoryWriters) {
             factoryWriter.close();

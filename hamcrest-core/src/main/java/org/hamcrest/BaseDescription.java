@@ -13,16 +13,19 @@ import org.hamcrest.internal.SelfDescribingValueIterator;
  */
 public abstract class BaseDescription implements Description {
 
+    @Override
     public Description appendText(String text) {
         append(text);
         return this;
     }
     
+    @Override
     public Description appendDescriptionOf(SelfDescribing value) {
         value.describeTo(this);
         return this;
     }
     
+    @Override
     public Description appendValue(Object value) {
         if (value == null) {
             append("null");
@@ -54,10 +57,12 @@ public abstract class BaseDescription implements Description {
         return this;
     }
     
+    @Override
     public <T> Description appendValueList(String start, String separator, String end, T... values) {
         return appendValueList(start, separator, end, Arrays.asList(values));
     }
     
+    @Override
     public <T> Description appendValueList(String start, String separator, String end, Iterable<T> values) {
         return appendValueList(start, separator, end, values.iterator());
     }
@@ -66,6 +71,7 @@ public abstract class BaseDescription implements Description {
         return appendList(start, separator, end, new SelfDescribingValueIterator<T>(values));
     }
     
+    @Override
     public Description appendList(String start, String separator, String end, Iterable<? extends SelfDescribing> values) {
         return appendList(start, separator, end, values.iterator());
     }
