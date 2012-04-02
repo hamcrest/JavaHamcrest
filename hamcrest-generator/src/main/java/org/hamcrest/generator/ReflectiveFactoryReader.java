@@ -1,5 +1,6 @@
 package org.hamcrest.generator;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import static java.lang.reflect.Modifier.isPublic;
 import static java.lang.reflect.Modifier.isStatic;
@@ -36,12 +37,14 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
         this.classLoader = cls.getClassLoader();
     }
 
+    @Override
     public Iterator<FactoryMethod> iterator() {
         return new Iterator<FactoryMethod>() {
 
             private int currentMethod = -1;
             private Method[] allMethods = cls.getMethods();
 
+            @Override
             public boolean hasNext() {
                 while (true) {
                     currentMethod++;
@@ -53,6 +56,7 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
                 }
             }
 
+            @Override
             public FactoryMethod next() {
                 if (outsideArrayBounds()) {
                   throw new IllegalStateException("next() called without hasNext() check.");
@@ -60,6 +64,7 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
                 return buildFactoryMethod(allMethods[currentMethod]);
             }
 
+            @Override
             public void remove() {
                 throw new UnsupportedOperationException();
             }
@@ -80,26 +85,38 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
      * <p/>
      * <p>To use another set of rules, override this method.
      */
-    @SuppressWarnings({"unchecked"})
     protected boolean isFactoryMethod(Method javaMethod) {
         // We dynamically load these classes, to avoid a compile time
         // dependency on org.hamcrest.{Factory,Matcher}. This gets around
         // a circular bootstrap issue (because generator is required to
         // compile core).
-        Class factoryCls;
-        Class matcherCls;
-        try {
-            factoryCls = classLoader.loadClass("org.hamcrest.Factory");
-            matcherCls = classLoader.loadClass("org.hamcrest.Matcher");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Cannot load hamcrest core", e);
-        }
         return isStatic(javaMethod.getModifiers())
                 && isPublic(javaMethod.getModifiers())
-                && javaMethod.getAnnotation(factoryCls) != null
-                && matcherCls.isAssignableFrom(javaMethod.getReturnType());
+                && hasFactoryAnnotation(javaMethod)
+                && matcherClass().isAssignableFrom(javaMethod.getReturnType());
     }
 
+    private Class<?> matcherClass() {
+      try {
+          return classLoader.loadClass("org.hamcrest.Matcher");
+      } catch (ClassNotFoundException e) {
+          throw new RuntimeException("Cannot load hamcrest core", e);
+      }
+    }
+
+    @SuppressWarnings("unchecked")
+    private boolean hasFactoryAnnotation(Method javaMethod) {
+      try {
+        final Class<?> factoryClass = classLoader.loadClass("org.hamcrest.Factory");
+        if (!Annotation.class.isAssignableFrom(factoryClass)) {
+          throw new RuntimeException("Not an annotation class: " + factoryClass.getCanonicalName());
+        }
+        return javaMethod.getAnnotation((Class<? extends Annotation>)factoryClass) != null;        
+      } catch (ClassNotFoundException e) {
+        throw new RuntimeException("Cannot load hamcrest core", e);
+      }
+    }
+    
     private FactoryMethod buildFactoryMethod(Method javaMethod) {
         FactoryMethod result = new FactoryMethod(
                 javaMethod.getDeclaringClass().getName(),

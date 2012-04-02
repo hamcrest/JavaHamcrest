@@ -51,8 +51,9 @@ public class ExampleWithAssertThat {
       assertThat(complicated, shouldBe("the wrong thing"));
     }
 
-    private Matcher<ComplicatedClass> shouldBe(@SuppressWarnings("unused") String string) {
+    private Matcher<ComplicatedClass> shouldBe(String string) {
       return new TypeSafeMatcher<ComplicatedClass>() {
+        @Override
         public void describeTo(Description description) { } // no op
         @Override
         public boolean matchesSafely(ComplicatedClass item) { return false; }
