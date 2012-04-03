@@ -43,7 +43,7 @@ public class QDoxFactoryReaderTest extends TestCase {
                 factoryMethod.getJavaDoc());
     }
 
-    private FactoryMethod wrapUsingQDoxedSource(FactoryMethod originalMethod,
+    private static FactoryMethod wrapUsingQDoxedSource(FactoryMethod originalMethod,
                                                 String className, String input) {
         List<FactoryMethod> originalMethods = new ArrayList<FactoryMethod>();
         originalMethods.add(originalMethod);
@@ -56,7 +56,7 @@ public class QDoxFactoryReaderTest extends TestCase {
         return getFirstFactoryMethod(qDoxFactoryReader);
     }
 
-    private FactoryMethod getFirstFactoryMethod(QDoxFactoryReader qDoxFactoryReader) {
+    private static FactoryMethod getFirstFactoryMethod(QDoxFactoryReader qDoxFactoryReader) {
         Iterator<FactoryMethod> iterator = qDoxFactoryReader.iterator();
         iterator.hasNext();
         return iterator.next();

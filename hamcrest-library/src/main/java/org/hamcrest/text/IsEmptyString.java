@@ -17,10 +17,12 @@ public final class IsEmptyString extends BaseMatcher<String> {
     @SuppressWarnings("unchecked")
     private static final Matcher<String> NULL_OR_EMPTY_INSTANCE = anyOf(nullValue(), INSTANCE);
 
+    @Override
     public boolean matches(Object item) {
         return item != null && item instanceof String && ((String) item).equals("");
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("an empty string");
     }

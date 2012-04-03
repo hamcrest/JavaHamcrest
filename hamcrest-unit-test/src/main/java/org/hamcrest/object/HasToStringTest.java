@@ -45,7 +45,7 @@ public class HasToStringTest extends AbstractMatcherTest {
         assertMismatchDescription(expectedMismatchString, hasToString(TO_STRING_RESULT), "Cheese");
 	}
 
-    private String descriptionOf(Matcher<?> matcher) {
+    private static String descriptionOf(Matcher<?> matcher) {
         return StringDescription.asString(matcher);
     }
 }

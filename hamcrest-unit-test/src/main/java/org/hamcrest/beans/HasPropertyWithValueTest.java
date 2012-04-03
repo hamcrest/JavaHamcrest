@@ -106,7 +106,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
       this.property = property;
     }
 
-    public void setWriteOnlyProperty(float property) {
+    public void setWriteOnlyProperty(@SuppressWarnings("unused") float property) {
     }
 
     @Override

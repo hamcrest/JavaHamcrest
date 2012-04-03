@@ -48,7 +48,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
         description.appendText(" ").appendValue(expected);
     }
 
-    private String asText(int comparison) {
+    private static String asText(int comparison) {
         return comparisonDescriptions[comparison + 1];
     }
 

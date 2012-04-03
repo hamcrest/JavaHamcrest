@@ -29,7 +29,7 @@ public class IsEmptyCollectionTest extends AbstractMatcherTest {
         assertDescription("an empty collection", empty());
     }
 
-    private Collection<Object> collectionOfValues() {
+    private static Collection<Object> collectionOfValues() {
       return new ArrayList<Object>() {{ add("one"); add("three"); }};
     }
 }

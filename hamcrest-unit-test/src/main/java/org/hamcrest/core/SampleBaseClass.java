@@ -16,4 +16,9 @@ public class SampleBaseClass {
     public boolean equals(Object obj) {
         return obj instanceof SampleBaseClass && value.equals(((SampleBaseClass) obj).value);
     }
+
+    @Override
+    public int hashCode() {
+      return value.hashCode();
+    }
 }

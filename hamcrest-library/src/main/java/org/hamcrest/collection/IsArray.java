@@ -43,6 +43,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
       }
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendList(descriptionStart(), descriptionSeparator(), descriptionEnd(), 
                                Arrays.asList(elementMatchers));

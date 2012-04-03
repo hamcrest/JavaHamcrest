@@ -51,14 +51,16 @@ public class ExampleWithAssertThat {
       assertThat(complicated, shouldBe("the wrong thing"));
     }
 
-    private Matcher<ComplicatedClass> shouldBe(String string) {
+    private static Matcher<ComplicatedClass> shouldBe(final String string) {
       return new TypeSafeMatcher<ComplicatedClass>() {
         @Override
         public void describeTo(Description description) { } // no op
         @Override
         public boolean matchesSafely(ComplicatedClass item) { return false; }
         @Override
-        public void describeMismatchSafely(ComplicatedClass item, Description mismatchDescription) {} // no op
+        public void describeMismatchSafely(ComplicatedClass item, Description mismatchDescription) {
+          mismatchDescription.appendText(string);
+        } 
       };
     }
 

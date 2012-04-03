@@ -34,6 +34,7 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
       mismatchDescription.appendText("was ").appendText(item);
     }
     
+    @Override
     public void describeTo(Description description) {
         description.appendText("equalToIgnoringCase(")
                 .appendValue(string)

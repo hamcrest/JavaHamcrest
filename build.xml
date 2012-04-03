@@ -197,7 +197,7 @@
 
 	<target name="javadoc" depends="library">
 		<mkdir dir="build/javadoc"/>
-		<javadoc destdir="build/javadoc" source="1.5" failonerror="yes"
+		<javadoc destdir="build/javadoc" source="1.6" failonerror="yes"
 			overview="overview.html">
 			
             <classpath>
@@ -215,9 +215,8 @@
 			<group title="Matcher Library" packages="org.hamcrest.*"/>
 			<group title="Integration" packages="org.hamcrest.integration, org.hamcrest.integration.*"/>
 			
-			<link offline="false" href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
 			<link offline="false" href="http://www.junit.org/junit/javadoc/3.8.1/"/>
-			<link offline="false" href="http://junit.sourceforge.net/javadoc_40/"/>
+			<link offline="false" href="http://kentbeck.github.com/junit/javadoc/latest/"/>
 		</javadoc>
 	</target>
 

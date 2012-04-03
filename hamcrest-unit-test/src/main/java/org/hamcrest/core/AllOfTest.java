@@ -34,7 +34,6 @@ public class AllOfTest extends AbstractMatcherTest {
         assertThat("good", not(allOf(equalTo("good"), equalTo("good"), equalTo("bad"), equalTo("good"), equalTo("good"))));
     }
     
-    @SuppressWarnings("unchecked")
     public void testSupportsMixedTypes() {
         final Matcher<SampleSubClass> all = allOf(
                 equalTo(new SampleBaseClass("bad")),

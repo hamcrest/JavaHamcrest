@@ -18,10 +18,12 @@ public class IsSame<T> extends BaseMatcher<T> {
         this.object = object;
     }
 
+    @Override
     public boolean matches(Object arg) {
         return arg == object;
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("sameInstance(")
                 .appendValue(object)

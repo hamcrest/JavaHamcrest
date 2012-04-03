@@ -24,7 +24,8 @@ public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<T>> {
 		return true;
 	}
 
-	public void describeTo(Description description) {
+	@Override
+  public void describeTo(Description description) {
 		description.appendText("every item is ").appendDescriptionOf(matcher);
 	}
 	

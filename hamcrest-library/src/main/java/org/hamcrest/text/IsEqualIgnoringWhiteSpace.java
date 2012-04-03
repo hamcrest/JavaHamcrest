@@ -34,6 +34,7 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
       mismatchDescription.appendText("was  ").appendText(stripSpace(item));
     }
     
+    @Override
     public void describeTo(Description description) {
         description.appendText("equalToIgnoringWhiteSpace(")
                 .appendValue(string)

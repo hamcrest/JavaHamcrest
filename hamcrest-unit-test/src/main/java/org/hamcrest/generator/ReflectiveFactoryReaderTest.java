@@ -100,7 +100,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
             return null;
         }
 
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings("rawtypes")
         @Factory
         public static Matcher noGenerifiedType() {
             return null;
@@ -258,7 +258,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
         assertNotNull(readMethod(SubclassOfMatcher.class, "subclassMethod"));
     }
 
-    private FactoryMethod readMethod(Class<?> cls, String methodName) {
+    private static FactoryMethod readMethod(Class<?> cls, String methodName) {
         for (FactoryMethod method : new ReflectiveFactoryReader(cls)) {
             if (method.getName().equals(methodName)) {
                 return method;

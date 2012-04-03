@@ -38,14 +38,17 @@ public class HasXPathTest extends AbstractMatcherTest {
                 + "</root>\n"
         );
         ns = new NamespaceContext() {
+          @Override
           public String getNamespaceURI(String prefix) {
               return ("cheese".equals(prefix) ? "http://cheese.com" : null);
           }
 
+          @Override
           public String getPrefix(String namespaceURI) {
               return ("http://cheese.com".equals(namespaceURI) ? "cheese" : null);
           }
 
+          @Override
           public Iterator<String> getPrefixes(String namespaceURI) {
               HashSet<String> prefixes = new HashSet<String>();
               String prefix = getPrefix(namespaceURI);

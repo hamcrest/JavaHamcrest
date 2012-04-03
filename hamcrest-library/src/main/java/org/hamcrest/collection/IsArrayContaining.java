@@ -33,6 +33,7 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
       super.describeMismatch(Arrays.asList(item), mismatchDescription);
     };
 
+    @Override
     public void describeTo(Description description) {
         description
             .appendText("an array containing ")

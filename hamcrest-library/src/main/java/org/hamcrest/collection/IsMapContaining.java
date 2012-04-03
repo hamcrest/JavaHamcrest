@@ -35,6 +35,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
       mismatchDescription.appendText("map was ").appendValueList("[", ", ", "]", map.entrySet());
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("map containing [")
                    .appendDescriptionOf(keyMatcher)

@@ -19,11 +19,12 @@ public class IsIn<T> extends BaseMatcher<T> {
         collection = Arrays.asList(elements);
     }
     
-    @SuppressWarnings({"SuspiciousMethodCalls"})
+    @Override
     public boolean matches(Object o) {
         return collection.contains(o);
     }
 
+    @Override
     public void describeTo(Description buffer) {
         buffer.appendText("one of ");
         buffer.appendValueList("{", ", ", "}", collection);

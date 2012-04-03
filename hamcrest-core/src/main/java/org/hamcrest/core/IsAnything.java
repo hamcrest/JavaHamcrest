@@ -23,10 +23,12 @@ public class IsAnything<T> extends BaseMatcher<T> {
         this.message = message;
     }
 
+    @Override
     public boolean matches(Object o) {
         return true;
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText(message);
     }

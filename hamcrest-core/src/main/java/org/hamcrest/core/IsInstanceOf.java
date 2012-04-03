@@ -54,6 +54,7 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
       return true;
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("an instance of ")
                 .appendText(expectedClass.getName());

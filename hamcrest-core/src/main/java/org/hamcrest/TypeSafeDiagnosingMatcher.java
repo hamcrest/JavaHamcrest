@@ -49,6 +49,7 @@ public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
       this(TYPE_FINDER); 
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public final boolean matches(Object item) {
         return item != null

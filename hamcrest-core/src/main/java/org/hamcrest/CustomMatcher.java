@@ -30,6 +30,7 @@ public abstract class CustomMatcher<T> extends BaseMatcher<T> {
         this.fixedDescription = description;
     }
 
+    @Override
     public final void describeTo(Description description) {
         description.appendText(fixedDescription);
     }

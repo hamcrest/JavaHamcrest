@@ -46,6 +46,7 @@ public abstract class FeatureMatcher<T, U> extends TypeSafeDiagnosingMatcher<T> 
     return true;
   };
       
+  @Override
   public final void describeTo(Description description) {
     description.appendText(featureDescription).appendText(" ")
                .appendDescriptionOf(subMatcher);

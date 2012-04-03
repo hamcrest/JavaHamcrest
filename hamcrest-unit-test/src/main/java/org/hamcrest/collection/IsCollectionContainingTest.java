@@ -84,7 +84,7 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     }
     
     
-    private Matcher<? super String> mismatchable(final String string) {
+    private static Matcher<? super String> mismatchable(final String string) {
       return new TypeSafeDiagnosingMatcher<String>() {
         @Override
         protected boolean matchesSafely(String item, Description mismatchDescription) {

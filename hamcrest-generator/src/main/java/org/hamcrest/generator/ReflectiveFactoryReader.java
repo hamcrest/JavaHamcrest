@@ -117,7 +117,7 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
       }
     }
     
-    private FactoryMethod buildFactoryMethod(Method javaMethod) {
+    private static FactoryMethod buildFactoryMethod(Method javaMethod) {
         FactoryMethod result = new FactoryMethod(
                 javaMethod.getDeclaringClass().getName(),
                 javaMethod.getName(), 

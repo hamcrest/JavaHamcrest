@@ -111,6 +111,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         return readMethod;
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("hasProperty(");
         description.appendValue(propertyName);

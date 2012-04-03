@@ -94,7 +94,7 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
     /**
      * Reconstructs the JavaDoc as a string for a particular method.
      */
-    private String createJavaDocComment(JavaMethod methodSource) {
+    private static String createJavaDocComment(JavaMethod methodSource) {
         String comment = methodSource.getComment();
         DocletTag[] tags = methodSource.getTags();
         if ((comment == null || comment.trim().length() == 0) && tags.length == 0) {

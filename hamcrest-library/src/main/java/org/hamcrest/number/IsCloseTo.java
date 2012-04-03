@@ -33,6 +33,7 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
                          .appendValue(actualDelta(item));
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("a numeric value within ")
                 .appendValue(delta)

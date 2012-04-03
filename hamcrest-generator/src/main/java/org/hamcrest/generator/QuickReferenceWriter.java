@@ -53,7 +53,7 @@ public class QuickReferenceWriter implements FactoryWriter {
         out.println();
     }
 
-    private String removePackageNames(String in) {
+    private static String removePackageNames(String in) {
         // Simplify fully qualified names (allowing for trailing '...').
         return in == null ? "" : in.replaceAll("[^<>]*\\.([^\\.])", "$1");
     }

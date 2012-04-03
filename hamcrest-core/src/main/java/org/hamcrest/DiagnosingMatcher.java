@@ -7,7 +7,8 @@ package org.hamcrest;
  */
 public abstract class DiagnosingMatcher<T> extends BaseMatcher<T> {
 
-	public final boolean matches(Object item) {
+	@Override
+  public final boolean matches(Object item) {
 		return matches(item, Description.NONE);
 	}
 

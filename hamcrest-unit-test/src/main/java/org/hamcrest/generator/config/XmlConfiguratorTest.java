@@ -43,7 +43,7 @@ public class XmlConfiguratorTest extends TestCase {
             hasItem(new FactoryMethod(AnotherMatcher.class.getName(), "matcher3", "org.hamcrest.CombinableMatcher")));
     }
 
-    private InputSource createXml(String xml) {
+    private static InputSource createXml(String xml) {
         return new InputSource(new StringReader(xml));
     }
 

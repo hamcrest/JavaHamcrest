@@ -41,6 +41,7 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
         return ev.getSource() == source;
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("an event of type ")
                 .appendText(eventClass.getName())
