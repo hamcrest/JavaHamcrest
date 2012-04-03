@@ -26,11 +26,9 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
 
     @Override
 	  public boolean matchesSafely(T obj) {
-    	// TODO(ngd): this is not type safe.
         try {
             return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null;
         } catch (IllegalArgumentException e) {
-            // introspection failure is treated as a matcher failure
             return false;
         }
     }

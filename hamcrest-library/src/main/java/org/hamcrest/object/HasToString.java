@@ -13,7 +13,7 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
     
     @Override
     protected String featureValueOf(T actual) {
-      return actual.toString();
+      return String.valueOf(actual);
     }
 
     /**

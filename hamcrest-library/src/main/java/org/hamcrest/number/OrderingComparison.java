@@ -7,6 +7,8 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+import static java.lang.Integer.signum;
+
 public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher<T> {
     private static final int LESS_THAN = -1;
     private static final int GREATER_THAN = 1;
@@ -28,7 +30,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
 
     @Override
     public boolean matchesSafely(T actual) {
-        int compare = Integer.signum(actual.compareTo(expected));
+        int compare = signum(actual.compareTo(expected));
         return minCompare <= compare && compare <= maxCompare;
     }
 

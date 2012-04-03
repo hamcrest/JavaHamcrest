@@ -1,11 +1,11 @@
 package org.hamcrest.collection;
 
-import static org.hamcrest.core.DescribedAs.describedAs;
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import org.hamcrest.Factory;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
+
+import static org.hamcrest.core.DescribedAs.describedAs;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
  * Matches if array size satisfies a nested matcher.
@@ -18,7 +18,7 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
     @Override
     protected Integer featureValueOf(E[] actual) {
       return actual.length;
-    };
+    }
 
     /**
      * Does array size satisfy a given matcher?

@@ -34,7 +34,6 @@ public class Is<T> extends BaseMatcher<T> {
 
     @Override
     public void describeMismatch(Object item, Description mismatchDescription) {
-    	// TODO(ngd): unit tests....
     	matcher.describeMismatch(item, mismatchDescription);
     }
 

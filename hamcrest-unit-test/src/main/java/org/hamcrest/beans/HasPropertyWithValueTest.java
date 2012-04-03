@@ -25,9 +25,7 @@ import org.hamcrest.core.IsEqual;
  */
 public class HasPropertyWithValueTest extends AbstractMatcherTest {
   private final BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected");
-
-  private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo(
-      "not expected");
+  private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");
 
   private final BeanWithInfo beanWithInfo = new BeanWithInfo("with info");
 
@@ -38,13 +36,13 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   public void testMatchesInfolessBeanWithMatchedNamedProperty() {
     assertMatches("with property", hasProperty("property", equalTo("is expected")), shouldMatch);
-    assertMismatchDescription("property \"property\" was \"not expected\"", 
+    assertMismatchDescription("property 'property' was \"not expected\"", 
                               hasProperty("property", equalTo("is expected")), shouldNotMatch);
   }
 
   public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
     assertMatches("with bean info", hasProperty("property", equalTo("with info")), beanWithInfo);
-    assertMismatchDescription("property \"property\" was \"with info\"", 
+    assertMismatchDescription("property 'property' was \"with info\"", 
         hasProperty("property", equalTo("without info")), beanWithInfo);
   }
 

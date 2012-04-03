@@ -7,6 +7,8 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
 
+import static java.lang.Character.isWhitespace;
+
 /**
  * Tests if a string is equal to another string, ignoring any changes in whitespace.
  */
@@ -42,11 +44,11 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
     }
 
     public String stripSpace(String toBeStripped) {
-        StringBuilder result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
         boolean lastWasSpace = true;
         for (int i = 0; i < toBeStripped.length(); i++) {
             char c = toBeStripped.charAt(i);
-            if (Character.isWhitespace(c)) {
+            if (isWhitespace(c)) {
                 if (!lastWasSpace) {
                     result.append(' ');
                 }

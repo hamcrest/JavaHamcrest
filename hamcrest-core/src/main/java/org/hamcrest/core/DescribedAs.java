@@ -9,6 +9,8 @@ import org.hamcrest.Matcher;
 
 import java.util.regex.Pattern;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * Provides a custom description to another matcher.
  */
@@ -37,8 +39,7 @@ public class DescribedAs<T> extends BaseMatcher<T> {
         int textStart = 0;
         while (arg.find()) {
             description.appendText(descriptionTemplate.substring(textStart, arg.start()));
-            int argIndex = Integer.parseInt(arg.group(1));
-            description.appendValue(values[argIndex]);
+            description.appendValue(values[parseInt(arg.group(1))]);
             textStart = arg.end();
         }
         

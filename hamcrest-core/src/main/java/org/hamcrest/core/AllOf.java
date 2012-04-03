@@ -22,11 +22,11 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     }
 
     @Override
-    public boolean matches(Object o, Description mismatchDescription) {
+    public boolean matches(Object o, Description mismatch) {
     	for (Matcher<? super T> matcher : matchers) {
             if (!matcher.matches(o)) {
-            	mismatchDescription.appendDescriptionOf(matcher).appendText(" ");
-            	matcher.describeMismatch(o, mismatchDescription);
+            	mismatch.appendDescriptionOf(matcher).appendText(" ");
+            	matcher.describeMismatch(o, mismatch);
               return false;
             }
         }
