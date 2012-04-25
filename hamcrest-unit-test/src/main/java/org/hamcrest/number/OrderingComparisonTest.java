@@ -30,8 +30,9 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
       assertMismatchDescription("<0> was less than <1>", greaterThan(1), 0);
       assertMismatchDescription("<1> was equal to <1>", greaterThan(1), 1);
       assertMismatchDescription("<1> was greater than <0>", lessThan(0), 1);
+      assertMismatchDescription("<2> was equal to <2>", lessThan(2), 2);
     }
-    
+
     public void testComparesObjectsForGreaterThan() {
         assertThat(2, greaterThan(1));
         assertThat(0, not(greaterThan(1)));
@@ -57,7 +58,7 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
         assertThat(1.1, greaterThan(1.0));
         assertThat("cc", greaterThan("bb"));
     }
-    
+
     public void testComparesBigDecimalsWithDifferentScalesCorrectlyForIssue20() {
       assertThat(new BigDecimal("10.0"), greaterThanOrEqualTo(new BigDecimal("10")));
       assertThat(new BigDecimal(10), greaterThanOrEqualTo(new BigDecimal("10.0")));
