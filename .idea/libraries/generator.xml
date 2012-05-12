@@ -2,7 +2,7 @@
   <library name="generator">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/generator/jarjar-1.0rc3.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/generator/qdox-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/generator/qdox-1.12.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

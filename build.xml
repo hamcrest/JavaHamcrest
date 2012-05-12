@@ -26,7 +26,7 @@
         <java-to-jar srcdir="hamcrest-generator/src/main/java"
                      destjar="build/temp/hamcrest-generator-${version}-nodeps.jar"
                      classpath="
-                       lib/generator/qdox-1.6.1.jar;
+                       lib/generator/qdox-1.12.jar;
                      "/>
         <taskdef name="jarjar"
                  classname="com.tonicsystems.jarjar.JarJarTask"
@@ -36,7 +36,7 @@
              to prevent conflict. -->
         <jarjar jarfile="build/hamcrest-generator-${version}.jar">
             <zipfileset src="build/temp/hamcrest-generator-${version}-nodeps.jar"/>
-            <zipfileset src="lib/generator/qdox-1.6.1.jar"/>
+            <zipfileset src="lib/generator/qdox-1.12.jar"/>
             <rule pattern="com.thoughtworks.qdox.**"
                   result="org.hamcrest.generator.qdox.@1"/>
         </jarjar>
