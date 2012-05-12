@@ -47,8 +47,18 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * </pre>
    */
   @Factory
-  public static <LHS> CombinableMatcher<LHS> both(Matcher<? super LHS> matcher) {
-    return new CombinableMatcher<LHS>(matcher);
+  public static <LHS> CombinableBothMatcher<LHS> both(Matcher<? super LHS> matcher) {
+    return new CombinableBothMatcher<LHS>(matcher);
+  }
+  
+  public static final class CombinableBothMatcher<X> {
+    private final Matcher<? super X> first;
+    public CombinableBothMatcher(Matcher<? super X> matcher) {
+        this.first = matcher;
+    }
+    public CombinableMatcher<X> and(Matcher<? super X> other) {
+      return new CombinableMatcher<X>(first).and(other);
+    }
   }
 
   /**
@@ -58,7 +68,17 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * </pre>
    */
   @Factory
-  public static <LHS> CombinableMatcher<LHS> either(Matcher<? super LHS> matcher) {
-    return new CombinableMatcher<LHS>(matcher);
+  public static <LHS> CombinableEitherMatcher<LHS> either(Matcher<? super LHS> matcher) {
+    return new CombinableEitherMatcher<LHS>(matcher);
+  }
+  
+  public static final class CombinableEitherMatcher<X> {
+    private final Matcher<? super X> first;
+    public CombinableEitherMatcher(Matcher<? super X> matcher) {
+        this.first = matcher;
+    }
+    public CombinableMatcher<X> or(Matcher<? super X> other) {
+      return new CombinableMatcher<X>(first).or(other);
+    }
   }
 }
