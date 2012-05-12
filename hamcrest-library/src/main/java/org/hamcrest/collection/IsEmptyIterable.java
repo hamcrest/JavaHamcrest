@@ -8,14 +8,14 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Tests if collection is empty.
  */
-public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<E>> {
+public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
 
     @Override
-    public boolean matchesSafely(Iterable<E> iterable) {
+    public boolean matchesSafely(Iterable<? extends E> iterable) {
         return !iterable.iterator().hasNext();
     }
     @Override
-    public void describeMismatchSafely(Iterable<E> iter, Description mismatchDescription) {
+    public void describeMismatchSafely(Iterable<? extends E> iter, Description mismatchDescription) {
         mismatchDescription.appendValueList("[", ",", "]", iter);
     }
 
@@ -28,7 +28,7 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<E>> {
      * Matches an empty iterable.
      */
     @Factory
-    public static <E> Matcher<Iterable<E>> emptyIterable() {
+    public static <E> Matcher<Iterable<? extends E>> emptyIterable() {
         return new IsEmptyIterable<E>();
     }
 }

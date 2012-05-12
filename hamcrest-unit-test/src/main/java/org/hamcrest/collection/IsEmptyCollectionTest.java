@@ -1,35 +1,39 @@
 package org.hamcrest.collection;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-
+import static java.util.Arrays.asList;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.Is.is;
 
 public class IsEmptyCollectionTest extends AbstractMatcherTest {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Collection<?>> createMatcher() {
         return empty();
     }
 
     public void testMatchesAnEmptyCollection() {
-        assertMatches("empty collection", empty(), Arrays.asList());
+        assertMatches("empty collection", createMatcher(), emptyCollection());
     }
 
     public void testDoesNotMatchACollectionWithAnItem() {
-        assertMismatchDescription("<[one, three]>", is(empty()), collectionOfValues());
+        assertMismatchDescription("<[one, three]>", is(createMatcher()), collectionOfValues());
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("an empty collection", empty());
+        assertDescription("an empty collection", createMatcher());
     }
 
-    private static Collection<Object> collectionOfValues() {
-      return new ArrayList<Object>() {{ add("one"); add("three"); }};
+    private static Collection<String> collectionOfValues() {
+        return new ArrayList<String>(asList("one", "three"));
+    }
+
+    private static Collection<Integer> emptyCollection() {
+        return new ArrayList<Integer>();
     }
 }
