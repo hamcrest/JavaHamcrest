@@ -1,5 +1,9 @@
 == Version 1.3: Not yet released ==
 
+* Introduce Condition class to ease the implelemtation of multi-step matches
+
+* Upgrade qdox (included in the generator) to the latest stable version
+
 * Fix issue 179 - AllOf does not output mismatch description
 
 * Fix issue 152 - Factory classes missing from matchers.xml
