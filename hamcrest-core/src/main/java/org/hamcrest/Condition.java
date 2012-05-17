@@ -17,9 +17,12 @@ public abstract class Condition<T> {
         Condition<O> apply(I value, Description mismatch);
     }
 
-    public boolean matching(Matcher<T> match) { return matching(match, ""); }
+    private Condition() { }
+
     public abstract boolean matching(Matcher<T> match, String message);
     public abstract <U> Condition<U> and(Step<? super T, U> mapping);
+
+    public final boolean matching(Matcher<T> match) { return matching(match, ""); }
     public final <U> Condition<U> then(Step<? super T, U> mapping) { return and(mapping); }
 
     @SuppressWarnings("unchecked")
@@ -28,25 +31,35 @@ public abstract class Condition<T> {
     }
 
     public static <T> Condition<T> matched(final T theValue, final Description mismatch) {
-        return new Condition<T>() {
-            @Override
-            public boolean matching(Matcher<T> matcher, String message) {
-                if (matcher.matches(theValue)) {
-                    return true;
-                }
-                mismatch.appendText(message);
-                matcher.describeMismatch(theValue, mismatch);
-                return false;
-            }
-
-            @Override
-            public <U> Condition<U> and(Step<? super T, U> next) {
-                return next.apply(theValue, mismatch);
-            }
-        };
+        return new Matched<T>(theValue, mismatch);
     }
 
-    private static class NotMatched<T> extends Condition<T> {
+    private static final class Matched<T> extends Condition<T> {
+        private final T theValue;
+        private final Description mismatch;
+
+        private Matched(T theValue, Description mismatch) {
+            this.theValue = theValue;
+            this.mismatch = mismatch;
+        }
+
+        @Override
+        public boolean matching(Matcher<T> matcher, String message) {
+            if (matcher.matches(theValue)) {
+                return true;
+            }
+            mismatch.appendText(message);
+            matcher.describeMismatch(theValue, mismatch);
+            return false;
+        }
+
+        @Override
+        public <U> Condition<U> and(Step<? super T, U> next) {
+            return next.apply(theValue, mismatch);
+        }
+    }
+
+    private static final class NotMatched<T> extends Condition<T> {
         @Override public boolean matching(Matcher<T> match, String message) { return false; }
 
         @Override public <U> Condition<U> and(Step<? super T, U> mapping) {
