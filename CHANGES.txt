@@ -8,6 +8,8 @@
 
 * Fix issue 152 - Factory classes missing from matchers.xml
 
+* Fix issue 144 - OrderingComparison doesn't describe mismatch of comparables that return values other than (-1,0,1)
+
 * Fix issue 134 - DescribedAs does not delegate describeMismatch
 
 * Fix issue 106 - deprecation warning when writing custom matchers

@@ -51,7 +51,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
     }
 
     private static String asText(int comparison) {
-        return comparisonDescriptions[comparison + 1];
+        return comparisonDescriptions[signum(comparison) + 1];
     }
 
     /**

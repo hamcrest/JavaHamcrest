@@ -64,4 +64,19 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
       assertThat(new BigDecimal(10), greaterThanOrEqualTo(new BigDecimal("10.0")));
       assertThat(new BigDecimal("2"), comparesEqualTo(new BigDecimal("2.000")));
     }
+    
+    public void testComparesCustomTypesWhoseCompareToReturnsValuesGreaterThatOne() {
+        assertThat(new CustomInt(5), lessThan(new CustomInt(10)));
+    }
+
+    private static final class CustomInt implements Comparable<CustomInt> {
+        private final int value;
+        public CustomInt(int value) {
+            this.value = value;
+        }
+
+        public int compareTo(CustomInt other) {
+            return value - other.value;
+        }
+    }
 }
