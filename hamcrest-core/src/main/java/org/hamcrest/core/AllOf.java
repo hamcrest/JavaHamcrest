@@ -15,27 +15,27 @@ import java.util.List;
  */
 public class AllOf<T> extends DiagnosingMatcher<T> {
 
-	private final Iterable<Matcher<? super T>> matchers;
+    private final Iterable<Matcher<? super T>> matchers;
 
     public AllOf(Iterable<Matcher<? super T>> matchers) {
-    	this.matchers = matchers;
+        this.matchers = matchers;
     }
 
     @Override
     public boolean matches(Object o, Description mismatch) {
-    	for (Matcher<? super T> matcher : matchers) {
+        for (Matcher<? super T> matcher : matchers) {
             if (!matcher.matches(o)) {
-            	mismatch.appendDescriptionOf(matcher).appendText(" ");
-            	matcher.describeMismatch(o, mismatch);
+                mismatch.appendDescriptionOf(matcher).appendText(" ");
+                matcher.describeMismatch(o, mismatch);
               return false;
             }
         }
-    	return true;
+        return true;
     }
 
     @Override
     public void describeTo(Description description) {
-    	description.appendList("(", " " + "and" + " ", ")", matchers);
+        description.appendList("(", " " + "and" + " ", ")", matchers);
     }
 
     /**

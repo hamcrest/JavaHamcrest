@@ -26,7 +26,7 @@ public class HasXPathTest extends AbstractMatcherTest {
     private NamespaceContext ns;
 
     @Override
-	protected void setUp() throws Exception {
+    protected void setUp() throws Exception {
         super.setUp();
         xml = parse(""
                 + "<root type='food'>\n"
@@ -61,7 +61,7 @@ public class HasXPathTest extends AbstractMatcherTest {
     }
 
     @Override
-	protected Matcher<?> createMatcher() {
+    protected Matcher<?> createMatcher() {
         return hasXPath("//irrelevant");
     }
 
@@ -115,12 +115,12 @@ public class HasXPathTest extends AbstractMatcherTest {
     }
 
     public void testDescribesMissingNodeMismatch() {
-    	assertMismatchDescription("xpath returned no results.", hasXPath("//honky"), xml);
-	}
+        assertMismatchDescription("xpath returned no results.", hasXPath("//honky"), xml);
+    }
 
     public void testDescribesIncorrectNodeValueMismatch() {
-    	assertMismatchDescription("was \"Edam\"", hasXPath("//something[1]/cheese", equalTo("parmesan")), xml);
-	}
+        assertMismatchDescription("was \"Edam\"", hasXPath("//something[1]/cheese", equalTo("parmesan")), xml);
+    }
 
     private static Document parse(String xml) throws Exception {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();

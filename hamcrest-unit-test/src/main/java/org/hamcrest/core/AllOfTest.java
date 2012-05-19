@@ -51,6 +51,6 @@ public class AllOfTest extends AbstractMatcherTest {
     }
 
     public void testMismatchDescriptionDescribesFirstFailingMatch() {
-    	assertMismatchDescription("\"good\" was \"bad\"", allOf(equalTo("bad"), equalTo("good")), "bad");
-	}
+        assertMismatchDescription("\"good\" was \"bad\"", allOf(equalTo("bad"), equalTo("good")), "bad");
+    }
 }

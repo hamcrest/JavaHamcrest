@@ -75,7 +75,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     }
 
     @Override
-	public boolean matchesSafely(T bean, Description mismatch) {
+    public boolean matchesSafely(T bean, Description mismatch) {
         return propertyOn(bean, mismatch)
                   .and(WITH_READ_METHOD)
                   .and(withPropertyValue(bean))

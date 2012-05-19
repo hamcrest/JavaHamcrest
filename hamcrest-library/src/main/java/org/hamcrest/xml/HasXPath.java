@@ -54,7 +54,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     }
 
     @Override
-	public boolean matchesSafely(Node item, Description mismatch) {
+    public boolean matchesSafely(Node item, Description mismatch) {
         return evaluated(item, mismatch)
                .and(NODE_EXISTS)
                .matching(valueMatcher);
