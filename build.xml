@@ -166,9 +166,7 @@
 
     <target name="javadoc" depends="library">
         <mkdir dir="build/javadoc"/>
-        <javadoc destdir="build/javadoc" source="1.6" failonerror="yes"
-            overview="overview.html">
-            
+        <javadoc destdir="build/javadoc" source="1.6" failonerror="yes" overview="overview.html">
             <classpath>
                 <fileset dir="lib/integration">
                     <include name="*.jar"/>
@@ -178,7 +176,8 @@
             <packageset dir="hamcrest-core/src/main/java"/>
             <packageset dir="hamcrest-library/src/main/java" excludes="org/hamcrest/internal"/>
             <packageset dir="hamcrest-integration/src/main/java"/>
-            <packageset dir="build/generated-code"/>
+            <packageset dir="build/temp/hamcrest-core/generated-code"/>
+            <packageset dir="build/temp/hamcrest-library/generated-code"/>
             
             <group title="Hamcrest API and Utility Classes" packages="org.hamcrest"/>
             <group title="Matcher Library" packages="org.hamcrest.*"/>
