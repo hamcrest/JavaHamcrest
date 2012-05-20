@@ -23,7 +23,11 @@ public class IsNull<T> extends BaseMatcher<T> {
     }
 
     /**
-     * Matches if value is null.
+     * Creates a matcher that matches if examined object is <code>null</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(cheese, is(nullValue())</pre>
+     * 
      */
     @Factory
     public static Matcher<Object> nullValue() {
@@ -31,7 +35,13 @@ public class IsNull<T> extends BaseMatcher<T> {
     }
 
     /**
-     * Matches if value is not null.
+     * A shortcut to the frequently used <code>not(nullValue())</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(cheese, is(notNullValue()))</pre>
+     * instead of:
+     * <pre>assertThat(cheese, is(not(nullValue())))</pre>
+     * 
      */
     @Factory
     public static Matcher<Object> notNullValue() {
@@ -39,15 +49,32 @@ public class IsNull<T> extends BaseMatcher<T> {
     }
 
     /**
-     * Matches if value is null. With type inference.
+     * Creates a matcher that matches if examined object is <code>null</code>. Accepts a
+     * single dummy argument to facilitate type inference.
+     * <p/>
+     * For example:
+     * <pre>assertThat(cheese, is(nullValue(Cheese.class))</pre>
+     * 
+     * @param type
+     *     dummy parameter used to infer the generic type of the returned matcher
      */
     @Factory
-    public static <T> Matcher<T> nullValue(@SuppressWarnings("unused") Class<T> type) {
+    public static <T> Matcher<T> nullValue(Class<T> type) {
         return new IsNull<T>();
     }
 
     /**
-     * Matches if value is not null. With type inference.
+     * A shortcut to the frequently used <code>not(nullValue(X.class)). Accepts a
+     * single dummy argument to facilitate type inference.</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(cheese, is(notNullValue(X.class)))</pre>
+     * instead of:
+     * <pre>assertThat(cheese, is(not(nullValue(X.class))))</pre>
+     * 
+     * @param type
+     *     dummy parameter used to infer the generic type of the returned matcher
+     *  
      */
     @Factory
     public static <T> Matcher<T> notNullValue(Class<T> type) {

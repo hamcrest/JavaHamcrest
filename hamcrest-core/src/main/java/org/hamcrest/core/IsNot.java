@@ -32,7 +32,14 @@ public class IsNot<T> extends BaseMatcher<T>  {
 
     
     /**
-     * Inverts the rule.
+     * Creates a matcher that wraps an existing matcher, but inverts the logic by which
+     * it will match.
+     * <p/>
+     * For example:
+     * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
+     * 
+     * @param matcher
+     *     the matcher whose sense should be inverted
      */
     @Factory
     public static <T> Matcher<T> not(Matcher<T> matcher) {
@@ -40,10 +47,15 @@ public class IsNot<T> extends BaseMatcher<T>  {
     }
 
     /**
-     * This is a shortcut to the frequently used not(equalTo(x)).
-     *
-     * For example:  assertThat(cheese, is(not(equalTo(smelly))))
-     *          vs.  assertThat(cheese, is(not(smelly)))
+     * A shortcut to the frequently used <code>not(equalTo(x))</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(cheese, is(not(smelly)))</pre>
+     * instead of:
+     * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
+     * 
+     * @param value
+     *     the value that any examined object should <b>not</b> equal
      */
     @Factory
     public static <T> Matcher<T> not(T value) {

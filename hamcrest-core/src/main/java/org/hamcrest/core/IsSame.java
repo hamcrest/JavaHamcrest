@@ -31,8 +31,8 @@ public class IsSame<T> extends BaseMatcher<T> {
     }
     
     /**
-     * Creates a matcher that evaluates to true only when the examined object is the
-     * same instance as the specified target object.
+     * Creates a matcher that matches only when the examined object is the same instance as
+     * the specified target object.
      *
      * @param target
      *     the target instance against which others should be assessed
@@ -43,8 +43,8 @@ public class IsSame<T> extends BaseMatcher<T> {
     }
     
     /**
-     * Creates a matcher that evaluates to true only when the examined object is the
-     * same instance as the specified target object.
+     * Creates a matcher that matches only when the examined object is the same instance as
+     * the specified target object.
      *
      * @param target
      *     the target instance against which others should be assessed
