@@ -61,9 +61,24 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
         return result.toString().trim();
     }
 
+    /**
+     * Creates a matcher of {@link String} that matches when the examined string is equal to
+     * the specified expectedString, when whitespace differences are (mostly) ignored.  To be
+     * exact, the following whitespace rules are applied:
+     * <ul>
+     *   <li>all leading and trailing whitespace of both the expectedString and the examined string are ignored</li>
+     *   <li>any remaining whitespace, appearing within either string, is collapsed to a single space before comparison</li>
+     * </ul>
+     * <p/>
+     * For example:
+     * <pre>assertThat("   my\tfoo  bar ", equalToIgnoringWhiteSpace(" my  foo bar"))</pre>
+     * 
+     * @param expectedString
+     *     the expected value of matched strings
+     */
     @Factory
-    public static Matcher<String> equalToIgnoringWhiteSpace(String string) {
-        return new IsEqualIgnoringWhiteSpace(string);
+    public static Matcher<String> equalToIgnoringWhiteSpace(String expectedString) {
+        return new IsEqualIgnoringWhiteSpace(expectedString);
     }
 
 }

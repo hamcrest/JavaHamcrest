@@ -103,21 +103,70 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     }
 
 
+    /**
+     * Creates a matcher of {@link Node}s that matches when the examined node has a value at the
+     * specified <code>xPath</code> that satisfies the specified <code>valueMatcher</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", equalTo("Cheddar")))</pre>
+     * 
+     * @param xPath
+     *     the target xpath
+     * @param valueMatcher
+     *     matcher for the value at the specified xpath
+     */
     @Factory
     public static Matcher<Node> hasXPath(String xPath, Matcher<String> valueMatcher) {
         return hasXPath(xPath, NO_NAMESPACE_CONTEXT, valueMatcher);
     }
 
+    /**
+     * Creates a matcher of {@link Node}s that matches when the examined node has a value at the
+     * specified <code>xPath</code>, within the specified <code>namespaceContext</code>, that satisfies
+     * the specified <code>valueMatcher</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", myNs, equalTo("Cheddar")))</pre>
+     * 
+     * @param xPath
+     *     the target xpath
+     * @param namespaceContext
+     *     the namespace for matching nodes
+     * @param valueMatcher
+     *     matcher for the value at the specified xpath
+     */
     @Factory
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
         return new HasXPath(xPath, namespaceContext, valueMatcher, STRING);
     }
 
+    /**
+     * Creates a matcher of {@link Node}s that matches when the examined node contains a node
+     * at the specified <code>xPath</code>, with any content.
+     * <p/>
+     * For example:
+     * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese"))</pre>
+     * 
+     * @param xPath
+     *     the target xpath
+     */
     @Factory
     public static Matcher<Node> hasXPath(String xPath) {
         return hasXPath(xPath, NO_NAMESPACE_CONTEXT);
     }
 
+    /**
+     * Creates a matcher of {@link Node}s that matches when the examined node contains a node
+     * at the specified <code>xPath</code> within the specified namespace context, with any content.
+     * <p/>
+     * For example:
+     * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", myNs))</pre>
+     * 
+     * @param xPath
+     *     the target xpath
+     * @param namespaceContext
+     *     the namespace for matching nodes
+     */
     @Factory
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext) {
         return new HasXPath(xPath, namespaceContext, WITH_ANY_CONTENT, XPathConstants.NODE);

@@ -27,6 +27,16 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
         description.appendText("type < ").appendText(type.getName());
     }
     
+    /**
+     * Creates a matcher of {@link Class} that matches when the specified baseType is
+     * assignable from the examined class.
+     * <p/>
+     * For example:
+     * <pre>assertThat(Integer.class, typeCompatibleWith(Number.class))</pre>
+     * 
+     * @param baseType
+     *     the base class to examine classes against
+     */
     @Factory
     public static <T> Matcher<Class<?>> typeCompatibleWith(Class<T> baseType) {
         return new IsCompatibleType<T>(baseType);

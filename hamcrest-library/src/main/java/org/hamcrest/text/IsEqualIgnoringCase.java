@@ -41,9 +41,19 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
                 .appendText(")");
     }
 
+    /**
+     * Creates a matcher of {@link String} that matches when the examined string is equal to
+     * the specified expectedString, ignoring case.
+     * <p/>
+     * For example:
+     * <pre>assertThat("Foo", equalToIgnoringCase("FOO"))</pre>
+     * 
+     * @param expectedString
+     *     the expected value of matched strings
+     */
     @Factory
-    public static Matcher<String> equalToIgnoringCase(String string) {
-        return new IsEqualIgnoringCase(string);
+    public static Matcher<String> equalToIgnoringCase(String expectedString) {
+        return new IsEqualIgnoringCase(expectedString);
     }
 
 }

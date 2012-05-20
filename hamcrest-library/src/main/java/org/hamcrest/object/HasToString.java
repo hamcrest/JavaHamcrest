@@ -17,7 +17,14 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
     }
 
     /**
-     * Evaluates whether item.toString() satisfies a given matcher.
+     * Creates a matcher that matches any examined object whose <code>toString</code> method
+     * returns a value that satisfies the specified matcher.
+     * <p/>
+     * For example:
+     * <pre>assertThat(true, hasToString(equalTo("TRUE")))</pre>
+     * 
+     * @param toStringMatcher
+     *     the matcher used to verify the toString result
      */
     @Factory
     public static <T> Matcher<T> hasToString(Matcher<? super String> toStringMatcher) {
@@ -25,10 +32,14 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
     }
 
     /**
-     * This is a shortcut to the frequently used has_string(equalTo(x)).
-     *
-     * For example,  assertThat(hasToString(equal_to(x)))
-     *          vs.  assertThat(hasToString(x))
+     * Creates a matcher that matches any examined object whose <code>toString</code> method
+     * returns a value equalTo the specified string.
+     * <p/>
+     * For example:
+     * <pre>assertThat(true, hasToString("TRUE"))</pre>
+     * 
+     * @param expectedToString
+     *     the expected toString result
      */
     @Factory
     public static <T> Matcher<T> hasToString(String expectedToString) {

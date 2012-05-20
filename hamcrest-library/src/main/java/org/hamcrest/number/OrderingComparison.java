@@ -55,7 +55,16 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
     }
 
     /**
-     * @return Is value = expected?
+     * Creates a matcher of {@link Comparable} object that matches when the examined object is
+     * equal to the specified value, as reported by the <code>compareTo</code> method of the
+     * <b>examined</b> object.
+     * <p/>
+     * For example:
+     * <pre>assertThat(1, comparesEqualTo(1))</pre>
+     * 
+     * @param value
+     *     the value which, when passed to the compareTo method of the examined object, should return zero
+     * 
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> comparesEqualTo(T value) {
@@ -63,7 +72,17 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
     }
 
     /**
-     * Is value > expected?
+     * Creates a matcher of {@link Comparable} object that matches when the examined object is
+     * greater than the specified value, as reported by the <code>compareTo</code> method of the
+     * <b>examined</b> object.
+     * <p/>
+     * For example:
+     * <pre>assertThat(2, greaterThan(1))</pre>
+     * 
+     * @param value
+     *     the value which, when passed to the compareTo method of the examined object, should return greater
+     *     than zero
+     * 
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThan(T value) {
@@ -71,7 +90,17 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
     }
 
     /**
-     * Is value >= expected?
+     * Creates a matcher of {@link Comparable} object that matches when the examined object is
+     * greater than or equal to the specified value, as reported by the <code>compareTo</code> method
+     * of the <b>examined</b> object.
+     * <p/>
+     * For example:
+     * <pre>assertThat(1, greaterThanOrEqualTo(1))</pre>
+     * 
+     * @param value
+     *     the value which, when passed to the compareTo method of the examined object, should return greater
+     *     than or equal to zero
+     * 
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
@@ -79,7 +108,17 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
     }
 
     /**
-     * Is value < expected?
+     * Creates a matcher of {@link Comparable} object that matches when the examined object is
+     * less than the specified value, as reported by the <code>compareTo</code> method of the
+     * <b>examined</b> object.
+     * <p/>
+     * For example:
+     * <pre>assertThat(1, lessThan(2))</pre>
+     * 
+     * @param value
+     *     the value which, when passed to the compareTo method of the examined object, should return less
+     *     than zero
+     * 
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> lessThan(T value) {
@@ -87,7 +126,17 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
     }
 
     /**
-     * Is value <= expected?
+     * Creates a matcher of {@link Comparable} object that matches when the examined object is
+     * less than or equal to the specified value, as reported by the <code>compareTo</code> method
+     * of the <b>examined</b> object.
+     * <p/>
+     * For example:
+     * <pre>assertThat(1, lessThanOrEqualTo(1))</pre>
+     * 
+     * @param value
+     *     the value which, when passed to the compareTo method of the examined object, should return less
+     *     than or equal to zero
+     * 
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> lessThanOrEqualTo(T value) {
