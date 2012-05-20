@@ -9,7 +9,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
 /**
- * Decorates another Matcher, retaining the behavior but allowing tests
+ * Decorates another Matcher, retaining the behaviour but allowing tests
  * to be slightly more expressive.
  *
  * For example:  assertThat(cheese, equalTo(smelly))
@@ -38,7 +38,7 @@ public class Is<T> extends BaseMatcher<T> {
     }
 
     /**
-     * Decorates another Matcher, retaining the behavior but allowing tests
+     * Decorates another Matcher, retaining its behaviour, but allowing tests
      * to be slightly more expressive.
      *
      * For example:  assertThat(cheese, equalTo(smelly))
@@ -50,7 +50,7 @@ public class Is<T> extends BaseMatcher<T> {
     }
 
     /**
-     * This is a shortcut to the frequently used is(equalTo(x)).
+     * A shortcut to the frequently used is(equalTo(x)).
      *
      * For example:  assertThat(cheese, is(equalTo(smelly)))
      *          vs.  assertThat(cheese, is(smelly))
@@ -61,7 +61,7 @@ public class Is<T> extends BaseMatcher<T> {
     }
 
     /**
-     * This is a shortcut to the frequently used is(instanceOf(SomeClass.class)).
+     * A shortcut to the frequently used is(instanceOf(SomeClass.class)).
      *
      * For example:  assertThat(cheese, is(instanceOf(Cheddar.class)))
      *          vs.  assertThat(cheese, is(Cheddar.class))
