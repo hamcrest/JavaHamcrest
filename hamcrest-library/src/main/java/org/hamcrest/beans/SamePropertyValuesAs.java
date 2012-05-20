@@ -120,6 +120,17 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
         }
     }
 
+    /**
+     * Creates a matcher that matches when the examined object has values for all of
+     * its JavaBean properties that are equal to the corresponding values of the
+     * specified bean.
+     * <p/>
+     * For example:
+     * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean))</pre>
+     * 
+     * @param expectedBean
+     *     the bean against which examined beans are compared
+     */
     @Factory
     public static <T> Matcher<T> samePropertyValuesAs(T expectedBean) {
         return new SamePropertyValuesAs<T>(expectedBean);

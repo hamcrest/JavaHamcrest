@@ -2,10 +2,14 @@
  */
 package org.hamcrest.beans;
 
-import org.hamcrest.*;
-
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+
+import org.hamcrest.Condition;
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
@@ -20,35 +24,33 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * <h2>Example Usage</h2>
  * Consider the situation where we have a class representing a person, which
  * follows the basic JavaBean convention of having get() and possibly set()
- * methods for it's properties: <code>
+ * methods for it's properties:
+ * <pre>
  * public class Person {
- * private String name;
- * <p/>
- * public Person(String person) {
- * this.person = person;
- * }
- * <p/>
- * public String getName() {
- * return name;
- * }
- * }
- * </code> And that these person
- * objects are generated within a piece of code under test (a class named
- * PersonGenerator). This object is sent to one of our mock objects which
- * overrides the PersonGenerationListener interface: <code>
+ *   private String name;
+ *   public Person(String person) {
+ *     this.person = person;
+ *   }
+ *   public String getName() {
+ *     return name;
+ *   }
+ * }</pre>
+ * 
+ * And that these person objects are generated within a piece of code under test
+ * (a class named PersonGenerator). This object is sent to one of our mock objects
+ * which overrides the PersonGenerationListener interface:
+ * <pre>
  * public interface PersonGenerationListener {
- * public void personGenerated(Person person);
- * }
- * </code>
+ *   public void personGenerated(Person person);
+ * }</pre>
+ * 
  * In order to check that the code under test generates a person with name
  * "Iain" we would do the following:
- * <p/>
- * <code>
+ * <pre>
  * Mock personGenListenerMock = mock(PersonGenerationListener.class);
  * personGenListenerMock.expects(once()).method("personGenerated").with(and(isA(Person.class), hasProperty("Name", eq("Iain")));
- * PersonGenerationListener listener = (PersonGenerationListener)personGenListenerMock.proxy();
- * </code>
- * <p/>
+ * PersonGenerationListener listener = (PersonGenerationListener)personGenListenerMock.proxy();</pre>
+ * 
  * If an exception is thrown by the getter method for a property, the property
  * does not exist, is not readable, or a reflection related exception is thrown
  * when trying to invoke it then this is treated as an evaluation failure and
@@ -131,8 +133,20 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         };
     }
 
+    /**
+     * Creates a matcher that matches when the examined object has a JavaBean property
+     * with the specified name whose value satisfies the specified matcher.
+     * <p/>
+     * For example:
+     * <pre>assertThat(myBean, hasProperty("foo", equalTo("bar"))</pre>
+     * 
+     * @param propertyName
+     *     the name of the JavaBean property that examined beans should possess
+     * @param valueMatcher
+     *     a matcher for the value of the specified property of the examined bean
+     */
     @Factory
-    public static <T> Matcher<T> hasProperty(String propertyName, Matcher<?> value) {
-        return new HasPropertyWithValue<T>(propertyName, value);
+    public static <T> Matcher<T> hasProperty(String propertyName, Matcher<?> valueMatcher) {
+        return new HasPropertyWithValue<T>(propertyName, valueMatcher);
     }
 }

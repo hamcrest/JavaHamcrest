@@ -30,7 +30,7 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
     
     @Override
     public void describeMismatchSafely(T[] item, Description mismatchDescription) {
-      super.describeMismatch(Arrays.asList(item), mismatchDescription);
+        super.describeMismatch(Arrays.asList(item), mismatchDescription);
     };
 
     @Override
@@ -41,7 +41,15 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
     }
 
     /**
-     * Evaluates to true if any item in an array satisfies the given matcher.
+     * Creates a matcher for arrays that matches when the examined array contains at least one item
+     * that is matched by the specified <code>elementMatcher</code>.  Whilst matching, the traversal
+     * of the examined array will stop as soon as a matching element is found.
+     * <p/>
+     * For example:
+     * <pre>assertThat(new String[] {"foo", "bar"}, hasItemInArray(startsWith("ba")))</pre>
+     * 
+     * @param elementMatcher
+     *     the matcher to apply to elements in examined arrays
      */
     @Factory
     public static <T> Matcher<T[]> hasItemInArray(Matcher<? super T> elementMatcher) {
@@ -49,10 +57,15 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
     }
 
     /**
-     * This is a shortcut to the frequently used hasItemInArray(equalTo(x)).
-     *
-     * For example,  assertThat(hasItemInArray(equal_to(x)))
-     *          vs.  assertThat(hasItemInArray(x))
+     * A shortcut to the frequently used <code>hasItemInArray(equalTo(x))</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(hasItemInArray(x))</pre>
+     * instead of:
+     * <pre>assertThat(hasItemInArray(equalTo(x)))</pre>
+     * 
+     * @param element
+     *     the element that should be present in examined arrays
      */
     @Factory
     public static <T> Matcher<T[]> hasItemInArray(T element) {

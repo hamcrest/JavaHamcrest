@@ -30,16 +30,40 @@ public class IsIn<T> extends BaseMatcher<T> {
         buffer.appendValueList("{", ", ", "}", collection);
     }
     
+    /**
+     * Creates a matcher that matches when the examined object is found within the
+     * specified collection.
+     * 
+     * @param collection
+     *     the collection in which matching items must be found
+     * 
+     */
     @Factory
     public static <T> Matcher<T> isIn(Collection<T> collection) {
         return new IsIn<T>(collection);
     }
-    
+
+    /**
+     * Creates a matcher that matches when the examined object is found within the
+     * specified array.
+     * 
+     * @param elements
+     *     the array in which matching items must be found
+     * 
+     */
     @Factory
     public static <T> Matcher<T> isIn(T[] elements) {
         return new IsIn<T>(elements);
     }
     
+    /**
+     * Creates a matcher that matches when the examined object is equal to one of the
+     * specified elements.
+     * 
+     * @param elements
+     *     the elements amongst which matching items will be found 
+     * 
+     */
     @Factory
     public static <T> Matcher<T> isOneOf(T... elements) {
         return isIn(elements);

@@ -27,9 +27,14 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
         description.appendText("an empty collection");
     }
 
-    /**
-     * Matches an empty collection.
-     */
+  /**
+   * Creates a matcher for {@link Collection}s matching examined collections whose <code>isEmpty</code>
+   * method returns <code>true</code>.
+   * <p/>
+   * For example:
+   * <pre>assertThat(new ArrayList&lt;String&gt;(), is(empty()))</pre>
+   * 
+   */
     @Factory
     public static <E> Matcher<Collection<? extends E>> empty() {
         return new IsEmptyCollection<E>();

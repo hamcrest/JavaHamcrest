@@ -22,19 +22,29 @@ public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends
     }
 
     /**
-     * Does collection size satisfy a given matcher?
+     * Creates a matcher for {@link Collection}s that matches when the <code>size()</code> method returns
+     * a value that satisfies the specified matcher.
+     * <p/>
+     * For example:
+     * <pre>assertThat(Arrays.asList("foo", "bar"), hasSize(equalTo(2)))</pre>
+     * 
+     * @param sizeMatcher
+     *     a matcher for the size of an examined {@link Collection}
      */
     @Factory
-    public static <E> Matcher<Collection<? extends E>> hasSize(Matcher<? super Integer> size) {
-        return new IsCollectionWithSize<E>(size);
+    public static <E> Matcher<Collection<? extends E>> hasSize(Matcher<? super Integer> sizeMatcher) {
+        return new IsCollectionWithSize<E>(sizeMatcher);
     }
 
-
     /**
-     * This is a shortcut to the frequently used hasSize(equalTo(x)).
-     *
-     * For example,  assertThat(hasSize(equal_to(x)))
-     *          vs.  assertThat(hasSize(x))
+     * Creates a matcher for {@link Collection}s that matches when the <code>size()</code> method returns
+     * a value equal to the specified <code>size</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(Arrays.asList("foo", "bar"), hasSize(2))</pre>
+     * 
+     * @param size
+     *     the expected size of an examined {@link Collection}
      */
     @Factory
     public static <E> Matcher<Collection<? extends E>> hasSize(int size) {

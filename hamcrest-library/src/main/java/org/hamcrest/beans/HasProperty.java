@@ -43,6 +43,16 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
         description.appendText("hasProperty(").appendValue(propertyName).appendText(")");
     }
 
+    /**
+     * Creates a matcher that matches when the examined object has a JavaBean property
+     * with the specified name.
+     * <p/>
+     * For example:
+     * <pre>assertThat(myBean, hasProperty("foo"))</pre>
+     * 
+     * @param propertyName
+     *     the name of the JavaBean property that examined beans should possess
+     */
     @Factory
     public static <T> Matcher<T> hasProperty(String propertyName) {
         return new HasProperty<T>(propertyName);
