@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 import org.hamcrest.Description;
 import org.hamcrest.StringDescription;
 
-public class BeanMatcherTest extends TestCase {
+public class BeanHasTest extends TestCase {
 	
 	private static final String MISMATCH_DESCRIPTION = "MISMATCH DESCRIPTION";
 	private static final String OTHER_MISMATCH_DESCRIPTION = "OTHER MISMATCH DESCRIPTION";
@@ -19,9 +19,9 @@ public class BeanMatcherTest extends TestCase {
 	private static final boolean DOES_NOT_MATCH = false;
 	
 	private Object bean;
-	private BeanPropertyMatcher<Object> unmatchingProperty;
-	private BeanPropertyMatcher<Object> otherUnmatchingProperty;
-	private BeanPropertyMatcher<Object> matchingProperty;
+	private BeanProperty<Object> unmatchingProperty;
+	private BeanProperty<Object> otherUnmatchingProperty;
+	private BeanProperty<Object> matchingProperty;
 	
 	private Description expectedDescription;
 	private Description mismatchDescription;
@@ -29,78 +29,78 @@ public class BeanMatcherTest extends TestCase {
 	@Override
 	protected void setUp() {
 		bean = new Object();
-		matchingProperty = new MockPropertyMatcher<Object>(MATCHES, EXPECTED_DESCRIPTION, MISMATCH_DESCRIPTION);
-		unmatchingProperty = new MockPropertyMatcher<Object>(DOES_NOT_MATCH, EXPECTED_DESCRIPTION, MISMATCH_DESCRIPTION);
-		otherUnmatchingProperty = new MockPropertyMatcher<Object>(DOES_NOT_MATCH, OTHER_EXPECTED_DESCRIPTION, OTHER_MISMATCH_DESCRIPTION);
+		matchingProperty = new MockBeanProperty<Object>(MATCHES, EXPECTED_DESCRIPTION, MISMATCH_DESCRIPTION);
+		unmatchingProperty = new MockBeanProperty<Object>(DOES_NOT_MATCH, EXPECTED_DESCRIPTION, MISMATCH_DESCRIPTION);
+		otherUnmatchingProperty = new MockBeanProperty<Object>(DOES_NOT_MATCH, OTHER_EXPECTED_DESCRIPTION, OTHER_MISMATCH_DESCRIPTION);
 		expectedDescription = new StringDescription();
 		mismatchDescription = new StringDescription();
 	}
 	
 	public void testNoExpectedDescriptionWhenPropertyIsAMatch() {
-		BeanMatcher<Object> beanMatcher = BeanMatcher.has(matchingProperty);
+		BeanHas<Object> beanHas = BeanHas.has(matchingProperty);
 		
-		beanMatcher.matches(bean);
-		beanMatcher.describeTo(expectedDescription);
+		beanHas.matches(bean);
+		beanHas.describeTo(expectedDescription);
 		
 		assertThat(expectedDescription.toString(), isEmptyString());
 	}
 
 	public void testNoMismatchingDescriptionsWhenPropertyIsAMatch() {
-		BeanMatcher<?> beanMatcher = BeanMatcher.has(matchingProperty);
+		BeanHas<?> beanHas = BeanHas.has(matchingProperty);
 		
-		beanMatcher.matches(bean);
-		beanMatcher.describeMismatch(bean, mismatchDescription);
+		beanHas.matches(bean);
+		beanHas.describeMismatch(bean, mismatchDescription);
 		
 		assertThat(mismatchDescription.toString(), isEmptyString());
 	}
 	
 	public void testPopulateExpectedDescriptionWhenPropertiesDoNotMatch() {
-		BeanMatcher<Object> beanMatcher = BeanMatcher.has(unmatchingProperty);
+		BeanHas<Object> beanHas = BeanHas.has(unmatchingProperty);
 		
-		beanMatcher.matches(bean);
-		beanMatcher.describeTo(expectedDescription);
+		beanHas.matches(bean);
+		beanHas.describeTo(expectedDescription);
 		
 		assertThat(expectedDescription.toString(), is(EXPECTED_DESCRIPTION));
 	}
 	
 	public void testPopulateMismatchDescriptionWhenPropertiesDoNotMatch() {
-		BeanMatcher<Object> beanMatcher = BeanMatcher.has(unmatchingProperty);
+		BeanHas<Object> beanHas = BeanHas.has(unmatchingProperty);
 		
-		beanMatcher.matches(bean);
-		beanMatcher.describeMismatch(bean, mismatchDescription);
+		beanHas.matches(bean);
+		beanHas.describeMismatch(bean, mismatchDescription);
 		
 		assertThat(mismatchDescription.toString(), is(MISMATCH_DESCRIPTION));
 	}
 	
 	public void testExpectedDescriptionIsAppendedWhenMultiplePropertiesFail() {
-		BeanMatcher<Object> beanMatcher = BeanMatcher.has(unmatchingProperty, 
+		BeanHas<Object> beanHas = BeanHas.has(unmatchingProperty, 
 														  matchingProperty,
 														  otherUnmatchingProperty);
 		
-		beanMatcher.matches(bean);
-		beanMatcher.describeTo(expectedDescription);
+		beanHas.matches(bean);
+		beanHas.describeTo(expectedDescription);
 		
 		assertThat(expectedDescription.toString(), is(EXPECTED_DESCRIPTION + OTHER_EXPECTED_DESCRIPTION));
 	}
 	
 	public void testMismatchDescriptionIsAppendedWhenMultiplePropertiesFail() {
-		BeanMatcher<Object> beanMatcher = BeanMatcher.has(unmatchingProperty, 
+		BeanHas<Object> beanHas = BeanHas.has(unmatchingProperty, 
 														  matchingProperty,
 														  otherUnmatchingProperty);
 		
-		beanMatcher.matches(bean);
-		beanMatcher.describeMismatch(bean, expectedDescription);
+		beanHas.matches(bean);
+		beanHas.describeMismatch(bean, expectedDescription);
 		
 		assertThat(expectedDescription.toString(), is(MISMATCH_DESCRIPTION + OTHER_MISMATCH_DESCRIPTION));
 	}
 	
-	private class MockPropertyMatcher<T> extends BeanPropertyMatcher<T> {
+	private class MockBeanProperty<T> extends BeanProperty<T> {
 		
 		private boolean matches;
 		private String expectedDescription;
 		private String mismatchDescription;
 
-		public MockPropertyMatcher(boolean matches, String expectedDescription, String mismatchDescription) {
+		public MockBeanProperty(boolean matches, String expectedDescription, String mismatchDescription) {
 			super("any property", anything());
 			this.matches = matches;
 			this.expectedDescription = expectedDescription;

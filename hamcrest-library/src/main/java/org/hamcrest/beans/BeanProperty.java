@@ -12,25 +12,25 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
- * Property matcher that should be used in conjunction with {@link BeanMatcher}.
+ * Property matcher that should be used in conjunction with {@link BeanHas}.
  * 
- * @see BeanMatcher
+ * @see BeanHas
  * 
  * @author Sandro Mancuso
  */
-public class BeanPropertyMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
+public class BeanProperty<T> extends TypeSafeDiagnosingMatcher<T> {
 
 	private String matchingPropertyName;
 	private Matcher<?> valueMatcher;
 
-	public BeanPropertyMatcher(String propertyName, Matcher<?> valueMatcher) {
+	public BeanProperty(String propertyName, Matcher<?> valueMatcher) {
 		this.matchingPropertyName = propertyName;
 		this.valueMatcher = valueMatcher;
 	}
 
 	@Factory
-	public static <T> BeanPropertyMatcher<T> property(String propertyName,Matcher<?> value) {
-		return new BeanPropertyMatcher<T>(propertyName, value);
+	public static <T> BeanProperty<T> property(String propertyName,Matcher<?> value) {
+		return new BeanProperty<T>(propertyName, value);
 	}
 
 	@Override

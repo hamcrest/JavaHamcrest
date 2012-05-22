@@ -1,7 +1,7 @@
 package org.hamcrest.beans;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.beans.BeanPropertyMatcher.property;
+import static org.hamcrest.beans.BeanProperty.property;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -13,7 +13,7 @@ import org.hamcrest.beans.HasPropertyWithValueTest.BeanWithInfo;
 import org.hamcrest.beans.HasPropertyWithValueTest.BeanWithoutInfo;
 import org.hamcrest.core.IsEqual;
 
-public class BeanPropertyMatcherTest extends AbstractMatcherTest {
+public class BeanPropertyTest extends AbstractMatcherTest {
 	
 	private final BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected");
 	private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");

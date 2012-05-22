@@ -46,24 +46,24 @@ import org.hamcrest.StringDescription;
  * 
  * @author Sandro Mancuso
  */
-public class BeanMatcher<T> extends BaseMatcher<T> {
+public class BeanHas<T> extends BaseMatcher<T> {
 	
-	private BeanPropertyMatcher<?>[] propertyMatchers;
+	private BeanProperty<?>[] propertyMatchers;
 	private Description expectedDescription = new StringDescription();
 	private Description mismatchDescription = new StringDescription();
 
-	public BeanMatcher(BeanPropertyMatcher<?>... propertyMatchers) {
+	public BeanHas(BeanProperty<?>... propertyMatchers) {
 		this.propertyMatchers = propertyMatchers;
 	}
 
 	@Factory
-	public static <T> BeanMatcher<T> has(BeanPropertyMatcher<?>... propertyMatchers) {
-		return new BeanMatcher<T>(propertyMatchers);
+	public static <T> BeanHas<T> has(BeanProperty<?>... propertyMatchers) {
+		return new BeanHas<T>(propertyMatchers);
 	}
 	
 	public boolean matches(Object item) {
 		boolean matches = true;
-		for (BeanPropertyMatcher<?> matcher : propertyMatchers) {
+		for (BeanProperty<?> matcher : propertyMatchers) {
 			if (!matcher.matches(item)) {
 				matches = false;
 				appendDescriptions(item, matcher);
