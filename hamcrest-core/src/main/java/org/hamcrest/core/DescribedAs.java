@@ -54,7 +54,18 @@ public class DescribedAs<T> extends BaseMatcher<T> {
     }
 
     /**
-     * Wraps an existing matcher and overrides the description when it fails.
+     * Wraps an existing matcher, overriding its description with that specified.  All other functions are
+     * delegated to the decorated matcher, including its mismatch description.
+     * <p/>
+     * For example:
+     * <pre>describedAs("a big decimal equal to %0", equalTo(myBigDecimal), myBigDecimal.toPlainString())</pre> 
+     * 
+     * @param description
+     *     the new description for the wrapped matcher
+     * @param
+     *     the matcher to wrap
+     * @param
+     *     optional values to insert into the tokenised description
      */
     @Factory
     public static <T> Matcher<T> describedAs(String description, Matcher<T> matcher, Object... values) {

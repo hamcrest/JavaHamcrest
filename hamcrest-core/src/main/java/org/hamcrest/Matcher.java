@@ -13,7 +13,9 @@ package org.hamcrest;
  * <p/>
  * For easy access to common Matcher implementations, use the static factory
  * methods in {@link CoreMatchers}.
- *
+ * <p/>
+ * N.B. Well designed matchers should be immutable.
+ * 
  * @see CoreMatchers
  * @see BaseMatcher
  */

@@ -80,14 +80,16 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
         // This seems to cover most cases though.
         List<FactoryMethod.Parameter> params = factoryMethod.getParameters();
         Type[] types = new Type[params.size()];
+        boolean varArgs = false;
         for (int i = 0; i < types.length; i++) {
-            // QDox ignores varargs and generics, so we strip them out to help QDox.
             String type = params.get(i).getType();
+            varArgs = VARARGS_REGEX.matcher(type).find();
+            // QDox ignores varargs and generics, so we strip them out to help QDox.
             type = GENERIC_REGEX.matcher(type).replaceAll("");
             type = VARARGS_REGEX.matcher(type).replaceAll("");
             types[i] = new Type(type);
         }
-        JavaMethod[] methods = classSource.getMethodsBySignature(factoryMethod.getName(), types, false);
+        JavaMethod[] methods = classSource.getMethodsBySignature(factoryMethod.getName(), types, false, varArgs);
         return methods.length == 1 ?  methods[0] : null;
     }
 

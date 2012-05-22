@@ -13,13 +13,13 @@ public class HasToStringTest extends AbstractMatcherTest {
     private static final String TO_STRING_RESULT = "toString result";
     private static final Object ARG = new Object() {
         @Override
-		public String toString() {
+        public String toString() {
             return TO_STRING_RESULT;
         }
     };
 
     @Override
-	protected Matcher<?> createMatcher() {
+    protected Matcher<?> createMatcher() {
         return hasToString(equalTo("irrelevant"));
     }
 
@@ -41,9 +41,9 @@ public class HasToStringTest extends AbstractMatcherTest {
     }
 
     public void testMismatchContainsToStringValue() {
-    	String expectedMismatchString = "toString() was \"Cheese\"";
+        String expectedMismatchString = "toString() was \"Cheese\"";
         assertMismatchDescription(expectedMismatchString, hasToString(TO_STRING_RESULT), "Cheese");
-	}
+    }
 
     private static String descriptionOf(Matcher<?> matcher) {
         return StringDescription.asString(matcher);

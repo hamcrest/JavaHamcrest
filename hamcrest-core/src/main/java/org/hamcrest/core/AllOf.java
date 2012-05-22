@@ -15,31 +15,34 @@ import java.util.List;
  */
 public class AllOf<T> extends DiagnosingMatcher<T> {
 
-	private final Iterable<Matcher<? super T>> matchers;
+    private final Iterable<Matcher<? super T>> matchers;
 
     public AllOf(Iterable<Matcher<? super T>> matchers) {
-    	this.matchers = matchers;
+        this.matchers = matchers;
     }
 
     @Override
     public boolean matches(Object o, Description mismatch) {
-    	for (Matcher<? super T> matcher : matchers) {
+        for (Matcher<? super T> matcher : matchers) {
             if (!matcher.matches(o)) {
-            	mismatch.appendDescriptionOf(matcher).appendText(" ");
-            	matcher.describeMismatch(o, mismatch);
+                mismatch.appendDescriptionOf(matcher).appendText(" ");
+                matcher.describeMismatch(o, mismatch);
               return false;
             }
         }
-    	return true;
+        return true;
     }
 
     @Override
     public void describeTo(Description description) {
-    	description.appendList("(", " " + "and" + " ", ")", matchers);
+        description.appendList("(", " " + "and" + " ", ")", matchers);
     }
 
     /**
-     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> Matcher<T> allOf(Iterable<Matcher<? super T>> matchers) {
@@ -47,7 +50,10 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     }
 
     /**
-     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> Matcher<T> allOf(Matcher<? super T>... matchers) {
@@ -55,7 +61,10 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     }
 
     /**
-     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> Matcher<T> allOf(Matcher<? super T> first, Matcher<? super T> second) {
@@ -66,7 +75,10 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     }
 
     /**
-     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> Matcher<T> allOf(Matcher<? super T> first, Matcher<? super T> second, Matcher<? super T> third) {
@@ -78,7 +90,10 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     }
 
     /**
-     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> Matcher<T> allOf(Matcher<? super T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth) {
@@ -91,7 +106,10 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     }
 
     /**
-     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> Matcher<T> allOf(Matcher<? super T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth) {
@@ -105,7 +123,10 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     }
 
     /**
-     * Evaluates to true only if ALL of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> Matcher<T> allOf(Matcher<? super T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth, Matcher<? super T> sixth) {

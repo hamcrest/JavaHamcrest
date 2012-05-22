@@ -23,9 +23,19 @@ public class StringEndsWith extends SubstringMatcher {
         return "ending with";
     }
 
+    /**
+     * Creates a matcher that matches if the examined {@link String} ends with the specified
+     * {@link String}.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
+     * 
+     * @param suffix
+     *      the substring that the returned matcher will expect at the end of any examined string
+     */
     @Factory
-    public static Matcher<String> endsWith(String substring) {
-        return new StringEndsWith(substring);
+    public static Matcher<String> endsWith(String suffix) {
+        return new StringEndsWith(suffix);
     }
 
 }

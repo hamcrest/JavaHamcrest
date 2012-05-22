@@ -41,10 +41,10 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
   }
 
   /**
-   * This is useful for fluently combining matchers that must both pass.  For example:
-   * <pre>
-   *   assertThat(string, both(containsString("a")).and(containsString("b")));
-   * </pre>
+   * Creates a matcher that matches when both of the specified matchers match the examined object.
+   * <p/>
+   * For example:
+   * <pre>assertThat("fab", both(containsString("a")).and(containsString("b")))</pre>
    */
   @Factory
   public static <LHS> CombinableBothMatcher<LHS> both(Matcher<? super LHS> matcher) {
@@ -62,10 +62,10 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
   }
 
   /**
-   * This is useful for fluently combining matchers where either may pass, for example:
-   * <pre>
-   *   assertThat(string, both(containsString("a")).and(containsString("b")));
-   * </pre>
+   * Creates a matcher that matches when either of the specified matchers match the examined object.
+   * <p/>
+   * For example:
+   * <pre>assertThat("fan", either(containsString("a")).and(containsString("b")))</pre>
    */
   @Factory
   public static <LHS> CombinableEitherMatcher<LHS> either(Matcher<? super LHS> matcher) {

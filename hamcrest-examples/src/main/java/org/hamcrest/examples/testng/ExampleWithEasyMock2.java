@@ -6,7 +6,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.hamcrest.EasyMock2Matchers.equalTo;
 
-import org.testng.annotations.Configuration;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -45,7 +45,7 @@ public class ExampleWithEasyMock2 {
 
     private AnInterface mock;
 
-    @Configuration(beforeTestMethod = true)
+    @BeforeMethod
     public void setUpMock() {
         mock = createMock(AnInterface.class);
     }

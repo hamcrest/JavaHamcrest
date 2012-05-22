@@ -56,15 +56,19 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("an instance of ")
-                .appendText(expectedClass.getName());
+        description.appendText("an instance of ").appendText(expectedClass.getName());
     }
 
     /**
-     * Is the value an instance of a particular type? 
-     * This version assumes no relationship between the required type and
-     * the signature of the method that sets it up, for example in
-     * <code>assertThat(anObject, instanceOf(Thing.class));</code>
+     * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
+     * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
+     * the examined object.
+     * 
+     * <p>The created matcher assumes no relationship between specified type and the examined object.</p>
+     * <p/>
+     * For example: 
+     * <pre>assertThat(new Canoe(), instanceOf(Paddlable.class));</pre>
+     * 
      */
     @SuppressWarnings("unchecked")
     @Factory
@@ -73,9 +77,17 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
     }
     
     /**
-     * Is the value an instance of a particular type? 
-     * Use this version to make generics conform, for example in 
-     * the JMock clause <code>with(any(Thing.class))</code> 
+     * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
+     * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
+     * the examined object.
+     * 
+     * <p>The created matcher forces a relationship between specified type and the examined object, and should be
+     * used when it is necessary to make generics conform, for example in the JMock clause
+     * <code>with(any(Thing.class))</code></p>
+     * <p/>
+     * For example: 
+     * <pre>assertThat(new Canoe(), instanceOf(Canoe.class));</pre>
+     *
      */
     @SuppressWarnings("unchecked")
     @Factory

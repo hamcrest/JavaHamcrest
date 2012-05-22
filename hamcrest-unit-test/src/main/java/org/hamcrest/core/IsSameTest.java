@@ -2,6 +2,7 @@
  */
 package org.hamcrest.core;
 
+import static org.hamcrest.core.IsSame.theInstance;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.hamcrest.core.IsNot.not;
 import org.hamcrest.AbstractMatcherTest;
@@ -22,6 +23,14 @@ public class IsSameTest extends AbstractMatcherTest {
 
         assertThat(o1, sameInstance(o1));
         assertThat(o2, not(sameInstance(o1)));
+    }
+
+    public void testAlternativeFactoryMethodAlsoMatchesOnlyIfArgumentIsReferenceToASpecifiedObject() {
+        Object o1 = new Object();
+        Object o2 = new Object();
+        
+        assertThat(o1, theInstance(o1));
+        assertThat(o2, not(theInstance(o1)));
     }
 
     public void testReturnsReadableDescriptionFromToString() {

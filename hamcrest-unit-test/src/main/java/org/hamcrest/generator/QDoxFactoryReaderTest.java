@@ -23,6 +23,36 @@ public class QDoxFactoryReaderTest extends TestCase {
         assertEquals("java.lang.String", factoryMethod.getParameters().get(0).getType());
         assertEquals("realParamName", factoryMethod.getParameters().get(0).getName());
     }
+    
+    public void testExtractsOriginalGenericParameterNamesFromSource() {
+        FactoryMethod method = new FactoryMethod("org.SomeClass", "someMethod", "unusedReturnType");
+        method.addParameter("java.util.Collection<java.lang.String>", "badParamName");
+
+        String input = "" +
+                "package org;\n" +
+                "class SomeClass {\n" +
+                "  Matcher someMethod(java.util.Collection<String> realParamName) { ... } \n" +
+                "}\n";
+        FactoryMethod factoryMethod = wrapUsingQDoxedSource(method, "org.SomeClass", input);
+
+        assertEquals("java.util.Collection<java.lang.String>", factoryMethod.getParameters().get(0).getType());
+        assertEquals("realParamName", factoryMethod.getParameters().get(0).getName());
+    }
+    
+    public void testExtractsOriginalVarArgParameterNamesFromSource() {
+        FactoryMethod method = new FactoryMethod("org.SomeClass", "someMethod", "unusedReturnType");
+        method.addParameter("java.lang.String...", "badParamName");
+
+        String input = "" +
+                "package org;\n" +
+                "class SomeClass {\n" +
+                "  Matcher someMethod(java.lang.String... realParamName) { ... } \n" +
+                "}\n";
+        FactoryMethod factoryMethod = wrapUsingQDoxedSource(method, "org.SomeClass", input);
+
+        assertEquals("java.lang.String...", factoryMethod.getParameters().get(0).getType());
+        assertEquals("realParamName", factoryMethod.getParameters().get(0).getName());
+    }
 
     public void testExtractsOriginalJavaDocFromSource() {
         FactoryMethod method = new FactoryMethod("org.SomeClass", "someMethod", "unusedReturnType");

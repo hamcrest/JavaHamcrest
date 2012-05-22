@@ -29,7 +29,10 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     }
 
     /**
-     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> AnyOf<T> anyOf(Iterable<Matcher<? super T>> matchers) {
@@ -37,7 +40,10 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     }
     
     /**
-     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> AnyOf<T> anyOf(Matcher<? super T>... matchers) {
@@ -45,7 +51,10 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     }
 
     /**
-     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> AnyOf<T> anyOf(Matcher<T> first, Matcher<? super T> second) {
@@ -56,7 +65,10 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     }
 
     /**
-     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> AnyOf<T> anyOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third) {
@@ -68,7 +80,10 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     }
 
     /**
-     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> AnyOf<T> anyOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth) {
@@ -81,7 +96,10 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     }
 
     /**
-     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> AnyOf<T> anyOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth) {
@@ -95,7 +113,10 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     }
 
     /**
-     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
     @Factory
     public static <T> AnyOf<T> anyOf(Matcher<T> first, Matcher<? super T> second, Matcher<? super T> third, Matcher<? super T> fourth, Matcher<? super T> fifth, Matcher<? super T> sixth) {

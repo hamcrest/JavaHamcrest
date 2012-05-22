@@ -45,10 +45,20 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
       return (Math.abs((item - value)) - delta);
     }
 
-
+    /**
+     * Creates a matcher of {@link Double}s that matches when an examined double is equal
+     * to the specified <code>operand</code>, within a range of +/- <code>error</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(1.03, is(closeTo(1.0, 0.03)))</pre>
+     * 
+     * @param operand
+     *     the expected value of matching doubles
+     * @param error
+     *     the delta (+/-) within which matches will be allowed
+     */
     @Factory
     public static Matcher<Double> closeTo(double operand, double error) {
         return new IsCloseTo(operand, error);
     }
-
 }

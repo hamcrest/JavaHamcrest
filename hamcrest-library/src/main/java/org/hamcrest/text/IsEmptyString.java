@@ -28,7 +28,11 @@ public final class IsEmptyString extends BaseMatcher<String> {
     }
 
     /**
-     * Matches if value is null or zero-length string.
+     * Creates a matcher of {@link String} that matches when the examined string has zero length.
+     * <p/>
+     * For example:
+     * <pre>assertThat("", isEmptyString())</pre>
+     * 
      */
     @Factory
     public static Matcher<String> isEmptyString() {
@@ -36,7 +40,12 @@ public final class IsEmptyString extends BaseMatcher<String> {
     }
 
     /**
-     * Matches if value is null or zero-length string.
+     * Creates a matcher of {@link String} that matches when the examined string is <code>null</code>, or
+     * has zero length.
+     * <p/>
+     * For example:
+     * <pre>assertThat(((String)null), isEmptyString())</pre>
+     * 
      */
     @Factory
     public static Matcher<String> isEmptyOrNullString() {

@@ -9,7 +9,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
 /**
- * Decorates another Matcher, retaining the behavior but allowing tests
+ * Decorates another Matcher, retaining the behaviour but allowing tests
  * to be slightly more expressive.
  *
  * For example:  assertThat(cheese, equalTo(smelly))
@@ -34,15 +34,18 @@ public class Is<T> extends BaseMatcher<T> {
 
     @Override
     public void describeMismatch(Object item, Description mismatchDescription) {
-    	matcher.describeMismatch(item, mismatchDescription);
+        matcher.describeMismatch(item, mismatchDescription);
     }
 
     /**
-     * Decorates another Matcher, retaining the behavior but allowing tests
+     * Decorates another Matcher, retaining its behaviour, but allowing tests
      * to be slightly more expressive.
-     *
-     * For example:  assertThat(cheese, equalTo(smelly))
-     *          vs.  assertThat(cheese, is(equalTo(smelly)))
+     * <p/>
+     * For example:
+     * <pre>assertThat(cheese, is(equalTo(smelly)))</pre>
+     * instead of:
+     * <pre>assertThat(cheese, equalTo(smelly))</pre>
+     * 
      */
     @Factory
     public static <T> Matcher<T> is(Matcher<T> matcher) {
@@ -50,10 +53,13 @@ public class Is<T> extends BaseMatcher<T> {
     }
 
     /**
-     * This is a shortcut to the frequently used is(equalTo(x)).
-     *
-     * For example:  assertThat(cheese, is(equalTo(smelly)))
-     *          vs.  assertThat(cheese, is(smelly))
+     * A shortcut to the frequently used <code>is(equalTo(x))</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(cheese, is(smelly))</pre>
+     * instead of:
+     * <pre>assertThat(cheese, is(equalTo(smelly)))</pre>
+     * 
      */
     @Factory
     public static <T> Matcher<T> is(T value) {
@@ -61,10 +67,12 @@ public class Is<T> extends BaseMatcher<T> {
     }
 
     /**
-     * This is a shortcut to the frequently used is(instanceOf(SomeClass.class)).
-     *
-     * For example:  assertThat(cheese, is(instanceOf(Cheddar.class)))
-     *          vs.  assertThat(cheese, is(Cheddar.class))
+     * A shortcut to the frequently used <code>is(instanceOf(SomeClass.class))</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(cheese, is(Cheddar.class))</pre>
+     * instead of:
+     * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
      *
      * @deprecated use isA(Class<T> type) instead.
      */
@@ -75,8 +83,16 @@ public class Is<T> extends BaseMatcher<T> {
         return is(typeMatcher);
     }
 
+    /**
+     * A shortcut to the frequently used <code>is(instanceOf(SomeClass.class))</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(cheese, isA(Cheddar.class))</pre>
+     * instead of:
+     * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
+     * 
+     */
     @Factory
-    @Deprecated
     public static <T> Matcher<T> isA(Class<T> type) {
         final Matcher<T> typeMatcher = instanceOf(type);
         return is(typeMatcher);

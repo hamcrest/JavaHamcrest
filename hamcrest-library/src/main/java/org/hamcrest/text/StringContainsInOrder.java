@@ -38,6 +38,16 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
                    .appendText(" in order");
     }
     
+    /**
+     * Creates a matcher of {@link String} that matches when the examined string contains all of
+     * the specified substrings, regardless of the order of their appearance.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myfoobarbaz", stringContainsInOrder(Arrays.asList("bar", "foo")))</pre>
+     * 
+     * @param substrings
+     *     the substrings that must be contained within matching strings
+     */
     @Factory
     public static Matcher<String> stringContainsInOrder(Iterable<String> substrings) {
         return new StringContainsInOrder(substrings);

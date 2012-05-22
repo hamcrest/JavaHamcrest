@@ -8,9 +8,9 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
- * Matcher that checks that an object has a JavaBean property
- * with the specified name. If an error occurs while introspecting
- * the object then this is treated as a matcher failure.
+ * A Matcher that checks that an object has a JavaBean property
+ * with the specified name. If an error occurs during introspection
+ * of the object then this is treated as a mismatch.
  *
  * @author Iain McGinniss
  * @author Nat Pryce
@@ -25,17 +25,17 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
     }
 
     @Override
-	  public boolean matchesSafely(T obj) {
+    public boolean matchesSafely(T obj) {
         try {
             return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null;
         } catch (IllegalArgumentException e) {
             return false;
         }
     }
-    
+
     @Override
     public void describeMismatchSafely(T item, Description mismatchDescription) {
-      mismatchDescription.appendText("no ").appendValue(propertyName).appendText(" in ").appendValue(item);
+        mismatchDescription.appendText("no ").appendValue(propertyName).appendText(" in ").appendValue(item);
     }
 
     @Override
@@ -43,6 +43,16 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
         description.appendText("hasProperty(").appendValue(propertyName).appendText(")");
     }
 
+    /**
+     * Creates a matcher that matches when the examined object has a JavaBean property
+     * with the specified name.
+     * <p/>
+     * For example:
+     * <pre>assertThat(myBean, hasProperty("foo"))</pre>
+     * 
+     * @param propertyName
+     *     the name of the JavaBean property that examined beans should possess
+     */
     @Factory
     public static <T> Matcher<T> hasProperty(String propertyName) {
         return new HasProperty<T>(propertyName);

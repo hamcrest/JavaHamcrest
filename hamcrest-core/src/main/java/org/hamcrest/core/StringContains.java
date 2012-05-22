@@ -23,6 +23,17 @@ public class StringContains extends SubstringMatcher {
         return "containing";
     }
 
+    /**
+     * Creates a matcher that matches if the examined {@link String} contains the specified
+     * {@link String} anywhere.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
+     * 
+     * @param substring
+     *     the substring that the returned matcher will expect to find within any examined string
+     * 
+     */
     @Factory
     public static Matcher<String> containsString(String substring) {
         return new StringContains(substring);

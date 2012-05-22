@@ -31,13 +31,26 @@ public class IsSame<T> extends BaseMatcher<T> {
     }
     
     /**
-     * Creates a new instance of IsSame
+     * Creates a matcher that matches only when the examined object is the same instance as
+     * the specified target object.
      *
-     * @param object The predicate evaluates to true only when the argument is
-     *               this object.
+     * @param target
+     *     the target instance against which others should be assessed
      */
     @Factory
-    public static <T> Matcher<T> sameInstance(T object) {
-        return new IsSame<T>(object);
+    public static <T> Matcher<T> sameInstance(T target) {
+        return new IsSame<T>(target);
+    }
+    
+    /**
+     * Creates a matcher that matches only when the examined object is the same instance as
+     * the specified target object.
+     *
+     * @param target
+     *     the target instance against which others should be assessed
+     */
+    @Factory
+    public static <T> Matcher<T> theInstance(T target) {
+        return new IsSame<T>(target);
     }
 }

@@ -34,7 +34,7 @@ public class IsAnything<T> extends BaseMatcher<T> {
     }
 
     /**
-     * This matcher always evaluates to true.
+     * Creates a matcher that always matches, regardless of the examined object.
      */
     @Factory
     public static Matcher<Object> anything() {
@@ -42,9 +42,11 @@ public class IsAnything<T> extends BaseMatcher<T> {
     }
 
     /**
-     * This matcher always evaluates to true.
+     * Creates a matcher that always matches, regardless of the examined object, but describes
+     * itself with the specified {@link String}.
      *
-     * @param description A meaningful string used when describing itself.
+     * @param description
+     *     a meaningful {@link String} used when describing itself
      */
     @Factory
     public static Matcher<Object> anything(String description) {
