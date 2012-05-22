@@ -7,6 +7,43 @@ import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
 /**
+ * <p>Matches multiple attributes of an object within a single assertion</p>
+ * 
+ * <p>How to use it: <p>
+ * 
+ * // Static imports <br/>
+ * import static org.craftedsw.beanpropertymatcher.matcher.BeanMatcher.has; <br/>
+ * import static org.craftedsw.beanpropertymatcher.matcher.BeanPropertyMatcher.property; <br/>
+ * <b>import static org.hamcrest.MatcherAssert.assertThat;</b><br/>
+ * import static org.hamcrest.Matchers.equalTo;<br/>
+ * import static org.hamcrest.Matchers.greaterThan;<br/>
+ * <p>
+ * Person person = new Person();<br/>
+ * person.setFirstName("Sandro");<br/>
+ * person.setAge(35);<br/>
+ * </p>   
+ * <p>   
+ * Country uk = new Country();<br/>
+ * uk.setName("United Kingdom");<br/>
+ * </p>
+ * <p>      
+ * Address address = new Address();<br/>
+ * address.setPostcode("1234556");<br/>
+ * address.setCity("London");<br/>
+ * address.setCountry(uk);<br/>
+ * </p> 
+ * <p>     
+ * person.setAddress(address);<br/>
+ * </p>
+ * <p>     
+ * assertThat(person, has(<br/>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; property("firstName", equalTo("Sandro")),<br/>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; property("age", greaterThan(18)),<br/>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; property("address.city", equalTo("London")),<br/>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; property("address.postcode", equalTo("1234556")),<br/>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; property("address.country.name", equalTo("United Kingdom"))));<br/>
+ * </p>
+ * 
  * @author Sandro Mancuso
  */
 public class BeanMatcher<T> extends BaseMatcher<T> {

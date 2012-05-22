@@ -12,6 +12,10 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
+ * Property matcher that should be used in conjunction with {@link BeanMatcher}.
+ * 
+ * @see BeanMatcher
+ * 
  * @author Sandro Mancuso
  */
 public class BeanPropertyMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
