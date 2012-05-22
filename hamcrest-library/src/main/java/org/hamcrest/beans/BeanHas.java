@@ -12,8 +12,8 @@ import org.hamcrest.StringDescription;
  * <p>How to use it: <p>
  * 
  * // Static imports <br/>
- * import static org.craftedsw.beanpropertymatcher.matcher.BeanMatcher.has; <br/>
- * import static org.craftedsw.beanpropertymatcher.matcher.BeanPropertyMatcher.property; <br/>
+ * import static org.hamcrest.beans.BeanHas.has; <br/>
+ * import static org.hamcrest.beans.BeanProperty.property; <br/>
  * <b>import static org.hamcrest.MatcherAssert.assertThat;</b><br/>
  * import static org.hamcrest.Matchers.equalTo;<br/>
  * import static org.hamcrest.Matchers.greaterThan;<br/>
