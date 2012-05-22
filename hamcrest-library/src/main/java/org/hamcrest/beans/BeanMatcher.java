@@ -47,7 +47,6 @@ public class BeanMatcher<T> extends BaseMatcher<T> {
 	private void appendDescriptions(Object item, Matcher<?> matcher) {
 		matcher.describeTo(expectedDescription);
 		matcher.describeMismatch(item, mismatchDescription);
-		mismatchDescription.appendText(" ");
 	}
 	
 }
