@@ -8,6 +8,8 @@
 
 * Fix issue 179 - AllOf does not output mismatch description
 
+* Fix issue 177 - Introduced closeTo matcher for BigDecimals
+
 * Fix issue 152 - Factory classes missing from matchers.xml
 
 * Fix issue 144 - OrderingComparison doesn't describe mismatch of comparables that return values other than (-1,0,1)
