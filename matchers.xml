@@ -32,9 +32,10 @@
     <factory class="org.hamcrest.collection.IsIterableWithSize"/>
     <factory class="org.hamcrest.collection.IsMapContaining"/>
     <factory class="org.hamcrest.collection.IsIn"/>
-    
+
     <!-- Number -->
     <factory class="org.hamcrest.number.IsCloseTo"/>
+    <factory class="org.hamcrest.number.BigDecimalCloseTo"/>
     <factory class="org.hamcrest.number.OrderingComparison"/>
 
     <!-- Text -->
