@@ -37,26 +37,35 @@ public abstract class BaseDescription implements Description {
             append('"');
         } else if (value instanceof Short) {
             append('<');
-            append(valueOf(value));
+            append(descriptionOf(value));
             append("s>");
         } else if (value instanceof Long) {
             append('<');
-            append(valueOf(value));
+            append(descriptionOf(value));
             append("L>");
         } else if (value instanceof Float) {
             append('<');
-            append(valueOf(value));
+            append(descriptionOf(value));
             append("F>");
         } else if (value.getClass().isArray()) {
             appendValueList("[",", ","]", new ArrayIterator(value));
         } else {
             append('<');
-            append(valueOf(value));
+            append(descriptionOf(value));
             append('>');
         }
         return this;
     }
-    
+
+    private String descriptionOf(Object value) {
+        try {
+            return valueOf(value);
+        }
+        catch (Exception e) {
+            return value.getClass().getName() + "@" + Integer.toHexString(value.hashCode());
+        }
+    }
+
     @Override
     public <T> Description appendValueList(String start, String separator, String end, T... values) {
         return appendValueList(start, separator, end, Arrays.asList(values));

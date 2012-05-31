@@ -52,4 +52,16 @@ public class BaseDescriptionTest extends TestCase {
         baseDescription.appendValue(value);
         assertEquals("<" + value.toString() + ">", result.toString());
     }
+    
+    public void testSafelyDescribesAppendedValueOfObjectWhoseToStringThrowsAnException() {
+        final Object value = new Object() {
+            @Override public String toString() {
+                throw new UnsupportedOperationException();
+            }
+        };
+        
+        final String expected = value.getClass().getName() + "@" + Integer.toHexString(value.hashCode());
+        baseDescription.appendValue(value);
+        assertEquals("<" + expected + ">", result.toString());
+    }
 }
