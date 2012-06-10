@@ -128,6 +128,12 @@
             <zipfileset src="build/hamcrest-generator-${version}.jar"/>
             <zipfileset src="build/hamcrest-integration-${version}.jar"/>
         </jar>
+        <jar jarfile="build/hamcrest-all-${version}-sources.jar" duplicate="preserve">
+            <zipfileset src="build/hamcrest-core-${version}-sources.jar"/>
+            <zipfileset src="build/hamcrest-library-${version}-sources.jar"/>
+            <zipfileset src="build/hamcrest-generator-${version}-sources.jar"/>
+            <zipfileset src="build/hamcrest-integration-${version}-sources.jar"/>
+        </jar>
     </target>
 
     <target name="package" depends="core, generator, library, integration, bigjar, unit-test, examples" description="Package for distribution">
