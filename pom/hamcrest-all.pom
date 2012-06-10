@@ -16,12 +16,4 @@
     A self-contained hamcrest jar containing all of the sub-modules in a single artifact. 
   </description>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.thoughtworks.qdox</groupId>
-      <artifactId>qdox</artifactId>
-      <version>1.12</version>
-      <optional>true</optional>
-    </dependency>
-  </dependencies>
 </project>
