@@ -12,7 +12,7 @@
 
     <target name="generator" description="Build code generator tool">
         <java-to-jar srcdir="hamcrest-generator/src/main/java"
-                     destjar="build/temp/hamcrest-generator-${version}-nodeps.jar"
+                     destjar="build/temp/hamcrest-generator-${version}-nodeps"
                      classpath="lib/generator/qdox-1.12.jar"/>
 
         <!-- Bundle QDox classes in hamcrest-generator.jar using JarJar to place classes under a different package -->
@@ -25,7 +25,7 @@
     </target>
 
     <target name="core" depends="generator" description="Build core Hamcrest library">
-        <java-to-jar srcdir="hamcrest-core/src/main/java" destjar="build/hamcrest-core-${version}.jar"/>
+        <java-to-jar srcdir="hamcrest-core/src/main/java" destjar="build/hamcrest-core-${version}"/>
 
         <!-- Generate one class with all static imports -->
         <mkdir dir="build/temp/hamcrest-core/generated-code"/>
@@ -44,7 +44,7 @@
         </java>
         <!-- Append to core jar -->
         <java-to-jar srcdir="build/temp/hamcrest-core/generated-code"
-                     destjar="build/hamcrest-core-${version}.jar"
+                     destjar="build/hamcrest-core-${version}"
                      classpath="build/hamcrest-core-${version}.jar"/>
     </target>
 
@@ -53,7 +53,7 @@
             description="Build library of matchers">
         <mkdir dir="build/temp/hamcrest-library/generated-code"/>
         <java-to-jar srcdir="hamcrest-library/src/main/java"
-                     destjar="build/hamcrest-library-${version}.jar"
+                     destjar="build/hamcrest-library-${version}"
                      classpath="build/hamcrest-core-${version}.jar"/>
         <!-- Generate one class with all static imports -->
         <java classname="org.hamcrest.generator.config.XmlConfigurator"
@@ -71,19 +71,19 @@
         </java>
         <!-- Append to library jar -->
         <java-to-jar srcdir="build/temp/hamcrest-library/generated-code"
-                     destjar="build/hamcrest-library-${version}.jar"
+                     destjar="build/hamcrest-library-${version}"
                      classpath="build/hamcrest-core-${version}.jar"/>
     </target>
 
     <target name="integration" depends="core, library" description="Build integration with external tools">
-        <java-to-jar srcdir="hamcrest-integration/src/main/java" destjar="build/hamcrest-integration-${version}.jar"
+        <java-to-jar srcdir="hamcrest-integration/src/main/java" destjar="build/hamcrest-integration-${version}"
                      classpath="
                         build/hamcrest-core-${version}.jar;
                         build/hamcrest-library-${version}.jar"/>
     </target>
     
     <target name="unit-test" depends="core, library, integration, generator" description="Build and run unit tests.">
-        <java-to-jar srcdir="hamcrest-unit-test/src/main/java" destjar="build/hamcrest-unit-test-${version}.jar"
+        <java-to-jar srcdir="hamcrest-unit-test/src/main/java" destjar="build/hamcrest-unit-test-${version}"
                      classpath="
                         build/hamcrest-core-${version}.jar;
                         build/hamcrest-library-${version}.jar;
@@ -112,7 +112,7 @@
 
     <target name="examples" depends="core, library, integration" description="Build and run unit tests.">
         <java-to-jar srcdir="hamcrest-examples/src/main/java"
-                     destjar="build/hamcrest-examples-${version}.jar"
+                     destjar="build/hamcrest-examples-${version}"
                      classpath="
                         build/hamcrest-core-${version}.jar;
                         build/hamcrest-library-${version}.jar;
@@ -193,8 +193,8 @@
         <attribute name="destjar" description="Path to Jar"/>
         <attribute name="classpath" description="Anything additional to add on the classpath" default=""/>
         <sequential>
-            <mkdir dir="build/temp/@{destjar}.contents"/>
-            <javac srcdir="@{srcdir}" destdir="build/temp/@{destjar}.contents" debug="${debug}" target="1.5">
+            <mkdir dir="build/temp/@{destjar}.jar.contents"/>
+            <javac srcdir="@{srcdir}" destdir="build/temp/@{destjar}.jar.contents" debug="${debug}" target="1.5">
                 <classpath>
                     <fileset dir="lib/integration">
                         <include name="*.jar"/>
@@ -202,13 +202,13 @@
                     <pathelement path="@{classpath}"/>
                 </classpath>
             </javac>
-            <copy file="LICENSE.txt" todir="build/temp/@{destjar}.contents"/>
+            <copy file="LICENSE.txt" todir="build/temp/@{destjar}.jar.contents"/>
             <!-- Put Java source in Jars for user's convenience. -->
-            <copy todir="build/temp/@{destjar}.contents">
+            <copy todir="build/temp/@{destjar}.jar.contents">
                 <fileset dir="@{srcdir}"/>
             </copy>
-            <jar jarfile="@{destjar}">
-                <fileset dir="build/temp/@{destjar}.contents"/>
+            <jar jarfile="@{destjar}.jar">
+                <fileset dir="build/temp/@{destjar}.jar.contents"/>
             </jar>
         </sequential>
     </macrodef>
