@@ -231,13 +231,33 @@
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}.jar"/></exec>
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}-javadoc.jar"/></exec>
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}-sources.jar"/></exec>
-        <jar destfile="build/bundle.jar">
+        <jar destfile="build/maven-bundle-parent.jar">
             <fileset dir="build">
                 <include name="hamcrest-parent-${version}*"/>
+            </fileset>
+        </jar>
+        <jar destfile="build/maven-bundle-core.jar">
+            <fileset dir="build">
                 <include name="hamcrest-core-${version}*"/>
+            </fileset>
+        </jar>
+        <jar destfile="build/maven-bundle-library.jar">
+            <fileset dir="build">
                 <include name="hamcrest-library-${version}*"/>
+            </fileset>
+        </jar>
+        <jar destfile="build/maven-bundle-generator.jar">
+            <fileset dir="build">
                 <include name="hamcrest-generator-${version}*"/>
+            </fileset>
+        </jar>
+        <jar destfile="build/maven-bundle-integration.jar">
+            <fileset dir="build">
                 <include name="hamcrest-integration-${version}*"/>
+            </fileset>
+        </jar>
+        <jar destfile="build/maven-bundle-all.jar">
+            <fileset dir="build">
                 <include name="hamcrest-all-${version}*"/>
             </fileset>
         </jar>
