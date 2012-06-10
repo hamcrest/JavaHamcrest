@@ -14,5 +14,4 @@
   <description>
     A tool to allow many Matcher implementations to be combined into a single class so users don't have to remember many classes/packages to import. Generates code.
   </description>
-
 </project>

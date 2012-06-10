@@ -15,5 +15,4 @@
   <description>
     A self-contained hamcrest jar containing all of the sub-modules in a single artifact. 
   </description>
-
 </project>
