@@ -22,6 +22,7 @@
             <zipfileset src="lib/generator/qdox-1.12.jar"/>
             <rule pattern="com.thoughtworks.qdox.**" result="org.hamcrest.generator.qdox.@1"/>
         </jarjar>
+        <copy file="build/hamcrest-generator-${version}-nodeps-sources.jar" tofile="build/hamcrest-generator-${version}-sources.jar"/>
     </target>
 
     <target name="core" depends="generator" description="Build core Hamcrest library">
@@ -203,12 +204,17 @@
                 </classpath>
             </javac>
             <copy file="LICENSE.txt" todir="build/temp/@{modulename}.jar.contents"/>
-            <!-- Put Java source in Jars for user's convenience. -->
-            <copy todir="build/temp/@{modulename}.jar.contents">
-                <fileset dir="@{srcdir}"/>
-            </copy>
             <jar jarfile="build/@{modulename}.jar">
                 <fileset dir="build/temp/@{modulename}.jar.contents"/>
+            </jar>
+            <copy file="LICENSE.txt" todir="build/temp/@{modulename}.jar.contents"/>
+
+            <!-- Build sources jar -->
+            <copy todir="build/temp/@{modulename}-sources.jar.contents">
+                <fileset dir="@{srcdir}"/>
+            </copy>
+            <jar jarfile="build/@{modulename}-sources.jar">
+                <fileset dir="build/temp/@{modulename}-sources.jar.contents"/>
             </jar>
         </sequential>
     </macrodef>
