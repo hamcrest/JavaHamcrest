@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.hamcrest</groupId>
+    <artifactId>hamcrest-parent</artifactId>
+    <version>@VERSION@</version>
+  </parent>
+
+  <artifactId>hamcrest-library</artifactId>
+  <packaging>jar</packaging>
+  <name>Hamcrest library</name>
+  <description>
+    Hamcrest library of matcher implementations.
+  </description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <version>@VERSION@</version>
+    </dependency>
+  </dependencies>
+</project>
