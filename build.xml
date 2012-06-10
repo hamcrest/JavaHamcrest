@@ -134,6 +134,23 @@
             <zipfileset src="build/hamcrest-generator-${version}-sources.jar"/>
             <zipfileset src="build/hamcrest-integration-${version}-sources.jar"/>
         </jar>
+        <javadoc packagenames="org.hamcrest.*" sourcepath="build/temp/@{modulename}-sources.jar.contents" defaultexcludes="yes"
+                 destdir="build/temp/hamcrest-all-${version}-javadoc.jar.contents" author="true" version="true" use="true"
+                 windowtitle="Hamcrest" source="1.6" failonerror="yes" overview="overview.html">
+            <packageset dir="build/temp/hamcrest-core-${version}-sources.jar.contents"/>
+            <packageset dir="build/temp/hamcrest-library-${version}-sources.jar.contents" excludes="org/hamcrest/internal"/>
+            <packageset dir="build/temp/hamcrest-integration-${version}-sources.jar.contents"/>
+            
+            <group title="Hamcrest API and Utility Classes" packages="org.hamcrest"/>
+            <group title="Matcher Library" packages="org.hamcrest.*"/>
+            <group title="Integration" packages="org.hamcrest.integration, org.hamcrest.integration.*"/>
+            
+            <link offline="false" href="http://www.junit.org/junit/javadoc/3.8.1/"/>
+            <link offline="false" href="http://kentbeck.github.com/junit/javadoc/latest/"/>
+        </javadoc>
+        <jar jarfile="build/hamcrest-all-${version}-javadoc.jar">
+            <fileset dir="build/temp/hamcrest-all-${version}-javadoc.jar.contents"/>
+        </jar>
     </target>
 
     <target name="package" depends="core, generator, library, integration, bigjar, unit-test, examples" description="Package for distribution">
@@ -171,30 +188,6 @@
         </tar>
     </target>
 
-    <target name="javadoc" depends="library">
-        <mkdir dir="build/javadoc"/>
-        <javadoc destdir="build/javadoc" source="1.6" failonerror="yes" overview="overview.html">
-            <classpath>
-                <fileset dir="lib/integration">
-                    <include name="*.jar"/>
-                </fileset>
-            </classpath>
-
-            <packageset dir="hamcrest-core/src/main/java"/>
-            <packageset dir="hamcrest-library/src/main/java" excludes="org/hamcrest/internal"/>
-            <packageset dir="hamcrest-integration/src/main/java"/>
-            <packageset dir="build/temp/hamcrest-core/generated-code"/>
-            <packageset dir="build/temp/hamcrest-library/generated-code"/>
-            
-            <group title="Hamcrest API and Utility Classes" packages="org.hamcrest"/>
-            <group title="Matcher Library" packages="org.hamcrest.*"/>
-            <group title="Integration" packages="org.hamcrest.integration, org.hamcrest.integration.*"/>
-            
-            <link offline="false" href="http://www.junit.org/junit/javadoc/3.8.1/"/>
-            <link offline="false" href="http://kentbeck.github.com/junit/javadoc/latest/"/>
-        </javadoc>
-    </target>
-
     <macrodef name="java-to-jar" description="Compile Java source for a module and build a Jar">
         <attribute name="srcdir" description="Directory containg Java source"/>
         <attribute name="modulename" description="Name of the module to jar"/>
@@ -213,7 +206,6 @@
             <jar jarfile="build/@{modulename}.jar">
                 <fileset dir="build/temp/@{modulename}.jar.contents"/>
             </jar>
-            <copy file="LICENSE.txt" todir="build/temp/@{modulename}.jar.contents"/>
 
             <!-- Build sources jar -->
             <copy todir="build/temp/@{modulename}-sources.jar.contents">
@@ -222,7 +214,21 @@
             <jar jarfile="build/@{modulename}-sources.jar">
                 <fileset dir="build/temp/@{modulename}-sources.jar.contents"/>
             </jar>
+        
+            <!-- Build javadoc jar -->
+            <javadoc packagenames="org.hamcrest.*" sourcepath="build/temp/@{modulename}-sources.jar.contents" defaultexcludes="yes"
+                     destdir="build/temp/@{modulename}-javadoc.jar.contents" author="true" version="true" use="true"
+                     windowtitle="Hamcrest">
+                <classpath>
+                    <fileset dir="lib/integration">
+                        <include name="*.jar"/>
+                    </fileset>
+                    <pathelement path="@{classpath}"/>
+                </classpath>
+            </javadoc>
+            <jar jarfile="build/@{modulename}-javadoc.jar">
+                <fileset dir="build/temp/@{modulename}-javadoc.jar.contents"/>
+            </jar>
         </sequential>
     </macrodef>
-
 </project>
