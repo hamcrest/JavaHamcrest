@@ -168,6 +168,11 @@
     </target>
 
     <target name="package" depends="core, generator, library, integration, bigjar, unit-test, examples, javadoc" description="Package for distribution">
+        <copy todir="build">
+            <fileset dir="pom" includes="*.pom"/>
+            <filterset><filter token="VERSION" value="${version}"/></filterset>
+            <mapper type="regexp" from="(.*)\.pom" to="\1-${version}.pom"/>
+        </copy>
         <zip zipfile="build/hamcrest-${version}.zip">
             <zipfileset dir="." prefix="hamcrest-${version}">
                 <include name="hamcrest-*/**"/>
@@ -177,6 +182,7 @@
                 <include name="*matchers.xml"/>
             </zipfileset>
             <zipfileset dir="build" prefix="hamcrest-${version}">
+                <include name="*.pom"/>
                 <include name="hamcrest-core-${version}.jar"/>
                 <include name="hamcrest-core-${version}-sources.jar"/>
                 <include name="hamcrest-core-${version}-javadoc.jar"/>
@@ -203,6 +209,7 @@
                 <include name="*matchers.xml"/>
             </tarfileset>
             <tarfileset dir="build" prefix="hamcrest-${version}">
+                <include name="*.pom"/>
                 <include name="hamcrest-core-${version}.jar"/>
                 <include name="hamcrest-core-${version}-sources.jar"/>
                 <include name="hamcrest-core-${version}-javadoc.jar"/>
@@ -220,6 +227,36 @@
                 <include name="hamcrest-all-${version}-javadoc.jar"/>
             </tarfileset>
         </tar>
+    </target>
+
+    <target name="bundle" description="Create a release bundle for deployment to maven central" depends="clean,package">
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}.pom"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}-javadoc.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}-sources.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-generator-${version}.pom"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-generator-${version}.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-generator-${version}-javadoc.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-generator-${version}-sources.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-library-${version}.pom"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-library-${version}.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-library-${version}-javadoc.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-library-${version}-sources.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-integration-${version}.pom"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-integration-${version}.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-integration-${version}-javadoc.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-integration-${version}-sources.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}.pom"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}-javadoc.jar"/></exec>
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}-sources.jar"/></exec>
+        <jar destfile="build/bundle.jar">
+            <fileset dir="build" includes="hamcrest-core-${version.label}*"/>
+            <fileset dir="build" includes="hamcrest-generator-${version.label}*"/>
+            <fileset dir="build" includes="hamcrest-library-${version.label}*"/>
+            <fileset dir="build" includes="hamcrest-integration-${version.label}*"/>
+            <fileset dir="build" includes="hamcrest-all-${version.label}*"/>
+        </jar>
     </target>
 
     <macrodef name="java-to-jar" description="Compile Java source for a module and build a Jar">
