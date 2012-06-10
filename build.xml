@@ -137,6 +137,11 @@
         <javadoc packagenames="org.hamcrest.*" sourcepath="build/temp/@{modulename}-sources.jar.contents" defaultexcludes="yes"
                  destdir="build/temp/hamcrest-all-${version}-javadoc.jar.contents" author="true" version="true" use="true"
                  windowtitle="Hamcrest" source="1.6" failonerror="yes" overview="overview.html">
+            <classpath>
+                <fileset dir="lib/integration">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
             <packageset dir="build/temp/hamcrest-core-${version}-sources.jar.contents"/>
             <packageset dir="build/temp/hamcrest-library-${version}-sources.jar.contents" excludes="org/hamcrest/internal"/>
             <packageset dir="build/temp/hamcrest-integration-${version}-sources.jar.contents"/>
@@ -194,7 +199,7 @@
         <attribute name="classpath" description="Anything additional to add on the classpath" default=""/>
         <sequential>
             <mkdir dir="build/temp/@{modulename}.jar.contents"/>
-            <javac srcdir="@{srcdir}" destdir="build/temp/@{modulename}.jar.contents" debug="${debug}" target="1.5">
+            <javac srcdir="@{srcdir}" destdir="build/temp/@{modulename}.jar.contents" debug="${debug}" target="1.5" includeantruntime="false">
                 <classpath>
                     <fileset dir="lib/integration">
                         <include name="*.jar"/>

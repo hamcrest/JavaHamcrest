@@ -62,9 +62,9 @@ public class DescribedAs<T> extends BaseMatcher<T> {
      * 
      * @param description
      *     the new description for the wrapped matcher
-     * @param
+     * @param matcher
      *     the matcher to wrap
-     * @param
+     * @param values
      *     optional values to insert into the tokenised description
      */
     @Factory

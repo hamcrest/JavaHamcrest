@@ -97,8 +97,6 @@ public class FactoryMethod {
     /**
      * List of generic type parameters for factory method definition.
      * ie. 'public &lt;THIS,THAT&gt; Matcher&lt;...&gt; blah(...)'
-     *
-     * @return
      */
     public List<String> getGenericTypeParameters() {
         return unmodifiableList(genericTypeParameters);

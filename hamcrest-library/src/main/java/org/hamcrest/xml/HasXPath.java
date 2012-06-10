@@ -104,7 +104,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
 
 
     /**
-     * Creates a matcher of {@link Node}s that matches when the examined node has a value at the
+     * Creates a matcher of {@link org.w3c.dom.Node}s that matches when the examined node has a value at the
      * specified <code>xPath</code> that satisfies the specified <code>valueMatcher</code>.
      * <p/>
      * For example:
@@ -121,7 +121,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     }
 
     /**
-     * Creates a matcher of {@link Node}s that matches when the examined node has a value at the
+     * Creates a matcher of {@link org.w3c.dom.Node}s that matches when the examined node has a value at the
      * specified <code>xPath</code>, within the specified <code>namespaceContext</code>, that satisfies
      * the specified <code>valueMatcher</code>.
      * <p/>
@@ -141,7 +141,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     }
 
     /**
-     * Creates a matcher of {@link Node}s that matches when the examined node contains a node
+     * Creates a matcher of {@link org.w3c.dom.Node}s that matches when the examined node contains a node
      * at the specified <code>xPath</code>, with any content.
      * <p/>
      * For example:
@@ -156,7 +156,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     }
 
     /**
-     * Creates a matcher of {@link Node}s that matches when the examined node contains a node
+     * Creates a matcher of {@link org.w3c.dom.Node}s that matches when the examined node contains a node
      * at the specified <code>xPath</code> within the specified namespace context, with any content.
      * <p/>
      * For example:

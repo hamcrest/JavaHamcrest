@@ -28,7 +28,7 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
     }
 
   /**
-   * Creates a matcher for {@link Collection}s matching examined collections whose <code>isEmpty</code>
+   * Creates a matcher for {@link java.util.Collection}s matching examined collections whose <code>isEmpty</code>
    * method returns <code>true</code>.
    * <p/>
    * For example:
