@@ -134,7 +134,16 @@
             <zipfileset src="build/hamcrest-generator-${version}-sources.jar"/>
             <zipfileset src="build/hamcrest-integration-${version}-sources.jar"/>
         </jar>
-        <javadoc packagenames="org.hamcrest.*" sourcepath="build/temp/@{modulename}-sources.jar.contents" defaultexcludes="yes"
+    </target>
+
+    <target name="javadoc" description="build javadoc jars">
+        <java-to-javadoc-jar modulename="hamcrest-generator-${version}-nodeps"/>
+        <java-to-javadoc-jar modulename="hamcrest-core-${version}"/>
+        <java-to-javadoc-jar modulename="hamcrest-library-${version}"/>
+        <java-to-javadoc-jar modulename="hamcrest-integration-${version}"/>
+        <copy file="build/hamcrest-generator-${version}-nodeps-javadoc.jar" tofile="build/hamcrest-generator-${version}-javadoc.jar"/>
+
+        <javadoc packagenames="org.hamcrest.*" defaultexcludes="yes"
                  destdir="build/temp/hamcrest-all-${version}-javadoc.jar.contents" author="true" version="true" use="true"
                  windowtitle="Hamcrest" source="1.6" failonerror="yes" overview="overview.html">
             <classpath>
@@ -158,7 +167,7 @@
         </jar>
     </target>
 
-    <target name="package" depends="core, generator, library, integration, bigjar, unit-test, examples" description="Package for distribution">
+    <target name="package" depends="core, generator, library, integration, bigjar, unit-test, examples, javadoc" description="Package for distribution">
         <zip zipfile="build/hamcrest-${version}.zip">
             <zipfileset dir="." prefix="hamcrest-${version}">
                 <include name="hamcrest-*/**"/>
@@ -173,6 +182,16 @@
                 <include name="hamcrest-library-${version}.jar"/>
                 <include name="hamcrest-integration-${version}.jar"/>
                 <include name="hamcrest-all-${version}.jar"/>
+                <include name="hamcrest-core-${version}-sources.jar"/>
+                <include name="hamcrest-generator-${version}-sources.jar"/>
+                <include name="hamcrest-library-${version}-sources.jar"/>
+                <include name="hamcrest-integration-${version}-sources.jar"/>
+                <include name="hamcrest-all-${version}-sources.jar"/>
+                <include name="hamcrest-core-${version}-javadoc.jar"/>
+                <include name="hamcrest-generator-${version}-javadoc.jar"/>
+                <include name="hamcrest-library-${version}-javadoc.jar"/>
+                <include name="hamcrest-integration-${version}-javadoc.jar"/>
+                <include name="hamcrest-all-${version}-javadoc.jar"/>
             </zipfileset>
         </zip>
         <tar tarfile="build/hamcrest-${version}.tgz" compression="gzip" longfile="gnu">
@@ -189,6 +208,16 @@
                 <include name="hamcrest-library-${version}.jar"/>
                 <include name="hamcrest-integration-${version}.jar"/>
                 <include name="hamcrest-all-${version}.jar"/>
+                <include name="hamcrest-core-${version}-sources.jar"/>
+                <include name="hamcrest-generator-${version}-sources.jar"/>
+                <include name="hamcrest-library-${version}-sources.jar"/>
+                <include name="hamcrest-integration-${version}-sources.jar"/>
+                <include name="hamcrest-all-${version}-sources.jar"/>
+                <include name="hamcrest-core-${version}-javadoc.jar"/>
+                <include name="hamcrest-generator-${version}-javadoc.jar"/>
+                <include name="hamcrest-library-${version}-javadoc.jar"/>
+                <include name="hamcrest-integration-${version}-javadoc.jar"/>
+                <include name="hamcrest-all-${version}-javadoc.jar"/>
             </tarfileset>
         </tar>
     </target>
@@ -219,16 +248,24 @@
             <jar jarfile="build/@{modulename}-sources.jar">
                 <fileset dir="build/temp/@{modulename}-sources.jar.contents"/>
             </jar>
-        
-            <!-- Build javadoc jar -->
+        </sequential>
+    </macrodef>
+
+    <macrodef name="java-to-javadoc-jar" description="Generate javadoc for a module and build a Jar">
+        <attribute name="modulename" description="Name of the module to document"/>
+        <sequential>
             <javadoc packagenames="org.hamcrest.*" sourcepath="build/temp/@{modulename}-sources.jar.contents" defaultexcludes="yes"
                      destdir="build/temp/@{modulename}-javadoc.jar.contents" author="true" version="true" use="true"
-                     windowtitle="Hamcrest">
+                     windowtitle="Hamcrest" source="1.6" failonerror="yes">
                 <classpath>
                     <fileset dir="lib/integration">
                         <include name="*.jar"/>
                     </fileset>
-                    <pathelement path="@{classpath}"/>
+                    <fileset file="lib/generator/qdox-1.12.jar"/>
+                    <fileset file="build/hamcrest-core-${version}.jar"/>
+                    <fileset file="build/hamcrest-library-${version}.jar"/>
+                    <fileset file="build/hamcrest-generator-${version}.jar"/>
+                    <fileset file="build/hamcrest-integration-${version}.jar"/>
                 </classpath>
             </javadoc>
             <jar jarfile="build/@{modulename}-javadoc.jar">
