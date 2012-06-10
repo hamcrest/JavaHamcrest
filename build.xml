@@ -182,22 +182,12 @@
                 <include name="*matchers.xml"/>
             </zipfileset>
             <zipfileset dir="build" prefix="hamcrest-${version}">
-                <include name="*.pom"/>
-                <include name="hamcrest-core-${version}.jar"/>
-                <include name="hamcrest-core-${version}-sources.jar"/>
-                <include name="hamcrest-core-${version}-javadoc.jar"/>
-                <include name="hamcrest-generator-${version}.jar"/>
-                <include name="hamcrest-generator-${version}-sources.jar"/>
-                <include name="hamcrest-generator-${version}-javadoc.jar"/>
-                <include name="hamcrest-library-${version}.jar"/>
-                <include name="hamcrest-library-${version}-sources.jar"/>
-                <include name="hamcrest-library-${version}-javadoc.jar"/>
-                <include name="hamcrest-integration-${version}.jar"/>
-                <include name="hamcrest-integration-${version}-sources.jar"/>
-                <include name="hamcrest-integration-${version}-javadoc.jar"/>
-                <include name="hamcrest-all-${version}.jar"/>
-                <include name="hamcrest-all-${version}-sources.jar"/>
-                <include name="hamcrest-all-${version}-javadoc.jar"/>
+                <include name="hamcrest-parent-${version}*"/>
+                <include name="hamcrest-core-${version}*"/>
+                <include name="hamcrest-library-${version}*"/>
+                <include name="hamcrest-generator-${version}*"/>
+                <include name="hamcrest-integration-${version}*"/>
+                <include name="hamcrest-all-${version}*"/>
             </zipfileset>
         </zip>
         <tar tarfile="build/hamcrest-${version}.tgz" compression="gzip" longfile="gnu">
@@ -209,27 +199,18 @@
                 <include name="*matchers.xml"/>
             </tarfileset>
             <tarfileset dir="build" prefix="hamcrest-${version}">
-                <include name="*.pom"/>
-                <include name="hamcrest-core-${version}.jar"/>
-                <include name="hamcrest-core-${version}-sources.jar"/>
-                <include name="hamcrest-core-${version}-javadoc.jar"/>
-                <include name="hamcrest-generator-${version}.jar"/>
-                <include name="hamcrest-generator-${version}-sources.jar"/>
-                <include name="hamcrest-generator-${version}-javadoc.jar"/>
-                <include name="hamcrest-library-${version}.jar"/>
-                <include name="hamcrest-library-${version}-sources.jar"/>
-                <include name="hamcrest-library-${version}-javadoc.jar"/>
-                <include name="hamcrest-integration-${version}.jar"/>
-                <include name="hamcrest-integration-${version}-sources.jar"/>
-                <include name="hamcrest-integration-${version}-javadoc.jar"/>
-                <include name="hamcrest-all-${version}.jar"/>
-                <include name="hamcrest-all-${version}-sources.jar"/>
-                <include name="hamcrest-all-${version}-javadoc.jar"/>
+                <include name="hamcrest-parent-${version}*"/>
+                <include name="hamcrest-core-${version}*"/>
+                <include name="hamcrest-library-${version}*"/>
+                <include name="hamcrest-generator-${version}*"/>
+                <include name="hamcrest-integration-${version}*"/>
+                <include name="hamcrest-all-${version}*"/>
             </tarfileset>
         </tar>
     </target>
 
     <target name="bundle" description="Create a release bundle for deployment to maven central" depends="clean, package">
+        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-parent-${version}.pom"/></exec>
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}.pom"/></exec>
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}.jar"/></exec>
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}-javadoc.jar"/></exec>
@@ -251,11 +232,14 @@
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}-javadoc.jar"/></exec>
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}-sources.jar"/></exec>
         <jar destfile="build/bundle.jar">
-            <fileset dir="build" includes="hamcrest-core-${version.label}*"/>
-            <fileset dir="build" includes="hamcrest-generator-${version.label}*"/>
-            <fileset dir="build" includes="hamcrest-library-${version.label}*"/>
-            <fileset dir="build" includes="hamcrest-integration-${version.label}*"/>
-            <fileset dir="build" includes="hamcrest-all-${version.label}*"/>
+            <fileset dir="build">
+                <include name="hamcrest-parent-${version}*"/>
+                <include name="hamcrest-core-${version}*"/>
+                <include name="hamcrest-library-${version}*"/>
+                <include name="hamcrest-generator-${version}*"/>
+                <include name="hamcrest-integration-${version}*"/>
+                <include name="hamcrest-all-${version}*"/>
+            </fileset>
         </jar>
     </target>
 
