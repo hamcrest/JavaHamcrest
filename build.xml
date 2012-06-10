@@ -178,19 +178,19 @@
             </zipfileset>
             <zipfileset dir="build" prefix="hamcrest-${version}">
                 <include name="hamcrest-core-${version}.jar"/>
-                <include name="hamcrest-generator-${version}.jar"/>
-                <include name="hamcrest-library-${version}.jar"/>
-                <include name="hamcrest-integration-${version}.jar"/>
-                <include name="hamcrest-all-${version}.jar"/>
                 <include name="hamcrest-core-${version}-sources.jar"/>
-                <include name="hamcrest-generator-${version}-sources.jar"/>
-                <include name="hamcrest-library-${version}-sources.jar"/>
-                <include name="hamcrest-integration-${version}-sources.jar"/>
-                <include name="hamcrest-all-${version}-sources.jar"/>
                 <include name="hamcrest-core-${version}-javadoc.jar"/>
+                <include name="hamcrest-generator-${version}.jar"/>
+                <include name="hamcrest-generator-${version}-sources.jar"/>
                 <include name="hamcrest-generator-${version}-javadoc.jar"/>
+                <include name="hamcrest-library-${version}.jar"/>
+                <include name="hamcrest-library-${version}-sources.jar"/>
                 <include name="hamcrest-library-${version}-javadoc.jar"/>
+                <include name="hamcrest-integration-${version}.jar"/>
+                <include name="hamcrest-integration-${version}-sources.jar"/>
                 <include name="hamcrest-integration-${version}-javadoc.jar"/>
+                <include name="hamcrest-all-${version}.jar"/>
+                <include name="hamcrest-all-${version}-sources.jar"/>
                 <include name="hamcrest-all-${version}-javadoc.jar"/>
             </zipfileset>
         </zip>
@@ -204,19 +204,19 @@
             </tarfileset>
             <tarfileset dir="build" prefix="hamcrest-${version}">
                 <include name="hamcrest-core-${version}.jar"/>
-                <include name="hamcrest-generator-${version}.jar"/>
-                <include name="hamcrest-library-${version}.jar"/>
-                <include name="hamcrest-integration-${version}.jar"/>
-                <include name="hamcrest-all-${version}.jar"/>
                 <include name="hamcrest-core-${version}-sources.jar"/>
-                <include name="hamcrest-generator-${version}-sources.jar"/>
-                <include name="hamcrest-library-${version}-sources.jar"/>
-                <include name="hamcrest-integration-${version}-sources.jar"/>
-                <include name="hamcrest-all-${version}-sources.jar"/>
                 <include name="hamcrest-core-${version}-javadoc.jar"/>
+                <include name="hamcrest-generator-${version}.jar"/>
+                <include name="hamcrest-generator-${version}-sources.jar"/>
                 <include name="hamcrest-generator-${version}-javadoc.jar"/>
+                <include name="hamcrest-library-${version}.jar"/>
+                <include name="hamcrest-library-${version}-sources.jar"/>
                 <include name="hamcrest-library-${version}-javadoc.jar"/>
+                <include name="hamcrest-integration-${version}.jar"/>
+                <include name="hamcrest-integration-${version}-sources.jar"/>
                 <include name="hamcrest-integration-${version}-javadoc.jar"/>
+                <include name="hamcrest-all-${version}.jar"/>
+                <include name="hamcrest-all-${version}-sources.jar"/>
                 <include name="hamcrest-all-${version}-javadoc.jar"/>
             </tarfileset>
         </tar>
