@@ -37,12 +37,12 @@ public class ReflectiveFactoryReaderTest extends TestCase {
         assertTrue("Expected first method", methods.hasNext());
         FactoryMethod firstMethod = methods.next();
         assertEquals("firstMethod", firstMethod.getName());
-        assertEquals(SimpleSetOfMatchers.class.getName(), firstMethod.getMatcherClass());
+        assertEquals(SimpleSetOfMatchers.class.getName().replace('$', '.'), firstMethod.getMatcherClass());
 
         assertTrue("Expected second method", methods.hasNext());
         FactoryMethod secondMethod = methods.next();
         assertEquals("secondMethod", secondMethod.getName());
-        assertEquals(SimpleSetOfMatchers.class.getName(), secondMethod.getMatcherClass());
+        assertEquals(SimpleSetOfMatchers.class.getName().replace('$', '.'), secondMethod.getMatcherClass());
 
         assertFalse("Expected no more methods", methods.hasNext());
     }
@@ -69,18 +69,17 @@ public class ReflectiveFactoryReaderTest extends TestCase {
         }
 
         @Factory
-        public static Matcher<String> anotherGoodMethod() {
+        public static String anotherGoodMethod() {
             return null;
         }
 
         @Factory
-        public static String wrongReturnType() {
-            return null;
+        public static void wrongReturnType() {
         }
 
     }
 
-    public void testOnlyReadsPublicStaticAnnotatedMethodsThatReturnMatcher() {
+    public void testOnlyReadsPublicStaticAnnotatedMethodsThatReturnNonVoid() {
         Iterable<FactoryMethod> reader = new ReflectiveFactoryReader(MatchersWithDodgySignatures.class);
         Iterator<FactoryMethod> methods = reader.iterator();
 

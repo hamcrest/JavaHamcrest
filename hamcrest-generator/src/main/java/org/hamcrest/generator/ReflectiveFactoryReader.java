@@ -86,26 +86,18 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
      * <p>To use another set of rules, override this method.
      */
     protected boolean isFactoryMethod(Method javaMethod) {
-        // We dynamically load these classes, to avoid a compile time
-        // dependency on org.hamcrest.{Factory,Matcher}. This gets around
-        // a circular bootstrap issue (because generator is required to
-        // compile core).
         return isStatic(javaMethod.getModifiers())
                 && isPublic(javaMethod.getModifiers())
                 && hasFactoryAnnotation(javaMethod)
-                && matcherClass().isAssignableFrom(javaMethod.getReturnType());
-    }
-
-    private Class<?> matcherClass() {
-      try {
-          return classLoader.loadClass("org.hamcrest.Matcher");
-      } catch (ClassNotFoundException e) {
-          throw new RuntimeException("Cannot load hamcrest core", e);
-      }
+                && !Void.TYPE.equals(javaMethod.getReturnType());
     }
 
     @SuppressWarnings("unchecked")
     private boolean hasFactoryAnnotation(Method javaMethod) {
+      // We dynamically load the Factory class, to avoid a compile time
+      // dependency on org.hamcrest.Factory. This gets around
+      // a circular bootstrap issue (because generator is required to
+      // compile core).
       try {
         final Class<?> factoryClass = classLoader.loadClass("org.hamcrest.Factory");
         if (!Annotation.class.isAssignableFrom(factoryClass)) {
@@ -119,9 +111,9 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
     
     private static FactoryMethod buildFactoryMethod(Method javaMethod) {
         FactoryMethod result = new FactoryMethod(
-                javaMethod.getDeclaringClass().getName(),
+                classToString(javaMethod.getDeclaringClass()),
                 javaMethod.getName(), 
-                javaMethod.getReturnType().getName());
+                classToString(javaMethod.getReturnType()));
 
         for (TypeVariable<Method> typeVariable : javaMethod.getTypeParameters()) {
             boolean hasBound = false;
@@ -175,7 +167,8 @@ public class ReflectiveFactoryReader implements Iterable<FactoryMethod> {
     }
 
     private static String classToString(Class<?> cls) {
-      return cls.isArray() ? cls.getComponentType().getName() + "[]" : cls.getName();
+      final String name = cls.isArray() ? cls.getComponentType().getName() + "[]" : cls.getName();
+      return name.replace('$', '.');
     }
 
 }
