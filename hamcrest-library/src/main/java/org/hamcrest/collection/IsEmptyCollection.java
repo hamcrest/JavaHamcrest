@@ -22,21 +22,38 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
       mismatchDescription.appendValue(item);
     }
 
-  @Override
-  public void describeTo(Description description) {
+    @Override
+    public void describeTo(Description description) {
         description.appendText("an empty collection");
     }
 
-  /**
-   * Creates a matcher for {@link java.util.Collection}s matching examined collections whose <code>isEmpty</code>
-   * method returns <code>true</code>.
-   * <p/>
-   * For example:
-   * <pre>assertThat(new ArrayList&lt;String&gt;(), is(empty()))</pre>
-   * 
-   */
+    /**
+     * Creates a matcher for {@link java.util.Collection}s matching examined collections whose <code>isEmpty</code>
+     * method returns <code>true</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(new ArrayList&lt;String&gt;(), is(empty()))</pre>
+     * 
+     */
     @Factory
     public static <E> Matcher<Collection<? extends E>> empty() {
         return new IsEmptyCollection<E>();
+    }
+
+    /**
+     * Creates a matcher for {@link java.util.Collection}s matching examined collections whose <code>isEmpty</code>
+     * method returns <code>true</code>.
+     * <p/>
+     * For example:
+     * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyCollectionOf(String.class)))</pre>
+     * 
+     * @param type
+     *     the type of the collection's content
+     */
+    @Factory
+    public static <E> Matcher<Collection<E>> emptyCollectionOf(Class<E> type) {
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+        final Matcher<Collection<E>> result = (Matcher)empty();
+        return result;
     }
 }

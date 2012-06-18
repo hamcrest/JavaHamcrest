@@ -1,7 +1,5 @@
 package org.hamcrest.collection;
 
-import static org.hamcrest.collection.IsEmptyIterable.emptyIterable;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -9,6 +7,7 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 import static java.util.Arrays.asList;
+import static org.hamcrest.collection.IsEmptyIterable.emptyIterable;
 
 public class IsEmptyIterableTest extends AbstractMatcherTest {
 
@@ -28,6 +27,12 @@ public class IsEmptyIterableTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("an empty iterable", createMatcher());
     }
+
+    public void testCompiles() {
+        needs(IsEmptyIterable.emptyIterableOf(String.class));
+    }
+
+    private void needs(@SuppressWarnings("unused") Matcher<Iterable<String>> bar) { }
 
     private static Collection<String> collectionOfValues() {
         return new ArrayList<String>(asList("one", "three"));

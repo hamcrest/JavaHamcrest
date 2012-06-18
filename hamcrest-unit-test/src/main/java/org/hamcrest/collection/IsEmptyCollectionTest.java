@@ -29,6 +29,12 @@ public class IsEmptyCollectionTest extends AbstractMatcherTest {
         assertDescription("an empty collection", createMatcher());
     }
 
+    public void testCompiles() {
+        needs(IsEmptyCollection.emptyCollectionOf(String.class));
+    }
+
+    private void needs(@SuppressWarnings("unused") Matcher<Collection<String>> bar) { }
+    
     private static Collection<String> collectionOfValues() {
         return new ArrayList<String>(asList("one", "three"));
     }
