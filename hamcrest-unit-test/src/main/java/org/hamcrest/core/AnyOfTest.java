@@ -15,7 +15,7 @@ public class AnyOfTest extends AbstractMatcherTest {
     @Override
     @SuppressWarnings("unchecked")
     protected Matcher<?> createMatcher() {
-        return anyOf(equalTo("irrelevant"));
+        return anyOf(IsEqual.<Object>equalTo("irrelevant"));
     }
 
     public void testEvaluatesToTheTheLogicalDisjunctionOfTwoOtherMatchers() {
