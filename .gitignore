@@ -1,5 +1,6 @@
 /build
 /classes
+/test-output
 .idea/dictionaries
 .idea/scopes
 .idea/workspace.xml

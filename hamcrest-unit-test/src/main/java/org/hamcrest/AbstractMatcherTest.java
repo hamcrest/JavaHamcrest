@@ -33,6 +33,12 @@ public abstract class AbstractMatcherTest extends TestCase {
         Assert.assertEquals("Expected mismatch description", expected, description.toString().trim());
     }
 
+    public static <T> void assertMismatchDescription(String expected, Matcher<? super T> matcher, T arg, Description description) {
+    	Assert.assertFalse("Precondtion: Matcher should not match item.", matcher.matches(arg));
+    	matcher.describeMismatch(arg, description);
+    	Assert.assertEquals("Expected mismatch description", expected, description.toString().trim());
+    }
+    
     public void testIsNullSafe() {
        // should not throw a NullPointerException
        createMatcher().matches(null);
