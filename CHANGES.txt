@@ -1,6 +1,6 @@
 == Version 1.3: Not yet released ==
 
-* Introduce Condition class to ease the implelemtation of multi-step matches
+* Introduce Condition class to ease the implementation of multi-step matches
 
 * Upgrade qdox (included in the generator) to the latest stable version
 
