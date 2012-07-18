@@ -68,7 +68,7 @@ Contributors:
 Also, thanks to everyone who has worked on DynaMock, nMock, jMock, EasyMock and MiniMock! These libraries inspired Hamcrest.
 
 
-[logo]: https://raw.github.com/hamcrest/JavaHamcrest/master/doc/images/logo.png
+[logo]: https://raw.github.com/hamcrest/JavaHamcrest/master/doc/images/logo.jpg
 [website]: http://code.google.com/p/hamcrest
 [BSD License]: http://opensource.org/licenses/BSD-3-Clause
 [Maven central]: http://search.maven.org/#search%7Cga%7C1%7Cg%3Aorg.hamcrest
