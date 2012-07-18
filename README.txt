@@ -10,6 +10,13 @@
 Hamcrest is a library of matchers, which can be combined in
 to create flexible expressions of intent in tests.
 
+--[ Downloads ]----------------------------------------------
+
+You can obtain Hamcrest binaries from maven central, or from
+Google code.
+
+http://search.maven.org/#search%7Cga%7C1%7Cg%3Aorg.hamcrest
+http://code.google.com/p/hamcrest/downloads/list?can=2&q=label%3AJava
 
 --[ Binaries ]-----------------------------------------------
 
@@ -43,8 +50,7 @@ Alternatively, if you don't care:
  * [hamcrest-all.jar]
    Includes all of the above.
 
-For convenience, all the Jars also include source code.
-
+Sources and JavaDoc jars are available for all of the above.
 
 --[ Dependencies ]-------------------------------------------
 
