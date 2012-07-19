@@ -83,6 +83,11 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
                 asList("e", "c", "b", "d")); // 'a' missing
     }
     
+    public void testReportsMismatchWithAReadableDescription() {
+        final Matcher<Iterable<Integer>> matcher = hasItems(1, 4);
+        
+        assertMismatchDescription("a collection containing <4> was <1>, was <2>, was <3>", matcher, asList(1, 2, 3));
+    }
     
     private static Matcher<? super String> mismatchable(final String string) {
       return new TypeSafeDiagnosingMatcher<String>() {
