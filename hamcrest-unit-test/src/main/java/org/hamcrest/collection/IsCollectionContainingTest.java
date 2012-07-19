@@ -32,11 +32,11 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
 
     public void testDoesNotMatchCollectionThatDoesntContainAnElementMatchingTheGivenMatcher() {
         final Matcher<Iterable<? super String>> matcher1 = hasItem(mismatchable("a"));
-        assertMismatchDescription("mismatched: b, mismatched: c", matcher1, asList("b", "c"));
-        
+        assertMismatchDescription("was a collection that did not contain mismatchable: a -- mismatches were: [mismatched: b, mismatched: c]",
+                                  matcher1, asList("b", "c"));
         
         final Matcher<Iterable<? super String>> matcher2 = hasItem(equalTo("a"));
-        assertMismatchDescription("", matcher2, new ArrayList<String>());
+        assertMismatchDescription("was an empty collection", matcher2, new ArrayList<String>());
     }
 
     public void testDoesNotMatchNull() {
@@ -84,9 +84,10 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     }
     
     public void testReportsMismatchWithAReadableDescription() {
-        final Matcher<Iterable<Integer>> matcher = hasItems(1, 4);
+        final Matcher<Iterable<Integer>> matcher = hasItems(3, 4);
         
-        assertMismatchDescription("a collection containing <4> was <1>, was <2>, was <3>", matcher, asList(1, 2, 3));
+        assertMismatchDescription("a collection containing <4> was a collection that did not contain <4> -- mismatches were: [was <1>, was <2>, was <3>]",
+                                  matcher, asList(1, 2, 3));
     }
     
     private static Matcher<? super String> mismatchable(final String string) {
