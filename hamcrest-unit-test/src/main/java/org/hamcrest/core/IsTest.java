@@ -2,6 +2,7 @@ package org.hamcrest.core;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.Is.isA;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
@@ -32,8 +33,8 @@ public class IsTest extends AbstractMatcherTest {
     }
 
     public void testProvidesConvenientShortcutForIsInstanceOf() {
-        assertTrue("should match", is(String.class).matches("A"));
-        assertFalse("should not match", is(Integer.class).matches(new Object()));
-        assertFalse("should not match", is(Integer.class).matches(null));
+        assertTrue("should match", isA(String.class).matches("A"));
+        assertFalse("should not match", isA(Integer.class).matches(new Object()));
+        assertFalse("should not match", isA(Integer.class).matches(null));
     }
 }
