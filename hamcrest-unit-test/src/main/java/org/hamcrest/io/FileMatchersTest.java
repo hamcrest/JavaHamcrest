@@ -46,9 +46,11 @@ public class FileMatchersTest extends AbstractMatcherTest {
 
     @Test
     public void testAReadableFile() {
+        file.setReadable(true);
         assertMatches("matches readable file", FileMatchers.aReadableFile(), file);
-        file.setReadable(false);
-        assertDoesNotMatch("doesn't match unreadable file", FileMatchers.aReadableFile(), file);
+        if (file.setReadable(false)) {
+            assertDoesNotMatch("doesn't match unreadable file", FileMatchers.aReadableFile(), file);
+        }
     }
 
     @Test
