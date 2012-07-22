@@ -29,7 +29,7 @@ Sources and JavaDoc jars are available for all of the above.
 Extensions
 ----------
 
-For Hamcrest extension projects see [hamcrest extensions][this list].
+For Hamcrest extension projects see the [hamcrest extensions page][].
 
 Dependencies
 ------------
@@ -79,4 +79,4 @@ Also, thanks to everyone who has worked on DynaMock, nMock, jMock, EasyMock and 
 [Maven central]: http://search.maven.org/#search%7Cga%7C1%7Cg%3Aorg.hamcrest
 [google code downloads]: http://code.google.com/p/hamcrest/downloads/list?can=2&q=label%3AJava
 [google code wiki]: http://code.google.com/p/hamcrest/wiki/Tutorial
-[hamcrest extensions]: https://github.com/hamcrest/JavaHamcrest/wiki/Related-Projects
+[hamcrest extensions page]: https://github.com/hamcrest/JavaHamcrest/wiki/Related-Projects
