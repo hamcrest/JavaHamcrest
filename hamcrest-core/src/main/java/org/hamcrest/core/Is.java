@@ -70,23 +70,6 @@ public class Is<T> extends BaseMatcher<T> {
      * A shortcut to the frequently used <code>is(instanceOf(SomeClass.class))</code>.
      * <p/>
      * For example:
-     * <pre>assertThat(cheese, is(Cheddar.class))</pre>
-     * instead of:
-     * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
-     *
-     * @deprecated use isA(Class<T> type) instead.
-     */
-    @Factory
-    @Deprecated
-    public static <T> Matcher<T> is(Class<T> type) {
-        final Matcher<T> typeMatcher = instanceOf(type);
-        return is(typeMatcher);
-    }
-
-    /**
-     * A shortcut to the frequently used <code>is(instanceOf(SomeClass.class))</code>.
-     * <p/>
-     * For example:
      * <pre>assertThat(cheese, isA(Cheddar.class))</pre>
      * instead of:
      * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>

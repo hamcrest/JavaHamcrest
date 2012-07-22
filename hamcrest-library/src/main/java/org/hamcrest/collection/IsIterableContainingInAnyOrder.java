@@ -1,16 +1,15 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.Description;
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
+
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
@@ -80,28 +79,6 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
         mismatchDescription.appendText("Not matched: ").appendValue(item);
         return false;
       }
-
-    }
-
-    /**
-     * Creates a matcher for {@link Iterable}s that matches when a single pass over the
-     * examined {@link Iterable} yields a single item that satisfies the specified matcher.
-     * For a positive match, the examined iterable must only yield one item.
-     * <p/>
-     * For example:
-     * <pre>assertThat(Arrays.asList("foo"), containsInAnyOrder(equalTo("foo")))</pre>
-     * 
-     * @deprecated use contains(Matcher<? super E> itemMatcher) instead
-     * 
-     * @param itemMatcher
-     *     the matcher that must be satisfied by the single item provided by an
-     *     examined {@link Iterable}
-     */
-    @SuppressWarnings("unchecked")
-    @Deprecated
-    @Factory
-    public static <E> Matcher<Iterable<? extends E>> containsInAnyOrder(final Matcher<? super E> itemMatcher) {
-        return containsInAnyOrder(new ArrayList<Matcher<? super E>>(asList(itemMatcher)));
     }
 
     /**

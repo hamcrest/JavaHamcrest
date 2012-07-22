@@ -31,16 +31,17 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
 
     @Override
     public void describeMismatchSafely(T[] actual, Description mismatchDescription) {
-      if (actual.length != elementMatchers.length) {
-        mismatchDescription.appendText("array length was " + actual.length);
-        return;
-      }
-      for (int i = 0; i < actual.length; i++) {
-        if (!elementMatchers[i].matches(actual[i])) {
-          mismatchDescription.appendText("element " + i + " was ").appendValue(actual[i]);
-          return;
+        if (actual.length != elementMatchers.length) {
+            mismatchDescription.appendText("array length was ").appendValue(actual.length);
+            return;
         }
-      }
+        for (int i = 0; i < actual.length; i++) {
+            if (!elementMatchers[i].matches(actual[i])) {
+                mismatchDescription.appendText("element ").appendValue(i).appendText(" ");
+                elementMatchers[i].describeMismatch(actual[i], mismatchDescription);
+                return;
+            }
+        }
     }
 
     @Override

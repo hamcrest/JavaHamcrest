@@ -51,10 +51,4 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("iterable over [<1>, <2>] in any order", containsInAnyOrder(1, 2));
     }
-    
-    public void testDoesNotMatchIfSingleItemMismatches() throws Exception {
-      assertMismatchDescription("Not matched: <WithValue 3>", containsInAnyOrder(value(4)), asList(make(3)));  
-  }
-  
-
 }

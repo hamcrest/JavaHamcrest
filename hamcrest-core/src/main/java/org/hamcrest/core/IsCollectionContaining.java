@@ -20,17 +20,31 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
 
     @Override
     protected boolean matchesSafely(Iterable<? super T> collection, Description mismatchDescription) {
-        boolean isPastFirst = false;
+        boolean empty = true;
         for (Object item : collection) {
-            if (elementMatcher.matches(item)){
+            empty = false;
+            if (elementMatcher.matches(item)) {
                 return true;
             }
+        }
+        
+        if (empty) {
+            mismatchDescription.appendText("was an empty collection");
+            return false;
+        }
+        
+        mismatchDescription.appendText("was a collection that did not contain ")
+                           .appendDescriptionOf(elementMatcher)
+                           .appendText(" -- mismatches were: [");
+        boolean isPastFirst = false;
+        for (Object item : collection) {
             if (isPastFirst) {
               mismatchDescription.appendText(", ");
             }
             elementMatcher.describeMismatch(item, mismatchDescription);
             isPastFirst = true;
         }
+        mismatchDescription.appendText("]");
         return false;
     }
 

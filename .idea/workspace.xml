@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="a7a68868-e842-40fc-be0a-f367011acf62" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java" afterPath="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/AbstractMatcherTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/AbstractMatcherTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java" afterPath="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java" />
     </list>
     <ignored path="hamcrest-java.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,30 +64,7 @@
     <favorites_list name="hamcrest-java" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="CombinableTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="70" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.6556474">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#631#640#0" expanded="true" />
-                <element signature="e#761#770#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CombinableMatcher.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="0" selection-start="898" selection-end="898" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -103,7 +77,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/AllOf.java" />
         <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIterableContainingInOrder.java" />
         <option value="$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsArrayContainingInOrder.java" />
         <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/collection/IsEmptyCollectionTest.java" />
@@ -119,6 +92,7 @@
         <option value="$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java" />
         <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/AbstractMatcherTest.java" />
         <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java" />
+        <option value="$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/beans/HasPropertyWithValueTest.java" />
       </list>
     </option>
   </component>
@@ -130,9 +104,10 @@
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="1276" />
-    <option name="height" value="1230" />
+    <option name="x" value="1477" />
+    <option name="y" value="28" />
+    <option name="width" value="1001" />
+    <option name="height" value="1271" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -171,26 +146,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JavaHamcrest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -207,6 +162,26 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="JavaHamcrest" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JavaHamcrest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -228,10 +203,10 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="898" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="647" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="900" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="105" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="59" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="100" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="105" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="59" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="100" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
@@ -270,8 +245,8 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="Regex">
     <option name="pos1" value="218" />
@@ -284,30 +259,7 @@
     <option name="referencePos" value="0" />
     <option name="showLabels" value="true" />
   </component>
-  <component name="RunManager" selected="JUnit.CombinableTest">
-    <configuration default="false" name="IsIterableContainingInOrderTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="snapshooter" />
-      <module name="hamcrest-unit-tests" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.hamcrest.collection" />
-      <option name="MAIN_CLASS_NAME" value="org.hamcrest.collection.IsIterableContainingInOrderTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.HasPropertyWithValueTest">
     <configuration default="false" name="IsEqualTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="snapshooter" />
       <module name="hamcrest-unit-tests" />
@@ -400,6 +352,29 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="false" name="HasPropertyWithValueTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="snapshooter" />
+      <module name="hamcrest-unit-tests" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.hamcrest.beans" />
+      <option name="MAIN_CLASS_NAME" value="org.hamcrest.beans.HasPropertyWithValueTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -476,11 +451,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.IsIterableContainingInOrderTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.IsEqualTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.org.hamcrest in hamcrest-unit-tests" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.All in hamcrest-unit-tests" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.CombinableTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.IsEqualTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.org.hamcrest in hamcrest-unit-tests" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.All in hamcrest-unit-tests" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.CombinableTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.HasPropertyWithValueTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -534,8 +509,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1276" height="1230" extended-state="0" />
-    <editor active="true" />
+    <frame x="1477" y="28" width="1001" height="1271" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32670808" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -544,17 +519,17 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32771823" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26690713" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3089268" sideWeight="0.25686592" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39959016" sideWeight="0.6597444" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27361563" sideWeight="0.69071233" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30928764" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27282268" sideWeight="0.69071233" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30928764" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19448699" sideWeight="0.9968355" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26690713" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -634,16 +609,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIterableContainingInAnyOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="53" selection-start="2727" selection-end="2727" vertical-scroll-proportion="0.30670926" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/collection/IsIn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="33" selection-start="804" selection-end="804" vertical-scroll-proportion="0.59383035" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/IsEqual.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="27" selection-start="744" selection-end="744" vertical-scroll-proportion="0.19023137" />
@@ -679,59 +644,49 @@
         <state line="44" column="51" selection-start="1374" selection-end="1374" vertical-scroll-proportion="0.45286506" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/beans/HasPropertyWithValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="83" selection-start="5276" selection-end="5276" vertical-scroll-proportion="0.8690365">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/AllOf.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="11" selection-start="539" selection-end="539" vertical-scroll-proportion="0.06548176">
-          <folding />
-        </state>
+        <state line="19" column="11" selection-start="539" selection-end="539" vertical-scroll-proportion="0.06548176" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/MatcherAssertTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="173" selection-end="173" vertical-scroll-proportion="0.051756006">
-          <folding />
-        </state>
+        <state line="7" column="13" selection-start="173" selection-end="173" vertical-scroll-proportion="0.051756006" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/integration/junit-3.8.1.jar!/junit/framework/Assert.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="21" selection-start="987" selection-end="987" vertical-scroll-proportion="0.47931525">
-          <folding />
-        </state>
+        <state line="25" column="21" selection-start="987" selection-end="987" vertical-scroll-proportion="0.47931525" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/AbstractMatcherTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="8" selection-start="1058" selection-end="1058" vertical-scroll-proportion="0.5304465">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="898" selection-end="898" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="29" column="8" selection-start="1058" selection-end="1058" vertical-scroll-proportion="0.5304465" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/core/CombinableTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="70" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.6556474">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#631#640#0" expanded="true" />
-            <element signature="e#761#770#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="47" column="29" selection-start="1637" selection-end="1637" vertical-scroll-proportion="0.6155285" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-core/src/main/java/org/hamcrest/core/CombinableMatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="0" selection-start="898" selection-end="898" vertical-scroll-proportion="0.41404805" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/beans/SamePropertyValuesAs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="24" selection-start="3285" selection-end="3285" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-unit-test/src/main/java/org/hamcrest/beans/HasPropertyWithValueTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="3" selection-start="3221" selection-end="3221" vertical-scroll-proportion="0.29759705" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hamcrest-library/src/main/java/org/hamcrest/beans/HasPropertyWithValue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="134" column="83" selection-start="5276" selection-end="5276" vertical-scroll-proportion="0.8690365" />
       </provider>
     </entry>
   </component>
