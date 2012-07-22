@@ -60,6 +60,9 @@ ALL OF THE DEPENDENCIES ARE OPTIONAL.
 Documentation can be found at:
   http://hamcrest.org/
 
+--[ Extensions ]------------------------------------------
+
+For Hamcrest extension projects see https://github.com/hamcrest/JavaHamcrest/wiki/Related-Projects
 
 --[ Source ]-------------------------------------------------
 
