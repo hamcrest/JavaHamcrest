@@ -292,7 +292,7 @@
                     <pathelement path="@{classpath}"/>
                 </classpath>
             </javac>
-            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}.jar.contents"/>
+            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}.jar.contents/META-INF"/>
             <jar jarfile="build/@{modulename}-${version}.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
                 <fileset dir="build/temp/@{modulename}-${version}.jar.contents"/>
             </jar>
@@ -301,6 +301,7 @@
             <copy todir="build/temp/@{modulename}-${version}-sources.jar.contents">
                 <fileset dir="@{srcdir}"/>
             </copy>
+            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}-sources.jar.contents/META-INF"/>
             <jar jarfile="build/@{modulename}-${version}-sources.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
                 <fileset dir="build/temp/@{modulename}-${version}-sources.jar.contents"/>
             </jar>
