@@ -24,6 +24,7 @@
     <factory class="org.hamcrest.collection.IsArrayContainingInOrder"/>
     <factory class="org.hamcrest.collection.IsArrayContainingInAnyOrder"/>
     <factory class="org.hamcrest.collection.IsArrayWithSize"/>
+    <factory class="org.hamcrest.collection.IsMapWithSize"/>
     <factory class="org.hamcrest.collection.IsCollectionWithSize"/>
     <factory class="org.hamcrest.collection.IsEmptyCollection"/>
     <factory class="org.hamcrest.collection.IsEmptyIterable"/>
