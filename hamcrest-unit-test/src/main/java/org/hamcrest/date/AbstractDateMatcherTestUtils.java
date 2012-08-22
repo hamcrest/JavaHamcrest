@@ -12,7 +12,7 @@ import java.util.Date;
  * 
  * @author Stewart Bissett
  */
-abstract class DateMatcherTestUtil {
+abstract class AbstractDateMatcherTestUtils {
 
 	public static Date addDateField(final Date date, final int field, final int duration) {
 		Calendar cal = Calendar.getInstance();
