@@ -3,9 +3,11 @@
 package org.hamcrest.number;
 
 import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+
+import static java.lang.Math.abs;
 
 
 /**
@@ -30,7 +32,9 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
     public void describeMismatchSafely(Double item, Description mismatchDescription) {
       mismatchDescription.appendValue(item)
                          .appendText(" differed by ")
-                         .appendValue(actualDelta(item));
+                         .appendValue(actualDelta(item))
+                         .appendText(" more than delta ")
+                         .appendValue(delta);
     }
 
     @Override
@@ -42,7 +46,7 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
     }
 
     private double actualDelta(Double item) {
-      return (Math.abs((item - value)) - delta);
+      return abs(item - value) - delta;
     }
 
     /**

@@ -1,11 +1,11 @@
 package org.hamcrest.number;
 
-import static org.hamcrest.number.BigDecimalCloseTo.closeTo;
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
 import java.math.BigDecimal;
 
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
+import static org.hamcrest.number.BigDecimalCloseTo.closeTo;
 
 public class BigDecimalCloseToTest  extends AbstractMatcherTest {
 
@@ -23,9 +23,9 @@ public class BigDecimalCloseToTest  extends AbstractMatcherTest {
     assertTrue(p.matches(new BigDecimal("1.5")));
 
     assertDoesNotMatch("too large", p, new BigDecimal("2.0"));
-    assertMismatchDescription("<2.0> differed by <0.5>", p, new BigDecimal("2.0"));
+    assertMismatchDescription("<2.0> differed by <0.5> more than delta <0.5>", p, new BigDecimal("2.0"));
     assertDoesNotMatch("number too small", p, new BigDecimal("0.0"));
-    assertMismatchDescription("<0.0> differed by <0.5>", p, new BigDecimal("0.0"));
+    assertMismatchDescription("<0.0> differed by <0.5> more than delta <0.5>", p, new BigDecimal("0.0"));
   }
   
   public void testEvaluatesToTrueIfArgumentHasDifferentScale() {
@@ -36,9 +36,9 @@ public class BigDecimalCloseToTest  extends AbstractMatcherTest {
     assertTrue(p.matches(new BigDecimal("1.500000")));
 
     assertDoesNotMatch("too large", p, new BigDecimal("2.000000"));
-    assertMismatchDescription("<2.000000> differed by <0.5>", p, new BigDecimal("2.000000"));
+    assertMismatchDescription("<2.000000> differed by <0.5> more than delta <0.5>", p, new BigDecimal("2.000000"));
     assertDoesNotMatch("number too small", p, new BigDecimal("0.000000"));
-    assertMismatchDescription("<0.000000> differed by <0.5>", p, new BigDecimal("0.000000"));
+    assertMismatchDescription("<0.000000> differed by <0.5> more than delta <0.5>", p, new BigDecimal("0.000000"));
   }
 
 }
