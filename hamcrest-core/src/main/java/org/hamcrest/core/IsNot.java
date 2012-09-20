@@ -30,14 +30,19 @@ public class IsNot<T> extends BaseMatcher<T>  {
         description.appendText("not ").appendDescriptionOf(matcher);
     }
 
-    
+
+    @Override
+    public void describeMismatch(Object item, Description description) {
+        matcher.describeMismatch(item, description);
+    }
+
     /**
      * Creates a matcher that wraps an existing matcher, but inverts the logic by which
      * it will match.
      * <p/>
      * For example:
      * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
-     * 
+     *
      * @param matcher
      *     the matcher whose sense should be inverted
      */
@@ -53,7 +58,7 @@ public class IsNot<T> extends BaseMatcher<T>  {
      * <pre>assertThat(cheese, is(not(smelly)))</pre>
      * instead of:
      * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
-     * 
+     *
      * @param value
      *     the value that any examined object should <b>not</b> equal
      */
