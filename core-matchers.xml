@@ -3,6 +3,7 @@
     <!-- Core -->
     <factory class="org.hamcrest.core.AllOf"/>
     <factory class="org.hamcrest.core.AnyOf"/>
+    <factory class="org.hamcrest.core.Are"/>
     <factory class="org.hamcrest.core.CombinableMatcher"/>
     <factory class="org.hamcrest.core.DescribedAs"/>
     <factory class="org.hamcrest.core.Every"/>
