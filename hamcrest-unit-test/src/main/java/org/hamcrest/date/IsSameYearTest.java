@@ -1,6 +1,3 @@
-/*
- * Copyright (c) Modular IT Limited.
- */
 
 package org.hamcrest.date;
 

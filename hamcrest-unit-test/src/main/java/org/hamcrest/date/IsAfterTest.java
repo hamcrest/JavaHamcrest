@@ -1,6 +1,3 @@
-/*
- * Copyright (c) Modular IT Limited.
- */
 
 package org.hamcrest.date;
 
@@ -10,7 +7,6 @@ import static org.hamcrest.core.IsNot.*;
 import static org.hamcrest.date.AbstractDateMatcherTestUtils.*;
 import static org.hamcrest.date.IsAfter.*;
 import java.util.Date;
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
 /**
