@@ -1,4 +1,7 @@
-[![][logo]][website]
+![JavaHamcrest](http://hamcrest.org/images/logo.jpg)
+
+[![Build Status](https://travis-ci.org/hamcrest/JavaHamcrest.png?branch=master)](https://travis-ci.org/hamcrest/JavaHamcrest)
+
 Java Hamcrest
 =============
 Licensed under [BSD License][].
