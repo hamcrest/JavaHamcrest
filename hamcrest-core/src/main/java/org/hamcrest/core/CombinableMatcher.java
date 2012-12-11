@@ -65,7 +65,7 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * Creates a matcher that matches when either of the specified matchers match the examined object.
    * <p/>
    * For example:
-   * <pre>assertThat("fan", either(containsString("a")).and(containsString("b")))</pre>
+   * <pre>assertThat("fan", either(containsString("a")).or(containsString("b")))</pre>
    */
   @Factory
   public static <LHS> CombinableEitherMatcher<LHS> either(Matcher<? super LHS> matcher) {
