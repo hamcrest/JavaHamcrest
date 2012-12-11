@@ -23,7 +23,7 @@ public interface Description {
     Description appendDescriptionOf(SelfDescribing value);
 
     /**
-     * Appends an arbitary value to the description.
+     * Appends an arbitrary value to the description.
      */
     Description appendValue(Object value);
 

@@ -73,7 +73,7 @@ public class ExampleWithEasyMock2 {
      */
     @Test
     public void usingAssertThat() {
-        // TODO(joe): This is a bit tricker with EasyMock.
+        // TODO(joe): This is a bit trickier with EasyMock.
         //assertThat("xx", isTwoXs());
         //assertThat("yy", not(isTwoXs()));
         //assertThat("i like cheese", startsWith("i like"));

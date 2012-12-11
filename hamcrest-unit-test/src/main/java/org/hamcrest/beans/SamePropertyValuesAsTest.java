@@ -27,7 +27,7 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
                               samePropertyValuesAs((Object)aValue), actualBean);
   }
 
-  public void testReportsMisatchOnFirstPropertyDifference() {
+  public void testReportsMismatchOnFirstPropertyDifference() {
     assertMismatchDescription("string was \"different\"", 
         samePropertyValuesAs(expectedBean), new ExampleBean("different", 1, aValue));
     assertMismatchDescription("int was <2>", 

@@ -129,7 +129,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
                 method.getGenerifiedType());
     }
 
-    public static class ParamterizedMatchers {
+    public static class ParameterizedMatchers {
 
         @Factory
         public static Matcher<String> withParam(String someString, int[] numbers, Collection<Object> things) {
@@ -154,7 +154,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     }
 
     public void testReadsParameterTypes() {
-        FactoryMethod method = readMethod(ParamterizedMatchers.class, "withParam");
+        FactoryMethod method = readMethod(ParameterizedMatchers.class, "withParam");
         List<FactoryMethod.Parameter> params = method.getParameters();
         assertEquals(3, params.size());
 
@@ -164,15 +164,15 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     }
 
     public void testReadsArrayAndVarArgParameterTypes() {
-        FactoryMethod arrayMethod = readMethod(ParamterizedMatchers.class, "withArray");
+        FactoryMethod arrayMethod = readMethod(ParameterizedMatchers.class, "withArray");
         assertEquals("java.lang.String[]", arrayMethod.getParameters().get(0).getType());
 
-        FactoryMethod varArgsMethod = readMethod(ParamterizedMatchers.class, "withVarArgs");
+        FactoryMethod varArgsMethod = readMethod(ParameterizedMatchers.class, "withVarArgs");
         assertEquals("java.lang.String...", varArgsMethod.getParameters().get(0).getType());
     }
 
     public void testReadsGenerifiedParameterTypes() {
-        FactoryMethod method = readMethod(ParamterizedMatchers.class, "withGenerifiedParam");
+        FactoryMethod method = readMethod(ParameterizedMatchers.class, "withGenerifiedParam");
         assertEquals("java.util.Collection<? extends java.lang.Comparable<java.lang.String>>",
                 method.getParameters().get(0).getType());
         assertEquals("java.util.Set<java.lang.String[]>[]",
@@ -180,7 +180,7 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     }
 
     public void testCannotReadParameterNamesSoMakesThemUpInstead() {
-        FactoryMethod method = readMethod(ParamterizedMatchers.class, "withParam");
+        FactoryMethod method = readMethod(ParameterizedMatchers.class, "withParam");
         List<FactoryMethod.Parameter> params = method.getParameters();
 
         assertEquals("param1", params.get(0).getName());

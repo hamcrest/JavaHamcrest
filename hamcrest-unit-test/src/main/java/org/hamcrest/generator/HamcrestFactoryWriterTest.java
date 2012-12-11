@@ -141,7 +141,7 @@ public class HamcrestFactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesMethodWithNameOverriden() throws IOException {
+    public void testWritesMethodWithNameOverridden() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "eq", "matcher.ReturnType");
 
         factoryWriter.writeMethod("anotherName", method);

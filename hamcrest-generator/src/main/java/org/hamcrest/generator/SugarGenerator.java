@@ -68,7 +68,7 @@ public class SugarGenerator implements Closeable, SugarConfiguration {
     }
 
     /**
-     * Convient way to add multiple FactoryMethods.
+     * Convenient way to add multiple FactoryMethods.
      *
      * @see #addFactoryMethod(FactoryMethod)
      */

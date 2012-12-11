@@ -37,7 +37,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     }
 
     /**
-     * Creates a matcher for arrays that matcheswhen each item in the examined array is
+     * Creates a matcher for arrays that matches when each item in the examined array is
      * logically equal to the corresponding item in the specified items.  For a positive match,
      * the examined array must be of the same length as the number of specified items.
      * <p/>
