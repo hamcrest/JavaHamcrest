@@ -12,7 +12,7 @@ import org.hamcrest.TypeSafeMatcher;
  */
 public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
 
-    // TODO: Replace String with CharSequence to allow for easy interopability between
+    // TODO: Replace String with CharSequence to allow for easy interoperability between
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
 
     private final String string;

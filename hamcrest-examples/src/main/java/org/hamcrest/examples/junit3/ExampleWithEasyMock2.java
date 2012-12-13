@@ -69,7 +69,7 @@ public class ExampleWithEasyMock2 extends TestCase {
      * with both jMock Constraints and Hamcrest Matchers.
      */
     public void testUsingAssertThat() {
-        // TODO(joe): This is a bit tricker with EasyMock.
+        // TODO(joe): This is a bit trickier with EasyMock.
         //assertThat("xx", equal("xx"));
         //assertThat("yy", not(equal("xx")));
         //assertThat("i like cheese", startsWith("i like"));
