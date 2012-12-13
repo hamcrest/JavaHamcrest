@@ -5,7 +5,7 @@ import org.hamcrest.TypeSafeMatcher;
 
 public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
 
-    // TODO: Replace String with CharSequence to allow for easy interopability between
+    // TODO: Replace String with CharSequence to allow for easy interoperability between
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
 
     protected final String substring;
