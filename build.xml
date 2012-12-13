@@ -11,6 +11,10 @@
         <delete dir="build"/>
     </target>
 
+    <target name="api" description="Build Hamcrest APIs">
+        <java-to-jar srcdir="hamcrest-api/src/main/java" modulename="hamcrest-api"/>
+    </target>
+
     <target name="generator" description="Build code generator tool">
         <java-to-jar srcdir="hamcrest-generator/src/main/java"
                      modulename="hamcrest-generator-nodeps"
@@ -26,17 +30,19 @@
         <copy file="build/hamcrest-generator-nodeps-${version}-sources.jar" tofile="build/hamcrest-generator-${version}-sources.jar"/>
     </target>
 
-    <target name="core" depends="generator" description="Build core Hamcrest library">
-        <java-to-jar srcdir="hamcrest-core/src/main/java" modulename="hamcrest-core"/>
+    <target name="core" depends="api,generator" description="Build core Hamcrest library">
+        <java-to-jar srcdir="hamcrest-core/src/main/java"
+                     modulename="hamcrest-core-nodeps"
+                     classpath="build/hamcrest-api-${version}.jar"/>
 
         <!-- Generate one class with all static imports -->
         <mkdir dir="build/temp/hamcrest-core/generated-code"/>
-
         <java classname="org.hamcrest.generator.config.XmlConfigurator"
               fork="yes"
               failonerror="yes"
               classpath="
-                build/hamcrest-core-${version}.jar;
+                build/hamcrest-api-${version}.jar;
+                build/hamcrest-core-nodeps-${version}.jar;
                 build/hamcrest-generator-${version}.jar;
               ">
             <arg value="core-matchers.xml"/>
@@ -44,10 +50,22 @@
             <arg value="org.hamcrest.CoreMatchers"/>
             <arg value="build/temp/hamcrest-core/generated-code"/>
         </java>
-        <!-- Append to core jar -->
+
+        <!-- Append generated code to core jar -->
         <java-to-jar srcdir="build/temp/hamcrest-core/generated-code"
-                     modulename="hamcrest-core"
-                     classpath="build/hamcrest-core-${version}.jar"/>
+                     modulename="hamcrest-core-nodeps"
+                     classpath="build/hamcrest-api-${version}.jar;
+                                build/hamcrest-core-nodeps-${version}.jar"/>
+
+        <!-- Bundle api into core jar -->
+        <jar jarfile="build/hamcrest-core-${version}.jar" duplicate="preserve">
+            <zipfileset src="build/hamcrest-api-${version}.jar"/>
+            <zipfileset src="build/hamcrest-core-nodeps-${version}.jar"/>
+        </jar>
+        <jar jarfile="build/hamcrest-core-${version}-sources.jar" duplicate="preserve">
+            <zipfileset src="build/hamcrest-api-${version}-sources.jar"/>
+            <zipfileset src="build/hamcrest-core-nodeps-${version}-sources.jar"/>
+        </jar>
     </target>
 
     <target name="library"
@@ -311,6 +329,7 @@
     <macrodef name="java-to-javadoc-jar" description="Generate javadoc for a module and build a Jar">
         <attribute name="modulename" description="Name of the module to document"/>
         <sequential>
+            <unzip src="build/@{modulename}-${version}-sources.jar" dest="build/temp/@{modulename}-${version}-sources.jar.contents"/>
             <javadoc packagenames="org.hamcrest.*" sourcepath="build/temp/@{modulename}-${version}-sources.jar.contents" defaultexcludes="yes"
                      destdir="build/temp/@{modulename}-${version}-javadoc.jar.contents" author="true" version="true" use="true"
                      windowtitle="Hamcrest" source="1.6" failonerror="yes">
