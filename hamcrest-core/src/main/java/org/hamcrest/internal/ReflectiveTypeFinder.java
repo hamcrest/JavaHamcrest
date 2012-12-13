@@ -13,7 +13,7 @@
  * 
  * A <code>FeatureMatcher</code> is an abstract subclass of <code>TypeSafeDiagnosingMatcher</code>. 
  * Although it has a templated implementation of <code>matchesSafely(&lt;T&gt;, Description);</code>, the
- * actually run-time signature of this is <code>matchesSafely(Object, Description);</code>. Instead,
+ * actual run-time signature of this is <code>matchesSafely(Object, Description);</code>. Instead,
  * we must find the type by reflecting on the concrete implementation of 
  * <pre>protected abstract U featureValueOf(T actual);</pre>
  * a method which is declared in <code>FeatureMatcher</code>.
