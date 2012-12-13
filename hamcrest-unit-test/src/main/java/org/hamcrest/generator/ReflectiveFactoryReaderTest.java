@@ -6,7 +6,9 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -31,20 +33,18 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     }
 
     public void testIteratesOverFactoryMethods() {
-        Iterable<FactoryMethod> reader = new ReflectiveFactoryReader(SimpleSetOfMatchers.class);
-        Iterator<FactoryMethod> methods = reader.iterator();
+        final ReflectiveFactoryReader reader = new ReflectiveFactoryReader(SimpleSetOfMatchers.class);
+        final List<FactoryMethod> methods = methodsReadBy(reader);
 
-        assertTrue("Expected first method", methods.hasNext());
-        FactoryMethod firstMethod = methods.next();
-        assertEquals("firstMethod", firstMethod.getName());
-        assertEquals(SimpleSetOfMatchers.class.getName().replace('$', '.'), firstMethod.getMatcherClass());
+        assertEquals(2, methods.size());
+        
+        final String expectedClass = SimpleSetOfMatchers.class.getName().replace('$', '.');
+        
+        assertEquals("firstMethod", methods.get(0).getName());
+        assertEquals(expectedClass, methods.get(0).getMatcherClass());
 
-        assertTrue("Expected second method", methods.hasNext());
-        FactoryMethod secondMethod = methods.next();
-        assertEquals("secondMethod", secondMethod.getName());
-        assertEquals(SimpleSetOfMatchers.class.getName().replace('$', '.'), secondMethod.getMatcherClass());
-
-        assertFalse("Expected no more methods", methods.hasNext());
+        assertEquals("secondMethod", methods.get(1).getName());
+        assertEquals(expectedClass, methods.get(1).getMatcherClass());
     }
 
     public static class MatchersWithDodgySignatures {
@@ -80,16 +80,12 @@ public class ReflectiveFactoryReaderTest extends TestCase {
     }
 
     public void testOnlyReadsPublicStaticAnnotatedMethodsThatReturnNonVoid() {
-        Iterable<FactoryMethod> reader = new ReflectiveFactoryReader(MatchersWithDodgySignatures.class);
-        Iterator<FactoryMethod> methods = reader.iterator();
+        final ReflectiveFactoryReader reader = new ReflectiveFactoryReader(MatchersWithDodgySignatures.class);
+        final List<FactoryMethod> methods = methodsReadBy(reader);
 
-        assertTrue("Expected first method", methods.hasNext());
-        assertEquals("goodMethod", methods.next().getName());
-
-        assertTrue("Expected second method", methods.hasNext());
-        assertEquals("anotherGoodMethod", methods.next().getName());
-
-        assertFalse("Expected no more methods", methods.hasNext());
+        assertEquals(2, methods.size());
+        assertEquals("anotherGoodMethod", methods.get(0).getName());
+        assertEquals("goodMethod", methods.get(1).getName());
     }
 
     public static class GenerifiedMatchers {
@@ -173,10 +169,15 @@ public class ReflectiveFactoryReaderTest extends TestCase {
 
     public void testReadsGenerifiedParameterTypes() {
         FactoryMethod method = readMethod(ParameterizedMatchers.class, "withGenerifiedParam");
+        
         assertEquals("java.util.Collection<? extends java.lang.Comparable<java.lang.String>>",
-                method.getParameters().get(0).getType());
-        assertEquals("java.util.Set<java.lang.String[]>[]",
-                method.getParameters().get(1).getType());
+                     method.getParameters().get(0).getType());
+
+        String expected = System.getProperty("java.version").startsWith("1.7.")
+                ? "java.util.Set<[Ljava.lang.String;>[]"
+                : "java.util.Set<java.lang.String[]>[]";
+
+        assertEquals(expected, method.getParameters().get(1).getType());
     }
 
     public void testCannotReadParameterNamesSoMakesThemUpInstead() {
@@ -257,6 +258,19 @@ public class ReflectiveFactoryReaderTest extends TestCase {
         assertNotNull(readMethod(SubclassOfMatcher.class, "subclassMethod"));
     }
 
+    private static List<FactoryMethod> methodsReadBy(final ReflectiveFactoryReader reader) {
+        final List<FactoryMethod> extractedMethods = new ArrayList<FactoryMethod>();
+        for (FactoryMethod factoryMethod : reader) {
+            extractedMethods.add(factoryMethod);
+        }
+        Collections.sort(extractedMethods, new Comparator<FactoryMethod>() {
+            @Override public int compare(FactoryMethod o1, FactoryMethod o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        return extractedMethods;
+    }
+
     private static FactoryMethod readMethod(Class<?> cls, String methodName) {
         for (FactoryMethod method : new ReflectiveFactoryReader(cls)) {
             if (method.getName().equals(methodName)) {
@@ -265,5 +279,4 @@ public class ReflectiveFactoryReaderTest extends TestCase {
         }
         return null;
     }
-
 }

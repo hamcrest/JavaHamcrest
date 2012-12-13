@@ -284,7 +284,7 @@
                 <attribute name="Built-Date" value="${build.timestamp}"/>
             </manifest>
             <mkdir dir="build/temp/@{modulename}-${version}.jar.contents"/>
-            <javac srcdir="@{srcdir}" destdir="build/temp/@{modulename}-${version}.jar.contents" debug="${debug}" target="1.5" includeantruntime="false">
+            <javac srcdir="@{srcdir}" destdir="build/temp/@{modulename}-${version}.jar.contents" debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
                 <classpath>
                     <fileset dir="lib/integration">
                         <include name="*.jar"/>
