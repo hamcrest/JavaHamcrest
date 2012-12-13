@@ -84,33 +84,6 @@
                                 build/hamcrest-library-${version}.jar"/>
     </target>
     
-    <target name="unit-test" depends="core, library, integration, generator" description="Build and run unit tests.">
-        <java-to-jar srcdir="hamcrest-unit-test/src/main/java" modulename="hamcrest-unit-test"
-                     classpath="build/hamcrest-core-${version}.jar;
-                                build/hamcrest-library-${version}.jar;
-                                build/hamcrest-integration-${version}.jar;
-                                build/hamcrest-generator-${version}.jar"/>
-        <junit printsummary="no" fork="no" haltonfailure="${haltonfailure}">
-            <formatter type="brief" usefile="no"/>
-            <classpath>
-                <fileset dir="lib/integration">
-                    <include name="*.jar"/>
-                </fileset>
-                <pathelement path="build/hamcrest-core-${version}.jar"/>
-                <pathelement path="build/hamcrest-library-${version}.jar"/>
-                <pathelement path="build/hamcrest-integration-${version}.jar"/>
-                <pathelement path="build/hamcrest-generator-${version}.jar"/>
-                <pathelement path="build/hamcrest-unit-test-${version}.jar"/>
-            </classpath>
-            <batchtest>
-                <fileset dir="hamcrest-unit-test/src/main/java">
-                    <include name="**/*Test*"/>
-                    <exclude name="**/Abstract*"/>
-                </fileset>
-            </batchtest>
-        </junit>
-    </target>
-
     <target name="examples" depends="core, library, integration" description="Build and run unit tests.">
         <java-to-jar srcdir="hamcrest-examples/src/main/java"
                      modulename="hamcrest-examples"
@@ -174,7 +147,7 @@
         </jar>
     </target>
 
-    <target name="package" depends="core, generator, library, integration, bigjar, unit-test, examples, javadoc" description="Package for distribution">
+    <target name="package" depends="core, generator, library, integration, bigjar, examples, javadoc" description="Package for distribution">
         <copy todir="build">
             <fileset dir="pom" includes="*.pom"/>
             <filterset><filter token="VERSION" value="${version}"/></filterset>
@@ -283,6 +256,8 @@
                 <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Built-Date" value="${build.timestamp}"/>
             </manifest>
+
+            <!-- Build jar -->
             <mkdir dir="build/temp/@{modulename}-${version}.jar.contents"/>
             <javac srcdir="@{srcdir}" destdir="build/temp/@{modulename}-${version}.jar.contents" debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
                 <classpath>
@@ -295,6 +270,21 @@
             <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}.jar.contents/META-INF"/>
             <jar jarfile="build/@{modulename}-${version}.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
                 <fileset dir="build/temp/@{modulename}-${version}.jar.contents"/>
+            </jar>
+
+            <!-- Build test jar -->
+            <mkdir dir="build/temp/@{modulename}-${version}.testjar.contents"/>
+            <javac srcdir="@{srcdir}" destdir="build/temp/@{modulename}-${version}.testjar.contents" debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
+                <classpath>
+                    <fileset dir="lib/integration">
+                        <include name="*.jar"/>
+                    </fileset>
+                    <pathelement path="build/@{modulename}-${version}.jar"/>
+                    <pathelement path="@{classpath}"/>
+                </classpath>
+            </javac>
+            <jar jarfile="build/@{modulename}-${version}-tests.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
+                <fileset dir="build/temp/@{modulename}-${version}.testjar.contents"/>
             </jar>
 
             <!-- Build sources jar -->
@@ -328,6 +318,33 @@
             <jar jarfile="build/@{modulename}-${version}-javadoc.jar">
                 <fileset dir="build/temp/@{modulename}-${version}-javadoc.jar.contents"/>
             </jar>
+        </sequential>
+    </macrodef>
+	
+    <macrodef name="unit-test" description="run unit tests.">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <attribute name="classpath" description="Anything additional to add on the classpath" default=""/>
+        <sequential>
+            <junit printsummary="no" fork="no" haltonfailure="${haltonfailure}">
+                <formatter type="brief" usefile="no"/>
+                <classpath>
+                    <fileset dir="lib/integration">
+                        <include name="*.jar"/>
+                    </fileset>
+                    <pathelement path="build/hamcrest-core-${version}.jar"/>
+                    <pathelement path="build/hamcrest-library-${version}.jar"/>
+                    <pathelement path="build/hamcrest-integration-${version}.jar"/>
+                    <pathelement path="build/hamcrest-generator-${version}.jar"/>
+                    <pathelement path="build/hamcrest-unit-test-${version}.jar"/>
+                </classpath>
+                <batchtest>
+                    <batchtest fork="yes" todir="${build.dir}/testreport">
+                        <zipfileset src="build/@{modulename}-${version}-tests.jar">
+                            <include name="org/hamcrest/**/*Test.class"/>
+                        </zipfileset>
+                    </batchtest>
+                </batchtest>
+            </junit>
         </sequential>
     </macrodef>
 </project>
