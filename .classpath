@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="hamcrest-core/src/main/java"/>
-	<classpathentry kind="src" path="build/temp/hamcrest-core/generated-code"/>
+	<classpathentry kind="src" path="hamcrest-core/src/test/java"/>
 	<classpathentry kind="src" path="hamcrest-generator/src/main/java"/>
-	<classpathentry kind="src" path="hamcrest-examples/src/main/java"/>
+	<classpathentry kind="src" path="hamcrest-generator/src/test/java"/>
+	<classpathentry kind="src" path="build/temp/hamcrest-core/generated-code"/>
 	<classpathentry kind="src" path="hamcrest-integration/src/main/java"/>
+	<classpathentry kind="src" path="hamcrest-integration/src/test/java"/>
 	<classpathentry kind="src" path="hamcrest-library/src/main/java"/>
-	<classpathentry kind="src" path="hamcrest-unit-test/src/main/java"/>
+	<classpathentry kind="src" path="hamcrest-library/src/test/java"/>
 	<classpathentry kind="src" path="build/temp/hamcrest-library/generated-code"/>
+	<classpathentry kind="src" path="hamcrest-examples/src/main/java"/>
 	<classpathentry kind="lib" path="lib/integration/easymock-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/integration/jmock-1.10RC1.jar"/>
 	<classpathentry kind="lib" path="lib/generator/qdox-1.12.jar" sourcepath="lib/sources/qdox-1.12-sources.jar"/>
