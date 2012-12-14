@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="hamcrest-api/src/main/java"/>
 	<classpathentry kind="src" path="hamcrest-api/src/test/java"/>
-	<classpathentry kind="src" path="hamcrest-core/src/main/java"/>
-	<classpathentry kind="src" path="hamcrest-core/src/test/java"/>
 	<classpathentry kind="src" path="hamcrest-generator/src/main/java"/>
 	<classpathentry kind="src" path="hamcrest-generator/src/test/java"/>
+	<classpathentry kind="src" path="hamcrest-core/src/main/java"/>
+	<classpathentry kind="src" path="hamcrest-core/src/test/java"/>
 	<classpathentry kind="src" path="build/temp/hamcrest-core/generated-code"/>
 	<classpathentry kind="src" path="hamcrest-integration/src/main/java"/>
 	<classpathentry kind="src" path="hamcrest-integration/src/test/java"/>
