@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-api/src/main/hamcrest-api.iml" filepath="$PROJECT_DIR$/hamcrest-api/src/main/hamcrest-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/hamcrest-core/src/main/hamcrest-core.iml" filepath="$PROJECT_DIR$/hamcrest-core/src/main/hamcrest-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/hamcrest-examples/src/main/hamcrest-examples.iml" filepath="$PROJECT_DIR$/hamcrest-examples/src/main/hamcrest-examples.iml" />
       <module fileurl="file://$PROJECT_DIR$/hamcrest-generator/src/main/hamcrest-generator.iml" filepath="$PROJECT_DIR$/hamcrest-generator/src/main/hamcrest-generator.iml" />

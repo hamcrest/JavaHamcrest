@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="hamcrest-api/src/main/java"/>
 	<classpathentry kind="src" path="hamcrest-core/src/main/java"/>
 	<classpathentry kind="src" path="hamcrest-core/src/test/java"/>
 	<classpathentry kind="src" path="hamcrest-generator/src/main/java"/>
