@@ -22,6 +22,7 @@
         <path id="cp-hamcrest-generator-main" path="lib/generator/qdox-1.12.jar;build/hamcrest-api-${version}.jar"/>
         <path id="cp-hamcrest-generator-test" path="lib/integration/junit-dep-4.10.jar"/>
         <compile-module modulename="hamcrest-generator"/>
+        <test-module modulename="hamcrest-generator"/>
 
         <!-- Bundle QDox classes in hamcrest-generator.jar using JarJar to place classes under a different package -->
         <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="lib/generator/jarjar-1.3.jar"/>
@@ -33,9 +34,23 @@
         </jarjar>
     </target>
 
+    <target name="core" depends="generator" description="Build core Hamcrest library">
+        <path id="cp-hamcrest-core-main" path="build/hamcrest-api-${version}.jar"/>
+        <path id="cp-hamcrest-core-test" path="lib/integration/junit-dep-4.10.jar"/>
+        <compile-module modulename="hamcrest-core"/>
+        <test-module modulename="hamcrest-core"/>
+        <generate-module-factory modulename="hamcrest-core" configurationfile="core-matchers.xml" targetclass="org.hamcrest.CoreMatchers"/>
+        
+        <!-- Bundle api into core jar -->
+        <copy file="build/hamcrest-core-${version}.jar" tofile="build/hamcrest-core-${version}-nodep.jar"/>
+        <jar jarfile="build/hamcrest-core-${version}.jar" duplicate="preserve">
+            <zipfileset src="build/hamcrest-api-${version}.jar"/>
+            <zipfileset src="build/hamcrest-core-${version}-nodep.jar"/>
+        </jar>
+    </target>
+
     <macrodef name="compile-module">
         <attribute name="modulename" description="Name of the module to jar"/>
-        <attribute name="classpathref" description="Anything additional to add on the classpath" default=""/>
 
         <sequential>
             <mkdir dir="build/temp/@{modulename}-${version}.jar.contents"/>
@@ -64,41 +79,33 @@
         </sequential>
     </macrodef>
 
-    <target name="core" depends="generator" description="Build core Hamcrest library">
-        <java-to-jar srcdir="hamcrest-core/src/main/java" modulename="hamcrest-core"/>
+    <macrodef name="generate-module-factory" description="Generate one class with all static imports">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <attribute name="configurationfile" description="xml configuration file"/>
+        <attribute name="targetclass" description="factory class to generate"/>
+        <sequential>
+            <mkdir dir="build/temp/@{modulename}/generated-code"/>
+            <java classname="org.hamcrest.generator.config.XmlConfigurator" fork="yes" failonerror="yes">
+                <classpath path="build/hamcrest-generator-${version}.jar"/>
+                <classpath refid="cp-@{modulename}-main"/>
+                <classpath path="build/@{modulename}-${version}.jar"/>
+                <arg value="@{configurationfile}"/>
+                <arg value="@{modulename}/src/main/java"/>
+                <arg value="@{targetclass}"/>
+                <arg value="build/temp/@{modulename}/generated-code"/>
+            </java>
 
-        <!-- Generate one class with all static imports -->
-        <mkdir dir="build/temp/hamcrest-core/generated-code"/>
-        <java classname="org.hamcrest.generator.config.XmlConfigurator"
-              fork="yes"
-              failonerror="yes"
-              classpath="
-                build/hamcrest-api-${version}.jar;
-                build/hamcrest-core-nodeps-${version}.jar;
-                build/hamcrest-generator-${version}.jar;
-              ">
-            <arg value="core-matchers.xml"/>
-            <arg value="hamcrest-core/src/main/java"/>
-            <arg value="org.hamcrest.CoreMatchers"/>
-            <arg value="build/temp/hamcrest-core/generated-code"/>
-        </java>
-
-        <!-- Append generated code to core jar -->
-        <java-to-jar srcdir="build/temp/hamcrest-core/generated-code"
-                     modulename="hamcrest-core-nodeps"
-                     classpath="build/hamcrest-api-${version}.jar;
-                                build/hamcrest-core-nodeps-${version}.jar"/>
-
-        <!-- Bundle api into core jar -->
-        <jar jarfile="build/hamcrest-core-${version}.jar" duplicate="preserve">
-            <zipfileset src="build/hamcrest-api-${version}.jar"/>
-            <zipfileset src="build/hamcrest-core-nodeps-${version}.jar"/>
-        </jar>
-        <jar jarfile="build/hamcrest-core-${version}-sources.jar" duplicate="preserve">
-            <zipfileset src="build/hamcrest-api-${version}-sources.jar"/>
-            <zipfileset src="build/hamcrest-core-nodeps-${version}-sources.jar"/>
-        </jar>
-    </target>
+            <!-- Append generated code to core jar -->
+            <javac srcdir="build/temp/@{modulename}/generated-code"
+                   destdir="build/temp/@{modulename}-${version}.jar.contents"
+                   debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
+                <classpath refid="cp-@{modulename}-main"/>
+            </javac>
+            <jar jarfile="build/@{modulename}-${version}.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
+                <fileset dir="build/temp/@{modulename}-${version}.jar.contents"/>
+            </jar>
+        </sequential>
+    </macrodef>
 
     <target name="library"
             depends="core,generator"
@@ -398,6 +405,7 @@
                 <batchtest fork="yes" todir="${build.dir}/testreport">
                     <zipfileset src="build/@{modulename}-${version}-test.jar">
                         <include name="org/hamcrest/**/*Test.class"/>
+                        <exclude name="**/Abstract*.class"/>
                     </zipfileset>
                 </batchtest>
             </junit>
