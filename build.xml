@@ -79,79 +79,6 @@
         <jar-module modulename="hamcrest-examples"/>
     </target>
 
-    <macrodef name="compile-module">
-        <attribute name="modulename" description="Name of the module to jar"/>
-        <sequential>
-            <mkdir dir="build/temp/@{modulename}-${version}-sources.jar.contents"/>
-            <copy todir="build/temp/@{modulename}-${version}-sources.jar.contents">
-                <fileset dir="@{modulename}/src/main/java"/>
-            </copy>
-            <mkdir dir="build/temp/@{modulename}-${version}.jar.contents"/>
-            <javac srcdir="build/temp/@{modulename}-${version}-sources.jar.contents"
-                   destdir="build/temp/@{modulename}-${version}.jar.contents"
-                   debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
-                <classpath refid="cp-@{modulename}-main"/>
-            </javac>
-
-            <mkdir dir="build/temp/@{modulename}-${version}-tests-sources.jar.contents"/>
-            <copy todir="build/temp/@{modulename}-${version}-tests-sources.jar.contents" failonerror="false">
-                <fileset dir="@{modulename}/src/test/java"/>
-            </copy>
-            <mkdir dir="build/temp/@{modulename}-${version}-tests.jar.contents"/>
-            <javac srcdir="build/temp/@{modulename}-${version}-tests-sources.jar.contents"
-                   destdir="build/temp/@{modulename}-${version}-tests.jar.contents"
-                   debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
-                <classpath refid="cp-@{modulename}-main"/>
-                <classpath refid="cp-@{modulename}-test"/>
-                <classpath path="build/temp/@{modulename}-${version}.jar.contents"/>
-            </javac>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="jar-module">
-        <attribute name="modulename" description="Name of the module to jar"/>
-        <sequential>
-            <make-manifest modulename="@{modulename}"/>
-            <jar-module-component modulename="@{modulename}"/>
-            <jar-module-component modulename="@{modulename}" suffix="-tests"/>
-            <jar-module-component modulename="@{modulename}" suffix="-sources"/>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="jar-module-component">
-        <attribute name="modulename" description="Name of the module to jar"/>
-        <attribute name="suffix" default="" description="Name of the module to jar"/>
-        <sequential>
-            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}@{suffix}.jar.contents/META-INF"/>
-            <jar jarfile="build/@{modulename}-${version}@{suffix}.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
-                <fileset dir="build/temp/@{modulename}-${version}@{suffix}.jar.contents"/>
-            </jar>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="generate-module-factory" description="Generate one class with all static imports">
-        <attribute name="modulename" description="Name of the module to jar"/>
-        <attribute name="configurationfile" description="xml configuration file"/>
-        <attribute name="targetclass" description="factory class to generate"/>
-        <sequential>
-            <mkdir dir="build/temp/@{modulename}/generated-code"/>
-            <java classname="org.hamcrest.generator.config.XmlConfigurator" fork="yes" failonerror="yes">
-                <classpath path="build/hamcrest-generator-${version}.jar"/>
-                <classpath refid="cp-@{modulename}-main"/>
-                <classpath path="build/temp/@{modulename}-${version}.jar.contents"/>
-                <arg value="@{configurationfile}"/>
-                <arg value="@{modulename}/src/main/java"/>
-                <arg value="@{targetclass}"/>
-                <arg value="build/temp/@{modulename}/generated-code"/>
-            </java>
-
-            <copy todir="build/temp/@{modulename}-${version}-sources.jar.contents">
-                <fileset dir="build/temp/@{modulename}/generated-code"/>
-            </copy>
-            <compile-module modulename="@{modulename}"/>
-        </sequential>
-    </macrodef>
-    
     <target name="bigjar" depends="core, library, integration, generator"
             description="Build a single Jar (hamcrest-all.jar) that contains core, library, generator and integration.">
         <!-- Bundle api into core jar -->
@@ -315,6 +242,79 @@
                <attribute name="Built-By" value="${user.name}"/>
                <attribute name="Built-Date" value="${build.timestamp}"/>
            </manifest>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="compile-module">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <sequential>
+            <mkdir dir="build/temp/@{modulename}-${version}-sources.jar.contents"/>
+            <copy todir="build/temp/@{modulename}-${version}-sources.jar.contents">
+                <fileset dir="@{modulename}/src/main/java"/>
+            </copy>
+            <mkdir dir="build/temp/@{modulename}-${version}.jar.contents"/>
+            <javac srcdir="build/temp/@{modulename}-${version}-sources.jar.contents"
+                   destdir="build/temp/@{modulename}-${version}.jar.contents"
+                   debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
+                <classpath refid="cp-@{modulename}-main"/>
+            </javac>
+
+            <mkdir dir="build/temp/@{modulename}-${version}-tests-sources.jar.contents"/>
+            <copy todir="build/temp/@{modulename}-${version}-tests-sources.jar.contents" failonerror="false">
+                <fileset dir="@{modulename}/src/test/java"/>
+            </copy>
+            <mkdir dir="build/temp/@{modulename}-${version}-tests.jar.contents"/>
+            <javac srcdir="build/temp/@{modulename}-${version}-tests-sources.jar.contents"
+                   destdir="build/temp/@{modulename}-${version}-tests.jar.contents"
+                   debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
+                <classpath refid="cp-@{modulename}-main"/>
+                <classpath refid="cp-@{modulename}-test"/>
+                <classpath path="build/temp/@{modulename}-${version}.jar.contents"/>
+            </javac>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="jar-module">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <sequential>
+            <make-manifest modulename="@{modulename}"/>
+            <jar-module-component modulename="@{modulename}"/>
+            <jar-module-component modulename="@{modulename}" suffix="-tests"/>
+            <jar-module-component modulename="@{modulename}" suffix="-sources"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="jar-module-component">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <attribute name="suffix" default="" description="Name of the module to jar"/>
+        <sequential>
+            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}@{suffix}.jar.contents/META-INF"/>
+            <jar jarfile="build/@{modulename}-${version}@{suffix}.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
+                <fileset dir="build/temp/@{modulename}-${version}@{suffix}.jar.contents"/>
+            </jar>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="generate-module-factory" description="Generate one class with all static imports">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <attribute name="configurationfile" description="xml configuration file"/>
+        <attribute name="targetclass" description="factory class to generate"/>
+        <sequential>
+            <mkdir dir="build/temp/@{modulename}/generated-code"/>
+            <java classname="org.hamcrest.generator.config.XmlConfigurator" fork="yes" failonerror="yes">
+                <classpath path="build/hamcrest-generator-${version}.jar"/>
+                <classpath refid="cp-@{modulename}-main"/>
+                <classpath path="build/temp/@{modulename}-${version}.jar.contents"/>
+                <arg value="@{configurationfile}"/>
+                <arg value="@{modulename}/src/main/java"/>
+                <arg value="@{targetclass}"/>
+                <arg value="build/temp/@{modulename}/generated-code"/>
+            </java>
+
+            <copy todir="build/temp/@{modulename}-${version}-sources.jar.contents">
+                <fileset dir="build/temp/@{modulename}/generated-code"/>
+            </copy>
+            <compile-module modulename="@{modulename}"/>
         </sequential>
     </macrodef>
 
