@@ -68,12 +68,24 @@
         <test-module modulename="hamcrest-integration"/>
     </target>
 
+    <target name="examples" depends="core, library, integration" description="Build and run unit tests.">
+        <path id="cp-hamcrest-examples-main">
+            <fileset file="build/hamcrest-core-${version}.jar"/>
+            <fileset file="build/hamcrest-library-${version}.jar"/>
+            <fileset file="build/hamcrest-integration-${version}.jar"/>
+            <fileset dir="lib/integration" includes="**/*.jar"/>
+        </path>
+        <compile-module modulename="hamcrest-examples"/>
+    </target>
+
     <macrodef name="compile-module">
         <attribute name="modulename" description="Name of the module to jar"/>
 
         <sequential>
+            <mkdir dir="build/temp/@{modulename}-${version}.jar.source"/>
+            <copy todir="build/temp/@{modulename}-${version}.jar.source"><fileset dir="@{modulename}/src/main/java"/></copy>
             <mkdir dir="build/temp/@{modulename}-${version}.jar.contents"/>
-            <javac srcdir="@{modulename}/src/main/java"
+            <javac srcdir="build/temp/@{modulename}-${version}.jar.source"
                    destdir="build/temp/@{modulename}-${version}.jar.contents"
                    debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
                 <classpath refid="cp-@{modulename}-main"/>
@@ -84,8 +96,10 @@
                 <fileset dir="build/temp/@{modulename}-${version}.jar.contents"/>
             </jar>
 
+            <mkdir dir="build/temp/@{modulename}-${version}-test.jar.source"/>
+            <copy todir="build/temp/@{modulename}-${version}-test.jar.source" failonerror="false"><fileset dir="@{modulename}/src/test/java"/></copy>
             <mkdir dir="build/temp/@{modulename}-${version}-test.jar.contents"/>
-            <javac srcdir="@{modulename}/src/test/java"
+            <javac srcdir="build/temp/@{modulename}-${version}-test.jar.source"
                    destdir="build/temp/@{modulename}-${version}-test.jar.contents"
                    debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
                 <classpath refid="cp-@{modulename}-main"/>
@@ -126,14 +140,6 @@
         </sequential>
     </macrodef>
     
-    <target name="examples" depends="core, library, integration" description="Build and run unit tests.">
-        <java-to-jar srcdir="hamcrest-examples/src/main/java"
-                     modulename="hamcrest-examples"
-                     classpath="build/hamcrest-core-${version}.jar;
-                                build/hamcrest-library-${version}.jar;
-                                build/hamcrest-integration-${version}.jar"/>
-    </target>
-
     <target name="bigjar" depends="core, library, integration, generator"
             description="Build a single Jar (hamcrest-all.jar) that contains core, library, generator and integration.">
         <mkdir dir="build/temp/hamcrest-all-${version}.jar.manifest"/>
