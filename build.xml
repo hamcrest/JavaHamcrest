@@ -16,9 +16,9 @@
     </target>
 
     <target name="generator" description="Build code generator tool">
-        <java-to-jar srcdir="hamcrest-generator/src/main/java"
-                     modulename="hamcrest-generator-nodeps"
-                     classpath="lib/generator/qdox-1.12.jar"/>
+        <path id="cp-hamcrest-generator-main" path="lib/generator/qdox-1.12.jar"/>
+        <path id="cp-hamcrest-generator-test" path="lib/integration/junit-dep-4.10.jar"/>
+        <compile-module modulename="hamcrest-generator"/>
 
         <!-- Bundle QDox classes in hamcrest-generator.jar using JarJar to place classes under a different package -->
         <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="lib/generator/jarjar-1.3.jar"/>
@@ -30,10 +30,35 @@
         <copy file="build/hamcrest-generator-nodeps-${version}-sources.jar" tofile="build/hamcrest-generator-${version}-sources.jar"/>
     </target>
 
-    <target name="core" depends="api,generator" description="Build core Hamcrest library">
-        <java-to-jar srcdir="hamcrest-core/src/main/java"
-                     modulename="hamcrest-core-nodeps"
-                     classpath="build/hamcrest-api-${version}.jar"/>
+    <macrodef name="compile-module">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <attribute name="classpathref" description="Anything additional to add on the classpath" default=""/>
+
+        <sequential>
+            <mkdir dir="build/temp/@{modulename}-${version}.jar.contents"/>
+            <javac srcdir="@{modulename}/src/main/java"
+                   destdir="build/temp/@{modulename}-${version}.jar.contents"
+                   debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
+                <classpath refid="cp-@{modulename}-main"/>
+            </javac>
+            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}.jar.contents/META-INF"/>
+            <make-manifest modulename="@{modulename}"/>
+            <jar jarfile="build/@{modulename}-${version}.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
+                <fileset dir="build/temp/@{modulename}-${version}.jar.contents"/>
+            </jar>
+
+            <mkdir dir="build/temp/@{modulename}-${version}-test.jar.contents"/>
+            <javac srcdir="@{modulename}/src/test/java"
+                   destdir="build/temp/@{modulename}-${version}-test.jar.contents"
+                   debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
+                <classpath refid="cp-@{modulename}-test"/>
+                <classpath path="build/@{modulename}-${version}.jar"/>
+            </javac>
+        </sequential>
+    </macrodef>
+
+    <target name="core" depends="generator" description="Build core Hamcrest library">
+        <java-to-jar srcdir="hamcrest-core/src/main/java" modulename="hamcrest-core"/>
 
         <!-- Generate one class with all static imports -->
         <mkdir dir="build/temp/hamcrest-core/generated-code"/>
@@ -260,6 +285,20 @@
             </fileset>
         </jar>
     </target>
+
+    <macrodef name="make-manifest">
+        <attribute name="modulename" description="Name of the module"/>
+        <sequential>
+            <mkdir dir="build/temp/@{modulename}-${version}.jar.manifest"/>
+            <manifest file="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
+               <attribute name="Implementation-Title" value="@{modulename}"/>
+               <attribute name="Implementation-Vendor" value="hamcrest.org"/>
+               <attribute name="Implementation-Version" value="${version}"/>
+               <attribute name="Built-By" value="${user.name}"/>
+               <attribute name="Built-Date" value="${build.timestamp}"/>
+           </manifest>
+        </sequential>
+    </macrodef>
 
     <macrodef name="java-to-jar" description="Compile Java source for a module and build a Jar">
         <attribute name="srcdir" description="Directory containg Java source"/>
