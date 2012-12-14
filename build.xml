@@ -3,7 +3,7 @@
     <property name="version" value="SNAPSHOT" description="Version number to use in build files"/>
     <property name="haltonfailure" value="true" description="Whether to halt the build if the tests fail"/>
     <property name="debug" value="true" description="Whether to build with debug information"/>
-	<tstamp><format property="build.timestamp" pattern="yyyy-MM-dd HH:mm:ss" timezone="GMT"/></tstamp>
+    <tstamp><format property="build.timestamp" pattern="yyyy-MM-dd HH:mm:ss" timezone="GMT"/></tstamp>
 
     <target name="all" depends="clean, package" description="Performs clean build, runs tests and packages for distribution"/>
 
@@ -12,11 +12,14 @@
     </target>
 
     <target name="api" description="Build Hamcrest APIs">
-        <java-to-jar srcdir="hamcrest-api/src/main/java" modulename="hamcrest-api"/>
+        <path id="cp-hamcrest-api-main" path=""/>
+        <path id="cp-hamcrest-api-test" path="lib/integration/junit-dep-4.10.jar"/>
+        <compile-module modulename="hamcrest-api"/>
+        <test-module modulename="hamcrest-api"/>
     </target>
 
-    <target name="generator" description="Build code generator tool">
-        <path id="cp-hamcrest-generator-main" path="lib/generator/qdox-1.12.jar"/>
+    <target name="generator" depends="api" description="Build code generator tool">
+        <path id="cp-hamcrest-generator-main" path="lib/generator/qdox-1.12.jar;build/hamcrest-api-${version}.jar"/>
         <path id="cp-hamcrest-generator-test" path="lib/integration/junit-dep-4.10.jar"/>
         <compile-module modulename="hamcrest-generator"/>
 
@@ -51,9 +54,13 @@
             <javac srcdir="@{modulename}/src/test/java"
                    destdir="build/temp/@{modulename}-${version}-test.jar.contents"
                    debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
+                <classpath refid="cp-@{modulename}-main"/>
                 <classpath refid="cp-@{modulename}-test"/>
                 <classpath path="build/@{modulename}-${version}.jar"/>
             </javac>
+            <jar jarfile="build/@{modulename}-${version}-test.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
+                <fileset dir="build/temp/@{modulename}-${version}-test.jar.contents"/>
+            </jar>
         </sequential>
     </macrodef>
 
@@ -379,28 +386,19 @@
         </sequential>
     </macrodef>
 	
-    <macrodef name="unit-test" description="run unit tests.">
+    <macrodef name="test-module" description="run unit tests.">
         <attribute name="modulename" description="Name of the module to jar"/>
-        <attribute name="classpath" description="Anything additional to add on the classpath" default=""/>
         <sequential>
             <junit printsummary="no" fork="no" haltonfailure="${haltonfailure}">
                 <formatter type="brief" usefile="no"/>
-                <classpath>
-                    <fileset dir="lib/integration">
-                        <include name="*.jar"/>
-                    </fileset>
-                    <pathelement path="build/hamcrest-core-${version}.jar"/>
-                    <pathelement path="build/hamcrest-library-${version}.jar"/>
-                    <pathelement path="build/hamcrest-integration-${version}.jar"/>
-                    <pathelement path="build/hamcrest-generator-${version}.jar"/>
-                    <pathelement path="build/hamcrest-unit-test-${version}.jar"/>
-                </classpath>
-                <batchtest>
-                    <batchtest fork="yes" todir="${build.dir}/testreport">
-                        <zipfileset src="build/@{modulename}-${version}-tests.jar">
-                            <include name="org/hamcrest/**/*Test.class"/>
-                        </zipfileset>
-                    </batchtest>
+                <classpath refid="cp-@{modulename}-main"/>
+                <classpath refid="cp-@{modulename}-test"/>
+                <classpath path="build/@{modulename}-${version}.jar"/>
+                <classpath path="build/@{modulename}-${version}-test.jar"/>
+                <batchtest fork="yes" todir="${build.dir}/testreport">
+                    <zipfileset src="build/@{modulename}-${version}-test.jar">
+                        <include name="org/hamcrest/**/*Test.class"/>
+                    </zipfileset>
                 </batchtest>
             </junit>
         </sequential>
