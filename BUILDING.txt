@@ -41,15 +41,22 @@ Steps:
     necessary to compile.
   - Create a new project.
   - Add the following directories as source directories:
+      hamcrest-api/src/main/java
+      hamcrest-generator/src/main/java
       hamcrest-core/src/main/java
       hamcrest-library/src/main/java
-      hamcrest-generator/src/main/java
       hamcrest-integration/src/main/java
       build/temp/hamcrest-core/generated-code
       build/temp/hamcrest-library/generated-code
-  - Add hamcrest-unit-test/src/main/java as a test directory.
-    If this is unsupported by the IDE, add it as another source
-    directory.
+      hamcrest-examples/src/main/java
+  - Add the following directories as test directories:
+      hamcrest-api/src/test/java
+      hamcrest-generator/src/test/java
+      hamcrest-core/src/test/java
+      hamcrest-library/src/test/java
+      hamcrest-integration/src/test/java
+    If this is unsupported by the IDE, add them as source
+    directories.
   - Include all jars in the lib directory in the classpath.
   - Compile as usual in the IDE.
   - If supported, run all tests under org.hamcrest from the
