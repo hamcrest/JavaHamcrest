@@ -26,7 +26,7 @@
         <jar-module modulename="hamcrest-generator"/>
         <test-module modulename="hamcrest-generator"/>
 
-        <!-- Bundle QDox classes in hamcrest-generator.jar using JarJar to place classes under a different package -->
+        <!-- Include QDox classes in hamcrest-generator.jar using JarJar to place classes under a different package -->
         <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="lib/generator/jarjar-1.3.jar"/>
         <copy file="build/hamcrest-generator-${version}.jar" tofile="build/hamcrest-generator-${version}-nodep.jar"/>
         <jarjar jarfile="build/hamcrest-generator-${version}.jar">
@@ -120,57 +120,20 @@
     </target>
 
     <target name="bundle" description="Create a release bundle for deployment to maven central" depends="clean, javadoc">
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-parent-${version}.pom"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}.pom"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}-javadoc.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}-sources.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-generator-${version}.pom"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-generator-${version}.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-generator-${version}-javadoc.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-generator-${version}-sources.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-library-${version}.pom"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-library-${version}.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-library-${version}-javadoc.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-library-${version}-sources.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-integration-${version}.pom"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-integration-${version}.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-integration-${version}-javadoc.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-integration-${version}-sources.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}.pom"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}-javadoc.jar"/></exec>
-        <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-all-${version}-sources.jar"/></exec>
-        <jar destfile="build/maven-bundle-parent.jar">
-            <fileset dir="build">
-                <include name="hamcrest-parent-${version}*"/>
-            </fileset>
-        </jar>
-        <jar destfile="build/maven-bundle-core.jar">
-            <fileset dir="build">
-                <include name="hamcrest-core-${version}*"/>
-            </fileset>
-        </jar>
-        <jar destfile="build/maven-bundle-library.jar">
-            <fileset dir="build">
-                <include name="hamcrest-library-${version}*"/>
-            </fileset>
-        </jar>
-        <jar destfile="build/maven-bundle-generator.jar">
-            <fileset dir="build">
-                <include name="hamcrest-generator-${version}*"/>
-            </fileset>
-        </jar>
-        <jar destfile="build/maven-bundle-integration.jar">
-            <fileset dir="build">
-                <include name="hamcrest-integration-${version}*"/>
-            </fileset>
-        </jar>
-        <jar destfile="build/maven-bundle-all.jar">
-            <fileset dir="build">
-                <include name="hamcrest-all-${version}*"/>
-            </fileset>
-        </jar>
+        <copy todir="build">
+            <fileset dir="pom" includes="*.pom"/>
+            <filterset><filter token="VERSION" value="${version}"/></filterset>
+            <mapper type="regexp" from="(.*)\.pom" to="\1-${version}.pom"/>
+        </copy>
+
+        <sign target="hamcrest-parent-${version}.pom"/>
+        <jar-bundle modulename="hamcrest-parent"/>
+
+        <bundle-module modulename="hamcrest-core"/>
+        <bundle-module modulename="hamcrest-generator"/>
+        <bundle-module modulename="hamcrest-library"/>
+        <bundle-module modulename="hamcrest-integration"/>
+        <bundle-module modulename="hamcrest-all"/>
     </target>
 
     <macrodef name="make-manifest">
@@ -294,4 +257,30 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="bundle-module" description="Generate maven bundle jar for a module">
+        <attribute name="modulename" description="Name of the module to bundle"/>
+        <sequential>
+            <sign target="@{modulename}-${version}.pom"/>
+            <sign target="@{modulename}-${version}.jar"/>
+            <sign target="@{modulename}-${version}-javadoc.jar"/>
+            <sign target="@{modulename}-${version}-sources.jar"/>
+            <jar-bundle modulename="@{modulename}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="jar-bundle" description="Jar maven bundle contents">
+        <attribute name="modulename" description="Name of the module to create bundle jar for"/>
+        <sequential>
+            <jar destfile="build/maven-bundle-@{modulename}.jar">
+                <fileset dir="build"><include name="@{modulename}-${version}*"/></fileset>
+            </jar>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="sign" description="Sign a file with a gpg key">
+        <attribute name="target" description="Name of the resource to sign"/>
+        <sequential>
+            <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="@{target}"/></exec>
+        </sequential>
+    </macrodef>
 </project>
