@@ -15,6 +15,7 @@
         <path id="cp-hamcrest-api-main" path=""/>
         <path id="cp-hamcrest-api-test" path="lib/integration/junit-dep-4.10.jar"/>
         <compile-module modulename="hamcrest-api"/>
+        <jar-module modulename="hamcrest-api"/>
         <test-module modulename="hamcrest-api"/>
     </target>
 
@@ -22,6 +23,7 @@
         <path id="cp-hamcrest-generator-main" path="lib/generator/qdox-1.12.jar;build/hamcrest-api-${version}.jar"/>
         <path id="cp-hamcrest-generator-test" path="lib/integration/junit-dep-4.10.jar"/>
         <compile-module modulename="hamcrest-generator"/>
+        <jar-module modulename="hamcrest-generator"/>
         <test-module modulename="hamcrest-generator"/>
 
         <!-- Bundle QDox classes in hamcrest-generator.jar using JarJar to place classes under a different package -->
@@ -38,8 +40,9 @@
         <path id="cp-hamcrest-core-main" path="build/hamcrest-api-${version}.jar"/>
         <path id="cp-hamcrest-core-test" path="lib/integration/junit-dep-4.10.jar"/>
         <compile-module modulename="hamcrest-core"/>
-        <test-module modulename="hamcrest-core"/>
         <generate-module-factory modulename="hamcrest-core" configurationfile="core-matchers.xml" targetclass="org.hamcrest.CoreMatchers"/>
+        <jar-module modulename="hamcrest-core"/>
+        <test-module modulename="hamcrest-core"/>
         
         <!-- Bundle api into core jar -->
         <copy file="build/hamcrest-core-${version}.jar" tofile="build/hamcrest-core-${version}-nodep.jar"/>
@@ -53,8 +56,9 @@
         <path id="cp-hamcrest-library-main" path="build/hamcrest-core-${version}.jar"/>
         <path id="cp-hamcrest-library-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-tests.jar"/>
         <compile-module modulename="hamcrest-library"/>
-        <test-module modulename="hamcrest-library"/>
         <generate-module-factory modulename="hamcrest-library" configurationfile="matchers.xml" targetclass="org.hamcrest.Matchers"/>
+        <jar-module modulename="hamcrest-library"/>
+        <test-module modulename="hamcrest-library"/>
     </target>
 
     <target name="integration" depends="library" description="Build integration with external tools">
@@ -65,6 +69,7 @@
         </path>
         <path id="cp-hamcrest-integration-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-tests.jar"/>
         <compile-module modulename="hamcrest-integration"/>
+        <jar-module modulename="hamcrest-integration"/>
         <test-module modulename="hamcrest-integration"/>
     </target>
 
@@ -76,6 +81,7 @@
             <fileset dir="lib/integration" includes="**/*.jar"/>
         </path>
         <compile-module modulename="hamcrest-examples"/>
+        <jar-module modulename="hamcrest-examples"/>
     </target>
 
     <macrodef name="compile-module">
@@ -104,8 +110,6 @@
                 <classpath refid="cp-@{modulename}-test"/>
                 <classpath path="build/temp/@{modulename}-${version}.jar.contents"/>
             </javac>
-
-            <jar-module modulename="@{modulename}"/>
         </sequential>
     </macrodef>
 
@@ -139,22 +143,17 @@
             <java classname="org.hamcrest.generator.config.XmlConfigurator" fork="yes" failonerror="yes">
                 <classpath path="build/hamcrest-generator-${version}.jar"/>
                 <classpath refid="cp-@{modulename}-main"/>
-                <classpath path="build/@{modulename}-${version}.jar"/>
+                <classpath path="build/temp/@{modulename}-${version}.jar.contents"/>
                 <arg value="@{configurationfile}"/>
                 <arg value="@{modulename}/src/main/java"/>
                 <arg value="@{targetclass}"/>
                 <arg value="build/temp/@{modulename}/generated-code"/>
             </java>
 
-            <!-- Append generated code to core jar -->
-            <javac srcdir="build/temp/@{modulename}/generated-code"
-                   destdir="build/temp/@{modulename}-${version}.jar.contents"
-                   debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
-                <classpath refid="cp-@{modulename}-main"/>
-            </javac>
-            <jar jarfile="build/@{modulename}-${version}.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
-                <fileset dir="build/temp/@{modulename}-${version}.jar.contents"/>
-            </jar>
+            <copy todir="build/temp/@{modulename}-${version}-sources.jar.contents">
+                <fileset dir="build/temp/@{modulename}/generated-code"/>
+            </copy>
+            <compile-module modulename="@{modulename}"/>
         </sequential>
     </macrodef>
     
