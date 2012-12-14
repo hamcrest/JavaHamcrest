@@ -9,7 +9,6 @@ import static org.hamcrest.core.CombinableMatcher.both;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.notNullValue;
-import static org.hamcrest.number.OrderingComparison.greaterThan;
 import static org.junit.Assert.assertEquals;
 
 public class CombinableTest {
@@ -29,7 +28,6 @@ public class CombinableTest {
     assertThat(3, not(tripleAnd));
   }
 
-
   @Test
   public void bothDescribesItself() {
     assertEquals("(not <3> and not <4>)", NOT_3_AND_NOT_4.toString());
@@ -44,7 +42,7 @@ public class CombinableTest {
 
   @Test
   public void acceptsAndRejectsThreeOrs() {
-    final CombinableMatcher<Integer> orTriple = EITHER_3_OR_4.or(greaterThan(10));
+    final CombinableMatcher<Integer> orTriple = EITHER_3_OR_4.or(equalTo(11));
     assertThat(11, orTriple);
     assertThat(9, not(orTriple));
   }

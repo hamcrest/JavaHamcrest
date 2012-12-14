@@ -2,12 +2,12 @@
  */
 package org.hamcrest.core;
 
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.hamcrest.core.IsNot.not;
+
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.number.OrderingComparison.greaterThan;
 
 public class IsNotTest extends AbstractMatcherTest {
   @Override
@@ -28,7 +28,7 @@ public class IsNotTest extends AbstractMatcherTest {
   }
 
   public void testUsesDescriptionOfNegatedMatcherWithPrefix() {
-    assertDescription("not a value greater than <2>", not(greaterThan(2)));
+    assertDescription("not an instance of java.lang.String", not(instanceOf(String.class)));
     assertDescription("not \"A\"", not("A"));
   }
  }
