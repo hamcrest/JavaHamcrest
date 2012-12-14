@@ -43,17 +43,10 @@
         <generate-module-factory modulename="hamcrest-core" configurationfile="core-matchers.xml" targetclass="org.hamcrest.CoreMatchers"/>
         <jar-module modulename="hamcrest-core"/>
         <test-module modulename="hamcrest-core"/>
-        
-        <!-- Bundle api into core jar -->
-        <copy file="build/hamcrest-core-${version}.jar" tofile="build/hamcrest-core-${version}-nodep.jar"/>
-        <jar jarfile="build/hamcrest-core-${version}.jar" duplicate="preserve">
-            <zipfileset src="build/hamcrest-api-${version}.jar"/>
-            <zipfileset src="build/hamcrest-core-${version}-nodep.jar"/>
-        </jar>
     </target>
 
     <target name="library" depends="core" description="Build library of matchers">
-        <path id="cp-hamcrest-library-main" path="build/hamcrest-core-${version}.jar"/>
+        <path id="cp-hamcrest-library-main" path="build/hamcrest-api-${version}.jar;build/hamcrest-core-${version}.jar"/>
         <path id="cp-hamcrest-library-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-tests.jar"/>
         <compile-module modulename="hamcrest-library"/>
         <generate-module-factory modulename="hamcrest-library" configurationfile="matchers.xml" targetclass="org.hamcrest.Matchers"/>
@@ -63,6 +56,7 @@
 
     <target name="integration" depends="library" description="Build integration with external tools">
         <path id="cp-hamcrest-integration-main">
+            <fileset file="build/hamcrest-api-${version}.jar"/>
             <fileset file="build/hamcrest-core-${version}.jar"/>
             <fileset file="build/hamcrest-library-${version}.jar"/>
             <fileset dir="lib/integration" includes="**/*.jar"/>
@@ -75,6 +69,7 @@
 
     <target name="examples" depends="core, library, integration" description="Build and run unit tests.">
         <path id="cp-hamcrest-examples-main">
+            <fileset file="build/hamcrest-api-${version}.jar"/>
             <fileset file="build/hamcrest-core-${version}.jar"/>
             <fileset file="build/hamcrest-library-${version}.jar"/>
             <fileset file="build/hamcrest-integration-${version}.jar"/>
@@ -159,7 +154,14 @@
     
     <target name="bigjar" depends="core, library, integration, generator"
             description="Build a single Jar (hamcrest-all.jar) that contains core, library, generator and integration.">
-        <mkdir dir="build/temp/hamcrest-all-${version}.jar.manifest"/>
+        <!-- Bundle api into core jar -->
+        <copy file="build/hamcrest-core-${version}.jar" tofile="build/hamcrest-core-${version}-nodep.jar"/>
+        <jar jarfile="build/hamcrest-core-${version}.jar" duplicate="preserve">
+            <zipfileset src="build/hamcrest-api-${version}.jar"/>
+            <zipfileset src="build/hamcrest-core-${version}-nodep.jar"/>
+        </jar>
+    	
+    	<mkdir dir="build/temp/hamcrest-all-${version}.jar.manifest"/>
         <make-manifest modulename="hamcrest-all"/>
         <jar jarfile="build/hamcrest-all-${version}.jar" duplicate="preserve" manifest="build/temp/hamcrest-all-${version}.jar.manifest/MANIFEST.MF">
             <zipfileset src="build/hamcrest-core-${version}.jar"/>
