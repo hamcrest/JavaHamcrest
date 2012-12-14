@@ -1,7 +1,8 @@
 /build
 /classes
-.idea/dictionaries
-.idea/scopes
-.idea/workspace.xml
+/bin
+/out
+/.idea/workspace.xml
+/.idea/tasks.xml
 .DS_Store
 *~
