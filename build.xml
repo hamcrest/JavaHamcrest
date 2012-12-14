@@ -5,7 +5,7 @@
     <property name="debug" value="true" description="Whether to build with debug information"/>
     <tstamp><format property="build.timestamp" pattern="yyyy-MM-dd HH:mm:ss" timezone="GMT"/></tstamp>
 
-    <target name="all" depends="clean, package" description="Performs clean build, runs tests and packages for distribution"/>
+    <target name="all" depends="clean, bigjar" description="Performs clean build, runs tests and packages for distribution"/>
 
     <target name="clean" description="Clean up all built files">
         <delete dir="build"/>
@@ -79,105 +79,47 @@
         <jar-module modulename="hamcrest-examples"/>
     </target>
 
-    <target name="bigjar" depends="core, library, integration, generator"
-            description="Build a single Jar (hamcrest-all.jar) that contains core, library, generator and integration.">
+    <target name="bigjar" depends="core,library,integration,generator" description="Build composite jars">
         <!-- Bundle api into core jar -->
-        <copy file="build/hamcrest-core-${version}.jar" tofile="build/hamcrest-core-${version}-nodep.jar"/>
-        <jar jarfile="build/hamcrest-core-${version}.jar" duplicate="preserve">
-            <zipfileset src="build/hamcrest-api-${version}.jar"/>
-            <zipfileset src="build/hamcrest-core-${version}-nodep.jar"/>
-        </jar>
-    	
-    	<mkdir dir="build/temp/hamcrest-all-${version}.jar.manifest"/>
-        <make-manifest modulename="hamcrest-all"/>
-        <jar jarfile="build/hamcrest-all-${version}.jar" duplicate="preserve" manifest="build/temp/hamcrest-all-${version}.jar.manifest/MANIFEST.MF">
-            <zipfileset src="build/hamcrest-core-${version}.jar"/>
-            <zipfileset src="build/hamcrest-library-${version}.jar"/>
-            <zipfileset src="build/hamcrest-generator-${version}.jar"/>
-            <zipfileset src="build/hamcrest-integration-${version}.jar"/>
-        </jar>
-        <jar jarfile="build/hamcrest-all-${version}-sources.jar" duplicate="preserve" manifest="build/temp/hamcrest-all-${version}.jar.manifest/MANIFEST.MF">
-            <zipfileset src="build/hamcrest-core-${version}-sources.jar"/>
-            <zipfileset src="build/hamcrest-library-${version}-sources.jar"/>
-            <zipfileset src="build/hamcrest-generator-${version}-sources.jar"/>
-            <zipfileset src="build/hamcrest-integration-${version}-sources.jar"/>
-        </jar>
-    </target>
-
-    <target name="javadoc" description="build javadoc jars">
-        <java-to-javadoc-jar modulename="hamcrest-generator-nodeps"/>
-        <java-to-javadoc-jar modulename="hamcrest-core"/>
-        <java-to-javadoc-jar modulename="hamcrest-library"/>
-        <java-to-javadoc-jar modulename="hamcrest-integration"/>
-        <copy file="build/hamcrest-generator-nodeps-${version}-javadoc.jar" tofile="build/hamcrest-generator-${version}-javadoc.jar"/>
-
-        <javadoc packagenames="org.hamcrest.*" defaultexcludes="yes"
-                 destdir="build/temp/hamcrest-all-${version}-javadoc.jar.contents" author="true" version="true" use="true"
-                 windowtitle="Hamcrest" source="1.6" failonerror="yes" overview="overview.html">
-            <classpath>
-                <fileset dir="lib/integration">
-                    <include name="*.jar"/>
-                </fileset>
-            </classpath>
-            <packageset dir="build/temp/hamcrest-core-${version}-sources.jar.contents"/>
-            <packageset dir="build/temp/hamcrest-library-${version}-sources.jar.contents" excludes="org/hamcrest/internal"/>
-            <packageset dir="build/temp/hamcrest-integration-${version}-sources.jar.contents"/>
-            
-            <group title="Hamcrest API and Utility Classes" packages="org.hamcrest"/>
-            <group title="Matcher Library" packages="org.hamcrest.*"/>
-            <group title="Integration" packages="org.hamcrest.integration, org.hamcrest.integration.*"/>
-            
-            <link offline="false" href="http://www.junit.org/junit/javadoc/3.8.1/"/>
-            <link offline="false" href="http://kentbeck.github.com/junit/javadoc/latest/"/>
-        </javadoc>
-        <jar jarfile="build/hamcrest-all-${version}-javadoc.jar">
-            <fileset dir="build/temp/hamcrest-all-${version}-javadoc.jar.contents"/>
-        </jar>
-    </target>
-
-    <target name="package" depends="core, generator, library, integration, bigjar, examples, javadoc" description="Package for distribution">
-        <copy todir="build">
-            <fileset dir="pom" includes="*.pom"/>
-            <filterset><filter token="VERSION" value="${version}"/></filterset>
-            <mapper type="regexp" from="(.*)\.pom" to="\1-${version}.pom"/>
+        <copy todir="build/temp/hamcrest-core-${version}.jar.contents">
+            <fileset dir="build/temp/hamcrest-api-${version}.jar.contents"/>
         </copy>
-        <zip zipfile="build/hamcrest-${version}.zip">
-            <zipfileset dir="." prefix="hamcrest-${version}">
-                <include name="hamcrest-*/**"/>
-                <include name="lib/**"/>
-                <include name="*.txt"/>
-                <include name="build.xml"/>
-                <include name="*matchers.xml"/>
-            </zipfileset>
-            <zipfileset dir="build" prefix="hamcrest-${version}">
-                <include name="hamcrest-parent-${version}*"/>
-                <include name="hamcrest-core-${version}*"/>
-                <include name="hamcrest-library-${version}*"/>
-                <include name="hamcrest-generator-${version}*"/>
-                <include name="hamcrest-integration-${version}*"/>
-                <include name="hamcrest-all-${version}*"/>
-            </zipfileset>
-        </zip>
-        <tar tarfile="build/hamcrest-${version}.tgz" compression="gzip" longfile="gnu">
-            <tarfileset  dir="." prefix="hamcrest-${version}">
-                <include name="hamcrest-*/**"/>
-                <include name="lib/**"/>
-                <include name="*.txt"/>
-                <include name="build.xml"/>
-                <include name="*matchers.xml"/>
-            </tarfileset>
-            <tarfileset dir="build" prefix="hamcrest-${version}">
-                <include name="hamcrest-parent-${version}*"/>
-                <include name="hamcrest-core-${version}*"/>
-                <include name="hamcrest-library-${version}*"/>
-                <include name="hamcrest-generator-${version}*"/>
-                <include name="hamcrest-integration-${version}*"/>
-                <include name="hamcrest-all-${version}*"/>
-            </tarfileset>
-        </tar>
+        <copy todir="build/temp/hamcrest-core-${version}-sources.jar.contents">
+            <fileset dir="build/temp/hamcrest-api-${version}-sources.jar.contents"/>
+        </copy>
+        <jar-module modulename="hamcrest-core"/>
+
+        <!-- Bundle core, library, integration, and generator into all jar-->
+        <copy todir="build/temp/hamcrest-all-${version}.jar.contents">
+            <fileset dir="build/temp/hamcrest-core-${version}.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-library-${version}.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-integration-${version}.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-generator-${version}.jar.contents"/>
+        </copy>
+        <copy todir="build/temp/hamcrest-all-${version}-sources.jar.contents">
+            <fileset dir="build/temp/hamcrest-core-${version}-sources.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-library-${version}-sources.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-integration-${version}-sources.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-generator-${version}-sources.jar.contents"/>
+        </copy>
+        <path id="cp-hamcrest-all-main">
+            <path refid="cp-hamcrest-core-main"/>
+            <path refid="cp-hamcrest-library-main"/>
+            <path refid="cp-hamcrest-integration-main"/>
+            <path refid="cp-hamcrest-generator-main"/>
+        </path>
+        <jar-module modulename="hamcrest-all"/>
     </target>
 
-    <target name="bundle" description="Create a release bundle for deployment to maven central" depends="clean, package">
+    <target name="javadoc" depends="bigjar" description="build javadoc jars">
+        <javadoc-module modulename="hamcrest-generator"/>
+        <javadoc-module modulename="hamcrest-core"/>
+        <javadoc-module modulename="hamcrest-library"/>
+        <javadoc-module modulename="hamcrest-integration"/>
+        <javadoc-module modulename="hamcrest-all"/>
+    </target>
+
+    <target name="bundle" description="Create a release bundle for deployment to maven central" depends="clean, javadoc">
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-parent-${version}.pom"/></exec>
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}.pom"/></exec>
         <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="hamcrest-core-${version}.jar"/></exec>
@@ -338,27 +280,15 @@
         </sequential>
     </macrodef>
 
-    <macrodef name="java-to-javadoc-jar" description="Generate javadoc for a module and build a Jar">
+    <macrodef name="javadoc-module" description="Generate javadoc for a module and build a Jar">
         <attribute name="modulename" description="Name of the module to document"/>
         <sequential>
-            <unzip src="build/@{modulename}-${version}-sources.jar" dest="build/temp/@{modulename}-${version}-sources.jar.contents"/>
-            <javadoc packagenames="org.hamcrest.*" sourcepath="build/temp/@{modulename}-${version}-sources.jar.contents" defaultexcludes="yes"
-                     destdir="build/temp/@{modulename}-${version}-javadoc.jar.contents" author="true" version="true" use="true"
-                     windowtitle="Hamcrest" source="1.6" failonerror="yes">
-                <classpath>
-                    <fileset dir="lib/integration">
-                        <include name="*.jar"/>
-                    </fileset>
-                    <fileset file="lib/generator/qdox-1.12.jar"/>
-                    <fileset file="build/hamcrest-core-${version}.jar"/>
-                    <fileset file="build/hamcrest-library-${version}.jar"/>
-                    <fileset file="build/hamcrest-generator-${version}.jar"/>
-                    <fileset file="build/hamcrest-integration-${version}.jar"/>
-                </classpath>
+            <javadoc packagenames="org.hamcrest.*" sourcepath="build/temp/@{modulename}-${version}-sources.jar.contents"
+                     destdir="build/temp/@{modulename}-${version}-javadoc.jar.contents" author="true" version="true"
+                     use="true" windowtitle="Hamcrest" source="1.5" failonerror="yes" defaultexcludes="yes">
+                <classpath refid="cp-@{modulename}-main"/>
             </javadoc>
-            <jar jarfile="build/@{modulename}-${version}-javadoc.jar">
-                <fileset dir="build/temp/@{modulename}-${version}-javadoc.jar.contents"/>
-            </jar>
+            <jar-module-component modulename="@{modulename}" suffix="-javadoc"/>
         </sequential>
     </macrodef>
 
