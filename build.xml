@@ -3,6 +3,7 @@
     <property name="version" value="SNAPSHOT" description="Version number to use in build files"/>
     <property name="haltonfailure" value="true" description="Whether to halt the build if the tests fail"/>
     <property name="debug" value="true" description="Whether to build with debug information"/>
+    <property name="javaversion" value="1.5" description="Java version to target"/>
     <tstamp><format property="build.timestamp" pattern="yyyy-MM-dd HH:mm:ss" timezone="GMT"/></tstamp>
 
     <target name="all" depends="clean, bigjar" description="Performs clean build, runs tests and packages for distribution"/>
@@ -13,7 +14,7 @@
 
     <target name="api" description="Build Hamcrest APIs">
         <path id="cp-hamcrest-api-main" path=""/>
-        <path id="cp-hamcrest-api-test" path="lib/integration/junit-dep-4.10.jar"/>
+        <path id="cp-hamcrest-api-test" path=""/>
         <compile-module modulename="hamcrest-api"/>
         <jar-module modulename="hamcrest-api"/>
         <test-module modulename="hamcrest-api"/>
@@ -21,7 +22,7 @@
 
     <target name="generator" depends="api" description="Build code generator tool">
         <path id="cp-hamcrest-generator-main" path="lib/generator/qdox-1.12.jar;build/hamcrest-api-${version}.jar"/>
-        <path id="cp-hamcrest-generator-test" path="lib/integration/junit-dep-4.10.jar"/>
+        <path id="cp-hamcrest-generator-test" path=""/>
         <compile-module modulename="hamcrest-generator"/>
         <jar-module modulename="hamcrest-generator"/>
         <test-module modulename="hamcrest-generator"/>
@@ -38,7 +39,7 @@
 
     <target name="core" depends="generator" description="Build core Hamcrest library">
         <path id="cp-hamcrest-core-main" path="build/hamcrest-api-${version}.jar"/>
-        <path id="cp-hamcrest-core-test" path="lib/integration/junit-dep-4.10.jar"/>
+        <path id="cp-hamcrest-core-test" path=""/>
         <compile-module modulename="hamcrest-core"/>
         <generate-module-factory modulename="hamcrest-core" configurationfile="core-matchers.xml" targetclass="org.hamcrest.CoreMatchers"/>
         <jar-module modulename="hamcrest-core"/>
@@ -47,7 +48,7 @@
 
     <target name="library" depends="core" description="Build library of matchers">
         <path id="cp-hamcrest-library-main" path="build/hamcrest-api-${version}.jar;build/hamcrest-core-${version}.jar"/>
-        <path id="cp-hamcrest-library-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-tests.jar"/>
+        <path id="cp-hamcrest-library-test" path="build/hamcrest-core-${version}-tests.jar"/>
         <compile-module modulename="hamcrest-library"/>
         <generate-module-factory modulename="hamcrest-library" configurationfile="matchers.xml" targetclass="org.hamcrest.Matchers"/>
         <jar-module modulename="hamcrest-library"/>
@@ -61,7 +62,7 @@
             <fileset file="build/hamcrest-library-${version}.jar"/>
             <fileset dir="lib/integration" includes="**/*.jar"/>
         </path>
-        <path id="cp-hamcrest-integration-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-tests.jar"/>
+        <path id="cp-hamcrest-integration-test" path="build/hamcrest-core-${version}-tests.jar"/>
         <compile-module modulename="hamcrest-integration"/>
         <jar-module modulename="hamcrest-integration"/>
         <test-module modulename="hamcrest-integration"/>
@@ -155,6 +156,7 @@
         <sequential>
             <compile-content srcdir="@{modulename}/src/main/java" jarname="@{modulename}-${version}" classpathref="cp-@{modulename}-main" />
             <path id="cp-@{modulename}-test-complete">
+                <path path="lib/integration/junit-dep-4.10.jar"/>
                 <path refid="cp-@{modulename}-main"/>
                 <path refid="cp-@{modulename}-test"/>
                 <path path="build/temp/@{modulename}-${version}.jar.contents"/>
@@ -175,7 +177,7 @@
             <mkdir dir="build/temp/@{jarname}.jar.contents"/>
             <javac srcdir="build/temp/@{jarname}-sources.jar.contents"
                    destdir="build/temp/@{jarname}.jar.contents"
-                   debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
+                   debug="${debug}" source="${javaversion}" target="${javaversion}" includeantruntime="false">
                 <classpath refid="@{classpathref}"/>
             </javac>
         </sequential>
@@ -231,9 +233,7 @@
             <mkdir dir="build/temp/@{modulename}/test-wrk"/>
             <junit printsummary="no" forkmode="once" tempdir="build/temp/@{modulename}/test-wrk" haltonfailure="${haltonfailure}">
                 <formatter type="brief" usefile="no"/>
-                <classpath refid="cp-@{modulename}-main"/>
-                <classpath refid="cp-@{modulename}-test"/>
-                <classpath path="build/@{modulename}-${version}.jar"/>
+                <classpath refid="cp-@{modulename}-test-complete"/>
                 <classpath path="build/@{modulename}-${version}-tests.jar"/>
                 <batchtest fork="yes" todir="${build.dir}/testreport">
                     <zipfileset src="build/@{modulename}-${version}-tests.jar">
@@ -250,7 +250,7 @@
         <sequential>
             <javadoc packagenames="org.hamcrest.*" sourcepath="build/temp/@{modulename}-${version}-sources.jar.contents"
                      destdir="build/temp/@{modulename}-${version}-javadoc.jar.contents" author="true" version="true"
-                     use="true" windowtitle="Hamcrest" source="1.5" failonerror="yes" defaultexcludes="yes">
+                     use="true" windowtitle="Hamcrest" source="${javaversion}" failonerror="yes" defaultexcludes="yes">
                 <classpath refid="cp-@{modulename}-main"/>
             </javadoc>
             <jar-module-component modulename="@{modulename}" suffix="-javadoc"/>
