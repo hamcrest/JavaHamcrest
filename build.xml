@@ -51,7 +51,7 @@
 
     <target name="library" depends="core" description="Build library of matchers">
         <path id="cp-hamcrest-library-main" path="build/hamcrest-core-${version}.jar"/>
-        <path id="cp-hamcrest-library-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-test.jar"/>
+        <path id="cp-hamcrest-library-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-tests.jar"/>
         <compile-module modulename="hamcrest-library"/>
         <test-module modulename="hamcrest-library"/>
         <generate-module-factory modulename="hamcrest-library" configurationfile="matchers.xml" targetclass="org.hamcrest.Matchers"/>
@@ -63,7 +63,7 @@
             <fileset file="build/hamcrest-library-${version}.jar"/>
             <fileset dir="lib/integration" includes="**/*.jar"/>
         </path>
-        <path id="cp-hamcrest-integration-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-test.jar"/>
+        <path id="cp-hamcrest-integration-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-tests.jar"/>
         <compile-module modulename="hamcrest-integration"/>
         <test-module modulename="hamcrest-integration"/>
     </target>
@@ -82,32 +82,42 @@
         <attribute name="modulename" description="Name of the module to jar"/>
 
         <sequential>
-            <mkdir dir="build/temp/@{modulename}-${version}.jar.source"/>
-            <copy todir="build/temp/@{modulename}-${version}.jar.source"><fileset dir="@{modulename}/src/main/java"/></copy>
+            <make-manifest modulename="@{modulename}"/>
+
+            <mkdir dir="build/temp/@{modulename}-${version}-sources.jar.contents"/>
+            <copy todir="build/temp/@{modulename}-${version}-sources.jar.contents">
+                <fileset dir="@{modulename}/src/main/java"/>
+            </copy>
             <mkdir dir="build/temp/@{modulename}-${version}.jar.contents"/>
-            <javac srcdir="build/temp/@{modulename}-${version}.jar.source"
+            <javac srcdir="build/temp/@{modulename}-${version}-sources.jar.contents"
                    destdir="build/temp/@{modulename}-${version}.jar.contents"
                    debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
                 <classpath refid="cp-@{modulename}-main"/>
             </javac>
             <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}.jar.contents/META-INF"/>
-            <make-manifest modulename="@{modulename}"/>
             <jar jarfile="build/@{modulename}-${version}.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
                 <fileset dir="build/temp/@{modulename}-${version}.jar.contents"/>
             </jar>
 
-            <mkdir dir="build/temp/@{modulename}-${version}-test.jar.source"/>
-            <copy todir="build/temp/@{modulename}-${version}-test.jar.source" failonerror="false"><fileset dir="@{modulename}/src/test/java"/></copy>
-            <mkdir dir="build/temp/@{modulename}-${version}-test.jar.contents"/>
-            <javac srcdir="build/temp/@{modulename}-${version}-test.jar.source"
-                   destdir="build/temp/@{modulename}-${version}-test.jar.contents"
+            <mkdir dir="build/temp/@{modulename}-${version}-tests-sources.jar.contents"/>
+            <copy todir="build/temp/@{modulename}-${version}-tests-sources.jar.contents" failonerror="false">
+                <fileset dir="@{modulename}/src/test/java"/>
+            </copy>
+            <mkdir dir="build/temp/@{modulename}-${version}-tests.jar.contents"/>
+            <javac srcdir="build/temp/@{modulename}-${version}-tests-sources.jar.contents"
+                   destdir="build/temp/@{modulename}-${version}-tests.jar.contents"
                    debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
                 <classpath refid="cp-@{modulename}-main"/>
                 <classpath refid="cp-@{modulename}-test"/>
                 <classpath path="build/@{modulename}-${version}.jar"/>
             </javac>
-            <jar jarfile="build/@{modulename}-${version}-test.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
-                <fileset dir="build/temp/@{modulename}-${version}-test.jar.contents"/>
+            <jar jarfile="build/@{modulename}-${version}-tests.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
+                <fileset dir="build/temp/@{modulename}-${version}-tests.jar.contents"/>
+            </jar>
+            
+            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}-sources.jar.contents/META-INF"/>
+            <jar jarfile="build/@{modulename}-${version}-sources.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
+                <fileset dir="build/temp/@{modulename}-${version}-sources.jar.contents"/>
             </jar>
         </sequential>
     </macrodef>
@@ -143,13 +153,7 @@
     <target name="bigjar" depends="core, library, integration, generator"
             description="Build a single Jar (hamcrest-all.jar) that contains core, library, generator and integration.">
         <mkdir dir="build/temp/hamcrest-all-${version}.jar.manifest"/>
-        <manifest file="build/temp/hamcrest-all-${version}.jar.manifest/MANIFEST.MF">
-            <attribute name="Implementation-Title" value="hamcrest-all"/>
-            <attribute name="Implementation-Vendor" value="hamcrest.org"/>
-            <attribute name="Implementation-Version" value="${version}"/>
-            <attribute name="Built-By" value="${user.name}"/>
-            <attribute name="Built-Date" value="${build.timestamp}"/>
-        </manifest>
+        <make-manifest modulename="hamcrest-all"/>
         <jar jarfile="build/hamcrest-all-${version}.jar" duplicate="preserve" manifest="build/temp/hamcrest-all-${version}.jar.manifest/MANIFEST.MF">
             <zipfileset src="build/hamcrest-core-${version}.jar"/>
             <zipfileset src="build/hamcrest-library-${version}.jar"/>
@@ -305,58 +309,23 @@
         </sequential>
     </macrodef>
 
-    <macrodef name="java-to-jar" description="Compile Java source for a module and build a Jar">
-        <attribute name="srcdir" description="Directory containg Java source"/>
+    <macrodef name="test-module" description="run unit tests.">
         <attribute name="modulename" description="Name of the module to jar"/>
-        <attribute name="classpath" description="Anything additional to add on the classpath" default=""/>
         <sequential>
-            <mkdir dir="build/temp/@{modulename}-${version}.jar.manifest"/>
-            <manifest file="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
-                <attribute name="Implementation-Title" value="@{modulename}"/>
-                <attribute name="Implementation-Vendor" value="hamcrest.org"/>
-                <attribute name="Implementation-Version" value="${version}"/>
-                <attribute name="Built-By" value="${user.name}"/>
-                <attribute name="Built-Date" value="${build.timestamp}"/>
-            </manifest>
-
-            <!-- Build jar -->
-            <mkdir dir="build/temp/@{modulename}-${version}.jar.contents"/>
-            <javac srcdir="@{srcdir}" destdir="build/temp/@{modulename}-${version}.jar.contents" debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
-                <classpath>
-                    <fileset dir="lib/integration">
-                        <include name="*.jar"/>
-                    </fileset>
-                    <pathelement path="@{classpath}"/>
-                </classpath>
-            </javac>
-            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}.jar.contents/META-INF"/>
-            <jar jarfile="build/@{modulename}-${version}.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
-                <fileset dir="build/temp/@{modulename}-${version}.jar.contents"/>
-            </jar>
-
-            <!-- Build test jar -->
-            <mkdir dir="build/temp/@{modulename}-${version}.testjar.contents"/>
-            <javac srcdir="@{srcdir}" destdir="build/temp/@{modulename}-${version}.testjar.contents" debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
-                <classpath>
-                    <fileset dir="lib/integration">
-                        <include name="*.jar"/>
-                    </fileset>
-                    <pathelement path="build/@{modulename}-${version}.jar"/>
-                    <pathelement path="@{classpath}"/>
-                </classpath>
-            </javac>
-            <jar jarfile="build/@{modulename}-${version}-tests.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
-                <fileset dir="build/temp/@{modulename}-${version}.testjar.contents"/>
-            </jar>
-
-            <!-- Build sources jar -->
-            <copy todir="build/temp/@{modulename}-${version}-sources.jar.contents">
-                <fileset dir="@{srcdir}"/>
-            </copy>
-            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}-sources.jar.contents/META-INF"/>
-            <jar jarfile="build/@{modulename}-${version}-sources.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
-                <fileset dir="build/temp/@{modulename}-${version}-sources.jar.contents"/>
-            </jar>
+            <mkdir dir="build/temp/@{modulename}/test-wrk"/>
+            <junit printsummary="no" forkmode="once" tempdir="build/temp/@{modulename}/test-wrk" haltonfailure="${haltonfailure}">
+                <formatter type="brief" usefile="no"/>
+                <classpath refid="cp-@{modulename}-main"/>
+                <classpath refid="cp-@{modulename}-test"/>
+                <classpath path="build/@{modulename}-${version}.jar"/>
+                <classpath path="build/@{modulename}-${version}-tests.jar"/>
+                <batchtest fork="yes" todir="${build.dir}/testreport">
+                    <zipfileset src="build/@{modulename}-${version}-tests.jar">
+                        <include name="org/hamcrest/**/*Test.class"/>
+                        <exclude name="**/Abstract*.class"/>
+                    </zipfileset>
+                </batchtest>
+            </junit>
         </sequential>
     </macrodef>
 
@@ -383,24 +352,5 @@
             </jar>
         </sequential>
     </macrodef>
-	
-    <macrodef name="test-module" description="run unit tests.">
-        <attribute name="modulename" description="Name of the module to jar"/>
-        <sequential>
-            <mkdir dir="build/temp/@{modulename}/test-wrk"/>
-            <junit printsummary="no" forkmode="once" tempdir="build/temp/@{modulename}/test-wrk" haltonfailure="${haltonfailure}">
-                <formatter type="brief" usefile="no"/>
-                <classpath refid="cp-@{modulename}-main"/>
-                <classpath refid="cp-@{modulename}-test"/>
-                <classpath path="build/@{modulename}-${version}.jar"/>
-                <classpath path="build/@{modulename}-${version}-test.jar"/>
-                <batchtest fork="yes" todir="${build.dir}/testreport">
-                    <zipfileset src="build/@{modulename}-${version}-test.jar">
-                        <include name="org/hamcrest/**/*Test.class"/>
-                        <exclude name="**/Abstract*.class"/>
-                    </zipfileset>
-                </batchtest>
-            </junit>
-        </sequential>
-    </macrodef>
+
 </project>
