@@ -1,21 +1,18 @@
 package org.hamcrest.generator;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 import java.io.StringWriter;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class HamcrestFactoryWriterTest extends TestCase {
-    private FactoryWriter factoryWriter;
-    private StringWriter output = new StringWriter();
+public final class HamcrestFactoryWriterTest {
+    private final StringWriter output = new StringWriter();
+    private final FactoryWriter factoryWriter = new HamcrestFactoryWriter(null, null, output);
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        factoryWriter = new HamcrestFactoryWriter(null, null, output);
-    }
-
-    public void testWritesMethodDelegationMethod() throws IOException {
+    @Test public void
+    writesMethodDelegationMethod() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "anyObject", "matcher.ReturnType");
 
         factoryWriter.writeMethod(method.getName(), method);
@@ -27,13 +24,15 @@ public class HamcrestFactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesCompleteJavaSource() throws IOException {
-        factoryWriter = new HamcrestFactoryWriter("com.some.package", "SomeClass", output);
-        factoryWriter.writeHeader();
-        factoryWriter.writeMethod("method1", new FactoryMethod("com.example.MyMatcher", "method1", "matcher.ReturnType"));
-        factoryWriter.writeMethod("method2", new FactoryMethod("com.example.MyMatcher", "method2", "matcher.ReturnType"));
-        factoryWriter.writeFooter();
-
+    @Test public void
+    writesCompleteJavaSource() throws IOException {
+        final FactoryWriter writer = new HamcrestFactoryWriter("com.some.package", "SomeClass", output);
+        writer.writeHeader();
+        writer.writeMethod("method1", new FactoryMethod("com.example.MyMatcher", "method1", "matcher.ReturnType"));
+        writer.writeMethod("method2", new FactoryMethod("com.example.MyMatcher", "method2", "matcher.ReturnType"));
+        writer.writeFooter();
+        writer.close();
+        
         assertEquals("" +
                 "// Generated source.\n" +
                 "package com.some.package;\n" +
@@ -52,7 +51,8 @@ public class HamcrestFactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesGenerifiedMatcherType() throws IOException {
+    @Test public void
+    writesGenerifiedMatcherType() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "anyString", "matcher.ReturnType");
         method.setGenerifiedType("String");
 
@@ -65,7 +65,8 @@ public class HamcrestFactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesAdvancedGenerifiedMatcherType() throws IOException {
+    @Test public void
+    writesAdvancedGenerifiedMatcherType() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "weirdThing", "matcher.ReturnType");
         method.setGenerifiedType("java.util.Map<com.Foo<Cheese>,?>");
 
@@ -78,7 +79,8 @@ public class HamcrestFactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesParameters() throws IOException {
+    @Test public void
+    writesParameters() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "between", "matcher.ReturnType");
         method.addParameter("int[]", "lower");
         method.addParameter("com.blah.Cheesable<Long>...", "upper");
@@ -92,7 +94,8 @@ public class HamcrestFactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesExceptions() throws IOException {
+    @Test public void
+    writesExceptions() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "tricky", "matcher.ReturnType");
         method.addException("java.io.IOException");
         method.addException("com.foo.CheeselessException");
@@ -106,7 +109,8 @@ public class HamcrestFactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesGenericTypeParameters() throws IOException {
+    @Test public void
+    writesGenericTypeParameters() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "tricky", "matcher.ReturnType");
         method.addGenericTypeParameter("T");
         method.addGenericTypeParameter("V extends String & Cheese");
@@ -122,7 +126,8 @@ public class HamcrestFactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesJavaDoc() throws IOException {
+    @Test public void
+    writesJavaDoc() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "needsDoc", "matcher.ReturnType");
         method.setJavaDoc("This is a complicated method.\nIt needs docs.\n\n@see MoreStuff");
 
@@ -141,7 +146,8 @@ public class HamcrestFactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesMethodWithNameOverridden() throws IOException {
+    @Test public void
+    writesMethodWithNameOverridden() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "eq", "matcher.ReturnType");
 
         factoryWriter.writeMethod("anotherName", method);
@@ -152,5 +158,4 @@ public class HamcrestFactoryWriterTest extends TestCase {
                 "\n",
                 output.toString());
     }
-
 }

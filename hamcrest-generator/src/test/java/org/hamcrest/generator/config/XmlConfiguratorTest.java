@@ -1,10 +1,10 @@
 package org.hamcrest.generator.config;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import junit.framework.TestCase;
 
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
@@ -12,21 +12,16 @@ import org.hamcrest.Matcher;
 import org.hamcrest.generator.FactoryMethod;
 import org.hamcrest.generator.FactoryWriter;
 import org.hamcrest.generator.SugarConfiguration;
+import org.junit.Test;
 import org.xml.sax.InputSource;
 
-public class XmlConfiguratorTest extends TestCase {
+public final class XmlConfiguratorTest {
 
-    private MockSugarConfiguration sugarConfiguration;
-    private XmlConfigurator config;
+    private final MockSugarConfiguration sugarConfiguration = new MockSugarConfiguration();
+    private final XmlConfigurator config = new XmlConfigurator(sugarConfiguration, getClass().getClassLoader());
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        sugarConfiguration = new MockSugarConfiguration();
-        config = new XmlConfigurator(sugarConfiguration, getClass().getClassLoader());
-    }
-
-    public void testAddsMatcherFactoryMethodsToConfiguration() throws Exception {
+    @Test public void
+    addsMatcherFactoryMethodsToConfiguration() throws Exception {
         config.load(createXml("" +
                 "<matchers>" +
                 "  <factory class='org.hamcrest.generator.config.XmlConfiguratorTest$SomeMatcher'/>" +

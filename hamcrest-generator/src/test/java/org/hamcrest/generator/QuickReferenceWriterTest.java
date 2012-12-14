@@ -1,29 +1,22 @@
 package org.hamcrest.generator;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
-import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
-public class QuickReferenceWriterTest extends TestCase {
+import org.junit.Test;
 
-    private ByteArrayOutputStream actualBuffer;
-    private ByteArrayOutputStream expectedBuffer;
-    private PrintStream expected;
-    private QuickReferenceWriter writer;
+public final class QuickReferenceWriterTest {
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        actualBuffer = new ByteArrayOutputStream();
-        writer = new QuickReferenceWriter(new PrintStream(actualBuffer));
+    private final ByteArrayOutputStream actualBuffer = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream expectedBuffer = new ByteArrayOutputStream();
+    private final PrintStream expected = new PrintStream(expectedBuffer);
+    private final QuickReferenceWriter writer = new QuickReferenceWriter(new PrintStream(actualBuffer));
 
-        expectedBuffer = new ByteArrayOutputStream();
-        expected = new PrintStream(expectedBuffer);
-    }
-
-    public void testWritesSimplifiedSummaryOfMatchers() throws IOException {
+    @Test public void
+    writesSimplifiedSummaryOfMatchers() throws IOException {
         FactoryMethod namedMethod = new FactoryMethod("SomeClass", "someMethod", "unusedReturnType");
         namedMethod.addParameter("Cheese", "a");
         namedMethod.addParameter("int", "b");
@@ -39,7 +32,8 @@ public class QuickReferenceWriterTest extends TestCase {
         verify();
     }
 
-    public void testRemovesPackageNames() throws IOException {
+    @Test public void
+    removesPackageNames() throws IOException {
         FactoryMethod namedMethod = new FactoryMethod("SomeClass", "someMethod", "unusedReturnType");
         namedMethod.addParameter("com.blah.Foo", "a");
         namedMethod.addParameter("com.foo.Cheese<x.y.Zoo>", "b");
@@ -53,5 +47,4 @@ public class QuickReferenceWriterTest extends TestCase {
     private void verify() {
         assertEquals(new String(expectedBuffer.toByteArray()), new String(actualBuffer.toByteArray()));
     }
-
 }

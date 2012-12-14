@@ -1,22 +1,19 @@
 package org.hamcrest.generator;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
-import java.io.StringWriter;
 import java.io.IOException;
+import java.io.StringWriter;
 
-public class EasyMock2FactoryWriterTest extends TestCase {
+import org.junit.Test;
 
-    private FactoryWriter factoryWriter;
-    private StringWriter output = new StringWriter();
+public final class EasyMock2FactoryWriterTest {
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        factoryWriter = new EasyMock2FactoryWriter(output, "com.blah", "EasyMatchers");
-    }
+    private final StringWriter output = new StringWriter();
+    private final FactoryWriter factoryWriter = new EasyMock2FactoryWriter(output, "com.blah", "EasyMatchers");
 
-    public void testWritesMethodDelegationMethodWrappedInAdapter() throws IOException {
+    @Test public void
+    writesMethodDelegationMethodWrappedInAdapter() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "anyObject", "unusedReturnType");
 
         factoryWriter.writeMethod(method.getName(), method);
@@ -30,7 +27,8 @@ public class EasyMock2FactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesReturnType() throws IOException {
+    @Test public void
+    writesReturnType() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "anyString", "unusedReturnType");
         method.setGenerifiedType("String");
 
@@ -45,7 +43,8 @@ public class EasyMock2FactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesAdvancedGenerifiedMatcherType() throws IOException {
+    @Test public void
+    writesAdvancedGenerifiedMatcherType() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "weirdThing", "unusedReturnType");
         method.setGenerifiedType("java.util.Map<com.Foo<Cheese>,?>");
 
@@ -60,7 +59,8 @@ public class EasyMock2FactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesParameters() throws IOException {
+    @Test public void
+    writesParameters() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "between", "unusedReturnType");
         method.addParameter("int[]", "lower");
         method.addParameter("com.blah.Cheesable<Long>...", "upper");
@@ -76,7 +76,8 @@ public class EasyMock2FactoryWriterTest extends TestCase {
                 output.toString());
     }
 
-    public void testWritesExceptions() throws IOException {
+    @Test public void
+    writesExceptions() throws IOException {
         FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "tricky", "unusedReturnType");
         method.addException("java.io.IOException");
         method.addException("com.foo.CheeselessException");
@@ -92,7 +93,8 @@ public class EasyMock2FactoryWriterTest extends TestCase {
                 output.toString());
     }
 //
-//    public void testWritesGenericTypeParameters() throws IOException {
+//    @Test public void
+//    writesGenericTypeParameters() throws IOException {
 //        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "tricky");
 //        method.addGenericTypeParameter("T");
 //        method.addGenericTypeParameter("V extends String & Cheese");
@@ -108,7 +110,8 @@ public class EasyMock2FactoryWriterTest extends TestCase {
 //                output.toString());
 //    }
 //
-//    public void testWritesJavaDoc() throws IOException {
+//    @Test public void
+//    writesJavaDoc() throws IOException {
 //        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "needsDoc");
 //        method.setJavaDoc("This is a complicated method.\nIt needs docs.\n\n@see MoreStuff");
 //
@@ -127,7 +130,8 @@ public class EasyMock2FactoryWriterTest extends TestCase {
 //                output.toString());
 //    }
 //
-//    public void testWritesMethodWithNameOverridden() throws IOException {
+//    @Test public void
+//    writesMethodWithNameOverridden() throws IOException {
 //        FactoryMethod method = new FactoryMethod("com.example.MyMatcher", "eq");
 //
 //        factoryWriter.writeMethod("anotherName", method);
@@ -142,6 +146,4 @@ public class EasyMock2FactoryWriterTest extends TestCase {
     // primitives
     // arrays?
     // and/or/not/etc
-
-
 }

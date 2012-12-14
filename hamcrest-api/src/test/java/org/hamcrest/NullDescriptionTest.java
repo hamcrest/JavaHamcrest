@@ -1,6 +1,6 @@
 package org.hamcrest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.hamcrest.Description.NullDescription;
 import org.junit.Test;
