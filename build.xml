@@ -49,6 +49,14 @@
         </jar>
     </target>
 
+    <target name="library" depends="core" description="Build library of matchers">
+        <path id="cp-hamcrest-library-main" path="build/hamcrest-core-${version}.jar"/>
+        <path id="cp-hamcrest-library-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-test.jar"/>
+        <compile-module modulename="hamcrest-library"/>
+        <test-module modulename="hamcrest-library"/>
+        <generate-module-factory modulename="hamcrest-library" configurationfile="matchers.xml" targetclass="org.hamcrest.Matchers"/>
+    </target>
+
     <macrodef name="compile-module">
         <attribute name="modulename" description="Name of the module to jar"/>
 
@@ -107,32 +115,6 @@
         </sequential>
     </macrodef>
 
-    <target name="library"
-            depends="core,generator"
-            description="Build library of matchers">
-        <mkdir dir="build/temp/hamcrest-library/generated-code"/>
-        <java-to-jar srcdir="hamcrest-library/src/main/java"
-                     modulename="hamcrest-library"
-                     classpath="build/hamcrest-core-${version}.jar"/>
-        <!-- Generate one class with all static imports -->
-        <java classname="org.hamcrest.generator.config.XmlConfigurator"
-              fork="yes"
-              failonerror="yes"
-              classpath="
-                build/hamcrest-core-${version}.jar;
-                build/hamcrest-generator-${version}.jar;
-                build/hamcrest-library-${version}.jar;
-              ">
-            <arg value="matchers.xml"/>
-            <arg value="hamcrest-core/src/main/java,hamcrest-library/src/main/java"/>
-            <arg value="org.hamcrest.Matchers"/>
-            <arg value="build/temp/hamcrest-library/generated-code"/>
-        </java>
-        <!-- Append to library jar -->
-        <java-to-jar srcdir="build/temp/hamcrest-library/generated-code"
-                     modulename="hamcrest-library"
-                     classpath="build/hamcrest-core-${version}.jar"/>
-    </target>
 
     <target name="integration" depends="core, library" description="Build integration with external tools">
         <java-to-jar srcdir="hamcrest-integration/src/main/java"
@@ -396,7 +378,8 @@
     <macrodef name="test-module" description="run unit tests.">
         <attribute name="modulename" description="Name of the module to jar"/>
         <sequential>
-            <junit printsummary="no" fork="no" haltonfailure="${haltonfailure}">
+            <mkdir dir="build/temp/@{modulename}/test-wrk"/>
+            <junit printsummary="no" forkmode="once" tempdir="build/temp/@{modulename}/test-wrk" haltonfailure="${haltonfailure}">
                 <formatter type="brief" usefile="no"/>
                 <classpath refid="cp-@{modulename}-main"/>
                 <classpath refid="cp-@{modulename}-test"/>
