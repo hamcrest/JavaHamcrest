@@ -190,28 +190,30 @@
     <macrodef name="compile-module">
         <attribute name="modulename" description="Name of the module to jar"/>
         <sequential>
-            <mkdir dir="build/temp/@{modulename}-${version}-sources.jar.contents"/>
-            <copy todir="build/temp/@{modulename}-${version}-sources.jar.contents">
-                <fileset dir="@{modulename}/src/main/java"/>
-            </copy>
-            <mkdir dir="build/temp/@{modulename}-${version}.jar.contents"/>
-            <javac srcdir="build/temp/@{modulename}-${version}-sources.jar.contents"
-                   destdir="build/temp/@{modulename}-${version}.jar.contents"
-                   debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
-                <classpath refid="cp-@{modulename}-main"/>
-            </javac>
+            <compile-content srcdir="@{modulename}/src/main/java" jarname="@{modulename}-${version}" classpathref="cp-@{modulename}-main" />
+            <path id="cp-@{modulename}-test-complete">
+                <path refid="cp-@{modulename}-main"/>
+                <path refid="cp-@{modulename}-test"/>
+                <path path="build/temp/@{modulename}-${version}.jar.contents"/>
+            </path>
+            <compile-content srcdir="@{modulename}/src/test/java" jarname="@{modulename}-${version}-tests" classpathref="cp-@{modulename}-test-complete" />
+        </sequential>
+    </macrodef>
 
-            <mkdir dir="build/temp/@{modulename}-${version}-tests-sources.jar.contents"/>
-            <copy todir="build/temp/@{modulename}-${version}-tests-sources.jar.contents" failonerror="false">
-                <fileset dir="@{modulename}/src/test/java"/>
+    <macrodef name="compile-content">
+        <attribute name="srcdir"/>
+        <attribute name="jarname" description="Name of the jar whose content is being compiled (without .jar suffix)"/>
+        <attribute name="classpathref"/>
+        <sequential>
+            <mkdir dir="build/temp/@{jarname}-sources.jar.contents"/>
+            <copy todir="build/temp/@{jarname}-sources.jar.contents">
+                <fileset dir="@{srcdir}"/>
             </copy>
-            <mkdir dir="build/temp/@{modulename}-${version}-tests.jar.contents"/>
-            <javac srcdir="build/temp/@{modulename}-${version}-tests-sources.jar.contents"
-                   destdir="build/temp/@{modulename}-${version}-tests.jar.contents"
+            <mkdir dir="build/temp/@{jarname}.jar.contents"/>
+            <javac srcdir="build/temp/@{jarname}-sources.jar.contents"
+                   destdir="build/temp/@{jarname}.jar.contents"
                    debug="${debug}" source="1.5" target="1.5" includeantruntime="false">
-                <classpath refid="cp-@{modulename}-main"/>
-                <classpath refid="cp-@{modulename}-test"/>
-                <classpath path="build/temp/@{modulename}-${version}.jar.contents"/>
+                <classpath refid="@{classpathref}"/>
             </javac>
         </sequential>
     </macrodef>
