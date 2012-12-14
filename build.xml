@@ -57,6 +57,17 @@
         <generate-module-factory modulename="hamcrest-library" configurationfile="matchers.xml" targetclass="org.hamcrest.Matchers"/>
     </target>
 
+    <target name="integration" depends="library" description="Build integration with external tools">
+        <path id="cp-hamcrest-integration-main">
+            <fileset file="build/hamcrest-core-${version}.jar"/>
+            <fileset file="build/hamcrest-library-${version}.jar"/>
+            <fileset dir="lib/integration" includes="**/*.jar"/>
+        </path>
+        <path id="cp-hamcrest-integration-test" path="lib/integration/junit-dep-4.10.jar;build/hamcrest-core-${version}-test.jar"/>
+        <compile-module modulename="hamcrest-integration"/>
+        <test-module modulename="hamcrest-integration"/>
+    </target>
+
     <macrodef name="compile-module">
         <attribute name="modulename" description="Name of the module to jar"/>
 
@@ -114,14 +125,6 @@
             </jar>
         </sequential>
     </macrodef>
-
-
-    <target name="integration" depends="core, library" description="Build integration with external tools">
-        <java-to-jar srcdir="hamcrest-integration/src/main/java"
-                     modulename="hamcrest-integration"
-                     classpath="build/hamcrest-core-${version}.jar;
-                                build/hamcrest-library-${version}.jar"/>
-    </target>
     
     <target name="examples" depends="core, library, integration" description="Build and run unit tests.">
         <java-to-jar srcdir="hamcrest-examples/src/main/java"
