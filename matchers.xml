@@ -58,4 +58,18 @@
     <!-- XML -->
     <factory class="org.hamcrest.xml.HasXPath"/>
 
+    <!-- Date -->
+    <factory class="org.hamcrest.date.IsBefore"/>
+    <factory class="org.hamcrest.date.IsAfter"/>
+    <factory class="org.hamcrest.date.IsWithin"/>
+    <factory class="org.hamcrest.date.IsSameInstant"/>
+    <factory class="org.hamcrest.date.IsSameDayOfTheMonth"/>
+    <factory class="org.hamcrest.date.IsSameDayOfTheWeek"/>
+    <factory class="org.hamcrest.date.IsSameDayOfTheYear"/>
+    <factory class="org.hamcrest.date.IsSameYear"/>
+    <factory class="org.hamcrest.date.IsSameMonth"/>
+    <factory class="org.hamcrest.date.IsSameHour"/>
+    <factory class="org.hamcrest.date.IsSameMinute"/>
+    <factory class="org.hamcrest.date.IsSameSecond"/>
+
 </matchers>
