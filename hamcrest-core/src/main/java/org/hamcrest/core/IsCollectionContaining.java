@@ -11,7 +11,7 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
+public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<T>> {
     private final Matcher<? super T> elementMatcher;
 
     public IsCollectionContaining(Matcher<? super T> elementMatcher) {
@@ -19,7 +19,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
     }
 
     @Override
-    protected boolean matchesSafely(Iterable<? super T> collection, Description mismatchDescription) {
+    protected boolean matchesSafely(Iterable<T> collection, Description mismatchDescription) {
         boolean empty = true;
         for (Object item : collection) {
             empty = false;
@@ -69,7 +69,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      *     the matcher to apply to items provided by the examined {@link Iterable}
      */
     @Factory
-    public static <T> Matcher<Iterable<? super T>> hasItem(Matcher<? super T> itemMatcher) {
+    public static <T> Matcher<Iterable<T>> hasItem(Matcher<? super T> itemMatcher) {
         return new IsCollectionContaining<T>(itemMatcher);
     }
 
@@ -86,7 +86,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      *     the item to compare against the items provided by the examined {@link Iterable}
      */
     @Factory
-    public static <T> Matcher<Iterable<? super T>> hasItem(T item) {
+    public static <T> Matcher<Iterable<T>> hasItem(T item) {
         // Doesn't forward to hasItem() method so compiler can sort out generics.
         return new IsCollectionContaining<T>(equalTo(item));
     }

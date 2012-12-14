@@ -24,18 +24,18 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     }
 
     public void testMatchesACollectionThatContainsAnElementMatchingTheGivenMatcher() {
-        Matcher<Iterable<? super String>> itemMatcher = hasItem(equalTo("a"));
+        Matcher<Iterable<String>> itemMatcher = hasItem(equalTo("a"));
         
         assertMatches("should match list that contains 'a'",
                 itemMatcher, asList("a", "b", "c"));
     }
 
     public void testDoesNotMatchCollectionThatDoesntContainAnElementMatchingTheGivenMatcher() {
-        final Matcher<Iterable<? super String>> matcher1 = hasItem(mismatchable("a"));
+        final Matcher<Iterable<String>> matcher1 = hasItem(mismatchable("a"));
         assertMismatchDescription("was a collection that did not contain mismatchable: a -- mismatches were: [mismatched: b, mismatched: c]",
                                   matcher1, asList("b", "c"));
         
-        final Matcher<Iterable<? super String>> matcher2 = hasItem(equalTo("a"));
+        final Matcher<Iterable<String>> matcher2 = hasItem(equalTo("a"));
         assertMismatchDescription("was an empty collection", matcher2, new ArrayList<String>());
     }
 
@@ -52,7 +52,7 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
       final Set<Number> s = new HashSet<Number>();
       s.add(Integer.valueOf(2));
       assertThat(s, new IsCollectionContaining<Number>(new IsEqual<Number>(Integer.valueOf(2))));
-      assertThat(s, IsCollectionContaining.hasItem(Integer.valueOf(2)));
+      assertThat(s, IsCollectionContaining.hasItem((Number) Integer.valueOf(2)));
     }
 
     @SuppressWarnings("unchecked")
