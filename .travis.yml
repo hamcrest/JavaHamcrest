@@ -6,4 +6,4 @@ jdk:
   - oraclejdk7
 
 script:
-  - ant unit-test
+  - ant javadoc
