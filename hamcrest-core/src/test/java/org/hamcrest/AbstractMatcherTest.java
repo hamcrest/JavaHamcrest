@@ -38,7 +38,7 @@ public abstract class AbstractMatcherTest extends TestCase {
           matcher.matches(null);
       }
       catch (Exception e) {
-          throw new AssertionError("Matcher was not null safe", e);
+          Assert.fail("Matcher was not null safe");
       }
   }
 
@@ -47,7 +47,7 @@ public abstract class AbstractMatcherTest extends TestCase {
           matcher.matches(new UnknownType());
       }
       catch (Exception e) {
-          throw new AssertionError("Matcher was not unknown type safe", e);
+          Assert.fail("Matcher was not unknown type safe");
       }
   }
 
