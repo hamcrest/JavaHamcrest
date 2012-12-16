@@ -1,8 +1,11 @@
 package org.hamcrest;
 
-import junit.framework.TestCase;
+import static junit.framework.Assert.assertFalse;
+import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
 
-public class TypeSafeMatcherTest extends TestCase {
+import org.junit.Test;
+
+public final class TypeSafeMatcherTest {
     private final Matcher<String> matcher = new TypeSafeMatcherSubclass();
 
     public static class TypeSafeMatcherSubclass extends TypeSafeMatcher<String> {
@@ -19,23 +22,19 @@ public class TypeSafeMatcherTest extends TestCase {
         @Override
         public void describeTo(Description description) {
         }
-
     }
-    
-    public void testCanDetermineMatcherTypeFromProtectedMatchesSafelyMethod() {
+
+    @Test public void
+    canDetermineMatcherTypeFromProtectedMatchesSafelyMethod() {
         assertFalse(matcher.matches(null));
         assertFalse(matcher.matches(10));
     }
-    
-    public void testDescribesMismatches() {
-      assertMismatchDescription("was null", null);
-      assertMismatchDescription("was a java.lang.Integer (<3>)", new Integer(3));
-      assertMismatchDescription("The mismatch", "a string");
-    }
 
-    private void assertMismatchDescription(String expectedDescription, Object actual) {
-      StringDescription description = new StringDescription();
-      matcher.describeMismatch(actual, description);
-      assertEquals(expectedDescription, description.toString());
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Test public void
+    describesMismatches() {
+      assertMismatchDescription("was null", matcher, null);
+      assertMismatchDescription("was a java.lang.Integer (<3>)", (Matcher)matcher, new Integer(3));
+      assertMismatchDescription("The mismatch", matcher, "a string");
     }
 }
