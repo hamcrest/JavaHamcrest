@@ -1,24 +1,30 @@
 package org.hamcrest.integration;
 
-import junit.framework.TestCase;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import static org.hamcrest.core.IsEqual.equalTo;
 import org.jmock.core.Constraint;
+import org.junit.Test;
 
-public class JMock1AdapterTest extends TestCase {
+public final class JMock1AdapterTest {
 
     public static interface InterfaceToMock {
         void doStuff(String name, int number);
     }
 
-    public void testAdaptsHamcrestMatcherToJMockConstraint() {
+    @Test public void
+    adaptsHamcrestMatcherToJMockConstraint() {
         Constraint jMockConstraint = new JMock1Adapter(equalTo("expected"));
         assertTrue("Should have matched", jMockConstraint.eval("expected"));
         assertFalse("Should not have matched", jMockConstraint.eval("unexpected"));
     }
 
-    public void testDelegatesDescriptionToUnderlyingMatcher() {
+    @Test public void
+    delegatesDescriptionToUnderlyingMatcher() {
         Constraint jMockConstraint = new JMock1Adapter(new BaseMatcher<Object>() {
             @Override
             public boolean matches(Object o) {
@@ -36,5 +42,4 @@ public class JMock1AdapterTest extends TestCase {
         buffer = jMockConstraint.describeTo(buffer);
         assertEquals("is like \"cheese\"", buffer.toString());
     }
-
 }

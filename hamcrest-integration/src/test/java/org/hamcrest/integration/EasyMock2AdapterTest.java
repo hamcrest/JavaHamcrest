@@ -1,24 +1,30 @@
 package org.hamcrest.integration;
 
-import junit.framework.TestCase;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.easymock.IArgumentMatcher;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import static org.hamcrest.core.IsEqual.equalTo;
+import org.junit.Test;
 
-public class EasyMock2AdapterTest extends TestCase {
+public final class EasyMock2AdapterTest {
 
     public static interface InterfaceToMock {
         void doStuff(String name, int number);
     }
 
-    public void testAdaptsHamcrestMatcherToEasyMockArgumentsMatcher() {
+    @Test public void
+    adaptsHamcrestMatcherToEasyMockArgumentsMatcher() {
         IArgumentMatcher easyMockMatcher = new EasyMock2Adapter(equalTo("expected"));
         assertTrue("Should have matched", easyMockMatcher.matches("expected"));
         assertFalse("Should not have matched", easyMockMatcher.matches("unexpected"));
     }
 
-    public void testDelegatesDescriptionToUnderlyingMatcher() {
+    @Test public void
+    delegatesDescriptionToUnderlyingMatcher() {
         IArgumentMatcher easyMockMatcher = new EasyMock2Adapter(new BaseMatcher<Object>() {
             @Override
             public boolean matches(Object o) {

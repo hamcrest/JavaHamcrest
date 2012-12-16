@@ -2,14 +2,20 @@ package org.hamcrest;
 
 import static org.hamcrest.JavaLangMatcherAssert.that;
 import static org.hamcrest.core.StringStartsWith.startsWith;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class JavaLangMatcherAssertTest extends TestCase {
-    public void testWouldCauseFailingAssertion() throws Exception {
-        assertEquals(false, that("Foo", startsWith("Bar")));
+import org.junit.Test;
+
+public final class JavaLangMatcherAssertTest {
+
+    @Test public void
+    wouldCauseFailingAssertion() throws Exception {
+        assertFalse(that("Foo", startsWith("Bar")));
     }
-    
-    public void testWouldCausePassingAssertion() throws Exception {
-        assertEquals(true, that("Foo", startsWith("F")));
+
+    @Test public void
+    wouldCausePassingAssertion() throws Exception {
+        assertTrue(that("Foo", startsWith("F")));
     }
 }
