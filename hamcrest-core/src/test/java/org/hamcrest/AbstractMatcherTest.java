@@ -32,6 +32,24 @@ public abstract class AbstractMatcherTest extends TestCase {
     Assert.assertFalse("Precondition: Matcher should not match item.", matcher.matches(arg));
     Assert.assertEquals("Expected mismatch description", expected, mismatchDescription(matcher, arg));
   }
+  
+  public static void assertNullSafe(Matcher<?> matcher) {
+      try {
+          matcher.matches(null);
+      }
+      catch (Exception e) {
+          throw new AssertionError("Matcher was not null safe", e);
+      }
+  }
+
+  public static void assertUnknownTypeSafe(Matcher<?> matcher) {
+      try {
+          matcher.matches(new UnknownType());
+      }
+      catch (Exception e) {
+          throw new AssertionError("Matcher was not unknown type safe", e);
+      }
+  }
 
   private static <T> String mismatchDescription(Matcher<? super T> matcher, T arg) {
     Description description = new StringDescription();
@@ -40,13 +58,11 @@ public abstract class AbstractMatcherTest extends TestCase {
   }
 
   public void testIsNullSafe() {
-    // should not throw a NullPointerException
-    createMatcher().matches(null);
+    assertNullSafe(createMatcher());
   }
 
   public void testCopesWithUnknownTypes() {
-    // should not throw ClassCastException
-    createMatcher().matches(new UnknownType());
+    assertUnknownTypeSafe(createMatcher());
   }
 
   public static class UnknownType {
