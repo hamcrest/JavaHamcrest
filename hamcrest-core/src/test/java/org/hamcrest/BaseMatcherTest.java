@@ -1,10 +1,14 @@
 package org.hamcrest;
 
-import junit.framework.TestCase;
+import static junit.framework.Assert.assertEquals;
 
-public class BaseMatcherTest extends TestCase {
+import org.junit.Test;
 
-    public void testDescribesItselfWithToStringMethod() {
+public final class BaseMatcherTest {
+
+    @Test
+    public void
+    describesItselfWithToStringMethod() {
         Matcher<Object> someMatcher = new BaseMatcher<Object>() {
             @Override
             public boolean matches(Object item) {

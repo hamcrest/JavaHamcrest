@@ -1,8 +1,10 @@
 package org.hamcrest;
 
-import junit.framework.TestCase;
+import static junit.framework.Assert.assertEquals;
 
-public class BaseDescriptionTest extends TestCase {
+import org.junit.Test;
+
+public final class BaseDescriptionTest {
 
     private final StringBuilder result = new StringBuilder();
 
@@ -12,48 +14,57 @@ public class BaseDescriptionTest extends TestCase {
         }
     };
 
-    public void testDescribesAppendedNullValue() {
+    @Test public void 
+    describesAppendedNullValue() {
         baseDescription.appendValue(null);
         assertEquals("null", result.toString());
     }
 
-    public void testQuotesAppendedStringValue() {
+    @Test public void 
+    quotesAppendedStringValue() {
         baseDescription.appendValue("foo");
         assertEquals("\"foo\"", result.toString());
     }
 
-    public void testQuotesAppendedCharacterValue() {
+    @Test public void 
+    quotesAppendedCharacterValue() {
         baseDescription.appendValue('f');
         assertEquals("\"f\"", result.toString());
     }
 
-    public void testBracketsAppendedShortValue() {
+    @Test public void 
+    bracketsAppendedShortValue() {
         baseDescription.appendValue(Short.valueOf("2"));
         assertEquals("<2s>", result.toString());
     }
 
-    public void testBracketsAppendedLongValue() {
+    @Test public void 
+    bracketsAppendedLongValue() {
         baseDescription.appendValue(Long.valueOf("2"));
         assertEquals("<2L>", result.toString());
     }
 
-    public void testBracketsAppendedFloatValue() {
+    @Test public void 
+    bracketsAppendedFloatValue() {
         baseDescription.appendValue(Float.valueOf("1.2"));
         assertEquals("<1.2F>", result.toString());
     }
 
-    public void testDescribesAppendedArrayValue() {
+    @Test public void 
+    describesAppendedArrayValue() {
         baseDescription.appendValue(new String[] {"2", "3"});
         assertEquals("[\"2\", \"3\"]", result.toString());
     }
 
-    public void testBracketsAppendedObjectValue() {
+    @Test public void 
+    bracketsAppendedObjectValue() {
         final Object value = new Object();
         baseDescription.appendValue(value);
         assertEquals("<" + value.toString() + ">", result.toString());
     }
     
-    public void testSafelyDescribesAppendedValueOfObjectWhoseToStringThrowsAnException() {
+    @Test public void 
+    safelyDescribesAppendedValueOfObjectWhoseToStringThrowsAnException() {
         final Object value = new Object() {
             @Override public String toString() {
                 throw new UnsupportedOperationException();

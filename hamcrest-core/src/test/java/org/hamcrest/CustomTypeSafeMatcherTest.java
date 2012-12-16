@@ -1,34 +1,44 @@
 package org.hamcrest;
 
-public class CustomTypeSafeMatcherTest extends AbstractMatcherTest {
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
+
+import org.junit.Test;
+
+public final class CustomTypeSafeMatcherTest {
     private static final String STATIC_DESCRIPTION = "I match non empty strings";
-    private Matcher<String> customMatcher;
 
-    @Override
-    protected void setUp() throws Exception {
-        customMatcher = new CustomTypeSafeMatcher<String>(STATIC_DESCRIPTION) {
-            @Override
-            public boolean matchesSafely(String item) {
-                return false;
-            }
+    private final Matcher<String> customMatcher = new CustomTypeSafeMatcher<String>(STATIC_DESCRIPTION) {
+        @Override
+        public boolean matchesSafely(String item) {
+            return false;
+        }
 
-            @Override
-            public void describeMismatchSafely(String item, Description mismatchDescription) {
-              mismatchDescription.appendText("an " + item);
-            }
-        };
-    }
+        @Override
+        public void describeMismatchSafely(String item, Description mismatchDescription) {
+            mismatchDescription.appendText("an " + item);
+        }
+    };
 
-    public void testUsesStaticDescription() throws Exception {
+    @Test public void
+    usesStaticDescription() throws Exception {
         assertDescription(STATIC_DESCRIPTION, customMatcher);
     }
 
-    public void testReportsMismatch() {
-      assertMismatchDescription("an item", customMatcher, "item");
+    @Test public void
+    reportsMismatch() {
+        assertMismatchDescription("an item", customMatcher, "item");
     }
 
-    @Override
-    protected Matcher<?> createMatcher() {
-        return customMatcher;
+    @Test public void
+    isNullSafe() {
+        assertNullSafe(customMatcher);
+    }
+    
+    @Test public void
+    copesWithUnknownTypes() {
+        assertUnknownTypeSafe(customMatcher);
     }
 }

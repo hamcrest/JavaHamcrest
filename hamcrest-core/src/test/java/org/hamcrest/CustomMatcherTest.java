@@ -1,11 +1,13 @@
 package org.hamcrest;
 
 import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import junit.framework.TestCase;
 
-public class CustomMatcherTest extends TestCase {
+import org.junit.Test;
 
-    public void testUsesStaticDescription() throws Exception {
+public final class CustomMatcherTest {
+
+    @Test public void
+    usesStaticDescription() throws Exception {
         Matcher<String> matcher = new CustomMatcher<String>("I match strings") {
             @Override
             public boolean matches(Object item) {

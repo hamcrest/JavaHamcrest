@@ -1,18 +1,22 @@
 package org.hamcrest;
 
-import junit.framework.TestCase;
-
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class MatcherAssertTest extends TestCase {
+import org.junit.Test;
 
-    public void testIncludesDescriptionOfTestedValueInErrorMessage() {
+public final class MatcherAssertTest {
+
+    @Test public void
+    includesDescriptionOfTestedValueInErrorMessage() {
         String expected = "expected";
         String actual = "actual";
-        
+
         String expectedMessage = "identifier\nExpected: \"expected\"\n     but: was \"actual\"";
-        
+
         try {
             assertThat("identifier", actual, equalTo(expected));
         }
@@ -20,16 +24,17 @@ public class MatcherAssertTest extends TestCase {
             assertTrue(e.getMessage().startsWith(expectedMessage));
             return;
         }
-        
+
         fail("should have failed");
     }
 
-    public void testDescriptionCanBeElided() {
+    @Test public void
+    descriptionCanBeElided() {
         String expected = "expected";
         String actual = "actual";
-        
+
         String expectedMessage = "\nExpected: \"expected\"\n     but: was \"actual\"";
-        
+
         try {
             assertThat(actual, equalTo(expected));
         }
@@ -37,13 +42,14 @@ public class MatcherAssertTest extends TestCase {
             assertTrue(e.getMessage().startsWith(expectedMessage));
             return;
         }
-        
+
         fail("should have failed");
     }
-    
-    public void testCanTestBooleanDirectly() {
+
+    @Test public void
+    canTestBooleanDirectly() {
         assertThat("success reason message", true);
-        
+
         try {
             assertThat("failing reason message", false);
         }
@@ -51,44 +57,45 @@ public class MatcherAssertTest extends TestCase {
             assertEquals("failing reason message", e.getMessage());
             return;
         }
-        
+
         fail("should have failed");
     }
 
-    public void testIncludesMismatchDescription() {
-      Matcher<String> matcherWithCustomMismatchDescription = new BaseMatcher<String>() {
-        @Override
-        public boolean matches(Object item) {
-          return false;
+    @Test public void
+    includesMismatchDescription() {
+        Matcher<String> matcherWithCustomMismatchDescription = new BaseMatcher<String>() {
+            @Override
+            public boolean matches(Object item) {
+                return false;
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Something cool");
+            }
+
+            @Override
+            public void describeMismatch(Object item, Description mismatchDescription) {
+                mismatchDescription.appendText("Not cool");
+            }
+        };
+
+        String expectedMessage = "\nExpected: Something cool\n     but: Not cool";
+
+        try {
+            assertThat("Value", matcherWithCustomMismatchDescription);
+            fail("should have failed");
         }
-
-        @Override
-        public void describeTo(Description description) {
-          description.appendText("Something cool");
+        catch (AssertionError e) {
+            assertEquals(expectedMessage, e.getMessage());
         }
-
-        @Override
-        public void describeMismatch(Object item, Description mismatchDescription) {
-          mismatchDescription.appendText("Not cool");
-        }
-      };
-
-      String expectedMessage = "\nExpected: Something cool\n     but: Not cool";
-
-      try {
-        assertThat("Value", matcherWithCustomMismatchDescription);
-        fail("should have failed");
-      }
-      catch (AssertionError e) {
-        assertEquals(expectedMessage, e.getMessage());
-      }
     }
-    
-    
-    public void testCanAssertSubtypes() {
-      Integer aSub = new Integer(1);
-      Number aSuper = aSub;
-      
-      assertThat(aSub, equalTo(aSuper));
+
+    @Test public void
+    canAssertSubtypes() {
+        Integer aSub = new Integer(1);
+        Number aSuper = aSub;
+
+        assertThat(aSub, equalTo(aSuper));
     }
 }
