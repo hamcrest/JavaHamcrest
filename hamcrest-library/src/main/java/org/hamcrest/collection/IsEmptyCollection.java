@@ -1,11 +1,11 @@
 package org.hamcrest.collection;
 
-import java.util.Collection;
-
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+
+import java.util.Collection;
 
 /**
  * Tests if collection is empty.
@@ -52,8 +52,6 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
      */
     @Factory
     public static <E> Matcher<Collection<E>> emptyCollectionOf(Class<E> type) {
-        @SuppressWarnings({ "rawtypes", "unchecked" })
-        final Matcher<Collection<E>> result = (Matcher)empty();
-        return result;
+      return (Matcher)empty();
     }
 }
