@@ -47,11 +47,12 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
      * For example:
      * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyCollectionOf(String.class)))</pre>
      * 
-     * @param type
+     * @param unusedToForceReturnType
      *     the type of the collection's content
      */
+    @SuppressWarnings({"unchecked", "UnusedParameters"})
     @Factory
-    public static <E> Matcher<Collection<E>> emptyCollectionOf(Class<E> type) {
+    public static <E> Matcher<Collection<E>> emptyCollectionOf(Class<E> unusedToForceReturnType) {
       return (Matcher)empty();
     }
 }

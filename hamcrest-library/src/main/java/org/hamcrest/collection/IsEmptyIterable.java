@@ -42,13 +42,12 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
      * For example:
      * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyIterableOf(String.class)))</pre>
      * 
-     * @param type
+     * @param unusedToForceReturnType
      *     the type of the iterable's content
      */
+    @SuppressWarnings({"unchecked", "UnusedParameters"})
     @Factory
-    public static <E> Matcher<Iterable<E>> emptyIterableOf(Class<E> type) {
-        @SuppressWarnings({ "rawtypes", "unchecked" })
-        final Matcher<Iterable<E>> result = (Matcher)emptyIterable();
-        return result;
+    public static <E> Matcher<Iterable<E>> emptyIterableOf(Class<E> unusedToForceReturnType) {
+      return (Matcher)emptyIterable();
     }
 }
