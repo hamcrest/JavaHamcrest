@@ -48,8 +48,7 @@ public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends
      */
     @Factory
     public static <E> Matcher<Collection<? extends E>> hasSize(int size) {
-        Matcher<? super Integer> matcher = equalTo(size);
-        return IsCollectionWithSize.<E>hasSize(matcher);
+      return IsCollectionWithSize.hasSize(equalTo(size));
     }
 
 }
