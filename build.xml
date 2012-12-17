@@ -156,7 +156,7 @@
         <sequential>
             <compile-content srcdir="@{modulename}/src/main/java" jarname="@{modulename}-${version}" classpathref="cp-@{modulename}-main" />
             <path id="cp-@{modulename}-test-complete">
-                <path path="lib/integration/junit-dep-4.10.jar"/>
+                <path path="lib/integration/junit-dep-4.11.jar"/>
                 <path refid="cp-@{modulename}-main"/>
                 <path refid="cp-@{modulename}-test"/>
                 <path path="build/temp/@{modulename}-${version}.jar.contents"/>
