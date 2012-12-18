@@ -2,55 +2,69 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
-
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 
-public class AllOfTest extends AbstractMatcherTest {
+import org.hamcrest.Matcher;
+import org.junit.Test;
 
-    @Override
-    @SuppressWarnings("unchecked")
-    protected Matcher<?> createMatcher() {
-        return allOf(IsEqual.<Object>equalTo("irrelevant"));
+public final class AllOfTest {
+
+    @Test public void
+    copesWithNullsAndUnknownTypes() {
+        Matcher<String> matcher = allOf(equalTo("irrelevant"), startsWith("irr"));
+        
+        assertNullSafe(matcher);
+        assertUnknownTypeSafe(matcher);
     }
     
-    public void testEvaluatesToTheTheLogicalConjunctionOfTwoOtherMatchers() {
-        assertThat("good", allOf(equalTo("good"), startsWith("good")));
-
-        assertThat("good", not(allOf(equalTo("bad"), equalTo("good"))));
-        assertThat("good", not(allOf(equalTo("good"), equalTo("bad"))));
-        assertThat("good", not(allOf(equalTo("bad"), equalTo("bad"))));
+    @Test public void
+    evaluatesToTheTheLogicalConjunctionOfTwoOtherMatchers() {
+        Matcher<String> matcher = allOf(startsWith("goo"), endsWith("ood"));
+        
+        assertMatches("didn't pass both sub-matchers", matcher, "good");
+        assertDoesNotMatch("didn't fail first sub-matcher", matcher, "mood");
+        assertDoesNotMatch("didn't fail second sub-matcher", matcher, "goon");
+        assertDoesNotMatch("didn't fail both sub-matchers", matcher, "fred");
     }
 
-    public void testEvaluatesToTheTheLogicalConjunctionOfManyOtherMatchers() {
-        assertThat("good", allOf(equalTo("good"), equalTo("good"), equalTo("good"), equalTo("good"), equalTo("good")));
-        assertThat("good", not(allOf(equalTo("good"), equalTo("good"), equalTo("bad"), equalTo("good"), equalTo("good"))));
+    @Test public void
+    evaluatesToTheTheLogicalConjunctionOfManyOtherMatchers() {
+        Matcher<String> matcher = allOf(startsWith("g"), startsWith("go"), endsWith("d"), startsWith("go"), startsWith("goo"));
+        
+        assertMatches("didn't pass all sub-matchers", matcher, "good");
+        assertDoesNotMatch("didn't fail middle sub-matcher", matcher, "goon");
     }
     
-    public void testSupportsMixedTypes() {
-        final Matcher<SampleSubClass> all = allOf(
+    @Test public void
+    supportsMixedTypes() {
+        final Matcher<SampleSubClass> matcher = allOf(
                 equalTo(new SampleBaseClass("bad")),
                 is(notNullValue()),
                 equalTo(new SampleBaseClass("good")),
                 equalTo(new SampleSubClass("ugly")));
-        final Matcher<SampleSubClass> negated = not(all);
         
-        assertThat(new SampleSubClass("good"), negated);
+        assertDoesNotMatch("didn't fail last sub-matcher", matcher, new SampleSubClass("good"));
     }
     
-    public void testHasAReadableDescription() {
+    @Test public void
+    hasAReadableDescription() {
         assertDescription("(\"good\" and \"bad\" and \"ugly\")",
                 allOf(equalTo("good"), equalTo("bad"), equalTo("ugly")));
     }
 
-    public void testMismatchDescriptionDescribesFirstFailingMatch() {
+    @Test public void
+    hasAMismatchDescriptionDescribingTheFirstFailingMatch() {
         assertMismatchDescription("\"good\" was \"bad\"", allOf(equalTo("bad"), equalTo("good")), "bad");
     }
 }
