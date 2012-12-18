@@ -2,47 +2,60 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.StringEndsWith.endsWith;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 
-import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.Test;
 
-public class AnyOfTest extends AbstractMatcherTest {
+public final class AnyOfTest {
 
-    @Override
+    @Test public void
+    copesWithNullsAndUnknownTypes() {
+        Matcher<String> matcher = anyOf(equalTo("irrelevant"), startsWith("irr"));
+        
+        assertNullSafe(matcher);
+        assertUnknownTypeSafe(matcher);
+    }
+
+    @Test public void
+    evaluatesToTheTheLogicalDisjunctionOfTwoOtherMatchers() {
+        Matcher<String> matcher = anyOf(startsWith("goo"), endsWith("ood"));
+        
+        assertMatches("didn't pass both sub-matchers", matcher, "good");
+        assertMatches("didn't pass second sub-matcher", matcher, "mood");
+        assertMatches("didn't pass first sub-matcher", matcher, "goon");
+        assertDoesNotMatch("didn't fail both sub-matchers", matcher, "flan");
+    }
+
+    @Test public void
+    evaluatesToTheTheLogicalDisjunctionOfManyOtherMatchers() {
+        Matcher<String> matcher = anyOf(startsWith("g"), startsWith("go"), endsWith("d"), startsWith("go"), startsWith("goo"));
+        
+        assertMatches("didn't pass middle sub-matcher", matcher, "vlad");
+        assertDoesNotMatch("didn't fail all sub-matchers", matcher, "flan");
+    }
+
     @SuppressWarnings("unchecked")
-    protected Matcher<?> createMatcher() {
-        return anyOf(IsEqual.<Object>equalTo("irrelevant"));
-    }
-
-    public void testEvaluatesToTheTheLogicalDisjunctionOfTwoOtherMatchers() {
-        assertThat("good", anyOf(equalTo("bad"), equalTo("good")));
-        assertThat("good", anyOf(equalTo("good"), equalTo("good")));
-        assertThat("good", anyOf(equalTo("good"), equalTo("bad")));
-
-        assertThat("good", not(anyOf(equalTo("bad"), equalTo("bad"))));
-    }
-
-    public void testEvaluatesToTheTheLogicalDisjunctionOfManyOtherMatchers() {
-        assertThat("good", anyOf(equalTo("bad"), equalTo("good"), equalTo("bad"), equalTo("bad"), equalTo("bad")));
-        assertThat("good", not(anyOf(equalTo("bad"), equalTo("bad"), equalTo("bad"), equalTo("bad"), equalTo("bad"))));
-    }
-
-    @SuppressWarnings("unchecked")
-    public void testSupportsMixedTypes() {
-        final Matcher<SampleSubClass> combined = anyOf(
+    @Test public void
+    supportsMixedTypes() {
+        final Matcher<SampleSubClass> matcher = anyOf(
                 equalTo(new SampleBaseClass("bad")),
                 equalTo(new SampleBaseClass("good")),
-                equalTo(new SampleSubClass("ugly"))
-        );
+                equalTo(new SampleSubClass("ugly")));
         
-        assertThat(new SampleSubClass("good"), combined);
-    }    
-    
-    public void testHasAReadableDescription() {
+        assertMatches("didn't pass middle sub-matcher", matcher, new SampleSubClass("good"));
+    }
+
+    @Test public void
+    hasAReadableDescription() {
         assertDescription("(\"good\" or \"bad\" or \"ugly\")",
                 anyOf(equalTo("good"), equalTo("bad"), equalTo("ugly")));
     }
