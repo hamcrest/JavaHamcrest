@@ -1,14 +1,14 @@
 package org.hamcrest.collection;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -21,7 +21,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
     
     @Override
     protected boolean matchesSafely(Iterable<? extends T> items, Description mismatchDescription) {
-      Matching<T> matching = new Matching<T>(matchers, mismatchDescription);
+      final Matching<T> matching = new Matching<T>(matchers, mismatchDescription);
       for (T item : items) {
         if (! matching.matches(item)) {
           return false;
@@ -33,7 +33,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
     
     @Override
     public void describeTo(Description description) {
-      description.appendText("iterable over ")
+      description.appendText("iterable with items ")
           .appendList("[", ", ", "]", matchers)
           .appendText(" in any order");
     }
@@ -48,7 +48,11 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
       }
       
       public boolean matches(S item) {
-        return isNotSurplus(item) && isMatched(item);
+        if (matchers.isEmpty()) {
+          mismatchDescription.appendText("no match for: ").appendValue(item);
+          return false;
+        }
+        return isMatched(item);
       }
 
       public boolean isFinished(Iterable<? extends S> items) {
@@ -56,17 +60,9 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
           return true;
         }
         mismatchDescription
-          .appendText("No item matches: ").appendList("", ", ", "", matchers)
+          .appendText("no item matches: ").appendList("", ", ", "", matchers)
           .appendText(" in ").appendValueList("[", ", ", "]", items);
         return false;
-      }
-      
-      private boolean isNotSurplus(S item) {
-        if (matchers.isEmpty()) {
-          mismatchDescription.appendText("Not matched: ").appendValue(item);
-          return false;
-        }
-        return true;
       }
 
       private boolean isMatched(S item) {
@@ -76,7 +72,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
             return true;
           }
         }
-        mismatchDescription.appendText("Not matched: ").appendValue(item);
+        mismatchDescription.appendText("not matched: ").appendValue(item);
         return false;
       }
     }

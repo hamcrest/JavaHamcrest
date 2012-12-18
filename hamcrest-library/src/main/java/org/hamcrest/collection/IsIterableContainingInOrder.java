@@ -20,7 +20,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
 
     @Override
     protected boolean matchesSafely(Iterable<? extends E> iterable, Description mismatchDescription) {
-        MatchSeries<E> matchSeries = new MatchSeries<E>(matchers, mismatchDescription);
+        final MatchSeries<E> matchSeries = new MatchSeries<E>(matchers, mismatchDescription);
         for (E item : iterable) {
             if (!matchSeries.matches(item)) {
                 return false;
@@ -36,9 +36,9 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     }
 
     private static class MatchSeries<F> {
-        public final List<Matcher<? super F>> matchers;
+        private final List<Matcher<? super F>> matchers;
         private final Description mismatchDescription;
-        public int nextMatchIx = 0;
+        private int nextMatchIx = 0;
 
         public MatchSeries(List<Matcher<? super F>> matchers, Description mismatchDescription) {
             this.mismatchDescription = mismatchDescription;
@@ -49,19 +49,24 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
         }
 
         public boolean matches(F item) {
-            return isNotSurplus(item) && isMatched(item);
+          if (matchers.size() <= nextMatchIx) {
+            mismatchDescription.appendText("not matched: ").appendValue(item);
+            return false;
+          }
+
+          return isMatched(item);
         }
 
         public boolean isFinished() {
             if (nextMatchIx < matchers.size()) {
-                mismatchDescription.appendText("No item matched: ").appendDescriptionOf(matchers.get(nextMatchIx));
+                mismatchDescription.appendText("no item was ").appendDescriptionOf(matchers.get(nextMatchIx));
                 return false;
             }
             return true;
         }
 
         private boolean isMatched(F item) {
-            Matcher<? super F> matcher = matchers.get(nextMatchIx);
+            final Matcher<? super F> matcher = matchers.get(nextMatchIx);
             if (!matcher.matches(item)) {
                 describeMismatch(matcher, item);
                 return false;
@@ -70,15 +75,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
             return true;
         }
 
-        private boolean isNotSurplus(F item) {
-            if (matchers.size() <= nextMatchIx) {
-                mismatchDescription.appendText("Not matched: ").appendValue(item);
-                return false;
-            }
-            return true;
-        }
-
-        private void describeMismatch(Matcher<? super F> matcher, F item) {
+      private void describeMismatch(Matcher<? super F> matcher, F item) {
             mismatchDescription.appendText("item " + nextMatchIx + ": ");
             matcher.describeMismatch(item, mismatchDescription);
         }

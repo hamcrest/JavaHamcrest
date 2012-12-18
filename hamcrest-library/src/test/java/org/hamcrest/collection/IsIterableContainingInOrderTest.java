@@ -30,12 +30,12 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchWithMoreElementsThanExpected() throws Exception {
-        assertMismatchDescription("Not matched: <4>", contains(1, 2, 3), asList(1, 2, 3, 4));
+        assertMismatchDescription("not matched: <4>", contains(1, 2, 3), asList(1, 2, 3, 4));
     }
 
     public void testDoesNotMatchWithFewerElementsThanExpected() throws Exception {
         List<WithValue> valueList = asList(make(1), make(2));
-        assertMismatchDescription("No item matched: value with <3>", contains123, valueList);
+        assertMismatchDescription("no item was value with <3>", contains123, valueList);
     }
 
     public void testDoesNotMatchIfSingleItemMismatches() throws Exception {
@@ -47,7 +47,7 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchEmptyIterable() throws Exception {
-        assertMismatchDescription("No item matched: value with <4>", contains(value(4)), new ArrayList<WithValue>());
+        assertMismatchDescription("no item was value with <4>", contains(value(4)), new ArrayList<WithValue>());
     }
 
     public void testHasAReadableDescription() {

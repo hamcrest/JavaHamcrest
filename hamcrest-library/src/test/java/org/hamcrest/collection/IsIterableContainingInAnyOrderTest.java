@@ -23,7 +23,7 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchEmpty() {
-        assertMismatchDescription("No item matches: <1>, <2> in []", containsInAnyOrder(1, 2), Collections.<Integer>emptyList());
+        assertMismatchDescription("no item matches: <1>, <2> in []", containsInAnyOrder(1, 2), Collections.<Integer>emptyList());
     }
     
     public void testMatchesIterableOutOfOrder() {
@@ -35,20 +35,20 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
     }
     
     public void testDoesNotMatchIfOneOfMultipleElementsMismatches() {
-        assertMismatchDescription("Not matched: <4>", containsInAnyOrder(1, 2, 3), asList(1, 2, 4));
+        assertMismatchDescription("not matched: <4>", containsInAnyOrder(1, 2, 3), asList(1, 2, 4));
     }
 
     @SuppressWarnings("unchecked")
     public void testDoesNotMatchIfThereAreMoreElementsThanMatchers() {
-        Matcher<Iterable<? extends WithValue>> helpTheCompilerOut = containsInAnyOrder(value(1), value(3));
-        assertMismatchDescription("Not matched: <WithValue 2>", helpTheCompilerOut, asList(make(1), make(2), make(3)));
+        final Matcher<Iterable<? extends WithValue>> helpTheCompilerOut = containsInAnyOrder(value(1), value(3));
+        assertMismatchDescription("not matched: <WithValue 2>", helpTheCompilerOut, asList(make(1), make(2), make(3)));
     }
     
     public void testDoesNotMatchIfThereAreMoreMatchersThanElements() {
-        assertMismatchDescription("No item matches: <4> in [<1>, <2>, <3>]", containsInAnyOrder(1, 2, 3, 4), asList(1, 2, 3));
+        assertMismatchDescription("no item matches: <4> in [<1>, <2>, <3>]", containsInAnyOrder(1, 2, 3, 4), asList(1, 2, 3));
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("iterable over [<1>, <2>] in any order", containsInAnyOrder(1, 2));
+        assertDescription("iterable with items [<1>, <2>] in any order", containsInAnyOrder(1, 2));
     }
 }

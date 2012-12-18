@@ -19,6 +19,7 @@ public class IsIn<T> extends BaseMatcher<T> {
         collection = Arrays.asList(elements);
     }
     
+    @SuppressWarnings("SuspiciousMethodCalls")
     @Override
     public boolean matches(Object o) {
         return collection.contains(o);

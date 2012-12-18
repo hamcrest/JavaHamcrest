@@ -12,7 +12,7 @@ public abstract class AbstractMatcherTest extends TestCase {
    */
   protected abstract Matcher<?> createMatcher();
 
-  public static <T> void assertMatches(String message, Matcher<? super T> matcher, T arg) {
+  public static <T> void assertMatches(String message, Matcher<T> matcher, T arg) {
     if (!matcher.matches(arg)) {
       Assert.fail(message + " because: '" + mismatchDescription(matcher, arg) + "'");
     }
