@@ -1,6 +1,6 @@
 package org.hamcrest;
 
-import static junit.framework.Assert.assertFalse;
+import static org.junit.Assert.assertFalse;
 import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
 
 import org.junit.Test;
