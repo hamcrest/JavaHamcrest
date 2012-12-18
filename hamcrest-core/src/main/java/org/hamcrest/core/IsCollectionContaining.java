@@ -1,15 +1,15 @@
 package org.hamcrest.core;
 
-import static org.hamcrest.core.AllOf.allOf;
-import static org.hamcrest.core.IsEqual.equalTo;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.core.AllOf.allOf;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
     private final Matcher<? super T> elementMatcher;
@@ -20,22 +20,18 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
 
     @Override
     protected boolean matchesSafely(Iterable<? super T> collection, Description mismatchDescription) {
-        boolean empty = true;
+        if (isEmpty(collection)) {
+          mismatchDescription.appendText("was empty");
+          return false;
+        }
+
         for (Object item : collection) {
-            empty = false;
             if (elementMatcher.matches(item)) {
                 return true;
             }
         }
-        
-        if (empty) {
-            mismatchDescription.appendText("was an empty collection");
-            return false;
-        }
-        
-        mismatchDescription.appendText("was a collection that did not contain ")
-                           .appendDescriptionOf(elementMatcher)
-                           .appendText(" -- mismatches were: [");
+
+        mismatchDescription.appendText("mismatches were: [");
         boolean isPastFirst = false;
         for (Object item : collection) {
             if (isPastFirst) {
@@ -46,6 +42,10 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
         }
         mismatchDescription.appendText("]");
         return false;
+    }
+
+    private boolean isEmpty(Iterable<? super T> iterable) {
+      return ! iterable.iterator().hasNext();
     }
 
     @Override
@@ -130,8 +130,8 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
     @Factory
     public static <T> Matcher<Iterable<T>> hasItems(T... items) {
         List<Matcher<? super Iterable<T>>> all = new ArrayList<Matcher<? super Iterable<T>>>(items.length);
-        for (T element : items) {
-            all.add(hasItem(element));
+        for (T item : items) {
+            all.add(hasItem(item));
         }
         
         return allOf(all);
