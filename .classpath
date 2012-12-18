@@ -18,6 +18,6 @@
 	<classpathentry kind="lib" path="lib/generator/qdox-1.12.jar" sourcepath="lib/sources/qdox-1.12-sources.jar"/>
 	<classpathentry kind="lib" path="lib/integration/testng-6.5.2.jar" sourcepath="lib/sources/testng-6.5.2-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/integration/junit-dep-4.10.jar"/>
+	<classpathentry kind="lib" path="lib/integration/junit-dep-4.11.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
