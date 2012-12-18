@@ -1,6 +1,6 @@
 package org.hamcrest;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.hamcrest.AbstractMatcherTest.assertDescription;
 import static org.hamcrest.AbstractMatcherTest.assertMatches;
 import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
