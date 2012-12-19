@@ -1,32 +1,48 @@
 package org.hamcrest.core;
 
-import org.hamcrest.StringDescription;
-import org.junit.Test;
+import static java.util.Arrays.asList;
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
+import static org.hamcrest.core.StringContains.containsString;
 
 import java.util.ArrayList;
 
-import static java.util.Arrays.asList;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.StringContains.containsString;
-import static org.junit.Assert.assertEquals;
+import org.hamcrest.Matcher;
+import org.junit.Test;
 
-public class EveryTest {
-    @Test public void isTrueWhenEveryValueMatches() {
-        assertThat(asList("AaA", "BaB", "CaC"), Every.everyItem(containsString("a")));
-        assertThat(asList("AbA", "BbB", "CbC"), not(Every.everyItem(containsString("a"))));
+public final class EveryTest {
+
+    private final Matcher<Iterable<String>> matcher = Every.everyItem(containsString("a"));
+
+    @Test public void
+    copesWithNullsAndUnknownTypes() {
+        assertNullSafe(matcher);
+        assertUnknownTypeSafe(matcher);
     }
 
-    @Test public void isAlwaysTrueForEmptyLists() {
-        assertThat(new ArrayList<String>(), Every.everyItem(containsString("a")));
+    @Test public void
+    matchesOnlyWhenEveryItemMatches() {
+        assertMatches("didn't match", matcher, asList("AaA", "BaB", "CaC"));
+        assertDoesNotMatch("matched unexpectedly", matcher, asList("AaA", "BXB", "CaC"));
     }
 
-    @Test public void describesItself() {
-        final Every<String> each=  new Every<String>(containsString("a"));
-        assertEquals("every item is a string containing \"a\"", each.toString());
-        
-        StringDescription description = new StringDescription(); 
-        each.matchesSafely(asList("BbB"), description);
-        assertEquals("an item was \"BbB\"", description.toString());
+    @Test public void
+    matchesEmptyLists() {
+        assertMatches("didn't match empty list", matcher, new ArrayList<String>());
+    }
+
+    @Test public void
+    describesItself() {
+        assertDescription("every item is a string containing \"a\"", matcher);
+    }
+
+    @Test public void
+    describesAMismatch() {
+        assertMismatchDescription("an item was \"BXB\"", matcher, asList("BXB"));
     }
 }
+
