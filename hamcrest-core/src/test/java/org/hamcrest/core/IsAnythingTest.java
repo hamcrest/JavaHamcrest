@@ -2,30 +2,34 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
 import static org.hamcrest.core.IsAnything.anything;
 
-import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.Test;
 
-public class IsAnythingTest extends AbstractMatcherTest {
+public final class IsAnythingTest {
 
-    @Override
-    protected Matcher<?> createMatcher() {
-        return anything();
+    private final Matcher<Object> matcher = anything();
+
+    private static class CustomThing { }
+    
+    @Test public void
+    alwaysEvaluatesToTrue() {
+        assertMatches("didn't match null", matcher, null);
+        assertMatches("didn't match Object", matcher, new Object());
+        assertMatches("didn't match custom object", matcher, new CustomThing());
+        assertMatches("didn't match String", matcher, "hi");
     }
 
-    public void testAlwaysEvaluatesToTrue() {
-        assertThat(null, anything());
-        assertThat(new Object(), anything());
-        assertThat("hi", anything());
+    @Test public void
+    hasUsefulDefaultDescription() {
+        assertDescription("ANYTHING", matcher);
     }
 
-    public void testHasUsefulDefaultDescription() {
-        assertDescription("ANYTHING", anything());
-    }
-
-    public void testCanOverrideDescription() {
+    @Test public void
+    canOverrideDescription() {
         String description = "description";
         assertDescription(description, anything(description));
     }
