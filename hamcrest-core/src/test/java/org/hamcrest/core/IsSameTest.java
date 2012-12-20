@@ -2,42 +2,53 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.core.IsSame.theInstance;
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.IsSame.sameInstance;
-import static org.hamcrest.core.IsNot.not;
-import org.hamcrest.AbstractMatcherTest;
+import static org.hamcrest.core.IsSame.theInstance;
+
 import org.hamcrest.Matcher;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.Test;
 
 
-public class IsSameTest extends AbstractMatcherTest {
+public final class IsSameTest {
 
-    @Override
-    protected Matcher<?> createMatcher() {
-        return sameInstance("irrelevant");
-    }
-
-    public void testEvaluatesToTrueIfArgumentIsReferenceToASpecifiedObject() {
-        Object o1 = new Object();
-        Object o2 = new Object();
-
-        assertThat(o1, sameInstance(o1));
-        assertThat(o2, not(sameInstance(o1)));
-    }
-
-    public void testAlternativeFactoryMethodAlsoMatchesOnlyIfArgumentIsReferenceToASpecifiedObject() {
-        Object o1 = new Object();
-        Object o2 = new Object();
+    @Test public void
+    copesWithNullsAndUnknownTypes() {
+        Matcher<String> matcher = sameInstance("irrelevant");
         
-        assertThat(o1, theInstance(o1));
-        assertThat(o2, not(theInstance(o1)));
+        assertNullSafe(matcher);
+        assertUnknownTypeSafe(matcher);
     }
 
-    public void testReturnsReadableDescriptionFromToString() {
+    @Test public void
+    evaluatesToTrueIfArgumentIsReferenceToASpecifiedObject() {
+        Object o1 = new Object();
+        Matcher<Object> matcher = sameInstance(o1);
+
+        assertMatches("didn't match", matcher, o1);
+        assertDoesNotMatch("matched unexpectedly", matcher, new Object());
+    }
+
+    @Test public void
+    alternativeFactoryMethodAlsoMatchesOnlyIfArgumentIsReferenceToASpecifiedObject() {
+        Object o1 = new Object();
+        Matcher<Object> matcher = theInstance(o1);
+
+        assertMatches("didn't match", matcher, o1);
+        assertDoesNotMatch("matched unexpectedly", matcher, new Object());
+    }
+
+    @Test public void
+    returnsReadableDescriptionFromToString() {
         assertDescription("sameInstance(\"ARG\")", sameInstance("ARG"));
     }
 
-    public void testReturnsReadableDescriptionFromToStringWhenInitialisedWithNull() {
+    @Test public void
+    returnsReadableDescriptionFromToStringWhenInitialisedWithNull() {
         assertDescription("sameInstance(null)", sameInstance(null));
     }
 }
