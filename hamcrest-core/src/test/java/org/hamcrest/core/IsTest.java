@@ -1,40 +1,57 @@
 package org.hamcrest.core;
 
-import static org.hamcrest.core.IsEqual.equalTo;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.Is.isA;
-import org.hamcrest.AbstractMatcherTest;
+import static org.hamcrest.core.IsEqual.equalTo;
+
 import org.hamcrest.Matcher;
+import org.junit.Test;
 
-public class IsTest extends AbstractMatcherTest {
+public final class IsTest {
 
-    @Override
-    protected Matcher<?> createMatcher() {
-        return is("something");
+    @Test public void
+    copesWithNullsAndUnknownTypes() {
+        Matcher<String> matcher = is("something");
+        
+        assertNullSafe(matcher);
+        assertUnknownTypeSafe(matcher);
     }
 
-    public void testJustMatchesTheSameWayTheUnderlyingMatcherDoes() {
-        assertMatches("should match", is(equalTo(true)), true);
-        assertMatches("should match", is(equalTo(false)), false);
-        assertDoesNotMatch("should not match", is(equalTo(true)), false);
-        assertDoesNotMatch("should not match", is(equalTo(false)), true);
+    @Test public void
+    matchesTheSameWayTheUnderlyingMatcherDoes() {
+        final Matcher<Boolean> matcher = is(equalTo(true));
+
+        assertMatches("didn't match", matcher, true);
+        assertDoesNotMatch("matched unexpectedly", matcher, false);
     }
 
-    public void testGeneratesIsPrefixInDescription() {
+    @Test public void
+    generatesIsPrefixInDescription() {
         assertDescription("is <true>", is(equalTo(true)));
-    }
-
-    public void testProvidesConvenientShortcutForIsEqualTo() {
-        assertMatches("should match", is("A"), "A");
-        assertMatches("should match", is("B"), "B");
-        assertDoesNotMatch("should not match", is("A"), "B");
-        assertDoesNotMatch("should not match", is("B"), "A");
         assertDescription("is \"A\"", is("A"));
     }
 
-    public void testProvidesConvenientShortcutForIsInstanceOf() {
-        assertTrue("should match", isA(String.class).matches("A"));
-        assertFalse("should not match", isA(Integer.class).matches(new Object()));
-        assertFalse("should not match", isA(Integer.class).matches(null));
+    @Test public void
+    providesConvenientShortcutForIsEqualTo() {
+        final Matcher<String> matcher = is("A");
+        
+        assertMatches("didn't match", matcher, "A");
+        assertDoesNotMatch("matched unexpectedly", is("A"), "B");
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Test public void
+    providesConvenientShortcutForIsInstanceOf() {
+        final Matcher matcher = isA(Integer.class);
+        assertMatches("didn't match", matcher, Integer.valueOf(1));
+        assertDoesNotMatch("matched unexpectedly", matcher, new Object());
+        assertDoesNotMatch("matched unexpectedly", matcher, null);
     }
 }
