@@ -2,33 +2,47 @@
  */
 package org.hamcrest.core;
 
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNot.not;
 
-import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.Test;
 
-public class IsNotTest extends AbstractMatcherTest {
-  @Override
-  protected Matcher<?> createMatcher() {
-    return not("something");
-  }
+public final class IsNotTest {
 
-  public void testEvaluatesToTheTheLogicalNegationOfAnotherMatcher() {
-    assertMatches("should match", not(equalTo("A")), "B");
-    assertDoesNotMatch("should not match", not(equalTo("B")), "B");
-  }
+    @Test public void
+    copesWithNullsAndUnknownTypes() {
+        Matcher<String> matcher = not("something");
 
-  public void testProvidesConvenientShortcutForNotEqualTo() {
-    assertMatches("should match", not("A"), "B");
-    assertMatches("should match", not("B"), "A");
-    assertDoesNotMatch("should not match", not("A"), "A");
-    assertDoesNotMatch("should not match", not("B"), "B");
-  }
+        assertNullSafe(matcher);
+        assertUnknownTypeSafe(matcher);
+    }
 
-  public void testUsesDescriptionOfNegatedMatcherWithPrefix() {
-    assertDescription("not an instance of java.lang.String", not(instanceOf(String.class)));
-    assertDescription("not \"A\"", not("A"));
-  }
- }
+    @Test public void
+    evaluatesToTheTheLogicalNegationOfAnotherMatcher() {
+        final Matcher<String> matcher = not(equalTo("A"));
+
+        assertMatches("didn't match", matcher, "B");
+        assertDoesNotMatch("matched unexpectedly", matcher, "A");
+    }
+
+    @Test public void
+    providesConvenientShortcutForNotEqualTo() {
+        final Matcher<String> matcher = not("A");
+
+        assertMatches("didn't match", matcher, "B");
+        assertDoesNotMatch("matched unexpectedly", matcher, "A");
+    }
+
+    @Test public void
+    usesDescriptionOfNegatedMatcherWithPrefix() {
+        assertDescription("not an instance of java.lang.String", not(instanceOf(String.class)));
+        assertDescription("not \"A\"", not("A"));
+    }
+}
