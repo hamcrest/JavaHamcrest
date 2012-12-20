@@ -1,7 +1,5 @@
 package org.hamcrest.core;
 
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.AbstractMatcherTest.assertDescription;
 import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
 import static org.hamcrest.AbstractMatcherTest.assertMatches;
