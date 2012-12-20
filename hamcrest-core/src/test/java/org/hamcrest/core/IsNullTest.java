@@ -2,39 +2,47 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
 
-import java.math.BigDecimal;
-
-import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.Test;
 
 
-public class IsNullTest extends AbstractMatcherTest {
-    private static final BigDecimal ANY_NON_NULL_ARGUMENT = new BigDecimal(66);
+public final class IsNullTest {
 
-    @Override
-    protected Matcher<?> createMatcher() {
-        return nullValue();
+    private final Matcher<Object> nullMatcher = nullValue();
+    private final Matcher<Object> notNullMatcher = notNullValue();
+
+    @Test public void
+    copesWithNullsAndUnknownTypes() {
+        assertNullSafe(nullMatcher);
+        assertUnknownTypeSafe(nullMatcher);
+        
+        assertNullSafe(notNullMatcher);
+        assertUnknownTypeSafe(notNullMatcher);
     }
 
-    public void testEvaluatesToTrueIfArgumentIsNull() {
-        assertThat(null, nullValue());
-        assertThat(ANY_NON_NULL_ARGUMENT, not(nullValue()));
-
-        assertThat(ANY_NON_NULL_ARGUMENT, notNullValue());
-        assertThat(null, not(notNullValue()));
+    @Test public void
+    evaluatesToTrueIfArgumentIsNull() {
+        assertMatches("didn't match", nullMatcher, null);
+        assertDoesNotMatch("matched unexpectedly", nullMatcher, new Object());
+        
+        assertMatches("didn't match", notNullMatcher, new Object());
+        assertDoesNotMatch("matched unexpectedly", notNullMatcher, null);
     }
-
-    public void testSupportsStaticTyping() {
+    
+    @Test public void
+    supportsStaticTyping() {
         requiresStringMatcher(nullValue(String.class));
         requiresStringMatcher(notNullValue(String.class));
     }
 
     private void requiresStringMatcher(@SuppressWarnings("unused") Matcher<String> arg) {
         // no-op
-    }    
+    }
 }
