@@ -2,37 +2,51 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
-
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNot.not;
 
+import org.hamcrest.Matcher;
+import org.junit.Test;
 
-public class IsEqualTest extends AbstractMatcherTest {
+public final class IsEqualTest {
 
-    @Override
-    protected Matcher<?> createMatcher() {
-        return equalTo("irrelevant");
+    @Test public void
+    copesWithNullsAndUnknownTypes() {
+        Matcher<?> matcher = equalTo("irrelevant");
+
+        assertNullSafe(matcher);
+        assertUnknownTypeSafe(matcher);
     }
 
-    public void testComparesObjectsUsingEqualsMethod() {
-        assertThat("hi", equalTo("hi"));
-        assertThat("bye", not(equalTo("hi")));
+    @Test public void
+    comparesObjectsUsingEqualsMethod() {
+        final Matcher<String> matcher1 = equalTo("hi");
+        assertMatches("didn't match", matcher1, "hi");
+        assertDoesNotMatch("matched unexpectedly", matcher1, "bye");
+        assertDoesNotMatch("matched unexpectedly", matcher1, null);
 
-        assertThat(1, equalTo(1));
-        assertThat(1, not(equalTo(2)));
+        final Matcher<Integer> matcher2 = equalTo(1);
+        assertMatches("didn't match", matcher2, 1);
+        assertDoesNotMatch("matched unexpectedly", matcher2, 2);
+        assertDoesNotMatch("matched unexpectedly", matcher2, null);
     }
 
-    public void testCanCompareNullValues() {
-        assertThat(null, equalTo(null));
-
-        assertThat(null, not(equalTo("hi")));
-        assertThat("hi", not(equalTo(null)));
+    @Test public void
+    canCompareNullValues() {
+        final Matcher<Object> matcher = equalTo(null);
+        
+        assertMatches("didn't match", matcher, null);
+        assertDoesNotMatch("matched unexpectedly", matcher, 2);
+        assertDoesNotMatch("matched unexpectedly", matcher, "hi");
+        assertDoesNotMatch("matched unexpectedly", matcher, new String[] {"a", "b"});
     }
 
-    public void testHonoursIsEqualImplementationEvenWithNullValues() {
+    @Test public void
+    honoursIsEqualImplementationEvenWithNullValues() {
         Object alwaysEqual = new Object() {
             @Override
             public boolean equals(Object obj) {
@@ -46,52 +60,58 @@ public class IsEqualTest extends AbstractMatcherTest {
             }
         };
 
-        assertThat(alwaysEqual, equalTo(null));
-        assertThat(neverEqual, not(equalTo(null)));
+        final Matcher<Object> matcher = equalTo(null);
+        assertMatches("didn't match", matcher, alwaysEqual);
+        assertDoesNotMatch("matched unexpectedly", matcher, neverEqual);
     }
-    
-    public void testComparesTheElementsOfAnObjectArray() {
+
+    @Test public void
+    comparesTheElementsOfAnObjectArray() {
         String[] s1 = {"a", "b"};
         String[] s2 = {"a", "b"};
         String[] s3 = {"c", "d"};
         String[] s4 = {"a", "b", "c", "d"};
 
-        assertThat(s1, equalTo(s1));
-        assertThat(s2, equalTo(s1));
-        assertThat(s3, not(equalTo(s1)));
-        assertThat(s4, not(equalTo(s1)));
+        final Matcher<String[]> matcher = equalTo(s1);
+        assertMatches("didn't match", matcher, s1);
+        assertMatches("didn't match", matcher, s2);
+        assertDoesNotMatch("matched unexpectedly", matcher, s3);
+        assertDoesNotMatch("matched unexpectedly", matcher, s4);
+        assertDoesNotMatch("matched unexpectedly", matcher, null);
     }
 
-    public void testComparesArraysToNull() {
-        assertThat(new String[]{"a", "b"}, not(equalTo(null)));
-        assertThat(null, not(equalTo(new String[]{"a", "b"})));
-    }
-
-    public void testComparesTheElementsOfAnArrayOfPrimitiveTypes() {
+    @Test public void
+    comparesTheElementsOfAnArrayOfPrimitiveTypes() {
         int[] i1 = new int[]{1, 2};
         int[] i2 = new int[]{1, 2};
         int[] i3 = new int[]{3, 4};
         int[] i4 = new int[]{1, 2, 3, 4};
 
-        assertThat(i1, equalTo(i1));
-        assertThat(i2, equalTo(i1));
-        assertThat(i3, not(equalTo(i1)));
-        assertThat(i4, not(equalTo(i1)));
+        final Matcher<int[]> matcher = equalTo(i1);
+        assertMatches("didn't match", matcher, i1);
+        assertMatches("didn't match", matcher, i2);
+        assertDoesNotMatch("matched unexpectedly", matcher, i3);
+        assertDoesNotMatch("matched unexpectedly", matcher, i4);
+        assertDoesNotMatch("matched unexpectedly", matcher, null);
     }
 
-    public void testRecursivelyTestsElementsOfArrays() {
+    @Test public void
+    recursivelyTestsElementsOfArrays() {
         int[][] i1 = new int[][]{{1, 2}, {3, 4}};
         int[][] i2 = new int[][]{{1, 2}, {3, 4}};
         int[][] i3 = new int[][]{{5, 6}, {7, 8}};
         int[][] i4 = new int[][]{{1, 2, 3, 4}, {3, 4}};
 
-        assertThat(i1, equalTo(i1));
-        assertThat(i2, equalTo(i1));
-        assertThat(i3, not(equalTo(i1)));
-        assertThat(i4, not(equalTo(i1)));
+        final Matcher<int[][]> matcher = equalTo(i1);
+        assertMatches("didn't match", matcher, i1);
+        assertMatches("didn't match", matcher, i2);
+        assertDoesNotMatch("matched unexpectedly", matcher, i3);
+        assertDoesNotMatch("matched unexpectedly", matcher, i4);
+        assertDoesNotMatch("matched unexpectedly", matcher, null);
     }
 
-    public void testIncludesTheResultOfCallingToStringOnItsArgumentInTheDescription() {
+    @Test public void
+    includesTheResultOfCallingToStringOnItsArgumentInTheDescription() {
         final String argumentDescription = "ARGUMENT DESCRIPTION";
         Object argument = new Object() {
             @Override
@@ -102,12 +122,14 @@ public class IsEqualTest extends AbstractMatcherTest {
         assertDescription("<" + argumentDescription + ">", equalTo(argument));
     }
 
-    public void testReturnsAnObviousDescriptionIfCreatedWithANestedMatcherByMistake() {
+    @Test public void
+    returnsAnObviousDescriptionIfCreatedWithANestedMatcherByMistake() {
         Matcher<? super String> innerMatcher = equalTo("NestedMatcher");
         assertDescription("<" + innerMatcher.toString() + ">", equalTo(innerMatcher));
     }
 
-    public void testReturnsGoodDescriptionIfCreatedWithNullReference() {
+    @Test public void
+    returnsGoodDescriptionIfCreatedWithNullReference() {
         assertDescription("null", equalTo(null));
     }
 }
