@@ -11,7 +11,7 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<T>> {
+public class IsCollectionContaining<T, I extends Iterable<T>> extends TypeSafeDiagnosingMatcher<I> {
     private final Matcher<? super T> elementMatcher;
 
     public IsCollectionContaining(Matcher<? super T> elementMatcher) {
@@ -19,7 +19,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
     }
 
     @Override
-    protected boolean matchesSafely(Iterable<T> collection, Description mismatchDescription) {
+    protected boolean matchesSafely(I collection, Description mismatchDescription) {
         boolean empty = true;
         for (Object item : collection) {
             empty = false;
@@ -27,12 +27,12 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
                 return true;
             }
         }
-        
+
         if (empty) {
             mismatchDescription.appendText("was an empty collection");
             return false;
         }
-        
+
         mismatchDescription.appendText("was a collection that did not contain ")
                            .appendDescriptionOf(elementMatcher)
                            .appendText(" -- mismatches were: [");
@@ -55,7 +55,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
             .appendDescriptionOf(elementMatcher);
     }
 
-    
+
     /**
      * Creates a matcher for {@link Iterable}s that only matches when a single pass over the
      * examined {@link Iterable} yields at least one item that is matched by the specified
@@ -64,13 +64,13 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem(startsWith("ba")))</pre>
-     * 
+     *
      * @param itemMatcher
      *     the matcher to apply to items provided by the examined {@link Iterable}
      */
     @Factory
-    public static <T> Matcher<Iterable<T>> hasItem(Matcher<? super T> itemMatcher) {
-        return new IsCollectionContaining<T>(itemMatcher);
+    public static <T, I extends Iterable<T>> Matcher<I> hasItem(Matcher<? super T> itemMatcher) {
+        return new IsCollectionContaining<T, I>(itemMatcher);
     }
 
     /**
@@ -81,14 +81,14 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem("bar"))</pre>
-     * 
+     *
      * @param item
      *     the item to compare against the items provided by the examined {@link Iterable}
      */
     @Factory
-    public static <T> Matcher<Iterable<T>> hasItem(T item) {
+    public static <T, I extends Iterable<T>> Matcher<I> hasItem(T item) {
         // Doesn't forward to hasItem() method so compiler can sort out generics.
-        return new IsCollectionContaining<T>(equalTo(item));
+        return new IsCollectionContaining<T, I>(equalTo(item));
     }
 
     /**
@@ -99,22 +99,22 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems(endsWith("z"), endsWith("o")))</pre>
-     * 
+     *
      * @param itemMatchers
      *     the matchers to apply to items provided by the examined {@link Iterable}
      */
     @Factory
-    public static <T> Matcher<Iterable<T>> hasItems(Matcher<? super T>... itemMatchers) {
-        List<Matcher<? super Iterable<T>>> all = new ArrayList<Matcher<? super Iterable<T>>>(itemMatchers.length);
-        
+    public static <T, I extends Iterable<T>> Matcher<I> hasItems(Matcher<? super T>... itemMatchers) {
+        List<Matcher<? super I>> all = new ArrayList<Matcher<? super I>>(itemMatchers.length);
+
         for (Matcher<? super T> elementMatcher : itemMatchers) {
           // Doesn't forward to hasItem() method so compiler can sort out generics.
-          all.add(new IsCollectionContaining<T>(elementMatcher));
+          all.add(new IsCollectionContaining<T, I>(elementMatcher));
         }
-        
+
         return allOf(all);
     }
-    
+
     /**
      * Creates a matcher for {@link Iterable}s that matches when consecutive passes over the
      * examined {@link Iterable} yield at least one item that is equal to the corresponding
@@ -123,17 +123,17 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems("baz", "foo"))</pre>
-     * 
+     *
      * @param items
      *     the items to compare against the items provided by the examined {@link Iterable}
      */
     @Factory
-    public static <T> Matcher<Iterable<T>> hasItems(T... items) {
-        List<Matcher<? super Iterable<T>>> all = new ArrayList<Matcher<? super Iterable<T>>>(items.length);
+    public static <T, I extends Iterable<T>> Matcher<I> hasItems(T... items) {
+        List<Matcher<? super I>> all = new ArrayList<Matcher<? super I>>(items.length);
         for (T element : items) {
             all.add(hasItem(element));
         }
-        
+
         return allOf(all);
     }
 

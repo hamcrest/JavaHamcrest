@@ -8,14 +8,14 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Tests if collection is empty.
  */
-public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
+public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<E>> {
 
     @Override
-    public boolean matchesSafely(Iterable<? extends E> iterable) {
+    public boolean matchesSafely(Iterable<E> iterable) {
         return !iterable.iterator().hasNext();
     }
     @Override
-    public void describeMismatchSafely(Iterable<? extends E> iter, Description mismatchDescription) {
+    public void describeMismatchSafely(Iterable<E> iter, Description mismatchDescription) {
         mismatchDescription.appendValueList("[", ",", "]", iter);
     }
 
@@ -29,10 +29,10 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
      * <p/>
      * For example:
      * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyIterable()))</pre>
-     * 
+     *
      */
     @Factory
-    public static <E> Matcher<Iterable<? extends E>> emptyIterable() {
+    public static <E> Matcher<Iterable<E>> emptyIterable() {
         return new IsEmptyIterable<E>();
     }
 
@@ -41,7 +41,7 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
      * <p/>
      * For example:
      * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyIterableOf(String.class)))</pre>
-     * 
+     *
      * @param type
      *     the type of the iterable's content
      */

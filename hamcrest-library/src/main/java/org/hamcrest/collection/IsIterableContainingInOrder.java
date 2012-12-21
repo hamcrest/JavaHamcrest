@@ -11,7 +11,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
+public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<E>> {
     private final List<Matcher<? super E>> matchers;
 
     public IsIterableContainingInOrder(List<Matcher<? super E>> matchers) {
@@ -19,7 +19,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     }
 
     @Override
-    protected boolean matchesSafely(Iterable<? extends E> iterable, Description mismatchDescription) {
+    protected boolean matchesSafely(Iterable<E> iterable, Description mismatchDescription) {
         MatchSeries<E> matchSeries = new MatchSeries<E>(matchers, mismatchDescription);
         for (E item : iterable) {
             if (!matchSeries.matches(item)) {
@@ -92,12 +92,12 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains("foo", "bar"))</pre>
-     * 
+     *
      * @param items
      *     the items that must equal the items provided by an examined {@link Iterable}
      */
     @Factory
-    public static <E> Matcher<Iterable<? extends E>> contains(E... items) {
+    public static <E> Matcher<Iterable<E>> contains(E... items) {
         List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
         for (E item : items) {
             matchers.add(equalTo(item));
@@ -113,14 +113,14 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo"), contains(equalTo("foo")))</pre>
-     * 
+     *
      * @param itemMatcher
      *     the matcher that must be satisfied by the single item provided by an
      *     examined {@link Iterable}
      */
     @SuppressWarnings("unchecked")
     @Factory
-    public static <E> Matcher<Iterable<? extends E>> contains(final Matcher<? super E> itemMatcher) {
+    public static <E> Matcher<Iterable<E>> contains(final Matcher<? super E> itemMatcher) {
         return contains(new ArrayList<Matcher<? super E>>(asList(itemMatcher)));
     }
 
@@ -132,12 +132,12 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains(equalTo("foo"), equalTo("bar")))</pre>
-     * 
+     *
      * @param itemMatchers
      *     the matchers that must be satisfied by the items provided by an examined {@link Iterable}
      */
     @Factory
-    public static <E> Matcher<Iterable<? extends E>> contains(Matcher<? super E>... itemMatchers) {
+    public static <E> Matcher<Iterable<E>> contains(Matcher<? super E>... itemMatchers) {
         return contains(asList(itemMatchers));
     }
 
@@ -149,13 +149,13 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains(Arrays.asList(equalTo("foo"), equalTo("bar"))))</pre>
-     * 
+     *
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by the corresponding item provided by
      *     an examined {@link Iterable}
      */
     @Factory
-    public static <E> Matcher<Iterable<? extends E>> contains(List<Matcher<? super E>> itemMatchers) {
+    public static <E> Matcher<Iterable<E>> contains(List<Matcher<? super E>> itemMatchers) {
         return new IsIterableContainingInOrder<E>(itemMatchers);
     }
 }

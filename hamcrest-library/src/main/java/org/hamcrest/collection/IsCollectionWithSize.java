@@ -11,13 +11,13 @@ import static org.hamcrest.core.IsEqual.equalTo;
 /**
  * Matches if collection size satisfies a nested matcher.
  */
-public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends E>, Integer> {
+public class IsCollectionWithSize<E, C extends Collection<E>> extends FeatureMatcher<C, Integer> {
     public IsCollectionWithSize(Matcher<? super Integer> sizeMatcher) {
       super(sizeMatcher, "a collection with size", "collection size");
     }
 
     @Override
-    protected Integer featureValueOf(Collection<? extends E> actual) {
+    protected Integer featureValueOf(C actual) {
       return actual.size();
     }
 
@@ -27,13 +27,13 @@ public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasSize(equalTo(2)))</pre>
-     * 
+     *
      * @param sizeMatcher
      *     a matcher for the size of an examined {@link java.util.Collection}
      */
     @Factory
-    public static <E> Matcher<Collection<? extends E>> hasSize(Matcher<? super Integer> sizeMatcher) {
-        return new IsCollectionWithSize<E>(sizeMatcher);
+    public static <E, C extends Collection<E>> Matcher<C> hasSize(Matcher<? super Integer> sizeMatcher) {
+        return new IsCollectionWithSize<E, C>(sizeMatcher);
     }
 
     /**
@@ -42,14 +42,14 @@ public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasSize(2))</pre>
-     * 
+     *
      * @param size
      *     the expected size of an examined {@link java.util.Collection}
      */
     @Factory
-    public static <E> Matcher<Collection<? extends E>> hasSize(int size) {
+    public static <E, C extends Collection<E>> Matcher<C> hasSize(int size) {
         Matcher<? super Integer> matcher = equalTo(size);
-        return IsCollectionWithSize.<E>hasSize(matcher);
+        return IsCollectionWithSize.<E, C>hasSize(matcher);
     }
 
 }

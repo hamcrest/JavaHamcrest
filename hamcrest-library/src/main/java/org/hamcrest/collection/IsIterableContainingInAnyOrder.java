@@ -12,25 +12,25 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
+public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher<Iterable<T>> {
     private final Collection<Matcher<? super T>> matchers;
 
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }
-    
+
     @Override
-    protected boolean matchesSafely(Iterable<? extends T> items, Description mismatchDescription) {
+    protected boolean matchesSafely(Iterable<T> items, Description mismatchDescription) {
       Matching<T> matching = new Matching<T>(matchers, mismatchDescription);
       for (T item : items) {
         if (! matching.matches(item)) {
           return false;
         }
       }
-      
+
       return matching.isFinished(items);
     }
-    
+
     @Override
     public void describeTo(Description description) {
       description.appendText("iterable over ")
@@ -46,7 +46,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
         this.matchers = new ArrayList<Matcher<? super S>>(matchers);
         this.mismatchDescription = mismatchDescription;
       }
-      
+
       public boolean matches(S item) {
         return isNotSurplus(item) && isMatched(item);
       }
@@ -60,7 +60,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
           .appendText(" in ").appendValueList("[", ", ", "]", items);
         return false;
       }
-      
+
       private boolean isNotSurplus(S item) {
         if (matchers.isEmpty()) {
           mismatchDescription.appendText("Not matched: ").appendValue(item);
@@ -93,12 +93,12 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder(equalTo("bar"), equalTo("foo")))</pre>
-     * 
+     *
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
      */
     @Factory
-    public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(Matcher<? super T>... itemMatchers) {
+    public static <T> Matcher<Iterable<T>> containsInAnyOrder(Matcher<? super T>... itemMatchers) {
         return containsInAnyOrder(Arrays.asList(itemMatchers));
     }
 
@@ -114,17 +114,17 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder("bar", "foo"))</pre>
-     * 
+     *
      * @param items
      *     the items that must equal the items provided by an examined {@link Iterable} in any order
      */
     @Factory
-    public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(T... items) {
+    public static <T> Matcher<Iterable<T>> containsInAnyOrder(T... items) {
         List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
         for (T item : items) {
             matchers.add(equalTo(item));
         }
-        
+
         return new IsIterableContainingInAnyOrder<T>(matchers);
     }
 
@@ -140,12 +140,12 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder(Arrays.asList(equalTo("bar"), equalTo("foo"))))</pre>
-     * 
+     *
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
      */
     @Factory
-    public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(Collection<Matcher<? super T>> itemMatchers) {
+    public static <T> Matcher<Iterable<T>> containsInAnyOrder(Collection<Matcher<? super T>> itemMatchers) {
         return new IsIterableContainingInAnyOrder<T>(itemMatchers);
     }
 }
