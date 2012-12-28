@@ -51,7 +51,7 @@ public class IsEmptyCollection<C extends Collection<?>> extends TypeSafeMatcher<
      *     the type of the collection's content
      */
     @Factory
-    public static <E, C extends Collection<E>> Matcher<C> emptyCollectionOf(Class<E> type) {
+    public static <T> Matcher<Collection<T>> emptyCollectionOf(Class<T> type) {
         return empty();
     }
 }
