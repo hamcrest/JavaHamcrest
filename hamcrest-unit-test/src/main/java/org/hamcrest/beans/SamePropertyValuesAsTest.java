@@ -7,14 +7,14 @@ import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class SamePropertyValuesAsTest extends AbstractMatcherTest {
+public class SamePropertyValuesAsTest extends AbstractMatcherTest<SamePropertyValuesAsTest.ExampleBean> {
   private static final Value aValue = new Value("expected");
   private static final ExampleBean expectedBean = new ExampleBean("same", 1, aValue);
   private static final ExampleBean actualBean = new ExampleBean("same", 1, aValue);
   
   
   @Override
-  protected Matcher<?> createMatcher() {
+  protected Matcher<ExampleBean> createMatcher() {
     return samePropertyValuesAs(expectedBean);
   }
 

@@ -11,10 +11,10 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 
-public class IsEventFromTest extends AbstractMatcherTest {
+public class IsEventFromTest extends AbstractMatcherTest<EventObject> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<EventObject> createMatcher() {
         return eventFrom(null);
     }
 

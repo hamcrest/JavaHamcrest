@@ -11,10 +11,10 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-public class IsCollectionContaining<T, I extends Iterable<T>> extends TypeSafeDiagnosingMatcher<I> {
-    private final Matcher<? super T> elementMatcher;
+public class IsCollectionContaining<I extends Iterable<?>> extends TypeSafeDiagnosingMatcher<I> {
+    private final Matcher<?> elementMatcher;
 
-    public IsCollectionContaining(Matcher<? super T> elementMatcher) {
+    public IsCollectionContaining(Matcher<?> elementMatcher) {
         this.elementMatcher = elementMatcher;
     }
 
@@ -69,8 +69,8 @@ public class IsCollectionContaining<T, I extends Iterable<T>> extends TypeSafeDi
      *     the matcher to apply to items provided by the examined {@link Iterable}
      */
     @Factory
-    public static <T, I extends Iterable<T>> Matcher<I> hasItem(Matcher<? super T> itemMatcher) {
-        return new IsCollectionContaining<T, I>(itemMatcher);
+    public static <I extends Iterable<?>> Matcher<I> hasItem(Matcher<?> itemMatcher) {
+        return new IsCollectionContaining<I>(itemMatcher);
     }
 
     /**
@@ -86,9 +86,8 @@ public class IsCollectionContaining<T, I extends Iterable<T>> extends TypeSafeDi
      *     the item to compare against the items provided by the examined {@link Iterable}
      */
     @Factory
-    public static <T, I extends Iterable<T>> Matcher<I> hasItem(T item) {
-        // Doesn't forward to hasItem() method so compiler can sort out generics.
-        return new IsCollectionContaining<T, I>(equalTo(item));
+    public static <I extends Iterable<?>> Matcher<I> hasItem(Object item) {
+        return hasItem(equalTo(item));
     }
 
     /**
@@ -104,12 +103,11 @@ public class IsCollectionContaining<T, I extends Iterable<T>> extends TypeSafeDi
      *     the matchers to apply to items provided by the examined {@link Iterable}
      */
     @Factory
-    public static <T, I extends Iterable<T>> Matcher<I> hasItems(Matcher<? super T>... itemMatchers) {
+    public static <I extends Iterable<?>> Matcher<I> hasItems(Matcher<?>... itemMatchers) {
         List<Matcher<? super I>> all = new ArrayList<Matcher<? super I>>(itemMatchers.length);
 
-        for (Matcher<? super T> elementMatcher : itemMatchers) {
-          // Doesn't forward to hasItem() method so compiler can sort out generics.
-          all.add(new IsCollectionContaining<T, I>(elementMatcher));
+        for (Matcher<?> elementMatcher : itemMatchers) {
+          all.add(hasItem(elementMatcher));
         }
 
         return allOf(all);
@@ -128,9 +126,9 @@ public class IsCollectionContaining<T, I extends Iterable<T>> extends TypeSafeDi
      *     the items to compare against the items provided by the examined {@link Iterable}
      */
     @Factory
-    public static <T, I extends Iterable<T>> Matcher<I> hasItems(T... items) {
+    public static <I extends Iterable<?>> Matcher<I> hasItems(Object... items) {
         List<Matcher<? super I>> all = new ArrayList<Matcher<? super I>>(items.length);
-        for (T element : items) {
+        for (Object element : items) {
             all.add(hasItem(element));
         }
 

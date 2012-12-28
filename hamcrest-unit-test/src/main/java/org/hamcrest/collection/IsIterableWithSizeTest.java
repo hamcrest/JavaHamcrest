@@ -7,10 +7,10 @@ import java.util.Collections;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class IsIterableWithSizeTest extends AbstractMatcherTest {
+public class IsIterableWithSizeTest extends AbstractMatcherTest<Iterable<Number>> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Iterable<Number>> createMatcher() {
         return iterableWithSize(7);
     }
 

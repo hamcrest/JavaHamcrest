@@ -9,9 +9,9 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.number.OrderingComparison.greaterThan;
 
-public class IsNotTest extends AbstractMatcherTest {
+public class IsNotTest extends AbstractMatcherTest<String> {
   @Override
-  protected Matcher<?> createMatcher() {
+  protected Matcher<String> createMatcher() {
     return not("something");
   }
 

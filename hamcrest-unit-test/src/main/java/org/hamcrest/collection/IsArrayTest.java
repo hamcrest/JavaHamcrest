@@ -9,10 +9,10 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
 @SuppressWarnings("unchecked")
-public class IsArrayTest extends AbstractMatcherTest {
+public class IsArrayTest extends AbstractMatcherTest<String[]> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String[]> createMatcher() {
         return array(equalTo("irrelevant"));
     }
 

@@ -22,7 +22,7 @@ public class EveryTest {
     }
 
     @Test public void describesItself() {
-        final Every<String> each=  new Every<String>(containsString("a"));
+        final Every<Iterable<String>> each= new Every<Iterable<String>>(containsString("a"));
         assertEquals("every item is a string containing \"a\"", each.toString());
         
         StringDescription description = new StringDescription(); 

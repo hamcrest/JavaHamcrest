@@ -8,7 +8,7 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 
-public class FileMatchersTest extends AbstractMatcherTest {
+public class FileMatchersTest extends AbstractMatcherTest<File> {
 
     private File directory;
     private File file;
@@ -96,7 +96,7 @@ public class FileMatchersTest extends AbstractMatcherTest {
     }
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<File> createMatcher() {
         return FileMatchers.aFileWithSize(1L);
     }
 

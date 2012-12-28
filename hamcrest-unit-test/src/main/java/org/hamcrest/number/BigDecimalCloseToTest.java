@@ -7,11 +7,11 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.number.BigDecimalCloseTo.closeTo;
 
-public class BigDecimalCloseToTest  extends AbstractMatcherTest {
+public class BigDecimalCloseToTest  extends AbstractMatcherTest<BigDecimal> {
   private final Matcher<BigDecimal> matcher = closeTo(new BigDecimal("1.0"), new BigDecimal("0.5"));
 
   @Override
-  protected Matcher<?> createMatcher() {
+  protected Matcher<BigDecimal> createMatcher() {
     BigDecimal irrelevant = new BigDecimal("0.01");
     return closeTo(irrelevant, irrelevant);
   }

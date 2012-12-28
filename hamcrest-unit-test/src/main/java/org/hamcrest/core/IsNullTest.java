@@ -13,11 +13,11 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 
-public class IsNullTest extends AbstractMatcherTest {
+public class IsNullTest extends AbstractMatcherTest<Object> {
     private static final BigDecimal ANY_NON_NULL_ARGUMENT = new BigDecimal(66);
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Object> createMatcher() {
         return nullValue();
     }
 

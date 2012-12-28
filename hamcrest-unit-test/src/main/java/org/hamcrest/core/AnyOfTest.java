@@ -10,12 +10,12 @@ import static org.hamcrest.core.IsNot.not;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class AnyOfTest extends AbstractMatcherTest {
+public class AnyOfTest extends AbstractMatcherTest<String> {
 
     @Override
     @SuppressWarnings("unchecked")
-    protected Matcher<?> createMatcher() {
-        return anyOf(IsEqual.<Object>equalTo("irrelevant"));
+    protected Matcher<String> createMatcher() {
+        return anyOf(equalTo("irrelevant"));
     }
 
     public void testEvaluatesToTheTheLogicalDisjunctionOfTwoOtherMatchers() {

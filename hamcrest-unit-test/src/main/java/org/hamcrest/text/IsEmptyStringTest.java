@@ -8,10 +8,10 @@ import static org.hamcrest.text.IsEmptyString.emptyString;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class IsEmptyStringTest extends AbstractMatcherTest {
+public class IsEmptyStringTest extends AbstractMatcherTest<String> {
 
   @Override
-  protected Matcher<?> createMatcher() {
+  protected Matcher<String> createMatcher() {
     return emptyOrNullString();
   }
 

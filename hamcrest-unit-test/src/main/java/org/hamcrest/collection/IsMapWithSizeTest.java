@@ -10,10 +10,10 @@ import org.hamcrest.MatcherAssert;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public final class IsMapWithSizeTest extends AbstractMatcherTest {
+public final class IsMapWithSizeTest extends AbstractMatcherTest<Map<String,String>> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Map<String,String>> createMatcher() {
         return aMapWithSize(7);
     }
 

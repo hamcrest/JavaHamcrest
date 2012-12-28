@@ -8,10 +8,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
 
-public class IsEqualIgnoringCaseTest extends AbstractMatcherTest {
+public class IsEqualIgnoringCaseTest extends AbstractMatcherTest<String> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return equalToIgnoringCase("irrelevant");
     }
 

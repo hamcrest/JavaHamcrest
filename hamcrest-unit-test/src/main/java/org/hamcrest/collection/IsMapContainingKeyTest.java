@@ -10,10 +10,10 @@ import java.util.TreeMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
 
-public class IsMapContainingKeyTest extends AbstractMatcherTest {
+public class IsMapContainingKeyTest extends AbstractMatcherTest<Map<String,String>> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Map<String,String>> createMatcher() {
         return hasKey("foo");
     }
 

@@ -8,10 +8,10 @@ import static org.hamcrest.core.IsAnything.anything;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class IsAnythingTest extends AbstractMatcherTest {
+public class IsAnythingTest extends AbstractMatcherTest<Object> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Object> createMatcher() {
         return anything();
     }
 

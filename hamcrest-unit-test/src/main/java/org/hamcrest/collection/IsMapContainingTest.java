@@ -10,11 +10,11 @@ import org.hamcrest.Matcher;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class IsMapContainingTest extends AbstractMatcherTest {
+public class IsMapContainingTest extends AbstractMatcherTest<Map<String,String>> {
 
     @Override
-    protected Matcher<?> createMatcher() {
-        return IsMapContaining.hasEntry("irrelevant", "irrelevant");
+    protected Matcher<Map<String,String>> createMatcher() {
+        return hasEntry("irrelevant", "irrelevant");
     }
 
     public void testMatchesMapContainingMatchingKeyAndValue() {

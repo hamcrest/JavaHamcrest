@@ -11,18 +11,18 @@ import java.util.Map.Entry;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
-    private final Matcher<? super K> keyMatcher;
-    private final Matcher<? super V> valueMatcher;
+public class IsMapContaining<M extends Map<?, ?>> extends TypeSafeMatcher<M> {
+    private final Matcher<?> keyMatcher;
+    private final Matcher<?> valueMatcher;
 
-    public IsMapContaining(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
+    public IsMapContaining(Matcher<?> keyMatcher, Matcher<?> valueMatcher) {
         this.keyMatcher = keyMatcher;
         this.valueMatcher = valueMatcher;
     }
 
     @Override
-    public boolean matchesSafely(Map<K, V> map) {
-        for (Entry<? extends K, ? extends V> entry : map.entrySet()) {
+    public boolean matchesSafely(M map) {
+        for (Entry<?, ?> entry : map.entrySet()) {
             if (keyMatcher.matches(entry.getKey()) && valueMatcher.matches(entry.getValue())) {
                 return true;
             }
@@ -31,7 +31,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
     }
 
     @Override
-    public void describeMismatchSafely(Map<K, V> map, Description mismatchDescription) {
+    public void describeMismatchSafely(M map, Description mismatchDescription) {
       mismatchDescription.appendText("map was ").appendValueList("[", ", ", "]", map.entrySet());
     }
 
@@ -58,8 +58,8 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
      *     the value matcher that, in combination with the keyMatcher, must be satisfied by at least one entry
      */
     @Factory
-    public static <K,V> Matcher<Map<K, V>> hasEntry(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
-        return new IsMapContaining<K,V>(keyMatcher, valueMatcher);
+    public static <K, V, M extends Map<?,?>> Matcher<M> hasEntry(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
+        return new IsMapContaining<M>(keyMatcher, valueMatcher);
     }
 
     /**
@@ -76,8 +76,8 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
      *     the value that, in combination with the key, must be describe at least one entry
      */
     @Factory
-    public static <K, V> Matcher<Map<K, V>> hasEntry(K key, V value) {
-        return new IsMapContaining<K,V>(equalTo(key), equalTo(value));
+    public static <K, V, M extends Map<?,?>> Matcher<M> hasEntry(K key, V value) {
+        return hasEntry(equalTo(key), equalTo(value));
     }
 
     /**
@@ -91,8 +91,8 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
      *     the matcher that must be satisfied by at least one key
      */
     @Factory
-    public static <K, V> Matcher<Map<K, V>> hasKey(Matcher<? super K> keyMatcher) {
-        return new IsMapContaining<K, V>(keyMatcher, anything());
+    public static <K, M extends Map<?,?>> Matcher<M> hasKey(Matcher<? super K> keyMatcher) {
+        return hasEntry(keyMatcher, anything());
     }
 
     /**
@@ -106,8 +106,8 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
      *     the key that satisfying maps must contain
      */
     @Factory
-    public static <K, V> Matcher<Map<K, V>> hasKey(K key) {
-        return new IsMapContaining<K, V>(equalTo(key), anything());
+    public static <K, M extends Map<?,?>> Matcher<M> hasKey(K key) {
+        return hasKey(equalTo(key));
     }
 
     /**
@@ -121,8 +121,8 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
      *     the matcher that must be satisfied by at least one value
      */
     @Factory
-    public static <K, V> Matcher<Map<K, V>> hasValue(Matcher<? super V> valueMatcher) {
-        return new IsMapContaining<K, V>(anything(), valueMatcher);
+    public static <V, M extends Map<?,?>> Matcher<M> hasValue(Matcher<? super V> valueMatcher) {
+        return hasEntry(anything(), valueMatcher);
     }
 
     /**
@@ -136,7 +136,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<K, V>> {
      *     the value that satisfying maps must contain
      */
     @Factory
-    public static <K, V> Matcher<Map<K, V>> hasValue(V value) {
-        return new IsMapContaining<K, V>(anything(), equalTo(value));
+    public static <V, M extends Map<?,?>> Matcher<M> hasValue(V value) {
+        return hasValue(equalTo(value));
     }
 }

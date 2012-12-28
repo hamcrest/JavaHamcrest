@@ -9,7 +9,7 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
-public class HasToStringTest extends AbstractMatcherTest {
+public class HasToStringTest extends AbstractMatcherTest<Object> {
     private static final String TO_STRING_RESULT = "toString result";
     private static final Object ARG = new Object() {
         @Override
@@ -19,7 +19,7 @@ public class HasToStringTest extends AbstractMatcherTest {
     };
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Object> createMatcher() {
         return hasToString(equalTo("irrelevant"));
     }
 

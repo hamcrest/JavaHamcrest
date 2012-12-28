@@ -13,11 +13,11 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
-    private final Collection<Matcher<? super E>> matchers;
-    private final IsIterableContainingInOrder<E> iterableMatcher;
+    private final Collection<Matcher<?>> matchers;
+    private final IsIterableContainingInOrder<Iterable<E>> iterableMatcher;
 
-    public IsArrayContainingInOrder(List<Matcher<? super E>> matchers) {
-        this.iterableMatcher = new IsIterableContainingInOrder<E>(matchers);
+    public IsArrayContainingInOrder(List<Matcher<?>> matchers) {
+        this.iterableMatcher = new IsIterableContainingInOrder<Iterable<E>>(matchers);
         this.matchers = matchers;
     }
 
@@ -49,7 +49,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      */
     @Factory
     public static <E> Matcher<E[]> arrayContaining(E... items) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
+        List<Matcher<?>> matchers = new ArrayList<Matcher<?>>();
         for (E item : items) {
             matchers.add(equalTo(item));
         }
@@ -68,7 +68,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      *     the matchers that must be satisfied by the items in the examined array
      */
     @Factory
-    public static <E> Matcher<E[]> arrayContaining(Matcher<? super E>... itemMatchers) {
+    public static <E> Matcher<E[]> arrayContaining(Matcher<?>... itemMatchers) {
         return arrayContaining(asList(itemMatchers));
     }
 
@@ -84,7 +84,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      *     a list of matchers, each of which must be satisfied by the corresponding item in an examined array
      */
     @Factory
-    public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
+    public static <E> Matcher<E[]> arrayContaining(List<Matcher<?>> itemMatchers) {
         return new IsArrayContainingInOrder<E>(itemMatchers);
     }
 }

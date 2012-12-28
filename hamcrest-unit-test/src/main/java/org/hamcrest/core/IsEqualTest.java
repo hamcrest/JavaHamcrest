@@ -10,10 +10,10 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 
 
-public class IsEqualTest extends AbstractMatcherTest {
+public class IsEqualTest extends AbstractMatcherTest<String> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return equalTo("irrelevant");
     }
 

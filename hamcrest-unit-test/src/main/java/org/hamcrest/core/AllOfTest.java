@@ -13,12 +13,12 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 
-public class AllOfTest extends AbstractMatcherTest {
+public class AllOfTest extends AbstractMatcherTest<String> {
 
     @Override
     @SuppressWarnings("unchecked")
-    protected Matcher<?> createMatcher() {
-        return allOf(IsEqual.<Object>equalTo("irrelevant"));
+    protected Matcher<String> createMatcher() {
+        return allOf(equalTo("irrelevant"));
     }
     
     public void testEvaluatesToTheTheLogicalConjunctionOfTwoOtherMatchers() {

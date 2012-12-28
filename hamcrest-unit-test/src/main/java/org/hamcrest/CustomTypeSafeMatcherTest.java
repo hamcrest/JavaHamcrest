@@ -1,6 +1,6 @@
 package org.hamcrest;
 
-public class CustomTypeSafeMatcherTest extends AbstractMatcherTest {
+public class CustomTypeSafeMatcherTest extends AbstractMatcherTest<String> {
     private static final String STATIC_DESCRIPTION = "I match non empty strings";
     private Matcher<String> customMatcher;
 
@@ -28,7 +28,7 @@ public class CustomTypeSafeMatcherTest extends AbstractMatcherTest {
     }
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return customMatcher;
     }
 }

@@ -7,11 +7,11 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
-public class IsInTest extends AbstractMatcherTest {
+public class IsInTest extends AbstractMatcherTest<String> {
     String[] elements = {"a", "b", "c"};
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return new IsIn<String>(elements);
     }
 

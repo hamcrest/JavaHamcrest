@@ -5,19 +5,19 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-public class Every<T, I extends Iterable<T>> extends TypeSafeDiagnosingMatcher<I> {
-    private final Matcher<? super T> matcher;
+public class Every<I extends Iterable<?>> extends TypeSafeDiagnosingMatcher<I> {
+    private final Matcher<?> matcher;
 
-    public Every(Matcher<? super T> matcher) {
+    public Every(Matcher<?> matcher) {
         this.matcher= matcher;
     }
 
     @Override
     public boolean matchesSafely(I collection, Description mismatchDescription) {
-        for (T t : collection) {
-            if (!matcher.matches(t)) {
+        for (Object o : collection) {
+            if (!matcher.matches(o)) {
                 mismatchDescription.appendText("an item ");
-                matcher.describeMismatch(t, mismatchDescription);
+                matcher.describeMismatch(o, mismatchDescription);
                 return false;
             }
         }
@@ -41,7 +41,7 @@ public class Every<T, I extends Iterable<T>> extends TypeSafeDiagnosingMatcher<I
      *     the matcher to apply to every item provided by the examined {@link Iterable}
      */
     @Factory
-    public static <U, I extends Iterable<U>> Matcher<I> everyItem(final Matcher<U> itemMatcher) {
-        return new Every<U, I>(itemMatcher);
+    public static <I extends Iterable<?>> Matcher<I> everyItem(final Matcher<?> itemMatcher) {
+        return new Every<I>(itemMatcher);
     }
 }

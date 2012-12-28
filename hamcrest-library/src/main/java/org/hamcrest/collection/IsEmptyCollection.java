@@ -10,7 +10,7 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Tests if collection is empty.
  */
-public class IsEmptyCollection<E, C extends Collection<E>> extends TypeSafeMatcher<C> {
+public class IsEmptyCollection<C extends Collection<?>> extends TypeSafeMatcher<C> {
 
     @Override
     public boolean matchesSafely(C item) {
@@ -36,8 +36,8 @@ public class IsEmptyCollection<E, C extends Collection<E>> extends TypeSafeMatch
      *
      */
     @Factory
-    public static <E, C extends Collection<E>> Matcher<C> empty() {
-        return new IsEmptyCollection<E, C>();
+    public static <C extends Collection<?>> Matcher<C> empty() {
+        return new IsEmptyCollection<C>();
     }
 
     /**
@@ -52,8 +52,6 @@ public class IsEmptyCollection<E, C extends Collection<E>> extends TypeSafeMatch
      */
     @Factory
     public static <E, C extends Collection<E>> Matcher<C> emptyCollectionOf(Class<E> type) {
-        @SuppressWarnings({ "rawtypes", "unchecked" })
-        final Matcher<C> result = (Matcher)empty();
-        return result;
+        return empty();
     }
 }

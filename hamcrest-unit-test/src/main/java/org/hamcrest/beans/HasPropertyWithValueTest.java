@@ -23,14 +23,14 @@ import org.hamcrest.core.IsEqual;
  * @author Steve Freeman
  * @since 1.1.0
  */
-public class HasPropertyWithValueTest extends AbstractMatcherTest {
+public class HasPropertyWithValueTest extends AbstractMatcherTest<Object> {
   private final BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected");
   private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");
 
   private final BeanWithInfo beanWithInfo = new BeanWithInfo("with info");
 
   @Override
-  protected Matcher<?> createMatcher() {
+  protected Matcher<Object> createMatcher() {
     return hasProperty("irrelevant", anything());
   }
 
@@ -63,7 +63,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   public void testMatchesPropertyAndValue() {
     assertMatches("property with value", hasProperty( "property", anything()), beanWithInfo);
   }
-  
+
   public void testDoesNotWriteMismatchIfPropertyMatches() {
     Description description = new StringDescription();
     hasProperty( "property", anything()).describeMismatch(beanWithInfo, description);
@@ -129,8 +129,8 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     @Override
     public PropertyDescriptor[] getPropertyDescriptors() {
       try {
-        return new PropertyDescriptor[] { 
-            new PropertyDescriptor("property", BeanWithInfo.class, "property", null) 
+        return new PropertyDescriptor[] {
+            new PropertyDescriptor("property", BeanWithInfo.class, "property", null)
           };
       } catch (IntrospectionException e) {
         throw new RuntimeException("Introspection exception: " + e.getMessage());

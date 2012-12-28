@@ -8,12 +8,12 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 
-public class StringEndsWithTest extends AbstractMatcherTest {
+public class StringEndsWithTest extends AbstractMatcherTest<String> {
     static final String EXCERPT = "EXCERPT";
     Matcher<String> stringEndsWith = endsWith(EXCERPT);
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return stringEndsWith;
     }
 

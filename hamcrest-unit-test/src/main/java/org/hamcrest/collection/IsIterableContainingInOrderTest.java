@@ -11,13 +11,12 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-@SuppressWarnings("unchecked")
-public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
+public class IsIterableContainingInOrderTest extends AbstractMatcherTest<Iterable<Integer>> {
     // temporary hack until the Java type system works
-    private final Matcher<Iterable<? extends WithValue>> contains123 = contains(value(1), value(2), value(3));
+    private final Matcher<Iterable<WithValue>> contains123 = contains(value(1), value(2), value(3));
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Iterable<Integer>> createMatcher() {
         return contains(1, 2);
     }
 

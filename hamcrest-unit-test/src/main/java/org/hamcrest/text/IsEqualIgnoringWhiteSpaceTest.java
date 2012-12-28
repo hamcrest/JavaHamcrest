@@ -8,12 +8,12 @@ import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSp
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class IsEqualIgnoringWhiteSpaceTest extends AbstractMatcherTest {
+public class IsEqualIgnoringWhiteSpaceTest extends AbstractMatcherTest<String> {
 
     private final Matcher<String> matcher = equalToIgnoringWhiteSpace("Hello World   how\n are we? ");
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return matcher;
     }
 

@@ -7,6 +7,7 @@ import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,9 +18,9 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.hamcrest.core.IsCollectionContaining;
 import org.hamcrest.core.IsEqual;
 
-public class IsCollectionContainingTest extends AbstractMatcherTest {
+public class IsCollectionContainingTest extends AbstractMatcherTest<Iterable<String>> {
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Iterable<String>> createMatcher() {
         return hasItem(equalTo("irrelevant"));
     }
 
@@ -51,11 +52,10 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     {
       final Set<Number> s = new HashSet<Number>();
       s.add(Integer.valueOf(2));
-      assertThat(s, new IsCollectionContaining<Number>(new IsEqual<Number>(Integer.valueOf(2))));
+      assertThat(s, new IsCollectionContaining<Collection<Number>>(new IsEqual<Number>(Integer.valueOf(2))));
       assertThat(s, IsCollectionContaining.hasItem((Number) Integer.valueOf(2)));
     }
 
-    @SuppressWarnings("unchecked")
     public void testMatchesAllItemsInCollection() {
         final Matcher<Iterable<String>> matcher1 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));
         assertMatches("should match list containing all items",

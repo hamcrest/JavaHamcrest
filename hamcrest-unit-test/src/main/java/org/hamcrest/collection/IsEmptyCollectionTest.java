@@ -10,10 +10,10 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.Is.is;
 
-public class IsEmptyCollectionTest extends AbstractMatcherTest {
+public class IsEmptyCollectionTest extends AbstractMatcherTest<Collection<String>> {
 
     @Override
-    protected Matcher<Collection<?>> createMatcher() {
+    protected Matcher<Collection<String>> createMatcher() {
         return empty();
     }
 
@@ -39,7 +39,7 @@ public class IsEmptyCollectionTest extends AbstractMatcherTest {
         return new ArrayList<String>(asList("one", "three"));
     }
 
-    private static Collection<Integer> emptyCollection() {
-        return new ArrayList<Integer>();
+    private static Collection<String> emptyCollection() {
+        return new ArrayList<String>();
     }
 }

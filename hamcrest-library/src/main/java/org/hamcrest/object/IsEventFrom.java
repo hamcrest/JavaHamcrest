@@ -13,7 +13,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 /**
  * Tests if the value is an event announced by a specific object.
  */
-public class IsEventFrom<T extends EventObject> extends TypeSafeDiagnosingMatcher<T> {
+public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
     private final Class<?> eventClass;
     private final Object source;
 
@@ -62,8 +62,8 @@ public class IsEventFrom<T extends EventObject> extends TypeSafeDiagnosingMatche
      *     the source of the event
      */
     @Factory
-    public static <T extends EventObject> Matcher<T> eventFrom(Class<T> eventClass, Object source) {
-        return new IsEventFrom<T>(eventClass, source);
+    public static <T extends EventObject> Matcher<EventObject> eventFrom(Class<T> eventClass, Object source) {
+        return new IsEventFrom(eventClass, source);
     }
 
     /**

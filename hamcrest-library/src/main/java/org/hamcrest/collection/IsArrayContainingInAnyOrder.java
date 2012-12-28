@@ -1,5 +1,6 @@
 package org.hamcrest.collection;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
@@ -13,11 +14,11 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
-    private final IsIterableContainingInAnyOrder<E> iterableMatcher;
-    private final Collection<Matcher<? super E>> matchers;
+    private final IsIterableContainingInAnyOrder<Iterable<E>> iterableMatcher;
+    private final Collection<Matcher<?>> matchers;
 
-    public IsArrayContainingInAnyOrder(Collection<Matcher<? super E>> matchers) {
-        this.iterableMatcher = new IsIterableContainingInAnyOrder<E>(matchers);
+    public IsArrayContainingInAnyOrder(Collection<Matcher<?>> matchers) {
+        this.iterableMatcher = new IsIterableContainingInAnyOrder<Iterable<E>>(matchers);
         this.matchers = matchers;
     }
 
@@ -54,8 +55,8 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
      *     a list of matchers, each of which must be satisfied by an entry in an examined array
      */
     @Factory
-    public static <E> Matcher<E[]> arrayContainingInAnyOrder(Matcher<? super E>... itemMatchers) {
-        return arrayContainingInAnyOrder(Arrays.asList(itemMatchers));
+    public static <E> Matcher<E[]> arrayContainingInAnyOrder(Matcher<?>... itemMatchers) {
+        return arrayContainingInAnyOrder(asList(itemMatchers));
     }
 
     /**
@@ -75,7 +76,7 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
      *     a list of matchers, each of which must be satisfied by an item provided by an examined array
      */
     @Factory
-    public static <E> Matcher<E[]> arrayContainingInAnyOrder(Collection<Matcher<? super E>> itemMatchers) {
+    public static <E> Matcher<E[]> arrayContainingInAnyOrder(Collection<Matcher<?>> itemMatchers) {
         return new IsArrayContainingInAnyOrder<E>(itemMatchers);
     }
 
@@ -97,10 +98,10 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
      */
     @Factory
     public static <E> Matcher<E[]> arrayContainingInAnyOrder(E... items) {
-      List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
+      List<Matcher<?>> matchers = new ArrayList<Matcher<?>>();
       for (E item : items) {
           matchers.add(equalTo(item));
       }
-      return new IsArrayContainingInAnyOrder<E>(matchers);
+      return arrayContainingInAnyOrder(matchers);
     }
 }

@@ -17,11 +17,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 /**
  * @author Joe Walnes
  */
-public class HasXPathTest extends AbstractMatcherTest {
+public class HasXPathTest extends AbstractMatcherTest<Node> {
     private Document xml;
     private NamespaceContext ns;
 
@@ -61,7 +62,7 @@ public class HasXPathTest extends AbstractMatcherTest {
     }
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Node> createMatcher() {
         return hasXPath("//irrelevant");
     }
 

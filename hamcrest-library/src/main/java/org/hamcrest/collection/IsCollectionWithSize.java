@@ -11,7 +11,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 /**
  * Matches if collection size satisfies a nested matcher.
  */
-public class IsCollectionWithSize<E, C extends Collection<E>> extends FeatureMatcher<C, Integer> {
+public class IsCollectionWithSize<C extends Collection<?>> extends FeatureMatcher<C, Integer> {
     public IsCollectionWithSize(Matcher<? super Integer> sizeMatcher) {
       super(sizeMatcher, "a collection with size", "collection size");
     }
@@ -32,8 +32,8 @@ public class IsCollectionWithSize<E, C extends Collection<E>> extends FeatureMat
      *     a matcher for the size of an examined {@link java.util.Collection}
      */
     @Factory
-    public static <E, C extends Collection<E>> Matcher<C> hasSize(Matcher<? super Integer> sizeMatcher) {
-        return new IsCollectionWithSize<E, C>(sizeMatcher);
+    public static <C extends Collection<?>> Matcher<C> hasSize(Matcher<? super Integer> sizeMatcher) {
+        return new IsCollectionWithSize<C>(sizeMatcher);
     }
 
     /**
@@ -47,9 +47,8 @@ public class IsCollectionWithSize<E, C extends Collection<E>> extends FeatureMat
      *     the expected size of an examined {@link java.util.Collection}
      */
     @Factory
-    public static <E, C extends Collection<E>> Matcher<C> hasSize(int size) {
-        Matcher<? super Integer> matcher = equalTo(size);
-        return IsCollectionWithSize.<E, C>hasSize(matcher);
+    public static <C extends Collection<?>> Matcher<C> hasSize(int size) {
+        return hasSize(equalTo(size));
     }
 
 }

@@ -8,12 +8,12 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 
-public class StringContainsTest extends AbstractMatcherTest {
+public class StringContainsTest extends AbstractMatcherTest<String> {
     static final String EXCERPT = "EXCERPT";
     Matcher<String> stringContains = containsString(EXCERPT);
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return stringContains;
     }
 

@@ -7,10 +7,10 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class IsArrayWithSizeTest extends AbstractMatcherTest {
+public class IsArrayWithSizeTest extends AbstractMatcherTest<Number[]> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Number[]> createMatcher() {
         return arrayWithSize(equalTo(2));
     }
 

@@ -1,20 +1,16 @@
 package org.hamcrest.collection;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
+
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import org.hamcrest.collection.IsIterableContainingInOrderTest.WithValue;
 
-import java.util.Collections;
-
-import static java.util.Arrays.asList;
-import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
-import static org.hamcrest.collection.IsIterableContainingInOrderTest.make;
-import static org.hamcrest.collection.IsIterableContainingInOrderTest.value;
-
-public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
+public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest<Iterable<Number>> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Iterable<Number>> createMatcher() {
         return containsInAnyOrder(1, 2);
     }   
 
@@ -23,7 +19,7 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchEmpty() {
-        assertMismatchDescription("No item matches: <1>, <2> in []", containsInAnyOrder(1, 2), Collections.<Integer>emptyList());
+        assertMismatchDescription("No item matches: <1>, <2> in []", containsInAnyOrder(1, 2), emptyList());
     }
     
     public void testMatchesIterableOutOfOrder() {
@@ -38,10 +34,8 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
         assertMismatchDescription("Not matched: <4>", containsInAnyOrder(1, 2, 3), asList(1, 2, 4));
     }
 
-    @SuppressWarnings("unchecked")
     public void testDoesNotMatchIfThereAreMoreElementsThanMatchers() {
-        Matcher<Iterable<? extends WithValue>> helpTheCompilerOut = containsInAnyOrder(value(1), value(3));
-        assertMismatchDescription("Not matched: <WithValue 2>", helpTheCompilerOut, asList(make(1), make(2), make(3)));
+        assertMismatchDescription("Not matched: <2>", containsInAnyOrder(1, 3), asList(1, 2, 3));
     }
     
     public void testDoesNotMatchIfThereAreMoreMatchersThanElements() {

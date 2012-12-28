@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.number.OrderingComparison.*;
 
-public class OrderingComparisonTest extends AbstractMatcherTest {
+public class OrderingComparisonTest extends AbstractMatcherTest<Integer> {
 
     @Override
     protected Matcher<Integer> createMatcher() {

@@ -4,10 +4,10 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 
-public class IsArrayContainingTest extends AbstractMatcherTest {
+public class IsArrayContainingTest extends AbstractMatcherTest<String[]> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String[]> createMatcher() {
         return hasItemInArray("irrelevant");
     }
 

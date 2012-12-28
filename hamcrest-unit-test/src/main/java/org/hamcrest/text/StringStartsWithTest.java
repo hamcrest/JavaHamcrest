@@ -8,12 +8,12 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 
-public class StringStartsWithTest extends AbstractMatcherTest {
+public class StringStartsWithTest extends AbstractMatcherTest<String> {
     static final String EXCERPT = "EXCERPT";
     Matcher<String> stringStartsWith = startsWith(EXCERPT);
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return stringStartsWith;
     }
 

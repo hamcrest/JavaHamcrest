@@ -8,10 +8,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsInstanceOf.*;
 import static org.hamcrest.core.IsNot.not;
 
-public class IsInstanceOfTest extends AbstractMatcherTest {
+public class IsInstanceOfTest extends AbstractMatcherTest<Class<Number>> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Class<Number>> createMatcher() {
         return instanceOf(Number.class);
     }
 

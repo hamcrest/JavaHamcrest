@@ -6,11 +6,11 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 
-public class StringContainsInOrderTest extends AbstractMatcherTest {
+public class StringContainsInOrderTest extends AbstractMatcherTest<String> {
     StringContainsInOrder m = new StringContainsInOrder(asList("a", "b", "c"));
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return m;
     }
     

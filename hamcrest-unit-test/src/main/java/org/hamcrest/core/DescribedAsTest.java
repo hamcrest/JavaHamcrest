@@ -11,22 +11,22 @@ import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 
-public class DescribedAsTest extends AbstractMatcherTest {
+public class DescribedAsTest extends AbstractMatcherTest<Object> {
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Object> createMatcher() {
         return describedAs("irrelevant", anything());
     }
 
     public void testOverridesDescriptionOfOtherMatcherWithThatPassedToConstructor() {
-        Matcher<?> m1 = describedAs("m1 description", anything());
-        Matcher<?> m2 = describedAs("m2 description", not(anything()));
+        Matcher<Object> m1 = describedAs("m1 description", anything());
+        Matcher<Object> m2 = describedAs("m2 description", not(anything()));
 
         assertDescription("m1 description", m1);
         assertDescription("m2 description", m2);
     }
 
     public void testAppendsValuesToDescription() {
-        Matcher<?> m = describedAs("value 1 = %0, value 2 = %1",
+        Matcher<Object> m = describedAs("value 1 = %0, value 2 = %1",
                 anything(), 33, 97);
 
         assertDescription("value 1 = <33>, value 2 = <97>", m);

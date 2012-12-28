@@ -5,7 +5,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
 
-public class IsCompatibleType<T> extends TypeSafeMatcher<Class<T>> {
+public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
     private final Class<T> type;
 
     public IsCompatibleType(Class<T> type) {
@@ -13,12 +13,12 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<T>> {
     }
 
     @Override
-    public boolean matchesSafely(Class<T> cls) {
+    public boolean matchesSafely(Class<?> cls) {
         return type.isAssignableFrom(cls);
     }
 
     @Override
-    public void describeMismatchSafely(Class<T> cls, Description mismatchDescription) {
+    public void describeMismatchSafely(Class<?> cls, Description mismatchDescription) {
       mismatchDescription.appendValue(cls.getName());
     }
 
@@ -38,7 +38,7 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<T>> {
      *     the base class to examine classes against
      */
     @Factory
-    public static <T> Matcher<Class<T>> typeCompatibleWith(Class<T> baseType) {
+    public static <T> Matcher<Class<?>> typeCompatibleWith(Class<T> baseType) {
         return new IsCompatibleType<T>(baseType);
     }
 }

@@ -9,10 +9,10 @@ import org.hamcrest.Matcher;
 import static java.util.Arrays.asList;
 import static org.hamcrest.collection.IsEmptyIterable.emptyIterable;
 
-public class IsEmptyIterableTest extends AbstractMatcherTest {
+public class IsEmptyIterableTest extends AbstractMatcherTest<Iterable<String>> {
 
     @Override
-    protected Matcher<Iterable<?>> createMatcher() {
+    protected Matcher<Iterable<String>> createMatcher() {
         return emptyIterable();
     }
 
@@ -38,7 +38,7 @@ public class IsEmptyIterableTest extends AbstractMatcherTest {
         return new ArrayList<String>(asList("one", "three"));
     }
 
-    private static Collection<Integer> emptyCollection() {
-        return new ArrayList<Integer>();
+    private static Collection<String> emptyCollection() {
+        return new ArrayList<String>();
     }
 }

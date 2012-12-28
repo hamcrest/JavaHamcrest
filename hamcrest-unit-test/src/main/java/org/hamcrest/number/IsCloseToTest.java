@@ -7,11 +7,11 @@ import org.hamcrest.Matcher;
 
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
-public class IsCloseToTest extends AbstractMatcherTest {
+public class IsCloseToTest extends AbstractMatcherTest<Double> {
   private final Matcher<Double> matcher = closeTo(1.0d, 0.5d);
 
   @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Double> createMatcher() {
         final double irrelevant = 0.1;
         return closeTo(irrelevant, irrelevant);
     }

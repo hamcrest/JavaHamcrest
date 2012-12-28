@@ -6,19 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 
-public class IsCollectionWithSizeTest extends AbstractMatcherTest {
+public class IsCollectionWithSizeTest extends AbstractMatcherTest<Collection<String>> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Collection<String>> createMatcher() {
         return hasSize(7);
     }
 

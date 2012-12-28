@@ -6,15 +6,13 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class IsArrayContainingInAnyOrderTest extends AbstractMatcherTest {
+public class IsArrayContainingInAnyOrderTest extends AbstractMatcherTest<Number[]> {
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Number[]> createMatcher() {
         return arrayContainingInAnyOrder(equalTo(1), equalTo(2));
     }
 
-    @SuppressWarnings("unchecked")
     public void testHasAReadableDescription() {
         assertDescription("[<1>, <2>] in any order", arrayContainingInAnyOrder(equalTo(1), equalTo(2)));
         assertDescription("[<1>, <2>] in any order", arrayContainingInAnyOrder(1, 2));
@@ -26,7 +24,6 @@ public class IsArrayContainingInAnyOrderTest extends AbstractMatcherTest {
       assertMatches("single", arrayContainingInAnyOrder(1), new Integer[] {1});
     }
 
-    @SuppressWarnings("unchecked")
     public void testAppliesMatchersInAnyOrder() {
       assertMatches("in order", arrayContainingInAnyOrder(equalTo(1), equalTo(2), equalTo(3)), new Integer[] {1, 2, 3});
       assertMatches("out of order", arrayContainingInAnyOrder(equalTo(1), equalTo(2), equalTo(3)), new Integer[] {3, 2, 1});

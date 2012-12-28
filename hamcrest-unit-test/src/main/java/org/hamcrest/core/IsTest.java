@@ -6,10 +6,10 @@ import static org.hamcrest.core.Is.isA;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class IsTest extends AbstractMatcherTest {
+public class IsTest extends AbstractMatcherTest<String> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return is("something");
     }
 

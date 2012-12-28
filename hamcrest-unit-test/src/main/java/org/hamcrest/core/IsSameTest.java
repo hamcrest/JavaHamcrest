@@ -10,10 +10,10 @@ import org.hamcrest.Matcher;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
-public class IsSameTest extends AbstractMatcherTest {
+public class IsSameTest extends AbstractMatcherTest<String> {
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<String> createMatcher() {
         return sameInstance("irrelevant");
     }
 

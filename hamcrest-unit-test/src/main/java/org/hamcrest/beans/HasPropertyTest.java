@@ -15,13 +15,13 @@ import org.hamcrest.Matcher;
  * @author Steve Freeman
  * @since 1.1.0
  */
-public class HasPropertyTest extends AbstractMatcherTest {
+public class HasPropertyTest extends AbstractMatcherTest<Object> {
 
     private final HasPropertyWithValueTest.BeanWithoutInfo bean
             = new HasPropertyWithValueTest.BeanWithoutInfo("a bean");
 
     @Override
-    protected Matcher<?> createMatcher() {
+    protected Matcher<Object> createMatcher() {
         return hasProperty("irrelevant");
     }
 
