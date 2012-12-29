@@ -6,7 +6,6 @@ import static org.hamcrest.AbstractMatcherTest.assertMatches;
 import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
 import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
 import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
-import static org.hamcrest.core.CombinableMatcher.both;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.notNullValue;

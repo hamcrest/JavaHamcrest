@@ -7,8 +7,6 @@ import org.hamcrest.core.IsEqual;
 
 import java.util.Collection;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-
 /**
  * Matches if collection size satisfies a nested matcher.
  */
