@@ -41,7 +41,7 @@
         <path id="cp-hamcrest-core-main" path="build/hamcrest-api-${version}.jar"/>
         <path id="cp-hamcrest-core-test" path=""/>
         <compile-module modulename="hamcrest-core"/>
-        <generate-module-factory modulename="hamcrest-core" configurationfile="core-matchers.xml" targetclass="org.hamcrest.CoreMatchers"/>
+        <generate-module-factory modulename="hamcrest-core" configurationfile="core-matchers.xml" targetclass="org.hamcrest.CoreMatchers" sources="hamcrest-core/src/main/java"/>
         <jar-module modulename="hamcrest-core"/>
         <test-module modulename="hamcrest-core"/>
     </target>
@@ -50,7 +50,7 @@
         <path id="cp-hamcrest-library-main" path="build/hamcrest-api-${version}.jar;build/hamcrest-core-${version}.jar"/>
         <path id="cp-hamcrest-library-test" path="build/hamcrest-core-${version}-tests.jar"/>
         <compile-module modulename="hamcrest-library"/>
-        <generate-module-factory modulename="hamcrest-library" configurationfile="matchers.xml" targetclass="org.hamcrest.Matchers"/>
+        <generate-module-factory modulename="hamcrest-library" configurationfile="matchers.xml" targetclass="org.hamcrest.Matchers" sources="hamcrest-core/src/main/java,hamcrest-library/src/main/java"/>
         <jar-module modulename="hamcrest-library"/>
         <test-module modulename="hamcrest-library"/>
     </target>
@@ -208,6 +208,7 @@
         <attribute name="modulename" description="Name of the module to jar"/>
         <attribute name="configurationfile" description="xml configuration file"/>
         <attribute name="targetclass" description="factory class to generate"/>
+        <attribute name="sources" description="comma-separated source directories"/>
         <sequential>
             <mkdir dir="build/temp/@{modulename}/generated-code"/>
             <java classname="org.hamcrest.generator.config.XmlConfigurator" fork="yes" failonerror="yes">
@@ -215,7 +216,7 @@
                 <classpath refid="cp-@{modulename}-main"/>
                 <classpath path="build/temp/@{modulename}-${version}.jar.contents"/>
                 <arg value="@{configurationfile}"/>
-                <arg value="@{modulename}/src/main/java"/>
+                <arg value="@{sources}"/>
                 <arg value="@{targetclass}"/>
                 <arg value="build/temp/@{modulename}/generated-code"/>
             </java>
