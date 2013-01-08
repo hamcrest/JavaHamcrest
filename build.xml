@@ -41,7 +41,7 @@
         <path id="cp-hamcrest-core-main" path="build/hamcrest-api-${version}.jar"/>
         <path id="cp-hamcrest-core-test" path=""/>
         <compile-module modulename="hamcrest-core"/>
-        <generate-module-factory modulename="hamcrest-core" configurationfile="core-matchers.xml" targetclass="org.hamcrest.CoreMatchers" sources="hamcrest-core/src/main/java"/>
+        <generate-module-factory modulename="hamcrest-core" configurationfile="hamcrest-core/core-matchers.xml" targetclass="org.hamcrest.CoreMatchers" sources="hamcrest-core/src/main/java"/>
         <jar-module modulename="hamcrest-core"/>
         <test-module modulename="hamcrest-core"/>
     </target>
@@ -50,7 +50,7 @@
         <path id="cp-hamcrest-library-main" path="build/hamcrest-api-${version}.jar;build/hamcrest-core-${version}.jar"/>
         <path id="cp-hamcrest-library-test" path="build/hamcrest-core-${version}-tests.jar"/>
         <compile-module modulename="hamcrest-library"/>
-        <generate-module-factory modulename="hamcrest-library" configurationfile="matchers.xml" targetclass="org.hamcrest.Matchers" sources="hamcrest-core/src/main/java,hamcrest-library/src/main/java"/>
+        <generate-module-factory modulename="hamcrest-library" configurationfile="hamcrest-library/matchers.xml" targetclass="org.hamcrest.Matchers" sources="hamcrest-core/src/main/java,hamcrest-library/src/main/java"/>
         <jar-module modulename="hamcrest-library"/>
         <test-module modulename="hamcrest-library"/>
     </target>
