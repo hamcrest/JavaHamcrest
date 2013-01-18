@@ -1,3 +1,0 @@
-#!/bin/bash
-ant -Dversion="GIT-$(git log -1 --oneline | cut -d " " -f 1)"
-

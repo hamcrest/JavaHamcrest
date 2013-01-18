@@ -44,6 +44,10 @@ Documentation
 -------------
 Documentation can be found on the [google code wiki][].
 
+Reporting Bugs/Issues
+---------------------
+If you find an issue with Java Hamcrest, please report it via the [GitHub issue tracker][], after first checking that it hasn't been raised already. N.B. a few issues are still tracked using the old [google code Issue tracker][].
+
 Source
 ------
 The complete source for Hamcrest is bundled. This includes:
@@ -83,3 +87,5 @@ Also, thanks to everyone who has worked on DynaMock, nMock, jMock, EasyMock and 
 [google code downloads]: http://code.google.com/p/hamcrest/downloads/list?can=2&q=label%3AJava
 [google code wiki]: http://code.google.com/p/hamcrest/wiki/Tutorial
 [hamcrest extensions page]: https://github.com/hamcrest/JavaHamcrest/wiki/Related-Projects
+[GitHub issue tracker]: https://github.com/hamcrest/JavaHamcrest/issues
+[google code Issue tracker]: http://code.google.com/p/hamcrest/issues/list?can=2&q=label%3AJava
