@@ -9,6 +9,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="integration" level="project" />
     <orderEntry type="library" name="ant_output" level="project" />
+    <orderEntry type="module" module-name="hamcrest-core" />
+    <orderEntry type="module" module-name="hamcrest-api" />
+    <orderEntry type="module" module-name="hamcrest-integration" />
   </component>
 </module>
 
