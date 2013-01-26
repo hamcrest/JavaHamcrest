@@ -45,7 +45,7 @@ public final class IsEmptyStringTest {
     }
 
     @Test public void
-    doesNotmatchFilledString() {
+    doesNotMatchFilledString() {
         assertDoesNotMatch("matched unexpectedly", emptyString(), "a");
         assertDoesNotMatch("matched unexpectedly", blankString(), "a");
         assertDoesNotMatch("matched unexpectedly", emptyOrNullString(), "a");
