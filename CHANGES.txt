@@ -1,3 +1,23 @@
+== Version 1.4: Released xx ==
+
+* Removed deprecated methods from previous release
+
+* Improve mismatch description of hasItem/hasItems
+
+* General improvements to mismatch descriptions
+
+* Several JavaDoc improvements and corrections
+
+* Fix gh issue #8 - isCloseTo() shows wrong delta in mismatch description
+
+* Fix issue 131 - Implement IsEmptyMap, IsMapWithSize
+
+* Fix issue 155 - Deprecated several matcher factory methods of the for "isXyz"
+
+* Fix issue 187 - IsArray.describeMismatchSafely() should use Matcher.describeMismatch
+
+* Fix issue 155 - Add Matcher implementation for files
+
 == Version 1.3: Released July 09 2012 ==
 
 * Introduce Condition class to ease the implementation of multi-step matches
