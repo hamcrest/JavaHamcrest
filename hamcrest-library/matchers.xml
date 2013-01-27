@@ -43,6 +43,7 @@
     <factory class="org.hamcrest.text.IsEqualIgnoringCase"/>
     <factory class="org.hamcrest.text.IsEqualIgnoringWhiteSpace"/>
     <factory class="org.hamcrest.text.IsEmptyString"/>
+    <factory class="org.hamcrest.text.IsBlankString"/>
     <factory class="org.hamcrest.text.StringContainsInOrder"/>
 
     <!-- Object -->
