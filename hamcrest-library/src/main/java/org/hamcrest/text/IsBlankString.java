@@ -6,15 +6,15 @@ import static org.hamcrest.core.IsNull.nullValue;
 
 import java.util.regex.Pattern;
 
-import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Matches blank Strings (and null).
  */
-public final class IsBlankString extends BaseMatcher<String> {
+public final class IsBlankString extends TypeSafeMatcher<String> {
     private static final IsBlankString BLANK_INSTANCE = new IsBlankString();
     @SuppressWarnings("unchecked")
     private static final Matcher<String> NULL_OR_BLANK_INSTANCE = anyOf(nullValue(), BLANK_INSTANCE);
@@ -24,8 +24,8 @@ public final class IsBlankString extends BaseMatcher<String> {
     private IsBlankString() { }
 
     @Override
-    public boolean matches(Object item) {
-        return item != null && item instanceof String && REGEX_WHITESPACE.matcher((String)item).matches();
+    public boolean matchesSafely(String item) {
+        return REGEX_WHITESPACE.matcher(item).matches();
     }
 
     @Override
