@@ -36,6 +36,7 @@
 
     <!-- Number -->
     <factory class="org.hamcrest.number.IsCloseTo"/>
+    <factory class="org.hamcrest.number.IsNaN"/>
     <factory class="org.hamcrest.number.BigDecimalCloseTo"/>
     <factory class="org.hamcrest.number.OrderingComparison"/>
 
