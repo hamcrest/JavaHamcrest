@@ -4,22 +4,24 @@ package org.hamcrest.text;
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.IsNull.nullValue;
 
-import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Matches empty Strings (and null).
  */
-public final class IsEmptyString extends BaseMatcher<String> {
+public final class IsEmptyString extends TypeSafeMatcher<String> {
     private static final IsEmptyString INSTANCE = new IsEmptyString();
     @SuppressWarnings("unchecked")
     private static final Matcher<String> NULL_OR_EMPTY_INSTANCE = anyOf(nullValue(), INSTANCE);
 
+    private IsEmptyString() { }
+
     @Override
-    public boolean matches(Object item) {
-        return item != null && item instanceof String && ((String) item).equals("");
+    public boolean matchesSafely(String item) {
+        return item.equals("");
     }
 
     @Override
@@ -40,7 +42,7 @@ public final class IsEmptyString extends BaseMatcher<String> {
     public static Matcher<String> isEmptyString() {
         return emptyString();
     }
-    
+
     /**
      * Creates a matcher of {@link String} that matches when the examined string has zero length.
      * <p/>
@@ -68,7 +70,7 @@ public final class IsEmptyString extends BaseMatcher<String> {
     public static Matcher<String> isEmptyOrNullString() {
         return emptyOrNullString();
     }
-    
+
     /**
      * Creates a matcher of {@link String} that matches when the examined string is <code>null</code>, or
      * has zero length.
