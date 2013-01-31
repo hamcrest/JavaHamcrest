@@ -69,6 +69,14 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
         assertThat(new CustomInt(5), lessThan(new CustomInt(10)));
     }
 
+    public void testHasCorrectParameterType() {
+        assertEquals(Integer.class, greaterThan(1).getParameterType());
+        assertEquals(Double.class, greaterThanOrEqualTo(1.0).getParameterType());
+        assertEquals(BigDecimal.class, comparesEqualTo(new BigDecimal("2.000")).getParameterType());
+        assertEquals(CustomInt.class, lessThan(new CustomInt(10)).getParameterType());
+        assertEquals(Float.class, lessThanOrEqualTo(1.0f).getParameterType());
+    }
+
     private static final class CustomInt implements Comparable<CustomInt> {
         private final int value;
         public CustomInt(int value) {

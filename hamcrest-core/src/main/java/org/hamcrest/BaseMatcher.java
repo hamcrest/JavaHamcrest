@@ -6,6 +6,7 @@ package org.hamcrest;
  * BaseClass for all Matcher implementations.
  *
  * @see Matcher
+ * @see DiagnosingMatcher
  */
 public abstract class BaseMatcher<T> implements Matcher<T> {
 
@@ -21,6 +22,11 @@ public abstract class BaseMatcher<T> implements Matcher<T> {
     @Override
     public void describeMismatch(Object item, Description description) {
         description.appendText("was ").appendValue(item);
+    }
+
+    @Override
+    public Class<T> getParameterType() {
+        return null;
     }
 
     @Override

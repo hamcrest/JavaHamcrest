@@ -50,6 +50,13 @@ public interface Matcher<T> extends SelfDescribing {
     void describeMismatch(Object item, Description mismatchDescription);
 
     /**
+     * Returns the best estimate for the type parameter T of this
+     * matcher (usually the type of parameter this matcher is expected
+     * to match against), or null if no reasonable estimate can be made.
+     */
+    Class<T> getParameterType();
+
+    /**
      * This method simply acts a friendly reminder not to implement Matcher directly and
      * instead extend BaseMatcher. It's easy to ignore JavaDoc, but a bit harder to ignore
      * compile errors .

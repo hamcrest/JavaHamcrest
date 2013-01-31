@@ -4,7 +4,8 @@ import org.hamcrest.internal.ReflectiveTypeFinder;
 
 /**
  * Convenient base class for Matchers that require a non-null value of a specific type.
- * This simply implements the null check, checks the type and then casts.
+ * This simply implements the null check, checks the type and then casts. See also
+ * {@link TypeSafeDiagnosingMatcher}.
  *
  * @author Joe Walnes
  * @author Steve Freeman
@@ -81,5 +82,11 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
         } else {
             describeMismatchSafely((T)item, description);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Class<T> getParameterType() {
+        return (Class<T>)expectedType;
     }
 }

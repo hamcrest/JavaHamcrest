@@ -14,6 +14,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.hamcrest.core.StringStartsWith.startsWith;
+import static org.junit.Assert.assertEquals;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -65,6 +66,16 @@ public final class AllOfTest {
 
     @Test public void
     hasAMismatchDescriptionDescribingTheFirstFailingMatch() {
-        assertMismatchDescription("\"good\" was \"bad\"", allOf(equalTo("bad"), equalTo("good")), "bad");
+        assertMismatchDescription("was \"bad\"", allOf(equalTo("bad"), equalTo("good")), "bad");
+    }
+
+    @Test public void
+    hasCorrectParameterType() {
+        final Matcher<SampleSubClass> matcher = allOf(
+            equalTo(new SampleBaseClass("bad")),
+            is(notNullValue()),
+            equalTo(new SampleBaseClass("good")),
+            equalTo(new SampleSubClass("ugly")));
+        assertEquals(SampleSubClass.class, matcher.getParameterType());
     }
 }

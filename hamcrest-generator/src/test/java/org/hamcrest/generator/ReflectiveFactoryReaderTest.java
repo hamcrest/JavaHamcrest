@@ -267,6 +267,7 @@ public final class ReflectiveFactoryReaderTest {
         @Override public boolean matches(Object item) { return false; }
         @Override public void describeMismatch(Object item, Description mismatchDescription) { }
         @Override @Deprecated public void _dont_implement_Matcher___instead_extend_BaseMatcher_() { }
+        @Override public Class<T> getParameterType() { return null; }
     }
 
     public static class SubclassOfMatcher {

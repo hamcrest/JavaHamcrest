@@ -50,6 +50,12 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
         description.appendText(" ").appendValue(expected);
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public Class<T> getParameterType() {
+        return (Class)expected.getClass();
+    }
+
     private static String asText(int comparison) {
         return comparisonDescriptions[signum(comparison) + 1];
     }

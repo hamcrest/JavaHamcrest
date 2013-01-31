@@ -53,6 +53,7 @@ public final class XmlConfiguratorTest {
         @Override public void describeMismatch(Object item, Description mismatchDescription) { }
         @Override @Deprecated public void _dont_implement_Matcher___instead_extend_BaseMatcher_() { }
         @Factory public static AnotherMatcher matcher3() { return null; }
+        @Override public Class<T> getParameterType() { return null; }
     }
 
     /**

@@ -12,6 +12,17 @@ import org.hamcrest.BaseMatcher;
  * Is the value null?
  */
 public class IsNull<T> extends BaseMatcher<T> {
+
+    private final Class<T> parameterType;
+
+    public IsNull() {
+        parameterType = null;
+    }
+
+    public IsNull(Class<T> parameterType) {
+        this.parameterType = parameterType;
+    }
+
     @Override
     public boolean matches(Object o) {
         return o == null;
@@ -22,6 +33,11 @@ public class IsNull<T> extends BaseMatcher<T> {
         description.appendText("null");
     }
 
+    @Override
+    public Class<T> getParameterType() {
+        return parameterType;
+    }
+
     /**
      * Creates a matcher that matches if examined object is <code>null</code>.
      * <p/>
@@ -30,8 +46,8 @@ public class IsNull<T> extends BaseMatcher<T> {
      * 
      */
     @Factory
-    public static Matcher<Object> nullValue() {
-        return new IsNull<Object>();
+    public static <T> Matcher<T> nullValue() {
+        return new IsNull<T>();
     }
 
     /**
@@ -44,8 +60,8 @@ public class IsNull<T> extends BaseMatcher<T> {
      * 
      */
     @Factory
-    public static Matcher<Object> notNullValue() {
-        return not(nullValue());
+    public static <T> Matcher<T> notNullValue() {
+        return not(IsNull.<T>nullValue());
     }
 
     /**
@@ -60,7 +76,7 @@ public class IsNull<T> extends BaseMatcher<T> {
      */
     @Factory
     public static <T> Matcher<T> nullValue(Class<T> type) {
-        return new IsNull<T>();
+        return new IsNull<T>(type);
     }
 
     /**
