@@ -10,7 +10,7 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-public final class FileMatchers {
+public class FileMatchers {
 
     @Factory
     public static Matcher<File> anExistingDirectory() {

@@ -12,7 +12,7 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Matches empty Strings (and null).
  */
-public final class IsEmptyString extends TypeSafeMatcher<String> {
+public class IsEmptyString extends TypeSafeMatcher<String> {
     private static final IsEmptyString INSTANCE = new IsEmptyString();
     @SuppressWarnings("unchecked")
     private static final Matcher<String> NULL_OR_EMPTY_INSTANCE = anyOf(nullValue(), INSTANCE);

@@ -48,7 +48,7 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
     return new CombinableBothMatcher<LHS>(matcher);
   }
   
-  public static final class CombinableBothMatcher<X> {
+  public static class CombinableBothMatcher<X> {
     private final Matcher<? super X> first;
     public CombinableBothMatcher(Matcher<? super X> matcher) {
         this.first = matcher;
@@ -69,7 +69,7 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
     return new CombinableEitherMatcher<LHS>(matcher);
   }
   
-  public static final class CombinableEitherMatcher<X> {
+  public static class CombinableEitherMatcher<X> {
     private final Matcher<? super X> first;
     public CombinableEitherMatcher(Matcher<? super X> matcher) {
         this.first = matcher;

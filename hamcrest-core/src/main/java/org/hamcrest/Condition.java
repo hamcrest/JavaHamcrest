@@ -34,7 +34,7 @@ public abstract class Condition<T> {
         return new Matched<T>(theValue, mismatchDescription);
     }
 
-    private static final class Matched<T> extends Condition<T> {
+    private static class Matched<T> extends Condition<T> {
         private final T theValue;
         private final Description mismatchDescription;
 
@@ -59,7 +59,7 @@ public abstract class Condition<T> {
         }
     }
 
-    private static final class NotMatched<T> extends Condition<T> {
+    private static class NotMatched<T> extends Condition<T> {
         @Override public boolean matching(Matcher<T> match, String message) { return false; }
 
         @Override public <U> Condition<U> and(Step<? super T, U> mapping) {
