@@ -1,7 +1,5 @@
 package org.hamcrest.core;
 
-import org.hamcrest.Description;
-import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -13,29 +11,10 @@ import java.util.List;
  * Calculates the logical conjunction of multiple matchers. Evaluation is shortcut, so
  * subsequent matchers are not called if an earlier matcher returns <code>false</code>.
  */
-public class AllOf<T> extends DiagnosingMatcher<T> {
-
-    private final Iterable<Matcher<? super T>> matchers;
+public class AllOf<T> extends ShortcutCompositeMatcher<T> {
 
     public AllOf(Iterable<Matcher<? super T>> matchers) {
-        this.matchers = matchers;
-    }
-
-    @Override
-    public boolean matches(Object o, Description mismatch) {
-        for (Matcher<? super T> matcher : matchers) {
-            if (!matcher.matches(o)) {
-                mismatch.appendDescriptionOf(matcher).appendText(" ");
-                matcher.describeMismatch(o, mismatch);
-              return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public void describeTo(Description description) {
-        description.appendList("(", " " + "and" + " ", ")", matchers);
+        super(matchers, false, "and");
     }
 
     /**

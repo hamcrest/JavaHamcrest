@@ -37,6 +37,11 @@ public class Is<T> extends BaseMatcher<T> {
         matcher.describeMismatch(item, mismatchDescription);
     }
 
+    @Override
+    public Class<T> getParameterType() {
+        return matcher.getParameterType();
+    }
+
     /**
      * Decorates another Matcher, retaining its behaviour, but allowing tests
      * to be slightly more expressive.

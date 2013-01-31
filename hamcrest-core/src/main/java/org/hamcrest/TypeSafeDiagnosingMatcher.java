@@ -7,9 +7,12 @@ import org.hamcrest.internal.ReflectiveTypeFinder;
  * Convenient base class for Matchers that require a non-null value of a specific type
  * and that will report why the received value has been rejected.
  * This implements the null check, checks the type and then casts. 
- * To use, implement <pre>matchesSafely()</pre>. 
+ * To use, implement {@link #matchesSafely}.
+ * <P> This is a base class for matchers that use a single method to
+ * both detect an match and describe a mismatch (in contrast to
+ * {@link TypeSafeMatcher}, which has separate methods with potentially
+ * duplicate logic).
  *
- * @param <T>
  * @author Neil Dunn
  * @author Nat Pryce
  * @author Steve Freeman
@@ -60,10 +63,22 @@ public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
     @SuppressWarnings("unchecked")
     @Override
     public final void describeMismatch(Object item, Description mismatchDescription) {
-      if (item == null || !expectedType.isInstance(item)) {
-        super.describeMismatch(item, mismatchDescription);
-      } else {
-        matchesSafely((T) item, mismatchDescription);
-      }
+        if (item == null) {
+            super.describeMismatch(item, mismatchDescription);
+        } else if (! expectedType.isInstance(item)) {
+            mismatchDescription.appendText("was a ")
+                .appendText(item.getClass().getName())
+                .appendText(" (")
+                .appendValue(item)
+                .appendText(")");
+        } else {
+            matchesSafely((T)item, mismatchDescription);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Class<T> getParameterType() {
+        return (Class<T>)expectedType;
     }
 }

@@ -8,6 +8,7 @@ import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.Is.isA;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertEquals;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -48,8 +49,15 @@ public final class IsTest {
     @Test public void
     providesConvenientShortcutForIsInstanceOf() {
         final Matcher matcher = isA(Integer.class);
-        assertMatches("didn't match", matcher, Integer.valueOf(1));
+        assertMatches("didn't match", matcher, 1);
         assertDoesNotMatch("matched unexpectedly", matcher, new Object());
         assertDoesNotMatch("matched unexpectedly", matcher, null);
+    }
+
+    @Test public void
+    hasCorrectParameterType() {
+        assertEquals(Boolean.class, is(equalTo(true)).getParameterType());
+        assertEquals(String.class, is("A").getParameterType());
+        assertEquals(Integer.class, isA(Integer.class).getParameterType());
     }
 }

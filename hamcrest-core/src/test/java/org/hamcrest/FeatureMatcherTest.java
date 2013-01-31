@@ -32,7 +32,7 @@ public final class FeatureMatcherTest {
         resultMatcher.matches(new ShouldNotMatch());
         StringDescription mismatchDescription = new StringDescription(); 
         resultMatcher.describeMismatch(new ShouldNotMatch(), mismatchDescription);
-        assertEquals("was <ShouldNotMatch>", mismatchDescription.toString());
+        assertEquals("was a org.hamcrest.FeatureMatcherTest$ShouldNotMatch (<ShouldNotMatch>)", mismatchDescription.toString());
     }
 
     public static class Match extends IsEqual<String> {

@@ -11,6 +11,7 @@ import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.DescribedAs.describedAs;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertEquals;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -40,7 +41,7 @@ public final class DescribedAsTest {
     }
 
     @Test public void
-    celegatesMatchingToAnotherMatcher() {
+    delegatesMatchingToAnotherMatcher() {
         Matcher<String> matcher = describedAs("irrelevant", equalTo("hi"));
 
         assertMatches("didn't match", matcher, "hi");
@@ -52,5 +53,10 @@ public final class DescribedAsTest {
         Matcher<Integer> matcher = describedAs("irrelevant", equalTo(2));
 
         assertMismatchDescription("was <1>", matcher, 1);
+    }
+
+    @Test public void
+    hasCorrectParameterType() {
+        assertEquals(Integer.class, describedAs("irrelevant", equalTo(2)).getParameterType());
     }
 }

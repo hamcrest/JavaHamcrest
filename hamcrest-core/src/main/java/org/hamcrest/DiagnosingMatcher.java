@@ -1,9 +1,10 @@
 package org.hamcrest;
 
 /**
- * TODO(ngd): Document.
- *
- * @param <T>
+ * This is a base class for matchers that use a single method to
+ * both detect a match and describe a mismatch (in contrast to
+ * {@link BaseMatcher}, which has separate methods with potentially
+ * duplicate logic).
  */
 public abstract class DiagnosingMatcher<T> extends BaseMatcher<T> {
 

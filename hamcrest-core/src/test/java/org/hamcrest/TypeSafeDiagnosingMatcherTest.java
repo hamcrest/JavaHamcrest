@@ -1,27 +1,25 @@
 package org.hamcrest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-
 import org.junit.Test;
 
-public final class TypeSafeMatcherTest {
-    private final Matcher<String> matcher = new TypeSafeMatcherSubclass();
+import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
-    public static class TypeSafeMatcherSubclass extends TypeSafeMatcher<String> {
+public final class TypeSafeDiagnosingMatcherTest {
+    private final Matcher<String> matcher = new TypeSafeDiagnosingMatcherSubclass();
+
+    public static class TypeSafeDiagnosingMatcherSubclass extends TypeSafeDiagnosingMatcher<String> {
+
         @Override
-        public boolean matchesSafely(String item) {
+        protected boolean matchesSafely(String item, Description mismatchDescription) {
+            mismatchDescription.appendText("The mismatch");
             return false;
         }
 
         @Override
-        public void describeMismatchSafely(String item, Description mismatchDescription) {
-          mismatchDescription.appendText("The mismatch");
-        }
-
-        @Override
         public void describeTo(Description description) {
+
         }
     }
 

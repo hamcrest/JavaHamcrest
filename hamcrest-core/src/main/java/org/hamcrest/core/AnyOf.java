@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
@@ -12,20 +11,10 @@ import org.hamcrest.Matcher;
  * Calculates the logical disjunction of multiple matchers. Evaluation is shortcut, so
  * subsequent matchers are not called if an earlier matcher returns <code>true</code>.
  */
-public class AnyOf<T> extends ShortcutCombination<T> {
+public class AnyOf<T> extends ShortcutCompositeMatcher<T> {
 
     public AnyOf(Iterable<Matcher<? super T>> matchers) {
-        super(matchers);
-    }
-
-    @Override
-    public boolean matches(Object o) {
-        return matches(o, true);
-    }
-
-    @Override
-    public void describeTo(Description description) {
-        describeTo(description, "or");
+        super(matchers, true, "or");
     }
 
     /**
