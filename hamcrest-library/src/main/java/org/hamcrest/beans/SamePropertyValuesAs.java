@@ -27,10 +27,10 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
     }
 
     @Override
-    public boolean matchesSafely(T bean, Description mismatch) {
-        return isCompatibleType(bean, mismatch)
-                && hasNoExtraProperties(bean, mismatch)
-                && hasMatchingValues(bean, mismatch);
+    public boolean matchesSafely(T bean, Description mismatchDescription) {
+        return isCompatibleType(bean, mismatchDescription)
+                && hasNoExtraProperties(bean, mismatchDescription)
+                && hasMatchingValues(bean, mismatchDescription);
     }
 
     @Override
@@ -96,11 +96,11 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
         }
 
         @Override
-        public boolean matches(Object actual, Description mismatch) {
+        public boolean matches(Object actual, Description mismatchDescription) {
             final Object actualValue = readProperty(readMethod, actual);
             if (!matcher.matches(actualValue)) {
-                mismatch.appendText(propertyName + " ");
-                matcher.describeMismatch(actualValue, mismatch);
+                mismatchDescription.appendText(propertyName+" ");
+                matcher.describeMismatch(actualValue, mismatchDescription);
                 return false;
             }
             return true;

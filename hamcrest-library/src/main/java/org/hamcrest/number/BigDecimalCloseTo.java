@@ -20,16 +20,16 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
 
   @Override
   public boolean matchesSafely(BigDecimal item) {
-      return actualDelta(item).compareTo(BigDecimal.ZERO) <= 0;
+      return effectiveDelta(item).compareTo(BigDecimal.ZERO) <= 0;
   }
 
   @Override
   public void describeMismatchSafely(BigDecimal item, Description mismatchDescription) {
       mismatchDescription.appendValue(item)
-              .appendText(" differed by ")
-              .appendValue(actualDelta(item))
-              .appendText(" more than delta ")
-              .appendValue(delta);
+              .appendText(" differed from ")
+              .appendValue(value)
+              .appendText(" by ")
+              .appendValue(actualDelta(item));
   }
 
   @Override
@@ -41,10 +41,15 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
   }
 
   private BigDecimal actualDelta(BigDecimal item) {
-      return item.subtract(value, MathContext.DECIMAL128).abs().subtract(delta, MathContext.DECIMAL128).stripTrailingZeros();
+      return item.subtract(value, MathContext.DECIMAL128).abs().stripTrailingZeros();
+  }
+    
+  private BigDecimal effectiveDelta(BigDecimal item) {
+      return actualDelta(item).subtract(delta, MathContext.DECIMAL128).stripTrailingZeros();
   }
 
-  /**
+
+    /**
    * Creates a matcher of {@link java.math.BigDecimal}s that matches when an examined BigDecimal is equal
    * to the specified <code>operand</code>, within a range of +/- <code>error</code>. The comparison for equality
    * is done by BigDecimals {@link java.math.BigDecimal#compareTo(java.math.BigDecimal)} method.

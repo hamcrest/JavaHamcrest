@@ -25,16 +25,16 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
 
     @Override
     public boolean matchesSafely(Double item) {
-        return actualDelta(item) <= 0.0;
+        return effectiveDelta(item) <= 0.0;
     }
 
     @Override
     public void describeMismatchSafely(Double item, Description mismatchDescription) {
-      mismatchDescription.appendValue(item)
-                         .appendText(" differed by ")
-                         .appendValue(actualDelta(item))
-                         .appendText(" more than delta ")
-                         .appendValue(delta);
+        mismatchDescription.appendValue(item)
+                .appendText(" differed from ")
+                .appendValue(value)
+                .appendText(" by ")
+                .appendValue(actualDelta(item));
     }
 
     @Override
@@ -46,7 +46,11 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
     }
 
     private double actualDelta(Double item) {
-      return abs(item - value) - delta;
+        return abs(item - value);
+    }
+
+    private double effectiveDelta(Double item) {
+      return actualDelta(item) - delta;
     }
 
     /**

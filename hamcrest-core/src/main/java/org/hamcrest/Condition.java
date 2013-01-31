@@ -14,7 +14,7 @@ public abstract class Condition<T> {
     public static final NotMatched<Object> NOT_MATCHED = new NotMatched<Object>();
 
     public interface Step<I, O> {
-        Condition<O> apply(I value, Description mismatch);
+        Condition<O> apply(I value, Description mismatchDescription);
     }
 
     private Condition() { }
@@ -30,17 +30,17 @@ public abstract class Condition<T> {
         return (Condition<T>) NOT_MATCHED;
     }
 
-    public static <T> Condition<T> matched(final T theValue, final Description mismatch) {
-        return new Matched<T>(theValue, mismatch);
+    public static <T> Condition<T> matched(final T theValue, final Description mismatchDescription) {
+        return new Matched<T>(theValue, mismatchDescription);
     }
 
     private static final class Matched<T> extends Condition<T> {
         private final T theValue;
-        private final Description mismatch;
+        private final Description mismatchDescription;
 
-        private Matched(T theValue, Description mismatch) {
+        private Matched(T theValue, Description mismatchDescription) {
             this.theValue = theValue;
-            this.mismatch = mismatch;
+            this.mismatchDescription=mismatchDescription;
         }
 
         @Override
@@ -48,14 +48,14 @@ public abstract class Condition<T> {
             if (matcher.matches(theValue)) {
                 return true;
             }
-            mismatch.appendText(message);
-            matcher.describeMismatch(theValue, mismatch);
+            mismatchDescription.appendText(message);
+            matcher.describeMismatch(theValue, mismatchDescription);
             return false;
         }
 
         @Override
         public <U> Condition<U> and(Step<? super T, U> next) {
-            return next.apply(theValue, mismatch);
+            return next.apply(theValue, mismatchDescription);
         }
     }
 

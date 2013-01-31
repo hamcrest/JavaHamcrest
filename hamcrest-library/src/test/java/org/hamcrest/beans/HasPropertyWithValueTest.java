@@ -36,23 +36,23 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   public void testMatchesInfolessBeanWithMatchedNamedProperty() {
     assertMatches("with property", hasProperty("property", equalTo("is expected")), shouldMatch);
-    assertMismatchDescription("property 'property' was \"not expected\"", 
+    assertMismatchDescription("property 'property' was \"not expected\" on <[BeanWithoutInfo: not expected]>", 
                               hasProperty("property", equalTo("is expected")), shouldNotMatch);
   }
 
   public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
     assertMatches("with bean info", hasProperty("property", equalTo("with info")), beanWithInfo);
-    assertMismatchDescription("property 'property' was \"with info\"", 
+    assertMismatchDescription("property 'property' was \"with info\" on <[BeanWithInfo: with info]>", 
         hasProperty("property", equalTo("without info")), beanWithInfo);
   }
 
   public void testDoesNotMatchInfolessBeanWithoutMatchedNamedProperty() {
-    assertMismatchDescription("No property \"nonExistentProperty\"", 
+    assertMismatchDescription("no property \"nonExistentProperty\" on <[BeanWithoutInfo: not expected]>", 
                               hasProperty("nonExistentProperty", anything()), shouldNotMatch);
    }
 
   public void testDoesNotMatchWriteOnlyProperty() {
-    assertMismatchDescription("property \"writeOnlyProperty\" is not readable",
+    assertMismatchDescription("property \"writeOnlyProperty\" is not readable on <[BeanWithoutInfo: not expected]>",
                               hasProperty("writeOnlyProperty", anything()), shouldNotMatch); 
   }
 
@@ -71,7 +71,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   }
 
   public void testDescribesMissingPropertyMismatch() {
-    assertMismatchDescription("No property \"honk\"", hasProperty( "honk", anything()), shouldNotMatch);
+    assertMismatchDescription("no property \"honk\" on <[BeanWithoutInfo: not expected]>", hasProperty( "honk", anything()), shouldNotMatch);
   }
 
   public void testCanAccessAnAnonymousInnerClass() {
@@ -109,7 +109,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
     @Override
     public String toString() {
-      return "[Person: " + property + "]";
+      return "[BeanWithoutInfo: " + property + "]";
     }
   }
 
@@ -123,6 +123,11 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     public String property() {
       return propertyValue;
     }
+
+      @Override
+      public String toString() {
+          return "[BeanWithInfo: " + propertyValue + "]";
+      }
   }
 
   public static class BeanWithInfoBeanInfo extends SimpleBeanInfo {

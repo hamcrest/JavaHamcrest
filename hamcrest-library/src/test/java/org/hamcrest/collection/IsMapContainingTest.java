@@ -24,7 +24,7 @@ public class IsMapContainingTest extends AbstractMatcherTest {
 
         assertMatches("matcherA", hasEntry(equalTo("a"), equalTo(1)), map);
         assertMatches("matcherB", hasEntry(equalTo("b"), equalTo(2)), map);
-        assertMismatchDescription("map was [<a=1>, <b=2>]", hasEntry(equalTo("c"), equalTo(3)), map);
+        assertMismatchDescription("was <{a=1, b=2}>", hasEntry(equalTo("c"), equalTo(3)), map);
     }
 
 //    no longer compiles. SF

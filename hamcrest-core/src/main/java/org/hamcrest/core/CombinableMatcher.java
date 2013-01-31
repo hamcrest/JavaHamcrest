@@ -12,9 +12,9 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
   }
 
   @Override
-  protected boolean matchesSafely(T item, Description mismatch) {
+  protected boolean matchesSafely(T item, Description mismatchDescription) {
     if (!matcher.matches(item)) {
-      matcher.describeMismatch(item, mismatch);
+      matcher.describeMismatch(item, mismatchDescription);
       return false;
     }
     return true;

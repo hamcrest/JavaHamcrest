@@ -31,7 +31,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
             }
         }
 
-        mismatchDescription.appendText("mismatches were: [");
+        mismatchDescription.appendText("was [");
         boolean isPastFirst = false;
         for (Object item : collection) {
             if (isPastFirst) {

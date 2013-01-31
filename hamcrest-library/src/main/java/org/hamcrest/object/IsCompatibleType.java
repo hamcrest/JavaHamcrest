@@ -19,7 +19,7 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
     
     @Override
     public void describeMismatchSafely(Class<?> cls, Description mismatchDescription) {
-      mismatchDescription.appendValue(cls.getName());
+      mismatchDescription.appendText("was ").appendText(cls.getName());
     }
     
     @Override

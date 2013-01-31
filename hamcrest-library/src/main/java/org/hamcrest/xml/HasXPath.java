@@ -54,8 +54,8 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     }
 
     @Override
-    public boolean matchesSafely(Node item, Description mismatch) {
-        return evaluated(item, mismatch)
+    public boolean matchesSafely(Node item, Description mismatchDescription) {
+        return evaluated(item, mismatchDescription)
                .and(NODE_EXISTS)
                .matching(valueMatcher);
     }
@@ -68,11 +68,11 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
         }
     }
 
-    private Condition<Object> evaluated(Node item, Description mismatch) {
+    private Condition<Object> evaluated(Node item, Description mismatchDescription) {
         try {
-            return matched(compiledXPath.evaluate(item, evaluationMode), mismatch);
+            return matched(compiledXPath.evaluate(item, evaluationMode), mismatchDescription);
         } catch (XPathExpressionException e) {
-            mismatch.appendText(e.getMessage());
+            mismatchDescription.appendText(e.getMessage());
         }
         return notMatched();
     }
@@ -80,12 +80,12 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     private static Condition.Step<Object, String> nodeExists() {
         return new Condition.Step<Object, String>() {
             @Override
-            public Condition<String> apply(Object value, Description mismatch) {
+            public Condition<String> apply(Object value, Description mismatchDescription) {
                 if (value == null) {
-                    mismatch.appendText("xpath returned no results.");
+                    mismatchDescription.appendText("xpath returned no results.");
                     return notMatched();
                 }
-                return matched(String.valueOf(value), mismatch);
+                return matched(String.valueOf(value), mismatchDescription);
             }
         };
     }

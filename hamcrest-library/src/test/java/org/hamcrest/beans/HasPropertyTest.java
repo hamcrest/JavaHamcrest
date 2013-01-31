@@ -49,7 +49,7 @@ public final class HasPropertyTest {
 
     @Test public void
     describesAMismatch() {
-        assertMismatchDescription("no \"aNonExistentProp\" in <[Person: a bean]>",
+        assertMismatchDescription("no \"aNonExistentProp\" in <[BeanWithoutInfo: a bean]>",
                                   hasProperty("aNonExistentProp"), bean);
     }
 }

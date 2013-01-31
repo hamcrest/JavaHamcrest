@@ -40,14 +40,14 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
     }
 
     @Override
-    protected boolean matches(Object item, Description mismatch) {
+    protected boolean matches(Object item, Description mismatchDescription) {
       if (null == item) {
-        mismatch.appendText("null");
+        mismatchDescription.appendText("was null");
         return false;
       }
       
       if (!matchableClass.isInstance(item)) {
-        mismatch.appendValue(item).appendText(" is a " + item.getClass().getName());
+        mismatchDescription.appendValue(item).appendText(" was a " + item.getClass().getName());
         return false;
       }
       

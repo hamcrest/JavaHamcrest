@@ -70,7 +70,7 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
     }
     
     public void testDoesNotMatchEmptyMap() {
-        assertMismatchDescription("map was []", hasKey("Foo"), new HashMap<String,Integer>());
+        assertMismatchDescription("was <{}>", hasKey("Foo"), new HashMap<String,Integer>());
     }
     
     public void testDoesNotMatchMapMissingKey() {
@@ -79,6 +79,6 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
         map.put("b", 2);
         map.put("c", 3);
         
-        assertMismatchDescription("map was [<a=1>, <b=2>, <c=3>]", hasKey("d"), map);
+        assertMismatchDescription("was <{a=1, b=2, c=3}>", hasKey("d"), map);
     }
 }

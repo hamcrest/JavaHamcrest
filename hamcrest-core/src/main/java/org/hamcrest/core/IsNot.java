@@ -31,6 +31,11 @@ public class IsNot<T> extends BaseMatcher<T>  {
     }
 
     @Override
+    public void describeMismatch(Object item, Description description) {
+        matcher.describeMismatch(item, description);
+    }
+
+    @Override
     public Class<T> getParameterType() {
         return matcher.getParameterType();
     }
