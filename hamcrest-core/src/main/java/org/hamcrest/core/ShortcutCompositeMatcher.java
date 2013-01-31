@@ -44,29 +44,22 @@ abstract class ShortcutCompositeMatcher<T> extends DiagnosingMatcher<T> {
 
     @Override
     public boolean matches(Object o, Description mismatchDescription) {
-        Set<String> mismatchDescriptions = null;
+        Set<String> mismatchDescriptions = new LinkedHashSet<String>();
         boolean result = !shortcut;
         for (Matcher<? super T> matcher : matchers) {
             boolean matches = matcher.matches(o);
-            if (!matches) {
-                if (null == mismatchDescriptions) {
-                    mismatchDescriptions = new LinkedHashSet<String>();
-                }
-                StringDescription stringDescription=new StringDescription();
-                matcher.describeMismatch(o, stringDescription);
-                mismatchDescriptions.add(stringDescription.toString());
-            }
+            StringDescription stringDescription=new StringDescription();
+            matcher.describeMismatch(o, stringDescription);
+            mismatchDescriptions.add(stringDescription.toString());
             if (shortcut == matches) {
                 result = shortcut;
                 break;
             }
         }
-        if (null != mismatchDescriptions) {
-            boolean first = true;
-            for (String description : mismatchDescriptions) {
-                if (first) { first = false; } else { mismatchDescription.appendText(" and "); }
-                mismatchDescription.appendText(description);
-            }
+        boolean first = true;
+        for (String description : mismatchDescriptions) {
+            if (first) { first = false; } else { mismatchDescription.appendText(" and "); }
+            mismatchDescription.appendText(description);
         }
         return result;
     }

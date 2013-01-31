@@ -68,7 +68,7 @@ public final class AnyOfTest {
     @Test public void
     hasAMismatchDescriptionDescribingTheFailingMatches() {
         assertMismatchDescription("was \"other\"", anyOf(equalTo("good"), equalTo("bad"), equalTo("ugly")), "other");
-        assertMismatchDescription("was \"other\" and \"other\" was a java.lang.String", anyOf(equalTo("good"), instanceOf(Number.class)), "other");
+        assertMismatchDescription("was \"other\" and was a java.lang.String", anyOf(equalTo("good"), instanceOf(Number.class)), "other");
     }
 
     @SuppressWarnings("unchecked")

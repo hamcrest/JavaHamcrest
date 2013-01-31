@@ -24,6 +24,11 @@ public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
     /**
      * Subclasses should implement this. The item will already have been checked
      * for the specific type and will never be null.
+     * <P>
+     * The description should be able to replace Y in the sentence "Expected X but Y," and
+     * should be in the past tense, for example, "Expected null but <U>was &lt;"foo"&gt;</U>."
+     * The description should NOT describe the matcher, but rather should highlight features of interest on the item as they actually are.
+     * The description must ALWAYS be filled in, regardless of return value. 
      */
     protected abstract boolean matchesSafely(T item, Description mismatchDescription);
 

@@ -42,7 +42,7 @@ public final class IsInstanceOfTest {
 
     @Test public void
     describesActualClassInMismatchMessage() {
-        assertMismatchDescription("\"some text\" was a java.lang.String", instanceOf(Number.class), "some text");
+        assertMismatchDescription("was a java.lang.String", instanceOf(Number.class), "some text");
     }
 
     @Test public void

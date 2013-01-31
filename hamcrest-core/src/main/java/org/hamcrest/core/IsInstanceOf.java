@@ -41,17 +41,13 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
 
     @Override
     protected boolean matches(Object item, Description mismatchDescription) {
-      if (null == item) {
-        mismatchDescription.appendText("was null");
-        return false;
-      }
-      
-      if (!matchableClass.isInstance(item)) {
-        mismatchDescription.appendValue(item).appendText(" was a " + item.getClass().getName());
-        return false;
-      }
-      
-      return true;
+        if (null == item) {
+            mismatchDescription.appendText("was null");
+            return false;
+        }
+
+        mismatchDescription.appendText("was a " + item.getClass().getName());
+        return matchableClass.isInstance(item);
     }
 
     @Override

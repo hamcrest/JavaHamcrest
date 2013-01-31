@@ -42,7 +42,7 @@ public final class EveryTest {
 
     @Test public void
     describesAMismatch() {
-        assertMismatchDescription("an item was \"BXB\"", matcher, asList("BXB"));
+        assertMismatchDescription("item <0> was \"BXB\"", matcher, asList("BXB"));
     }
 }
 
