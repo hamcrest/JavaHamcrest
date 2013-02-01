@@ -12,19 +12,19 @@ public class IsArrayContainingTest extends AbstractMatcherTest {
     }
 
     public void testMatchesAnArrayThatContainsAnElementMatchingTheGivenMatcher() {
-        assertMatches("should matches array that contains 'a'",
+        assertMatches("should match array that contains 'a'",
                 hasItemInArray("a"), new String[]{"a", "b", "c"});
     }
 
     public void testDoesNotMatchAnArrayThatDoesntContainAnElementMatchingTheGivenMatcher() {
-        assertDoesNotMatch("should not matches array that doesn't contain 'a'",
+        assertDoesNotMatch("should not match array that doesn't contain 'a'",
                 hasItemInArray("a"), new String[]{"b", "c"});
-        assertDoesNotMatch("should not matches empty array",
+        assertDoesNotMatch("should not match empty array",
                 hasItemInArray("a"), new String[0]);
     }
 
     public void testDoesNotMatchNull() {
-        assertDoesNotMatch("should not matches null",
+        assertDoesNotMatch("should not match null",
                 hasItemInArray("a"), null);
     }
 
@@ -33,7 +33,7 @@ public class IsArrayContainingTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchObjectThatIsNotAnArray() {
-        assertDoesNotMatch("should not matches empty list",
+        assertDoesNotMatch("should not match empty list",
             hasItemInArray("a"), "not a collection");
     }
 
