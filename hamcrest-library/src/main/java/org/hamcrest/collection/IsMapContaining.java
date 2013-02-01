@@ -32,11 +32,11 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("map containing [")
+        description.appendText("map containing {")
                    .appendDescriptionOf(keyMatcher)
-                   .appendText("->")
+                   .appendText("=")
                    .appendDescriptionOf(valueMatcher)
-                   .appendText("]");
+                   .appendText("}");
     }
 
     /**

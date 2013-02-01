@@ -3,78 +3,123 @@ package org.hamcrest.collection;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
     private final Collection<Matcher<? super T>> matchers;
+    private final String itemName;
+    private final String collectionName;
 
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
-        this.matchers = matchers;
+        this(matchers, "iterable", "item");
+    }
+
+    public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers, String collectionName, String itemName) {
+        this.matchers=matchers;
+        this.itemName=itemName;
+        this.collectionName=collectionName;
     }
     
     @Override
     protected boolean matchesSafely(Iterable<? extends T> items, Description mismatchDescription) {
-      final Matching<T> matching = new Matching<T>(matchers, mismatchDescription);
-      for (T item : items) {
-        if (! matching.matches(item)) {
-          return false;
-        }
-      }
-      
-      return matching.isFinished(items);
+        return new Matching(items, mismatchDescription).getResult();
     }
     
     @Override
     public void describeTo(Description description) {
-      description.appendText("iterable with items ")
-          .appendList("[", ", ", "]", matchers)
-          .appendText(" in any order");
+        description.appendText(collectionName).appendText(" with ").appendText(itemName).appendText("s ")
+            .appendList("[", ", ", "]", matchers)
+            .appendText(" in any order");
     }
 
-    private static class Matching<S> {
-      private final Collection<Matcher<? super S>> matchers;
-      private final Description mismatchDescription;
+    private class Matching {
+        private final Collection<Matcher<? super T>> remainingMatchers;
+        private final Description mismatchDescription;
+        private final Description matchDescription=new StringDescription();
+        private final int matchersCount;
+        private int itemsCount;
+        private T unmatchedItem;
+        private int unmatchedItemIndex;
+        private boolean globalMatch;
 
-      public Matching(Collection<Matcher<? super S>> matchers, Description mismatchDescription) {
-        this.matchers = new ArrayList<Matcher<? super S>>(matchers);
-        this.mismatchDescription = mismatchDescription;
-      }
-      
-      public boolean matches(S item) {
-        if (matchers.isEmpty()) {
-          mismatchDescription.appendText("no match for: ").appendValue(item);
-          return false;
-        }
-        return isMatched(item);
-      }
+        public Matching(Iterable<? extends T> items, Description mismatchDescription) {
+            remainingMatchers=new ArrayList<Matcher<? super T>>(matchers);
+            this.mismatchDescription=mismatchDescription;
+            matchersCount=matchers.size();
 
-      public boolean isFinished(Iterable<? extends S> items) {
-        if (matchers.isEmpty()) {
-          return true;
+            globalMatch=true;
+            for (T item : items) {
+                if (globalMatch) { 
+                    tryMatch(item); 
+                }
+                itemsCount++;
+            }
+            finish();
         }
-        mismatchDescription
-          .appendText("no item matches: ").appendList("", ", ", "", matchers)
-          .appendText(" in ").appendValueList("[", ", ", "]", items);
-        return false;
-      }
 
-      private boolean isMatched(S item) {
-        for (Matcher<? super S>  matcher : matchers) {
-          if (matcher.matches(item)) {
-            matchers.remove(matcher);
-            return true;
-          }
+        private void tryMatch(T item) {
+            if (remainingMatchers.isEmpty()) {
+                globalMatch=false;
+                return;
+            }
+
+            for (Matcher<? super T>  matcher : remainingMatchers) {
+                if (matcher.matches(item)) {
+                    remainingMatchers.remove(matcher);
+                    if (itemsCount>0) {
+                        matchDescription.appendText(" and "); 
+                    }
+                    matchDescription.appendText(itemName).appendText(" ").appendValue(itemsCount).appendText(" ");
+                    matcher.describeMismatch(item, matchDescription);
+                    return;
+                }
+            }
+            globalMatch=false;
+            unmatchedItem=item;
+            unmatchedItemIndex=itemsCount;
         }
-        mismatchDescription.appendText("not matched: ").appendValue(item);
-        return false;
-      }
+
+        private void finish() {
+            if (matchersCount!=itemsCount) {
+                globalMatch=false;
+                mismatchDescription.appendText(collectionName).appendText(" contained ").appendValue(itemsCount).appendText(" ").appendText(itemName).appendText("s");
+                
+            } else if (globalMatch) {
+                mismatchDescription.appendText(matchDescription.toString());
+                
+            } else {
+                mismatchDescription.appendText(itemName).appendText(" ").appendValue(unmatchedItemIndex).appendText(" ");
+                Set<String> descriptions=new LinkedHashSet<String>();
+                for (Matcher<? super T>  matcher : remainingMatchers) {
+                    StringDescription stringDescription=new StringDescription();
+                    matcher.describeMismatch(unmatchedItem, stringDescription);
+                    descriptions.add(stringDescription.toString());
+                }
+                boolean first=true;
+                for (String description : descriptions) {
+                    if (first) { 
+                        first=false; 
+                    } else { 
+                        mismatchDescription.appendText(" and "); 
+                    }
+                    mismatchDescription.appendText(description);
+                }
+            }
+        }       
+
+        public boolean getResult() {
+            return globalMatch;
+        }
     }
 
     /**

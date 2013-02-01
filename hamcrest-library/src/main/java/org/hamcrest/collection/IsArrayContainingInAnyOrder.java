@@ -14,11 +14,9 @@ import org.hamcrest.TypeSafeMatcher;
 
 public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
     private final IsIterableContainingInAnyOrder<E> iterableMatcher;
-    private final Collection<Matcher<? super E>> matchers;
 
     public IsArrayContainingInAnyOrder(Collection<Matcher<? super E>> matchers) {
-        this.iterableMatcher = new IsIterableContainingInAnyOrder<E>(matchers);
-        this.matchers = matchers;
+        this.iterableMatcher = new IsIterableContainingInAnyOrder<E>(matchers, "array", "element");
     }
 
     @Override
@@ -29,12 +27,11 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
     @Override
     public void describeMismatchSafely(E[] item, Description mismatchDescription) {
       iterableMatcher.describeMismatch(Arrays.asList(item), mismatchDescription);
-    };
+    }
 
     @Override
     public void describeTo(Description description) {
-        description.appendList("[", ", ", "]", matchers)
-            .appendText(" in any order");
+        iterableMatcher.describeTo(description);
     }
 
     /**

@@ -16,8 +16,8 @@ public class IsArrayContainingInAnyOrderTest extends AbstractMatcherTest {
 
     @SuppressWarnings("unchecked")
     public void testHasAReadableDescription() {
-        assertDescription("[<1>, <2>] in any order", arrayContainingInAnyOrder(equalTo(1), equalTo(2)));
-        assertDescription("[<1>, <2>] in any order", arrayContainingInAnyOrder(1, 2));
+        assertDescription("array with elements [<1>, <2>] in any order", arrayContainingInAnyOrder(equalTo(1), equalTo(2)));
+        assertDescription("array with elements [<1>, <2>] in any order", arrayContainingInAnyOrder(1, 2));
     }
     
     public void testMatchesItemsInAnyOrder() {
@@ -36,8 +36,9 @@ public class IsArrayContainingInAnyOrderTest extends AbstractMatcherTest {
     public void testMismatchesItemsInAnyOrder() {
       Matcher<Integer[]> matcher = arrayContainingInAnyOrder(1, 2, 3);
       assertMismatchDescription("was null", matcher, null);
-      assertMismatchDescription("no item matches: <1>, <2>, <3> in []", matcher, new Integer[] {});
-      assertMismatchDescription("no item matches: <2>, <3> in [<1>]", matcher, new Integer[] {1});
-      assertMismatchDescription("not matched: <4>", matcher, new Integer[] {4,3,2,1});
+      assertMismatchDescription("array contained <0> elements", matcher, new Integer[] {});
+      assertMismatchDescription("array contained <1> elements", matcher, new Integer[] {1});
+      assertMismatchDescription("array contained <4> elements", matcher, new Integer[] {4,3,2,1});
+      assertMismatchDescription("element <1> was <4>", matcher, new Integer[] {3,4,2});
     }
 }

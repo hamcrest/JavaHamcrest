@@ -18,7 +18,7 @@ public class IsMapContainingValueTest extends AbstractMatcherTest {
     }
 
     public void testHasReadableDescription() {
-        assertDescription("map containing [ANYTHING->\"a\"]", hasValue("a"));
+        assertDescription("map containing {ANYTHING=\"a\"}", hasValue("a"));
     }
     
     public void testDoesNotMatchEmptyMap() {

@@ -1,10 +1,10 @@
 package org.hamcrest.collection;
 
-import java.util.Arrays;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Factory;
+import org.hamcrest.StringDescription;
 import org.hamcrest.TypeSafeMatcher;
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -29,9 +29,21 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
     }
     
     @Override
-    public void describeMismatchSafely(T[] item, Description mismatchDescription) {
-        super.describeMismatch(Arrays.asList(item), mismatchDescription);
-    };
+    public void describeMismatchSafely(T[] array, Description mismatchDescription) {
+        StringDescription stringDescription=new StringDescription();
+        for (int index=0, length=array.length; index<length; index++) {
+            T item=array[index];
+            if (elementMatcher.matches(item)) {
+                mismatchDescription.appendText("element ").appendValue(index).appendText(" ");
+                elementMatcher.describeMismatch(item, mismatchDescription);
+                return;
+            }
+            if (0!=index) { stringDescription.appendText(" and "); }
+            stringDescription.appendText("element ").appendValue(index).appendText(" ");
+            elementMatcher.describeMismatch(item, stringDescription);
+        }
+        mismatchDescription.appendText(stringDescription.toString());
+    }
 
     @Override
     public void describeTo(Description description) {

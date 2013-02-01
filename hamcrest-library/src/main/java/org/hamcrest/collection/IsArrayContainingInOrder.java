@@ -6,19 +6,16 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
-    private final Collection<Matcher<? super E>> matchers;
     private final IsIterableContainingInOrder<E> iterableMatcher;
 
     public IsArrayContainingInOrder(List<Matcher<? super E>> matchers) {
-        this.iterableMatcher = new IsIterableContainingInOrder<E>(matchers);
-        this.matchers = matchers;
+        this.iterableMatcher = new IsIterableContainingInOrder<E>(matchers, "array", "element");
     }
 
     @Override
@@ -33,7 +30,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendList("[", ", ", "]", matchers);
+        iterableMatcher.describeTo(description);
     }
 
     /**

@@ -3,9 +3,11 @@ package org.hamcrest.collection;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -13,71 +15,91 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
     private final List<Matcher<? super E>> matchers;
+    private final String itemName;
+    private final String collectionName;
 
     public IsIterableContainingInOrder(List<Matcher<? super E>> matchers) {
+        this(matchers, "iterable", "item");
+    }
+
+    public IsIterableContainingInOrder(List<Matcher<? super E>> matchers, String collectionName, String itemName) {
         this.matchers = matchers;
+        this.itemName=itemName;
+        this.collectionName=collectionName;
     }
 
     @Override
     protected boolean matchesSafely(Iterable<? extends E> iterable, Description mismatchDescription) {
-        final MatchSeries<E> matchSeries = new MatchSeries<E>(matchers, mismatchDescription);
-        for (E item : iterable) {
-            if (!matchSeries.matches(item)) {
-                return false;
-            }
-        }
-
-        return matchSeries.isFinished();
+        return new Matching(iterable, mismatchDescription).getResult();
     }
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("iterable containing ").appendList("[", ", ", "]", matchers);
+        description.appendText(collectionName).appendText(" containing ").appendList("[", ", ", "]", matchers);
     }
 
-    private static class MatchSeries<F> {
-        private final List<Matcher<? super F>> matchers;
+    private class Matching {
+        private final Iterator<Matcher<? super E>> matcherIterator;
         private final Description mismatchDescription;
-        private int nextMatchIx = 0;
+        private final Description matchDescription=new StringDescription();
+        private int itemsCount;
+        private E unmatchedItem;
+        private int unmatchedItemIndex;
+        private Matcher<? super E> unmatchedMatcher;
+        private boolean globalMatch;
 
-        public MatchSeries(List<Matcher<? super F>> matchers, Description mismatchDescription) {
-            this.mismatchDescription = mismatchDescription;
-            if (matchers.isEmpty()) {
-                throw new IllegalArgumentException("Should specify at least one expected element");
+        public Matching(Iterable<? extends E> iterable, Description mismatchDescription) {
+            this.mismatchDescription=mismatchDescription;
+
+            globalMatch=true;
+            matcherIterator=matchers.iterator();
+            for (E item : iterable) {
+                if (globalMatch) {
+                    tryMatch(item);
+                }
+                itemsCount++;
             }
-            this.matchers = matchers;
+            finish();
         }
 
-        public boolean matches(F item) {
-          if (matchers.size() <= nextMatchIx) {
-            mismatchDescription.appendText("not matched: ").appendValue(item);
-            return false;
-          }
-
-          return isMatched(item);
-        }
-
-        public boolean isFinished() {
-            if (nextMatchIx < matchers.size()) {
-                mismatchDescription.appendText("no item was ").appendDescriptionOf(matchers.get(nextMatchIx));
-                return false;
+        public void tryMatch(E item) {
+            if (!matcherIterator.hasNext()) {
+                globalMatch=false;
+                return;
             }
-            return true;
-        }
+            Matcher<? super E> matcher=matcherIterator.next();
+            if (matcher.matches(item)) {
+                if (itemsCount>0) {
+                    matchDescription.appendText(" and ");
+                }
+                matchDescription.appendText(itemName).appendText(" ").appendValue(itemsCount).appendText(" ");
+                matcher.describeMismatch(item, matchDescription);
 
-        private boolean isMatched(F item) {
-            final Matcher<? super F> matcher = matchers.get(nextMatchIx);
-            if (!matcher.matches(item)) {
-                describeMismatch(matcher, item);
-                return false;
+            } else {
+                globalMatch=false;
+                unmatchedItem=item;
+                unmatchedItemIndex=itemsCount;
+                unmatchedMatcher=matcher;
+                // describe later after we know the lengths match
             }
-            nextMatchIx++;
-            return true;
         }
 
-      private void describeMismatch(Matcher<? super F> matcher, F item) {
-            mismatchDescription.appendText("item " + nextMatchIx + ": ");
-            matcher.describeMismatch(item, mismatchDescription);
+        public void finish() {
+            if (matchers.size()!=itemsCount) {
+                globalMatch=false;
+                mismatchDescription.appendText(collectionName).appendText(" contained ").appendValue(itemsCount).appendText(" ").appendText(itemName).appendText("s");
+
+            } else if (globalMatch) {
+                mismatchDescription.appendText(matchDescription.toString());
+
+            } else {
+                mismatchDescription.appendText(itemName).appendText(" ").appendValue(unmatchedItemIndex).appendText(" ");
+                unmatchedMatcher.describeMismatch(unmatchedItem, mismatchDescription);
+            }
+        }
+
+        public boolean getResult() {
+            return globalMatch;
         }
     }
 

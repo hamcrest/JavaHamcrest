@@ -35,23 +35,22 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
     }
     
 
-//    No longer compiles
-//    public void testMatchesMapContainingKeyWithNoGenerics() {
-//        Map map = new HashMap();
-//        map.put("a", 1);
-//        map.put("b", 2);
-//        map.put("c", 3);
-//
-//        assertMatches("Matches a", hasKey("a"), map);
-//        assertMatches("Matches c", hasKey("c"), map);
-//    }
+    public void testMatchesMapContainingKeyWithNoGenerics() {
+        Map map = new HashMap();
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 3);
+
+        assertMatches("Matches a", hasKey("a"), map);
+        assertMatches("Matches c", hasKey("c"), map);
+    }
 
     public void testMatchesMapContainingKeyWithIntegerKeys() throws Exception {
         Map<Integer, String> map = new HashMap<Integer, String>();
         map.put(1, "A");
         map.put(2, "B");
 
-        assertThat(map, hasKey(Integer.valueOf(1)));
+        assertThat(map, hasKey(1));
     }
 
     public void testMatchesMapContainingKeyWithNumberKeys() throws Exception {
@@ -61,12 +60,11 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
 
         assertThat(map, hasKey((Number)1));
 
-        // TODO: work out the correct sprinkling of wildcards to get this to work!
-//        assertThat(map, hasKey(1));
+        assertThat(map, IsMapContaining.<Number>hasKey(1));
     }
 
     public void testHasReadableDescription() {
-        assertDescription("map containing [\"a\"->ANYTHING]", hasKey("a"));
+        assertDescription("map containing {\"a\"=ANYTHING}", hasKey("a"));
     }
     
     public void testDoesNotMatchEmptyMap() {

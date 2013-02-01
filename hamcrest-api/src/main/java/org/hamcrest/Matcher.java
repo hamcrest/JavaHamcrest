@@ -48,16 +48,15 @@ public interface Matcher<T> extends SelfDescribing {
     void describeTo(Description description);
 
     /**
-     * Generate a description of why the matcher has not accepted the item.
+     * Generate a description of the given item from the Matcher's point of view.
      * The description will be part of a larger description of why a matching
      * failed, so it should be concise.
      * The description should be able to replace Y in the sentence "Expected X but Y," and
      * should be in the past tense, for example, "Expected null but <U>was &lt;"foo"&gt;</U>."
      * The description should NOT describe the matcher, but rather should highlight features of interest on the item as they actually are.
-     * This method assumes that <code>matches(item)</code> is false, but 
-     * will not check this.
+     * The description must ALWAYS be filled in, regardless of return value of {@link #matches}. 
      *
-     * @param item The item that the Matcher has rejected.
+     * @param item The item that the Matcher is considering.
      * @param mismatchDescription
      *     The description to be built or appended to.
      */

@@ -42,6 +42,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
                 return;
             }
         }
+        mismatchDescription.appendText("was ").appendValue(actual);
     }
 
     @Override

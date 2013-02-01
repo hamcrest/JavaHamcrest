@@ -28,7 +28,7 @@ public class IsIn<T> extends BaseMatcher<T> {
     @Override
     public void describeTo(Description buffer) {
         buffer.appendText("one of ");
-        buffer.appendValueList("{", ", ", "}", collection);
+        buffer.appendValueList("[", ", ", "]", collection);
     }
     
     /**

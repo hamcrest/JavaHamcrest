@@ -38,7 +38,7 @@ public class IsInTest extends AbstractMatcherTest {
         Matcher<String> isIn = new IsIn<String>(elements);
         
         assertEquals("description", 
-            "one of {\"a\", \"b\", \"c\"}", 
+            "one of [\"a\", \"b\", \"c\"]", 
             StringDescription.toString(isIn));
     }
 }

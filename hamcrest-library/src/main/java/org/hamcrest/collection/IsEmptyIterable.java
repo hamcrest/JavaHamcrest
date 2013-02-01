@@ -16,7 +16,11 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
     }
     @Override
     public void describeMismatchSafely(Iterable<? extends E> iter, Description mismatchDescription) {
-        mismatchDescription.appendValueList("[", ",", "]", iter);
+        int count=0;
+        for (E e : iter) { 
+            count++;
+        }
+        mismatchDescription.appendText("was an iterable of size ").appendValue(count);
     }
 
     @Override

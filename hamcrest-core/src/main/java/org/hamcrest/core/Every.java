@@ -23,7 +23,7 @@ public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<T>> {
                 matcher.describeMismatch(t, mismatchDescription);
                 return false;
             }
-            if (count!=0) { stringDescription.appendText(" and "); }
+            if (0!=count) { stringDescription.appendText(" and "); }
             stringDescription.appendText("item ").appendValue(count).appendText(" ");
             matcher.describeMismatch(t, stringDescription);
             count++;
