@@ -22,9 +22,9 @@ public class BigDecimalCloseToTest  extends AbstractMatcherTest {
     assertTrue(matcher.matches(new BigDecimal("1.5")));
 
     assertDoesNotMatch("too large", matcher, new BigDecimal("2.0"));
-    assertMismatchDescription("<2.0> differed from <1.0> by <1>", matcher, new BigDecimal("2.0"));
+    assertMismatchDescription("differed from <1.0> by <1>", matcher, new BigDecimal("2.0"));
     assertDoesNotMatch("number too small", matcher, new BigDecimal("0.0"));
-    assertMismatchDescription("<0.0> differed from <1.0> by <1>", matcher, new BigDecimal("0.0"));
+    assertMismatchDescription("differed from <1.0> by <1>", matcher, new BigDecimal("0.0"));
   }
   
   public void testEvaluatesToTrueIfArgumentHasDifferentScale() {
@@ -33,13 +33,13 @@ public class BigDecimalCloseToTest  extends AbstractMatcherTest {
     assertTrue(matcher.matches(new BigDecimal("1.500000")));
 
     assertDoesNotMatch("too large", matcher, new BigDecimal("2.000000"));
-    assertMismatchDescription("<2.000000> differed from <1.0> by <1>", matcher, new BigDecimal("2.000000"));
+    assertMismatchDescription("differed from <1.0> by <1>", matcher, new BigDecimal("2.000000"));
     assertDoesNotMatch("number too small", matcher, new BigDecimal("0.000000"));
-    assertMismatchDescription("<0.000000> differed from <1.0> by <1>", matcher, new BigDecimal("0.000000"));
+    assertMismatchDescription("differed from <1.0> by <1>", matcher, new BigDecimal("0.000000"));
   }
 
   public void test_is_self_describing() {
-    assertDescription("a numeric value within <0.5> of <1.0>", matcher);
+    assertDescription("within <0.5> of <1.0>", matcher);
   }
 
 }

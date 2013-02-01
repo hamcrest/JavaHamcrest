@@ -21,13 +21,8 @@ public class IsNaN extends TypeSafeMatcher<Double> {
     }
 
     @Override
-    public void describeMismatchSafely(Double item, Description mismatchDescription) {
-        mismatchDescription.appendText("was ").appendValue(item);
-    }
-
-    @Override
     public void describeTo(Description description) {
-        description.appendText("a double value of NaN");
+        description.appendText("NaN");
     }
 
     /**

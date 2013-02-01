@@ -44,12 +44,12 @@ public final class HasPropertyTest {
 
     @Test public void
     describesItself() {
-        assertDescription("hasProperty(\"property\")", hasProperty("property"));
+        assertDescription("has property \"property\"", hasProperty("property"));
     }
 
     @Test public void
     describesAMismatch() {
-        assertMismatchDescription("no \"aNonExistentProp\" in <[BeanWithoutInfo: a bean]>",
+        assertMismatchDescription("didn't have property \"aNonExistentProp\"",
                                   hasProperty("aNonExistentProp"), bean);
     }
 }

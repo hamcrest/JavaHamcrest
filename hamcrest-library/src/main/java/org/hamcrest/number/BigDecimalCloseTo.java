@@ -25,8 +25,7 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
 
   @Override
   public void describeMismatchSafely(BigDecimal item, Description mismatchDescription) {
-      mismatchDescription.appendValue(item)
-              .appendText(" differed from ")
+      mismatchDescription.appendText("differed from ")
               .appendValue(value)
               .appendText(" by ")
               .appendValue(actualDelta(item));
@@ -34,7 +33,7 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
 
   @Override
   public void describeTo(Description description) {
-      description.appendText("a numeric value within ")
+      description.appendText("within ")
               .appendValue(delta)
               .appendText(" of ")
               .appendValue(value);

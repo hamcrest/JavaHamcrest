@@ -48,7 +48,7 @@ public interface Matcher<T> extends SelfDescribing {
     void describeTo(Description description);
 
     /**
-     * Generate a description of the given item from the Matcher's point of view.
+     * Generates a description of the given item from the Matcher's point of view.
      * The description will be part of a larger description of why a matching
      * failed, so it should be concise.
      * The description should be able to replace Y in the sentence "Expected X but Y," and

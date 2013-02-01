@@ -78,24 +78,22 @@ public class HasPropertyWithValue<T, U> extends TypeSafeDiagnosingMatcher<T> {
 
     @Override
     public boolean matchesSafely(T bean, Description mismatchDescription) {
-        boolean result=propertyOn(bean, mismatchDescription)
+        return propertyOn(bean, mismatchDescription)
             .and(WITH_READ_METHOD)
             .and(withPropertyValue(bean))
-            .matching(valueMatcher, "property '"+propertyName+"' ");
-        if (!result) { mismatchDescription.appendText(" on ").appendValue(bean); }
-        return result;
+            .matching(valueMatcher, "property \""+propertyName+"\" ");
     }
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("hasProperty(").appendValue(propertyName).appendText(", ")
-                   .appendDescriptionOf(valueMatcher).appendText(")");
+        description.appendText("has property ").appendValue(propertyName).appendText(" that is ")
+                   .appendDescriptionOf(valueMatcher);
     }
 
     private Condition<PropertyDescriptor> propertyOn(T bean, Description mismatchDescription) {
         PropertyDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, bean);
         if (property == null) {
-            mismatchDescription.appendText("no property ").appendValue(propertyName);
+            mismatchDescription.appendText("didn't have property ").appendValue(propertyName);
             return notMatched();
         }
 

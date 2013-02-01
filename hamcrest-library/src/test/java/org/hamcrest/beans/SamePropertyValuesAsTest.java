@@ -23,7 +23,7 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   }
   
   public void testReportsMismatchWhenActualTypeIsNotAssignableToExpectedType() {
-    assertMismatchDescription("is incompatible type: ExampleBean", 
+    assertMismatchDescription("was of incompatible type ExampleBean", 
                               samePropertyValuesAs((Object)aValue), actualBean);
   }
 
@@ -42,8 +42,10 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   }
 
   public void testRejectsSubTypeThatHasExtraProperties() {
-    assertMismatchDescription("has extra properties called [extra]", 
+    assertMismatchDescription("had extra property \"extra\"", 
         samePropertyValuesAs(expectedBean), new SubBeanWithExtraProperty("same", 1, aValue));
+    assertMismatchDescription("had extra properties \"other\" and \"extra\" and \"something\"",
+        samePropertyValuesAs(expectedBean), new SubBeanWithManyExtraProperties("same", 1, aValue));
   }
   
   public void testDescribesItself() {
@@ -95,5 +97,14 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
       super(stringProperty, intProperty, valueProperty);
     }
     public String getExtra() { return "extra"; }
+  }
+
+  public static class SubBeanWithManyExtraProperties extends ExampleBean {
+    public SubBeanWithManyExtraProperties(String stringProperty, int intProperty, Value valueProperty) {
+      super(stringProperty, intProperty, valueProperty);
+    }
+    public String getExtra() { return "extra"; }
+    public String getOther() { return "other"; }
+    public String getSomething() { return "something"; }
   }
 }

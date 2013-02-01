@@ -45,12 +45,9 @@ public abstract class Condition<T> {
 
         @Override
         public boolean matching(Matcher<T> matcher, String message) {
-            if (matcher.matches(theValue)) {
-                return true;
-            }
             mismatchDescription.appendText(message);
             matcher.describeMismatch(theValue, mismatchDescription);
-            return false;
+            return matcher.matches(theValue);
         }
 
         @Override

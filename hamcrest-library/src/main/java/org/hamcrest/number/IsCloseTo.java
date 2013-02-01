@@ -30,8 +30,7 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
 
     @Override
     public void describeMismatchSafely(Double item, Description mismatchDescription) {
-        mismatchDescription.appendValue(item)
-                .appendText(" differed from ")
+        mismatchDescription.appendText("differed from ")
                 .appendValue(value)
                 .appendText(" by ")
                 .appendValue(actualDelta(item));
@@ -39,7 +38,7 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("a numeric value within ")
+        description.appendText("within ")
                 .appendValue(delta)
                 .appendText(" of ")
                 .appendValue(value);

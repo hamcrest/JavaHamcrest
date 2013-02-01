@@ -38,7 +38,7 @@ public final class IsNanTest {
 
     @Test public void
     describesItself() {
-        assertDescription("a double value of NaN", notANumber());
+        assertDescription("NaN", notANumber());
     }
 
     @Test public void

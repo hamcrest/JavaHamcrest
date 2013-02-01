@@ -48,8 +48,8 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
     protected abstract boolean matchesSafely(T item);
     
     /**
-     * Subclasses should override this. The item will already have been checked for
-     * the specific type and will never be null.
+     * Generates a description of the given item from the Matcher's point of view.
+     * The item will already have been checked for the specific type and will never be null.
      * The description should be able to replace Y in the sentence "Expected X but Y," and
      * should be in the past tense, for example, "Expected null but <U>was &lt;"foo"&gt;</U>."
      * The description should NOT describe the matcher, but rather should highlight features of interest on the item as they actually are.

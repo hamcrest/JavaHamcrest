@@ -35,14 +35,14 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("same property values as " + expectedBean.getClass().getSimpleName())
+        description.appendText("same property values as ").appendText(expectedBean.getClass().getSimpleName())
                    .appendList(" [", ", ", "]", propertyMatchers);
     }
 
 
     private boolean isCompatibleType(T item, Description mismatchDescription) {
         if (!expectedBean.getClass().isAssignableFrom(item.getClass())) {
-            mismatchDescription.appendText("is incompatible type: " + item.getClass().getSimpleName());
+            mismatchDescription.appendText("was of incompatible type ").appendText(item.getClass().getSimpleName());
             return false;
         }
         return true;
@@ -52,19 +52,28 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
         Set<String> actualPropertyNames = propertyNamesFrom(propertyDescriptorsFor(item, Object.class));
         actualPropertyNames.removeAll(propertyNames);
         if (!actualPropertyNames.isEmpty()) {
-            mismatchDescription.appendText("has extra properties called " + actualPropertyNames);
+            mismatchDescription.appendText("had extra ").appendText(1==actualPropertyNames.size()?"property":"properties").appendText(" ").appendValueList("", " and ", "", actualPropertyNames);
             return false;
         }
         return true;
     }
 
     private boolean hasMatchingValues(T item, Description mismatchDescription) {
+        StringDescription stringDescription = new StringDescription();
+        boolean first = true;
         for (PropertyMatcher propertyMatcher : propertyMatchers) {
             if (!propertyMatcher.matches(item)) {
                 propertyMatcher.describeMismatch(item, mismatchDescription);
                 return false;
             }
+            if (first) {
+                first = false;
+            } else {
+                stringDescription.appendText(" and ");
+            }
+            propertyMatcher.describeMismatch(item, stringDescription);
         }
+        mismatchDescription.appendText(stringDescription.toString());
         return true;
     }
 
@@ -98,17 +107,14 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
         @Override
         public boolean matches(Object actual, Description mismatchDescription) {
             final Object actualValue = readProperty(readMethod, actual);
-            if (!matcher.matches(actualValue)) {
-                mismatchDescription.appendText(propertyName+" ");
-                matcher.describeMismatch(actualValue, mismatchDescription);
-                return false;
-            }
-            return true;
+            mismatchDescription.appendText(propertyName).appendText(" ");
+            matcher.describeMismatch(actualValue, mismatchDescription);
+            return matcher.matches(actualValue);
         }
 
         @Override
         public void describeTo(Description description) {
-            description.appendText(propertyName + ": ").appendDescriptionOf(matcher);
+            description.appendText(propertyName).appendText(": ").appendDescriptionOf(matcher);
         }
     }
 

@@ -19,18 +19,18 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
     }
 
     public void testDescription() {
-      assertDescription("a value greater than <1>", greaterThan(1));
-      assertDescription("a value equal to or greater than <1>", greaterThanOrEqualTo(1));
-      assertDescription("a value equal to <1>", comparesEqualTo(1));
-      assertDescription("a value less than or equal to <1>", lessThanOrEqualTo(1));
-      assertDescription("a value less than <1>", lessThan(1));
+      assertDescription("greater than <1>", greaterThan(1));
+      assertDescription("equal to or greater than <1>", greaterThanOrEqualTo(1));
+      assertDescription("equal to <1>", comparesEqualTo(1));
+      assertDescription("less than or equal to <1>", lessThanOrEqualTo(1));
+      assertDescription("less than <1>", lessThan(1));
     }
 
     public void testMismatchDescriptions() {
-      assertMismatchDescription("<0> was less than <1>", greaterThan(1), 0);
-      assertMismatchDescription("<1> was equal to <1>", greaterThan(1), 1);
-      assertMismatchDescription("<1> was greater than <0>", lessThan(0), 1);
-      assertMismatchDescription("<2> was equal to <2>", lessThan(2), 2);
+      assertMismatchDescription("was less than <1>", greaterThan(1), 0);
+      assertMismatchDescription("was equal to <1>", greaterThan(1), 1);
+      assertMismatchDescription("was greater than <0>", lessThan(0), 1);
+      assertMismatchDescription("was equal to <2>", lessThan(2), 2);
     }
 
     public void testComparesObjectsForGreaterThan() {

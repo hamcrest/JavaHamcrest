@@ -1,13 +1,17 @@
 package org.hamcrest;
 
+import org.hamcrest.beans.HasProperty;
+import org.hamcrest.beans.HasPropertyWithValue;
+import org.hamcrest.number.BigDecimalCloseTo;
+import org.hamcrest.number.IsCloseTo;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.TestCase.assertEquals;
+import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 import static org.hamcrest.collection.IsArray.array;
 import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
@@ -43,8 +47,14 @@ import static org.hamcrest.core.IsSame.sameInstance;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.hamcrest.core.StringStartsWith.startsWith;
+import static org.hamcrest.number.IsNaN.notANumber;
+import static org.hamcrest.number.OrderingComparison.comparesEqualTo;
 import static org.hamcrest.number.OrderingComparison.greaterThan;
+import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
 import static org.hamcrest.number.OrderingComparison.lessThan;
+import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /** 
  * This is a "torture test" for the describeMismatch method. The goal
@@ -59,14 +69,22 @@ public class DescribeMismatchTortureTest {
     // org.hamcrest.core (alphabetical order)
 
     @Test public void testAnyOf() {
+        assertEquals("Expected (\"good\" or \"bad\" or \"ugly\") but was null.", describeMismatch(anyOf(equalTo("good"), equalTo("bad"), equalTo("ugly")), null));
+        assertEquals("Expected (\"good\" or \"bad\" or \"ugly\") but was <5>.", describeMismatch(anyOf(equalTo("good"), equalTo("bad"), equalTo("ugly")), 5));
         assertEquals("Expected (\"good\" or \"bad\" or \"ugly\") but was \"other\".", describeMismatch(anyOf(equalTo("good"), equalTo("bad"), equalTo("ugly")), "other"));
+        assertEquals("Expected (\"good\" or an instance of java.lang.Number) but was null.", describeMismatch(anyOf(equalTo("good"), instanceOf(Number.class)), null));
+        assertEquals("Expected (\"good\" or an instance of java.lang.Number) but was <true> and was a java.lang.Boolean.", describeMismatch(anyOf(equalTo("good"), instanceOf(Number.class)), true));
         assertEquals("Expected (\"good\" or an instance of java.lang.Number) but was \"other\" and was a java.lang.String.", describeMismatch(anyOf(equalTo("good"), instanceOf(Number.class)), "other"));
         assertEquals("Expected not (\"good\" or \"bad\" or \"ugly\") but was \"bad\".", describeMismatch(not(anyOf(equalTo("good"), equalTo("bad"), equalTo("ugly"))), "bad"));
         assertEquals("Expected not (\"good\" or an instance of java.lang.Number) but was <5L> and was a java.lang.Long.", describeMismatch(not(anyOf(equalTo("good"), instanceOf(Number.class))), 5L));
     }
 
     @Test public void testAllOf() {
+        assertEquals("Expected (\"bad\" and \"good\") but was null.", describeMismatch(allOf(equalTo("bad"), equalTo("good")), null));
+        assertEquals("Expected (\"bad\" and \"good\") but was <5>.", describeMismatch(allOf(equalTo("bad"), equalTo("good")), 5));
         assertEquals("Expected (\"bad\" and \"good\") but was \"bad\".", describeMismatch(allOf(equalTo("bad"), equalTo("good")), "bad"));
+        assertEquals("Expected (an instance of java.lang.String and \"bad\") but was null.", describeMismatch(allOf(instanceOf(String.class), equalTo("bad")), null));
+        assertEquals("Expected (an instance of java.lang.String and \"bad\") but was a java.lang.Integer.", describeMismatch(allOf(instanceOf(String.class), equalTo("bad")), 5));
         assertEquals("Expected (an instance of java.lang.String and \"bad\") but was a java.lang.String and was \"ugly\".", describeMismatch(allOf(instanceOf(String.class), equalTo("bad")), "ugly"));
         assertEquals("Expected not (an instance of java.lang.String and \"bad\") but was a java.lang.String and was \"bad\".", describeMismatch(not(allOf(instanceOf(String.class), equalTo("bad"))), "bad"));
     }
@@ -175,17 +193,38 @@ public class DescribeMismatchTortureTest {
 
     //################################################################
     // org.hamcrest.beans (alphabetical order)
+    
+    @Test public void testHasProperty() {
+        assertEquals("Expected has property \"good\" but was null.", describeMismatch(HasProperty.hasProperty("good"), null));
+        assertEquals("Expected has property \"good\" but didn't have property \"good\".", describeMismatch(HasProperty.hasProperty("good"), 5));
+        assertEquals("Expected not has property \"bytes\" but had property \"bytes\".", describeMismatch(not(HasProperty.hasProperty("bytes")), "good"));
+    }
+
+    @Test public void testHasPropertyWithValue() {
+        assertEquals("Expected has property \"message\" that is \"good\" but was null.", describeMismatch(HasPropertyWithValue.hasProperty("message", equalTo("good")), null));
+        assertEquals("Expected has property \"message\" that is \"good\" but didn't have property \"message\".", describeMismatch(HasPropertyWithValue.hasProperty("message", equalTo("good")), 5));
+        assertEquals("Expected has property \"message\" that is \"good\" but property \"message\" was \"bad\".", describeMismatch(HasPropertyWithValue.hasProperty("message", equalTo("good")), new Exception("bad")));
+        assertEquals("Expected not has property \"message\" that is \"good\" but property \"message\" was \"good\".", describeMismatch(not(HasPropertyWithValue.hasProperty("message", equalTo("good"))), new Exception("good")));
+        assertEquals("Expected has property \"message\" that is (a string starting with \"g\" and an instance of java.lang.Number) but property \"message\" was \"good\" and was a java.lang.String.", describeMismatch(HasPropertyWithValue.hasProperty("message", allOf(startsWith("g"), instanceOf(Number.class))), new Exception("good")));
+    }
+
+    @Test public void testSamePropertyValuesAs() {
+        assertEquals("Expected same property values as String [bytes: [<103>, <111>, <111>, <100>], empty: <false>] but was null.", describeMismatch(samePropertyValuesAs("good"), null));
+        assertEquals("Expected same property values as String [bytes: [<103>, <111>, <111>, <100>], empty: <false>] but was of incompatible type Integer.", describeMismatch(samePropertyValuesAs("good"), 5));
+        assertEquals("Expected same property values as String [bytes: [<103>, <111>, <111>, <100>], empty: <false>] but bytes was [].", describeMismatch(samePropertyValuesAs("good"), ""));
+        assertEquals("Expected not same property values as String [bytes: [<103>, <111>, <111>, <100>], empty: <false>] but bytes was [<103>, <111>, <111>, <100>] and empty was <false>.", describeMismatch(not(samePropertyValuesAs("good")), "good"));
+    }
 
     //################################################################
     // org.hamcrest.collection (alphabetical order)
 
     @Test public void testIsArray() {
-        assertEquals("Expected [\"good\", \"bad\", \"ugly\"] but was null.", describeMismatch(array(equalTo("good"), equalTo("bad"), equalTo("ugly")), null));
-        assertEquals("Expected [\"good\", \"bad\", \"ugly\"] but was a java.lang.Integer (<5>).", describeMismatch(array(equalTo("good"), equalTo("bad"), equalTo("ugly")), 5));
-        assertEquals("Expected [\"good\", \"bad\", \"ugly\"] but array length was <2>.", describeMismatch(array(equalTo("good"), equalTo("bad"), equalTo("ugly")), new Object[]{"good", "bad"}));
-        assertEquals("Expected [\"good\", \"bad\", \"ugly\"] but element <2> was \"indifferent\".", describeMismatch(array(equalTo("good"), equalTo("bad"), equalTo("ugly")), new Object[]{"good", "bad", "indifferent"}));
-        assertEquals("Expected [\"good\", \"bad\", not \"ugly\"] but element <2> was \"ugly\".", describeMismatch(array(equalTo("good"), equalTo("bad"), not(equalTo("ugly"))), new Object[]{"good", "bad", "ugly"}));
-        assertEquals("Expected not [\"good\", \"bad\", \"ugly\"] but was [\"good\", \"bad\", \"ugly\"].", describeMismatch(not(array(equalTo("good"), equalTo("bad"), equalTo("ugly"))), new Object[]{"good", "bad", "ugly"}));
+        assertEquals("Expected array [\"good\", \"bad\", \"ugly\"] but was null.", describeMismatch(array(equalTo("good"), equalTo("bad"), equalTo("ugly")), null));
+        assertEquals("Expected array [\"good\", \"bad\", \"ugly\"] but was a java.lang.Integer (<5>).", describeMismatch(array(equalTo("good"), equalTo("bad"), equalTo("ugly")), 5));
+        assertEquals("Expected array [\"good\", \"bad\", \"ugly\"] but array length was <2>.", describeMismatch(array(equalTo("good"), equalTo("bad"), equalTo("ugly")), new Object[]{"good", "bad"}));
+        assertEquals("Expected array [\"good\", \"bad\", \"ugly\"] but element <2> was \"indifferent\".", describeMismatch(array(equalTo("good"), equalTo("bad"), equalTo("ugly")), new Object[]{"good", "bad", "indifferent"}));
+        assertEquals("Expected array [\"good\", \"bad\", not \"ugly\"] but element <2> was \"ugly\".", describeMismatch(array(equalTo("good"), equalTo("bad"), not(equalTo("ugly"))), new Object[]{"good", "bad", "ugly"}));
+        assertEquals("Expected not array [\"good\", \"bad\", \"ugly\"] but was [\"good\", \"bad\", \"ugly\"].", describeMismatch(not(array(equalTo("good"), equalTo("bad"), equalTo("ugly"))), new Object[]{"good", "bad", "ugly"}));
     }
 
     @Test public void testIsArrayContaining() {
@@ -221,8 +260,8 @@ public class DescribeMismatchTortureTest {
         assertEquals("Expected an array with size <2> but was null.", describeMismatch(arrayWithSize(2), null));
         assertEquals("Expected an array with size <2> but was a java.lang.Integer (<5>).", describeMismatch(arrayWithSize(2), 5));
         assertEquals("Expected an array with size <2> but array size was <3>.", describeMismatch(arrayWithSize(2), new Object[]{"good", "bad", "ugly"}));
-        assertEquals("Expected an array with size a value greater than <2> but array size <2> was equal to <2>.", describeMismatch(arrayWithSize(greaterThan(2)), new Object[]{"good", "bad"}));
-        assertEquals("Expected an array with size (a value greater than <2> or a value less than <1>) but array size <2> was equal to <2> and <2> was greater than <1>.", describeMismatch(arrayWithSize(anyOf(greaterThan(2), lessThan(1))), new Object[]{"good", "bad"}));
+        assertEquals("Expected an array with size greater than <2> but array size was equal to <2>.", describeMismatch(arrayWithSize(greaterThan(2)), new Object[]{"good", "bad"}));
+        assertEquals("Expected an array with size (greater than <2> or less than <1>) but array size was equal to <2> and was greater than <1>.", describeMismatch(arrayWithSize(anyOf(greaterThan(2), lessThan(1))), new Object[]{"good", "bad"}));
         assertEquals("Expected not an array with size <2> but array size was <2>.", describeMismatch(not(arrayWithSize(2)), new Object[]{"good", "bad"}));
     }
 
@@ -230,8 +269,8 @@ public class DescribeMismatchTortureTest {
         assertEquals("Expected a collection with size <2> but was null.", describeMismatch(hasSize(2), null));
         assertEquals("Expected a collection with size <2> but was a java.lang.Integer (<5>).", describeMismatch(hasSize(2), 5));
         assertEquals("Expected a collection with size <2> but collection size was <3>.", describeMismatch(hasSize(2), Arrays.asList("good", "bad", "ugly")));
-        assertEquals("Expected a collection with size a value greater than <2> but collection size <2> was equal to <2>.", describeMismatch(hasSize(greaterThan(2)), Arrays.asList("good", "bad")));
-        assertEquals("Expected a collection with size (a value greater than <2> or a value less than <1>) but collection size <2> was equal to <2> and <2> was greater than <1>.", describeMismatch(hasSize(anyOf(greaterThan(2), lessThan(1))), Arrays.asList("good", "bad")));
+        assertEquals("Expected a collection with size greater than <2> but collection size was equal to <2>.", describeMismatch(hasSize(greaterThan(2)), Arrays.asList("good", "bad")));
+        assertEquals("Expected a collection with size (greater than <2> or less than <1>) but collection size was equal to <2> and was greater than <1>.", describeMismatch(hasSize(anyOf(greaterThan(2), lessThan(1))), Arrays.asList("good", "bad")));
         assertEquals("Expected not a collection with size <2> but collection size was <2>.", describeMismatch(not(hasSize(2)), Arrays.asList("good", "bad")));
     }
 
@@ -282,8 +321,8 @@ public class DescribeMismatchTortureTest {
         assertEquals("Expected an iterable with size <2> but was null.", describeMismatch(iterableWithSize(2), null));
         assertEquals("Expected an iterable with size <2> but was a java.lang.Integer (<5>).", describeMismatch(iterableWithSize(2), 5));
         assertEquals("Expected an iterable with size <2> but iterable size was <3>.", describeMismatch(iterableWithSize(2), Arrays.asList("good", "bad", "ugly")));
-        assertEquals("Expected an iterable with size a value greater than <2> but iterable size <2> was equal to <2>.", describeMismatch(iterableWithSize(greaterThan(2)), Arrays.asList("good", "bad")));
-        assertEquals("Expected an iterable with size (a value greater than <2> or a value less than <1>) but iterable size <2> was equal to <2> and <2> was greater than <1>.", describeMismatch(iterableWithSize(anyOf(greaterThan(2), lessThan(1))), Arrays.asList("good", "bad")));
+        assertEquals("Expected an iterable with size greater than <2> but iterable size was equal to <2>.", describeMismatch(iterableWithSize(greaterThan(2)), Arrays.asList("good", "bad")));
+        assertEquals("Expected an iterable with size (greater than <2> or less than <1>) but iterable size was equal to <2> and was greater than <1>.", describeMismatch(iterableWithSize(anyOf(greaterThan(2), lessThan(1))), Arrays.asList("good", "bad")));
         assertEquals("Expected not an iterable with size <2> but iterable size was <2>.", describeMismatch(not(iterableWithSize(2)), Arrays.asList("good", "bad")));
     }
 
@@ -308,8 +347,8 @@ public class DescribeMismatchTortureTest {
         assertEquals("Expected a map with size <2> but was null.", describeMismatch(aMapWithSize(2), null));
         assertEquals("Expected a map with size <2> but was a java.lang.Integer (<5>).", describeMismatch(aMapWithSize(2), 5));
         assertEquals("Expected a map with size <2> but map size was <3>.", describeMismatch(aMapWithSize(2), mapFromArray(String.class, String.class, "good", "times", "bad", "news", "ugly", "bird")));
-        assertEquals("Expected a map with size a value greater than <2> but map size <2> was equal to <2>.", describeMismatch(aMapWithSize(greaterThan(2)), mapFromArray(String.class, String.class, "good", "times", "bad", "news")));
-        assertEquals("Expected a map with size (a value greater than <2> or a value less than <1>) but map size <2> was equal to <2> and <2> was greater than <1>.", describeMismatch(aMapWithSize(anyOf(greaterThan(2), lessThan(1))), mapFromArray(String.class, String.class, "good", "times", "bad", "news")));
+        assertEquals("Expected a map with size greater than <2> but map size was equal to <2>.", describeMismatch(aMapWithSize(greaterThan(2)), mapFromArray(String.class, String.class, "good", "times", "bad", "news")));
+        assertEquals("Expected a map with size (greater than <2> or less than <1>) but map size was equal to <2> and was greater than <1>.", describeMismatch(aMapWithSize(anyOf(greaterThan(2), lessThan(1))), mapFromArray(String.class, String.class, "good", "times", "bad", "news")));
         assertEquals("Expected not a map with size <2> but map size was <2>.", describeMismatch(not(aMapWithSize(2)), mapFromArray(String.class, String.class, "good", "times", "bad", "news")));
     }
 
@@ -318,6 +357,59 @@ public class DescribeMismatchTortureTest {
 
     //################################################################
     // org.hamcrest.number (alphabetical order)
+    
+    @Test public void testBigDecimalCloseTo() {
+        assertEquals("Expected within <1> of <5> but was null.", describeMismatch(BigDecimalCloseTo.closeTo(new BigDecimal("5"), new BigDecimal("1")), null));
+        assertEquals("Expected within <1> of <5> but was a java.lang.String (\"bad\").", describeMismatch(BigDecimalCloseTo.closeTo(new BigDecimal("5"), new BigDecimal("1")), "bad"));
+        assertEquals("Expected within <1> of <5> but differed from <5> by <5>.", describeMismatch(BigDecimalCloseTo.closeTo(new BigDecimal("5"), new BigDecimal("1")), new BigDecimal("10")));
+        assertEquals("Expected not within <1> of <5> but differed from <5> by <0.2>.", describeMismatch(not(BigDecimalCloseTo.closeTo(new BigDecimal("5"), new BigDecimal("1"))), new BigDecimal("5.2")));
+        assertEquals("Expected not within <1> of <5> but differed from <5> by <0>.", describeMismatch(not(BigDecimalCloseTo.closeTo(new BigDecimal("5"), new BigDecimal("1"))), new BigDecimal("5")));
+    }
+
+    @Test public void testIsCloseTo() {
+        assertEquals("Expected within <1.0> of <5.0> but was null.", describeMismatch(IsCloseTo.closeTo(5, 1), null));
+        assertEquals("Expected within <1.0> of <5.0> but was a java.lang.String (\"bad\").", describeMismatch(IsCloseTo.closeTo(5, 1), "bad"));
+        assertEquals("Expected within <1.0> of <5.0> but differed from <5.0> by <5.0>.", describeMismatch(IsCloseTo.closeTo(5, 1), 10.0));
+        assertEquals("Expected not within <1.0> of <5.0> but differed from <5.0> by <0.20000000000000018>.", describeMismatch(not(IsCloseTo.closeTo(5, 1)), 5.2));
+        assertEquals("Expected not within <1.0> of <5.0> but differed from <5.0> by <0.0>.", describeMismatch(not(IsCloseTo.closeTo(5, 1)), 5.0));
+    }
+
+    @Test public void testIsNaN() {
+        assertEquals("Expected NaN but was null.", describeMismatch(notANumber(), null));
+        assertEquals("Expected NaN but was a java.lang.String (\"bad\").", describeMismatch(notANumber(), "bad"));
+        assertEquals("Expected NaN but was <5.0>.", describeMismatch(notANumber(), 5.0));
+        assertEquals("Expected NaN but was <Infinity>.", describeMismatch(notANumber(), Double.POSITIVE_INFINITY));
+        assertEquals("Expected not NaN but was <NaN>.", describeMismatch(not(notANumber()), Double.NaN));
+    }
+
+    @Test public void testOrderingComparison() {
+        assertEquals("Expected greater than <5> but was null.", describeMismatch(greaterThan(5), null));
+        assertEquals("Expected greater than <5> but was a java.lang.String (\"bad\").", describeMismatch(greaterThan(5), "bad"));
+        assertEquals("Expected greater than <5> but was a java.lang.Double (<4.0>).", describeMismatch(greaterThan(5), 4.0));
+        assertEquals("Expected greater than \"b\" but was less than \"b\".", describeMismatch(greaterThan("b"), "a"));
+        assertEquals("Expected greater than <5.0> but was less than <5.0>.", describeMismatch(greaterThan(5.0), 4.0));
+        assertEquals("Expected greater than <5.0> but was less than <5.0>.", describeMismatch(greaterThan(new BigDecimal("5.0")), new BigDecimal("4.0")));
+
+        assertEquals("Expected equal to <5> but was less than <5>.", describeMismatch(comparesEqualTo(5), 4));
+        assertEquals("Expected not equal to <5> but was equal to <5>.", describeMismatch(not(comparesEqualTo(5)), 5));
+        assertEquals("Expected equal to <5> but was greater than <5>.", describeMismatch(comparesEqualTo(5), 6));
+        
+        assertEquals("Expected greater than <5> but was less than <5>.", describeMismatch(greaterThan(5), 4));
+        assertEquals("Expected greater than <5> but was equal to <5>.", describeMismatch(greaterThan(5), 5));
+        assertEquals("Expected not greater than <5> but was greater than <5>.", describeMismatch(not(greaterThan(5)), 6));
+        
+        assertEquals("Expected equal to or greater than <5> but was less than <5>.", describeMismatch(greaterThanOrEqualTo(5), 4));
+        assertEquals("Expected not equal to or greater than <5> but was equal to <5>.", describeMismatch(not(greaterThanOrEqualTo(5)), 5));
+        assertEquals("Expected not equal to or greater than <5> but was greater than <5>.", describeMismatch(not(greaterThanOrEqualTo(5)), 6));
+        
+        assertEquals("Expected not less than <5> but was less than <5>.", describeMismatch(not(lessThan(5)), 4));
+        assertEquals("Expected less than <5> but was equal to <5>.", describeMismatch(lessThan(5), 5));
+        assertEquals("Expected less than <5> but was greater than <5>.", describeMismatch(lessThan(5), 6));
+        
+        assertEquals("Expected not less than or equal to <5> but was less than <5>.", describeMismatch(not(lessThanOrEqualTo(5)), 4));
+        assertEquals("Expected not less than or equal to <5> but was equal to <5>.", describeMismatch(not(lessThanOrEqualTo(5)), 5));
+        assertEquals("Expected less than or equal to <5> but was greater than <5>.", describeMismatch(lessThanOrEqualTo(5), 6));
+    }
 
     //################################################################
     // org.hamcrest.object (alphabetical order)

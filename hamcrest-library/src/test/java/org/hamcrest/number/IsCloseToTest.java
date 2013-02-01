@@ -22,13 +22,13 @@ public class IsCloseToTest extends AbstractMatcherTest {
         assertMatches("1.5d", matcher, 1.5d);
 
         assertDoesNotMatch("too large", matcher, 2.0);
-        assertMismatchDescription("<3.0> differed from <1.0> by <2.0>", matcher, 3.0d);
+        assertMismatchDescription("differed from <1.0> by <2.0>", matcher, 3.0d);
         assertDoesNotMatch("number too small", matcher, 0.0);
-        assertMismatchDescription("<0.1> differed from <1.0> by <0.9>", matcher, 0.1);
+        assertMismatchDescription("differed from <1.0> by <0.9>", matcher, 0.1);
     }
 
     public void test_is_self_describing() {
-        assertDescription("a numeric value within <0.5> of <1.0>", matcher);
+        assertDescription("within <0.5> of <1.0>", matcher);
     }
 
 }
