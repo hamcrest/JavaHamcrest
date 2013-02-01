@@ -5,11 +5,18 @@ import org.hamcrest.beans.HasPropertyWithValue;
 import org.hamcrest.number.BigDecimalCloseTo;
 import org.hamcrest.number.IsCloseTo;
 import org.junit.Test;
+import org.w3c.dom.Document;
 
+import java.awt.event.ActionEvent;
+import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.EventObject;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 import static org.hamcrest.collection.IsArray.array;
@@ -53,6 +60,17 @@ import static org.hamcrest.number.OrderingComparison.greaterThan;
 import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
 import static org.hamcrest.number.OrderingComparison.lessThan;
 import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
+import static org.hamcrest.object.HasToString.hasToString;
+import static org.hamcrest.object.IsCompatibleType.typeCompatibleWith;
+import static org.hamcrest.object.IsEventFrom.eventFrom;
+import static org.hamcrest.text.IsBlankString.blankOrNullString;
+import static org.hamcrest.text.IsBlankString.blankString;
+import static org.hamcrest.text.IsEmptyString.emptyOrNullString;
+import static org.hamcrest.text.IsEmptyString.emptyString;
+import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
+import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
+import static org.hamcrest.text.StringContainsInOrder.stringContainsInOrder;
+import static org.hamcrest.xml.HasXPath.hasXPath;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -122,7 +140,7 @@ public class DescribeMismatchTortureTest {
     }
 
     @Test public void testIsAnything() {
-        assertEquals("Expected not ANYTHING but was \"something\".", describeMismatch(not(anything()), "something"));
+        assertEquals("Expected not anything but was \"something\".", describeMismatch(not(anything()), "something"));
         assertEquals("Expected not any possible value but was \"something\".", describeMismatch(not(anything("any possible value")), "something"));
     }
 
@@ -335,12 +353,12 @@ public class DescribeMismatchTortureTest {
         assertEquals("Expected not map containing {\"ugly\"=\"bird\"} but was <{good=times, ugly=bird}>.", describeMismatch(not(hasEntry("ugly", "bird")), mapFromArray(String.class, String.class, "good", "times", "ugly", "bird")));
 
         // hasKey
-        assertEquals("Expected map containing {\"ugly\"=ANYTHING} but was <{good=times, bad=news}>.", describeMismatch(hasKey("ugly"), mapFromArray(String.class, String.class, "good", "times", "bad", "news")));
-        assertEquals("Expected not map containing {\"ugly\"=ANYTHING} but was <{good=times, ugly=bird}>.", describeMismatch(not(hasKey("ugly")), mapFromArray(String.class, String.class, "good", "times", "ugly", "bird")));
+        assertEquals("Expected map containing {\"ugly\"=anything} but was <{good=times, bad=news}>.", describeMismatch(hasKey("ugly"), mapFromArray(String.class, String.class, "good", "times", "bad", "news")));
+        assertEquals("Expected not map containing {\"ugly\"=anything} but was <{good=times, ugly=bird}>.", describeMismatch(not(hasKey("ugly")), mapFromArray(String.class, String.class, "good", "times", "ugly", "bird")));
         
         // hasValue
-        assertEquals("Expected map containing {ANYTHING=\"bird\"} but was <{good=times, bad=news}>.", describeMismatch(hasValue("bird"), mapFromArray(String.class, String.class, "good", "times", "bad", "news")));
-        assertEquals("Expected not map containing {ANYTHING=\"bird\"} but was <{good=times, ugly=bird}>.", describeMismatch(not(hasValue("bird")), mapFromArray(String.class, String.class, "good", "times", "ugly", "bird")));
+        assertEquals("Expected map containing {anything=\"bird\"} but was <{good=times, bad=news}>.", describeMismatch(hasValue("bird"), mapFromArray(String.class, String.class, "good", "times", "bad", "news")));
+        assertEquals("Expected not map containing {anything=\"bird\"} but was <{good=times, ugly=bird}>.", describeMismatch(not(hasValue("bird")), mapFromArray(String.class, String.class, "good", "times", "ugly", "bird")));
     }
 
     @Test public void testIsMapWithSize() {
@@ -414,11 +432,95 @@ public class DescribeMismatchTortureTest {
     //################################################################
     // org.hamcrest.object (alphabetical order)
 
+    @Test public void testHasToString() {
+        assertEquals("Expected toString() is \"good\" but was null.", describeMismatch(hasToString("good"), null));
+        assertEquals("Expected toString() is \"good\" but toString() was \"5\".", describeMismatch(hasToString("good"), 5));
+        assertEquals("Expected toString() is \"good\" but toString() was \"bad\".", describeMismatch(hasToString("good"), "bad"));
+        assertEquals("Expected not toString() is \"good\" but toString() was \"good\".", describeMismatch(not(hasToString("good")), "good"));
+        assertEquals("Expected toString() is a string starting with \"good\" but toString() was \"bad\".", describeMismatch(hasToString(startsWith("good")), "bad"));
+    }
+
+    @Test public void testIsCompatibleType() {
+        assertEquals("Expected type < java.lang.Number but was null.", describeMismatch(typeCompatibleWith(Number.class), null));
+        assertEquals("Expected type < java.lang.Number but was a java.lang.String (\"foo\").", describeMismatch(typeCompatibleWith(Number.class), "foo"));
+        assertEquals("Expected type < java.lang.Number but was java.lang.String.", describeMismatch(typeCompatibleWith(Number.class), String.class));
+        assertEquals("Expected not type < java.lang.Number but was java.lang.Integer.", describeMismatch(not(typeCompatibleWith(Number.class)), Integer.class));
+        assertEquals("Expected type < java.lang.Integer but was java.lang.Number.", describeMismatch(typeCompatibleWith(Integer.class), Number.class));
+    }
+
+    @Test public void testIsEventFrom() {
+        assertEquals("Expected an event of type java.util.EventObject from \"foo\" but was null.", describeMismatch(eventFrom("foo"), null));
+        assertEquals("Expected an event of type java.util.EventObject from \"foo\" but was a java.lang.Integer (<5>).", describeMismatch(eventFrom("foo"), 5));
+        assertEquals("Expected an event of type java.util.EventObject from \"foo\" but source was <5>.", describeMismatch(eventFrom("foo"), new EventObject(5)));
+        assertEquals("Expected not an event of type java.util.EventObject from \"foo\" but was <java.util.EventObject[source=foo]>.", describeMismatch(not(eventFrom("foo")), new EventObject("foo")));
+        assertEquals("Expected not an event of type java.util.EventObject from \"foo\" but was <java.awt.event.ActionEvent[unknown type,cmd=win,when=0,modifiers=] on foo>.", describeMismatch(not(eventFrom("foo")), new ActionEvent("foo", 5, "win")));
+        assertEquals("Expected an event of type java.awt.event.ActionEvent from \"foo\" but type was java.util.EventObject.", describeMismatch(eventFrom(ActionEvent.class, "foo"), new EventObject("foo")));
+    }
+
     //################################################################
     // org.hamcrest.text (alphabetical order)
 
+    @Test public void testIsBlankString() {
+        assertEquals("Expected a blank string but was null.", describeMismatch(blankString(), null));
+        assertEquals("Expected a blank string but was a java.lang.Integer (<5>).", describeMismatch(blankString(), 5));
+        assertEquals("Expected a blank string but was \"bad\".", describeMismatch(blankString(), "bad"));
+        assertEquals("Expected not a blank string but was \"\".", describeMismatch(not(blankString()), ""));
+        assertEquals("Expected not a blank string but was \"  \".", describeMismatch(not(blankString()), "  "));
+
+        assertEquals("Expected not (null or a blank string) but was null.", describeMismatch(not(blankOrNullString()), null));
+        assertEquals("Expected (null or a blank string) but was <5> and was a java.lang.Integer (<5>).", describeMismatch(blankOrNullString(), 5));
+        assertEquals("Expected (null or a blank string) but was \"bad\".", describeMismatch(blankOrNullString(), "bad"));
+        assertEquals("Expected not (null or a blank string) but was \"\".", describeMismatch(not(blankOrNullString()), ""));
+        assertEquals("Expected not (null or a blank string) but was \"  \".", describeMismatch(not(blankOrNullString()), "  "));
+    }
+
+    @Test public void testIsEmptyString() {
+        assertEquals("Expected an empty string but was null.", describeMismatch(emptyString(), null));
+        assertEquals("Expected an empty string but was a java.lang.Integer (<5>).", describeMismatch(emptyString(), 5));
+        assertEquals("Expected an empty string but was \"bad\".", describeMismatch(emptyString(), "bad"));
+        assertEquals("Expected not an empty string but was \"\".", describeMismatch(not(emptyString()), ""));
+        assertEquals("Expected an empty string but was \"  \".", describeMismatch(emptyString(), "  "));
+        
+        assertEquals("Expected not (null or an empty string) but was null.", describeMismatch(not(emptyOrNullString()), null));
+        assertEquals("Expected (null or an empty string) but was <5> and was a java.lang.Integer (<5>).", describeMismatch(emptyOrNullString(), 5));
+        assertEquals("Expected (null or an empty string) but was \"bad\".", describeMismatch(emptyOrNullString(), "bad"));
+        assertEquals("Expected not (null or an empty string) but was \"\".", describeMismatch(not(emptyOrNullString()), ""));
+        assertEquals("Expected (null or an empty string) but was \"  \".", describeMismatch(emptyOrNullString(), "  "));
+    }
+
+    @Test public void testIsEqualIgnoringCase() {
+        assertEquals("Expected equalToIgnoringCase(\"good\") but was null.", describeMismatch(equalToIgnoringCase("good"), null));
+        assertEquals("Expected equalToIgnoringCase(\"good\") but was a java.lang.Integer (<5>).", describeMismatch(equalToIgnoringCase("good"), 5));
+        assertEquals("Expected equalToIgnoringCase(\"good\") but was \"bad\".", describeMismatch(equalToIgnoringCase("good"), "bad"));
+        assertEquals("Expected not equalToIgnoringCase(\"good\") but was \"GooD\".", describeMismatch(not(equalToIgnoringCase("good")), "GooD"));
+    }
+
+    @Test public void testIsEqualIgnoringWhiteSpace() {
+        assertEquals("Expected equalToIgnoringWhiteSpace(\"go  od\") but was null.", describeMismatch(equalToIgnoringWhiteSpace("go  od"), null));
+        assertEquals("Expected equalToIgnoringWhiteSpace(\"go  od\") but was a java.lang.Integer (<5>).", describeMismatch(equalToIgnoringWhiteSpace("go  od"), 5));
+        assertEquals("Expected equalToIgnoringWhiteSpace(\"go  od\") but was \"bad\".", describeMismatch(equalToIgnoringWhiteSpace("go  od"), "bad"));
+        assertEquals("Expected not equalToIgnoringWhiteSpace(\"go  od\") but was \" go od \".", describeMismatch(not(equalToIgnoringWhiteSpace("go  od")), " go od "));
+    }
+
+    @Test public void testStringContainsInOrder() {
+        assertEquals("Expected a string containing \"a\", \"b\", \"c\" in order but was null.", describeMismatch(stringContainsInOrder("a", "b", "c"), null));
+        assertEquals("Expected a string containing \"a\", \"b\", \"c\" in order but was a java.lang.Integer (<5>).", describeMismatch(stringContainsInOrder("a", "b", "c"), 5));
+        assertEquals("Expected a string containing \"a\", \"b\", \"c\" in order but was \"bad\".", describeMismatch(stringContainsInOrder("a", "b", "c"), "bad"));
+        assertEquals("Expected not a string containing \"a\", \"b\", \"c\" in order but was \"alphabetical\".", describeMismatch(not(stringContainsInOrder("a", "b", "c")), "alphabetical"));
+    }
+
     //################################################################
     // org.hamcrest.xml (alphabetical order)
+
+    @Test public void testHasXPath() {
+        assertEquals("Expected an XML document with XPath /root/child but was null.", describeMismatch(hasXPath("/root/child"), null));
+        assertEquals("Expected an XML document with XPath /root/child but was a java.lang.Integer (<5>).", describeMismatch(hasXPath("/root/child"), 5));
+        assertEquals("Expected an XML document with XPath /root/child but xpath returned no results.", describeMismatch(hasXPath("/root/child"), parse("<root></root>")));
+        assertEquals("Expected not an XML document with XPath /root/child but was \"[child: null]\".", describeMismatch(not(hasXPath("/root/child")), parse("<root><child/></root>")));
+        assertEquals("Expected an XML document with XPath /root/child/@attr that is a string starting with \"a\" but was null.", describeMismatch(hasXPath("/root/child/@attr", startsWith("a")), null));
+        assertEquals("Expected an XML document with XPath /root/child/@attr that is a string starting with \"a\" but was \"bad\".", describeMismatch(hasXPath("/root/child/@attr", startsWith("a")), parse("<root><child attr=\"bad\"/></root>")));
+        assertEquals("Expected not an XML document with XPath /root/child/@attr that is a string starting with \"a\" but was \"all good\".", describeMismatch(not(hasXPath("/root/child/@attr", startsWith("a"))), parse("<root><child attr=\"all good\"/></root>")));
+    }
 
     //################################################################
     
@@ -447,5 +549,16 @@ public class DescribeMismatchTortureTest {
             map.put((K)key, (V)value);
         }
         return map;
+    }
+
+    private static Document parse(String xml) {
+        try {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            documentBuilderFactory.setNamespaceAware(true);
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            return documentBuilder.parse(new ByteArrayInputStream(xml.getBytes()));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

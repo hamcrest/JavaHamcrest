@@ -25,7 +25,7 @@ public final class IsAnythingTest {
 
     @Test public void
     hasUsefulDefaultDescription() {
-        assertDescription("ANYTHING", matcher);
+        assertDescription("anything", matcher);
     }
 
     @Test public void

@@ -48,7 +48,7 @@ public class IsEventFromTest extends AbstractMatcherTest {
 
         assertThat(goodEv, isEventMatcher);
         assertMismatchDescription("source was \"wrong source\"", isEventMatcher, wrongSource);
-        assertMismatchDescription("item type was java.util.EventObject", isEventMatcher, wrongType);
-        assertMismatchDescription("item type was java.util.EventObject", isEventMatcher, wrongSourceAndType);
+        assertMismatchDescription("type was java.util.EventObject", isEventMatcher, wrongType);
+        assertMismatchDescription("type was java.util.EventObject", isEventMatcher, wrongSourceAndType);
     }
 }

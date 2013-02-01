@@ -64,7 +64,7 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
     }
 
     public void testHasReadableDescription() {
-        assertDescription("map containing {\"a\"=ANYTHING}", hasKey("a"));
+        assertDescription("map containing {\"a\"=anything}", hasKey("a"));
     }
     
     public void testDoesNotMatchEmptyMap() {

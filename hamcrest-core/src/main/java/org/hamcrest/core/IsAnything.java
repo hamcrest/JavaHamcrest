@@ -13,10 +13,12 @@ import org.hamcrest.BaseMatcher;
  */
 public class IsAnything<T> extends BaseMatcher<T> {
 
+    public static final IsAnything<?> ANYTHING_MATCHER=new IsAnything<Object>();
+    
     private final String message;
 
     public IsAnything() {
-        this("ANYTHING");
+        this("anything");
     }
 
     public IsAnything(String message) {
@@ -38,7 +40,8 @@ public class IsAnything<T> extends BaseMatcher<T> {
      */
     @Factory
     public static <T> Matcher<T> anything() {
-        return new IsAnything<T>();
+        //noinspection unchecked
+        return (Matcher<T>)ANYTHING_MATCHER;
     }
 
     /**

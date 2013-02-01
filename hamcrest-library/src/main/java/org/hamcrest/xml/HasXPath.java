@@ -20,7 +20,6 @@ import static org.hamcrest.Condition.notMatched;
  */
 public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     public static final NamespaceContext NO_NAMESPACE_CONTEXT = null;
-    private static final IsAnything<String> WITH_ANY_CONTENT = new IsAnything<String>("");
     private static final Condition.Step<Object,String> NODE_EXISTS = nodeExists();
     private final Matcher<String> valueMatcher;
     private final XPathExpression compiledXPath;
@@ -57,14 +56,14 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     public boolean matchesSafely(Node item, Description mismatchDescription) {
         return evaluated(item, mismatchDescription)
                .and(NODE_EXISTS)
-               .matching(valueMatcher);
+               .matching(null!=valueMatcher?valueMatcher:IsAnything.<String>anything());
     }
 
     @Override
     public void describeTo(Description description) {
         description.appendText("an XML document with XPath ").appendText(xpathString);
         if (valueMatcher != null) {
-            description.appendText(" ").appendDescriptionOf(valueMatcher);
+            description.appendText(" that is ").appendDescriptionOf(valueMatcher);
         }
     }
 
@@ -82,7 +81,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
             @Override
             public Condition<String> apply(Object value, Description mismatchDescription) {
                 if (value == null) {
-                    mismatchDescription.appendText("xpath returned no results.");
+                    mismatchDescription.appendText("xpath returned no results");
                     return notMatched();
                 }
                 return matched(String.valueOf(value), mismatchDescription);
@@ -169,6 +168,6 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      */
     @Factory
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext) {
-        return new HasXPath(xPath, namespaceContext, WITH_ANY_CONTENT, XPathConstants.NODE);
+        return new HasXPath(xPath, namespaceContext, null, XPathConstants.NODE);
     }
 }
