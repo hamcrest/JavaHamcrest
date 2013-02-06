@@ -25,7 +25,7 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
     @Override
     public boolean matchesSafely(EventObject item, Description mismatchDescription) {
         if (!eventClass.isInstance(item)) {
-          mismatchDescription.appendText("item type was " + item.getClass().getName());
+          mismatchDescription.appendText("type was ").appendText(item.getClass().getName());
           return false;
         }
         
@@ -33,6 +33,8 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
           mismatchDescription.appendText("source was ").appendValue(item.getSource());
           return false;
         }
+
+        mismatchDescription.appendText("was ").appendValue(item);
         return true;
     }
 

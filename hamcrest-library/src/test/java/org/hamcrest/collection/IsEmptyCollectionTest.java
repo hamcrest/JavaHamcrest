@@ -22,7 +22,7 @@ public class IsEmptyCollectionTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchACollectionWithAnItem() {
-        assertMismatchDescription("<[one, three]>", is(createMatcher()), collectionOfValues());
+        assertMismatchDescription("was a collection of size <2>", is(createMatcher()), collectionOfValues());
     }
 
     public void testHasAReadableDescription() {

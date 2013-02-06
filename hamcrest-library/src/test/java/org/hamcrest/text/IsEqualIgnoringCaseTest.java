@@ -45,4 +45,8 @@ public class IsEqualIgnoringCaseTest extends AbstractMatcherTest {
         assertDescription("equalToIgnoringCase(\"heLLo\")",
                         equalToIgnoringCase("heLLo"));
     }
+
+    public void testHasReadableMismatchDescription() {
+        assertMismatchDescription("was \"other\"", equalToIgnoringCase("heLLo"), "other");
+    }
 }

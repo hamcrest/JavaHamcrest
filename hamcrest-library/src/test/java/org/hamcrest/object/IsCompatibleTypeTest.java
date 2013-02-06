@@ -54,4 +54,8 @@ public class IsCompatibleTypeTest extends AbstractMatcherTest {
     public void testHasReadableDescription() {
         assertDescription("type < java.lang.Runnable", typeCompatibleWith(Runnable.class));
     }
+
+    public void testHasReadableMismatchDescription() {
+        assertMismatchDescription("was java.lang.String", typeCompatibleWith(Runnable.class), String.class);
+    }
 }

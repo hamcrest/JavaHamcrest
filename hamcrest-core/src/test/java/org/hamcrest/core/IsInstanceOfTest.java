@@ -10,6 +10,7 @@ import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
 import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.IsInstanceOf.any;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.junit.Assert.assertEquals;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -41,7 +42,14 @@ public final class IsInstanceOfTest {
 
     @Test public void
     describesActualClassInMismatchMessage() {
-        assertMismatchDescription("\"some text\" is a java.lang.String", instanceOf(Number.class), "some text");
+        assertMismatchDescription("was a java.lang.String", instanceOf(Number.class), "some text");
+    }
+
+    @Test public void
+    hasCorrectParameterType() {
+        assertEquals(Number.class, any(Number.class).getParameterType());
+        assertEquals(int.class, any(int.class).getParameterType());
+        assertEquals(Integer.class, any(Integer.class).getParameterType());
     }
 
     @Test public void
@@ -56,21 +64,21 @@ public final class IsInstanceOfTest {
         assertMatches("didn't match", any(short.class), (short)1);
     }
 
+    // The following two tests are effectively compile-time tests
+    // rather than run-time tests and primarily serve as a reminder
+    // to future maintainers about the intended difference between
+    // instanceOf() and any().
+
     @Test public void
-    instanceOfRequiresACastToReturnTheCorrectTypeForUseInJMock() {
+    returnTypeOfInstanceOfIsIndependentOfArgumentType() {
         @SuppressWarnings("unused")
-        Integer anInteger = (Integer)with(instanceOf(Integer.class));
+        Matcher<String> matcher = instanceOf(Integer.class);
     }
 
     @Test public void
-    anyWillReturnTheCorrectTypeForUseInJMock() {
+    returnTypeOfAnyMatchesArgumentType() {
         @SuppressWarnings("unused")
-        Integer anInteger = with(any(Integer.class));
-    }
-
-
-    private static <T> T with(@SuppressWarnings("unused") Matcher<T> matcher) {
-        return null;
+        Matcher<Integer> matcher = any(Integer.class);
     }
 }
 

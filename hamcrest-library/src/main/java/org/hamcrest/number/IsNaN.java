@@ -11,7 +11,7 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Is the value a number actually not a number (NaN)?
  */
-public final class IsNaN extends TypeSafeMatcher<Double> {
+public class IsNaN extends TypeSafeMatcher<Double> {
 
     private IsNaN() { }
 
@@ -21,13 +21,8 @@ public final class IsNaN extends TypeSafeMatcher<Double> {
     }
 
     @Override
-    public void describeMismatchSafely(Double item, Description mismatchDescription) {
-        mismatchDescription.appendText("was ").appendValue(item);
-    }
-
-    @Override
     public void describeTo(Description description) {
-        description.appendText("a double value of NaN");
+        description.appendText("NaN");
     }
 
     /**

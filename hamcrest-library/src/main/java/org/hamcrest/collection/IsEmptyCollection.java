@@ -19,7 +19,7 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
 
     @Override
     public void describeMismatchSafely(Collection<? extends E> item, Description mismatchDescription) {
-      mismatchDescription.appendValue(item);
+      mismatchDescription.appendText("was a collection of size ").appendValue(item.size());
     }
 
     @Override

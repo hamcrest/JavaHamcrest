@@ -8,6 +8,8 @@ import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
 import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -40,9 +42,19 @@ public final class IsNullTest {
     supportsStaticTyping() {
         requiresStringMatcher(nullValue(String.class));
         requiresStringMatcher(notNullValue(String.class));
+        requiresStringMatcher(IsNull.<String>nullValue());
+        requiresStringMatcher(IsNull.<String>notNullValue());
     }
 
     private void requiresStringMatcher(@SuppressWarnings("unused") Matcher<String> arg) {
         // no-op
+    }
+
+    @Test public void
+    hasCorrectParameterType() {
+        assertNull(nullValue().getParameterType());
+        assertNull(notNullValue().getParameterType());
+        assertEquals(Number.class, nullValue(Number.class).getParameterType());
+        assertEquals(Number.class, notNullValue(Number.class).getParameterType());
     }
 }

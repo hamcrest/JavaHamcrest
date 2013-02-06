@@ -53,6 +53,11 @@ public class DescribedAs<T> extends BaseMatcher<T> {
         matcher.describeMismatch(item, description);
     }
 
+    @Override
+    public Class<T> getParameterType() {
+        return matcher.getParameterType();
+    }
+
     /**
      * Wraps an existing matcher, overriding its description with that specified.  All other functions are
      * delegated to the decorated matcher, including its mismatch description.

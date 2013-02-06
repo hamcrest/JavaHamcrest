@@ -36,18 +36,18 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   public void testMatchesInfolessBeanWithMatchedNamedProperty() {
     assertMatches("with property", hasProperty("property", equalTo("is expected")), shouldMatch);
-    assertMismatchDescription("property 'property' was \"not expected\"", 
+    assertMismatchDescription("property \"property\" was \"not expected\"", 
                               hasProperty("property", equalTo("is expected")), shouldNotMatch);
   }
 
   public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
     assertMatches("with bean info", hasProperty("property", equalTo("with info")), beanWithInfo);
-    assertMismatchDescription("property 'property' was \"with info\"", 
+    assertMismatchDescription("property \"property\" was \"with info\"", 
         hasProperty("property", equalTo("without info")), beanWithInfo);
   }
 
   public void testDoesNotMatchInfolessBeanWithoutMatchedNamedProperty() {
-    assertMismatchDescription("No property \"nonExistentProperty\"", 
+    assertMismatchDescription("didn't have property \"nonExistentProperty\"", 
                               hasProperty("nonExistentProperty", anything()), shouldNotMatch);
    }
 
@@ -57,21 +57,21 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   }
 
   public void testDescribeTo() {
-    assertDescription("hasProperty(\"property\", <true>)", hasProperty("property", equalTo(true)));
+    assertDescription("has property \"property\" that is <true>", hasProperty("property", equalTo(true)));
   }
 
   public void testMatchesPropertyAndValue() {
     assertMatches("property with value", hasProperty( "property", anything()), beanWithInfo);
   }
   
-  public void testDoesNotWriteMismatchIfPropertyMatches() {
+  public void testDoesWriteMismatchIfPropertyMatches() {
     Description description = new StringDescription();
     hasProperty( "property", anything()).describeMismatch(beanWithInfo, description);
-    assertEquals("Expected mismatch description", "", description.toString());
+    assertEquals("Expected mismatch description", "property \"property\" was \"with info\"", description.toString());
   }
 
   public void testDescribesMissingPropertyMismatch() {
-    assertMismatchDescription("No property \"honk\"", hasProperty( "honk", anything()), shouldNotMatch);
+    assertMismatchDescription("didn't have property \"honk\"", hasProperty( "honk", anything()), shouldNotMatch);
   }
 
   public void testCanAccessAnAnonymousInnerClass() {
@@ -109,7 +109,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
     @Override
     public String toString() {
-      return "[Person: " + property + "]";
+      return "[BeanWithoutInfo: " + property + "]";
     }
   }
 
@@ -123,6 +123,11 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     public String property() {
       return propertyValue;
     }
+
+      @Override
+      public String toString() {
+          return "[BeanWithInfo: " + propertyValue + "]";
+      }
   }
 
   public static class BeanWithInfoBeanInfo extends SimpleBeanInfo {

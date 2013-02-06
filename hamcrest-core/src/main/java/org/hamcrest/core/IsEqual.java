@@ -16,9 +16,12 @@ import java.lang.reflect.Array;
  */
 public class IsEqual<T> extends BaseMatcher<T> {
     private final Object expectedValue;
+    private final Class<T> parameterType;
 
+    @SuppressWarnings("unchecked")
     public IsEqual(T equalArg) {
         expectedValue = equalArg;
+        parameterType = null == equalArg ? null : (Class<T>)equalArg.getClass();
     }
 
     @Override
@@ -29,6 +32,11 @@ public class IsEqual<T> extends BaseMatcher<T> {
     @Override
     public void describeTo(Description description) {
         description.appendValue(expectedValue);
+    }
+
+    @Override
+    public Class<T> getParameterType() {
+        return parameterType;
     }
 
     private static boolean areEqual(Object actual, Object expected) {

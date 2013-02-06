@@ -3,6 +3,7 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<T>> {
@@ -14,13 +15,20 @@ public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<T>> {
 
     @Override
     public boolean matchesSafely(Iterable<T> collection, Description mismatchDescription) {
+        StringDescription stringDescription=new StringDescription();
+        int count=0;
         for (T t : collection) {
             if (!matcher.matches(t)) {
-                mismatchDescription.appendText("an item ");
+                mismatchDescription.appendText("item ").appendValue(count).appendText(" ");
                 matcher.describeMismatch(t, mismatchDescription);
                 return false;
             }
+            if (0!=count) { stringDescription.appendText(" and "); }
+            stringDescription.appendText("item ").appendValue(count).appendText(" ");
+            matcher.describeMismatch(t, stringDescription);
+            count++;
         }
+        mismatchDescription.appendText(stringDescription.toString());
         return true;
     }
 

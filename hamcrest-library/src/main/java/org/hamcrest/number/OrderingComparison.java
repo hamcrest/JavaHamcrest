@@ -23,6 +23,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
     };
 
     private OrderingComparison(T expected, int minCompare, int maxCompare) {
+        super(expected.getClass());
         this.expected = expected;
         this.minCompare = minCompare;
         this.maxCompare = maxCompare;
@@ -36,18 +37,24 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
 
     @Override
     public void describeMismatchSafely(T actual, Description mismatchDescription) {
-        mismatchDescription.appendValue(actual).appendText(" was ")
+        mismatchDescription.appendText("was ")
                 .appendText(asText(actual.compareTo(expected)))
                 .appendText(" ").appendValue(expected);
     }
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("a value ").appendText(asText(minCompare));
+        description.appendText(asText(minCompare));
         if (minCompare != maxCompare) {
             description.appendText(" or ").appendText(asText(maxCompare));
         }
         description.appendText(" ").appendValue(expected);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Class<T> getParameterType() {
+        return (Class)expected.getClass();
     }
 
     private static String asText(int comparison) {

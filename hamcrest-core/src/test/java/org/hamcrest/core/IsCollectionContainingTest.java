@@ -41,7 +41,7 @@ public final class IsCollectionContainingTest {
     doesNotMatchCollectionWithoutAnElementForGivenMatcher() {
         final Matcher<Iterable<? super String>> matcher = hasItem(mismatchable("a"));
         
-        assertMismatchDescription("mismatches were: [mismatched: b, mismatched: c]", matcher, asList("b", "c"));
+        assertMismatchDescription("item <0> mismatched: b and item <1> mismatched: c", matcher, asList("b", "c"));
         assertMismatchDescription("was empty", matcher, new ArrayList<String>());
     }
 
@@ -87,7 +87,7 @@ public final class IsCollectionContainingTest {
     reportsMismatchWithAReadableDescriptionForMultipleItems() {
         final Matcher<Iterable<Integer>> matcher = hasItems(3, 4);
         
-        assertMismatchDescription("a collection containing <4> mismatches were: [was <1>, was <2>, was <3>]",
+        assertMismatchDescription("item <2> was <3> and item <0> was <1> and item <1> was <2> and item <2> was <3>",
                                   matcher, asList(1, 2, 3));
     }
 

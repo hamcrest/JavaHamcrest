@@ -47,7 +47,7 @@ public interface Description {
                            Iterable<? extends SelfDescribing> values);
 
 
-    public static final class NullDescription implements Description {
+    public static class NullDescription implements Description {
       @Override
       public Description appendDescriptionOf(SelfDescribing value) {
         return this;

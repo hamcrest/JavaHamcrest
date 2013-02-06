@@ -30,6 +30,15 @@ public class IsNot<T> extends BaseMatcher<T>  {
         description.appendText("not ").appendDescriptionOf(matcher);
     }
 
+    @Override
+    public void describeMismatch(Object item, Description description) {
+        matcher.describeMismatch(item, description);
+    }
+
+    @Override
+    public Class<T> getParameterType() {
+        return matcher.getParameterType();
+    }
     
     /**
      * Creates a matcher that wraps an existing matcher, but inverts the logic by which

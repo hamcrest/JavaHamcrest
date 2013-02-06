@@ -32,9 +32,9 @@ public abstract class BaseDescription implements Description {
         } else if (value instanceof String) {
             toJavaSyntax((String) value);
         } else if (value instanceof Character) {
-            append('"');
+            append('\'');
             toJavaSyntax((Character) value);
-            append('"');
+            append('\'');
         } else if (value instanceof Short) {
             append('<');
             append(descriptionOf(value));

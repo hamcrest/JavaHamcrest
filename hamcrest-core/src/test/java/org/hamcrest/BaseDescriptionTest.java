@@ -29,7 +29,7 @@ public final class BaseDescriptionTest {
     @Test public void 
     quotesAppendedCharacterValue() {
         baseDescription.appendValue('f');
-        assertEquals("\"f\"", result.toString());
+        assertEquals("'f'", result.toString());
     }
 
     @Test public void 

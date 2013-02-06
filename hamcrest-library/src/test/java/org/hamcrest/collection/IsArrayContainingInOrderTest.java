@@ -16,7 +16,7 @@ public class IsArrayContainingInOrderTest extends AbstractMatcherTest {
 
     @SuppressWarnings("unchecked")
     public void testHasAReadableDescription() {
-        assertDescription("[<1>, <2>]", arrayContaining(equalTo(1), equalTo(2)));
+        assertDescription("array containing [<1>, <2>]", arrayContaining(equalTo(1), equalTo(2)));
     }
     
     public void testMatchesItemsInOrder() {
@@ -33,9 +33,9 @@ public class IsArrayContainingInOrderTest extends AbstractMatcherTest {
     public void testMismatchesItemsInOrder() {
       Matcher<Integer[]> matcher = arrayContaining(1, 2, 3);
       assertMismatchDescription("was null", matcher, null);
-      assertMismatchDescription("no item was <1>", matcher, new Integer[] {});
-      assertMismatchDescription("no item was <2>", matcher, new Integer[] {1});
-      assertMismatchDescription("item 0: was <4>", matcher, new Integer[] {4,3,2,1});
-      assertMismatchDescription("item 2: was <4>", matcher, new Integer[] {1,2, 4});
+      assertMismatchDescription("array contained <0> elements", matcher, new Integer[] {});
+      assertMismatchDescription("array contained <1> elements", matcher, new Integer[] {1});
+      assertMismatchDescription("array contained <4> elements", matcher, new Integer[] {4,3,2,1});
+      assertMismatchDescription("element <2> was <4>", matcher, new Integer[] {1,2,4});
     }
 }

@@ -35,19 +35,39 @@ public interface Matcher<T> extends SelfDescribing {
      * @see BaseMatcher
      */
     boolean matches(Object item);
-    
+
     /**
-     * Generate a description of why the matcher has not accepted the item.
-     * The description will be part of a larger description of why a matching
-     * failed, so it should be concise. 
-     * This method assumes that <code>matches(item)</code> is false, but 
-     * will not check this.
+     * Generates a description of the matcher. The description may be part of a 
+     * larger description, so it should be concise. The description should be able to
+     * replace X in the sentence "Expected X," for example, "Expected <U>null</U>."
      *
-     * @param item The item that the Matcher has rejected.
+     * @param description
+     *     The description to be built or appended to.
+     */
+    @Override
+    void describeTo(Description description);
+
+    /**
+     * Generates a description of the given item from the Matcher's point of view.
+     * The description will be part of a larger description of why a matching
+     * failed, so it should be concise.
+     * The description should be able to replace Y in the sentence "Expected X but Y," and
+     * should be in the past tense, for example, "Expected null but <U>was &lt;"foo"&gt;</U>."
+     * The description should NOT describe the matcher, but rather should highlight features of interest on the item as they actually are.
+     * The description must ALWAYS be filled in, regardless of return value of {@link #matches}. 
+     *
+     * @param item The item that the Matcher is considering.
      * @param mismatchDescription
      *     The description to be built or appended to.
      */
     void describeMismatch(Object item, Description mismatchDescription);
+
+    /**
+     * Returns the best estimate for the type parameter T of this
+     * matcher (usually the type of parameter this matcher is expected
+     * to match against), or null if no reasonable estimate can be made.
+     */
+    Class<T> getParameterType();
 
     /**
      * This method simply acts a friendly reminder not to implement Matcher directly and

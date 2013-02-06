@@ -66,69 +66,65 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * @author Nat Pryce
  * @author Steve Freeman
  */
-public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
-    private static final Condition.Step<PropertyDescriptor,Method> WITH_READ_METHOD = withReadMethod();
+public class HasPropertyWithValue<T, U> extends TypeSafeDiagnosingMatcher<T> {
+    private static final Condition.Step<PropertyDescriptor, Method> WITH_READ_METHOD = withReadMethod();
     private final String propertyName;
-    private final Matcher<Object> valueMatcher;
+    private final Matcher<U> valueMatcher;
 
-    public HasPropertyWithValue(String propertyName, Matcher<?> valueMatcher) {
+    public HasPropertyWithValue(String propertyName, Matcher<U> valueMatcher) {
         this.propertyName = propertyName;
-        this.valueMatcher = nastyGenericsWorkaround(valueMatcher);
+        this.valueMatcher = valueMatcher;
     }
 
     @Override
-    public boolean matchesSafely(T bean, Description mismatch) {
-        return propertyOn(bean, mismatch)
-                  .and(WITH_READ_METHOD)
-                  .and(withPropertyValue(bean))
-                  .matching(valueMatcher, "property '" + propertyName + "' ");
+    public boolean matchesSafely(T bean, Description mismatchDescription) {
+        return propertyOn(bean, mismatchDescription)
+            .and(WITH_READ_METHOD)
+            .and(withPropertyValue(bean))
+            .matching(valueMatcher, "property \""+propertyName+"\" ");
     }
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("hasProperty(").appendValue(propertyName).appendText(", ")
-                   .appendDescriptionOf(valueMatcher).appendText(")");
+        description.appendText("has property ").appendValue(propertyName).appendText(" that is ")
+                   .appendDescriptionOf(valueMatcher);
     }
 
-    private Condition<PropertyDescriptor> propertyOn(T bean, Description mismatch) {
+    private Condition<PropertyDescriptor> propertyOn(T bean, Description mismatchDescription) {
         PropertyDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, bean);
         if (property == null) {
-            mismatch.appendText("No property \"" + propertyName + "\"");
+            mismatchDescription.appendText("didn't have property ").appendValue(propertyName);
             return notMatched();
         }
 
-        return matched(property, mismatch);
+        return matched(property, mismatchDescription);
     }
 
-    private Condition.Step<Method, Object> withPropertyValue(final T bean) {
-        return new Condition.Step<Method, Object>() {
+    private Condition.Step<Method, U> withPropertyValue(final T bean) {
+        return new Condition.Step<Method, U>() {
+            @SuppressWarnings("unchecked")
             @Override
-            public Condition<Object> apply(Method readMethod, Description mismatch) {
+            public Condition<U> apply(Method readMethod, Description mismatchDescription) {
                 try {
-                    return matched(readMethod.invoke(bean, NO_ARGUMENTS), mismatch);
+                    return matched((U)readMethod.invoke(bean, NO_ARGUMENTS), mismatchDescription);
                 } catch (Exception e) {
-                    mismatch.appendText(e.getMessage());
+                    mismatchDescription.appendText(e.getMessage());
                     return notMatched();
                 }
             }
         };
     }
 
-    @SuppressWarnings("unchecked")
-    private static Matcher<Object> nastyGenericsWorkaround(Matcher<?> valueMatcher) {
-        return (Matcher<Object>) valueMatcher;
-    }
-
-    private static Condition.Step<PropertyDescriptor,Method> withReadMethod() {
+    private static Condition.Step<PropertyDescriptor, Method> withReadMethod() {
         return new Condition.Step<PropertyDescriptor, java.lang.reflect.Method>() {
             @Override
-            public Condition<Method> apply(PropertyDescriptor property, Description mismatch) {
+            public Condition<Method> apply(PropertyDescriptor property, Description mismatchDescription) {
                 final Method readMethod = property.getReadMethod();
                 if (null == readMethod) {
-                    mismatch.appendText("property \"" + property.getName() + "\" is not readable");
+                    mismatchDescription.appendText("property \""+property.getName()+"\" is not readable");
                     return notMatched();
                 }
-                return matched(readMethod, mismatch);
+                return matched(readMethod, mismatchDescription);
             }
         };
     }
@@ -146,7 +142,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      *     a matcher for the value of the specified property of the examined bean
      */
     @Factory
-    public static <T> Matcher<T> hasProperty(String propertyName, Matcher<?> valueMatcher) {
-        return new HasPropertyWithValue<T>(propertyName, valueMatcher);
+    public static <T, U> Matcher<T> hasProperty(String propertyName, Matcher<U> valueMatcher) {
+        return new HasPropertyWithValue<T, U>(propertyName, valueMatcher);
     }
 }

@@ -13,10 +13,12 @@ import org.hamcrest.BaseMatcher;
  */
 public class IsAnything<T> extends BaseMatcher<T> {
 
+    public static final IsAnything<?> ANYTHING_MATCHER=new IsAnything<Object>();
+    
     private final String message;
 
     public IsAnything() {
-        this("ANYTHING");
+        this("anything");
     }
 
     public IsAnything(String message) {
@@ -37,8 +39,9 @@ public class IsAnything<T> extends BaseMatcher<T> {
      * Creates a matcher that always matches, regardless of the examined object.
      */
     @Factory
-    public static Matcher<Object> anything() {
-        return new IsAnything<Object>();
+    public static <T> Matcher<T> anything() {
+        //noinspection unchecked
+        return (Matcher<T>)ANYTHING_MATCHER;
     }
 
     /**
@@ -49,7 +52,7 @@ public class IsAnything<T> extends BaseMatcher<T> {
      *     a meaningful {@link String} used when describing itself
      */
     @Factory
-    public static Matcher<Object> anything(String description) {
-        return new IsAnything<Object>(description);
+    public static <T> Matcher<T> anything(String description) {
+        return new IsAnything<T>(description);
     }
 }

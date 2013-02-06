@@ -39,7 +39,7 @@ public class IsArrayTest extends AbstractMatcherTest {
     }
     
     public void testHasAReadableDescription() {
-        assertDescription("[\"a\", \"b\"]", array(equalTo("a"), equalTo("b")));
+        assertDescription("array [\"a\", \"b\"]", array(equalTo("a"), equalTo("b")));
     }
     
     public void testHasAReadableMismatchDescriptionUsing() {

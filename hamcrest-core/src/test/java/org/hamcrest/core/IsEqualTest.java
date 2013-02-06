@@ -8,6 +8,8 @@ import static org.hamcrest.AbstractMatcherTest.assertMatches;
 import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
 import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -131,6 +133,13 @@ public final class IsEqualTest {
     @Test public void
     returnsGoodDescriptionIfCreatedWithNullReference() {
         assertDescription("null", equalTo(null));
+    }
+
+    @Test public void
+    hasCorrectParameterType() {
+        assertEquals(String.class, equalTo("hi").getParameterType());
+        assertEquals(Integer.class, equalTo(1).getParameterType());
+        assertNull(equalTo(null).getParameterType());
     }
 }
 

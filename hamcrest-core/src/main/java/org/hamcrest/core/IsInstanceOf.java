@@ -40,18 +40,14 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
     }
 
     @Override
-    protected boolean matches(Object item, Description mismatch) {
-      if (null == item) {
-        mismatch.appendText("null");
-        return false;
-      }
-      
-      if (!matchableClass.isInstance(item)) {
-        mismatch.appendValue(item).appendText(" is a " + item.getClass().getName());
-        return false;
-      }
-      
-      return true;
+    protected boolean matches(Object item, Description mismatchDescription) {
+        if (null == item) {
+            mismatchDescription.appendText("was null");
+            return false;
+        }
+
+        mismatchDescription.appendText("was a " + item.getClass().getName());
+        return matchableClass.isInstance(item);
     }
 
     @Override
@@ -59,12 +55,19 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
         description.appendText("an instance of ").appendText(expectedClass.getName());
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public Class<Object> getParameterType() {
+        return (Class)expectedClass;
+    }
+
     /**
      * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
      * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
      * the examined object.
      * 
-     * <p>The created matcher assumes no relationship between specified type and the examined object.</p>
+     * <p>The created matcher assumes no relationship between specified type and the examined object
+     * (unlike {@link #any}).</p>
      * <p/>
      * For example: 
      * <pre>assertThat(new Canoe(), instanceOf(Paddlable.class));</pre>
@@ -81,7 +84,8 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
      * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
      * the examined object.
      * 
-     * <p>The created matcher forces a relationship between specified type and the examined object, and should be
+     * <p>The created matcher forces a relationship between specified type and the examined object
+     * (unlike {@link #instanceOf(Class)}), and should be
      * used when it is necessary to make generics conform, for example in the JMock clause
      * <code>with(any(Thing.class))</code></p>
      * <p/>

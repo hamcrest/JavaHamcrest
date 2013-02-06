@@ -3,6 +3,7 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.util.ArrayList;
@@ -25,22 +26,20 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
           return false;
         }
 
+        StringDescription stringDescription=new StringDescription();
+        int count=0;
         for (Object item : collection) {
             if (elementMatcher.matches(item)) {
+                mismatchDescription.appendText("item ").appendValue(count).appendText(" ");
+                elementMatcher.describeMismatch(item, mismatchDescription);
                 return true;
             }
+            if (count!=0) { stringDescription.appendText(" and "); }
+            stringDescription.appendText("item ").appendValue(count).appendText(" ");
+            elementMatcher.describeMismatch(item, stringDescription);
+            count++;
         }
-
-        mismatchDescription.appendText("mismatches were: [");
-        boolean isPastFirst = false;
-        for (Object item : collection) {
-            if (isPastFirst) {
-              mismatchDescription.appendText(", ");
-            }
-            elementMatcher.describeMismatch(item, mismatchDescription);
-            isPastFirst = true;
-        }
-        mismatchDescription.appendText("]");
+        mismatchDescription.appendText(stringDescription.toString());
         return false;
     }
 

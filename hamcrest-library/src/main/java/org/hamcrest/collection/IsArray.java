@@ -42,11 +42,12 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
                 return;
             }
         }
+        mismatchDescription.appendText("was ").appendValue(actual);
     }
 
     @Override
     public void describeTo(Description description) {
-        description.appendList(descriptionStart(), descriptionSeparator(), descriptionEnd(), 
+        description.appendText("array ").appendList(descriptionStart(), descriptionSeparator(), descriptionEnd(), 
                                Arrays.asList(elementMatchers));
     }
     

@@ -108,14 +108,14 @@ public class HasXPathTest extends AbstractMatcherTest {
     }
 
     public void testDescribesItself() throws Exception {
-        assertDescription("an XML document with XPath /some/path \"Cheddar\"",
+        assertDescription("an XML document with XPath /some/path that is \"Cheddar\"",
                 hasXPath("/some/path", equalTo("Cheddar")));
         assertDescription("an XML document with XPath /some/path",
                 hasXPath("/some/path"));
     }
 
     public void testDescribesMissingNodeMismatch() {
-        assertMismatchDescription("xpath returned no results.", hasXPath("//honky"), xml);
+        assertMismatchDescription("xpath returned no results", hasXPath("//honky"), xml);
     }
 
     public void testDescribesIncorrectNodeValueMismatch() {

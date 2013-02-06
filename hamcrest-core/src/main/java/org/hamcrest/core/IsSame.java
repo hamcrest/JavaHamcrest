@@ -30,6 +30,12 @@ public class IsSame<T> extends BaseMatcher<T> {
                 .appendText(")");
     }
     
+    @SuppressWarnings("unchecked")
+    @Override
+    public Class<T> getParameterType() {
+        return null == object ? null : (Class<T>)object.getClass();
+    }
+
     /**
      * Creates a matcher that matches only when the examined object is the same instance as
      * the specified target object.

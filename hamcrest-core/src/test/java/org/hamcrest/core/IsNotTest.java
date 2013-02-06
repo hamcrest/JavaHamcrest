@@ -8,8 +8,10 @@ import static org.hamcrest.AbstractMatcherTest.assertMatches;
 import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
 import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsInstanceOf.any;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertEquals;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -44,5 +46,10 @@ public final class IsNotTest {
     usesDescriptionOfNegatedMatcherWithPrefix() {
         assertDescription("not an instance of java.lang.String", not(instanceOf(String.class)));
         assertDescription("not \"A\"", not("A"));
+    }
+
+    @Test public void
+    hasCorrectParameterType() {
+        assertEquals(Number.class, not(any(Number.class)).getParameterType());
     }
 }

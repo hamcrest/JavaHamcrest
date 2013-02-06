@@ -14,7 +14,7 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Matches blank Strings (and null).
  */
-public final class IsBlankString extends TypeSafeMatcher<String> {
+public class IsBlankString extends TypeSafeMatcher<String> {
     private static final IsBlankString BLANK_INSTANCE = new IsBlankString();
     @SuppressWarnings("unchecked")
     private static final Matcher<String> NULL_OR_BLANK_INSTANCE = anyOf(nullValue(), BLANK_INSTANCE);

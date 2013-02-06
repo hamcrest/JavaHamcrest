@@ -4,7 +4,8 @@ import org.hamcrest.internal.ReflectiveTypeFinder;
 
 /**
  * Convenient base class for Matchers that require a non-null value of a specific type.
- * This simply implements the null check, checks the type and then casts.
+ * This simply implements the null check, checks the type and then casts. See also
+ * {@link TypeSafeDiagnosingMatcher}.
  *
  * @author Joe Walnes
  * @author Steve Freeman
@@ -47,8 +48,12 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
     protected abstract boolean matchesSafely(T item);
     
     /**
-     * Subclasses should override this. The item will already have been checked for
-     * the specific type and will never be null.
+     * Generates a description of the given item from the Matcher's point of view.
+     * The item will already have been checked for the specific type and will never be null.
+     * The description should be able to replace Y in the sentence "Expected X but Y," and
+     * should be in the past tense, for example, "Expected null but <U>was &lt;"foo"&gt;</U>."
+     * The description should NOT describe the matcher, but rather should highlight features of interest on the item as they actually are.
+     * The description must ALWAYS be filled in, regardless of return value of {@link #matchesSafely}. 
      */
     protected void describeMismatchSafely(T item, Description mismatchDescription) {
         super.describeMismatch(item, mismatchDescription);
@@ -81,5 +86,11 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
         } else {
             describeMismatchSafely((T)item, description);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Class<T> getParameterType() {
+        return (Class<T>)expectedType;
     }
 }
