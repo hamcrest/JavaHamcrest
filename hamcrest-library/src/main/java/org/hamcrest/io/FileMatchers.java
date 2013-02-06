@@ -12,19 +12,28 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 public class FileMatchers {
 
+    private static void describeBasically(File file, Description mismatchDescription) {
+        if (!file.exists()) {
+            mismatchDescription.appendText("was nonexistent");
+        } else if (file.isDirectory()) {
+            mismatchDescription.appendText("was a directory");
+        } else if (file.isFile()) {
+            mismatchDescription.appendText("was a file");
+        } else {
+            mismatchDescription.appendText("was special (not a file or a directory)");
+        }
+    }
+    
     @Factory
     public static Matcher<File> anExistingDirectory() {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final boolean result = actual.isDirectory();
-                if (!result) {
-                    mismatchDescription.appendText("was a File that either didn't exist, or was not a directory");
-                }
-                return result;
+                describeBasically(actual, mismatchDescription);
+                return actual.isDirectory();
             }
  
             public void describeTo(Description description) {
-                description.appendText("a File representing a directory that exists");
+                description.appendText("an existing directory");
             }
         };
     }
@@ -33,15 +42,12 @@ public class FileMatchers {
     public static Matcher<File> anExistingFileOrDirectory() {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final boolean exists = actual.exists();
-                if (!exists) {
-                    mismatchDescription.appendText("was a File that did not exist");
-                }
-                return exists;
+                describeBasically(actual, mismatchDescription);
+                return actual.exists();
             }
 
             public void describeTo(Description description) {
-                description.appendText("a file or directory that exists");
+                description.appendText("an existing file or directory");
             }
         };
     }
@@ -50,15 +56,12 @@ public class FileMatchers {
     public static Matcher<File> anExistingFile() {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final boolean result = actual.isFile();
-                if (!result) {
-                    mismatchDescription.appendText("was a File that either didn't exist, or was a directory");
-                }
-                return result;
+                describeBasically(actual, mismatchDescription);
+                return actual.isFile();
             }
  
             public void describeTo(Description description) {
-                description.appendText("a File representing a file that exists");
+                description.appendText("an existing file");
             }
         };
     }
@@ -67,15 +70,17 @@ public class FileMatchers {
     public static Matcher<File> aReadableFile() {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final boolean result = actual.canRead();
-                if (!result) {
-                    mismatchDescription.appendText("was a File that could not be read");
+                if (!actual.isFile()) {
+                    describeBasically(actual, mismatchDescription);
+                    return false;
                 }
+                boolean result = actual.canRead();
+                mismatchDescription.appendText(result?"was a readable file":"was an unreadable file");
                 return result;
             }
  
             public void describeTo(Description description) {
-                description.appendText("a File that can be read");
+                description.appendText("a readable file");
             }
         };
     }
@@ -84,15 +89,17 @@ public class FileMatchers {
     public static Matcher<File> aWritableFile() {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final boolean result = actual.canWrite();
-                if (!result) {
-                    mismatchDescription.appendText("was a File that could not be written to");
+                if (!actual.isFile()) {
+                    describeBasically(actual, mismatchDescription);
+                    return false;
                 }
+                boolean result = actual.canWrite();
+                mismatchDescription.appendText(result?"was a writable file":"was an unwritable file");
                 return result;
             }
  
             public void describeTo(Description description) {
-                description.appendText("a writable File");
+                description.appendText("a writable file");
             }
         };
     }
@@ -106,17 +113,18 @@ public class FileMatchers {
     public static Matcher<File> aFileWithSize(final Matcher<Long> size) {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final long length = actual.length();
-                final boolean result = size.matches(length);
-                if (!result) {
-                    mismatchDescription.appendText("was a File whose size ");
-                    size.describeMismatch(length, mismatchDescription);
+                if (!actual.isFile()) {
+                    describeBasically(actual, mismatchDescription);
+                    return false;
                 }
-                return result;
+                long length = actual.length();
+                mismatchDescription.appendText("was a file whose size ");
+                size.describeMismatch(length, mismatchDescription);
+                return size.matches(length);
             }
 
             public void describeTo(Description description) {
-                description.appendText("a File whose size is ").appendDescriptionOf(size);
+                description.appendText("a file whose size is ").appendDescriptionOf(size);
             }
         };
     }
@@ -125,13 +133,10 @@ public class FileMatchers {
     public static Matcher<File> aFileNamed(final Matcher<String> name) {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final String actualName = actual.getName();
-                final boolean result = name.matches(actualName);
-                if (!result) {
-                    mismatchDescription.appendText("was a File whose name ");
-                    name.describeMismatch(actualName, mismatchDescription);
-                }
-                return result;
+                String actualName = actual.getName();
+                mismatchDescription.appendText("was a File whose name ");
+                name.describeMismatch(actualName, mismatchDescription);
+                return name.matches(actualName);
             }
 
             public void describeTo(Description description) {
@@ -146,12 +151,9 @@ public class FileMatchers {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
                 try {
                     String canonicalPath = actual.getCanonicalPath();
-                    final boolean result = path.matches(canonicalPath);
-                    if (!result) {
-                        mismatchDescription.appendText("was a File whose canonical path ");
-                        path.describeMismatch(canonicalPath, mismatchDescription);
-                    }
-                    return result;
+                    mismatchDescription.appendText("was a File whose canonical path ");
+                    path.describeMismatch(canonicalPath, mismatchDescription);
+                    return path.matches(canonicalPath);
                 } catch (IOException e) {
                     mismatchDescription.appendText("was a File whose canonical path was underivable (exception: ").appendValue(e).appendText(")");
                     return false;
@@ -168,13 +170,10 @@ public class FileMatchers {
     public static Matcher<File> aFileWithAbsolutePath(final Matcher<String> path) {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final String absolute = actual.getAbsolutePath();
-                final boolean result = path.matches(absolute);
-                if (!result) {
-                    mismatchDescription.appendText("was a File whose absolute path ");
-                    path.describeMismatch(absolute, mismatchDescription);
-                }
-                return result;
+                String absolute = actual.getAbsolutePath();
+                mismatchDescription.appendText("was a File whose absolute path ");
+                path.describeMismatch(absolute, mismatchDescription);
+                return path.matches(absolute);
             }
 
             public void describeTo(Description description) {

@@ -9,6 +9,9 @@ import org.w3c.dom.Document;
 
 import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.EventObject;
@@ -54,6 +57,15 @@ import static org.hamcrest.core.IsSame.sameInstance;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.hamcrest.core.StringStartsWith.startsWith;
+import static org.hamcrest.io.FileMatchers.aFileNamed;
+import static org.hamcrest.io.FileMatchers.aFileWithAbsolutePath;
+import static org.hamcrest.io.FileMatchers.aFileWithCanonicalPath;
+import static org.hamcrest.io.FileMatchers.aFileWithSize;
+import static org.hamcrest.io.FileMatchers.aReadableFile;
+import static org.hamcrest.io.FileMatchers.aWritableFile;
+import static org.hamcrest.io.FileMatchers.anExistingDirectory;
+import static org.hamcrest.io.FileMatchers.anExistingFile;
+import static org.hamcrest.io.FileMatchers.anExistingFileOrDirectory;
 import static org.hamcrest.number.IsNaN.notANumber;
 import static org.hamcrest.number.OrderingComparison.comparesEqualTo;
 import static org.hamcrest.number.OrderingComparison.greaterThan;
@@ -373,6 +385,96 @@ public class DescribeMismatchTortureTest {
     //################################################################
     // org.hamcrest.io (alphabetical order)
 
+    @Test public void testFileMatchers() throws IOException {
+        File directory = File.createTempFile("myDir", "");
+        if (!directory.delete()) { throw new IOException("Delete file "+directory+" failed."); }
+        if (!directory.mkdirs()) { throw new IOException("Create directory "+directory+" failed."); }
+        File missingDirectory = new File(directory, "missingDirectory");
+
+        File file = new File(directory, "myFile");
+        if (!file.createNewFile()) { throw new IOException("Create file "+file+" failed."); }
+        File missingFile = new File(directory, "missingFile");
+
+        File unreadableFile = new File(directory, "myUnreadableFile");
+        if (!unreadableFile.createNewFile()) { throw new IOException("Create file "+unreadableFile+" failed."); }
+        if (!unreadableFile.setReadable(false)) { unreadableFile = null; } // may not be supported on this OS
+
+        File unwritableFile = new File(directory, "myUnwritableFile");
+        if (!unwritableFile.createNewFile()) { throw new IOException("Create file "+unwritableFile+" failed."); }
+        if (!unwritableFile.setWritable(false)) { throw new IOException("Set file "+unwritableFile+" unwritable failed."); }
+
+        File size3File = new File(directory, "mySize3File");
+        FileOutputStream fileOutputStream=new FileOutputStream(size3File);
+        fileOutputStream.write(1);
+        fileOutputStream.write(2);
+        fileOutputStream.write(3);
+        fileOutputStream.close();
+
+        // anExistingDirectory
+        assertEquals("Expected an existing directory but was null.", describeMismatch(anExistingDirectory(), null));
+        assertEquals("Expected an existing directory but was a java.lang.Integer (<5>).", describeMismatch(anExistingDirectory(), 5));
+        assertEquals("Expected an existing directory but was nonexistent.", describeMismatch(anExistingDirectory(), missingDirectory));
+        assertEquals("Expected an existing directory but was a file.", describeMismatch(anExistingDirectory(), file));
+        assertEquals("Expected not an existing directory but was a directory.", describeMismatch(not(anExistingDirectory()), directory));
+
+        // anExistingFileOrDirectory
+        assertEquals("Expected an existing file or directory but was null.", describeMismatch(anExistingFileOrDirectory(), null));
+        assertEquals("Expected an existing file or directory but was a java.lang.Integer (<5>).", describeMismatch(anExistingFileOrDirectory(), 5));
+        assertEquals("Expected an existing file or directory but was nonexistent.", describeMismatch(anExistingFileOrDirectory(), missingDirectory));
+        assertEquals("Expected an existing file or directory but was nonexistent.", describeMismatch(anExistingFileOrDirectory(), missingFile));
+        assertEquals("Expected not an existing file or directory but was a file.", describeMismatch(not(anExistingFileOrDirectory()), file));
+        assertEquals("Expected not an existing file or directory but was a directory.", describeMismatch(not(anExistingFileOrDirectory()), directory));
+
+        // anExistingFile
+        assertEquals("Expected an existing file but was null.", describeMismatch(anExistingFile(), null));
+        assertEquals("Expected an existing file but was a java.lang.Integer (<5>).", describeMismatch(anExistingFile(), 5));
+        assertEquals("Expected an existing file but was nonexistent.", describeMismatch(anExistingFile(), missingDirectory));
+        assertEquals("Expected not an existing file but was a file.", describeMismatch(not(anExistingFile()), file));
+
+        // aReadableFile
+        assertEquals("Expected a readable file but was null.", describeMismatch(aReadableFile(), null));
+        assertEquals("Expected a readable file but was a java.lang.Integer (<5>).", describeMismatch(aReadableFile(), 5));
+        assertEquals("Expected a readable file but was nonexistent.", describeMismatch(aReadableFile(), missingFile));
+        assertEquals("Expected a readable file but was a directory.", describeMismatch(aReadableFile(), directory));
+        if (null!=unreadableFile) { assertEquals("Expected a readable file but was an unreadable file.", describeMismatch(aReadableFile(), unreadableFile)); }
+        assertEquals("Expected not a readable file but was a readable file.", describeMismatch(not(aReadableFile()), file));
+
+        // aWritableFile
+        assertEquals("Expected a writable file but was null.", describeMismatch(aWritableFile(), null));
+        assertEquals("Expected a writable file but was a java.lang.Integer (<5>).", describeMismatch(aWritableFile(), 5));
+        assertEquals("Expected a writable file but was nonexistent.", describeMismatch(aWritableFile(), missingFile));
+        assertEquals("Expected a writable file but was a directory.", describeMismatch(aWritableFile(), directory));
+        assertEquals("Expected a writable file but was an unwritable file.", describeMismatch(aWritableFile(), unwritableFile));
+        assertEquals("Expected not a writable file but was a writable file.", describeMismatch(not(aWritableFile()), file));
+
+        // aFileWithSize
+        assertEquals("Expected a file whose size is <3L> but was null.", describeMismatch(aFileWithSize(3L), null));
+        assertEquals("Expected a file whose size is <3L> but was a java.lang.Integer (<5>).", describeMismatch(aFileWithSize(3L), 5));
+        assertEquals("Expected a file whose size is <3L> but was nonexistent.", describeMismatch(aFileWithSize(3L), missingFile));
+        assertEquals("Expected a file whose size is <3L> but was a directory.", describeMismatch(aFileWithSize(3L), directory));
+        assertEquals("Expected a file whose size is <3L> but was a file whose size was <0L>.", describeMismatch(aFileWithSize(3L), file));
+        assertEquals("Expected not a file whose size is <3L> but was a file whose size was <3L>.", describeMismatch(not(aFileWithSize(3L)), size3File));
+
+        // aFileNamed
+        assertEquals("Expected a File whose name is \"foo\" but was null.", describeMismatch(aFileNamed(equalTo("foo")), null));
+        assertEquals("Expected a File whose name is \"foo\" but was a java.lang.Integer (<5>).", describeMismatch(aFileNamed(equalTo("foo")), 5));
+        assertEquals("Expected a File whose name is \"foo\" but was a File whose name was \"missingFile\".", describeMismatch(aFileNamed(equalTo("foo")), missingFile));
+        assertEquals("Expected not a File whose name is a string starting with \"myDir\" but was a File whose name was \""+directory.getName()+"\".", describeMismatch(not(aFileNamed(startsWith("myDir"))), directory));
+        assertEquals("Expected a File whose name is not \"myFile\" but was a File whose name was \"myFile\".", describeMismatch(aFileNamed(not(equalTo("myFile"))), file));
+
+        // aFileWithCanonicalPath
+        assertEquals("Expected a File whose canonical path is \"foo\" but was null.", describeMismatch(aFileWithCanonicalPath(equalTo("foo")), null));
+        assertEquals("Expected a File whose canonical path is \"foo\" but was a java.lang.Integer (<5>).", describeMismatch(aFileWithCanonicalPath(equalTo("foo")), 5));
+        assertEquals("Expected a File whose canonical path is \"foo\" but was a File whose canonical path was \""+missingFile.getCanonicalPath()+"\".", describeMismatch(aFileWithCanonicalPath(equalTo("foo")), missingFile));
+        assertEquals("Expected not a File whose canonical path is \""+directory.getCanonicalPath()+"\" but was a File whose canonical path was \""+directory.getCanonicalPath()+"\".", describeMismatch(not(aFileWithCanonicalPath(equalTo(directory.getCanonicalPath()))), directory));
+
+        // aFileWithAbsolutePath
+        assertEquals("Expected a File whose absolute path is \"foo\" but was null.", describeMismatch(aFileWithAbsolutePath(equalTo("foo")), null));
+        assertEquals("Expected a File whose absolute path is \"foo\" but was a java.lang.Integer (<5>).", describeMismatch(aFileWithAbsolutePath(equalTo("foo")), 5));
+        assertEquals("Expected a File whose absolute path is \"foo\" but was a File whose absolute path was \""+missingFile.getAbsolutePath()+"\".", describeMismatch(aFileWithAbsolutePath(equalTo("foo")), missingFile));
+        assertEquals("Expected not a File whose absolute path is \""+directory.getAbsolutePath()+"\" but was a File whose absolute path was \""+directory.getAbsolutePath()+"\".", describeMismatch(not(aFileWithAbsolutePath(equalTo(directory.getAbsolutePath()))), directory));
+    }
+    
     //################################################################
     // org.hamcrest.number (alphabetical order)
     
