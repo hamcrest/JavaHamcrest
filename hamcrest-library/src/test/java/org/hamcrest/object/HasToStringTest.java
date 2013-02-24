@@ -33,16 +33,16 @@ public final class HasToStringTest {
     matchesWhenUtilisingANestedMatcher() {
     	final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
 
-    	assertMatches("didn't match", matcher, TEST_OBJECT);
-    	assertDoesNotMatch("matched unexpectedly", matcher, new Object());
+    	assertMatches(matcher, TEST_OBJECT);
+    	assertDoesNotMatch(matcher, new Object());
     }
 
     @Test public void
     matchesWhenUsingShortcutForHasToStringEqualTo() {
     	final Matcher<Object> matcher = hasToString(TO_STRING_RESULT);
     	
-		assertMatches("didn't match", matcher, TEST_OBJECT);
-    	assertDoesNotMatch("matched unexpectedly", matcher, new Object());
+		assertMatches(matcher, TEST_OBJECT);
+    	assertDoesNotMatch(matcher, new Object());
     }
 
     @Test public void

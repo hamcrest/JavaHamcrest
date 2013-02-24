@@ -34,12 +34,12 @@ public final class HasPropertyTest {
 
     @Test public void
     matchesWhenThePropertyExists() {
-        assertMatches("didn't match", hasProperty("writeOnlyProperty"), bean);
+        assertMatches(hasProperty("writeOnlyProperty"), bean);
     }
 
     @Test public void
     doesNotMatchIfPropertyDoesNotExist() {
-        assertDoesNotMatch("matched unexpectedly", hasProperty("aNonExistentProp"), bean);
+        assertDoesNotMatch(hasProperty("aNonExistentProp"), bean);
     }
 
     @Test public void

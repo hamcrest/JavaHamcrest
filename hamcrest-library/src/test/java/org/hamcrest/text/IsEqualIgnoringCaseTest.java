@@ -27,25 +27,25 @@ public final class IsEqualIgnoringCaseTest {
     ignoresCaseOfCharsInString() {
         final Matcher<String> matcher = equalToIgnoringCase("heLLo");
 		
-        assertMatches("didn't match", matcher, "HELLO");
-        assertMatches("didn't match", matcher, "hello");
-        assertMatches("didn't match", matcher, "HelLo");
-    	assertDoesNotMatch("matched unexpectedly", matcher, "bye");
+        assertMatches(matcher, "HELLO");
+        assertMatches(matcher, "hello");
+        assertMatches(matcher, "HelLo");
+    	assertDoesNotMatch(matcher, "bye");
     }
 
     @Test public void 
     mismatchesIfAdditionalWhitespaceIsPresent() {
     	final Matcher<String> matcher = equalToIgnoringCase("heLLo");
 		
-    	assertDoesNotMatch("matched unexpectedly", matcher, "hello ");
-    	assertDoesNotMatch("matched unexpectedly", matcher, " hello");
+    	assertDoesNotMatch(matcher, "hello ");
+    	assertDoesNotMatch(matcher, " hello");
     }
 
     @Test public void 
     mismatchesNull() {
     	final Matcher<String> matcher = equalToIgnoringCase("heLLo");
 		
-    	assertDoesNotMatch("matched unexpectedly", matcher, null);
+    	assertDoesNotMatch(matcher, null);
     }
 
     @Test(expected=IllegalArgumentException.class) public void

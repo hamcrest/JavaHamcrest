@@ -28,16 +28,16 @@ public final class IsNotTest {
     evaluatesToTheTheLogicalNegationOfAnotherMatcher() {
         final Matcher<String> matcher = not(equalTo("A"));
 
-        assertMatches("didn't match", matcher, "B");
-        assertDoesNotMatch("matched unexpectedly", matcher, "A");
+        assertMatches(matcher, "B");
+        assertDoesNotMatch(matcher, "A");
     }
 
     @Test public void
     providesConvenientShortcutForNotEqualTo() {
         final Matcher<String> matcher = not("A");
 
-        assertMatches("didn't match", matcher, "B");
-        assertDoesNotMatch("matched unexpectedly", matcher, "A");
+        assertMatches(matcher, "B");
+        assertDoesNotMatch(matcher, "A");
     }
 
     @Test public void

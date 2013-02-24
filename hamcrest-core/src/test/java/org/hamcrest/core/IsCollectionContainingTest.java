@@ -60,8 +60,8 @@ public final class IsCollectionContainingTest {
         final Set<Number> s = new HashSet<Number>();
         s.add(2);
 
-        assertMatches("didn't match", new IsCollectionContaining<Number>(new IsEqual<Number>(2)), s);
-        assertMatches("didn't match", IsCollectionContaining.hasItem(2), s);
+        assertMatches(new IsCollectionContaining<Number>(new IsEqual<Number>(2)), s);
+        assertMatches(IsCollectionContaining.hasItem(2), s);
     }
 
     @SuppressWarnings("unchecked")

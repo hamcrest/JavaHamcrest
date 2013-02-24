@@ -25,24 +25,24 @@ public final class IsEqualTest {
     @Test public void
     comparesObjectsUsingEqualsMethod() {
         final Matcher<String> matcher1 = equalTo("hi");
-        assertMatches("didn't match", matcher1, "hi");
-        assertDoesNotMatch("matched unexpectedly", matcher1, "bye");
-        assertDoesNotMatch("matched unexpectedly", matcher1, null);
+        assertMatches(matcher1, "hi");
+        assertDoesNotMatch(matcher1, "bye");
+        assertDoesNotMatch(matcher1, null);
 
         final Matcher<Integer> matcher2 = equalTo(1);
-        assertMatches("didn't match", matcher2, 1);
-        assertDoesNotMatch("matched unexpectedly", matcher2, 2);
-        assertDoesNotMatch("matched unexpectedly", matcher2, null);
+        assertMatches(matcher2, 1);
+        assertDoesNotMatch(matcher2, 2);
+        assertDoesNotMatch(matcher2, null);
     }
 
     @Test public void
     canCompareNullValues() {
         final Matcher<Object> matcher = equalTo(null);
         
-        assertMatches("didn't match", matcher, null);
-        assertDoesNotMatch("matched unexpectedly", matcher, 2);
-        assertDoesNotMatch("matched unexpectedly", matcher, "hi");
-        assertDoesNotMatch("matched unexpectedly", matcher, new String[] {"a", "b"});
+        assertMatches(matcher, null);
+        assertDoesNotMatch(matcher, 2);
+        assertDoesNotMatch(matcher, "hi");
+        assertDoesNotMatch(matcher, new String[] {"a", "b"});
     }
 
     @Test public void
@@ -61,8 +61,8 @@ public final class IsEqualTest {
         };
 
         final Matcher<Object> matcher = equalTo(null);
-        assertMatches("didn't match", matcher, alwaysEqual);
-        assertDoesNotMatch("matched unexpectedly", matcher, neverEqual);
+        assertMatches(matcher, alwaysEqual);
+        assertDoesNotMatch(matcher, neverEqual);
     }
 
     @Test public void
@@ -73,11 +73,11 @@ public final class IsEqualTest {
         String[] s4 = {"a", "b", "c", "d"};
 
         final Matcher<String[]> matcher = equalTo(s1);
-        assertMatches("didn't match", matcher, s1);
-        assertMatches("didn't match", matcher, s2);
-        assertDoesNotMatch("matched unexpectedly", matcher, s3);
-        assertDoesNotMatch("matched unexpectedly", matcher, s4);
-        assertDoesNotMatch("matched unexpectedly", matcher, null);
+        assertMatches(matcher, s1);
+        assertMatches(matcher, s2);
+        assertDoesNotMatch(matcher, s3);
+        assertDoesNotMatch(matcher, s4);
+        assertDoesNotMatch(matcher, null);
     }
 
     @Test public void
@@ -88,11 +88,11 @@ public final class IsEqualTest {
         int[] i4 = new int[]{1, 2, 3, 4};
 
         final Matcher<int[]> matcher = equalTo(i1);
-        assertMatches("didn't match", matcher, i1);
-        assertMatches("didn't match", matcher, i2);
-        assertDoesNotMatch("matched unexpectedly", matcher, i3);
-        assertDoesNotMatch("matched unexpectedly", matcher, i4);
-        assertDoesNotMatch("matched unexpectedly", matcher, null);
+        assertMatches(matcher, i1);
+        assertMatches(matcher, i2);
+        assertDoesNotMatch(matcher, i3);
+        assertDoesNotMatch(matcher, i4);
+        assertDoesNotMatch(matcher, null);
     }
 
     @Test public void
@@ -103,11 +103,11 @@ public final class IsEqualTest {
         int[][] i4 = new int[][]{{1, 2, 3, 4}, {3, 4}};
 
         final Matcher<int[][]> matcher = equalTo(i1);
-        assertMatches("didn't match", matcher, i1);
-        assertMatches("didn't match", matcher, i2);
-        assertDoesNotMatch("matched unexpectedly", matcher, i3);
-        assertDoesNotMatch("matched unexpectedly", matcher, i4);
-        assertDoesNotMatch("matched unexpectedly", matcher, null);
+        assertMatches(matcher, i1);
+        assertMatches(matcher, i2);
+        assertDoesNotMatch(matcher, i3);
+        assertDoesNotMatch(matcher, i4);
+        assertDoesNotMatch(matcher, null);
     }
 
     @Test public void
