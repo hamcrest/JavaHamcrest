@@ -11,11 +11,19 @@ public abstract class AbstractMatcherTest extends TestCase {
    * Create an instance of the Matcher so some generic safety-net tests can be run on it.
    */
   protected abstract Matcher<?> createMatcher();
+  
+  public static <T> void assertMatches(Matcher<T> matcher, T arg) {
+      assertMatches("Expected match, but mismatched", matcher, arg);
+  }
 
   public static <T> void assertMatches(String message, Matcher<T> matcher, T arg) {
     if (!matcher.matches(arg)) {
       Assert.fail(message + " because: '" + mismatchDescription(matcher, arg) + "'");
     }
+  }
+
+  public static <T> void assertDoesNotMatch(Matcher<? super T> c, T arg) {
+      assertDoesNotMatch("Unexpected match", c, arg);
   }
 
   public static <T> void assertDoesNotMatch(String message, Matcher<? super T> c, T arg) {
