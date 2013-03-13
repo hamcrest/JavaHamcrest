@@ -1,51 +1,60 @@
 package org.hamcrest.object;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.object.HasToString.hasToString;
 
-import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import org.hamcrest.StringDescription;
+import org.junit.Test;
 
-public class HasToStringTest extends AbstractMatcherTest {
+public final class HasToStringTest {
     private static final String TO_STRING_RESULT = "toString result";
-    private static final Object ARG = new Object() {
+    private static final Object TEST_OBJECT = new Object() {
         @Override
         public String toString() {
             return TO_STRING_RESULT;
         }
     };
 
-    @Override
-    protected Matcher<?> createMatcher() {
-        return hasToString(equalTo("irrelevant"));
+    @Test public void
+    copesWithNullsAndUnknownTypes() {
+        Matcher<Object> matcher = hasToString(equalTo("irrelevant"));
+        
+        assertNullSafe(matcher);
+        assertUnknownTypeSafe(matcher);
+    }
+    
+    @Test public void
+    matchesWhenUtilisingANestedMatcher() {
+    	final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
+
+    	assertMatches(matcher, TEST_OBJECT);
+    	assertDoesNotMatch(matcher, new Object());
     }
 
-    public void testPassesResultOfToStringToNestedMatcher() {
-        assertThat(ARG, hasToString(equalTo(TO_STRING_RESULT)));
-        assertThat(ARG, not(hasToString(equalTo("OTHER STRING"))));
+    @Test public void
+    matchesWhenUsingShortcutForHasToStringEqualTo() {
+    	final Matcher<Object> matcher = hasToString(TO_STRING_RESULT);
+    	
+		assertMatches(matcher, TEST_OBJECT);
+    	assertDoesNotMatch(matcher, new Object());
     }
 
-    public void testProvidesConvenientShortcutForHasToStringEqualTo() {
-        assertThat(ARG, hasToString(TO_STRING_RESULT));
-        assertThat(ARG, not(hasToString("OTHER STRING")));
+    @Test public void
+    describesItself() {
+    	final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
+        assertDescription("with toString() \"toString result\"", matcher);
     }
 
-    public void testHasReadableDescription() {
-        Matcher<? super String> toStringMatcher = equalTo(TO_STRING_RESULT);
-        Matcher<Matcher<String>> matcher = hasToString(toStringMatcher);
-
-        assertEquals("with toString() " + descriptionOf(toStringMatcher), descriptionOf(matcher));
-    }
-
-    public void testMismatchContainsToStringValue() {
-        String expectedMismatchString = "toString() was \"Cheese\"";
-        assertMismatchDescription(expectedMismatchString, hasToString(TO_STRING_RESULT), "Cheese");
-    }
-
-    private static String descriptionOf(Matcher<?> matcher) {
-        return StringDescription.asString(matcher);
+    @Test public void
+    describesAMismatch() {
+    	final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
+    	String expectedMismatchString = "toString() was \"Cheese\"";
+        assertMismatchDescription(expectedMismatchString, matcher, "Cheese");
     }
 }

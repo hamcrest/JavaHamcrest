@@ -23,17 +23,17 @@ public final class IsNanTest {
 
     @Test public void
     matchesNaN() {
-        assertMatches("didn't match", notANumber(), Double.NaN);
+        assertMatches(notANumber(), Double.NaN);
     }
 
     @Test public void
     doesNotMatchDoubleValue() {
-        assertDoesNotMatch("matched unexpectedly", notANumber(), 1.25);
+        assertDoesNotMatch(notANumber(), 1.25);
     }
 
     @Test public void
     doesNotMatchInfinity() {
-        assertDoesNotMatch("matched unexpectedly", notANumber(), Double.POSITIVE_INFINITY);
+        assertDoesNotMatch(notANumber(), Double.POSITIVE_INFINITY);
     }
 
     @Test public void

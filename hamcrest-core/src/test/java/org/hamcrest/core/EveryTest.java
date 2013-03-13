@@ -26,8 +26,8 @@ public final class EveryTest {
 
     @Test public void
     matchesOnlyWhenEveryItemMatches() {
-        assertMatches("didn't match", matcher, asList("AaA", "BaB", "CaC"));
-        assertDoesNotMatch("matched unexpectedly", matcher, asList("AaA", "BXB", "CaC"));
+        assertMatches(matcher, asList("AaA", "BaB", "CaC"));
+        assertDoesNotMatch(matcher, asList("AaA", "BXB", "CaC"));
     }
 
     @Test public void

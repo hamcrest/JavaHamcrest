@@ -2,47 +2,68 @@
  */
 package org.hamcrest.text;
 
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
+import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
+import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
+import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
 
-public class IsEqualIgnoringCaseTest extends AbstractMatcherTest {
+import org.hamcrest.Matcher;
+import org.junit.Test;
 
-    @Override
-    protected Matcher<?> createMatcher() {
-        return equalToIgnoringCase("irrelevant");
+public final class IsEqualIgnoringCaseTest {
+
+    @Test public void
+    copesWithNullsAndUnknownTypes() {
+        Matcher<String> matcher = equalToIgnoringCase("irrelevant");
+        
+        assertNullSafe(matcher);
+        assertUnknownTypeSafe(matcher);
     }
 
-    public void testIgnoresCaseOfCharsInString() {
-        assertThat("HELLO", equalToIgnoringCase("heLLo"));
-        assertThat("hello", equalToIgnoringCase("heLLo"));
-        assertThat("HelLo", equalToIgnoringCase("heLLo"));
-
-        assertThat("bye", not(equalToIgnoringCase("heLLo")));
+    @Test public void
+    ignoresCaseOfCharsInString() {
+        final Matcher<String> matcher = equalToIgnoringCase("heLLo");
+		
+        assertMatches(matcher, "HELLO");
+        assertMatches(matcher, "hello");
+        assertMatches(matcher, "HelLo");
+    	assertDoesNotMatch(matcher, "bye");
     }
 
-    public void testFailsIfAdditionalWhitespaceIsPresent() {
-        assertThat("heLLo ", not(equalToIgnoringCase("heLLo")));
-        assertThat(" heLLo", not(equalToIgnoringCase("heLLo")));
+    @Test public void 
+    mismatchesIfAdditionalWhitespaceIsPresent() {
+    	final Matcher<String> matcher = equalToIgnoringCase("heLLo");
+		
+    	assertDoesNotMatch(matcher, "hello ");
+    	assertDoesNotMatch(matcher, " hello");
     }
 
-    public void testFailsIfMatchingAgainstNull() {
-        assertThat(null, not(equalToIgnoringCase("heLLo")));
+    @Test public void 
+    mismatchesNull() {
+    	final Matcher<String> matcher = equalToIgnoringCase("heLLo");
+		
+    	assertDoesNotMatch(matcher, null);
     }
 
-    public void testRequiresNonNullStringToBeConstructed() {
-        try {
-            equalToIgnoringCase(null);
-            fail("Expected exception");
-        } catch (IllegalArgumentException goodException) {
-            // expected!
-        }
+    @Test(expected=IllegalArgumentException.class) public void
+    canOnlyBeConstructedAboutANonNullString() {
+        equalToIgnoringCase(null);
     }
 
-    public void testDescribesItselfAsCaseInsensitive() {
-        assertDescription("equalToIgnoringCase(\"heLLo\")",
-                        equalToIgnoringCase("heLLo"));
+
+    @Test public void
+    describesItself() {
+    	final Matcher<String> matcher = equalToIgnoringCase("heLLo");
+        assertDescription("equalToIgnoringCase(\"heLLo\")", matcher);
+    }
+
+    @Test public void
+    describesAMismatch() {
+    	final Matcher<String> matcher = equalToIgnoringCase("heLLo");
+    	String expectedMismatchString = "was \"Cheese\"";
+        assertMismatchDescription(expectedMismatchString, matcher, "Cheese");
     }
 }

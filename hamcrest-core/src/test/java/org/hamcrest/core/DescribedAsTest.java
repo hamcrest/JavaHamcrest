@@ -43,7 +43,7 @@ public final class DescribedAsTest {
     celegatesMatchingToAnotherMatcher() {
         Matcher<String> matcher = describedAs("irrelevant", equalTo("hi"));
 
-        assertMatches("didn't match", matcher, "hi");
+        assertMatches(matcher, "hi");
         assertDoesNotMatch("matched", matcher, "oi");
     }
 

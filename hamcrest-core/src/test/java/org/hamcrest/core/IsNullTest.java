@@ -29,11 +29,11 @@ public final class IsNullTest {
 
     @Test public void
     evaluatesToTrueIfArgumentIsNull() {
-        assertMatches("didn't match", nullMatcher, null);
-        assertDoesNotMatch("matched unexpectedly", nullMatcher, new Object());
+        assertMatches(nullMatcher, null);
+        assertDoesNotMatch(nullMatcher, new Object());
         
-        assertMatches("didn't match", notNullMatcher, new Object());
-        assertDoesNotMatch("matched unexpectedly", notNullMatcher, null);
+        assertMatches(notNullMatcher, new Object());
+        assertDoesNotMatch(notNullMatcher, null);
     }
     
     @Test public void

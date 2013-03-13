@@ -24,26 +24,26 @@ public final class IsBlankStringTest {
 
     @Test public void
     matchesEmptyString() {
-        assertMatches("didn't match", blankOrNullString(), "");
-        assertMatches("didn't match", blankString(), "");
+        assertMatches(blankOrNullString(), "");
+        assertMatches(blankString(), "");
     }
 
     @Test public void
     matchesNullAppropriately() {
-        assertMatches("didn't match", blankOrNullString(), null);
-        assertDoesNotMatch("matched unexpectedly", blankString(), null);
+        assertMatches(blankOrNullString(), null);
+        assertDoesNotMatch(blankString(), null);
     }
 
     @Test public void
     matchesBlankStringAppropriately() {
-        assertMatches("didn't match", blankString(), " \t");
-        assertMatches("didn't match", blankOrNullString(), " \t");
+        assertMatches(blankString(), " \t");
+        assertMatches(blankOrNullString(), " \t");
     }
 
     @Test public void
     doesNotMatchFilledString() {
-        assertDoesNotMatch("matched unexpectedly", blankString(), "a");
-        assertDoesNotMatch("matched unexpectedly", blankOrNullString(), "a");
+        assertDoesNotMatch(blankString(), "a");
+        assertDoesNotMatch(blankOrNullString(), "a");
     }
 
     @Test public void

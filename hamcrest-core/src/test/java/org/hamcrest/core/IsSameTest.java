@@ -29,8 +29,8 @@ public final class IsSameTest {
         Object o1 = new Object();
         Matcher<Object> matcher = sameInstance(o1);
 
-        assertMatches("didn't match", matcher, o1);
-        assertDoesNotMatch("matched unexpectedly", matcher, new Object());
+        assertMatches(matcher, o1);
+        assertDoesNotMatch(matcher, new Object());
     }
 
     @Test public void
@@ -38,8 +38,8 @@ public final class IsSameTest {
         Object o1 = new Object();
         Matcher<Object> matcher = theInstance(o1);
 
-        assertMatches("didn't match", matcher, o1);
-        assertDoesNotMatch("matched unexpectedly", matcher, new Object());
+        assertMatches(matcher, o1);
+        assertDoesNotMatch(matcher, new Object());
     }
 
     @Test public void

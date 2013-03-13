@@ -26,8 +26,8 @@ public final class IsTest {
     matchesTheSameWayTheUnderlyingMatcherDoes() {
         final Matcher<Boolean> matcher = is(equalTo(true));
 
-        assertMatches("didn't match", matcher, true);
-        assertDoesNotMatch("matched unexpectedly", matcher, false);
+        assertMatches(matcher, true);
+        assertDoesNotMatch(matcher, false);
     }
 
     @Test public void
@@ -40,16 +40,16 @@ public final class IsTest {
     providesConvenientShortcutForIsEqualTo() {
         final Matcher<String> matcher = is("A");
         
-        assertMatches("didn't match", matcher, "A");
-        assertDoesNotMatch("matched unexpectedly", is("A"), "B");
+        assertMatches(matcher, "A");
+        assertDoesNotMatch(is("A"), "B");
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test public void
     providesConvenientShortcutForIsInstanceOf() {
         final Matcher matcher = isA(Integer.class);
-        assertMatches("didn't match", matcher, Integer.valueOf(1));
-        assertDoesNotMatch("matched unexpectedly", matcher, new Object());
-        assertDoesNotMatch("matched unexpectedly", matcher, null);
+        assertMatches(matcher, Integer.valueOf(1));
+        assertDoesNotMatch(matcher, new Object());
+        assertDoesNotMatch(matcher, null);
     }
 }

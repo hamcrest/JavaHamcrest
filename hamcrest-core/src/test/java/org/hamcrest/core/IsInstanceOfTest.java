@@ -28,10 +28,10 @@ public final class IsInstanceOfTest {
     evaluatesToTrueIfArgumentIsInstanceOfASpecificClass() {
         final Matcher<Object> matcher = instanceOf(Number.class);
 
-        assertMatches("didn't match", matcher, 1);
-        assertMatches("didn't match", matcher, 1.1);
-        assertDoesNotMatch("matched unexpectedly", matcher, null);
-        assertDoesNotMatch("matched unexpectedly", matcher, new Object());
+        assertMatches(matcher, 1);
+        assertMatches(matcher, 1.1);
+        assertDoesNotMatch(matcher, null);
+        assertDoesNotMatch(matcher, new Object());
     }
 
     @Test public void
@@ -46,14 +46,14 @@ public final class IsInstanceOfTest {
 
     @Test public void
     matchesPrimitiveTypes() {
-        assertMatches("didn't match", any(boolean.class), true);
-        assertMatches("didn't match", any(byte.class), (byte)1);
-        assertMatches("didn't match", any(char.class), 'x');
-        assertMatches("didn't match", any(double.class), 5.0);
-        assertMatches("didn't match", any(float.class), 5.0f);
-        assertMatches("didn't match", any(int.class), 2);
-        assertMatches("didn't match", any(long.class), 4L);
-        assertMatches("didn't match", any(short.class), (short)1);
+        assertMatches(any(boolean.class), true);
+        assertMatches(any(byte.class), (byte)1);
+        assertMatches(any(char.class), 'x');
+        assertMatches(any(double.class), 5.0);
+        assertMatches(any(float.class), 5.0f);
+        assertMatches(any(int.class), 2);
+        assertMatches(any(long.class), 4L);
+        assertMatches(any(short.class), (short)1);
     }
 
     @Test public void
