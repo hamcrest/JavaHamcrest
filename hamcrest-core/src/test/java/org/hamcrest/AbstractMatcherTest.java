@@ -59,7 +59,7 @@ public abstract class AbstractMatcherTest extends TestCase {
       }
   }
 
-  private static <T> String mismatchDescription(Matcher<? super T> matcher, T arg) {
+  public static <T> String mismatchDescription(Matcher<? super T> matcher, T arg) {
     Description description = new StringDescription();
     matcher.describeMismatch(arg, description);
     return description.toString().trim();

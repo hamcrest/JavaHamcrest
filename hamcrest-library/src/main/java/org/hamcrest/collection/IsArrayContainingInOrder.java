@@ -4,6 +4,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -69,7 +70,8 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      */
     @Factory
     public static <E> Matcher<E[]> arrayContaining(Matcher<? super E>... itemMatchers) {
-        return arrayContaining(asList(itemMatchers));
+        final List<Matcher<? super E>> nullSafeWithExplicitTypeMatchers = nullSafe(itemMatchers);
+        return arrayContaining(nullSafeWithExplicitTypeMatchers);
     }
 
     /**
@@ -86,5 +88,14 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     @Factory
     public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
         return new IsArrayContainingInOrder<E>(itemMatchers);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <E> List<Matcher<? super E>> nullSafe(Matcher<? super E>[] itemMatchers) {
+        final List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>(itemMatchers.length);
+        for (final Matcher<? super E> itemMatcher : itemMatchers) {
+            matchers.add((Matcher<? super E>) (itemMatcher == null ? IsNull.nullValue() : itemMatcher));
+        }
+        return matchers;
     }
 }
