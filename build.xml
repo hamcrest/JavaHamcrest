@@ -1,4 +1,5 @@
 <project name="hamcrest" default="all">
+    <taskdef resource="aQute/bnd/ant/taskdef.properties" classpath="lib/integration/bnd-0.0.384.jar"/>
 
     <property name="version" value="SNAPSHOT" description="Version number to use in build files"/>
     <property name="haltonfailure" value="true" description="Whether to halt the build if the tests fail"/>
@@ -187,9 +188,18 @@
         <attribute name="modulename" description="Name of the module to jar"/>
         <sequential>
             <make-manifest modulename="@{modulename}"/>
-            <jar-module-component modulename="@{modulename}"/>
+            <jar-osgi-bundle modulename="@{modulename}"/>
             <jar-module-component modulename="@{modulename}" suffix="-tests"/>
             <jar-module-component modulename="@{modulename}" suffix="-sources"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="jar-osgi-bundle">
+        <attribute name="modulename" description="Name of the OSGi bundle to jar"/>
+        <sequential>
+            <property name="bundlename" value="@{modulename}"/>
+            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}@{suffix}.jar.contents/META-INF"/>
+            <bnd classpath="build/temp/@{modulename}-${version}.jar.contents" eclipse="false" output="build/@{modulename}-${version}.jar" files="scripts/hamcrest.bnd"/>
         </sequential>
     </macrodef>
 
