@@ -198,8 +198,12 @@
         <attribute name="modulename" description="Name of the OSGi bundle to jar"/>
         <sequential>
             <property name="bundlename" value="@{modulename}"/>
-            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}@{suffix}.jar.contents/META-INF"/>
             <bnd classpath="build/temp/@{modulename}-${version}.jar.contents" eclipse="false" output="build/@{modulename}-${version}.jar" files="scripts/hamcrest.bnd"/>
+            <mkdir dir="build/temp/@{modulename}-${version}.jar.license/META-INF"/>
+            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}.jar.license/META-INF"/>
+            <jar jarfile="build/@{modulename}-${version}.jar" update="true">
+                <fileset dir="build/temp/@{modulename}-${version}.jar.license"/>
+            </jar>
         </sequential>
     </macrodef>
 
