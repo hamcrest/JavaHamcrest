@@ -36,6 +36,16 @@
             <zipfileset src="lib/generator/qdox-1.12.jar"/>
             <rule pattern="com.thoughtworks.qdox.**" result="org.hamcrest.generator.qdox.@1"/>
         </jarjar>
+        <unzip src="build/hamcrest-generator-${version}.jar" dest="build/temp/hamcrest-generator-${version}.jar.repackaged"/>
+        <delete file="build/hamcrest-generator-${version}.jar"/>
+        <bnd classpath="build/temp/hamcrest-generator-${version}.jar.repackaged" output="build/hamcrest-generator-${version}.jar" files="scripts/hamcrest-generator.bnd" eclipse="false" exceptions="true"/>
+        <mkdir dir="build/temp/hamcrest-generator-${version}.jar.maven/META-INF/maven/com.thoughtworks.qdox/qdox"/>
+        <copy file="build/temp/hamcrest-generator-${version}.jar.repackaged/META-INF/maven/com.thoughtworks.qdox/qdox/pom.properties" todir="build/temp/hamcrest-generator-${version}.jar.maven/META-INF/maven/com.thoughtworks.qdox/qdox"/>
+        <copy file="build/temp/hamcrest-generator-${version}.jar.repackaged/META-INF/maven/com.thoughtworks.qdox/qdox/pom.xml" todir="build/temp/hamcrest-generator-${version}.jar.maven/META-INF/maven/com.thoughtworks.qdox/qdox"/>
+        <jar jarfile="build/hamcrest-generator-${version}.jar" update="true">
+            <fileset dir="build/temp/hamcrest-generator-${version}.jar.license"/>
+            <fileset dir="build/temp/hamcrest-generator-${version}.jar.maven"/>
+        </jar>
     </target>
 
     <target name="core" depends="generator" description="Build core Hamcrest library">
@@ -197,8 +207,7 @@
     <macrodef name="jar-osgi-bundle">
         <attribute name="modulename" description="Name of the OSGi bundle to jar"/>
         <sequential>
-            <property name="bundlename" value="@{modulename}"/>
-            <bnd classpath="build/temp/@{modulename}-${version}.jar.contents" eclipse="false" output="build/@{modulename}-${version}.jar" files="scripts/hamcrest.bnd"/>
+            <bnd classpath="build/temp/@{modulename}-${version}.jar.contents" output="build/@{modulename}-${version}.jar" files="scripts/@{modulename}.bnd" eclipse="false" exceptions="true"/>
             <mkdir dir="build/temp/@{modulename}-${version}.jar.license/META-INF"/>
             <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}.jar.license/META-INF"/>
             <jar jarfile="build/@{modulename}-${version}.jar" update="true">

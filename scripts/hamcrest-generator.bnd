@@ -1,0 +1,9 @@
+Bundle-SymbolicName: org.hamcrest.hamcrest-generator
+Bundle-Name: JavaHamcrest
+Bundle-Version: ${version}
+Export-Package: org.hamcrest.*;version="${version}"
+Implementation-Title: hamcrest-generator
+Implementation-Vendor: hamcrest.org
+Implementation-Version: ${version}
+Built-By: ${user.name}
+Built-Date: ${build.timestamp}
