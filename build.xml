@@ -1,5 +1,5 @@
 <project name="hamcrest" default="all">
-    <taskdef resource="aQute/bnd/ant/taskdef.properties" classpath="lib/integration/bnd-0.0.384.jar"/>
+    <taskdef resource="aQute/bnd/ant/taskdef.properties" classpath="lib/integration/bnd-1.50.0.jar"/>
 
     <property name="version" value="0.0.0-SNAPSHOT" description="Version number to use in build files"/>
     <property name="haltonfailure" value="true" description="Whether to halt the build if the tests fail"/>
