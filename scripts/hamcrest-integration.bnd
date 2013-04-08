@@ -2,7 +2,7 @@ Bundle-SymbolicName: org.hamcrest.hamcrest-integration
 Bundle-Name: JavaHamcrest
 Bundle-Version: ${version}
 Export-Package: org.hamcrest.*;version="${version}"
-Import-Package: org.easymock.*;resolution:=optional,
+Import-Package: org.easymock.*;resolution:=optional, \
                 org.jmock.*;resolution:=optional
 Implementation-Title: hamcrest-integration
 Implementation-Vendor: hamcrest.org

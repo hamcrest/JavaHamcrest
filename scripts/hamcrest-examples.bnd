@@ -1,7 +1,7 @@
 Bundle-SymbolicName: org.hamcrest.hamcrest-examples
 Bundle-Name: JavaHamcrest
 Bundle-Version: ${version}
-Export-Package: !org.hamcrest.internal.*,
+Export-Package: !org.hamcrest.internal.*, \
                 org.hamcrest.*;version="${version}"
 Private-Package: org.hamcrest.internal.*;version="${version}"
 Implementation-Title: hamcrest-examples
