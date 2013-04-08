@@ -1,5 +1,6 @@
 Bundle-SymbolicName: org.hamcrest.hamcrest-core
-Bundle-Name: JavaHamcrest
+Bundle-Name: Hamcrest Core
+Bundle-Description: This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.
 Bundle-Version: ${version}
 Export-Package: !org.hamcrest.internal.*, \
                 org.hamcrest.*;version="${version}"

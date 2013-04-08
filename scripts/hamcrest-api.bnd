@@ -1,5 +1,6 @@
 Bundle-SymbolicName: org.hamcrest.hamcrest-api
-Bundle-Name: JavaHamcrest
+Bundle-Name: Hamcrest API
+Bundle-Description: Hamcrest API
 Bundle-Version: ${version}
 Export-Package: org.hamcrest.*;version="${version}"
 Implementation-Title: hamcrest-api
