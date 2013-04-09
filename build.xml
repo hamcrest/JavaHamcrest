@@ -8,12 +8,14 @@
 
     <target name="all" depends="clean, bigjar, osgi" description="Performs clean build, runs tests and packages for distribution"/>
 
-    <target name="osgi" depends="clean, bigjar" description="Build OSGi bundles">
-        <make-osgi-bundle modulename="hamcrest-generator"/>
-        <make-osgi-bundle modulename="hamcrest-core"/>
-        <make-osgi-bundle modulename="hamcrest-library"/>
-        <make-osgi-bundle modulename="hamcrest-integration"/>
-        <make-osgi-bundle modulename="hamcrest-all"/>
+    <target name="osgi" depends="bigjar" description="Build OSGi bundles">
+        <parallel>
+            <make-osgi-bundle modulename="hamcrest-generator"/>
+            <make-osgi-bundle modulename="hamcrest-core"/>
+            <make-osgi-bundle modulename="hamcrest-library"/>
+            <make-osgi-bundle modulename="hamcrest-integration"/>
+            <make-osgi-bundle modulename="hamcrest-all"/>
+        </parallel>
     </target>
 
     <target name="clean" description="Clean up all built files">
@@ -269,11 +271,11 @@
     <macrodef name="bundle-module" description="Generate maven bundle jar for a module">
         <attribute name="modulename" description="Name of the module to bundle"/>
         <sequential>
+            <make-osgi-bundle modulename="@{modulename}"/>
             <sign target="@{modulename}-${version}.pom"/>
             <sign target="@{modulename}-${version}.jar"/>
             <sign target="@{modulename}-${version}-javadoc.jar"/>
             <sign target="@{modulename}-${version}-sources.jar"/>
-            <make-osgi-bundle modulename="@{modulename}"/>
             <jar-bundle modulename="@{modulename}"/>
         </sequential>
     </macrodef>
