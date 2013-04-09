@@ -1,5 +1,4 @@
 <project name="hamcrest" default="all">
-    <taskdef resource="aQute/bnd/ant/taskdef.properties" classpath="lib/integration/bnd-1.50.0.jar"/>
 
     <property name="version" value="0.0.0-SNAPSHOT" description="Version number to use in build files"/>
     <property name="haltonfailure" value="true" description="Whether to halt the build if the tests fail"/>
@@ -7,7 +6,15 @@
     <property name="javaversion" value="1.5" description="Java version to target"/>
     <tstamp><format property="build.timestamp" pattern="yyyy-MM-dd HH:mm:ss" timezone="GMT"/></tstamp>
 
-    <target name="all" depends="clean, bigjar" description="Performs clean build, runs tests and packages for distribution"/>
+    <target name="all" depends="clean, bigjar, osgi" description="Performs clean build, runs tests and packages for distribution"/>
+
+    <target name="osgi" depends="clean, bigjar" description="Build OSGi bundles">
+        <make-osgi-bundle modulename="hamcrest-generator"/>
+        <make-osgi-bundle modulename="hamcrest-core"/>
+        <make-osgi-bundle modulename="hamcrest-library"/>
+        <make-osgi-bundle modulename="hamcrest-integration"/>
+        <make-osgi-bundle modulename="hamcrest-all"/>
+    </target>
 
     <target name="clean" description="Clean up all built files">
         <delete dir="build"/>
@@ -36,16 +43,6 @@
             <zipfileset src="lib/generator/qdox-1.12.jar"/>
             <rule pattern="com.thoughtworks.qdox.**" result="org.hamcrest.generator.qdox.@1"/>
         </jarjar>
-        <unzip src="build/hamcrest-generator-${version}.jar" dest="build/temp/hamcrest-generator-${version}.jar.repackaged"/>
-        <delete file="build/hamcrest-generator-${version}.jar"/>
-        <bnd classpath="build/temp/hamcrest-generator-${version}.jar.repackaged" output="build/hamcrest-generator-${version}.jar" files="scripts/hamcrest-generator.bnd" eclipse="false" exceptions="true"/>
-        <mkdir dir="build/temp/hamcrest-generator-${version}.jar.maven/META-INF/maven/com.thoughtworks.qdox/qdox"/>
-        <copy file="build/temp/hamcrest-generator-${version}.jar.repackaged/META-INF/maven/com.thoughtworks.qdox/qdox/pom.properties" todir="build/temp/hamcrest-generator-${version}.jar.maven/META-INF/maven/com.thoughtworks.qdox/qdox"/>
-        <copy file="build/temp/hamcrest-generator-${version}.jar.repackaged/META-INF/maven/com.thoughtworks.qdox/qdox/pom.xml" todir="build/temp/hamcrest-generator-${version}.jar.maven/META-INF/maven/com.thoughtworks.qdox/qdox"/>
-        <jar jarfile="build/hamcrest-generator-${version}.jar" update="true">
-            <fileset dir="build/temp/hamcrest-generator-${version}.jar.license"/>
-            <fileset dir="build/temp/hamcrest-generator-${version}.jar.maven"/>
-        </jar>
     </target>
 
     <target name="core" depends="generator" description="Build core Hamcrest library">
@@ -198,21 +195,9 @@
         <attribute name="modulename" description="Name of the module to jar"/>
         <sequential>
             <make-manifest modulename="@{modulename}"/>
-            <jar-osgi-bundle modulename="@{modulename}"/>
+            <jar-module-component modulename="@{modulename}"/>
             <jar-module-component modulename="@{modulename}" suffix="-tests"/>
             <jar-module-component modulename="@{modulename}" suffix="-sources"/>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="jar-osgi-bundle">
-        <attribute name="modulename" description="Name of the OSGi bundle to jar"/>
-        <sequential>
-            <bnd classpath="build/temp/@{modulename}-${version}.jar.contents" output="build/@{modulename}-${version}.jar" files="scripts/@{modulename}.bnd" eclipse="false" exceptions="true"/>
-            <mkdir dir="build/temp/@{modulename}-${version}.jar.license/META-INF"/>
-            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}.jar.license/META-INF"/>
-            <jar jarfile="build/@{modulename}-${version}.jar" update="true">
-                <fileset dir="build/temp/@{modulename}-${version}.jar.license"/>
-            </jar>
         </sequential>
     </macrodef>
 
@@ -288,6 +273,7 @@
             <sign target="@{modulename}-${version}.jar"/>
             <sign target="@{modulename}-${version}-javadoc.jar"/>
             <sign target="@{modulename}-${version}-sources.jar"/>
+            <make-osgi-bundle modulename="@{modulename}"/>
             <jar-bundle modulename="@{modulename}"/>
         </sequential>
     </macrodef>
@@ -305,6 +291,22 @@
         <attribute name="target" description="Name of the resource to sign"/>
         <sequential>
             <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="@{target}"/></exec>
+        </sequential>
+    </macrodef>
+	
+    <macrodef name="make-osgi-bundle" description="Extract JAR and create OSGi bundle">
+        <attribute name="modulename" description="Name of the OSGi bundle to jar"/>
+        <sequential>
+            <taskdef resource="aQute/bnd/ant/taskdef.properties" classpath="lib/integration/bnd-1.50.0.jar"/>
+            <unzip src="build/@{modulename}-${version}.jar" dest="build/temp/@{modulename}-${version}.jar.unzip"/>
+            <delete file="build/temp/@{modulename}-${version}.jar.unzip/META-INF/MANIFEST.MF"/>
+            <delete file="build/@{modulename}-${version}.jar"/>
+            <bnd classpath="build/temp/@{modulename}-${version}.jar.unzip" output="build/@{modulename}-${version}.jar" files="scripts/@{modulename}.bnd" eclipse="false" exceptions="true"/>
+            <mkdir dir="build/temp/@{modulename}-${version}.jar.license/META-INF"/>
+            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}.jar.license/META-INF"/>
+            <jar jarfile="build/@{modulename}-${version}.jar" update="true">
+                <fileset dir="build/temp/@{modulename}-${version}.jar.license"/>
+            </jar>
         </sequential>
     </macrodef>
 </project>
