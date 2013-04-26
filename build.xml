@@ -6,15 +6,15 @@
     <property name="javaversion" value="1.5" description="Java version to target"/>
     <tstamp><format property="build.timestamp" pattern="yyyy-MM-dd HH:mm:ss" timezone="GMT"/></tstamp>
 
-    <target name="all" depends="clean, bigjar, osgi" description="Performs clean build, runs tests and packages for distribution"/>
+    <target name="all" depends="clean, bigjar" description="Performs clean build, runs tests and packages for distribution"/>
 
-    <target name="osgi" depends="bigjar" description="Build OSGi bundles">
+    <target name="osgi" description="Build OSGi bundles and generate maven jars for generator, core, library, integration, all">
         <parallel>
-            <make-osgi-bundle modulename="hamcrest-generator"/>
-            <make-osgi-bundle modulename="hamcrest-core"/>
-            <make-osgi-bundle modulename="hamcrest-library"/>
-            <make-osgi-bundle modulename="hamcrest-integration"/>
-            <make-osgi-bundle modulename="hamcrest-all"/>
+            <bundle-osgi-module modulename="hamcrest-generator"/>
+            <bundle-osgi-module modulename="hamcrest-core"/>
+            <bundle-osgi-module modulename="hamcrest-library"/>
+            <bundle-osgi-module modulename="hamcrest-integration"/>
+            <bundle-osgi-module modulename="hamcrest-all"/>
         </parallel>
     </target>
 
@@ -271,7 +271,6 @@
     <macrodef name="bundle-module" description="Generate maven bundle jar for a module">
         <attribute name="modulename" description="Name of the module to bundle"/>
         <sequential>
-            <make-osgi-bundle modulename="@{modulename}"/>
             <sign target="@{modulename}-${version}.pom"/>
             <sign target="@{modulename}-${version}.jar"/>
             <sign target="@{modulename}-${version}-javadoc.jar"/>
@@ -280,9 +279,19 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="bundle-osgi-module" description="Build OSGi bundle and generate maven bundle jar for a module">
+        <attribute name="modulename" description="Name of the module to bundle"/>
+        <sequential>
+            <make-osgi-bundle modulename="@{modulename}"/>
+            <sign target="@{modulename}-${version}.jar"/>
+            <jar-bundle modulename="@{modulename}"/>
+        </sequential>
+    </macrodef>
+
     <macrodef name="jar-bundle" description="Jar maven bundle contents">
         <attribute name="modulename" description="Name of the module to create bundle jar for"/>
         <sequential>
+            <delete file="build/maven-bundle-@{modulename}.jar"/>
             <jar destfile="build/maven-bundle-@{modulename}.jar">
                 <fileset dir="build"><include name="@{modulename}-${version}*"/></fileset>
             </jar>
