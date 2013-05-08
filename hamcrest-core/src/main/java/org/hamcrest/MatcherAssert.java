@@ -3,7 +3,8 @@
 package org.hamcrest;
 
 
-import static org.hamcrest.MatcherExecute.AssertionErrorStrategy;
+import static org.hamcrest.MatcherExecute.failWithAssertionError;
+import static org.hamcrest.MatcherExecute.match;
 
 public class MatcherAssert {
     public static <T> void assertThat(T actual, Matcher<? super T> matcher) {
@@ -11,7 +12,7 @@ public class MatcherAssert {
     }
 
     public static <T> void assertThat(String reason, T actual, Matcher<? super T> matcher) {
-        MatcherExecute.match(reason, actual, matcher, new AssertionErrorStrategy());
+        match(reason, actual, matcher, failWithAssertionError());
     }
 
     public static void assertThat(String reason, boolean assertion) {
