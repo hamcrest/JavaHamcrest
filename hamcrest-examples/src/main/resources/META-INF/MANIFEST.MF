@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Hamcrest hamcrest test
+Bundle-SymbolicName: hamcrest-test
+Bundle-Version: 1.0
+Import-Package: org.osgi.framework, org.hamcrest.core, org.hamcrest.collection, org.hamcrest.integration
+Bundle-Activator: org.hamcrest.examples.osgi.TestActivator
+Require-Bundle: org.hamcrest.hamcrest-core, org.hamcrest.hamcrest-integration
+

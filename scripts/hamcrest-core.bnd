@@ -3,7 +3,8 @@ Bundle-Name: Hamcrest Core
 Bundle-Description: This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.
 Bundle-Version: ${version}
 Export-Package: !org.hamcrest.internal.*, \
-                org.hamcrest.*;version="${version}"
+                org.hamcrest;version="${version}";org.hamcrest.hamcrest-core=split;mandatory:=org.hamcrest.hamcrest-core, \
+                org.hamcrest.core.*;version="${version}"
 Private-Package: org.hamcrest.internal.*;version="${version}"
 Import-Package: org.jmock.*;resolution:=optional
 Implementation-Title: hamcrest-core

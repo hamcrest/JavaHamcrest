@@ -2,8 +2,10 @@ Bundle-SymbolicName: org.hamcrest.hamcrest-integration
 Bundle-Name: Hamcrest Integration
 Bundle-Description: Provides integration between Hamcrest and other testing tools, including JUnit (3 and 4), TestNG, jMock and EasyMock.
 Bundle-Version: ${version}
-Export-Package: org.hamcrest.*;version="${version}"
-Import-Package: org.hamcrest.*;version="${version}", \
+Export-Package: org.hamcrest;version="${version}";org.hamcrest.hamcrest-integration=split;mandatory:=org.hamcrest.hamcrest-integration, \
+                org.hamcrest.integration.*
+Import-Package: org.hamcrest.core.*;version="${version}", \
+                org.hamcrest.library.*;version="${version}", \
                 org.easymock.*;resolution:=optional, \
                 org.jmock.*;resolution:=optional
 Implementation-Title: hamcrest-integration
@@ -11,3 +13,4 @@ Implementation-Vendor: hamcrest.org
 Implementation-Version: ${version}
 Built-By: ${user.name}
 Built-Date: ${build.timestamp}
+Require-Bundle: org.hamcrest.hamcrest-core;bundle-version="${version}", org.hamcrest.hamcrest-library;bundle-version="${version}"
