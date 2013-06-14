@@ -10,6 +10,7 @@
     <orderEntry type="library" name="integration" level="project" />
     <orderEntry type="library" name="ant_output" level="project" />
     <orderEntry type="module" module-name="hamcrest-integration" />
+    <orderEntry type="library" name="OSGi" level="project" />
   </component>
 </module>
 

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="OSGi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/osgi/org.apache.felix.framework-4.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
