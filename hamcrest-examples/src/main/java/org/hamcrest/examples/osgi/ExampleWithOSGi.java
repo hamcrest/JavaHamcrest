@@ -1,3 +1,5 @@
+/*  Copyright (c) 2000-2010 hamcrest.org
+ */
 package org.hamcrest.examples.osgi;
 
 import org.junit.After;
@@ -62,9 +64,8 @@ public class ExampleWithOSGi {
         String coreRegex = "^hamcrest-core-([^-])+.jar$";
         String libRegex = "^hamcrest-library-([^-])+.jar$";
         String intRegex = "^hamcrest-integration-([^-])+.jar$";
-        Collection<String> bundles = BundlesUtil.relativePathFiles("build", coreRegex, libRegex, intRegex);
-        bundles.addAll(BundlesUtil.relativePathFiles("lib/osgi", "osgi-consumer.jar"));
-        for (String bundle : bundles) {
+        String consumerReges = "^hamcrest-osgiconsumer-([^-])+.jar$";
+        for (String bundle : BundlesUtil.relativePathFiles("build", coreRegex, libRegex, intRegex, consumerReges)) {
             context.installBundle("file:" + bundle);
         }
 
