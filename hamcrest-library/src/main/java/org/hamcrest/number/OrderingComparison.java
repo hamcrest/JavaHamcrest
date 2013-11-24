@@ -2,56 +2,13 @@
  */
 package org.hamcrest.number;
 
-import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.comparator.ComparatorMatcherBuilder;
 
-import static java.lang.Integer.signum;
+public class OrderingComparison {
 
-public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher<T> {
-    private static final int LESS_THAN = -1;
-    private static final int GREATER_THAN = 1;
-    private static final int EQUAL = 0;
-    private final T expected;
-    private final int minCompare, maxCompare;
-
-    private static final String[] comparisonDescriptions = {
-            "less than",
-            "equal to",
-            "greater than"
-    };
-
-    private OrderingComparison(T expected, int minCompare, int maxCompare) {
-        this.expected = expected;
-        this.minCompare = minCompare;
-        this.maxCompare = maxCompare;
-    }
-
-    @Override
-    public boolean matchesSafely(T actual) {
-        int compare = signum(actual.compareTo(expected));
-        return minCompare <= compare && compare <= maxCompare;
-    }
-
-    @Override
-    public void describeMismatchSafely(T actual, Description mismatchDescription) {
-        mismatchDescription.appendValue(actual).appendText(" was ")
-                .appendText(asText(actual.compareTo(expected)))
-                .appendText(" ").appendValue(expected);
-    }
-
-    @Override
-    public void describeTo(Description description) {
-        description.appendText("a value ").appendText(asText(minCompare));
-        if (minCompare != maxCompare) {
-            description.appendText(" or ").appendText(asText(maxCompare));
-        }
-        description.appendText(" ").appendValue(expected);
-    }
-
-    private static String asText(int comparison) {
-        return comparisonDescriptions[signum(comparison) + 1];
+    private OrderingComparison() {
     }
 
     /**
@@ -61,14 +18,12 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * <p/>
      * For example:
      * <pre>assertThat(1, comparesEqualTo(1))</pre>
-     * 
-     * @param value
-     *     the value which, when passed to the compareTo method of the examined object, should return zero
-     * 
+     *
+     * @param value the value which, when passed to the compareTo method of the examined object, should return zero
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> comparesEqualTo(T value) {
-        return new OrderingComparison<T>(value, EQUAL, EQUAL);
+        return ComparatorMatcherBuilder.<T>usingDefaultComparison().comparesEqualTo(value);
     }
 
     /**
@@ -78,15 +33,13 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * <p/>
      * For example:
      * <pre>assertThat(2, greaterThan(1))</pre>
-     * 
-     * @param value
-     *     the value which, when passed to the compareTo method of the examined object, should return greater
-     *     than zero
-     * 
+     *
+     * @param value the value which, when passed to the compareTo method of the examined object, should return greater
+     *              than zero
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThan(T value) {
-        return new OrderingComparison<T>(value, GREATER_THAN, GREATER_THAN);
+        return ComparatorMatcherBuilder.<T>usingDefaultComparison().greaterThan(value);
     }
 
     /**
@@ -96,15 +49,13 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * <p/>
      * For example:
      * <pre>assertThat(1, greaterThanOrEqualTo(1))</pre>
-     * 
-     * @param value
-     *     the value which, when passed to the compareTo method of the examined object, should return greater
-     *     than or equal to zero
-     * 
+     *
+     * @param value the value which, when passed to the compareTo method of the examined object, should return greater
+     *              than or equal to zero
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
-        return new OrderingComparison<T>(value, EQUAL, GREATER_THAN);
+        return ComparatorMatcherBuilder.<T>usingDefaultComparison().greaterThanOrEqualTo(value);
     }
 
     /**
@@ -114,15 +65,13 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * <p/>
      * For example:
      * <pre>assertThat(1, lessThan(2))</pre>
-     * 
-     * @param value
-     *     the value which, when passed to the compareTo method of the examined object, should return less
-     *     than zero
-     * 
+     *
+     * @param value the value which, when passed to the compareTo method of the examined object, should return less
+     *              than zero
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> lessThan(T value) {
-        return new OrderingComparison<T>(value, LESS_THAN, LESS_THAN);
+        return ComparatorMatcherBuilder.<T>usingDefaultComparison().lessThan(value);
     }
 
     /**
@@ -132,14 +81,12 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * <p/>
      * For example:
      * <pre>assertThat(1, lessThanOrEqualTo(1))</pre>
-     * 
-     * @param value
-     *     the value which, when passed to the compareTo method of the examined object, should return less
-     *     than or equal to zero
-     * 
+     *
+     * @param value the value which, when passed to the compareTo method of the examined object, should return less
+     *              than or equal to zero
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> lessThanOrEqualTo(T value) {
-        return new OrderingComparison<T>(value, LESS_THAN, EQUAL);
+        return ComparatorMatcherBuilder.<T>usingDefaultComparison().lessThanOrEqualTo(value);
     }
 }
