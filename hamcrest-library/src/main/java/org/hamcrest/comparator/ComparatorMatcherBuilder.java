@@ -12,20 +12,21 @@ import static java.lang.Integer.signum;
 public final class ComparatorMatcherBuilder<T> {
 
     private final Comparator<T> comparator;
+    private final boolean includeComparatorInDescription;
 
     /**
      * Creates a matcher factory for matchers of {@code Comparable}s.
      * <p/>
      * For example:
-     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingDefaultComparison().lessThanOrEqualTo(1))</pre>
+     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().lessThanOrEqualTo(1))</pre>
      */
-    public static <T extends Comparable<T>> ComparatorMatcherBuilder<T> usingDefaultComparison() {
+    public static <T extends Comparable<T>> ComparatorMatcherBuilder<T> usingNaturalOrdering() {
         return new ComparatorMatcherBuilder<T>(new Comparator<T>() {
             @Override
             public int compare(T o1, T o2) {
                 return o1.compareTo(o2);
             }
-        });
+        }, false);
     }
 
     /**
@@ -39,11 +40,12 @@ public final class ComparatorMatcherBuilder<T> {
      * }).lessThan(4))</pre>
      */
     public static <T> ComparatorMatcherBuilder<T> comparedBy(Comparator<T> comparator) {
-        return new ComparatorMatcherBuilder<T>(comparator);
+        return new ComparatorMatcherBuilder<T>(comparator, true);
     }
 
-    private ComparatorMatcherBuilder(Comparator<T> comparator) {
+    private ComparatorMatcherBuilder(Comparator<T> comparator, boolean includeComparatorInDescription) {
         this.comparator = comparator;
+        this.includeComparatorInDescription = includeComparatorInDescription;
     }
 
     private static final class ComparatorMatcher<T> extends TypeSafeMatcher<T> {
@@ -53,7 +55,9 @@ public final class ComparatorMatcherBuilder<T> {
 
         private final Comparator<T> comparator;
         private final T expected;
-        private final int minCompare, maxCompare;
+        private final int minCompare;
+        private final int maxCompare;
+        private final boolean includeComparatorInDescription;
 
         private static final String[] comparisonDescriptions = {
                 "less than",
@@ -61,11 +65,12 @@ public final class ComparatorMatcherBuilder<T> {
                 "greater than"
         };
 
-        private ComparatorMatcher(Comparator<T> comparator, T expected, int minCompare, int maxCompare) {
+        private ComparatorMatcher(Comparator<T> comparator, T expected, int minCompare, int maxCompare, boolean includeComparatorInDescription) {
             this.comparator = comparator;
             this.expected = expected;
             this.minCompare = minCompare;
             this.maxCompare = maxCompare;
+            this.includeComparatorInDescription = includeComparatorInDescription;
         }
 
         @Override
@@ -83,6 +88,9 @@ public final class ComparatorMatcherBuilder<T> {
             mismatchDescription.appendValue(actual).appendText(" was ")
                     .appendText(asText(comparator.compare(actual, expected)))
                     .appendText(" ").appendValue(expected);
+            if (includeComparatorInDescription) {
+                mismatchDescription.appendText(" when compared by ").appendValue(comparator);
+            }
         }
 
         @Override
@@ -92,6 +100,9 @@ public final class ComparatorMatcherBuilder<T> {
                 description.appendText(" or ").appendText(asText(maxCompare));
             }
             description.appendText(" ").appendValue(expected);
+            if (includeComparatorInDescription) {
+                description.appendText(" when compared by ").appendValue(comparator);
+            }
         }
 
         private static String asText(int comparison) {
@@ -105,13 +116,13 @@ public final class ComparatorMatcherBuilder<T> {
      * create this builder.
      * <p/>
      * For example:
-     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingDefaultComparison().comparesEqualTo(1))</pre>
+     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().comparesEqualTo(1))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return zero
      */
     @Factory
     public Matcher<T> comparesEqualTo(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.EQUAL);
+        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.EQUAL, includeComparatorInDescription);
     }
 
     /**
@@ -120,14 +131,14 @@ public final class ComparatorMatcherBuilder<T> {
      * create this builder.
      * <p/>
      * For example:
-     * <pre>assertThat(2, ComparatorMatcherBuilder.<Integer>usingDefaultComparison().greaterThan(1))</pre>
+     * <pre>assertThat(2, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().greaterThan(1))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return greater
      *              than zero
      */
     @Factory
     public Matcher<T> greaterThan(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.GREATER_THAN, ComparatorMatcher.GREATER_THAN);
+        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.GREATER_THAN, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
     }
 
     /**
@@ -136,14 +147,14 @@ public final class ComparatorMatcherBuilder<T> {
      * create this builder.
      * <p/>
      * For example:
-     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingDefaultComparison().greaterThanOrEqualTo(1))</pre>
+     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().greaterThanOrEqualTo(1))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return greater
      *              than or equal to zero
      */
     @Factory
     public Matcher<T> greaterThanOrEqualTo(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.GREATER_THAN);
+        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
     }
 
     /**
@@ -152,14 +163,14 @@ public final class ComparatorMatcherBuilder<T> {
      * create this builder.
      * <p/>
      * For example:
-     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingDefaultComparison().lessThan(2))</pre>
+     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().lessThan(2))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return less
      *              than zero
      */
     @Factory
     public Matcher<T> lessThan(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.LESS_THAN);
+        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.LESS_THAN, includeComparatorInDescription);
     }
 
     /**
@@ -168,13 +179,13 @@ public final class ComparatorMatcherBuilder<T> {
      * create this builder.
      * <p/>
      * For example:
-     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingDefaultComparison().lessThanOrEqualTo(1))</pre>
+     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().lessThanOrEqualTo(1))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return less
      *              than or equal to zero
      */
     @Factory
     public Matcher<T> lessThanOrEqualTo(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.EQUAL);
+        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.EQUAL, includeComparatorInDescription);
     }
 }

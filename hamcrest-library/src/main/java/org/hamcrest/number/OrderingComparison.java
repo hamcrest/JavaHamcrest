@@ -23,7 +23,7 @@ public class OrderingComparison {
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> comparesEqualTo(T value) {
-        return ComparatorMatcherBuilder.<T>usingDefaultComparison().comparesEqualTo(value);
+        return ComparatorMatcherBuilder.<T>usingNaturalOrdering().comparesEqualTo(value);
     }
 
     /**
@@ -39,7 +39,7 @@ public class OrderingComparison {
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThan(T value) {
-        return ComparatorMatcherBuilder.<T>usingDefaultComparison().greaterThan(value);
+        return ComparatorMatcherBuilder.<T>usingNaturalOrdering().greaterThan(value);
     }
 
     /**
@@ -55,7 +55,7 @@ public class OrderingComparison {
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
-        return ComparatorMatcherBuilder.<T>usingDefaultComparison().greaterThanOrEqualTo(value);
+        return ComparatorMatcherBuilder.<T>usingNaturalOrdering().greaterThanOrEqualTo(value);
     }
 
     /**
@@ -71,7 +71,7 @@ public class OrderingComparison {
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> lessThan(T value) {
-        return ComparatorMatcherBuilder.<T>usingDefaultComparison().lessThan(value);
+        return ComparatorMatcherBuilder.<T>usingNaturalOrdering().lessThan(value);
     }
 
     /**
@@ -87,6 +87,6 @@ public class OrderingComparison {
      */
     @Factory
     public static <T extends Comparable<T>> Matcher<T> lessThanOrEqualTo(T value) {
-        return ComparatorMatcherBuilder.<T>usingDefaultComparison().lessThanOrEqualTo(value);
+        return ComparatorMatcherBuilder.<T>usingNaturalOrdering().lessThanOrEqualTo(value);
     }
 }
