@@ -68,8 +68,12 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
     public void testComparesCustomTypesWhoseCompareToReturnsValuesGreaterThatOne() {
         assertThat(new CustomInt(5), lessThan(new CustomInt(10)));
     }
+    
+    public void testComparesCustomTypesWhichExtendComparableClasses() {
+        assertThat(new CustomExtendedInt(5), lessThan(new CustomExtendedInt(10)));
+    }
 
-    private static final class CustomInt implements Comparable<CustomInt> {
+    private static class CustomInt implements Comparable<CustomInt> {
         private final int value;
         public CustomInt(int value) {
             this.value = value;
@@ -77,6 +81,12 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
 
         public int compareTo(CustomInt other) {
             return value - other.value;
+        }
+    }
+
+    private static class CustomExtendedInt extends CustomInt {
+        public CustomExtendedInt(int value) {
+            super(value);
         }
     }
 }

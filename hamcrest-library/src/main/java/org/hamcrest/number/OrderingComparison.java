@@ -9,7 +9,7 @@ import org.hamcrest.TypeSafeMatcher;
 
 import static java.lang.Integer.signum;
 
-public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher<T> {
+public class OrderingComparison<T extends Comparable<? super T>> extends TypeSafeMatcher<T> {
     private static final int LESS_THAN = -1;
     private static final int GREATER_THAN = 1;
     private static final int EQUAL = 0;
@@ -67,7 +67,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * 
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<T> comparesEqualTo(T value) {
+    public static <T extends Comparable<? super T>> Matcher<T> comparesEqualTo(T value) {
         return new OrderingComparison<T>(value, EQUAL, EQUAL);
     }
 
@@ -85,7 +85,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * 
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<T> greaterThan(T value) {
+    public static <T extends Comparable<? super T>> Matcher<T> greaterThan(T value) {
         return new OrderingComparison<T>(value, GREATER_THAN, GREATER_THAN);
     }
 
@@ -103,7 +103,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * 
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
+    public static <T extends Comparable<? super T>> Matcher<T> greaterThanOrEqualTo(T value) {
         return new OrderingComparison<T>(value, EQUAL, GREATER_THAN);
     }
 
@@ -121,7 +121,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * 
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<T> lessThan(T value) {
+    public static <T extends Comparable<? super T>> Matcher<T> lessThan(T value) {
         return new OrderingComparison<T>(value, LESS_THAN, LESS_THAN);
     }
 
@@ -139,7 +139,7 @@ public class OrderingComparison<T extends Comparable<T>> extends TypeSafeMatcher
      * 
      */
     @Factory
-    public static <T extends Comparable<T>> Matcher<T> lessThanOrEqualTo(T value) {
+    public static <T extends Comparable<? super T>> Matcher<T> lessThanOrEqualTo(T value) {
         return new OrderingComparison<T>(value, LESS_THAN, EQUAL);
     }
 }
