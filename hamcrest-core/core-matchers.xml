@@ -17,5 +17,6 @@
     <factory class="org.hamcrest.core.StringContains"/>
     <factory class="org.hamcrest.core.StringStartsWith"/>
     <factory class="org.hamcrest.core.StringEndsWith"/>
+    <factory class="org.hamcrest.core.StringMatching"/>
 
 </matchers>
