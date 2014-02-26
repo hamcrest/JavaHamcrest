@@ -3,44 +3,61 @@
  */
 package org.hamcrest.core;
 
+import java.util.regex.Pattern;
+
+import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * @author borettim
  * 
  */
-public class StringMatching extends SubstringMatcher {
+public class StringMatching extends TypeSafeDiagnosingMatcher<String> {
 
-	protected StringMatching(String substring) {
-		super(substring);
+	protected StringMatching(Pattern pattern) {
+		this.pattern = pattern;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.hamcrest.core.SubstringMatcher#evalSubstringOf(java.lang.String)
-	 */
+	private Pattern pattern;
+
 	@Override
-	protected boolean evalSubstringOf(String s) {
-		return s.matches(substring);
+	public void describeTo(Description description) {
+		description.appendText("a string matching the pattern ").appendValue(pattern);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.hamcrest.core.SubstringMatcher#relationship()
-	 */
 	@Override
-	protected String relationship() {
-		return "matching the regex";
+	protected boolean matchesSafely(String item, Description mismatchDescription) {
+		if (!pattern.matcher(item).matches()) {
+			mismatchDescription.appendText("but the string ").appendValue(item)
+					.appendText(" was not matching ").appendValue(pattern);
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validate a string with a {@link java.util.regex.Pattern}.
+	 * 
+	 * <pre>
+	 * assertThat(&quot;abc&quot;, matchesRegex(Pattern.compile(&quot;&circ;[a-z]$&quot;));
+	 * </pre>
+	 * 
+	 * @param pattern
+	 *            the pattern to be used.
+	 * @return The matcher.
+	 */
+	@Factory
+	public static Matcher<String> matchesRegex(Pattern pattern) {
+		return new StringMatching(pattern);
 	}
 
 	/**
 	 * Validate a string with a regex.
 	 * 
 	 * <pre>
-	 * assertThat("abc",matches("^[a-z]+$"));
+	 * assertThat(&quot;abc&quot;, matchesRegex(&quot;&circ;[a-z]+$&quot;));
 	 * </pre>
 	 * 
 	 * @param regex
@@ -48,8 +65,7 @@ public class StringMatching extends SubstringMatcher {
 	 * @return The matcher.
 	 */
 	@Factory
-	public static Matcher<String> matches(String regex) {
-		return new StringMatching(regex);
+	public static Matcher<String> matchesRegex(String regex) {
+		return matchesRegex(Pattern.compile(regex));
 	}
-
 }
