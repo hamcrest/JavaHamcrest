@@ -1,0 +1,32 @@
+//package resources.CustomMatchers; //This is from my own code, not sure where it should go inside of the actual project
+
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.core.SubstringMatcher;
+
+public class stringContainsIgnoringCase extends SubstringMatcher {
+
+    public stringContainsIgnoringCase(String substring) {
+        super(substring);
+    }
+
+    @Override
+    public boolean matchesSafely(String test) {
+        return evalSubstringOf(test);
+    }
+
+    @Override
+    protected boolean evalSubstringOf(String s) {
+        return s.toLowerCase().contains(substring.toLowerCase()); //substring is inherited from SubstringMatcher
+    }
+
+    @Override
+    protected String relationship() {
+        return "containing ignoring case";
+    }
+
+    @Factory
+    public static <T> Matcher<String> containsStringIgnoringCase(String substring) {
+        return new stringContainsIgnoringCase(substring);
+    }
+}
