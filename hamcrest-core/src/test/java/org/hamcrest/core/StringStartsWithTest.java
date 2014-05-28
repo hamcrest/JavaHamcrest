@@ -17,25 +17,15 @@ public class StringStartsWithTest extends AbstractMatcherTest {
         return stringStartsWith;
     }
 
-    public void testEvaluatesToTrueIfArgumentContainsSpecifiedSubstring() {
-        assertTrue("should be true if excerpt at beginning",
-                stringStartsWith.matches(EXCERPT + "END"));
-        assertFalse("should be false if excerpt at end",
-                stringStartsWith.matches("START" + EXCERPT));
-        assertFalse("should be false if excerpt in middle",
-                stringStartsWith.matches("START" + EXCERPT + "END"));
-        assertTrue("should be true if excerpt is at beginning and repeated",
-                stringStartsWith.matches(EXCERPT + EXCERPT));
+    public void testMatchesStringAtStart() {
+        assertMatches(stringStartsWith, EXCERPT + "END");
+        assertDoesNotMatch(stringStartsWith, "START" + EXCERPT);
+        assertDoesNotMatch(stringStartsWith, "START" + EXCERPT + "END");
+        assertMatches(stringStartsWith, EXCERPT);
+        assertMatches(stringStartsWith, EXCERPT + EXCERPT);
+        assertDoesNotMatch(stringStartsWith, "EXCER");
 
-        assertFalse("should be false if excerpt is not in string",
-                stringStartsWith.matches("Something else"));
-        assertFalse("should be false if part of excerpt is at start of string",
-                stringStartsWith.matches(EXCERPT.substring(1)));
-    }
-
-    public void testEvaluatesToTrueIfArgumentIsEqualToSubstring() {
-        assertTrue("should be true if excerpt is entire string",
-                stringStartsWith.matches(EXCERPT));
+        assertMismatchDescription("was \"Something else\"", stringStartsWith, "Something else");
     }
 
     public void testHasAReadableDescription() {
