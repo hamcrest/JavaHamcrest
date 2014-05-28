@@ -9,18 +9,11 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that contains a substring.
  */
 public class StringEndsWith extends SubstringMatcher {
-    public StringEndsWith(String substring) {
-        super(substring);
-    }
+    public StringEndsWith(String substring) { super("ending with", substring); }
 
     @Override
     protected boolean evalSubstringOf(String s) {
         return s.endsWith(substring);
-    }
-
-    @Override
-    protected String relationship() {
-        return "ending with";
     }
 
     /**

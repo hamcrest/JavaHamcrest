@@ -10,17 +10,12 @@ import org.hamcrest.Matcher;
  */
 public class StringContains extends SubstringMatcher {
     public StringContains(String substring) {
-        super(substring);
+        super("containing", substring);
     }
 
     @Override
     protected boolean evalSubstringOf(String s) {
         return s.contains(substring);
-    }
-
-    @Override
-    protected String relationship() {
-        return "containing";
     }
 
     /**

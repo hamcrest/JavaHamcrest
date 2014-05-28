@@ -8,9 +8,11 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
     // TODO: Replace String with CharSequence to allow for easy interoperability between
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
 
+    private final String relationship;
     protected final String substring;
 
-    protected SubstringMatcher(final String substring) {
+    protected SubstringMatcher(String relationship, String substring) {
+        this.relationship = relationship;
         this.substring = substring;
     }
 
@@ -26,12 +28,11 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
     @Override
     public void describeTo(Description description) {
         description.appendText("a string ")
-                .appendText(relationship())
+                .appendText(relationship)
                 .appendText(" ")
                 .appendValue(substring);
     }
 
     protected abstract boolean evalSubstringOf(String string);
 
-    protected abstract String relationship();
 }

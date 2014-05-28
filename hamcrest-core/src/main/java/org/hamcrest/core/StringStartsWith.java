@@ -9,18 +9,11 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that contains a substring.
  */
 public class StringStartsWith extends SubstringMatcher {
-    public StringStartsWith(String substring) {
-        super(substring);
-    }
+    public StringStartsWith(String substring) { super("starting with", substring); }
 
     @Override
     protected boolean evalSubstringOf(String s) {
         return s.startsWith(substring);
-    }
-
-    @Override
-    protected String relationship() {
-        return "starting with";
     }
 
     /**
