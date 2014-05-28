@@ -9,13 +9,13 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that contains a substring.
  */
 public class StringContains extends SubstringMatcher {
-    public StringContains(String substring) {
-        super("containing", substring);
+    public StringContains(boolean ignoringCase, String substring) {
+        super("containing", ignoringCase, substring);
     }
 
     @Override
     protected boolean evalSubstringOf(String s) {
-        return s.contains(substring);
+        return s.toLowerCase().contains(substring.toLowerCase());
     }
 
     /**
@@ -31,7 +31,11 @@ public class StringContains extends SubstringMatcher {
      */
     @Factory
     public static Matcher<String> containsString(String substring) {
-        return new StringContains(substring);
+        return new StringContains(false, substring);
+    }
+    @Factory
+    public static Matcher<String> containsStringIgnoringCase(String substring) {
+        return new StringContains(true, substring);
     }
 
 }

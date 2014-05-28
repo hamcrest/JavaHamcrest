@@ -3,6 +3,7 @@
 package org.hamcrest.core;
 
 import static org.hamcrest.core.StringContains.containsString;
+import static org.hamcrest.core.StringContains.containsStringIgnoringCase;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
@@ -23,12 +24,21 @@ public class StringContainsTest extends AbstractMatcherTest {
         assertMatches(stringContains, "START" + EXCERPT);
         assertMatches(stringContains, "START" + EXCERPT + "END");
         assertMatches(stringContains, EXCERPT + EXCERPT);
+        assertDoesNotMatch(stringContains, "XC");
+
         assertMismatchDescription("was \"Something else\"", stringContains, "Something else");
-        assertMismatchDescription("was \"XC\"", stringContains, "XC");
+        assertDescription("a string containing \"EXCERPT\"", stringContains);
     }
 
+    public void testMatchesSubstringsIgnoringCase() {
+        final Matcher<String> ignoringCase = containsStringIgnoringCase("ExCert");
+        assertMatches(ignoringCase, "eXcERT" + "END");
+        assertMatches(ignoringCase, "START" + "EXCert");
+        assertMatches(ignoringCase, "START" + "excERT" + "END");
+        assertMatches(ignoringCase, "eXCert" + "excErt");
+        assertDoesNotMatch(ignoringCase, "xc");
 
-    public void testHasAReadableDescription() {
-        assertDescription("a string containing \"EXCERPT\"", stringContains);
+        assertMismatchDescription("was \"Something else\"", ignoringCase, "Something else");
+        assertDescription("a string containing \"ExCert\" ignoring case", ignoringCase);
     }
 }

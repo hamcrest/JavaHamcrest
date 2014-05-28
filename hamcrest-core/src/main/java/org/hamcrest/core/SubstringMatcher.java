@@ -9,16 +9,18 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
 
     private final String relationship;
+    private final boolean ignoringCase;
     protected final String substring;
 
-    protected SubstringMatcher(String relationship, String substring) {
+    protected SubstringMatcher(String relationship, boolean ignoringCase, String substring) {
         this.relationship = relationship;
+        this.ignoringCase = ignoringCase;
         this.substring = substring;
     }
 
     @Override
     public boolean matchesSafely(String item) {
-        return evalSubstringOf(item);
+        return evalSubstringOf(ignoringCase ? item.toLowerCase() :item);
     }
     @Override
     public void describeMismatchSafely(String item, Description mismatchDescription) {
@@ -31,6 +33,9 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
                 .appendText(relationship)
                 .appendText(" ")
                 .appendValue(substring);
+        if (ignoringCase) {
+            description.appendText(" ignoring case");
+        }
     }
 
     protected abstract boolean evalSubstringOf(String string);

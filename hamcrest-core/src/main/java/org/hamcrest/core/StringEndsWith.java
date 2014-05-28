@@ -9,7 +9,7 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that contains a substring.
  */
 public class StringEndsWith extends SubstringMatcher {
-    public StringEndsWith(String substring) { super("ending with", substring); }
+    public StringEndsWith(boolean ignoringCase, String substring) { super("ending with", ignoringCase, substring); }
 
     @Override
     protected boolean evalSubstringOf(String s) {
@@ -28,7 +28,7 @@ public class StringEndsWith extends SubstringMatcher {
      */
     @Factory
     public static Matcher<String> endsWith(String suffix) {
-        return new StringEndsWith(suffix);
+        return new StringEndsWith(false, suffix);
     }
 
 }

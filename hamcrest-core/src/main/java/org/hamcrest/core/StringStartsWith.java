@@ -9,7 +9,7 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that contains a substring.
  */
 public class StringStartsWith extends SubstringMatcher {
-    public StringStartsWith(String substring) { super("starting with", substring); }
+    public StringStartsWith(boolean ignoringCase, String substring) { super("starting with", ignoringCase, substring); }
 
     @Override
     protected boolean evalSubstringOf(String s) {
@@ -27,8 +27,6 @@ public class StringStartsWith extends SubstringMatcher {
      *      the substring that the returned matcher will expect at the start of any examined string
      */
     @Factory
-    public static Matcher<String> startsWith(String prefix) {
-        return new StringStartsWith(prefix);
-    }
+    public static Matcher<String> startsWith(String prefix) { return new StringStartsWith(false, prefix); }
 
 }
