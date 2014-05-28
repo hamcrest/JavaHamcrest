@@ -31,4 +31,19 @@ public class StringEndsWith extends SubstringMatcher {
         return new StringEndsWith(false, suffix);
     }
 
+    /**
+     * Creates a matcher that matches if the examined {@link String} ends with the specified
+     * {@link String}, ignoring case.
+     * <p/>
+     * For example:
+     * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
+     *
+     * @param suffix
+     *      the substring that the returned matcher will expect at the end of any examined string
+     */
+    @Factory
+    public static Matcher<String> endsWithIgnoringCase(String suffix) {
+        return new StringEndsWith(true, suffix);
+    }
+
 }

@@ -23,12 +23,23 @@ public class StringEndsWithTest extends AbstractMatcherTest {
         assertMatches(stringEndsWith, EXCERPT);
         assertDoesNotMatch(stringEndsWith, "START" + EXCERPT + "END");
         assertMatches(stringEndsWith, EXCERPT + EXCERPT);
-
         assertDoesNotMatch(stringEndsWith, "EXCER");
-        assertMismatchDescription("was \"Something else\"", stringEndsWith, "Something else");
-    }
 
-    public void testHasAReadableDescription() {
+        assertMismatchDescription("was \"Something else\"", stringEndsWith, "Something else");
         assertDescription("a string ending with \"EXCERPT\"", stringEndsWith);
     }
+
+    public void testMatchesSubstringAtEndIngoringCase() {
+        final Matcher<String> ingoringCase = endsWith("EXCERpt");
+        assertDoesNotMatch(ingoringCase, "eXCErpt" + "END");
+        assertMatches(ingoringCase, "START" + "EXceRpt");
+        assertMatches(ingoringCase, "EXcerPT");
+        assertDoesNotMatch(ingoringCase, "START" + "ExcERpt" + "END");
+        assertMatches(ingoringCase, "exCERpt" + "EXCerPt");
+        assertDoesNotMatch(ingoringCase, "ExcER");
+
+        assertMismatchDescription("was \"Something else\"", ingoringCase, "Something else");
+        assertDescription("a string ending with \"EXCERpt\" ignoring case", ingoringCase);
+    }
+
 }
