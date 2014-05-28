@@ -13,7 +13,7 @@ public class StringEndsWith extends SubstringMatcher {
 
     @Override
     protected boolean evalSubstringOf(String s) {
-        return s.endsWith(substring);
+        return s.toLowerCase().endsWith(substring.toLowerCase());
     }
 
     /**

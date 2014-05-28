@@ -3,6 +3,7 @@
 package org.hamcrest.core;
 
 import static org.hamcrest.core.StringEndsWith.endsWith;
+import static org.hamcrest.core.StringEndsWith.endsWithIgnoringCase;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
@@ -30,16 +31,16 @@ public class StringEndsWithTest extends AbstractMatcherTest {
     }
 
     public void testMatchesSubstringAtEndIngoringCase() {
-        final Matcher<String> ingoringCase = endsWith("EXCERpt");
-        assertDoesNotMatch(ingoringCase, "eXCErpt" + "END");
-        assertMatches(ingoringCase, "START" + "EXceRpt");
-        assertMatches(ingoringCase, "EXcerPT");
-        assertDoesNotMatch(ingoringCase, "START" + "ExcERpt" + "END");
-        assertMatches(ingoringCase, "exCERpt" + "EXCerPt");
-        assertDoesNotMatch(ingoringCase, "ExcER");
+        final Matcher<String> ignoringCase = endsWithIgnoringCase("EXCERpt");
+        assertDoesNotMatch(ignoringCase, "eXCErpt" + "END");
+        assertMatches(ignoringCase, "START" + "EXceRpt");
+        assertMatches(ignoringCase, "EXcerPT");
+        assertDoesNotMatch(ignoringCase, "START" + "ExcERpt" + "END");
+        assertMatches(ignoringCase, "exCERpt" + "EXCerPt");
+        assertDoesNotMatch(ignoringCase, "ExcER");
 
-        assertMismatchDescription("was \"Something else\"", ingoringCase, "Something else");
-        assertDescription("a string ending with \"EXCERpt\" ignoring case", ingoringCase);
+        assertMismatchDescription("was \"Something else\"", ignoringCase, "Something else");
+        assertDescription("a string ending with \"EXCERpt\" ignoring case", ignoringCase);
     }
 
 }
