@@ -15,7 +15,7 @@ public class StringContains extends SubstringMatcher {
 
     @Override
     protected boolean evalSubstringOf(String s) {
-        return s.indexOf(substring) >= 0;
+        return s.contains(substring);
     }
 
     @Override

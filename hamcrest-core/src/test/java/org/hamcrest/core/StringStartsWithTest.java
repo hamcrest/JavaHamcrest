@@ -1,6 +1,6 @@
 /*  Copyright (c) 2000-2006 hamcrest.org
  */
-package org.hamcrest.text;
+package org.hamcrest.core;
 
 import static org.hamcrest.core.StringStartsWith.startsWith;
 
