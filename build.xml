@@ -5,6 +5,8 @@
     <property name="debug" value="true" description="Whether to build with debug information"/>
     <property name="javaversion" value="1.5" description="Java version to target"/>
     <tstamp><format property="build.timestamp" pattern="yyyy-MM-dd HH:mm:ss" timezone="GMT"/></tstamp>
+    <taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpath="lib/integration/ant-junit-1.8.4.jar"/>
+
 
     <target name="all" depends="clean, bigjar" description="Performs clean build, runs tests and packages for distribution"/>
 
