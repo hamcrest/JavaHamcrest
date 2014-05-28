@@ -22,6 +22,7 @@ public class StringEndsWithTest extends AbstractMatcherTest {
         assertDoesNotMatch(stringEndsWith, EXCERPT + "END");
         assertMatches(stringEndsWith, "START" + EXCERPT);
         assertMatches(stringEndsWith, EXCERPT);
+        assertDoesNotMatch(stringEndsWith, EXCERPT.toLowerCase());
         assertDoesNotMatch(stringEndsWith, "START" + EXCERPT + "END");
         assertMatches(stringEndsWith, EXCERPT + EXCERPT);
         assertDoesNotMatch(stringEndsWith, "EXCER");

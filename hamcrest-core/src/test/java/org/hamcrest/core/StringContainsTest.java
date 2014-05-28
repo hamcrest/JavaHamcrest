@@ -23,6 +23,8 @@ public class StringContainsTest extends AbstractMatcherTest {
         assertMatches(stringContains, EXCERPT + "END");
         assertMatches(stringContains, "START" + EXCERPT);
         assertMatches(stringContains, "START" + EXCERPT + "END");
+        assertMatches(stringContains, EXCERPT);
+        assertDoesNotMatch(stringContains, EXCERPT.toLowerCase());
         assertMatches(stringContains, EXCERPT + EXCERPT);
         assertDoesNotMatch(stringContains, "XC");
 

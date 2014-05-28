@@ -15,7 +15,7 @@ public class StringContains extends SubstringMatcher {
 
     @Override
     protected boolean evalSubstringOf(String s) {
-        return s.toLowerCase().contains(substring.toLowerCase());
+        return converted(s).contains(converted(substring));
     }
 
     /**

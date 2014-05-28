@@ -38,6 +38,7 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
         }
     }
 
+    protected String converted(String arg) { return ignoringCase ? arg.toLowerCase() : arg; }
     protected abstract boolean evalSubstringOf(String string);
 
 }
