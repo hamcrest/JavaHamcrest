@@ -18,18 +18,14 @@ public class StringEndsWithTest extends AbstractMatcherTest {
     }
 
     public void testMatchesSubstringAtEnd() {
-        assertMatches(stringEndsWith, EXCERPT + "END");
+        assertDoesNotMatch(stringEndsWith, EXCERPT + "END");
         assertMatches(stringEndsWith, "START" + EXCERPT);
+        assertMatches(stringEndsWith, EXCERPT);
         assertDoesNotMatch(stringEndsWith, "START" + EXCERPT + "END");
         assertMatches(stringEndsWith, EXCERPT + EXCERPT);
 
         assertDoesNotMatch(stringEndsWith, "EXCER");
-        assertMismatchDescription("bad", stringEndsWith, "Something else");
-    }
-
-    public void testEvaluatesToTrueIfArgumentIsEqualToSubstring() {
-        assertTrue("should be true if excerpt is entire string",
-                stringEndsWith.matches(EXCERPT));
+        assertMismatchDescription("was \"Something else\"", stringEndsWith, "Something else");
     }
 
     public void testHasAReadableDescription() {
