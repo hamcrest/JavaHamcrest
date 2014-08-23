@@ -24,11 +24,19 @@ public class MatchesPattern extends TypeSafeMatcher<String> {
         description.appendText("a string matching the pattern '" + pattern + "'");
     }
 
+    /**
+     * Creates a matcher of {@link String} that matches when the examined string
+     * exactly matches the given {@link Pattern}.
+     */
     @Factory
     public static Matcher<String> matchesPattern(Pattern pattern) {
         return new MatchesPattern(pattern);
     }
 
+    /**
+     * Creates a matcher of {@link String} that matches when the examined string
+     * exactly matches the given regular expression, treated as a {@link Pattern}.
+     */
     @Factory
     public static Matcher<String> matchesPattern(String regex) {
         return new MatchesPattern(Pattern.compile(regex));
