@@ -28,7 +28,7 @@ public class MatchesPatternTest {
     }
 
     @Test
-    public void doesNotMatchesDifferentString() {
+    public void doesNotMatchADifferentString() {
         assertDoesNotMatch("A different string does not match", new MatchesPattern(Pattern.compile("a")), "b");
     }
 
