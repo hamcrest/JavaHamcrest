@@ -48,4 +48,16 @@ public class MatchesPatternTest {
         final Matcher<String> matcher = new MatchesPattern(Pattern.compile("a"));
         assertMismatchDescription("was \"Cheese\"", matcher, "Cheese");
     }
+
+    @Test
+    public void factoryMethodAllowsCreationWithPattern() {
+        Matcher<?> m = MatchesPattern.matchesPattern(Pattern.compile("a[bc](d|e)"));
+        assertDescription("a string matching the pattern 'a[bc](d|e)'", m );
+    }
+
+    @Test
+    public void factoryMethodAllowsCreationWithString() {
+        Matcher<?> m = MatchesPattern.matchesPattern("a[bc](d|e)");
+        assertDescription("a string matching the pattern 'a[bc](d|e)'", m );
+    }
 }
