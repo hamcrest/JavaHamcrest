@@ -18,13 +18,7 @@ public class MatchesPattern extends TypeSafeMatcher<String> {
     }
 
     @Override
-    protected void describeMismatchSafely(String item, Description mismatchDescription) {
-        // TODO Auto-generated method stub
-        super.describeMismatchSafely(item, mismatchDescription);
-    }
-
-    @Override
     public void describeTo(Description description) {
-        // TODO Auto-generated method stub
+        description.appendText("a string matching the pattern '" + pattern + "'");
     }
 }
