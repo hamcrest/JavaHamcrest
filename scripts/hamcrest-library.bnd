@@ -1,0 +1,13 @@
+Bundle-SymbolicName: org.hamcrest.hamcrest-library
+Bundle-Name: Hamcrest library
+Bundle-Description: Hamcrest library of matcher implementations.
+Bundle-Version: ${version}
+Export-Package: org.hamcrest;version="${version}";org.hamcrest.hamcrest-library=split;mandatory:=org.hamcrest.hamcrest-library, \
+                org.hamcrest.*;version="${version}"
+Import-Package: org.hamcrest.*;version="${version}"
+Implementation-Title: hamcrest-library
+Implementation-Vendor: hamcrest.org
+Implementation-Version: ${version}
+Built-By: ${user.name}
+Built-Date: ${build.timestamp}
+Require-Bundle: org.hamcrest.hamcrest-core;bundle-version="${version}"

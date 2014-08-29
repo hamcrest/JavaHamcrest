@@ -44,7 +44,7 @@ public class ExampleWithAssertThat {
       }
     }
     
-    @Test
+    @Test(expected = AssertionError.class)
     public void showMismatch() {
       ComplicatedClass complicated = new ComplicatedClass();
       
