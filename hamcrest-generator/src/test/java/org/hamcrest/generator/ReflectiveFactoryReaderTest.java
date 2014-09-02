@@ -154,7 +154,21 @@ public final class ReflectiveFactoryReaderTest {
         public static Matcher<String> withGenerifiedParam(Collection<? extends Comparable<String>> things, Set<String[]>[] x) {
             return null;
         }
+        
+        @Factory
+        public static Matcher<String> withInnerClass(Map.Entry<String, Integer> x) {
+        	return null;
+        }
 
+    }
+    
+    @Test public void
+    readsInnterClass() {
+        FactoryMethod method = readMethod(ParameterizedMatchers.class, "withInnerClass");
+        List<FactoryMethod.Parameter> params = method.getParameters();
+        assertEquals(1, params.size());
+
+        assertEquals("java.util.Map.Entry<java.lang.String, java.lang.Integer>", params.get(0).getType());
     }
 
     @Test public void
