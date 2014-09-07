@@ -14,6 +14,7 @@
     <factory class="org.hamcrest.core.IsNot"/>
     <factory class="org.hamcrest.core.IsNull"/>
     <factory class="org.hamcrest.core.IsSame"/>
+    <factory class="org.hamcrest.core.Returns"/>
     <factory class="org.hamcrest.core.StringContains"/>
     <factory class="org.hamcrest.core.StringStartsWith"/>
     <factory class="org.hamcrest.core.StringEndsWith"/>
