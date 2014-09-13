@@ -52,6 +52,7 @@
     <factory class="org.hamcrest.object.HasToString"/>
     <factory class="org.hamcrest.object.IsCompatibleType"/>
     <factory class="org.hamcrest.object.IsEventFrom"/>
+    <factory class="org.hamcrest.object.HasField"/>
 
     <!-- Beans -->
     <factory class="org.hamcrest.beans.HasProperty"/>
