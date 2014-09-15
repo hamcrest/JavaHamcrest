@@ -1,12 +1,12 @@
 package org.hamcrest;
 
-import static java.lang.String.valueOf;
+import org.hamcrest.internal.ArrayIterator;
+import org.hamcrest.internal.SelfDescribingValueIterator;
 
 import java.util.Arrays;
 import java.util.Iterator;
 
-import org.hamcrest.internal.ArrayIterator;
-import org.hamcrest.internal.SelfDescribingValueIterator;
+import static java.lang.String.valueOf;
 
 /**
  * A {@link Description} that is stored as a string.
@@ -49,6 +49,9 @@ public abstract class BaseDescription implements Description {
             append("F>");
         } else if (value.getClass().isArray()) {
             appendValueList("[",", ","]", new ArrayIterator(value));
+        } else if (value instanceof Iterable) {
+            final Iterable iterable = (Iterable) value;
+            appendValueList("[",", ","]", iterable.iterator());
         } else {
             append('<');
             append(descriptionOf(value));

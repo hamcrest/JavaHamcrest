@@ -1,8 +1,11 @@
 package org.hamcrest;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.Iterator;
+
+import static org.junit.Assert.assertEquals;
 
 public final class BaseDescriptionTest {
 
@@ -56,7 +59,18 @@ public final class BaseDescriptionTest {
         assertEquals("[\"2\", \"3\"]", result.toString());
     }
 
-    @Test public void 
+    @Test public void
+    describesAppendedIterableValue() {
+        baseDescription.appendValue(new Iterable<String>() {
+            @Override
+            public Iterator<String> iterator() {
+                return Arrays.asList("2", "3").iterator();
+            }
+        });
+        assertEquals("[\"2\", \"3\"]", result.toString());
+    }
+
+    @Test public void
     bracketsAppendedObjectValue() {
         final Object value = new Object();
         baseDescription.appendValue(value);
