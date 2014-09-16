@@ -49,6 +49,9 @@ public abstract class BaseDescription implements Description {
             append("F>");
         } else if (value.getClass().isArray()) {
             appendValueList("[",", ","]", new ArrayIterator(value));
+        } else if (value instanceof Iterable) {
+            final Iterable iterable = (Iterable) value;
+            appendValueList("<[",", ","]>", iterable.iterator());
         } else {
             append('<');
             append(descriptionOf(value));
