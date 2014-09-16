@@ -67,7 +67,7 @@ public final class BaseDescriptionTest {
                 return Arrays.asList("2", "3").iterator();
             }
         });
-        assertEquals("[\"2\", \"3\"]", result.toString());
+        assertEquals("<[\"2\", \"3\"]>", result.toString());
     }
 
     @Test public void
