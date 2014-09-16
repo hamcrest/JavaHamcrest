@@ -1,12 +1,12 @@
 package org.hamcrest;
 
-import org.hamcrest.internal.ArrayIterator;
-import org.hamcrest.internal.SelfDescribingValueIterator;
+import static java.lang.String.valueOf;
 
 import java.util.Arrays;
 import java.util.Iterator;
 
-import static java.lang.String.valueOf;
+import org.hamcrest.internal.ArrayIterator;
+import org.hamcrest.internal.SelfDescribingValueIterator;
 
 /**
  * A {@link Description} that is stored as a string.
