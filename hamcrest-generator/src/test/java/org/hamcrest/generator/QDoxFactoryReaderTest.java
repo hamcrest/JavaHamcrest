@@ -163,9 +163,7 @@ public final class QDoxFactoryReaderTest {
         assertEquals("java.util.Collection<? extends java.lang.Comparable<java.lang.String>>",
                      method.getParameters().get(0).getType());
 
-        String expected = System.getProperty("java.version").startsWith("1.7.")
-                ? "java.util.Set<[Ljava.lang.String;>[]"
-                : "java.util.Set<java.lang.String[]>[]";
+        String expected = "java.util.Set<java.lang.String[]>[]";
 
         assertEquals(expected, method.getParameters().get(1).getType());
     }
