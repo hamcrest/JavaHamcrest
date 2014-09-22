@@ -2,6 +2,8 @@ package org.hamcrest.generator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -37,7 +39,7 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
 
     @Override
     public Iterator<FactoryMethod> iterator() {
-        Collection<FactoryMethod> methods = new ArrayList<FactoryMethod>();
+        List<FactoryMethod> methods = new ArrayList<FactoryMethod>();
 
         for (JavaMethod jm : classSource.getMethods()) {
             if (!isFactoryMethod(jm)) {
@@ -76,6 +78,12 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
 
             methods.add(fm);
         }
+
+        Collections.sort(methods, new Comparator<FactoryMethod>() {
+            @Override public int compare(FactoryMethod o1, FactoryMethod o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
 
         return methods.iterator();
     }
