@@ -171,13 +171,13 @@ public final class QDoxFactoryReaderTest {
     }
 
     @Test public void
-    cannotReadParameterNamesSoMakesThemUpInstead() throws FileNotFoundException {
+    canReadParameterNames() throws FileNotFoundException {
         FactoryMethod method = readMethod("ParameterizedMatchers", "withParam");
         List<FactoryMethod.Parameter> params = method.getParameters();
 
-        assertEquals("param1", params.get(0).getName());
-        assertEquals("param2", params.get(1).getName());
-        assertEquals("param3", params.get(2).getName());
+        assertEquals("someString", params.get(0).getName());
+        assertEquals("numbers", params.get(1).getName());
+        assertEquals("things", params.get(2).getName());
     }
 
     @Test public void
@@ -192,10 +192,9 @@ public final class QDoxFactoryReaderTest {
     }
 
     @Test public void
-    cannotReadJavaDoc() throws FileNotFoundException {
-        // JavaDoc information is not available through reflection alone.
+    canReadJavaDoc() throws FileNotFoundException {
         FactoryMethod method = readMethod("WithJavaDoc", "documented");
-        assertEquals(null, method.getJavaDoc());
+        assertEquals("Look at me!\n\n@return something\n", method.getJavaDoc());
     }
 
     @Test public void
