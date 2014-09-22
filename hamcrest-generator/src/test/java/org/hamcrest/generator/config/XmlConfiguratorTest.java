@@ -16,7 +16,7 @@ import org.xml.sax.InputSource;
 public final class XmlConfiguratorTest {
 
     private final MockSugarConfiguration sugarConfiguration = new MockSugarConfiguration();
-    private final XmlConfigurator config = new XmlConfigurator(sugarConfiguration, getClass().getClassLoader());
+    private final XmlConfigurator config = new XmlConfigurator(sugarConfiguration);
 
     @Test public void
     addsMatcherFactoryMethodsToConfiguration() throws Exception {

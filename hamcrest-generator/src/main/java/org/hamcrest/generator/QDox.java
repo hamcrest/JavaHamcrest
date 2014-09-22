@@ -1,10 +1,10 @@
 package org.hamcrest.generator;
 
-import com.thoughtworks.qdox.JavaProjectBuilder;
-import com.thoughtworks.qdox.model.JavaClass;
-
 import java.io.File;
 import java.io.Reader;
+
+import com.thoughtworks.qdox.JavaProjectBuilder;
+import com.thoughtworks.qdox.model.JavaClass;
 
 /**
  * Wraps QDox library. This is because to ease distribution, QDox is bundled into

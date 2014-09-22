@@ -119,21 +119,21 @@ public final class QDoxFactoryReaderTest {
     @Test public void
     readsFullyQualifiedGenericType() throws FileNotFoundException {
         FactoryMethod method = readMethod("GenerifiedMatchers", "generifiedType");
-        assertEquals("java.util.Comparator<java.lang.String>", method.getGenerifiedType());
+        assertEquals("org.hamcrest.Matcher<java.util.Comparator<java.lang.String>>", method.getReturnType());
     }
 
     @Test public void
     readsNullGenerifiedTypeIfNotPresent() throws FileNotFoundException {
         FactoryMethod method = readMethod("GenerifiedMatchers", "noGenerifiedType");
-        assertNull(method.getGenerifiedType());
+        assertEquals("org.hamcrest.Matcher", method.getReturnType());
     }
 
     @Test public void
     readsGenericsInGenericType() throws FileNotFoundException {
         FactoryMethod method = readMethod("GenerifiedMatchers", "crazyType");
         assertEquals(
-                "java.util.Map<? extends java.util.Set<java.lang.Long>, org.hamcrest.Factory>",
-                method.getGenerifiedType());
+                "org.hamcrest.Matcher<java.util.Map<? extends java.util.Set<java.lang.Long>,org.hamcrest.Factory>>",
+                method.getReturnType());
     }
 
     @Test public void
@@ -203,7 +203,7 @@ public final class QDoxFactoryReaderTest {
         assertEquals("T", method.getGenericTypeParameters().get(0));
         assertEquals("V extends java.util.List<java.lang.String> & java.lang.Comparable<java.lang.String>",
                 method.getGenericTypeParameters().get(1));
-        assertEquals("java.util.Map<T, V[]>", method.getGenerifiedType());
+        assertEquals("org.hamcrest.Matcher<java.util.Map<T,V[]>>", method.getReturnType());
         assertEquals("java.util.Set<T>", method.getParameters().get(0).getType());
         assertEquals("V", method.getParameters().get(1).getType());
     }
