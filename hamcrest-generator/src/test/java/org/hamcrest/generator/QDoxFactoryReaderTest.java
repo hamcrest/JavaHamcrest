@@ -1,6 +1,7 @@
 package org.hamcrest.generator;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ public final class QDoxFactoryReaderTest {
         String input = "" +
                 "package org;\n" +
                 "class SomeClass {\n" +
-                "  Matcher someMethod(String realParamName) { ... } \n" +
+                "  @org.hamcrest.Factory" +
+                "  public static Matcher someMethod(String realParamName) { ... } \n" +
                 "}\n";
         FactoryMethod factoryMethod = wrapUsingQDoxedSource(method, "org.SomeClass", input);
 
@@ -35,14 +37,15 @@ public final class QDoxFactoryReaderTest {
         String input = "" +
                 "package org;\n" +
                 "class SomeClass {\n" +
-                "  Matcher someMethod(java.util.Collection<String> realParamName) { ... } \n" +
+                "  @org.hamcrest.Factory" +
+                "  public static Matcher someMethod(java.util.Collection<String> realParamName) { ... } \n" +
                 "}\n";
         FactoryMethod factoryMethod = wrapUsingQDoxedSource(method, "org.SomeClass", input);
 
         assertEquals("java.util.Collection<java.lang.String>", factoryMethod.getParameters().get(0).getType());
         assertEquals("realParamName", factoryMethod.getParameters().get(0).getName());
     }
-    
+
     @Test public void
     extractsOriginalVarArgParameterNamesFromSource() {
         FactoryMethod method = new FactoryMethod("org.SomeClass", "someMethod", "unusedReturnType");
@@ -51,7 +54,8 @@ public final class QDoxFactoryReaderTest {
         String input = "" +
                 "package org;\n" +
                 "class SomeClass {\n" +
-                "  Matcher someMethod(java.lang.String... realParamName) { ... } \n" +
+                "  @org.hamcrest.Factory" +
+                "  public static Matcher someMethod(java.lang.String... realParamName) { ... } \n" +
                 "}\n";
         FactoryMethod factoryMethod = wrapUsingQDoxedSource(method, "org.SomeClass", input);
 
@@ -71,7 +75,8 @@ public final class QDoxFactoryReaderTest {
                 "   *\n" +
                 "   * @return stuff.\n" +
                 "   */\n" +
-                "  Matcher someMethod() { ... } \n" +
+                "  @org.hamcrest.Factory" +
+                "  public static Matcher someMethod() { ... } \n" +
                 "}\n";
         FactoryMethod factoryMethod = wrapUsingQDoxedSource(method, "org.SomeClass", input);
 
@@ -93,7 +98,7 @@ public final class QDoxFactoryReaderTest {
 
     private static FactoryMethod getFirstFactoryMethod(QDoxFactoryReader qDoxFactoryReader) {
         Iterator<FactoryMethod> iterator = qDoxFactoryReader.iterator();
-        iterator.hasNext();
+        assertTrue(iterator.hasNext());
         return iterator.next();
     }
 }
