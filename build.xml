@@ -27,7 +27,7 @@
     </target>
 
     <target name="generator" depends="api" description="Build code generator tool">
-        <path id="cp-hamcrest-generator-main" path="lib/generator/qdox-1.12.jar;build/hamcrest-api-${version}.jar"/>
+        <path id="cp-hamcrest-generator-main" path="lib/downloaded/qdox-2.0-M2.jar;build/hamcrest-api-${version}.jar"/>
         <path id="cp-hamcrest-generator-test" path=""/>
         <compile-module modulename="hamcrest-generator"/>
         <jar-module modulename="hamcrest-generator"/>
@@ -38,7 +38,7 @@
         <copy file="build/hamcrest-generator-${version}.jar" tofile="build/hamcrest-generator-${version}-nodep.jar"/>
         <jarjar jarfile="build/hamcrest-generator-${version}.jar">
             <zipfileset src="build/hamcrest-generator-${version}-nodep.jar"/>
-            <zipfileset src="lib/generator/qdox-1.12.jar"/>
+            <zipfileset src="lib/downloaded/qdox-2.0-M2.jar"/>
             <rule pattern="com.thoughtworks.qdox.**" result="org.hamcrest.generator.qdox.@1"/>
         </jarjar>
     </target>

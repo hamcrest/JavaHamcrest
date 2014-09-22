@@ -4,8 +4,10 @@ import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.JavaParameter;
-import com.thoughtworks.qdox.model.Type;
+import com.thoughtworks.qdox.model.JavaType;
+import com.thoughtworks.qdox.model.impl.DefaultJavaType;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -56,15 +58,15 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
         JavaMethod methodSource = findMethodInSource(factoryMethod);
         if (methodSource != null) {
             factoryMethod.setJavaDoc(createJavaDocComment(methodSource));
-            JavaParameter[] parametersFromSource
+            List<JavaParameter> parametersFromSource
                     = methodSource.getParameters();
             List<FactoryMethod.Parameter> parametersFromReflection
                     = factoryMethod.getParameters();
 
-            if (parametersFromReflection.size() == parametersFromSource.length) {
-                for (int i = 0; i < parametersFromSource.length; i++) {
+            if (parametersFromReflection.size() == parametersFromSource.size()) {
+                for (int i = 0; i < parametersFromSource.size(); i++) {
                     parametersFromReflection.get(i).setName(
-                            parametersFromSource[i].getName());
+                            parametersFromSource.get(i).getName());
                 }
             }
         }
@@ -79,18 +81,18 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
         // Note, this doesn't always work - it struggles with some kinds of generics.
         // This seems to cover most cases though.
         List<FactoryMethod.Parameter> params = factoryMethod.getParameters();
-        Type[] types = new Type[params.size()];
+        List<JavaType> types = new ArrayList<JavaType>();
         boolean varArgs = false;
-        for (int i = 0; i < types.length; i++) {
+        for (int i = 0; i < params.size(); i++) {
             String type = params.get(i).getType();
             varArgs = VARARGS_REGEX.matcher(type).find();
             // QDox ignores varargs and generics, so we strip them out to help QDox.
             type = GENERIC_REGEX.matcher(type).replaceAll("");
             type = VARARGS_REGEX.matcher(type).replaceAll("");
-            types[i] = new Type(type);
+            types.add(new DefaultJavaType(type));
         }
-        JavaMethod[] methods = classSource.getMethodsBySignature(factoryMethod.getName(), types, false, varArgs);
-        return methods.length == 1 ?  methods[0] : null;
+        List<JavaMethod> methods = classSource.getMethodsBySignature(factoryMethod.getName(), types, false, varArgs);
+        return methods.size() == 1 ?  methods.get(0) : null;
     }
 
     /**
@@ -98,8 +100,8 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
      */
     private static String createJavaDocComment(JavaMethod methodSource) {
         String comment = methodSource.getComment();
-        DocletTag[] tags = methodSource.getTags();
-        if ((comment == null || comment.trim().length() == 0) && tags.length == 0) {
+        List<DocletTag> tags = methodSource.getTags();
+        if ((comment == null || comment.trim().length() == 0) && tags.size() == 0) {
             return null;
         }
         StringBuilder result = new StringBuilder();
