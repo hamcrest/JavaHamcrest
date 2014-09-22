@@ -87,8 +87,8 @@ public class XmlConfigurator {
         String packageName = dotIndex == -1 ? "" : fullClassName.substring(0, dotIndex);
         String shortClassName = fullClassName.substring(dotIndex + 1);
 
-        if (!outputDir.isDirectory()) {
-            System.err.println("Output directory not found : " + outputDir.getAbsolutePath());
+        if (!outputDir.isDirectory() && !outputDir.mkdirs()) {
+            System.err.println("Unable to create directory not : " + outputDir.getAbsolutePath());
             System.exit(-1);
         }
 
