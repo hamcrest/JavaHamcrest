@@ -1,10 +1,16 @@
 package org.hamcrest.generator;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -84,6 +90,160 @@ public final class QDoxFactoryReaderTest {
                 factoryMethod.getJavaDoc());
     }
 
+    @Test public void
+    iteratesOverFactoryMethods() throws FileNotFoundException {
+        final QDoxFactoryReader reader = readerForTestClass("SimpleSetOfMatchers");
+        final List<FactoryMethod> methods = methodsReadBy(reader);
+
+        assertEquals(2, methods.size());
+
+        final String expectedClass = "test.SimpleSetOfMatchers";
+
+        assertEquals("firstMethod", methods.get(0).getName());
+        assertEquals(expectedClass, methods.get(0).getMatcherClass());
+
+        assertEquals("secondMethod", methods.get(1).getName());
+        assertEquals(expectedClass, methods.get(1).getMatcherClass());
+    }
+
+    @Test public void
+    onlyReadsPublicStaticAnnotatedMethodsThatReturnNonVoid() throws FileNotFoundException {
+        final QDoxFactoryReader reader = readerForTestClass("MatchersWithDodgySignatures");
+        final List<FactoryMethod> methods = methodsReadBy(reader);
+
+        assertEquals(2, methods.size());
+        assertEquals("anotherGoodMethod", methods.get(0).getName());
+        assertEquals("goodMethod", methods.get(1).getName());
+    }
+
+    @Test public void
+    readsFullyQualifiedGenericType() throws FileNotFoundException {
+        FactoryMethod method = readMethod("GenerifiedMatchers", "generifiedType");
+        assertEquals("java.util.Comparator<java.lang.String>", method.getGenerifiedType());
+    }
+
+    @Test public void
+    readsNullGenerifiedTypeIfNotPresent() throws FileNotFoundException {
+        FactoryMethod method = readMethod("GenerifiedMatchers", "noGenerifiedType");
+        assertNull(method.getGenerifiedType());
+    }
+
+    @Test public void
+    readsGenericsInGenericType() throws FileNotFoundException {
+        FactoryMethod method = readMethod("GenerifiedMatchers", "crazyType");
+        assertEquals(
+                "java.util.Map<? extends java.util.Set<java.lang.Long>, org.hamcrest.Factory>",
+                method.getGenerifiedType());
+    }
+
+    @Test public void
+    readsParameterTypes() throws FileNotFoundException {
+        FactoryMethod method = readMethod("ParameterizedMatchers", "withParam");
+        List<FactoryMethod.Parameter> params = method.getParameters();
+        assertEquals(3, params.size());
+
+        assertEquals("java.lang.String", params.get(0).getType());
+        assertEquals("int[]", params.get(1).getType());
+        assertEquals("java.util.Collection<java.lang.Object>", params.get(2).getType());
+    }
+
+    @Test public void
+    readsArrayAndVarArgParameterTypes() throws FileNotFoundException {
+        FactoryMethod arrayMethod = readMethod("ParameterizedMatchers", "withArray");
+        assertEquals("java.lang.String[]", arrayMethod.getParameters().get(0).getType());
+
+        FactoryMethod varArgsMethod = readMethod("ParameterizedMatchers", "withVarArgs");
+        assertEquals("java.lang.String...", varArgsMethod.getParameters().get(0).getType());
+    }
+
+    @Test public void
+    readsGenerifiedParameterTypes() throws FileNotFoundException {
+        FactoryMethod method = readMethod("ParameterizedMatchers", "withGenerifiedParam");
+
+        assertEquals("java.util.Collection<? extends java.lang.Comparable<java.lang.String>>",
+                     method.getParameters().get(0).getType());
+
+        String expected = System.getProperty("java.version").startsWith("1.7.")
+                ? "java.util.Set<[Ljava.lang.String;>[]"
+                : "java.util.Set<java.lang.String[]>[]";
+
+        assertEquals(expected, method.getParameters().get(1).getType());
+    }
+
+    @Test public void
+    cannotReadParameterNamesSoMakesThemUpInstead() throws FileNotFoundException {
+        FactoryMethod method = readMethod("ParameterizedMatchers", "withParam");
+        List<FactoryMethod.Parameter> params = method.getParameters();
+
+        assertEquals("param1", params.get(0).getName());
+        assertEquals("param2", params.get(1).getName());
+        assertEquals("param3", params.get(2).getName());
+    }
+
+    @Test public void
+    readsExceptions() throws FileNotFoundException {
+        FactoryMethod method = readMethod("ExceptionalMatchers", "withExceptions");
+        List<String> exceptions = method.getExceptions();
+        assertEquals(3, exceptions.size());
+
+        assertEquals("java.lang.Error", exceptions.get(0));
+        assertEquals("java.io.IOException", exceptions.get(1));
+        assertEquals("java.lang.RuntimeException", exceptions.get(2));
+    }
+
+    @Test public void
+    cannotReadJavaDoc() throws FileNotFoundException {
+        // JavaDoc information is not available through reflection alone.
+        FactoryMethod method = readMethod("WithJavaDoc", "documented");
+        assertEquals(null, method.getJavaDoc());
+    }
+
+    @Test public void
+    readsGenericTypeParameters() throws FileNotFoundException {
+        FactoryMethod method = readMethod("G", "x");
+        assertEquals("T", method.getGenericTypeParameters().get(0));
+        assertEquals("V extends java.util.List<java.lang.String> & java.lang.Comparable<java.lang.String>",
+                method.getGenericTypeParameters().get(1));
+        assertEquals("java.util.Map<T, V[]>", method.getGenerifiedType());
+        assertEquals("java.util.Set<T>", method.getParameters().get(0).getType());
+        assertEquals("V", method.getParameters().get(1).getType());
+    }
+
+    @Test public void
+    catchesSubclasses() throws FileNotFoundException {
+        assertNotNull(readMethod("SubclassOfMatcher", "subclassMethod"));
+    }
+
+    private static List<FactoryMethod> methodsReadBy(final Iterable<FactoryMethod> reader) {
+        final List<FactoryMethod> extractedMethods = new ArrayList<FactoryMethod>();
+        for (FactoryMethod factoryMethod : reader) {
+            extractedMethods.add(factoryMethod);
+        }
+        Collections.sort(extractedMethods, new Comparator<FactoryMethod>() {
+            @Override public int compare(FactoryMethod o1, FactoryMethod o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        return extractedMethods;
+    }
+
+    private static QDoxFactoryReader readerForTestClass(String name)
+            throws FileNotFoundException {
+        QDox qdox = new QDox();
+        qdox.addSource(new FileReader("src/test/java-source/test/" + name + ".java"));
+
+        return new QDoxFactoryReader(qdox, "test." + name);
+    }
+
+    private static FactoryMethod readMethod(String name, String methodName) throws FileNotFoundException {
+        for (FactoryMethod method : readerForTestClass(name)) {
+            if (method.getName().equals(methodName)) {
+                return method;
+            }
+        }
+        return null;
+    }
+
     private static FactoryMethod wrapUsingQDoxedSource(FactoryMethod originalMethod, String className, String input) {
         List<FactoryMethod> originalMethods = new ArrayList<FactoryMethod>();
         originalMethods.add(originalMethod);
@@ -91,8 +251,7 @@ public final class QDoxFactoryReaderTest {
         QDox qdox = new QDox();
         qdox.addSource(new StringReader(input));
 
-        QDoxFactoryReader qDoxFactoryReader = new QDoxFactoryReader(
-                originalMethods, qdox, className);
+        QDoxFactoryReader qDoxFactoryReader = new QDoxFactoryReader(qdox, className);
         return getFirstFactoryMethod(qDoxFactoryReader);
     }
 
