@@ -26,13 +26,13 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
 
     private final JavaClass classSource;
 
-    private JavaClass annot;
+    private JavaClass factoryAnnotation;
 
     private static final Pattern GENERIC_REGEX = Pattern.compile("^<(.*)>$");
 
     public QDoxFactoryReader(QDox qdox, String className) {
         this.classSource = qdox.getClassByName(className);
-        this.annot = qdox.getClassByName("org.hamcrest.Factory");
+        this.factoryAnnotation = qdox.getClassByName("org.hamcrest.Factory");
     }
 
     @Override
@@ -40,22 +40,9 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
         Collection<FactoryMethod> methods = new ArrayList<FactoryMethod>();
 
         for (JavaMethod jm : classSource.getMethods()) {
-            if (!jm.isPublic() || !jm.isStatic())
+            if (!isFactoryMethod(jm)) {
                 continue;
-
-            if (jm.getReturnType().equals(JavaType.VOID))
-                continue;
-
-            boolean skip = true;
-
-            for (JavaAnnotation a : jm.getAnnotations()) {
-                if (a.getType().equals(annot)) {
-                    skip = false;
-                }
             }
-
-            if (skip)
-                continue;
 
             FactoryMethod fm = new FactoryMethod(typeToString(classSource), jm.getName(), typeToString(jm.getReturnType()));
 
@@ -91,6 +78,32 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
         }
 
         return methods.iterator();
+    }
+
+    /**
+     * Determine whether a particular method is classified as a matcher factory method.
+     * <p/>
+     * <p>The rules for determining this are:
+     * 1. The method must be public static.
+     * 2. It must have a return type of org.hamcrest.Matcher (or something that extends this).
+     * 3. It must be marked with the org.hamcrest.Factory annotation.
+     * <p/>
+     * <p>To use another set of rules, override this method.
+     */
+    protected boolean isFactoryMethod(JavaMethod javaMethod) {
+        return javaMethod.isStatic()
+                && javaMethod.isPublic()
+                && hasFactoryAnnotation(javaMethod)
+                && !javaMethod.getReturnType().equals(JavaType.VOID);
+    }
+
+    private boolean hasFactoryAnnotation(JavaMethod javaMethod) {
+        for (JavaAnnotation a : javaMethod.getAnnotations()) {
+            if (a.getType().equals(factoryAnnotation)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static String typeToString(JavaType type) {
