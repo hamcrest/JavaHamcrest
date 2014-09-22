@@ -235,10 +235,10 @@
     </macrodef>
 
     <macrodef name="test-module" description="run unit tests.">
-        <attribute name="modulename" description="Name of the module to jar"/>
+        <attribute name="modulename" description="Name of the module to test"/>
         <sequential>
             <mkdir dir="build/temp/@{modulename}/test-wrk"/>
-            <junit printsummary="no" forkmode="once" tempdir="build/temp/@{modulename}/test-wrk" haltonfailure="${haltonfailure}">
+            <junit printsummary="no" forkmode="once" tempdir="build/temp/@{modulename}/test-wrk" haltonfailure="${haltonfailure}" dir="@{modulename}">
                 <formatter type="brief" usefile="no"/>
                 <classpath refid="cp-@{modulename}-test-complete"/>
                 <classpath path="build/@{modulename}-${version}-tests.jar"/>
