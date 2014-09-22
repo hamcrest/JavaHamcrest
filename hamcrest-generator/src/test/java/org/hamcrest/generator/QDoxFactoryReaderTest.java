@@ -213,6 +213,13 @@ public final class QDoxFactoryReaderTest {
         assertNotNull(readMethod("SubclassOfMatcher", "subclassMethod"));
     }
 
+    @Test public void
+    usesCorrectNameForNestedClasses() throws FileNotFoundException {
+        FactoryMethod method = readMethod("MatcherWithNestedClass", "firstMethod");
+
+        assertEquals("test.MatcherWithNestedClass.SpecificMatcher", method.getReturnType());
+    }
+
     private static List<FactoryMethod> methodsReadBy(final Iterable<FactoryMethod> reader) {
         final List<FactoryMethod> extractedMethods = new ArrayList<FactoryMethod>();
         for (FactoryMethod factoryMethod : reader) {

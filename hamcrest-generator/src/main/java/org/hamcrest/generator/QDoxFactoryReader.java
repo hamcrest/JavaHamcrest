@@ -94,7 +94,7 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
     }
 
     private static String typeToString(JavaType type) {
-        return type.getGenericFullyQualifiedName();
+        return type.getGenericFullyQualifiedName().replace('$', '.');
     }
 
     /**
