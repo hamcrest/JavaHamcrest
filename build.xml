@@ -14,7 +14,18 @@
         <delete dir="build"/>
     </target>
 
-    <target name="api" description="Build Hamcrest APIs">
+    <target name="get-jars">
+        <condition property="hashesMatch">
+            <checksum algorithm="sha1">
+                <fileset dir="lib">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </checksum>
+        </condition>
+        <fail unless="hashesMatch" message="jar hashes do not match"/>
+    </target>
+
+    <target name="api" depends="get-jars" description="Build Hamcrest APIs">
         <path id="cp-hamcrest-api-main" path=""/>
         <path id="cp-hamcrest-api-test" path=""/>
         <compile-module modulename="hamcrest-api"/>
