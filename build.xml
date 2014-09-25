@@ -20,7 +20,9 @@
         <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/org/apache/ant/ant-junit/1.8.4/ant-junit-1.8.4.jar"/>
         <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/org/easymock/easymock/2.2/easymock-2.2.jar"/>
         <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/junit/junit/3.8.1/junit-3.8.1.jar"/>
+        <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/junit/junit/4.11/junit-4.11.jar"/>
         <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/org/testng/testng/6.5.2/testng-6.5.2.jar"/>
+        <get skipexisting="true" dest="lib/sources/" src="https://repo1.maven.org/maven2/junit/junit/4.11/junit-4.11-sources.jar"/>
         <get skipexisting="true" dest="lib/sources/" src="https://repo1.maven.org/maven2/com/thoughtworks/qdox/qdox/1.12/qdox-1.12-sources.jar"/>
         <get skipexisting="true" dest="lib/sources/" src="https://repo1.maven.org/maven2/org/testng/testng/6.5.2/testng-6.5.2-sources.jar"/>
 
@@ -178,7 +180,7 @@
         <sequential>
             <compile-content srcdir="@{modulename}/src/main/java" jarname="@{modulename}-${version}" classpathref="cp-@{modulename}-main" />
             <path id="cp-@{modulename}-test-complete">
-                <path path="lib/integration/junit-dep-4.11.jar"/>
+                <path path="lib/integration/junit-4.11.jar"/>
                 <path refid="cp-@{modulename}-main"/>
                 <path refid="cp-@{modulename}-test"/>
                 <path path="build/temp/@{modulename}-${version}.jar.contents"/>
