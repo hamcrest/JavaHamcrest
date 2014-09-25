@@ -19,6 +19,7 @@
         <get skipexisting="true" dest="lib/generator/" src="https://repo1.maven.org/maven2/com/thoughtworks/qdox/qdox/1.12/qdox-1.12.jar"/>
         <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/org/apache/ant/ant-junit/1.8.4/ant-junit-1.8.4.jar"/>
         <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/org/easymock/easymock/2.2/easymock-2.2.jar"/>
+        <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/jmock/jmock/1.1.0/jmock-1.1.0.jar"/>
         <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/junit/junit/3.8.1/junit-3.8.1.jar"/>
         <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/junit/junit/4.11/junit-4.11.jar"/>
         <get skipexisting="true" dest="lib/integration/" src="https://repo1.maven.org/maven2/org/testng/testng/6.5.2/testng-6.5.2.jar"/>
