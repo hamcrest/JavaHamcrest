@@ -2,13 +2,11 @@ package org.hamcrest.generator.config;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.Description;
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
 import org.hamcrest.generator.FactoryMethod;
 import org.hamcrest.generator.FactoryWriter;
 import org.hamcrest.generator.SugarConfiguration;
@@ -18,41 +16,25 @@ import org.xml.sax.InputSource;
 public final class XmlConfiguratorTest {
 
     private final MockSugarConfiguration sugarConfiguration = new MockSugarConfiguration();
-    private final XmlConfigurator config = new XmlConfigurator(sugarConfiguration, getClass().getClassLoader());
+    private final XmlConfigurator config = new XmlConfigurator(sugarConfiguration);
 
     @Test public void
     addsMatcherFactoryMethodsToConfiguration() throws Exception {
+        config.addSourceDir(new File("src/test/java-source"));
         config.load(createXml("" +
                 "<matchers>" +
-                "  <factory class='org.hamcrest.generator.config.XmlConfiguratorTest$SomeMatcher'/>" +
-                "  <factory class='org.hamcrest.generator.config.XmlConfiguratorTest$AnotherMatcher'/>" +
+                "  <factory class='test.SomeMatcher'/>" +
+                "  <factory class='test.AnotherMatcher'/>" +
                 "</matchers>"));
 
         final List<FactoryMethod> result = sugarConfiguration.factoryMethods();
-        assertTrue(result.contains(new FactoryMethod(SomeMatcher.class.getName().replace('$', '.'), "matcher1", "org.hamcrest.Matcher")));
-        assertTrue(result.contains(new FactoryMethod(SomeMatcher.class.getName().replace('$', '.'), "matcher2", "org.hamcrest.Matcher")));
-        assertTrue(result.contains(new FactoryMethod(AnotherMatcher.class.getName().replace('$', '.'), "matcher3", "org.hamcrest.MyMatcher")));
+        assertTrue(result.contains(new FactoryMethod("test.SomeMatcher", "matcher1", "org.hamcrest.Matcher")));
+        assertTrue(result.contains(new FactoryMethod("test.SomeMatcher", "matcher2", "org.hamcrest.Matcher")));
+        assertTrue(result.contains(new FactoryMethod("test.AnotherMatcher", "matcher3", "org.hamcrest.MyMatcher")));
     }
 
     private static InputSource createXml(String xml) {
         return new InputSource(new StringReader(xml));
-    }
-
-    // Sample Matchers
-
-    @SuppressWarnings("rawtypes")
-    public static class SomeMatcher {
-        @Factory public static Matcher matcher1() { return null; }
-        @Factory public static Matcher matcher2() { return null; }
-    }
-
-    @SuppressWarnings("rawtypes")
-    public static class AnotherMatcher<T> implements Matcher<T> {
-        @Override public void describeTo(Description description) { }
-        @Override public boolean matches(Object item) { return false; }
-        @Override public void describeMismatch(Object item, Description mismatchDescription) { }
-        @Override @Deprecated public void _dont_implement_Matcher___instead_extend_BaseMatcher_() { }
-        @Factory public static AnotherMatcher matcher3() { return null; }
     }
 
     /**
