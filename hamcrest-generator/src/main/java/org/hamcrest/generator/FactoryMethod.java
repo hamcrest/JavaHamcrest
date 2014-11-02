@@ -46,7 +46,7 @@ public class FactoryMethod {
     public String getReturnType() {
       return returnType;
     }
-    
+
     /**
      * Original name of factory method.
      */
@@ -115,7 +115,7 @@ public class FactoryMethod {
     public String getJavaDoc() {
         return javaDoc;
     }
-    
+
     // Generated in Eclipse...
     // n.b. Doesn't include returnType
     @Override
