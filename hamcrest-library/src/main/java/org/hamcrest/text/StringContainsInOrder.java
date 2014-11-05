@@ -42,10 +42,11 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
     
     /**
      * Creates a matcher of {@link String} that matches when the examined string contains all of
-     * the specified substrings, regardless of the order of their appearance.
+     * the specified substrings, considering the order of their appearance.
      * <p/>
      * For example:
      * <pre>assertThat("myfoobarbaz", stringContainsInOrder(Arrays.asList("bar", "foo")))</pre>
+     * fails as "foo" occurs before "bar" in the string "myfoobarbaz"
      * 
      * @param substrings
      *     the substrings that must be contained within matching strings
@@ -57,10 +58,11 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
 
     /**
      * Creates a matcher of {@link String} that matches when the examined string contains all of
-     * the specified substrings, regardless of the order of their appearance.
+     * the specified substrings, considering the order of their appearance.
      * <p/>
      * For example:
      * <pre>assertThat("myfoobarbaz", stringContainsInOrder("bar", "foo"))</pre>
+     * fails as "foo" occurs before "bar" in the string "myfoobarbaz"
      *
      * @param substrings
      *     the substrings that must be contained within matching strings
