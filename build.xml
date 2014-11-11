@@ -23,7 +23,7 @@
     </target>
 
     <target name="generator" depends="api" description="Build code generator tool">
-        <path id="cp-hamcrest-generator-main" path="lib/generator/qdox-1.12.jar;build/hamcrest-api-${version}.jar"/>
+        <path id="cp-hamcrest-generator-main" path="lib/generator/qdox-2.0-M2.jar;build/hamcrest-api-${version}.jar"/>
         <path id="cp-hamcrest-generator-test" path=""/>
         <compile-module modulename="hamcrest-generator"/>
         <jar-module modulename="hamcrest-generator"/>
@@ -34,7 +34,7 @@
         <copy file="build/hamcrest-generator-${version}.jar" tofile="build/hamcrest-generator-${version}-nodep.jar"/>
         <jarjar jarfile="build/hamcrest-generator-${version}.jar">
             <zipfileset src="build/hamcrest-generator-${version}-nodep.jar"/>
-            <zipfileset src="lib/generator/qdox-1.12.jar"/>
+            <zipfileset src="lib/generator/qdox-2.0-M2.jar"/>
             <rule pattern="com.thoughtworks.qdox.**" result="org.hamcrest.generator.qdox.@1"/>
         </jarjar>
     </target>
@@ -231,10 +231,10 @@
     </macrodef>
 
     <macrodef name="test-module" description="run unit tests.">
-        <attribute name="modulename" description="Name of the module to jar"/>
+        <attribute name="modulename" description="Name of the module to test"/>
         <sequential>
             <mkdir dir="build/temp/@{modulename}/test-wrk"/>
-            <junit printsummary="no" forkmode="once" tempdir="build/temp/@{modulename}/test-wrk" haltonfailure="${haltonfailure}">
+            <junit printsummary="no" forkmode="once" tempdir="build/temp/@{modulename}/test-wrk" haltonfailure="${haltonfailure}" dir="@{modulename}">
                 <formatter type="brief" usefile="no"/>
                 <classpath refid="cp-@{modulename}-test-complete"/>
                 <classpath path="build/@{modulename}-${version}-tests.jar"/>

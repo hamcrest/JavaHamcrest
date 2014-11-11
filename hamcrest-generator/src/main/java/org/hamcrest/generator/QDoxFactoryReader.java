@@ -1,14 +1,20 @@
 package org.hamcrest.generator;
 
-import com.thoughtworks.qdox.model.DocletTag;
-import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.JavaMethod;
-import com.thoughtworks.qdox.model.JavaParameter;
-import com.thoughtworks.qdox.model.Type;
-
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import com.thoughtworks.qdox.model.DocletTag;
+import com.thoughtworks.qdox.model.JavaAnnotation;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaMethod;
+import com.thoughtworks.qdox.model.JavaParameter;
+import com.thoughtworks.qdox.model.JavaType;
+import com.thoughtworks.qdox.model.JavaTypeVariable;
 
 /**
  * Wraps an existing sequence of FactoryMethods, and attempts to pull in
@@ -20,77 +26,96 @@ import java.util.regex.Pattern;
  */
 public class QDoxFactoryReader implements Iterable<FactoryMethod> {
 
-    private final Iterable<FactoryMethod> wrapped;
     private final JavaClass classSource;
 
-    private static final Pattern GENERIC_REGEX = Pattern.compile("<.*>");
-    private static final Pattern VARARGS_REGEX = Pattern.compile("...", Pattern.LITERAL);
+    private JavaClass factoryAnnotation;
 
-    public QDoxFactoryReader(Iterable<FactoryMethod> wrapped, QDox qdox, String className) {
-        this.wrapped = wrapped;
+    private static final Pattern GENERIC_REGEX = Pattern.compile("^<(.*)>$");
+
+    public QDoxFactoryReader(QDox qdox, String className) {
         this.classSource = qdox.getClassByName(className);
+        this.factoryAnnotation = qdox.getClassByName("org.hamcrest.Factory");
     }
 
     @Override
     public Iterator<FactoryMethod> iterator() {
-        final Iterator<FactoryMethod> iterator = wrapped.iterator();
-        return new Iterator<FactoryMethod>() {
-            @Override
-            public boolean hasNext() {
-                return iterator.hasNext();
+        List<FactoryMethod> methods = new ArrayList<FactoryMethod>();
+
+        for (JavaMethod jm : classSource.getMethods()) {
+            if (!isFactoryMethod(jm)) {
+                continue;
             }
 
-            @Override
-            public FactoryMethod next() {
-                return enhance(iterator.next());
+            FactoryMethod fm = new FactoryMethod(typeToString(classSource), jm.getName(), typeToString(jm.getReturnType()));
+
+            for (JavaTypeVariable<?> tv : jm.getTypeParameters()) {
+                String decl = tv.getGenericFullyQualifiedName();
+                decl = GENERIC_REGEX.matcher(decl).replaceFirst("$1");
+                fm.addGenericTypeParameter(decl);
             }
 
-            @Override
-            public void remove() {
-                iterator.remove();
-            }
-        };
-    }
+            for (JavaParameter p : jm.getParameters()) {
+                String type = typeToString(p.getType());
 
-    private FactoryMethod enhance(FactoryMethod factoryMethod) {
-        JavaMethod methodSource = findMethodInSource(factoryMethod);
-        if (methodSource != null) {
-            factoryMethod.setJavaDoc(createJavaDocComment(methodSource));
-            JavaParameter[] parametersFromSource
-                    = methodSource.getParameters();
-            List<FactoryMethod.Parameter> parametersFromReflection
-                    = factoryMethod.getParameters();
-
-            if (parametersFromReflection.size() == parametersFromSource.length) {
-                for (int i = 0; i < parametersFromSource.length; i++) {
-                    parametersFromReflection.get(i).setName(
-                            parametersFromSource[i].getName());
+                // Special case for var args methods.... String[] -> String...
+                if (p.isVarArgs()) {
+                    type += "...";
                 }
+
+                fm.addParameter(type, p.getName());
             }
+
+            for (JavaType exception : jm.getExceptions()) {
+                fm.addException(typeToString(exception));
+            }
+
+            fm.setJavaDoc(createJavaDocComment(jm));
+
+            String generifiedType = GENERIC_REGEX.matcher(fm.getReturnType()).replaceFirst("$1");
+            if (!generifiedType.equals(fm.getReturnType())) {
+                fm.setGenerifiedType(generifiedType);
+            }
+
+            methods.add(fm);
         }
-        return factoryMethod;
+
+        Collections.sort(methods, new Comparator<FactoryMethod>() {
+            @Override public int compare(FactoryMethod o1, FactoryMethod o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        return methods.iterator();
     }
 
     /**
-     * Attempts to locate the source code for a specific method, by cross-referencing
-     * the signature returned by reflection with the list of methods parsed by QDox.
+     * Determine whether a particular method is classified as a matcher factory method.
+     * <p/>
+     * <p>The rules for determining this are:
+     * 1. The method must be public static.
+     * 2. It must have a return type of org.hamcrest.Matcher (or something that extends this).
+     * 3. It must be marked with the org.hamcrest.Factory annotation.
+     * <p/>
+     * <p>To use another set of rules, override this method.
      */
-    private JavaMethod findMethodInSource(FactoryMethod factoryMethod) {
-        // Note, this doesn't always work - it struggles with some kinds of generics.
-        // This seems to cover most cases though.
-        List<FactoryMethod.Parameter> params = factoryMethod.getParameters();
-        Type[] types = new Type[params.size()];
-        boolean varArgs = false;
-        for (int i = 0; i < types.length; i++) {
-            String type = params.get(i).getType();
-            varArgs = VARARGS_REGEX.matcher(type).find();
-            // QDox ignores varargs and generics, so we strip them out to help QDox.
-            type = GENERIC_REGEX.matcher(type).replaceAll("");
-            type = VARARGS_REGEX.matcher(type).replaceAll("");
-            types[i] = new Type(type);
+    protected boolean isFactoryMethod(JavaMethod javaMethod) {
+        return javaMethod.isStatic()
+                && javaMethod.isPublic()
+                && hasFactoryAnnotation(javaMethod)
+                && !javaMethod.getReturnType().equals(JavaType.VOID);
+    }
+
+    private boolean hasFactoryAnnotation(JavaMethod javaMethod) {
+        for (JavaAnnotation a : javaMethod.getAnnotations()) {
+            if (a.getType().equals(factoryAnnotation)) {
+                return true;
+            }
         }
-        JavaMethod[] methods = classSource.getMethodsBySignature(factoryMethod.getName(), types, false, varArgs);
-        return methods.length == 1 ?  methods[0] : null;
+        return false;
+    }
+
+    private static String typeToString(JavaType type) {
+        return type.getGenericFullyQualifiedName().replace('$', '.');
     }
 
     /**
@@ -98,8 +123,8 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
      */
     private static String createJavaDocComment(JavaMethod methodSource) {
         String comment = methodSource.getComment();
-        DocletTag[] tags = methodSource.getTags();
-        if ((comment == null || comment.trim().length() == 0) && tags.length == 0) {
+        List<DocletTag> tags = methodSource.getTags();
+        if ((comment == null || comment.trim().length() == 0) && tags.isEmpty()) {
             return null;
         }
         StringBuilder result = new StringBuilder();

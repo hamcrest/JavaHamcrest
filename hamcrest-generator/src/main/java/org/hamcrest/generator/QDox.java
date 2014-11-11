@@ -1,10 +1,10 @@
 package org.hamcrest.generator;
 
-import com.thoughtworks.qdox.JavaDocBuilder;
-import com.thoughtworks.qdox.model.JavaClass;
-
 import java.io.File;
 import java.io.Reader;
+
+import com.thoughtworks.qdox.JavaProjectBuilder;
+import com.thoughtworks.qdox.model.JavaClass;
 
 /**
  * Wraps QDox library. This is because to ease distribution, QDox is bundled into
@@ -16,7 +16,7 @@ import java.io.Reader;
  */
 public class QDox {
 
-    private final JavaDocBuilder javaDocBuilder = new JavaDocBuilder();
+    private final JavaProjectBuilder javaDocBuilder = new JavaProjectBuilder();
 
     public void addSourceTree(File sourceDir) {
         javaDocBuilder.addSourceTree(sourceDir);

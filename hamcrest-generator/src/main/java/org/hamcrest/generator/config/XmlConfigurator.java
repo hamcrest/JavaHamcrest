@@ -3,7 +3,6 @@ package org.hamcrest.generator.config;
 import org.hamcrest.generator.HamcrestFactoryWriter;
 import org.hamcrest.generator.QDoxFactoryReader;
 import org.hamcrest.generator.QuickReferenceWriter;
-import org.hamcrest.generator.ReflectiveFactoryReader;
 import org.hamcrest.generator.SugarConfiguration;
 import org.hamcrest.generator.SugarGenerator;
 import org.hamcrest.generator.QDox;
@@ -15,6 +14,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,13 +22,11 @@ import java.io.IOException;
 public class XmlConfigurator {
 
     private final SugarConfiguration sugarConfiguration;
-    private final ClassLoader classLoader;
     private final SAXParserFactory saxParserFactory;
     private final QDox qdox;
 
-    public XmlConfigurator(SugarConfiguration sugarConfiguration, ClassLoader classLoader) {
+    public XmlConfigurator(SugarConfiguration sugarConfiguration) {
         this.sugarConfiguration = sugarConfiguration;
-        this.classLoader = classLoader;
         saxParserFactory = SAXParserFactory.newInstance();
         saxParserFactory.setNamespaceAware(true);
         qdox = new QDox();
@@ -46,20 +44,15 @@ public class XmlConfigurator {
             public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
                 if (localName.equals("factory")) {
                     String className = attributes.getValue("class");
-                    try {
-                        addClass(className);
-                    } catch (ClassNotFoundException e) {
-                        throw new SAXException("Cannot find Matcher class : " + className);
-                    }
+                    addClass(className);
                 }
             }
         });
     }
 
-    private void addClass(String className) throws ClassNotFoundException {
-        Class<?> cls = classLoader.loadClass(className);
+    private void addClass(String className) {
         sugarConfiguration.addFactoryMethods(
-                new QDoxFactoryReader(new ReflectiveFactoryReader(cls), qdox, className));
+                new QDoxFactoryReader(qdox, className));
     }
 
 
@@ -94,8 +87,8 @@ public class XmlConfigurator {
         String packageName = dotIndex == -1 ? "" : fullClassName.substring(0, dotIndex);
         String shortClassName = fullClassName.substring(dotIndex + 1);
 
-        if (!outputDir.isDirectory()) {
-            System.err.println("Output directory not found : " + outputDir.getAbsolutePath());
+        if (!outputDir.isDirectory() && !outputDir.mkdirs()) {
+            System.err.println("Unable to create directory not : " + outputDir.getAbsolutePath());
             System.exit(-1);
         }
 
@@ -109,7 +102,7 @@ public class XmlConfigurator {
             sugarGenerator.addWriter(new QuickReferenceWriter(System.out));
 
             XmlConfigurator xmlConfigurator
-                    = new XmlConfigurator(sugarGenerator, XmlConfigurator.class.getClassLoader());
+                    = new XmlConfigurator(sugarGenerator);
 
             if (srcDirs.trim().length() > 0) {
                 for (String srcDir : srcDirs.split(",")) {
