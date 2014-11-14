@@ -1,5 +1,9 @@
 package org.hamcrest;
 
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
+
+//TEST
 /**
  * This Hamcrest Matcher is used to create Matchers that can be chained similarly
  * to AssertJ assertions. It uses the decorator pattern to do so.
@@ -30,7 +34,7 @@ package org.hamcrest;
  * <p>
  * After that, you design your individual Matchers, {@code NameChainablePersonMatcher}
  * and {@code AgeChainablePersonMatcher}, to extend from this abstract class and
- * implement {@code chainDescribeTo()}, {@code chainMatches()}, and 
+ * implement {@code chainDescribeTo()}, {@code chainMatches()}, and optionally
  * {@code chainDescribeMismatch()} the same way you normally would do {@code describeTo()},
  * {@code matches()}, and {@code describeMismatch()}. Don't forget the
  * factory methods, though.</p>
@@ -42,8 +46,11 @@ package org.hamcrest;
  * object to decorate. You could set one up, though. To do so, you would have to
  * make it so that the base matcher is the only one with a factory method, and
  * that it passes {@code null} into the {@code super} constructor. </p>
- * 
- * @param <T> the same T as in {@link org.hamcrest.TypeSafeMatcher TypeSafeMatcher}&lt;T&gt;
+ * <p>
+ * For more information on how to use this, check out the <a href="">blog post</a>
+ * that led to its development.
+ * @param <T> the same T as in {@link org.hamcrest.BaseMatcher BaseMatcher}&lt;T&gt;
+ * @author Jacob Zimmerman - sad2project
  */
 public abstract class ChainableMatcher<T> extends BaseMatcher<T>
 {
@@ -78,7 +85,11 @@ public abstract class ChainableMatcher<T> extends BaseMatcher<T>
 	 * method call by ChainingMatcher's
 	 * @see #describeMismatch() 
 	 */
-	protected abstract void chainDescribeMismatch(Object item, Description mismatchDescription);
+	protected void chainDescribeMismatch(Object item, Description mismatchDescription)
+	{
+		mismatchDescription.appendText("was ")
+			.appendValue(item);
+	}
 
 	//***************************************************************************
 	// Template methods
