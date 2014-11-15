@@ -15,7 +15,7 @@
 	<classpathentry kind="src" path="hamcrest-examples/src/main/java"/>
 	<classpathentry kind="lib" path="lib/integration/easymock-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/integration/jmock-1.10RC1.jar"/>
-	<classpathentry kind="lib" path="lib/generator/qdox-1.12.jar" sourcepath="lib/sources/qdox-1.12-sources.jar"/>
+	<classpathentry kind="lib" path="lib/generator/qdox-2.0-M2.jar" sourcepath="lib/sources/qdox-2.0-M2-sources.jar"/>
 	<classpathentry kind="lib" path="lib/integration/testng-6.5.2.jar" sourcepath="lib/sources/testng-6.5.2-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/integration/junit-dep-4.11.jar" sourcepath="lib/sources/junit-4.11-sources.jar"/>
