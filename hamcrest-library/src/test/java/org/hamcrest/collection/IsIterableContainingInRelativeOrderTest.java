@@ -41,6 +41,18 @@ public class IsIterableContainingInRelativeOrderTest extends AbstractMatcherTest
         assertMatches("More elements in between", containsInRelativeOrder(1, 3), asList(1, 2, 3));
     }
 
+    public void testMatchesSubSection() throws Exception {
+        assertMatches("Sub section of iterable", containsInRelativeOrder(2, 3), asList(1, 2, 3, 4));
+    }
+
+    public void testMatchesWithSingleGapAndNotFirstOrLast() throws Exception {
+        assertMatches("Sub section with single gaps without a first or last match", containsInRelativeOrder(2, 4), asList(1, 2, 3, 4, 5));
+    }
+
+    public void testMatchingSubSectionWithManyGaps() throws Exception {
+        assertMatches("Sub section with many gaps iterable", containsInRelativeOrder(2, 4, 6), asList(1, 2, 3, 4, 5, 6, 7));
+    }
+
     public void testDoesNotMatchWithFewerElementsThanExpected() throws Exception {
         List<WithValue> valueList = asList(make(1), make(2));
         assertMismatchDescription("value with <3> was not found after <WithValue 2>", contains123, valueList);
