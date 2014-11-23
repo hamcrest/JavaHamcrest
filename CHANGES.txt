@@ -18,6 +18,12 @@
 
 * Fix issue 155 - Add Matcher implementation for files
 
+* Fix issue 59 - add untyped version of equalTo, named equalToObject
+
+* Fix issue 69 - fix NPE in IsIterableContainingInOrder
+
+* Fix issue 75 - disable doclint in Javadoc generation
+
 == Version 1.3: Released July 09 2012 ==
 
 * Introduce Condition class to ease the implementation of multi-step matches
