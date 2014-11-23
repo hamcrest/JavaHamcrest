@@ -255,6 +255,7 @@
                      destdir="build/temp/@{modulename}-${version}-javadoc.jar.contents" author="true" version="true"
                      use="true" windowtitle="Hamcrest" source="${javaversion}" failonerror="yes" defaultexcludes="yes">
                 <classpath refid="cp-@{modulename}-main"/>
+                <arg value="-Xdoclint:none"/>
             </javadoc>
             <jar-module-component modulename="@{modulename}" suffix="-javadoc"/>
         </sequential>
