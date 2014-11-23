@@ -91,4 +91,13 @@ public class IsEqual<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> equalTo(T operand) {
         return new IsEqual<T>(operand);
     }
+
+    /**
+     * Creates an {@link org.hamcrest.core.IsEqual} matcher that does not enforce the values being
+     * compared to be of the same static type.
+     */
+    @Factory
+    public static Matcher<Object> equalToObject(Object operand) {
+        return new IsEqual<Object>(operand);
+    }
 }
