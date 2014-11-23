@@ -53,6 +53,10 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("iterable containing [<1>, <2>]", contains(1, 2));
     }
+    
+    public void testCanHandleNullMatchers() {
+    	assertMatches(contains(null, null), asList(null, null));
+    }
 
     public static class WithValue {
       private final int value;
