@@ -81,4 +81,31 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
       return new CombinableMatcher<X>(first).or(other);
     }
   }
+
+  /**
+   *
+   * Creates a matcher that matches when either the specified matcher matches or the examined object is null.
+   * <p />
+   * For example:
+   * <pre>assertThat(null, eitherNullOr(containsString("a")))</pre>
+   */
+  @Factory
+  public static <LHS> Matcher<LHS> eitherNullOr(final Matcher<? super LHS> matcher) {
+    return AnyOf.anyOf(new IsNull<LHS>(), new TypeSafeDiagnosingMatcher<LHS>() {
+
+      @Override
+      public void describeTo(Description description) {
+        description.appendDescriptionOf(matcher);
+      }
+
+      @Override
+      protected boolean matchesSafely(LHS item, Description mismatch) {
+        if (!matcher.matches(item)) {
+          matcher.describeMismatch(matcher, mismatch);
+          return false;
+        }
+        return true;
+      }
+    });
+  }
 }

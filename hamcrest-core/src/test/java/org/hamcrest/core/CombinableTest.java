@@ -9,13 +9,14 @@ import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.notNullValue;
-
+import static org.hamcrest.core.IsNull.nullValue;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 
 public final class CombinableTest {
     private static final CombinableMatcher<Integer> EITHER_3_OR_4 = CombinableMatcher.<Integer>either(equalTo(3)).or(equalTo(4));
     private static final CombinableMatcher<Integer> NOT_3_AND_NOT_4 = CombinableMatcher.<Integer>both(not(equalTo(3))).and(not(equalTo(4)));
+    private static final Matcher<Integer> EITHER_NULL_OR_4 = CombinableMatcher.<Integer>eitherNullOr(equalTo(4));
 
     @Test public void
     copesWithNullsAndUnknownTypes() {
@@ -70,4 +71,22 @@ public final class CombinableTest {
         @SuppressWarnings("unused")
         Matcher<String> matcher = CombinableMatcher.<String>both(equalTo("yellow")).and(notNullValue(String.class));
     }
+
+    @Test public void
+    eitherDoesNotMatchForNull() {
+        assertDoesNotMatch("Null input to either matched", CombinableMatcher.<Integer>either(equalTo(4)).or(nullValue()), null);
+        assertDoesNotMatch("Null input to either matched", CombinableMatcher.<Integer>either(nullValue()).or(equalTo(4)), null);
+    }
+
+    @Test public void
+    eitherNullMatchesForNull() {
+      assertMatches("Null input to eitherNull failed to match", EITHER_NULL_OR_4, null);
+      assertMatches("Real input to eitherNull failed to match", EITHER_NULL_OR_4, 4);
+    }
+
+    @Test public void
+    eitherNullDescribesItself() {
+      assertDescription("(null or <4>)", EITHER_NULL_OR_4);
+      assertMismatchDescription("was <6>", EITHER_NULL_OR_4, 6);
+   }
 }
