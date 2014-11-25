@@ -72,7 +72,6 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * Creates a matcher for {@link Iterable}s that matches when a single pass over the
      * examined {@link Iterable} yields a series of items, that contains items logically equal to the
      * corresponding item in the specified items, in the same relative order
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("a", "b", "c", "d", "e"), containsInRelativeOrder("b", "d"))</pre>
      * 
@@ -93,7 +92,6 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * Creates a matcher for {@link Iterable}s that matches when a single pass over the
      * examined {@link Iterable} yields a series of items, that each satisfying the corresponding
      * matcher in the specified matchers, in the same relative order.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("a", "b", "c", "d", "e"), containsInRelativeOrder(equalTo("b"), equalTo("d")))</pre>
      * 
@@ -109,7 +107,6 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * Creates a matcher for {@link Iterable}s that matches when a single pass over the
      * examined {@link Iterable} yields a series of items, that contains items satisfying the corresponding
      * matcher in the specified list of matchers, in the same relative order.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("a", "b", "c", "d", "e"), contains(Arrays.asList(equalTo("b"), equalTo("d"))))</pre>
      * 
