@@ -22,7 +22,7 @@
 
 * Fix issue 69 - fix NPE in IsIterableContainingInOrder
 
-* Fix issue 75 - disable doclint in Javadoc generation
+* Fix issue 75 - address doclint errors reported in JDK 1.8
 
 == Version 1.3: Released July 09 2012 ==
 
