@@ -5,12 +5,14 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.hamcrest.core.IsNull;
+import org.hamcrest.internal.NullSafety;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.internal.NullSafety.nullSafe;
 
 public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
     private final List<Matcher<? super E>> matchers;
@@ -87,7 +89,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * examined {@link Iterable} yields a series of items, each logically equal to the
      * corresponding item in the specified items.  For a positive match, the examined iterable
      * must be of the same length as the number of specified items.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains("foo", "bar"))</pre>
      * 
@@ -108,7 +109,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * Creates a matcher for {@link Iterable}s that matches when a single pass over the
      * examined {@link Iterable} yields a single item that satisfies the specified matcher.
      * For a positive match, the examined iterable must only yield one item.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo"), contains(equalTo("foo")))</pre>
      * 
@@ -127,7 +127,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * examined {@link Iterable} yields a series of items, each satisfying the corresponding
      * matcher in the specified matchers.  For a positive match, the examined iterable
      * must be of the same length as the number of specified matchers.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains(equalTo("foo"), equalTo("bar")))</pre>
      * 
@@ -136,7 +135,9 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      */
     @Factory
     public static <E> Matcher<Iterable<? extends E>> contains(Matcher<? super E>... itemMatchers) {
-    	final List<Matcher<? super E>> nullSafeWithExplicitTypeMatchers = nullSafe(itemMatchers);
+        // required for JDK 1.6
+        //noinspection RedundantTypeArguments
+        final List<Matcher<? super E>> nullSafeWithExplicitTypeMatchers = NullSafety.<E>nullSafe(itemMatchers);
     	return contains(nullSafeWithExplicitTypeMatchers);
     }
 
@@ -145,7 +146,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * examined {@link Iterable} yields a series of items, each satisfying the corresponding
      * matcher in the specified list of matchers.  For a positive match, the examined iterable
      * must be of the same length as the specified list of matchers.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains(Arrays.asList(equalTo("foo"), equalTo("bar"))))</pre>
      * 
@@ -156,14 +156,5 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     @Factory
     public static <E> Matcher<Iterable<? extends E>> contains(List<Matcher<? super E>> itemMatchers) {
         return new IsIterableContainingInOrder<E>(itemMatchers);
-    }
-    
-    @SuppressWarnings("unchecked")
-    private static <E> List<Matcher<? super E>> nullSafe(Matcher<? super E>[] itemMatchers) {
-        final List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>(itemMatchers.length);
-        for (final Matcher<? super E> itemMatcher : itemMatchers) {
-            matchers.add((Matcher<? super E>) (itemMatcher == null ? IsNull.nullValue() : itemMatcher));
-        }
-        return matchers;
     }
 }

@@ -61,7 +61,6 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * examined {@link Iterable} yields at least one item that is matched by the specified
      * <code>itemMatcher</code>.  Whilst matching, the traversal of the examined {@link Iterable}
      * will stop as soon as a matching item is found.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem(startsWith("ba")))</pre>
      * 
@@ -78,7 +77,6 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * examined {@link Iterable} yields at least one item that is equal to the specified
      * <code>item</code>.  Whilst matching, the traversal of the examined {@link Iterable}
      * will stop as soon as a matching item is found.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem("bar"))</pre>
      * 
@@ -96,7 +94,6 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * examined {@link Iterable} yield at least one item that is matched by the corresponding
      * matcher from the specified <code>itemMatchers</code>.  Whilst matching, each traversal of
      * the examined {@link Iterable} will stop as soon as a matching item is found.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems(endsWith("z"), endsWith("o")))</pre>
      * 
@@ -120,7 +117,6 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * examined {@link Iterable} yield at least one item that is equal to the corresponding
      * item from the specified <code>items</code>.  Whilst matching, each traversal of the
      * examined {@link Iterable} will stop as soon as a matching item is found.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems("baz", "foo"))</pre>
      * 

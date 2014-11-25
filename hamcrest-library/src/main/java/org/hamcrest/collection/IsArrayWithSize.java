@@ -23,7 +23,6 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
     /**
      * Creates a matcher for arrays that matches when the <code>length</code> of the array
      * satisfies the specified matcher.
-     * <p/>
      * For example:
      * <pre>assertThat(new String[]{"foo", "bar"}, arrayWithSize(equalTo(2)))</pre>
      * 
@@ -38,7 +37,6 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
     /**
      * Creates a matcher for arrays that matches when the <code>length</code> of the array
      * equals the specified <code>size</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(new String[]{"foo", "bar"}, arrayWithSize(2))</pre>
      * 
@@ -53,7 +51,6 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
     /**
      * Creates a matcher for arrays that matches when the <code>length</code> of the array
      * is zero.
-     * <p/>
      * For example:
      * <pre>assertThat(new String[0], emptyArray())</pre>
      * 

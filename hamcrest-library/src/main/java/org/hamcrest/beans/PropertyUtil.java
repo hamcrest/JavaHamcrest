@@ -8,7 +8,6 @@ import java.beans.PropertyDescriptor;
 
 /**
  * Utility class for accessing properties on JavaBean objects.
- * <p/>
  * See http://java.sun.com/products/javabeans/docs/index.html for
  * more information on JavaBeans.
  *

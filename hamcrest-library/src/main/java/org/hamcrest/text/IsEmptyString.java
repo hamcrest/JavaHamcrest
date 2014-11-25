@@ -31,7 +31,6 @@ public final class IsEmptyString extends TypeSafeMatcher<String> {
 
     /**
      * Creates a matcher of {@link String} that matches when the examined string has zero length.
-     * <p/>
      * For example:
      * <pre>assertThat("", isEmptyString())</pre>
      * 
@@ -45,7 +44,6 @@ public final class IsEmptyString extends TypeSafeMatcher<String> {
 
     /**
      * Creates a matcher of {@link String} that matches when the examined string has zero length.
-     * <p/>
      * For example:
      * <pre>assertThat("", is(emptyString()))</pre>
      * 
@@ -58,7 +56,6 @@ public final class IsEmptyString extends TypeSafeMatcher<String> {
     /**
      * Creates a matcher of {@link String} that matches when the examined string is <code>null</code>, or
      * has zero length.
-     * <p/>
      * For example:
      * <pre>assertThat(((String)null), isEmptyOrNullString())</pre>
      * 
@@ -74,7 +71,6 @@ public final class IsEmptyString extends TypeSafeMatcher<String> {
     /**
      * Creates a matcher of {@link String} that matches when the examined string is <code>null</code>, or
      * has zero length.
-     * <p/>
      * For example:
      * <pre>assertThat(((String)null), is(emptyOrNullString()))</pre>
      * 

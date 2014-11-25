@@ -19,7 +19,6 @@ public class StringEndsWith extends SubstringMatcher {
     /**
      * Creates a matcher that matches if the examined {@link String} ends with the specified
      * {@link String}.
-     * <p/>
      * For example:
      * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
      * 
@@ -34,7 +33,6 @@ public class StringEndsWith extends SubstringMatcher {
     /**
      * Creates a matcher that matches if the examined {@link String} ends with the specified
      * {@link String}, ignoring case.
-     * <p/>
      * For example:
      * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
      *

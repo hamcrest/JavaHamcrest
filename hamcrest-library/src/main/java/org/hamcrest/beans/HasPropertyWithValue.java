@@ -16,11 +16,12 @@ import static org.hamcrest.Condition.notMatched;
 import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
 
 /**
- * Matcher that asserts that a JavaBean property on an argument passed to the
+ * <p>Matcher that asserts that a JavaBean property on an argument passed to the
  * mock object meets the provided matcher. This is useful for when objects
  * are created within code under test and passed to a mock object, and you wish
  * to assert that the created object has certain properties.
- * <p/>
+ * </p>
+ *
  * <h2>Example Usage</h2>
  * Consider the situation where we have a class representing a person, which
  * follows the basic JavaBean convention of having get() and possibly set()
@@ -51,16 +52,16 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * personGenListenerMock.expects(once()).method("personGenerated").with(and(isA(Person.class), hasProperty("Name", eq("Iain")));
  * PersonGenerationListener listener = (PersonGenerationListener)personGenListenerMock.proxy();</pre>
  * 
- * If an exception is thrown by the getter method for a property, the property
+ * <p>If an exception is thrown by the getter method for a property, the property
  * does not exist, is not readable, or a reflection related exception is thrown
  * when trying to invoke it then this is treated as an evaluation failure and
  * the matches method will return false.
- * <p/>
- * This matcher class will also work with JavaBean objects that have explicit
+ * </p>
+ * <p>This matcher class will also work with JavaBean objects that have explicit
  * bean descriptions via an associated BeanInfo description class. See the
  * JavaBeans specification for more information:
- * <p/>
  * http://java.sun.com/products/javabeans/docs/index.html
+ * </p>
  *
  * @author Iain McGinniss
  * @author Nat Pryce
@@ -136,7 +137,6 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     /**
      * Creates a matcher that matches when the examined object has a JavaBean property
      * with the specified name whose value satisfies the specified matcher.
-     * <p/>
      * For example:
      * <pre>assertThat(myBean, hasProperty("foo", equalTo("bar"))</pre>
      * 

@@ -65,8 +65,7 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
      * the examined object.
      * 
      * <p>The created matcher assumes no relationship between specified type and the examined object.</p>
-     * <p/>
-     * For example: 
+     * For example:
      * <pre>assertThat(new Canoe(), instanceOf(Paddlable.class));</pre>
      * 
      */
@@ -84,8 +83,7 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
      * <p>The created matcher forces a relationship between specified type and the examined object, and should be
      * used when it is necessary to make generics conform, for example in the JMock clause
      * <code>with(any(Thing.class))</code></p>
-     * <p/>
-     * For example: 
+     * For example:
      * <pre>assertThat(new Canoe(), instanceOf(Canoe.class));</pre>
      *
      */

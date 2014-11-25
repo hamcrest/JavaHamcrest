@@ -48,7 +48,6 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
      * at least one entry whose key satisfies the specified <code>keyMatcher</code> <b>and</b> whose
      * value satisfies the specified <code>valueMatcher</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(myMap, hasEntry(equalTo("bar"), equalTo("foo")))</pre>
      * 
@@ -66,7 +65,6 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
      * at least one entry whose key equals the specified <code>key</code> <b>and</b> whose value equals the
      * specified <code>value</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(myMap, hasEntry("bar", "foo"))</pre>
      *  
@@ -83,7 +81,6 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
     /**
      * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
      * at least one key that satisfies the specified matcher.
-     * <p/>
      * For example:
      * <pre>assertThat(myMap, hasKey(equalTo("bar")))</pre>
      * 
@@ -98,7 +95,6 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
     /**
      * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
      * at least one key that is equal to the specified key.
-     * <p/>
      * For example:
      * <pre>assertThat(myMap, hasKey("bar"))</pre>
      * 
@@ -113,7 +109,6 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
     /**
      * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
      * at least one value that satisfies the specified valueMatcher.
-     * <p/>
      * For example:
      * <pre>assertThat(myMap, hasValue(equalTo("foo")))</pre>
      * 
@@ -128,7 +123,6 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
     /**
      * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
      * at least one value that is equal to the specified value.
-     * <p/>
      * For example:
      * <pre>assertThat(myMap, hasValue("foo"))</pre>
      * 

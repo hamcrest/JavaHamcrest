@@ -42,7 +42,6 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
 
   /**
    * Creates a matcher that matches when both of the specified matchers match the examined object.
-   * <p/>
    * For example:
    * <pre>assertThat("fab", both(containsString("a")).and(containsString("b")))</pre>
    */
@@ -63,7 +62,6 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
 
   /**
    * Creates a matcher that matches when either of the specified matchers match the examined object.
-   * <p/>
    * For example:
    * <pre>assertThat("fan", either(containsString("a")).or(containsString("b")))</pre>
    */

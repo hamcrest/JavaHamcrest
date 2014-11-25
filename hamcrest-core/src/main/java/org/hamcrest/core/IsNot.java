@@ -34,7 +34,6 @@ public class IsNot<T> extends BaseMatcher<T>  {
     /**
      * Creates a matcher that wraps an existing matcher, but inverts the logic by which
      * it will match.
-     * <p/>
      * For example:
      * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
      * 
@@ -48,7 +47,6 @@ public class IsNot<T> extends BaseMatcher<T>  {
 
     /**
      * A shortcut to the frequently used <code>not(equalTo(x))</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(cheese, is(not(smelly)))</pre>
      * instead of:

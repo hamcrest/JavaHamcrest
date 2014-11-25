@@ -28,7 +28,6 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
      * Creates a matcher for {@link Iterable}s that matches when a single pass over the
      * examined {@link Iterable} yields an item count that satisfies the specified
      * matcher.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), iterableWithSize(equalTo(2)))</pre>
      * 
@@ -44,7 +43,6 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
      * Creates a matcher for {@link Iterable}s that matches when a single pass over the
      * examined {@link Iterable} yields an item count that is equal to the specified
      * <code>size</code> argument.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), iterableWithSize(2))</pre>
      * 

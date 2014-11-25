@@ -16,9 +16,8 @@ public final class ComparatorMatcherBuilder<T> {
 
     /**
      * Creates a matcher factory for matchers of {@code Comparable}s.
-     * <p/>
      * For example:
-     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().lessThanOrEqualTo(1))</pre>
+     * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().lessThanOrEqualTo(1))</pre>
      */
     public static <T extends Comparable<T>> ComparatorMatcherBuilder<T> usingNaturalOrdering() {
         return new ComparatorMatcherBuilder<T>(new Comparator<T>() {
@@ -31,9 +30,8 @@ public final class ComparatorMatcherBuilder<T> {
 
     /**
      * Creates a matcher factory for matchers of {@code Comparators}s of {@code T}.
-     * <p/>
      * For example:
-     * <pre>assertThat(5, comparedBy(new Comparator<Integer>() {
+     * <pre>assertThat(5, comparedBy(new Comparator&lt;Integer&gt;() {
      * public int compare(Integer o1, Integer o2) {
      * return -o1.compareTo(o2);
      * }
@@ -114,9 +112,8 @@ public final class ComparatorMatcherBuilder<T> {
      * Creates a matcher of {@code T} object that matches when the examined object is
      * equal to the specified value, as reported by the {@code Comparator} used to
      * create this builder.
-     * <p/>
      * For example:
-     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().comparesEqualTo(1))</pre>
+     * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().comparesEqualTo(1))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return zero
      */
@@ -129,9 +126,8 @@ public final class ComparatorMatcherBuilder<T> {
      * Creates a matcher of {@code T} object that matches when the examined object is
      * greater than the specified value, as reported by the {@code Comparator} used to
      * create this builder.
-     * <p/>
      * For example:
-     * <pre>assertThat(2, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().greaterThan(1))</pre>
+     * <pre>assertThat(2, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().greaterThan(1))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return greater
      *              than zero
@@ -145,9 +141,8 @@ public final class ComparatorMatcherBuilder<T> {
      * Creates a matcher of {@code T} object that matches when the examined object is
      * greater than or equal to the specified value, as reported by the {@code Comparator} used to
      * create this builder.
-     * <p/>
      * For example:
-     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().greaterThanOrEqualTo(1))</pre>
+     * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().greaterThanOrEqualTo(1))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return greater
      *              than or equal to zero
@@ -161,9 +156,8 @@ public final class ComparatorMatcherBuilder<T> {
      * Creates a matcher of {@code T} object that matches when the examined object is
      * less than the specified value, as reported by the {@code Comparator} used to
      * create this builder.
-     * <p/>
      * For example:
-     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().lessThan(2))</pre>
+     * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().lessThan(2))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return less
      *              than zero
@@ -177,9 +171,8 @@ public final class ComparatorMatcherBuilder<T> {
      * Creates a matcher of {@code T} object that matches when the examined object is
      * less than or equal to the specified value, as reported by the {@code Comparator} used to
      * create this builder.
-     * <p/>
      * For example:
-     * <pre>assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().lessThanOrEqualTo(1))</pre>
+     * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().lessThanOrEqualTo(1))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return less
      *              than or equal to zero

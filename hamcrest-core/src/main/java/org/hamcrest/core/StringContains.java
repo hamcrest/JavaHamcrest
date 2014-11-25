@@ -21,7 +21,6 @@ public class StringContains extends SubstringMatcher {
     /**
      * Creates a matcher that matches if the examined {@link String} contains the specified
      * {@link String} anywhere.
-     * <p/>
      * For example:
      * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
      * 
@@ -37,7 +36,6 @@ public class StringContains extends SubstringMatcher {
     /**
      * Creates a matcher that matches if the examined {@link String} contains the specified
      * {@link String} anywhere, ignoring case.
-     * <p/>
      * For example:
      * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
      *

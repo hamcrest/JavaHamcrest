@@ -34,7 +34,6 @@ public class IsIn<T> extends BaseMatcher<T> {
     /**
      * Creates a matcher that matches when the examined object is found within the
      * specified collection.
-     * <p/>
      * For example:
      * <pre>assertThat("foo", isIn(Arrays.asList("bar", "foo")))</pre>
      * 
@@ -53,7 +52,6 @@ public class IsIn<T> extends BaseMatcher<T> {
     /**
      * Creates a matcher that matches when the examined object is found within the
      * specified collection.
-     * <p/>
      * For example:
      * <pre>assertThat("foo", is(in(Arrays.asList("bar", "foo"))))</pre>
      * 
@@ -69,7 +67,6 @@ public class IsIn<T> extends BaseMatcher<T> {
     /**
      * Creates a matcher that matches when the examined object is found within the
      * specified array.
-     * <p/>
      * For example:
      * <pre>assertThat("foo", isIn(new String[]{"bar", "foo"}))</pre>
      * 
@@ -88,7 +85,6 @@ public class IsIn<T> extends BaseMatcher<T> {
     /**
      * Creates a matcher that matches when the examined object is found within the
      * specified array.
-     * <p/>
      * For example:
      * <pre>assertThat("foo", is(in(new String[]{"bar", "foo"})))</pre>
      * 
@@ -104,7 +100,6 @@ public class IsIn<T> extends BaseMatcher<T> {
     /**
      * Creates a matcher that matches when the examined object is equal to one of the
      * specified elements.
-     * <p/>
      * For example:
      * <pre>assertThat("foo", isOneOf("bar", "foo"))</pre>
      * 
@@ -123,7 +118,6 @@ public class IsIn<T> extends BaseMatcher<T> {
     /**
      * Creates a matcher that matches when the examined object is equal to one of the
      * specified elements.
-     * <p/>
      * For example:
      * <pre>assertThat("foo", is(oneOf("bar", "foo")))</pre>
      *  

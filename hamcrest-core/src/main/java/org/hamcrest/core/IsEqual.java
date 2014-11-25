@@ -79,7 +79,6 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * it will match if both the operand and the examined object are arrays of the same length and
      * contain items that are equal to each other (according to the above rules) <b>in the same
      * indexes</b>.</p> 
-     * <p/>
      * For example:
      * <pre>
      * assertThat("foo", equalTo("foo"));

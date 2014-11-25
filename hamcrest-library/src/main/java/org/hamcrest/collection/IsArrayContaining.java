@@ -44,7 +44,6 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
      * Creates a matcher for arrays that matches when the examined array contains at least one item
      * that is matched by the specified <code>elementMatcher</code>.  Whilst matching, the traversal
      * of the examined array will stop as soon as a matching element is found.
-     * <p/>
      * For example:
      * <pre>assertThat(new String[] {"foo", "bar"}, hasItemInArray(startsWith("ba")))</pre>
      * 
@@ -58,7 +57,6 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
 
     /**
      * A shortcut to the frequently used <code>hasItemInArray(equalTo(x))</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(hasItemInArray(x))</pre>
      * instead of:

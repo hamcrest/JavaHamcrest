@@ -84,7 +84,6 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
      * Creates a matcher that matches arrays whose elements are satisfied by the specified matchers.  Matches
      * positively only if the number of matchers specified is equal to the length of the examined array and
      * each matcher[i] is satisfied by array[i].
-     * <p/>
      * For example:
      * <pre>assertThat(new Integer[]{1,2,3}, is(array(equalTo(1), equalTo(2), equalTo(3))))</pre>
      * 

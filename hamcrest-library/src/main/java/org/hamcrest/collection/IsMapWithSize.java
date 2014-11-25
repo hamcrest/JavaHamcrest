@@ -24,7 +24,6 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
     /**
      * Creates a matcher for {@link java.util.Map}s that matches when the <code>size()</code> method returns
      * a value that satisfies the specified matcher.
-     * <p/>
      * For example:
      * <pre>assertThat(myMap, is(aMapWithSize(equalTo(2))))</pre>
      * 
@@ -39,7 +38,6 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
     /**
      * Creates a matcher for {@link java.util.Map}s that matches when the <code>size()</code> method returns
      * a value equal to the specified <code>size</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(myMap, is(aMapWithSize(2)))</pre>
      * 
@@ -55,7 +53,6 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
     /**
      * Creates a matcher for {@link java.util.Map}s that matches when the <code>size()</code> method returns
      * zero.
-     * <p/>
      * For example:
      * <pre>assertThat(myMap, is(anEmptyMap()))</pre>
      * 

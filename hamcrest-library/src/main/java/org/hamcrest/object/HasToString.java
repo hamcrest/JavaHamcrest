@@ -19,7 +19,6 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
     /**
      * Creates a matcher that matches any examined object whose <code>toString</code> method
      * returns a value that satisfies the specified matcher.
-     * <p/>
      * For example:
      * <pre>assertThat(true, hasToString(equalTo("TRUE")))</pre>
      * 
@@ -34,7 +33,6 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
     /**
      * Creates a matcher that matches any examined object whose <code>toString</code> method
      * returns a value equalTo the specified string.
-     * <p/>
      * For example:
      * <pre>assertThat(true, hasToString("TRUE"))</pre>
      * 

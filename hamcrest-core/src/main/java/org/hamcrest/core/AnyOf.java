@@ -30,7 +30,6 @@ public class AnyOf<T> extends ShortcutCombination<T> {
 
     /**
      * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-     * <p/>
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
@@ -41,7 +40,6 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     
     /**
      * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-     * <p/>
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
@@ -52,7 +50,6 @@ public class AnyOf<T> extends ShortcutCombination<T> {
 
     /**
      * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-     * <p/>
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
@@ -66,7 +63,6 @@ public class AnyOf<T> extends ShortcutCombination<T> {
 
     /**
      * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-     * <p/>
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
@@ -81,7 +77,6 @@ public class AnyOf<T> extends ShortcutCombination<T> {
 
     /**
      * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-     * <p/>
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
@@ -97,7 +92,6 @@ public class AnyOf<T> extends ShortcutCombination<T> {
 
     /**
      * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-     * <p/>
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
@@ -114,7 +108,6 @@ public class AnyOf<T> extends ShortcutCombination<T> {
 
     /**
      * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-     * <p/>
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */

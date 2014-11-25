@@ -36,7 +36,6 @@ public final class IsBlankString extends TypeSafeMatcher<String> {
     /**
      * Creates a matcher of {@link String} that matches when the examined string contains
      * zero or more whitespace characters and nothing else.
-     * <p/>
      * For example:
      * <pre>assertThat("  ", is(blankString()))</pre>
      */
@@ -48,7 +47,6 @@ public final class IsBlankString extends TypeSafeMatcher<String> {
     /**
      * Creates a matcher of {@link String} that matches when the examined string is <code>null</code>, or
      * contains zero or more whitespace characters and nothing else.
-     * <p/>
      * For example:
      * <pre>assertThat(((String)null), is(blankOrNullString()))</pre>
      * 

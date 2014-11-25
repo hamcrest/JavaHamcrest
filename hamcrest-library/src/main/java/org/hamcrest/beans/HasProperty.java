@@ -46,7 +46,6 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
     /**
      * Creates a matcher that matches when the examined object has a JavaBean property
      * with the specified name.
-     * <p/>
      * For example:
      * <pre>assertThat(myBean, hasProperty("foo"))</pre>
      * 

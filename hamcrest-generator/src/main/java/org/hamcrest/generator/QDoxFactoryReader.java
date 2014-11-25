@@ -89,14 +89,14 @@ public class QDoxFactoryReader implements Iterable<FactoryMethod> {
     }
 
     /**
-     * Determine whether a particular method is classified as a matcher factory method.
-     * <p/>
-     * <p>The rules for determining this are:
-     * 1. The method must be public static.
-     * 2. It must have a return type of org.hamcrest.Matcher (or something that extends this).
-     * 3. It must be marked with the org.hamcrest.Factory annotation.
-     * <p/>
-     * <p>To use another set of rules, override this method.
+     * <p>Determine whether a particular method is classified as a matcher factory method.</p>
+     * <p>The rules for determining this are:</p>
+     * <ol>
+ *     <li>The method must be public static.</li>
+     * <li>It must have a return type of org.hamcrest.Matcher (or something that extends this).</li>
+     * <li>It must be marked with the org.hamcrest.Factory annotation.</li>
+     * </ol>
+     * <p>To use another set of rules, override this method.</p>
      */
     protected boolean isFactoryMethod(JavaMethod javaMethod) {
         return javaMethod.isStatic()

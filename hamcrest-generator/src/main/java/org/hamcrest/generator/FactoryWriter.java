@@ -6,13 +6,14 @@ import java.io.IOException;
 
 /**
  * Writes syntactic sugar code for factories.
- * <p>Implementations of this could include vanilla factory methods for
+ * Implementations of this could include vanilla factory methods for
  * Hamcrest matchers, wrapped factories for other libraries or factories
  * in other languages (jython, jruby, groovy, etc).
+ *
  * <h3>Usage:</h3>
  * <pre>
  * writer.writeHeader(...);
- * <p/>
+ *
  * writer.writeMethod(...);
  * writer.writeMethod(...);
  * writer.writeMethod(...);

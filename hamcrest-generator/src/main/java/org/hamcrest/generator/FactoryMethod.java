@@ -6,8 +6,7 @@ import java.util.List;
 
 /**
  * Represents a Matcher Factory method.
- * <p/>
- * <p>This class uses Strings to represent things instead of java.lang.reflect equivalents,
+ * This class uses Strings to represent things instead of java.lang.reflect equivalents,
  * allowing methods to be defined from sources other than reflection of classes in the
  * classpath.
  *
@@ -72,7 +71,7 @@ public class FactoryMethod {
 
     /**
      * List of Parameters passed to factory method.
-     * ie. 'public Matcher&lt;...&ht;> blah(THIS, AND, THAT)'
+     * ie. 'public Matcher&lt;...&gt; blah(THIS, AND, THAT)'
      */
     public List<Parameter> getParameters() {
         return unmodifiableList(parameters);

@@ -44,7 +44,6 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
     /**
      * Creates a matcher of {@link String} that matches when the examined string is equal to
      * the specified expectedString, ignoring case.
-     * <p/>
      * For example:
      * <pre>assertThat("Foo", equalToIgnoringCase("FOO"))</pre>
      * 

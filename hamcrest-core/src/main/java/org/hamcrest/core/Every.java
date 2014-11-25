@@ -33,7 +33,6 @@ public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<T>> {
      * Creates a matcher for {@link Iterable}s that only matches when a single pass over the
      * examined {@link Iterable} yields items that are all matched by the specified
      * <code>itemMatcher</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("bar", "baz"), everyItem(startsWith("ba")))</pre>
      * 

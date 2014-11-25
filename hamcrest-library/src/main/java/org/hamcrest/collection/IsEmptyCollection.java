@@ -30,7 +30,6 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
     /**
      * Creates a matcher for {@link java.util.Collection}s matching examined collections whose <code>isEmpty</code>
      * method returns <code>true</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(new ArrayList&lt;String&gt;(), is(empty()))</pre>
      * 
@@ -43,7 +42,6 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
     /**
      * Creates a matcher for {@link java.util.Collection}s matching examined collections whose <code>isEmpty</code>
      * method returns <code>true</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyCollectionOf(String.class)))</pre>
      * 

@@ -69,7 +69,6 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
      *   <li>all leading and trailing whitespace of both the expectedString and the examined string are ignored</li>
      *   <li>any remaining whitespace, appearing within either string, is collapsed to a single space before comparison</li>
      * </ul>
-     * <p/>
      * For example:
      * <pre>assertThat("   my\tfoo  bar ", equalToIgnoringWhiteSpace(" my  foo bar"))</pre>
      * 

@@ -3,19 +3,24 @@
 package org.hamcrest;
 
 /**
+ * <p>
  * A matcher over acceptable values.
  * A matcher is able to describe itself to give feedback when it fails.
- * <p/>
+ * </p>
+ * <p>
  * Matcher implementations should <b>NOT directly implement this interface</b>.
  * Instead, <b>extend</b> the {@link BaseMatcher} abstract class,
  * which will ensure that the Matcher API can grow to support
  * new features and remain compatible with all Matcher implementations.
- * <p/>
+ * </p>
+ * <p>
  * For easy access to common Matcher implementations, use the static factory
  * methods in {@link CoreMatchers}.
- * <p/>
+ * </p>
+ * <p>
  * N.B. Well designed matchers should be immutable.
- * 
+ * </p>
+ *
  * @see CoreMatchers
  * @see BaseMatcher
  */
@@ -23,7 +28,7 @@ public interface Matcher<T> extends SelfDescribing {
 
     /**
      * Evaluates the matcher for argument <var>item</var>.
-     * <p/>
+     *
      * This method matches against Object, instead of the generic type T. This is
      * because the caller of the Matcher does not know at runtime what the type is
      * (because of type erasure with Java generics). It is down to the implementations

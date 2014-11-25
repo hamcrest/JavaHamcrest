@@ -6,7 +6,7 @@ package org.hamcrest;
  * <pre>
  * Matcher&lt;String&gt; aNonEmptyString = new CustomMatcher&lt;String&gt;("a non empty string") {
  *   public boolean matches(Object object) {
- *     return ((object instanceof String) && !((String) object).isEmpty();
+ *     return ((object instanceof String) &amp;&amp; !((String) object).isEmpty();
  *   }
  * };
  * </pre>

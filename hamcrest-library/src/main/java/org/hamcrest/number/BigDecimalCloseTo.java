@@ -48,7 +48,6 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
    * Creates a matcher of {@link java.math.BigDecimal}s that matches when an examined BigDecimal is equal
    * to the specified <code>operand</code>, within a range of +/- <code>error</code>. The comparison for equality
    * is done by BigDecimals {@link java.math.BigDecimal#compareTo(java.math.BigDecimal)} method.
-   * <p/>
    * For example:
    * <pre>assertThat(new BigDecimal("1.03"), is(closeTo(new BigDecimal("1.0"), new BigDecimal("0.03"))))</pre>
    * 

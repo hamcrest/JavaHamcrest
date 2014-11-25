@@ -15,9 +15,10 @@ public class StringStartsWith extends SubstringMatcher {
     protected boolean evalSubstringOf(String s) { return converted(s).startsWith(converted(substring)); }
 
     /**
+     * <p>
      * Creates a matcher that matches if the examined {@link String} starts with the specified
      * {@link String}.
-     * <p/>
+     * </p>
      * For example:
      * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
      * 
@@ -28,9 +29,10 @@ public class StringStartsWith extends SubstringMatcher {
     public static Matcher<String> startsWith(String prefix) { return new StringStartsWith(false, prefix); }
 
     /**
+     * <p>
      * Creates a matcher that matches if the examined {@link String} starts with the specified
      * {@link String}, ignoring case
-     * <p/>
+     * </p>
      * For example:
      * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
      *

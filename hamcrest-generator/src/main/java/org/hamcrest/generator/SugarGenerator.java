@@ -41,7 +41,6 @@ import java.util.List;
  * @author Joe Walnes
  * @see FactoryWriter
  * @see HamcrestFactoryWriter
- * @see ReflectiveFactoryReader
  */
 public class SugarGenerator implements Closeable, SugarConfiguration {
 
@@ -59,7 +58,6 @@ public class SugarGenerator implements Closeable, SugarConfiguration {
     /**
      * Add a FactoryMethod that will be generated in the sugar.
      *
-     * @see ReflectiveFactoryReader
      * @see FactoryMethod
      */
     @Override
@@ -83,6 +81,8 @@ public class SugarGenerator implements Closeable, SugarConfiguration {
      * Generate all the factory methods using all the writers.
      *
      * This should always happen AFTER adding factory methods and writers.
+     *
+     * @throws java.io.IOException from the underlying stream used to write the generated code
      */
     public void generate() throws IOException {
         for (FactoryWriter factoryWriter : factoryWriters) {

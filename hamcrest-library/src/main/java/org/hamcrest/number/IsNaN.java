@@ -32,7 +32,6 @@ public final class IsNaN extends TypeSafeMatcher<Double> {
 
     /**
      * Creates a matcher of {@link Double}s that matches when an examined double is not a number.
-     * <p/>
      * For example:
      * <pre>assertThat(Double.NaN, is(notANumber()))</pre>
      */

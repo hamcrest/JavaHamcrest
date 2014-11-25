@@ -24,7 +24,6 @@ public class IsNull<T> extends BaseMatcher<T> {
 
     /**
      * Creates a matcher that matches if examined object is <code>null</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(cheese, is(nullValue())</pre>
      * 
@@ -36,7 +35,6 @@ public class IsNull<T> extends BaseMatcher<T> {
 
     /**
      * A shortcut to the frequently used <code>not(nullValue())</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(cheese, is(notNullValue()))</pre>
      * instead of:
@@ -51,7 +49,6 @@ public class IsNull<T> extends BaseMatcher<T> {
     /**
      * Creates a matcher that matches if examined object is <code>null</code>. Accepts a
      * single dummy argument to facilitate type inference.
-     * <p/>
      * For example:
      * <pre>assertThat(cheese, is(nullValue(Cheese.class))</pre>
      * 
@@ -66,7 +63,6 @@ public class IsNull<T> extends BaseMatcher<T> {
     /**
      * A shortcut to the frequently used <code>not(nullValue(X.class)). Accepts a
      * single dummy argument to facilitate type inference.</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(cheese, is(notNullValue(X.class)))</pre>
      * instead of:

@@ -40,7 +40,6 @@ public class Is<T> extends BaseMatcher<T> {
     /**
      * Decorates another Matcher, retaining its behaviour, but allowing tests
      * to be slightly more expressive.
-     * <p/>
      * For example:
      * <pre>assertThat(cheese, is(equalTo(smelly)))</pre>
      * instead of:
@@ -54,7 +53,6 @@ public class Is<T> extends BaseMatcher<T> {
 
     /**
      * A shortcut to the frequently used <code>is(equalTo(x))</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(cheese, is(smelly))</pre>
      * instead of:
@@ -68,7 +66,6 @@ public class Is<T> extends BaseMatcher<T> {
 
     /**
      * A shortcut to the frequently used <code>is(instanceOf(SomeClass.class))</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(cheese, isA(Cheddar.class))</pre>
      * instead of:

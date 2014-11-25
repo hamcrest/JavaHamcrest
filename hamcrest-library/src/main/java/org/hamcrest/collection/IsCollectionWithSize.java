@@ -23,7 +23,6 @@ public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends
     /**
      * Creates a matcher for {@link java.util.Collection}s that matches when the <code>size()</code> method returns
      * a value that satisfies the specified matcher.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasSize(equalTo(2)))</pre>
      * 
@@ -38,7 +37,6 @@ public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends
     /**
      * Creates a matcher for {@link java.util.Collection}s that matches when the <code>size()</code> method returns
      * a value equal to the specified <code>size</code>.
-     * <p/>
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasSize(2))</pre>
      * 
