@@ -8,7 +8,7 @@
     <taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpath="lib/integration/ant-junit-1.8.4.jar"/>
 
 
-    <target name="all" depends="clean, bigjar" description="Performs clean build, runs tests and packages for distribution"/>
+    <target name="all" depends="clean, bigjar, javadoc" description="Performs clean build, runs tests and packages for distribution"/>
 
     <target name="clean" description="Clean up all built files">
         <delete dir="build"/>
