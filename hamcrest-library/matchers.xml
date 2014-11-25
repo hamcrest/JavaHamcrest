@@ -30,6 +30,7 @@
     <factory class="org.hamcrest.collection.IsEmptyIterable"/>
     <factory class="org.hamcrest.collection.IsIterableContainingInOrder"/>
     <factory class="org.hamcrest.collection.IsIterableContainingInAnyOrder"/>
+    <factory class="org.hamcrest.collection.IsIterableContainingInRelativeOrder"/>
     <factory class="org.hamcrest.collection.IsIterableWithSize"/>
     <factory class="org.hamcrest.collection.IsMapContaining"/>
     <factory class="org.hamcrest.collection.IsIn"/>
