@@ -19,6 +19,7 @@
     <factory class="org.hamcrest.core.StringEndsWith"/>
 
     <!-- Collection -->
+    <factory class="org.hamcrest.collection.HasConsecutiveItems"/>
     <factory class="org.hamcrest.collection.IsArray"/>
     <factory class="org.hamcrest.collection.IsArrayContaining"/>
     <factory class="org.hamcrest.collection.IsArrayContainingInOrder"/>
