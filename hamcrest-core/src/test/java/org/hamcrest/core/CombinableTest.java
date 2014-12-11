@@ -42,7 +42,7 @@ public final class CombinableTest {
     @Test public void
     bothDescribesItself() {
         assertDescription("(not <3> and not <4>)", NOT_3_AND_NOT_4);
-        assertMismatchDescription("not <3> was <3>", NOT_3_AND_NOT_4, 3);
+        assertMismatchDescription("was <3>", NOT_3_AND_NOT_4, 3);
     }
 
     @Test public void

@@ -87,7 +87,7 @@ public final class IsCollectionContainingTest {
     reportsMismatchWithAReadableDescriptionForMultipleItems() {
         final Matcher<Iterable<Integer>> matcher = hasItems(3, 4);
         
-        assertMismatchDescription("a collection containing <4> mismatches were: [was <1>, was <2>, was <3>]",
+        assertMismatchDescription("mismatches were: [was <1>, was <2>, was <3>]",
                                   matcher, asList(1, 2, 3));
     }
 
