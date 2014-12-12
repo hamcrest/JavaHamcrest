@@ -15,25 +15,25 @@ import java.util.Collection;
  * Matches if a collection contains another collection's items in
  * consecutive order anywhere inside it.
  */
-public class HasConsecutiveItems<T>
+public class HasSubsequence<T>
     extends TypeSafeDiagnosingMatcher<Collection<? extends T>> {
     private final List<Matcher<? super T>> matchers;
 
-    public HasConsecutiveItems(List<Matcher<? super T>> matchers) {
+    public HasSubsequence(List<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }
 
     @Override
     public boolean matchesSafely(
-            Collection<? extends T> itemsToMatch,
+            Collection<? extends T> subsequenceToMatch,
             Description mismatchDescription) {
-        List<? extends T> itemsToMatchList = new ArrayList<T>(itemsToMatch);
+        List<? extends T> subsequenceToMatchList = new ArrayList<T>(subsequenceToMatch);
 
-        for (int i = 0; i <= itemsToMatchList.size() - matchers.size(); i++) {
+        for (int i = 0; i <= subsequenceToMatchList.size() - matchers.size(); i++) {
             boolean allMatchersMatched = true;
             for (int j = 0; j < matchers.size(); j++) {
                 Matcher<? super T> matcher = matchers.get(j);
-                if (!matcher.matches(itemsToMatchList.get(i + j))) {
+                if (!matcher.matches(subsequenceToMatchList.get(i + j))) {
                     allMatchersMatched = false;
                     break;
                 }
@@ -44,42 +44,42 @@ public class HasConsecutiveItems<T>
         }
 
         mismatchDescription
-                .appendText("could not find items inside collection ")
-                .appendValueList("[", ", ", "]", itemsToMatch);
+                .appendText("could not find subsequence inside collection ")
+                .appendValueList("[", ", ", "]", subsequenceToMatch);
         return false;
     }
 
     @Override
     public void describeTo(Description description) {
         description
-                .appendText("collection contains consecutive items matching ")
+                .appendText("collection contains subsequence matching ")
                 .appendList("[", ", ", "]", matchers);
     }
 
     @Factory
-    public static <T> Matcher<Collection<? extends T>> hasConsecutiveItems(
+    public static <T> Matcher<Collection<? extends T>> hasSubsequence(
             List<Matcher<? super T>> matchers) {
-        return new HasConsecutiveItems<T>(matchers);
+        return new HasSubsequence<T>(matchers);
     }
 
     @Factory
-    public static <T> Matcher<Collection<? extends T>> hasConsecutiveItems(
+    public static <T> Matcher<Collection<? extends T>> hasSubsequence(
             Matcher<? super T>... matchers) {
-        return hasConsecutiveItems(Arrays.asList(matchers));
+        return hasSubsequence(Arrays.asList(matchers));
     }
 
     @Factory
-    public static <T> Matcher<Collection<? extends T>> hasConsecutiveItems(
+    public static <T> Matcher<Collection<? extends T>> hasSubsequence(
             Iterable<? extends T> items) {
         List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
         for (Object item : items) {
             matchers.add(equalTo(item));
         }
-        return new HasConsecutiveItems<T>(matchers);
+        return new HasSubsequence<T>(matchers);
     }
 
     @Factory
-    public static <T> Matcher<Collection<? extends T>> hasConsecutiveItems(T... elements) {
-        return hasConsecutiveItems(Arrays.asList(elements));
+    public static <T> Matcher<Collection<? extends T>> hasSubsequence(T... elements) {
+        return hasSubsequence(Arrays.asList(elements));
     }
 }

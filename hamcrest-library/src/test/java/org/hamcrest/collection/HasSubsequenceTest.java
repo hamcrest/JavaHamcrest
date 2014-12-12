@@ -9,61 +9,61 @@ import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
 import static java.util.Arrays.asList;
-import static org.hamcrest.collection.HasConsecutiveItems.hasConsecutiveItems;
+import static org.hamcrest.collection.HasSubsequence.hasSubsequence;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 @SuppressWarnings("unchecked")
-public class HasConsecutiveItemsTest extends AbstractMatcherTest {
-    private final Matcher<Collection<? extends WithValue>> contains123 = hasConsecutiveItems(value(1), value(2), value(3));
+public class HasSubsequenceTest extends AbstractMatcherTest {
+    private final Matcher<Collection<? extends WithValue>> contains123 = hasSubsequence(value(1), value(2), value(3));
 
     @Override
     protected Matcher<?> createMatcher() {
-        return hasConsecutiveItems(1, 2);
+        return hasSubsequence(1, 2);
     }
 
     public void testMatchingSingleItemCollection() throws Exception {
-        assertMatches("Single item iterable", hasConsecutiveItems(1), asList(1));
+        assertMatches("Single item iterable", hasSubsequence(1), asList(1));
     }
 
     public void testMatchingMultipleItemCollection() throws Exception {
-        assertMatches("Multiple item iterable", hasConsecutiveItems(1, 2, 3), asList(1, 2, 3));
+        assertMatches("Multiple item iterable", hasSubsequence(1, 2, 3), asList(1, 2, 3));
     }
 
     public void testMatchesWithMoreElementsThanExpectedAtBeginning() throws Exception {
-        assertMatches("More elements at beginning", hasConsecutiveItems(2, 3, 4), asList(1, 2, 3, 4));
+        assertMatches("More elements at beginning", hasSubsequence(2, 3, 4), asList(1, 2, 3, 4));
     }
 
     public void testMatchesWithMoreElementsThanExpectedAtEnd() throws Exception {
-        assertMatches("More elements at end", hasConsecutiveItems(1, 2, 3), asList(1, 2, 3, 4));
+        assertMatches("More elements at end", hasSubsequence(1, 2, 3), asList(1, 2, 3, 4));
     }
 
     public void testDoesNotMatchWithMoreElementsThanExpectedInBetween() throws Exception {
-        assertMismatchDescription("could not find items inside collection [<1>, <2>, <3>]", hasConsecutiveItems(1, 3), asList(1, 2, 3));
+        assertMismatchDescription("could not find subsequence inside collection [<1>, <2>, <3>]", hasSubsequence(1, 3), asList(1, 2, 3));
     }
 
     public void testMatchesSubSection() throws Exception {
-        assertMatches("Sub section of iterable", hasConsecutiveItems(2, 3), asList(1, 2, 3, 4));
+        assertMatches("Sub section of iterable", hasSubsequence(2, 3), asList(1, 2, 3, 4));
     }
 
     public void testDoesNotMatchWithFewerElementsThanExpected() throws Exception {
         List<WithValue> valueList = asList(make(1), make(2));
-        assertMismatchDescription("could not find items inside collection [<WithValue 1>, <WithValue 2>]", contains123, valueList);
+        assertMismatchDescription("could not find subsequence inside collection [<WithValue 1>, <WithValue 2>]", contains123, valueList);
     }
 
     public void testDoesNotMatchIfSingleItemNotFound() throws Exception {
-        assertMismatchDescription("could not find items inside collection [<WithValue 3>]", hasConsecutiveItems(value(4)), asList(make(3)));
+        assertMismatchDescription("could not find subsequence inside collection [<WithValue 3>]", hasSubsequence(value(4)), asList(make(3)));
     }
 
     public void testDoesNotMatchIfOneOfMultipleItemsNotFound() throws Exception {
-        assertMismatchDescription("could not find items inside collection [<WithValue 1>, <WithValue 2>, <WithValue 4>]", contains123, asList(make(1), make(2), make(4)));
+        assertMismatchDescription("could not find subsequence inside collection [<WithValue 1>, <WithValue 2>, <WithValue 4>]", contains123, asList(make(1), make(2), make(4)));
     }
 
     public void testDoesNotMatchEmptyCollection() throws Exception {
-        assertMismatchDescription("could not find items inside collection []", hasConsecutiveItems(value(4)), new ArrayList<WithValue>());
+        assertMismatchDescription("could not find subsequence inside collection []", hasSubsequence(value(4)), new ArrayList<WithValue>());
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("collection contains consecutive items matching [<1>, <2>]", hasConsecutiveItems(1, 2));
+        assertDescription("collection contains subsequence matching [<1>, <2>]", hasSubsequence(1, 2));
     }
 
     public static class WithValue {
