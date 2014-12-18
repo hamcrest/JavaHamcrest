@@ -4,11 +4,6 @@ sourceCompatibility = 1.7
 targetCompatibility=1.7
 version=7.0
 
-manifest {
-    attributes 'Implementation-Title': 'hamcrest-all',
-            'Implementation-Vendor': 'hamcrest.org',
-            'Implementation-Version': version
-}
 
 dependencies {
     testCompile(group: 'junit', name: 'junit', version: '4.+') {
@@ -30,17 +25,14 @@ sourceSets {
     }
 }
 
-
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'hamcrest-all',
+                'Implementation-Vendor': 'hamcrest.org',
+                'Implementation-Version': version
+    }
+}
 
 repositories {
     mavenCentral()
-}
-
-
-uploadArchives {
-    repositories {
-        flatDir {
-            dirs "repos"
-        }
-    }
 }
