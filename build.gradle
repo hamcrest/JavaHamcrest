@@ -1,15 +1,24 @@
 apply plugin: "java"
 
 sourceCompatibility = 1.7
+targetCompatibility=1.7
 version=7.0
+manifest {
+    attributes 'Implementation-Title': 'hamcrest-all',
+            'Implementation-Vendor': 'hamcrest.org',
+            'Implementation-Version': version
+}
 
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'hamcrest-all',
-                'Implementation-Vendor': 'hamcrest.org',
-                'Implementation-Version': version
+sourceSets {
+    core {
+        java {
+            srcDirs 'hamcrest-api/src/main/java', 'hamcrest-core/src/main/java', 'hamcrest-library/src/main/java'
+        }
+
     }
 }
+
+
 
 repositories {
     mavenCentral()
