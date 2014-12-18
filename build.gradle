@@ -1,0 +1,19 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.7
+version=7.0
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'hamcrest-all',
+                'Implementation-Vendor': 'hamcrest.org'
+    }
+}
+
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs "repos"
+        }
+    }
+}
