@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" value="Javac" />
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="CopyrightManager" default="" />
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DependencyValidationManager">
+    <option name="SKIP_IMPORT_STATEMENTS" value="false" />
+  </component>
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="modificationStamps">
+      <map>
+        <entry key="$PROJECT_DIR$/../../Springer/Interviews/john-rae/canvas" value="2829154025000" />
+        <entry key="$PROJECT_DIR$/../../Springer/Interviews/oliver-mannion" value="2835459218000" />
+        <entry key="$PROJECT_DIR$/../../Springer/Interviews/peter-pilgrim" value="1415626874000" />
+        <entry key="$PROJECT_DIR$/../../Springer/Interviews/stefan-vatov" value="2834300080000" />
+        <entry key="$PROJECT_DIR$/../../Springer/Oscar/oscar-jade" value="1415269043000" />
+        <entry key="$PROJECT_DIR$/../../Springer/Oscar/oscar-utterlyidle" value="1415269077000" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-api/src/main/api.iml" filepath="$PROJECT_DIR$/hamcrest-api/src/main/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-core/src/main/core.iml" filepath="$PROJECT_DIR$/hamcrest-core/src/main/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-examples/src/main/examples.iml" filepath="$PROJECT_DIR$/hamcrest-examples/src/main/examples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/generated-code/generated-code.iml" filepath="$PROJECT_DIR$/generated-code/generated-code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-generator/src/main/generator.iml" filepath="$PROJECT_DIR$/hamcrest-generator/src/main/generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-integration/src/main/integration.iml" filepath="$PROJECT_DIR$/hamcrest-integration/src/main/integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-library/src/main/library.iml" filepath="$PROJECT_DIR$/hamcrest-library/src/main/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-api/src/test/test-api.iml" filepath="$PROJECT_DIR$/hamcrest-api/src/test/test-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-core/src/test/test-core.iml" filepath="$PROJECT_DIR$/hamcrest-core/src/test/test-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-generator/src/test/test-generator.iml" filepath="$PROJECT_DIR$/hamcrest-generator/src/test/test-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-integration/src/test/test-integration.iml" filepath="$PROJECT_DIR$/hamcrest-integration/src/test/test-integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamcrest-library/src/test/test-library.iml" filepath="$PROJECT_DIR$/hamcrest-library/src/test/test-library.iml" />
+    </modules>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <list size="0" />
+    <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="svn" />
+  </component>
+  <component name="libraryTable">
+    <library name="generator">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/generator/qdox-2.0-M2.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/generator/jarjar-1.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="integration">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/integration/junit-3.8.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/integration/junit-dep-4.11.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/integration/easymock-2.2.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/integration/testng-6.5.2.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/integration/jmock-1.10RC1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/integration/ant-junit-1.8.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="sources">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/sources/qdox-2.0-M2-sources.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/sources/testng-6.5.2-sources.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/sources/junit-4.11-sources.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
