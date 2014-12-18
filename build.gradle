@@ -3,6 +3,7 @@ apply plugin: "java"
 sourceCompatibility = 1.7
 targetCompatibility=1.7
 version=7.0
+
 manifest {
     attributes 'Implementation-Title': 'hamcrest-all',
             'Implementation-Vendor': 'hamcrest.org',
@@ -10,7 +11,9 @@ manifest {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.+'
+    testCompile(group: 'junit', name: 'junit', version: '4.+') {
+        transitive = false
+    }
 }
 
 sourceSets {
