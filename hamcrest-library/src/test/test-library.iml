@@ -9,7 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="integration" level="project" />
     <orderEntry type="module" module-name="api" />
-    <orderEntry type="module" module-name="integration" />
     <orderEntry type="module" module-name="core" />
     <orderEntry type="module" module-name="library" scope="TEST" />
     <orderEntry type="module" module-name="test-core" scope="TEST" />
