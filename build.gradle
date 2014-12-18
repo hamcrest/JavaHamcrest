@@ -31,6 +31,7 @@ jar {
                 'Implementation-Vendor': 'hamcrest.org',
                 'Implementation-Version': version
     }
+    from sourceSets.main.allSource
     baseName = 'java-hamcrest'
 }
 
