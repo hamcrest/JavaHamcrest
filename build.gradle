@@ -31,6 +31,7 @@ jar {
                 'Implementation-Vendor': 'hamcrest.org',
                 'Implementation-Version': version
     }
+    baseName = 'java-hamcrest'
 }
 
 repositories {
