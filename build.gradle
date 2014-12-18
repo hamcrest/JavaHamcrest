@@ -57,6 +57,7 @@ artifacts {
 }
 
 signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
     sign configurations.archives
 }
 
@@ -74,7 +75,7 @@ uploadArchives {
                     authentication(userName: ossrhUsername, password: ossrhPassword)
                 }
             }
-            
+
             pom.project {
                 name 'Java Hamcrest'
                 packaging 'jar'
