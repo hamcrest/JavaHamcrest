@@ -8,12 +8,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="integration" level="project" />
-    <orderEntry type="module" module-name="test-integration" />
     <orderEntry type="module" module-name="api" />
-    <orderEntry type="module" module-name="test-api" />
     <orderEntry type="module" module-name="integration" />
     <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="test-core" />
-    <orderEntry type="module" module-name="generated-code" />
+    <orderEntry type="module" module-name="library" />
   </component>
 </module>
