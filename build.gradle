@@ -1,9 +1,18 @@
-apply plugin: "java"
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.7
 targetCompatibility=1.7
+
+group = "org-hamcrest"
+archivesBaseName = "java-hamcrest"
 version=7.0
 
+
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     testCompile(group: 'junit', name: 'junit', version: '4.+') {
@@ -31,10 +40,22 @@ jar {
                 'Implementation-Vendor': 'hamcrest.org',
                 'Implementation-Version': version
     }
-    from sourceSets.main.allSource
-    baseName = 'java-hamcrest'
 }
 
-repositories {
-    mavenCentral()
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+signing {
+    sign configurations.archives
 }
