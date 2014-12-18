@@ -9,12 +9,21 @@ manifest {
             'Implementation-Version': version
 }
 
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
 sourceSets {
-    core {
+    main {
         java {
             srcDirs 'hamcrest-api/src/main/java', 'hamcrest-core/src/main/java', 'hamcrest-library/src/main/java'
         }
 
+    }
+    test {
+        java {
+            srcDirs 'hamcrest-api/src/test/java', 'hamcrest-core/src/test/java', 'hamcrest-library/src/test/java'
+        }
     }
 }
 
