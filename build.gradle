@@ -59,3 +59,53 @@ artifacts {
 signing {
     sign configurations.archives
 }
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Java Hamcrest'
+                packaging 'jar'
+                description 'Hamcrest matcher library for Java'
+                url 'http://hamcrest.org/JavaHamcrest/'
+
+                scm {
+                    connection 'git@github.com:hamcrest/JavaHamcrest.git'
+                    url 'https://github.com/hamcrest/JavaHamcrest'
+                }
+
+                licenses {
+                    license {
+                        name 'BSD Licence 3'
+                        url 'http://opensource.org/licenses/BSD-3-Clause'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'joewalnes'
+                        name 'Joe Walnes'
+                    }
+                    developer {
+                        id 'npryce'
+                        name 'Nat Pryce'
+                    }
+                    developer {
+                        id 'sf105'
+                        name 'Steve Freeman'
+                    }
+                }
+            }
+        }
+    }
+}
