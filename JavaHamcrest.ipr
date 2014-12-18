@@ -177,7 +177,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/hamcrest-api/src/main/api.iml" filepath="$PROJECT_DIR$/hamcrest-api/src/main/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/hamcrest-core/src/main/core.iml" filepath="$PROJECT_DIR$/hamcrest-core/src/main/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hamcrest-examples/src/main/examples.iml" filepath="$PROJECT_DIR$/hamcrest-examples/src/main/examples.iml" />
       <module fileurl="file://$PROJECT_DIR$/hamcrest-library/src/main/library.iml" filepath="$PROJECT_DIR$/hamcrest-library/src/main/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/hamcrest-api/src/test/test-api.iml" filepath="$PROJECT_DIR$/hamcrest-api/src/test/test-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/hamcrest-core/src/test/test-core.iml" filepath="$PROJECT_DIR$/hamcrest-core/src/test/test-core.iml" />
