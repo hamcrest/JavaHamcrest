@@ -6,9 +6,15 @@ version=7.0
 jar {
     manifest {
         attributes 'Implementation-Title': 'hamcrest-all',
-                'Implementation-Vendor': 'hamcrest.org'
+                'Implementation-Vendor': 'hamcrest.org',
+                'Implementation-Version': version
     }
 }
+
+repositories {
+    mavenCentral()
+}
+
 
 uploadArchives {
     repositories {

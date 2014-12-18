@@ -7,11 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="test-integration" />
     <orderEntry type="module" module-name="api" />
-    <orderEntry type="module" module-name="test-api" />
     <orderEntry type="module" module-name="integration" />
     <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="test-core" />
   </component>
 </module>
