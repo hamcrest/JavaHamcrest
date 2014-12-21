@@ -25,8 +25,7 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     public boolean matches(Object o, Description mismatch) {
         for (Matcher<? super T> matcher : matchers) {
             if (!matcher.matches(o)) {
-                mismatch.appendDescriptionOf(matcher).appendText(" ");
-                matcher.describeMismatch(o, mismatch);
+            	matcher.describeMismatch(o, mismatch);
               return false;
             }
         }
