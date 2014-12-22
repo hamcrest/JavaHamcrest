@@ -41,6 +41,7 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      */
+    @SafeVarargs
     public static <T> AnyOf<T> anyOf(Matcher<? super T>... matchers) {
         return anyOf(Arrays.asList(matchers));
     }
