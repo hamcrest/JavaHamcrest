@@ -17,54 +17,11 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
    */
+  @SafeVarargs
   public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T>... matchers) {
     return org.hamcrest.core.AllOf.allOf(matchers);
   }
 
-  /**
-   * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
-   * For example:
-   * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
-   */
-  public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second) {
-    return org.hamcrest.core.AllOf.allOf(first, second);
-  }
-
-  /**
-   * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
-   * For example:
-   * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
-   */
-  public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third) {
-    return org.hamcrest.core.AllOf.allOf(first, second, third);
-  }
-
-  /**
-   * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
-   * For example:
-   * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
-   */
-  public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth) {
-    return org.hamcrest.core.AllOf.allOf(first, second, third, fourth);
-  }
-
-  /**
-   * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
-   * For example:
-   * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
-   */
-  public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth) {
-    return org.hamcrest.core.AllOf.allOf(first, second, third, fourth, fifth);
-  }
-
-  /**
-   * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
-   * For example:
-   * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
-   */
-  public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth, org.hamcrest.Matcher<? super T> sixth) {
-    return org.hamcrest.core.AllOf.allOf(first, second, third, fourth, fifth, sixth);
-  }
 
   /**
    * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
@@ -80,53 +37,9 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    */
+  @SafeVarargs
   public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T>... matchers) {
     return org.hamcrest.core.AnyOf.anyOf(matchers);
-  }
-
-  /**
-   * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-   * For example:
-   * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
-   */
-  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<T> first, org.hamcrest.Matcher<? super T> second) {
-    return org.hamcrest.core.AnyOf.anyOf(first, second);
-  }
-
-  /**
-   * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-   * For example:
-   * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
-   */
-  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third) {
-    return org.hamcrest.core.AnyOf.anyOf(first, second, third);
-  }
-
-  /**
-   * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-   * For example:
-   * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
-   */
-  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth) {
-    return org.hamcrest.core.AnyOf.anyOf(first, second, third, fourth);
-  }
-
-  /**
-   * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-   * For example:
-   * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
-   */
-  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth) {
-    return org.hamcrest.core.AnyOf.anyOf(first, second, third, fourth, fifth);
-  }
-
-  /**
-   * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
-   * For example:
-   * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
-   */
-  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth, org.hamcrest.Matcher<? super T> sixth) {
-    return org.hamcrest.core.AnyOf.anyOf(first, second, third, fourth, fifth, sixth);
   }
 
   /**
@@ -271,6 +184,7 @@ public class CoreMatchers {
    * @param itemMatchers
    *     the matchers to apply to items provided by the examined {@link Iterable}
    */
+  @SafeVarargs
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItems(org.hamcrest.Matcher<? super T>... itemMatchers) {
     return org.hamcrest.core.IsCollectionContaining.hasItems(itemMatchers);
   }
@@ -286,6 +200,7 @@ public class CoreMatchers {
    * @param items
    *     the items to compare against the items provided by the examined {@link Iterable}
    */
+  @SafeVarargs
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItems(T... items) {
     return org.hamcrest.core.IsCollectionContaining.hasItems(items);
   }
