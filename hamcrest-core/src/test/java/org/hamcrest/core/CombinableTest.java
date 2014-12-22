@@ -63,6 +63,6 @@ public final class CombinableTest {
     @Test public void
     picksUpTypeFromLeftHandSideOfExpression() {
         @SuppressWarnings("unused")
-        Matcher<String> matcher = CombinableMatcher.<String>both(equalTo("yellow")).and(notNullValue(String.class));
+        Matcher<String> matcher = CombinableMatcher.both(equalTo("yellow")).and(notNullValue(String.class));
     }
 }

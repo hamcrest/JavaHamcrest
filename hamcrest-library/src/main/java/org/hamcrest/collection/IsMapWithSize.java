@@ -44,7 +44,7 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
      */
     public static <K, V> Matcher<Map<? extends K, ? extends V>> aMapWithSize(int size) {
         Matcher<? super Integer> matcher = equalTo(size);
-        return IsMapWithSize.<K, V>aMapWithSize(matcher);
+        return IsMapWithSize.aMapWithSize(matcher);
     }
     
     /**
@@ -55,6 +55,6 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
      * 
      */
     public static <K, V> Matcher<Map<? extends K, ? extends V>> anEmptyMap() {
-        return IsMapWithSize.<K, V>aMapWithSize(equalTo(0));
+        return IsMapWithSize.aMapWithSize(equalTo(0));
     }
 }

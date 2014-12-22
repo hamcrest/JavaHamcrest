@@ -122,6 +122,7 @@ public class ComparatorMatcherBuilderTest extends AbstractMatcherTest {
             this.value = value;
         }
 
+        @Override
         public int compareTo(CustomInt other) {
             return value - other.value;
         }

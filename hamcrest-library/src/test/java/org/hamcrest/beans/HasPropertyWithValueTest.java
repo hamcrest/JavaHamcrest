@@ -23,6 +23,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * @author Steve Freeman
  * @since 1.1.0
  */
+@SuppressWarnings("UnusedDeclaration")
 public class HasPropertyWithValueTest extends AbstractMatcherTest {
   private final BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected");
   private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");

@@ -71,7 +71,7 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
     @Override
     final public void describeMismatch(Object item, Description description) {
         if (item == null) {
-            super.describeMismatch(item, description);
+            super.describeMismatch(null, description);
         } else if (! expectedType.isInstance(item)) {
             description.appendText("was a ")
                        .appendText(item.getClass().getName())

@@ -91,9 +91,6 @@ public final class MatcherAssertTest {
 
     @Test public void
     canAssertSubtypes() {
-        Integer aSub = new Integer(1);
-        Number aSuper = aSub;
-
-        assertThat(aSub, equalTo(aSuper));
+        assertThat(1, equalTo((Number) 1));
     }
 }

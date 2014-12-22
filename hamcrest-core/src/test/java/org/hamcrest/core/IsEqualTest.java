@@ -42,6 +42,7 @@ public final class IsEqualTest {
         assertDoesNotMatch(matcher, new String[] {"a", "b"});
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Test public void
     honoursIsEqualImplementationEvenWithNullValues() {
         Object alwaysEqual = new Object() {
@@ -57,7 +58,8 @@ public final class IsEqualTest {
             }
         };
 
-        final Matcher<Object> matcher = equalTo(null);
+        Matcher<Object> matcher = equalTo(null);
+
         assertMatches(matcher, alwaysEqual);
         assertDoesNotMatch(matcher, neverEqual);
     }

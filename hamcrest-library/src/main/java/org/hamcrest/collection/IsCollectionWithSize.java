@@ -2,9 +2,10 @@ package org.hamcrest.collection;
 
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.IsEqual;
 
 import java.util.Collection;
+
+import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
  * Matches if collection size satisfies a nested matcher.
@@ -43,7 +44,7 @@ public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static <E> Matcher<Collection<? extends E>> hasSize(int size) {
-    	return (Matcher)IsCollectionWithSize.hasSize(IsEqual.<Integer>equalTo(size));
+    	return (Matcher)IsCollectionWithSize.hasSize(equalTo(size));
     }
 
 }

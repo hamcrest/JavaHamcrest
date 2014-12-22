@@ -34,7 +34,7 @@ public final class TypeSafeMatcherTest {
     @Test public void
     describesMismatches() {
       assertMismatchDescription("was null", matcher, null);
-      assertMismatchDescription("was a java.lang.Integer (<3>)", (Matcher)matcher, new Integer(3));
+      assertMismatchDescription("was a java.lang.Integer (<3>)", (Matcher)matcher, 3);
       assertMismatchDescription("The mismatch", matcher, "a string");
     }
 }

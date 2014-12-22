@@ -44,7 +44,7 @@ public final class IsTest {
     @Test public void
     providesConvenientShortcutForIsInstanceOf() {
         final Matcher matcher = isA(Integer.class);
-        assertMatches(matcher, Integer.valueOf(1));
+        assertMatches(matcher, 1);
         assertDoesNotMatch(matcher, new Object());
         assertDoesNotMatch(matcher, null);
     }

@@ -72,7 +72,7 @@ public final class IsMapWithSizeTest extends AbstractMatcherTest {
       MatcherAssert.assertThat(arrayList, aMapWithSize(0));
     }
     
-    private static final <K, V> Map<K, V> mapWithKeys(K... keys) {
+    private static <K, V> Map<K, V> mapWithKeys(K... keys) {
         final Map<K, V> result = new HashMap<K, V>();
         for (K key : keys) {
             result.put(key, null);

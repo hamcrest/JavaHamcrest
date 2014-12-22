@@ -44,7 +44,7 @@ public abstract class FeatureMatcher<T, U> extends TypeSafeDiagnosingMatcher<T> 
       return false;
     }
     return true;
-  };
+  }
       
   @Override
   public final void describeTo(Description description) {
