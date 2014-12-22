@@ -2,7 +2,6 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 /**
@@ -25,7 +24,6 @@ public class StringStartsWith extends SubstringMatcher {
      * @param prefix
      *      the substring that the returned matcher will expect at the start of any examined string
      */
-    @Factory
     public static Matcher<String> startsWith(String prefix) { return new StringStartsWith(false, prefix); }
 
     /**
@@ -39,7 +37,6 @@ public class StringStartsWith extends SubstringMatcher {
      * @param prefix
      *      the substring that the returned matcher will expect at the start of any examined string
      */
-    @Factory
     public static Matcher<String> startsWithIgnoringCase(String prefix) { return new StringStartsWith(true, prefix); }
 
 }

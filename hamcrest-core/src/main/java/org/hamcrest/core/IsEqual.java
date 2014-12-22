@@ -4,7 +4,6 @@ package org.hamcrest.core;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 import java.lang.reflect.Array;
@@ -86,7 +85,6 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * </pre>
      * 
      */
-    @Factory
     public static <T> Matcher<T> equalTo(T operand) {
         return new IsEqual<T>(operand);
     }
@@ -95,7 +93,6 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * Creates an {@link org.hamcrest.core.IsEqual} matcher that does not enforce the values being
      * compared to be of the same static type.
      */
-    @Factory
     public static Matcher<Object> equalToObject(Object operand) {
         return new IsEqual<Object>(operand);
     }

@@ -1,18 +1,16 @@
 package org.hamcrest.io;
 
-import static org.hamcrest.core.IsEqual.equalTo;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.hamcrest.Description;
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public final class FileMatchers {
 
-    @Factory
     public static Matcher<File> anExistingDirectory() {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
@@ -29,7 +27,6 @@ public final class FileMatchers {
         };
     }
 
-    @Factory
     public static Matcher<File> anExistingFileOrDirectory() {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
@@ -46,7 +43,6 @@ public final class FileMatchers {
         };
     }
 
-    @Factory
     public static Matcher<File> anExistingFile() {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
@@ -63,7 +59,6 @@ public final class FileMatchers {
         };
     }
 
-    @Factory
     public static Matcher<File> aReadableFile() {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
@@ -80,7 +75,6 @@ public final class FileMatchers {
         };
     }
 
-    @Factory
     public static Matcher<File> aWritableFile() {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
@@ -97,12 +91,10 @@ public final class FileMatchers {
         };
     }
 
-    @Factory
     public static Matcher<File> aFileWithSize(long size) {
         return aFileWithSize(equalTo(size));
     }
 
-    @Factory
     public static Matcher<File> aFileWithSize(final Matcher<Long> size) {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
@@ -121,7 +113,6 @@ public final class FileMatchers {
         };
     }
 
-    @Factory
     public static Matcher<File> aFileNamed(final Matcher<String> name) {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
@@ -140,7 +131,6 @@ public final class FileMatchers {
         };
     }
 
-    @Factory
     public static Matcher<File> aFileWithCanonicalPath(final Matcher<String> path) {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
@@ -164,7 +154,6 @@ public final class FileMatchers {
         };
     }
 
-    @Factory
     public static Matcher<File> aFileWithAbsolutePath(final Matcher<String> path) {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {

@@ -1,11 +1,11 @@
 package org.hamcrest.collection;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 import static org.hamcrest.core.IsEqual.equalTo;

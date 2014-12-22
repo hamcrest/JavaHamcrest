@@ -2,7 +2,6 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 /**
@@ -28,7 +27,6 @@ public class StringContains extends SubstringMatcher {
      *     the substring that the returned matcher will expect to find within any examined string
      * 
      */
-    @Factory
     public static Matcher<String> containsString(String substring) {
         return new StringContains(false, substring);
     }
@@ -43,7 +41,6 @@ public class StringContains extends SubstringMatcher {
      *     the substring that the returned matcher will expect to find within any examined string
      *
      */
-    @Factory
     public static Matcher<String> containsStringIgnoringCase(String substring) {
         return new StringContains(true, substring);
     }

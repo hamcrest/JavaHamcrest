@@ -1,10 +1,10 @@
 package org.hamcrest.collection;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.collection.IsEmptyIterable.emptyIterable;

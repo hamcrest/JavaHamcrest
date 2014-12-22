@@ -1,29 +1,23 @@
 package org.hamcrest.xml;
 
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
-import static org.hamcrest.AbstractMatcherTest.assertMatches;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
-import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
+import org.hamcrest.Matcher;
+import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.ByteArrayInputStream;
+import java.util.HashSet;
+import java.util.Iterator;
+
+import static org.hamcrest.AbstractMatcherTest.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.xml.HasXPath.hasXPath;
 import static org.junit.Assert.fail;
-
-import java.io.ByteArrayInputStream;
-import java.util.HashSet;
-import java.util.Iterator;
-
-import javax.xml.namespace.NamespaceContext;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.hamcrest.Matcher;
-import org.junit.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 /**
  * @author Joe Walnes

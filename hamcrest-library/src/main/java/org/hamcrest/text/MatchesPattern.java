@@ -1,11 +1,10 @@
 package org.hamcrest.text;
 
-import java.util.regex.Pattern;
-
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+
+import java.util.regex.Pattern;
 
 public class MatchesPattern extends TypeSafeMatcher<String> {
     private final Pattern pattern;
@@ -28,7 +27,6 @@ public class MatchesPattern extends TypeSafeMatcher<String> {
      * Creates a matcher of {@link java.lang.String} that matches when the examined string
      * exactly matches the given {@link java.util.regex.Pattern}.
      */
-    @Factory
     public static Matcher<String> matchesPattern(Pattern pattern) {
         return new MatchesPattern(pattern);
     }
@@ -37,7 +35,6 @@ public class MatchesPattern extends TypeSafeMatcher<String> {
      * Creates a matcher of {@link java.lang.String} that matches when the examined string
      * exactly matches the given regular expression, treated as a {@link java.util.regex.Pattern}.
      */
-    @Factory
     public static Matcher<String> matchesPattern(String regex) {
         return new MatchesPattern(Pattern.compile(regex));
     }

@@ -2,7 +2,6 @@ package org.hamcrest.collection;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 import java.util.Arrays;
@@ -44,7 +43,6 @@ public class IsIn<T> extends BaseMatcher<T> {
      * 
      */
     @Deprecated
-    @Factory
     public static <T> Matcher<T> isIn(Collection<T> collection) {
         return in(collection);
     }
@@ -59,7 +57,6 @@ public class IsIn<T> extends BaseMatcher<T> {
      *     the collection in which matching items must be found
      * 
      */
-    @Factory
     public static <T> Matcher<T> in(Collection<T> collection) {
         return new IsIn<T>(collection);
     }
@@ -77,7 +74,6 @@ public class IsIn<T> extends BaseMatcher<T> {
      * 
      */
     @Deprecated
-    @Factory
     public static <T> Matcher<T> isIn(T[] elements) {
         return in(elements);
     }
@@ -92,7 +88,6 @@ public class IsIn<T> extends BaseMatcher<T> {
      *     the array in which matching items must be found
      * 
      */
-    @Factory
     public static <T> Matcher<T> in(T[] elements) {
         return new IsIn<T>(elements);
     }
@@ -110,7 +105,6 @@ public class IsIn<T> extends BaseMatcher<T> {
      * 
      */
     @Deprecated
-    @Factory
     public static <T> Matcher<T> isOneOf(T... elements) {
         return oneOf(elements);
     }
@@ -125,7 +119,6 @@ public class IsIn<T> extends BaseMatcher<T> {
      *     the elements amongst which matching items will be found 
      * 
      */
-    @Factory
     public static <T> Matcher<T> oneOf(T... elements) {
         return in(elements);
     }

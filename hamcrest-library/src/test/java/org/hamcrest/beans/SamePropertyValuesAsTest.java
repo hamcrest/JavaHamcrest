@@ -2,10 +2,10 @@
  */
 package org.hamcrest.beans;
 
-import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+
+import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 
 public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   private static final Value aValue = new Value("expected");

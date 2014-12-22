@@ -1,16 +1,11 @@
 package org.hamcrest.text;
 
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
-import static org.hamcrest.AbstractMatcherTest.assertMatches;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
-import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
-import static org.hamcrest.text.IsEmptyString.emptyOrNullString;
-import static org.hamcrest.text.IsEmptyString.emptyString;
-
 import org.hamcrest.Matcher;
 import org.junit.Test;
+
+import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.text.IsEmptyString.emptyOrNullString;
+import static org.hamcrest.text.IsEmptyString.emptyString;
 
 public final class IsEmptyStringTest {
 

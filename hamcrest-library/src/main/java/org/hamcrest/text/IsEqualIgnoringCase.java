@@ -4,7 +4,6 @@ package org.hamcrest.text;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
@@ -50,7 +49,6 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
      * @param expectedString
      *     the expected value of matched strings
      */
-    @Factory
     public static Matcher<String> equalToIgnoringCase(String expectedString) {
         return new IsEqualIgnoringCase(expectedString);
     }

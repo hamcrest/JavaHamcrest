@@ -1,7 +1,6 @@
 package org.hamcrest.text;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -50,7 +49,6 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
      * @param substrings
      *     the substrings that must be contained within matching strings
      */
-    @Factory
     public static Matcher<String> stringContainsInOrder(Iterable<String> substrings) {
         return new StringContainsInOrder(substrings);
     }
@@ -65,7 +63,6 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
      * @param substrings
      *     the substrings that must be contained within matching strings
      */
-    @Factory
     public static Matcher<String> stringContainsInOrder(String... substrings) {
         return new StringContainsInOrder(Arrays.asList(substrings));
     }

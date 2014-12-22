@@ -2,10 +2,9 @@
  */
 package org.hamcrest.core;
 
+import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Factory;
-import org.hamcrest.BaseMatcher;
 
 
 /**
@@ -36,7 +35,6 @@ public class IsAnything<T> extends BaseMatcher<T> {
     /**
      * Creates a matcher that always matches, regardless of the examined object.
      */
-    @Factory
     public static Matcher<Object> anything() {
         return new IsAnything<Object>();
     }
@@ -48,7 +46,6 @@ public class IsAnything<T> extends BaseMatcher<T> {
      * @param description
      *     a meaningful {@link String} used when describing itself
      */
-    @Factory
     public static Matcher<Object> anything(String description) {
         return new IsAnything<Object>(description);
     }

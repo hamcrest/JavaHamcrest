@@ -2,11 +2,11 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.core.StringEndsWith.endsWith;
-import static org.hamcrest.core.StringEndsWith.endsWithIgnoringCase;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+
+import static org.hamcrest.core.StringEndsWith.endsWith;
+import static org.hamcrest.core.StringEndsWith.endsWithIgnoringCase;
 
 
 public class StringEndsWithTest extends AbstractMatcherTest {

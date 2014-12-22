@@ -1,11 +1,8 @@
 package org.hamcrest;
 
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
-import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
-
 import org.junit.Test;
+
+import static org.hamcrest.AbstractMatcherTest.*;
 
 public final class CustomTypeSafeMatcherTest {
     private static final String STATIC_DESCRIPTION = "I match non empty strings";

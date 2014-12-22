@@ -4,7 +4,6 @@ package org.hamcrest.core;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -40,7 +39,6 @@ public class IsNot<T> extends BaseMatcher<T>  {
      * @param matcher
      *     the matcher whose sense should be inverted
      */
-    @Factory
     public static <T> Matcher<T> not(Matcher<T> matcher) {
         return new IsNot<T>(matcher);
     }
@@ -55,7 +53,6 @@ public class IsNot<T> extends BaseMatcher<T>  {
      * @param value
      *     the value that any examined object should <b>not</b> equal
      */
-    @Factory
     public static <T> Matcher<T> not(T value) {
         return not(equalTo(value));
     }

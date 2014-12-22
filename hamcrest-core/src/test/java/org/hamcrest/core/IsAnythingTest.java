@@ -2,12 +2,12 @@
  */
 package org.hamcrest.core;
 
+import org.hamcrest.Matcher;
+import org.junit.Test;
+
 import static org.hamcrest.AbstractMatcherTest.assertDescription;
 import static org.hamcrest.AbstractMatcherTest.assertMatches;
 import static org.hamcrest.core.IsAnything.anything;
-
-import org.hamcrest.Matcher;
-import org.junit.Test;
 
 public final class IsAnythingTest {
 

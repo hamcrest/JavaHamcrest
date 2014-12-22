@@ -2,7 +2,6 @@
  */
 package org.hamcrest.core;
 
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 /**
@@ -25,7 +24,6 @@ public class StringEndsWith extends SubstringMatcher {
      * @param suffix
      *      the substring that the returned matcher will expect at the end of any examined string
      */
-    @Factory
     public static Matcher<String> endsWith(String suffix) {
         return new StringEndsWith(false, suffix);
     }
@@ -39,7 +37,6 @@ public class StringEndsWith extends SubstringMatcher {
      * @param suffix
      *      the substring that the returned matcher will expect at the end of any examined string
      */
-    @Factory
     public static Matcher<String> endsWithIgnoringCase(String suffix) {
         return new StringEndsWith(true, suffix);
     }

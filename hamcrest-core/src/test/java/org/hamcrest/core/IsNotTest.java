@@ -2,17 +2,13 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
-import static org.hamcrest.AbstractMatcherTest.assertMatches;
-import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
-import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
+import org.hamcrest.Matcher;
+import org.junit.Test;
+
+import static org.hamcrest.AbstractMatcherTest.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNot.not;
-
-import org.hamcrest.Matcher;
-import org.junit.Test;
 
 public final class IsNotTest {
 

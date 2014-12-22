@@ -1,7 +1,6 @@
 package org.hamcrest.core;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
@@ -39,7 +38,6 @@ public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
      * @param itemMatcher
      *     the matcher to apply to every item provided by the examined {@link Iterable}
      */
-    @Factory
     public static <U> Matcher<Iterable<? extends U>> everyItem(final Matcher<U> itemMatcher) {
         return new Every<U>(itemMatcher);
     }

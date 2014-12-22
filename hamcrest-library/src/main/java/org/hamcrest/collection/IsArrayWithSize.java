@@ -1,6 +1,5 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.Factory;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
@@ -29,7 +28,6 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      * @param sizeMatcher
      *     a matcher for the length of an examined array
      */
-    @Factory
     public static <E> Matcher<E[]> arrayWithSize(Matcher<? super Integer> sizeMatcher) {
         return new IsArrayWithSize<E>(sizeMatcher);
     }
@@ -43,7 +41,6 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      * @param size
      *     the length that an examined array must have for a positive match
      */
-    @Factory
     public static <E> Matcher<E[]> arrayWithSize(int size) {
         return arrayWithSize(equalTo(size));
     }
@@ -55,7 +52,6 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      * <pre>assertThat(new String[0], emptyArray())</pre>
      * 
      */
-    @Factory
     public static <E> Matcher<E[]> emptyArray() {
         Matcher<E[]> isEmpty = arrayWithSize(0);
         return describedAs("an empty array", isEmpty);

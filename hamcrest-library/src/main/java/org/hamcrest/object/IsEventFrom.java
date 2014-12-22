@@ -2,12 +2,11 @@
  */
 package org.hamcrest.object;
 
-import java.util.EventObject;
-
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+
+import java.util.EventObject;
 
 
 /**
@@ -60,7 +59,6 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
      * @param source
      *     the source of the event
      */
-    @Factory
     public static Matcher<EventObject> eventFrom(Class<? extends EventObject> eventClass, Object source) {
         return new IsEventFrom(eventClass, source);
     }
@@ -74,7 +72,6 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
      * @param source
      *     the source of the event
      */
-    @Factory
     public static Matcher<EventObject> eventFrom(Object source) {
         return eventFrom(EventObject.class, source);
     }

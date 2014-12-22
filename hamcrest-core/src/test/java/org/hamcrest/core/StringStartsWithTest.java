@@ -2,11 +2,11 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.core.StringStartsWith.startsWith;
-import static org.hamcrest.core.StringStartsWith.startsWithIgnoringCase;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+
+import static org.hamcrest.core.StringStartsWith.startsWith;
+import static org.hamcrest.core.StringStartsWith.startsWithIgnoringCase;
 
 
 public class StringStartsWithTest extends AbstractMatcherTest {

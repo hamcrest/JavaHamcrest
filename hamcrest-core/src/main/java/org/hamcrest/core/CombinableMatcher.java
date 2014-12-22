@@ -1,6 +1,8 @@
 package org.hamcrest.core;
 
-import org.hamcrest.*;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.util.ArrayList;
 
@@ -45,7 +47,6 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * For example:
    * <pre>assertThat("fab", both(containsString("a")).and(containsString("b")))</pre>
    */
-  @Factory
   public static <LHS> CombinableBothMatcher<LHS> both(Matcher<? super LHS> matcher) {
     return new CombinableBothMatcher<LHS>(matcher);
   }
@@ -65,7 +66,6 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * For example:
    * <pre>assertThat("fan", either(containsString("a")).or(containsString("b")))</pre>
    */
-  @Factory
   public static <LHS> CombinableEitherMatcher<LHS> either(Matcher<? super LHS> matcher) {
     return new CombinableEitherMatcher<LHS>(matcher);
   }

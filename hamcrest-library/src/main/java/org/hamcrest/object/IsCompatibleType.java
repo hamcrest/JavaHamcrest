@@ -2,7 +2,6 @@ package org.hamcrest.object;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
 
 public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
@@ -36,7 +35,6 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
      * @param baseType
      *     the base class to examine classes against
      */
-    @Factory
     public static <T> Matcher<Class<?>> typeCompatibleWith(Class<T> baseType) {
         return new IsCompatibleType<T>(baseType);
     }

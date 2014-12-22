@@ -4,7 +4,6 @@ package org.hamcrest.core;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 
@@ -37,7 +36,6 @@ public class IsSame<T> extends BaseMatcher<T> {
      * @param target
      *     the target instance against which others should be assessed
      */
-    @Factory
     public static <T> Matcher<T> sameInstance(T target) {
         return new IsSame<T>(target);
     }
@@ -49,7 +47,6 @@ public class IsSame<T> extends BaseMatcher<T> {
      * @param target
      *     the target instance against which others should be assessed
      */
-    @Factory
     public static <T> Matcher<T> theInstance(T target) {
         return new IsSame<T>(target);
     }

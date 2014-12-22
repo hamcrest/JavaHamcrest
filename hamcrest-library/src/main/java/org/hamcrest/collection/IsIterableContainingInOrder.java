@@ -1,10 +1,8 @@
 package org.hamcrest.collection;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
-import org.hamcrest.core.IsNull;
 import org.hamcrest.internal.NullSafety;
 
 import java.util.ArrayList;
@@ -12,7 +10,6 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.internal.NullSafety.nullSafe;
 
 public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
     private final List<Matcher<? super E>> matchers;
@@ -95,7 +92,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * @param items
      *     the items that must equal the items provided by an examined {@link Iterable}
      */
-    @Factory
     public static <E> Matcher<Iterable<? extends E>> contains(E... items) {
         List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
         for (E item : items) {
@@ -117,7 +113,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      *     examined {@link Iterable}
      */
     @SuppressWarnings("unchecked")
-    @Factory
     public static <E> Matcher<Iterable<? extends E>> contains(final Matcher<? super E> itemMatcher) {
         return contains(new ArrayList<Matcher<? super E>>(asList(itemMatcher)));
     }
@@ -133,7 +128,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * @param itemMatchers
      *     the matchers that must be satisfied by the items provided by an examined {@link Iterable}
      */
-    @Factory
     public static <E> Matcher<Iterable<? extends E>> contains(Matcher<? super E>... itemMatchers) {
         // required for JDK 1.6
         //noinspection RedundantTypeArguments
@@ -153,7 +147,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      *     a list of matchers, each of which must be satisfied by the corresponding item provided by
      *     an examined {@link Iterable}
      */
-    @Factory
     public static <E> Matcher<Iterable<? extends E>> contains(List<Matcher<? super E>> itemMatchers) {
         return new IsIterableContainingInOrder<E>(itemMatchers);
     }

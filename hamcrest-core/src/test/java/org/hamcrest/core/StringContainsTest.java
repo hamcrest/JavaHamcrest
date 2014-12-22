@@ -2,12 +2,11 @@
  */
 package org.hamcrest.core;
 
-import static org.hamcrest.core.StringContains.containsString;
-import static org.hamcrest.core.StringContains.containsStringIgnoringCase;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import org.junit.Test;
+
+import static org.hamcrest.core.StringContains.containsString;
+import static org.hamcrest.core.StringContains.containsStringIgnoringCase;
 
 
 public class StringContainsTest extends AbstractMatcherTest {

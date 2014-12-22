@@ -4,7 +4,6 @@ package org.hamcrest.core;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 import java.util.regex.Pattern;
@@ -66,7 +65,6 @@ public class DescribedAs<T> extends BaseMatcher<T> {
      * @param values
      *     optional values to insert into the tokenised description
      */
-    @Factory
     public static <T> Matcher<T> describedAs(String description, Matcher<T> matcher, Object... values) {
         return new DescribedAs<T>(description, matcher, values);
     }

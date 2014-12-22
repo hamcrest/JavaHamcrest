@@ -1,11 +1,10 @@
 package org.hamcrest.collection;
 
-import java.util.Arrays;
-
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+
+import java.util.Arrays;
 
 /**
  * Matcher for array whose elements satisfy a sequence of matchers.
@@ -90,7 +89,6 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
      * @param elementMatchers
      *     the matchers that the elements of examined arrays should satisfy
      */
-    @Factory
     public static <T> IsArray<T> array(Matcher<? super T>... elementMatchers) {
         return new IsArray<T>(elementMatchers);
     }

@@ -2,7 +2,6 @@ package org.hamcrest.core;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -46,7 +45,6 @@ public class Is<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, equalTo(smelly))</pre>
      * 
      */
-    @Factory
     public static <T> Matcher<T> is(Matcher<T> matcher) {
         return new Is<T>(matcher);
     }
@@ -59,7 +57,6 @@ public class Is<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(equalTo(smelly)))</pre>
      * 
      */
-    @Factory
     public static <T> Matcher<T> is(T value) {
         return is(equalTo(value));
     }
@@ -72,7 +69,6 @@ public class Is<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
      * 
      */
-    @Factory
     public static <T> Matcher<T> isA(Class<T> type) {
         final Matcher<T> typeMatcher = instanceOf(type);
         return is(typeMatcher);

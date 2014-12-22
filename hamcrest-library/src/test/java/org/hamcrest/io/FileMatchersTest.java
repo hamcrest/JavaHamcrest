@@ -1,12 +1,12 @@
 package org.hamcrest.io;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-
-import java.io.File;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.junit.Test;
+
+import java.io.File;
+
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class FileMatchersTest extends AbstractMatcherTest {
 

@@ -3,7 +3,6 @@
 package org.hamcrest.number;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -60,7 +59,6 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
      * @param error
      *     the delta (+/-) within which matches will be allowed
      */
-    @Factory
     public static Matcher<Double> closeTo(double operand, double error) {
         return new IsCloseTo(operand, error);
     }

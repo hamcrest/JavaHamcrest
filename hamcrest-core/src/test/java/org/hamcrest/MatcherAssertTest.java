@@ -1,12 +1,10 @@
 package org.hamcrest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import org.junit.Test;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 public final class MatcherAssertTest {
 

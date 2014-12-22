@@ -1,14 +1,14 @@
 package org.hamcrest.collection;
 
-import static org.hamcrest.collection.IsMapContaining.hasEntry;
-import static org.hamcrest.core.IsAnything.anything;
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 import java.util.Map;
 import java.util.TreeMap;
+
+import static org.hamcrest.collection.IsMapContaining.hasEntry;
+import static org.hamcrest.core.IsAnything.anything;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsMapContainingTest extends AbstractMatcherTest {
 

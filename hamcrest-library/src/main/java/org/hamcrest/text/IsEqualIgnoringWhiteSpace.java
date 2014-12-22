@@ -4,7 +4,6 @@ package org.hamcrest.text;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
 
 import static java.lang.Character.isWhitespace;
@@ -75,7 +74,6 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
      * @param expectedString
      *     the expected value of matched strings
      */
-    @Factory
     public static Matcher<String> equalToIgnoringWhiteSpace(String expectedString) {
         return new IsEqualIgnoringWhiteSpace(expectedString);
     }

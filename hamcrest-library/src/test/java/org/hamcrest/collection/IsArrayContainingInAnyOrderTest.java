@@ -1,10 +1,10 @@
 package org.hamcrest.collection;
 
-import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+
+import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsArrayContainingInAnyOrderTest extends AbstractMatcherTest {
 
