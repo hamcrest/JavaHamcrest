@@ -61,5 +61,6 @@
 
     <!-- XML -->
     <factory class="org.hamcrest.xml.HasXPath"/>
+    <factory class="org.hamcrest.xml.Xml"/>
 
 </matchers>
