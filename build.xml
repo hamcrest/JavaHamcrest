@@ -1,0 +1,289 @@
+<project name="hamcrest" default="all">
+
+    <property name="version" value="SNAPSHOT" description="Version number to use in build files"/>
+    <property name="haltonfailure" value="true" description="Whether to halt the build if the tests fail"/>
+    <property name="debug" value="true" description="Whether to build with debug information"/>
+    <property name="javaversion" value="1.5" description="Java version to target"/>
+    <tstamp><format property="build.timestamp" pattern="yyyy-MM-dd HH:mm:ss" timezone="GMT"/></tstamp>
+    <taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpath="lib/integration/ant-junit-1.8.4.jar"/>
+
+
+    <target name="all" depends="clean, bigjar, javadoc" description="Performs clean build, runs tests and packages for distribution"/>
+
+    <target name="clean" description="Clean up all built files">
+        <delete dir="build"/>
+    </target>
+
+    <target name="api" description="Build Hamcrest APIs">
+        <path id="cp-hamcrest-api-main" path=""/>
+        <path id="cp-hamcrest-api-test" path=""/>
+        <compile-module modulename="hamcrest-api"/>
+        <jar-module modulename="hamcrest-api"/>
+        <test-module modulename="hamcrest-api"/>
+    </target>
+
+    <target name="generator" depends="api" description="Build code generator tool">
+        <path id="cp-hamcrest-generator-main" path="lib/generator/qdox-2.0-M2.jar;build/hamcrest-api-${version}.jar"/>
+        <path id="cp-hamcrest-generator-test" path=""/>
+        <compile-module modulename="hamcrest-generator"/>
+        <jar-module modulename="hamcrest-generator"/>
+        <test-module modulename="hamcrest-generator"/>
+
+        <!-- Include QDox classes in hamcrest-generator.jar using JarJar to place classes under a different package -->
+        <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="lib/generator/jarjar-1.3.jar"/>
+        <copy file="build/hamcrest-generator-${version}.jar" tofile="build/hamcrest-generator-${version}-nodep.jar"/>
+        <jarjar jarfile="build/hamcrest-generator-${version}.jar">
+            <zipfileset src="build/hamcrest-generator-${version}-nodep.jar"/>
+            <zipfileset src="lib/generator/qdox-2.0-M2.jar"/>
+            <rule pattern="com.thoughtworks.qdox.**" result="org.hamcrest.generator.qdox.@1"/>
+        </jarjar>
+    </target>
+
+    <target name="core" depends="generator" description="Build core Hamcrest library">
+        <path id="cp-hamcrest-core-main" path="build/hamcrest-api-${version}.jar"/>
+        <path id="cp-hamcrest-core-test" path=""/>
+        <compile-module modulename="hamcrest-core"/>
+        <generate-module-factory modulename="hamcrest-core" configurationfile="hamcrest-core/core-matchers.xml" targetclass="org.hamcrest.CoreMatchers" sources="hamcrest-core/src/main/java"/>
+        <jar-module modulename="hamcrest-core"/>
+        <test-module modulename="hamcrest-core"/>
+    </target>
+
+    <target name="library" depends="core" description="Build library of matchers">
+        <path id="cp-hamcrest-library-main" path="build/hamcrest-api-${version}.jar;build/hamcrest-core-${version}.jar"/>
+        <path id="cp-hamcrest-library-test" path="build/hamcrest-core-${version}-tests.jar"/>
+        <compile-module modulename="hamcrest-library"/>
+        <generate-module-factory modulename="hamcrest-library" configurationfile="hamcrest-library/matchers.xml" targetclass="org.hamcrest.Matchers" sources="hamcrest-core/src/main/java,hamcrest-library/src/main/java"/>
+        <jar-module modulename="hamcrest-library"/>
+        <test-module modulename="hamcrest-library"/>
+    </target>
+
+    <target name="integration" depends="library" description="Build integration with external tools">
+        <path id="cp-hamcrest-integration-main">
+            <fileset file="build/hamcrest-api-${version}.jar"/>
+            <fileset file="build/hamcrest-core-${version}.jar"/>
+            <fileset file="build/hamcrest-library-${version}.jar"/>
+            <fileset dir="lib/integration" includes="**/*.jar"/>
+        </path>
+        <path id="cp-hamcrest-integration-test" path="build/hamcrest-core-${version}-tests.jar"/>
+        <compile-module modulename="hamcrest-integration"/>
+        <jar-module modulename="hamcrest-integration"/>
+        <test-module modulename="hamcrest-integration"/>
+    </target>
+
+    <target name="examples" depends="core, library, integration" description="Build and run unit tests.">
+        <path id="cp-hamcrest-examples-main">
+            <fileset file="build/hamcrest-api-${version}.jar"/>
+            <fileset file="build/hamcrest-core-${version}.jar"/>
+            <fileset file="build/hamcrest-library-${version}.jar"/>
+            <fileset file="build/hamcrest-integration-${version}.jar"/>
+            <fileset dir="lib/integration" includes="**/*.jar"/>
+        </path>
+        <compile-module modulename="hamcrest-examples"/>
+        <jar-module modulename="hamcrest-examples"/>
+    </target>
+
+    <target name="bigjar" depends="core,library,integration,generator" description="Build composite jars">
+        <!-- Bundle api into core jar -->
+        <copy todir="build/temp/hamcrest-core-${version}.jar.contents">
+            <fileset dir="build/temp/hamcrest-api-${version}.jar.contents"/>
+        </copy>
+        <copy todir="build/temp/hamcrest-core-${version}-sources.jar.contents">
+            <fileset dir="build/temp/hamcrest-api-${version}-sources.jar.contents"/>
+        </copy>
+        <jar-module modulename="hamcrest-core"/>
+
+        <!-- Bundle core, library, integration, and generator into all jar-->
+        <copy todir="build/temp/hamcrest-all-${version}.jar.contents">
+            <fileset dir="build/temp/hamcrest-core-${version}.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-library-${version}.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-integration-${version}.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-generator-${version}.jar.contents"/>
+        </copy>
+        <copy todir="build/temp/hamcrest-all-${version}-sources.jar.contents">
+            <fileset dir="build/temp/hamcrest-core-${version}-sources.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-library-${version}-sources.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-integration-${version}-sources.jar.contents"/>
+            <fileset dir="build/temp/hamcrest-generator-${version}-sources.jar.contents"/>
+        </copy>
+        <path id="cp-hamcrest-all-main">
+            <path refid="cp-hamcrest-core-main"/>
+            <path refid="cp-hamcrest-library-main"/>
+            <path refid="cp-hamcrest-integration-main"/>
+            <path refid="cp-hamcrest-generator-main"/>
+        </path>
+        <jar-module modulename="hamcrest-all"/>
+    </target>
+
+    <target name="javadoc" depends="bigjar" description="build javadoc jars">
+        <javadoc-module modulename="hamcrest-generator"/>
+        <javadoc-module modulename="hamcrest-core"/>
+        <javadoc-module modulename="hamcrest-library"/>
+        <javadoc-module modulename="hamcrest-integration"/>
+        <javadoc-module modulename="hamcrest-all"/>
+    </target>
+
+    <target name="bundle" description="Create a release bundle for deployment to maven central" depends="clean, javadoc">
+        <copy todir="build">
+            <fileset dir="pom" includes="*.pom"/>
+            <filterset><filter token="VERSION" value="${version}"/></filterset>
+            <mapper type="regexp" from="(.*)\.pom" to="\1-${version}.pom"/>
+        </copy>
+
+        <sign target="hamcrest-parent-${version}.pom"/>
+        <jar-bundle modulename="hamcrest-parent"/>
+
+        <bundle-module modulename="hamcrest-core"/>
+        <bundle-module modulename="hamcrest-generator"/>
+        <bundle-module modulename="hamcrest-library"/>
+        <bundle-module modulename="hamcrest-integration"/>
+        <bundle-module modulename="hamcrest-all"/>
+    </target>
+
+    <macrodef name="make-manifest">
+        <attribute name="modulename" description="Name of the module"/>
+        <sequential>
+            <mkdir dir="build/temp/@{modulename}-${version}.jar.manifest"/>
+            <manifest file="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
+               <attribute name="Implementation-Title" value="@{modulename}"/>
+               <attribute name="Implementation-Vendor" value="hamcrest.org"/>
+               <attribute name="Implementation-Version" value="${version}"/>
+               <attribute name="Built-By" value="${user.name}"/>
+               <attribute name="Built-Date" value="${build.timestamp}"/>
+           </manifest>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="compile-module">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <sequential>
+            <compile-content srcdir="@{modulename}/src/main/java" jarname="@{modulename}-${version}" classpathref="cp-@{modulename}-main" />
+            <path id="cp-@{modulename}-test-complete">
+                <path path="lib/integration/junit-dep-4.11.jar"/>
+                <path refid="cp-@{modulename}-main"/>
+                <path refid="cp-@{modulename}-test"/>
+                <path path="build/temp/@{modulename}-${version}.jar.contents"/>
+            </path>
+            <compile-content srcdir="@{modulename}/src/test/java" jarname="@{modulename}-${version}-tests" classpathref="cp-@{modulename}-test-complete" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="compile-content">
+        <attribute name="srcdir"/>
+        <attribute name="jarname" description="Name of the jar whose content is being compiled (without .jar suffix)"/>
+        <attribute name="classpathref"/>
+        <sequential>
+            <mkdir dir="build/temp/@{jarname}-sources.jar.contents"/>
+            <copy failonerror="false" todir="build/temp/@{jarname}-sources.jar.contents">
+                <fileset dir="@{srcdir}"/>
+            </copy>
+            <mkdir dir="build/temp/@{jarname}.jar.contents"/>
+            <javac srcdir="build/temp/@{jarname}-sources.jar.contents"
+                   destdir="build/temp/@{jarname}.jar.contents"
+                   debug="${debug}" source="${javaversion}" target="${javaversion}" includeantruntime="false">
+                <classpath refid="@{classpathref}"/>
+            </javac>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="jar-module">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <sequential>
+            <make-manifest modulename="@{modulename}"/>
+            <jar-module-component modulename="@{modulename}"/>
+            <jar-module-component modulename="@{modulename}" suffix="-tests"/>
+            <jar-module-component modulename="@{modulename}" suffix="-sources"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="jar-module-component">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <attribute name="suffix" default="" description="Name of the module to jar"/>
+        <sequential>
+            <copy file="LICENSE.txt" todir="build/temp/@{modulename}-${version}@{suffix}.jar.contents/META-INF"/>
+            <jar jarfile="build/@{modulename}-${version}@{suffix}.jar" manifest="build/temp/@{modulename}-${version}.jar.manifest/MANIFEST.MF">
+                <fileset dir="build/temp/@{modulename}-${version}@{suffix}.jar.contents"/>
+            </jar>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="generate-module-factory" description="Generate one class with all static imports">
+        <attribute name="modulename" description="Name of the module to jar"/>
+        <attribute name="configurationfile" description="xml configuration file"/>
+        <attribute name="targetclass" description="factory class to generate"/>
+        <attribute name="sources" description="comma-separated source directories"/>
+        <sequential>
+            <mkdir dir="build/temp/@{modulename}/generated-code"/>
+            <java classname="org.hamcrest.generator.config.XmlConfigurator" fork="yes" failonerror="yes">
+                <classpath path="build/hamcrest-generator-${version}.jar"/>
+                <classpath refid="cp-@{modulename}-main"/>
+                <classpath path="build/temp/@{modulename}-${version}.jar.contents"/>
+                <arg value="@{configurationfile}"/>
+                <arg value="@{sources}"/>
+                <arg value="@{targetclass}"/>
+                <arg value="build/temp/@{modulename}/generated-code"/>
+            </java>
+
+            <copy todir="build/temp/@{modulename}-${version}-sources.jar.contents">
+                <fileset dir="build/temp/@{modulename}/generated-code"/>
+            </copy>
+            <compile-module modulename="@{modulename}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="test-module" description="run unit tests.">
+        <attribute name="modulename" description="Name of the module to test"/>
+        <sequential>
+            <mkdir dir="build/temp/@{modulename}/test-wrk"/>
+            <junit printsummary="no" forkmode="once" tempdir="build/temp/@{modulename}/test-wrk" haltonfailure="${haltonfailure}" dir="@{modulename}">
+                <formatter type="brief" usefile="no"/>
+                <classpath refid="cp-@{modulename}-test-complete"/>
+                <classpath path="build/@{modulename}-${version}-tests.jar"/>
+                <batchtest fork="yes" todir="${build.dir}/testreport">
+                    <zipfileset src="build/@{modulename}-${version}-tests.jar">
+                        <include name="org/hamcrest/**/*Test.class"/>
+                        <exclude name="**/Abstract*.class"/>
+                    </zipfileset>
+                </batchtest>
+            </junit>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="javadoc-module" description="Generate javadoc for a module and build a Jar">
+        <attribute name="modulename" description="Name of the module to document"/>
+        <sequential>
+            <javadoc packagenames="org.hamcrest.*" sourcepath="build/temp/@{modulename}-${version}-sources.jar.contents"
+                     destdir="build/temp/@{modulename}-${version}-javadoc.jar.contents" author="true" version="true"
+                     use="true" windowtitle="Hamcrest" source="${javaversion}" failonerror="yes" defaultexcludes="yes">
+                <classpath refid="cp-@{modulename}-main"/>
+            </javadoc>
+            <jar-module-component modulename="@{modulename}" suffix="-javadoc"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="bundle-module" description="Generate maven bundle jar for a module">
+        <attribute name="modulename" description="Name of the module to bundle"/>
+        <sequential>
+            <sign target="@{modulename}-${version}.pom"/>
+            <sign target="@{modulename}-${version}.jar"/>
+            <sign target="@{modulename}-${version}-javadoc.jar"/>
+            <sign target="@{modulename}-${version}-sources.jar"/>
+            <jar-bundle modulename="@{modulename}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="jar-bundle" description="Jar maven bundle contents">
+        <attribute name="modulename" description="Name of the module to create bundle jar for"/>
+        <sequential>
+            <jar destfile="build/maven-bundle-@{modulename}.jar">
+                <fileset dir="build"><include name="@{modulename}-${version}*"/></fileset>
+            </jar>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="sign" description="Sign a file with a gpg key">
+        <attribute name="target" description="Name of the resource to sign"/>
+        <sequential>
+            <exec executable="gpg" dir="build"><arg value="-ab"/><arg value="@{target}"/></exec>
+        </sequential>
+    </macrodef>
+</project>
