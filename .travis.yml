@@ -7,4 +7,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - ant javadoc
+  - gradle clean build javadoc
