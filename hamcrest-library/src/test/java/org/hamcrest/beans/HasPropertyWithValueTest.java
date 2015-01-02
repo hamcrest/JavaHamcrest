@@ -1,5 +1,3 @@
-/*  Copyright (c) 2000-20010 hamcrest.org
- */
 package org.hamcrest.beans;
 
 import org.hamcrest.AbstractMatcherTest;

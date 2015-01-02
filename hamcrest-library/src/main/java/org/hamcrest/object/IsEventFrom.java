@@ -1,5 +1,3 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
- */
 package org.hamcrest.object;
 
 import org.hamcrest.Description;
