@@ -1,4 +1,12 @@
-== Version 1.4: Released xx ==
+== Version 2.0.0.0 ==
+
+A new beginning...
+
+* Upgraded to Java 7
+
+* Build with Gradle
+
+* Publish a single jar java-hamcrest-x.x.x.x.jar
 
 * Removed deprecated methods from previous release
 
@@ -7,6 +15,14 @@
 * General improvements to mismatch descriptions
 
 * Several JavaDoc improvements and corrections
+
+* Fix gh issue #69 - Iterable contains in order is null-safe
+
+* Fix gh issue #59 - added equalToObject() (i.e. unchecked) method
+
+* Fix gh issue #25 - arrayContaining(null, null) cause NullPointerException
+
+* Fix gh issue #36 - string matching on regular expressions
 
 * Fix gh issue #8 - isCloseTo() shows wrong delta in mismatch description
 
