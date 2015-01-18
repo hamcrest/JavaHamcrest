@@ -1,18 +1,13 @@
 package org.hamcrest.core;
 
-import static java.util.Arrays.asList;
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
-import static org.hamcrest.AbstractMatcherTest.assertMatches;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
-import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
-import static org.hamcrest.core.StringContains.containsString;
+import org.hamcrest.Matcher;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
-import org.hamcrest.Matcher;
-import org.junit.Test;
+import static java.util.Arrays.asList;
+import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.core.StringContains.containsString;
 
 public final class EveryTest {
 
@@ -37,12 +32,18 @@ public final class EveryTest {
 
     @Test public void
     describesItself() {
-        assertDescription("every item is a string containing \"a\"", matcher);
+        assertDescription("a collection in which every item is a string containing \"a\"", matcher);
     }
 
     @Test public void
     describesAMismatch() {
         assertMismatchDescription("an item was \"BXB\"", matcher, asList("BXB"));
+    }
+
+    @Test public void
+    describesLotsOfMismatches() {
+        assertMismatchDescription("a collection with <2> mismatches: [was \"b\", was \"bit\"]",
+                matcher, asList("b", "a", "bat", "bit", "bar"));
     }
 }
 
