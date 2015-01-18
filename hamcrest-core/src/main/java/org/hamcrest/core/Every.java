@@ -1,9 +1,10 @@
 package org.hamcrest.core;
 
-import org.hamcrest.Description;
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
+import org.hamcrest.*;
+import org.hamcrest.internal.SelfDescribingText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
     private final Matcher<? super T> matcher;
@@ -14,19 +15,41 @@ public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
 
     @Override
     public boolean matchesSafely(Iterable<? extends T> collection, Description mismatchDescription) {
+        List<SelfDescribingText> mismatches = new ArrayList<SelfDescribingText>();
         for (T t : collection) {
             if (!matcher.matches(t)) {
-                mismatchDescription.appendText("an item ");
-                matcher.describeMismatch(t, mismatchDescription);
-                return false;
+                mismatches.add(mismatchString(t));
             }
         }
-        return true;
+
+        switch (mismatches.size()) {
+            case 0:
+                return true;
+
+            case 1:
+                mismatchDescription.appendText("an item ");
+                mismatchDescription.appendDescriptionOf(mismatches.get(0));
+                return false;
+
+            default:
+                mismatchDescription
+                        .appendText("a collection with ")
+                        .appendValue(mismatches.size())
+                        .appendText(" mismatches: ")
+                        .appendList("[", ", ", "]", mismatches);
+                return false;
+        }
+    }
+
+    private SelfDescribingText mismatchString(T t) {
+        Description desc = new StringDescription();
+        matcher.describeMismatch(t, desc);
+        return new SelfDescribingText(desc.toString());
     }
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("every item is ").appendDescriptionOf(matcher);
+        description.appendText("a collection in which every item is ").appendDescriptionOf(matcher);
     }
 
     /**
@@ -35,6 +58,10 @@ public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
      * <code>itemMatcher</code>.
      * For example:
      * <pre>assertThat(Arrays.asList("bar", "baz"), everyItem(startsWith("ba")))</pre>
+     *
+     * <p>
+     *     Note that the matcher will diagnose <em>all</em> mismatching items, rather than stopping at the first.
+     * </p>
      * 
      * @param itemMatcher
      *     the matcher to apply to every item provided by the examined {@link Iterable}
