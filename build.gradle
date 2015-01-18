@@ -9,7 +9,7 @@ targetCompatibility = VERSION_1_7
 archivesBaseName = "java-hamcrest"
 
 group = "org.hamcrest"
-version="2.0.0.0"
+version = "2.0.0.0"
 
 
 repositories {
@@ -64,11 +64,11 @@ signing {
 }
 
 uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+    if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-            if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
                 repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                     authentication(userName: ossrhUsername, password: ossrhPassword)
                 }
@@ -76,38 +76,38 @@ uploadArchives {
                 snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
                     authentication(userName: ossrhUsername, password: ossrhPassword)
                 }
-            }
 
-            pom.project {
-                name 'Java Hamcrest'
-                packaging 'jar'
-                description 'Hamcrest matcher library for Java'
-                url 'http://hamcrest.org/JavaHamcrest/'
+                pom.project {
+                    name 'Java Hamcrest'
+                    packaging 'jar'
+                    description 'Hamcrest matcher library for Java'
+                    url 'http://hamcrest.org/JavaHamcrest/'
 
-                scm {
-                    connection 'git@github.com:hamcrest/JavaHamcrest.git'
-                    url 'https://github.com/hamcrest/JavaHamcrest'
-                }
-
-                licenses {
-                    license {
-                        name 'BSD Licence 3'
-                        url 'http://opensource.org/licenses/BSD-3-Clause'
+                    scm {
+                        connection 'git@github.com:hamcrest/JavaHamcrest.git'
+                        url 'https://github.com/hamcrest/JavaHamcrest'
                     }
-                }
 
-                developers {
-                    developer {
-                        id 'joewalnes'
-                        name 'Joe Walnes'
+                    licenses {
+                        license {
+                            name 'BSD Licence 3'
+                            url 'http://opensource.org/licenses/BSD-3-Clause'
+                        }
                     }
-                    developer {
-                        id 'npryce'
-                        name 'Nat Pryce'
-                    }
-                    developer {
-                        id 'sf105'
-                        name 'Steve Freeman'
+
+                    developers {
+                        developer {
+                            id 'joewalnes'
+                            name 'Joe Walnes'
+                        }
+                        developer {
+                            id 'npryce'
+                            name 'Nat Pryce'
+                        }
+                        developer {
+                            id 'sf105'
+                            name 'Steve Freeman'
+                        }
                     }
                 }
             }
