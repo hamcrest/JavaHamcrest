@@ -1,16 +1,11 @@
-/*  Copyright (c) 2000-20010 hamcrest.org
- */
 package org.hamcrest.core;
-
-import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
-import static org.hamcrest.AbstractMatcherTest.assertMatches;
-import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
-import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
-import static org.hamcrest.core.IsNull.notNullValue;
-import static org.hamcrest.core.IsNull.nullValue;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
+
+import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.IsNull.nullValue;
 
 
 public final class IsNullTest {

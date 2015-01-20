@@ -1,7 +1,6 @@
 package org.hamcrest.core;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
@@ -67,9 +66,8 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * @param itemMatcher
      *     the matcher to apply to items provided by the examined {@link Iterable}
      */
-    @Factory
     public static <T> Matcher<Iterable<? super T>> hasItem(Matcher<? super T> itemMatcher) {
-        return new IsCollectionContaining<T>(itemMatcher);
+        return new IsCollectionContaining<>(itemMatcher);
     }
 
     /**
@@ -83,10 +81,9 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * @param item
      *     the item to compare against the items provided by the examined {@link Iterable}
      */
-    @Factory
     public static <T> Matcher<Iterable<? super T>> hasItem(T item) {
         // Doesn't forward to hasItem() method so compiler can sort out generics.
-        return new IsCollectionContaining<T>(equalTo(item));
+        return new IsCollectionContaining<>(equalTo(item));
     }
 
     /**
@@ -100,13 +97,13 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * @param itemMatchers
      *     the matchers to apply to items provided by the examined {@link Iterable}
      */
-    @Factory
+    @SafeVarargs
     public static <T> Matcher<Iterable<T>> hasItems(Matcher<? super T>... itemMatchers) {
-        List<Matcher<? super Iterable<T>>> all = new ArrayList<Matcher<? super Iterable<T>>>(itemMatchers.length);
+        List<Matcher<? super Iterable<T>>> all = new ArrayList<>(itemMatchers.length);
         
         for (Matcher<? super T> elementMatcher : itemMatchers) {
           // Doesn't forward to hasItem() method so compiler can sort out generics.
-          all.add(new IsCollectionContaining<T>(elementMatcher));
+          all.add(new IsCollectionContaining<>(elementMatcher));
         }
         
         return allOf(all);
@@ -123,9 +120,9 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * @param items
      *     the items to compare against the items provided by the examined {@link Iterable}
      */
-    @Factory
+    @SafeVarargs
     public static <T> Matcher<Iterable<T>> hasItems(T... items) {
-        List<Matcher<? super Iterable<T>>> all = new ArrayList<Matcher<? super Iterable<T>>>(items.length);
+        List<Matcher<? super Iterable<T>>> all = new ArrayList<>(items.length);
         for (T item : items) {
             all.add(hasItem(item));
         }

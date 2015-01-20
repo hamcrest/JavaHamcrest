@@ -1,11 +1,12 @@
 package org.hamcrest.collection;
-import static org.hamcrest.collection.IsIterableWithSize.iterableWithSize;
+
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
+import static org.hamcrest.collection.IsIterableWithSize.iterableWithSize;
 
 public class IsIterableWithSizeTest extends AbstractMatcherTest {
 

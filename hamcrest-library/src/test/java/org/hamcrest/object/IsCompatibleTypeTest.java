@@ -2,6 +2,7 @@ package org.hamcrest.object;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.object.IsCompatibleType.typeCompatibleWith;
 

@@ -1,11 +1,11 @@
 package org.hamcrest.collection;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 public class IsInTest extends AbstractMatcherTest {
     String[] elements = {"a", "b", "c"};

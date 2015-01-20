@@ -1,5 +1,3 @@
-/*  Copyright (c) 2000-2009 hamcrest.org
- */
 package org.hamcrest.comparator;
 
 import org.hamcrest.AbstractMatcherTest;

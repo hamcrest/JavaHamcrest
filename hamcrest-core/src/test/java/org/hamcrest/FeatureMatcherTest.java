@@ -1,12 +1,10 @@
 package org.hamcrest;
 
-import static org.junit.Assert.assertEquals;
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import static org.hamcrest.AbstractMatcherTest.assertMatches;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+
+import static org.hamcrest.AbstractMatcherTest.*;
+import static org.junit.Assert.assertEquals;
 
 public final class FeatureMatcherTest {
     private final FeatureMatcher<Thingy, String> resultMatcher = resultMatcher();

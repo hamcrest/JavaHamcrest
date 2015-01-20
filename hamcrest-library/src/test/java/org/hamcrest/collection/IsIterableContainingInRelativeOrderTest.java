@@ -1,11 +1,11 @@
 package org.hamcrest.collection;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.collection.IsIterableContainingInRelativeOrder.containsInRelativeOrder;

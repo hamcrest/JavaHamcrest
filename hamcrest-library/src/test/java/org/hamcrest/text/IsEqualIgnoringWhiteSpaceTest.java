@@ -1,12 +1,11 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
- */
 package org.hamcrest.text;
+
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
 
 public class IsEqualIgnoringWhiteSpaceTest extends AbstractMatcherTest {
 

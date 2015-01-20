@@ -1,9 +1,9 @@
 package org.hamcrest.text;
 
-import static java.util.Arrays.asList;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+
+import static java.util.Arrays.asList;
 
 
 public class StringContainsInOrderTest extends AbstractMatcherTest {

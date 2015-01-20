@@ -1,17 +1,13 @@
 package org.hamcrest.object;
 
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
-import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
-import static org.junit.Assert.assertThat;
-
-import java.util.regex.Pattern;
-
 import org.hamcrest.Matcher;
 import org.hamcrest.text.MatchesPattern;
 import org.junit.Test;
+
+import java.util.regex.Pattern;
+
+import static org.hamcrest.AbstractMatcherTest.*;
+import static org.junit.Assert.assertThat;
 
 public class MatchesPatternTest {
     @Test

@@ -1,19 +1,12 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
- */
 package org.hamcrest.core;
-
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
-import static org.hamcrest.AbstractMatcherTest.assertMatches;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
-import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
-import static org.hamcrest.core.DescribedAs.describedAs;
-import static org.hamcrest.core.IsAnything.anything;
-import static org.hamcrest.core.IsEqual.equalTo;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
+
+import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.core.DescribedAs.describedAs;
+import static org.hamcrest.core.IsAnything.anything;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public final class DescribedAsTest {
 

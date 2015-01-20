@@ -1,17 +1,12 @@
 package org.hamcrest.core;
 
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
-import static org.hamcrest.AbstractMatcherTest.assertMatches;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
-import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
+import org.hamcrest.Matcher;
+import org.junit.Test;
+
+import static org.hamcrest.AbstractMatcherTest.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.notNullValue;
-
-import org.hamcrest.Matcher;
-import org.junit.Test;
 
 public final class CombinableTest {
     private static final CombinableMatcher<Integer> EITHER_3_OR_4 = CombinableMatcher.<Integer>either(equalTo(3)).or(equalTo(4));
@@ -68,6 +63,6 @@ public final class CombinableTest {
     @Test public void
     picksUpTypeFromLeftHandSideOfExpression() {
         @SuppressWarnings("unused")
-        Matcher<String> matcher = CombinableMatcher.<String>both(equalTo("yellow")).and(notNullValue(String.class));
+        Matcher<String> matcher = CombinableMatcher.both(equalTo("yellow")).and(notNullValue(String.class));
     }
 }

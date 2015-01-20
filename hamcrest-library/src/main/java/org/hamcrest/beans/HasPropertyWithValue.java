@@ -1,15 +1,12 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
- */
 package org.hamcrest.beans;
-
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Method;
 
 import org.hamcrest.Condition;
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
 
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
@@ -145,7 +142,6 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      * @param valueMatcher
      *     a matcher for the value of the specified property of the examined bean
      */
-    @Factory
     public static <T> Matcher<T> hasProperty(String propertyName, Matcher<?> valueMatcher) {
         return new HasPropertyWithValue<T>(propertyName, valueMatcher);
     }

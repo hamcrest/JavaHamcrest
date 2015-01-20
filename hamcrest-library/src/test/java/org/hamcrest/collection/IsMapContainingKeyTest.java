@@ -51,7 +51,7 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
         map.put(1, "A");
         map.put(2, "B");
 
-        assertThat(map, hasKey(Integer.valueOf(1)));
+        assertThat(map, hasKey(1));
     }
 
     public void testMatchesMapContainingKeyWithNumberKeys() throws Exception {

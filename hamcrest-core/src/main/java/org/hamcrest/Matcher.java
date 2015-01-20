@@ -1,5 +1,3 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
- */
 package org.hamcrest;
 
 /**
@@ -14,14 +12,9 @@ package org.hamcrest;
  * new features and remain compatible with all Matcher implementations.
  * </p>
  * <p>
- * For easy access to common Matcher implementations, use the static factory
- * methods in {@link CoreMatchers}.
- * </p>
- * <p>
  * N.B. Well designed matchers should be immutable.
  * </p>
  *
- * @see CoreMatchers
  * @see BaseMatcher
  */
 public interface Matcher<T> extends SelfDescribing {

@@ -1,12 +1,11 @@
 package org.hamcrest.collection;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -78,7 +77,6 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * @param items
      *     the items that must be contained within items provided by an examined {@link Iterable} in the same relative order
      */
-    @Factory
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(E... items) {
         List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
         for (E item : items) {
@@ -98,7 +96,6 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * @param itemMatchers
      *     the matchers that must be satisfied by the items provided by an examined {@link Iterable} in the same relative order
      */
-    @Factory
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(Matcher<? super E>... itemMatchers) {
         return containsInRelativeOrder(asList(itemMatchers));
     }
@@ -114,7 +111,6 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      *     a list of matchers, each of which must be satisfied by the items provided by
      *     an examined {@link Iterable} in the same relative order
      */
-    @Factory
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(List<Matcher<? super E>> itemMatchers) {
         return new IsIterableContainingInRelativeOrder<E>(itemMatchers);
     }

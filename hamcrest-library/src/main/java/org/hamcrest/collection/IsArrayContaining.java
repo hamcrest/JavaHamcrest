@@ -1,11 +1,11 @@
 package org.hamcrest.collection;
 
-import java.util.Arrays;
-
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Factory;
 import org.hamcrest.TypeSafeMatcher;
+
+import java.util.Arrays;
+
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
@@ -31,7 +31,7 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
     @Override
     public void describeMismatchSafely(T[] item, Description mismatchDescription) {
         super.describeMismatch(Arrays.asList(item), mismatchDescription);
-    };
+    }
 
     @Override
     public void describeTo(Description description) {
@@ -50,7 +50,6 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
      * @param elementMatcher
      *     the matcher to apply to elements in examined arrays
      */
-    @Factory
     public static <T> Matcher<T[]> hasItemInArray(Matcher<? super T> elementMatcher) {
         return new IsArrayContaining<T>(elementMatcher);
     }
@@ -65,7 +64,6 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
      * @param element
      *     the element that should be present in examined arrays
      */
-    @Factory
     public static <T> Matcher<T[]> hasItemInArray(T element) {
         Matcher<? super T> matcher = equalTo(element);
         return IsArrayContaining.<T>hasItemInArray(matcher);

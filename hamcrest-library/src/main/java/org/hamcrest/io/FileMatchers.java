@@ -1,184 +1,106 @@
 package org.hamcrest.io;
 
-import static org.hamcrest.core.IsEqual.equalTo;
+import org.hamcrest.Description;
+import org.hamcrest.FeatureMatcher;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.hamcrest.Description;
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public final class FileMatchers {
 
-    @Factory
     public static Matcher<File> anExistingDirectory() {
-        return new TypeSafeDiagnosingMatcher<File>() {
-            public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final boolean result = actual.isDirectory();
-                if (!result) {
-                    mismatchDescription.appendText("was a File that either didn't exist, or was not a directory");
-                }
-                return result;
-            }
- 
-            public void describeTo(Description description) {
-                description.appendText("a File representing a directory that exists");
-            }
-        };
+        return fileChecker(IS_DIRECTORY, "an existing directory", "is not a directory");
     }
 
-    @Factory
     public static Matcher<File> anExistingFileOrDirectory() {
-        return new TypeSafeDiagnosingMatcher<File>() {
-            public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final boolean exists = actual.exists();
-                if (!exists) {
-                    mismatchDescription.appendText("was a File that did not exist");
-                }
-                return exists;
-            }
-
-            public void describeTo(Description description) {
-                description.appendText("a file or directory that exists");
-            }
-        };
+        return fileChecker(EXISTS, "an existing file or directory", "does not exist");
     }
 
-    @Factory
     public static Matcher<File> anExistingFile() {
-        return new TypeSafeDiagnosingMatcher<File>() {
-            public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final boolean result = actual.isFile();
-                if (!result) {
-                    mismatchDescription.appendText("was a File that either didn't exist, or was a directory");
-                }
-                return result;
-            }
- 
-            public void describeTo(Description description) {
-                description.appendText("a File representing a file that exists");
-            }
-        };
+        return fileChecker(IS_FILE, "an existing File", "is not a file");
     }
 
-    @Factory
     public static Matcher<File> aReadableFile() {
-        return new TypeSafeDiagnosingMatcher<File>() {
-            public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final boolean result = actual.canRead();
-                if (!result) {
-                    mismatchDescription.appendText("was a File that could not be read");
-                }
-                return result;
-            }
- 
-            public void describeTo(Description description) {
-                description.appendText("a File that can be read");
-            }
-        };
+        return fileChecker(CAN_READ, "a readable File", "cannot be read");
     }
 
-    @Factory
     public static Matcher<File> aWritableFile() {
-        return new TypeSafeDiagnosingMatcher<File>() {
-            public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final boolean result = actual.canWrite();
-                if (!result) {
-                    mismatchDescription.appendText("was a File that could not be written to");
-                }
-                return result;
-            }
- 
-            public void describeTo(Description description) {
-                description.appendText("a writable File");
-            }
-        };
+        return fileChecker(CAN_WRITE, "a writable File", "cannot be written to");
     }
 
-    @Factory
     public static Matcher<File> aFileWithSize(long size) {
         return aFileWithSize(equalTo(size));
     }
 
-    @Factory
-    public static Matcher<File> aFileWithSize(final Matcher<Long> size) {
-        return new TypeSafeDiagnosingMatcher<File>() {
-            public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final long length = actual.length();
-                final boolean result = size.matches(length);
-                if (!result) {
-                    mismatchDescription.appendText("was a File whose size ");
-                    size.describeMismatch(length, mismatchDescription);
-                }
-                return result;
-            }
-
-            public void describeTo(Description description) {
-                description.appendText("a File whose size is ").appendDescriptionOf(size);
-            }
+    public static Matcher<File> aFileWithSize(final Matcher<Long> expected) {
+        return new FeatureMatcher<File, Long>(expected, "A file with size", "size") {
+            @Override protected Long featureValueOf(File actual) { return actual.length(); }
         };
     }
 
-    @Factory
-    public static Matcher<File> aFileNamed(final Matcher<String> name) {
-        return new TypeSafeDiagnosingMatcher<File>() {
-            public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final String actualName = actual.getName();
-                final boolean result = name.matches(actualName);
-                if (!result) {
-                    mismatchDescription.appendText("was a File whose name ");
-                    name.describeMismatch(actualName, mismatchDescription);
-                }
-                return result;
-            }
-
-            public void describeTo(Description description) {
-                description.appendText("a File whose name is ").appendDescriptionOf(name);
-            }
+    public static Matcher<File> aFileNamed(final Matcher<String> expected) {
+        return new FeatureMatcher<File, String>(expected, "A file with name", "name") {
+            @Override protected String featureValueOf(File actual) { return actual.getName(); }
         };
     }
 
-    @Factory
-    public static Matcher<File> aFileWithCanonicalPath(final Matcher<String> path) {
-        return new TypeSafeDiagnosingMatcher<File>() {
-            public boolean matchesSafely(File actual, Description mismatchDescription) {
+    public static Matcher<File> aFileWithCanonicalPath(final Matcher<String> expected) {
+        return new FeatureMatcher<File, String>(expected, "A file with canonical path", "path") {
+            @Override protected String featureValueOf(File actual) {
                 try {
-                    String canonicalPath = actual.getCanonicalPath();
-                    final boolean result = path.matches(canonicalPath);
-                    if (!result) {
-                        mismatchDescription.appendText("was a File whose canonical path ");
-                        path.describeMismatch(canonicalPath, mismatchDescription);
-                    }
-                    return result;
+                    return actual.getCanonicalPath();
                 } catch (IOException e) {
-                    mismatchDescription.appendText("was a File whose canonical path was underivable (exception: ").appendValue(e).appendText(")");
-                    return false;
+                    return "Exception: " + e.getMessage();
                 }
-            }
-
-            public void describeTo(Description description) {
-                description.appendText("a File whose canonical path is ").appendDescriptionOf(path);
             }
         };
     }
 
-    @Factory
-    public static Matcher<File> aFileWithAbsolutePath(final Matcher<String> path) {
+    public static Matcher<File> aFileWithAbsolutePath(final Matcher<String> expected) {
+        return new FeatureMatcher<File, String>(expected, "A file with absolute path", "path") {
+            @Override protected String featureValueOf(File actual) { return actual.getAbsolutePath(); }
+        };
+    }
+
+    public static interface FileStatus {
+        boolean check(File actual);
+    }
+
+    public static final FileStatus CAN_WRITE = new FileStatus() {
+        @Override public boolean check(File actual) { return actual.canWrite(); }
+    };
+    public static final FileStatus CAN_READ = new FileStatus() {
+        @Override public boolean check(File actual) { return actual.canRead(); }
+    };
+
+    public static final FileStatus IS_FILE = new FileStatus() {
+        @Override public boolean check(File actual) { return actual.isFile(); }
+    };
+
+    public static final FileStatus IS_DIRECTORY = new FileStatus() {
+        @Override public boolean check(File actual) { return actual.isDirectory(); }
+    };
+
+    public static final FileStatus EXISTS = new FileStatus() {
+        @Override public boolean check(File actual) { return actual.exists(); }
+    };
+
+    private static Matcher<File> fileChecker(final FileStatus fileStatus, final String successDescription, final String failureDescription) {
         return new TypeSafeDiagnosingMatcher<File>() {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
-                final String absolute = actual.getAbsolutePath();
-                final boolean result = path.matches(absolute);
+                final boolean result = fileStatus.check(actual);
                 if (!result) {
-                    mismatchDescription.appendText("was a File whose absolute path ");
-                    path.describeMismatch(absolute, mismatchDescription);
+                    mismatchDescription.appendText(failureDescription);
                 }
                 return result;
             }
 
             public void describeTo(Description description) {
-                description.appendText("a File whose absolute path is ").appendDescriptionOf(path);
+                description.appendText(successDescription);
             }
         };
     }

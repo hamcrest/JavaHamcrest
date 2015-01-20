@@ -1,6 +1,9 @@
 package org.hamcrest.beans;
 
-import org.hamcrest.*;
+import org.hamcrest.Description;
+import org.hamcrest.DiagnosingMatcher;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
@@ -130,7 +133,6 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
      * @param expectedBean
      *     the bean against which examined beans are compared
      */
-    @Factory
     public static <T> Matcher<T> samePropertyValuesAs(T expectedBean) {
         return new SamePropertyValuesAs<T>(expectedBean);
     }

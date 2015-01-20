@@ -1,12 +1,11 @@
 package org.hamcrest.collection;
 
-import static org.hamcrest.core.IsEqual.equalTo;
+import org.hamcrest.FeatureMatcher;
+import org.hamcrest.Matcher;
 
 import java.util.Iterator;
 
-import org.hamcrest.Factory;
-import org.hamcrest.FeatureMatcher;
-import org.hamcrest.Matcher;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> {
 
@@ -34,7 +33,6 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
      * @param sizeMatcher
      *     a matcher for the number of items that should be yielded by an examined {@link Iterable}
      */
-    @Factory
     public static <E> Matcher<Iterable<E>> iterableWithSize(Matcher<? super Integer> sizeMatcher) {
         return new IsIterableWithSize<E>(sizeMatcher);
     }
@@ -49,7 +47,6 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
      * @param size
      *     the number of items that should be yielded by an examined {@link Iterable}
      */
-    @Factory
     public static <E> Matcher<Iterable<E>> iterableWithSize(int size) {
         return iterableWithSize(equalTo(size));
     }

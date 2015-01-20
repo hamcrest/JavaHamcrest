@@ -1,9 +1,9 @@
 package org.hamcrest;
 
-import static org.junit.Assert.assertEquals;
-
 import org.hamcrest.Description.NullDescription;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public final class NullDescriptionTest {
 

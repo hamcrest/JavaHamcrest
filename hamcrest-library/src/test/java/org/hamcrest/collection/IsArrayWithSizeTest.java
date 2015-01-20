@@ -1,11 +1,11 @@
 package org.hamcrest.collection;
 
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Matcher;
+
 import static org.hamcrest.collection.IsArrayWithSize.arrayWithSize;
 import static org.hamcrest.collection.IsArrayWithSize.emptyArray;
 import static org.hamcrest.core.IsEqual.equalTo;
-
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Matcher;
 
 public class IsArrayWithSizeTest extends AbstractMatcherTest {
 

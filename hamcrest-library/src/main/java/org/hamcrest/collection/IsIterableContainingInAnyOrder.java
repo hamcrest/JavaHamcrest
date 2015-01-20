@@ -1,7 +1,6 @@
 package org.hamcrest.collection;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
@@ -97,7 +96,6 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
      */
-    @Factory
     public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(Matcher<? super T>... itemMatchers) {
         return containsInAnyOrder(Arrays.asList(itemMatchers));
     }
@@ -122,7 +120,6 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * @param items
      *     the items that must equal the items provided by an examined {@link Iterable} in any order
      */
-    @Factory
     public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(T... items) {
         List<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
         for (T item : items) {
@@ -150,7 +147,6 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
      */
-    @Factory
     public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(Collection<Matcher<? super T>> itemMatchers) {
         return new IsIterableContainingInAnyOrder<T>(itemMatchers);
     }

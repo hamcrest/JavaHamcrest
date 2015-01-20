@@ -1,7 +1,6 @@
 package org.hamcrest.collection;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.internal.NullSafety;
@@ -47,7 +46,6 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * @param items
      *     the items that must equal the items within an examined array
      */
-    @Factory
     public static <E> Matcher<E[]> arrayContaining(E... items) {
         List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
         for (E item : items) {
@@ -66,7 +64,6 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * @param itemMatchers
      *     the matchers that must be satisfied by the items in the examined array
      */
-    @Factory
     public static <E> Matcher<E[]> arrayContaining(Matcher<? super E>... itemMatchers) {
         //required for JDK 1.6
         //noinspection RedundantTypeArguments
@@ -85,7 +82,6 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by the corresponding item in an examined array
      */
-    @Factory
     public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
         return new IsArrayContainingInOrder<E>(itemMatchers);
     }

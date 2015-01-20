@@ -1,15 +1,14 @@
 
 package org.hamcrest.text;
 
-import static org.hamcrest.core.AnyOf.anyOf;
-import static org.hamcrest.core.IsNull.nullValue;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 import java.util.regex.Pattern;
 
-import org.hamcrest.Description;
-import org.hamcrest.Factory;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
+import static org.hamcrest.core.AnyOf.anyOf;
+import static org.hamcrest.core.IsNull.nullValue;
 
 /**
  * Matches blank Strings (and null).
@@ -39,7 +38,6 @@ public final class IsBlankString extends TypeSafeMatcher<String> {
      * For example:
      * <pre>assertThat("  ", is(blankString()))</pre>
      */
-    @Factory
     public static Matcher<String> blankString() {
         return BLANK_INSTANCE;
     }
@@ -51,7 +49,6 @@ public final class IsBlankString extends TypeSafeMatcher<String> {
      * <pre>assertThat(((String)null), is(blankOrNullString()))</pre>
      * 
      */
-    @Factory
     public static Matcher<String> blankOrNullString() {
         return NULL_OR_BLANK_INSTANCE;
     }

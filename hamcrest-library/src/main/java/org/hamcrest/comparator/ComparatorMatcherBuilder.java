@@ -1,7 +1,6 @@
 package org.hamcrest.comparator;
 
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -117,7 +116,6 @@ public final class ComparatorMatcherBuilder<T> {
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return zero
      */
-    @Factory
     public Matcher<T> comparesEqualTo(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.EQUAL, includeComparatorInDescription);
     }
@@ -132,7 +130,6 @@ public final class ComparatorMatcherBuilder<T> {
      * @param value the value which, when passed to the Comparator supplied to this builder, should return greater
      *              than zero
      */
-    @Factory
     public Matcher<T> greaterThan(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.GREATER_THAN, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
     }
@@ -147,7 +144,6 @@ public final class ComparatorMatcherBuilder<T> {
      * @param value the value which, when passed to the Comparator supplied to this builder, should return greater
      *              than or equal to zero
      */
-    @Factory
     public Matcher<T> greaterThanOrEqualTo(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
     }
@@ -162,7 +158,6 @@ public final class ComparatorMatcherBuilder<T> {
      * @param value the value which, when passed to the Comparator supplied to this builder, should return less
      *              than zero
      */
-    @Factory
     public Matcher<T> lessThan(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.LESS_THAN, includeComparatorInDescription);
     }
@@ -177,7 +172,6 @@ public final class ComparatorMatcherBuilder<T> {
      * @param value the value which, when passed to the Comparator supplied to this builder, should return less
      *              than or equal to zero
      */
-    @Factory
     public Matcher<T> lessThanOrEqualTo(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.EQUAL, includeComparatorInDescription);
     }

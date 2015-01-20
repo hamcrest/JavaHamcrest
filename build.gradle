@@ -1,0 +1,116 @@
+import static org.gradle.api.JavaVersion.VERSION_1_7
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+sourceCompatibility = VERSION_1_7
+targetCompatibility = VERSION_1_7
+archivesBaseName = "java-hamcrest"
+
+group = "org.hamcrest"
+version = "2.0.0.0"
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile(group: 'junit', name: 'junit', version: '4.12') {
+        transitive = false
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'hamcrest-core/src/main/java', 'hamcrest-library/src/main/java'
+        }
+
+    }
+    test {
+        java {
+            srcDirs 'hamcrest-core/src/test/java', 'hamcrest-library/src/test/java'
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'hamcrest-all',
+                'Implementation-Vendor': 'hamcrest.org',
+                'Implementation-Version': version
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
+uploadArchives {
+    if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+
+                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+
+                pom.project {
+                    name 'Java Hamcrest'
+                    packaging 'jar'
+                    description 'Hamcrest matcher library for Java'
+                    url 'http://hamcrest.org/JavaHamcrest/'
+
+                    scm {
+                        connection 'git@github.com:hamcrest/JavaHamcrest.git'
+                        url 'https://github.com/hamcrest/JavaHamcrest'
+                    }
+
+                    licenses {
+                        license {
+                            name 'BSD Licence 3'
+                            url 'http://opensource.org/licenses/BSD-3-Clause'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'joewalnes'
+                            name 'Joe Walnes'
+                        }
+                        developer {
+                            id 'npryce'
+                            name 'Nat Pryce'
+                        }
+                        developer {
+                            id 'sf105'
+                            name 'Steve Freeman'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

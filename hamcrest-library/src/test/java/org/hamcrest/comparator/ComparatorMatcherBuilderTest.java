@@ -1,5 +1,3 @@
-/*  Copyright (c) 2000-2009 hamcrest.org
- */
 package org.hamcrest.comparator;
 
 import org.hamcrest.AbstractMatcherTest;
@@ -122,6 +120,7 @@ public class ComparatorMatcherBuilderTest extends AbstractMatcherTest {
             this.value = value;
         }
 
+        @Override
         public int compareTo(CustomInt other) {
             return value - other.value;
         }

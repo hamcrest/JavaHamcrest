@@ -1,10 +1,9 @@
 package org.hamcrest.collection;
 
-import java.util.Map;
-
-import org.hamcrest.Factory;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
+
+import java.util.Map;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -30,7 +29,6 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
      * @param sizeMatcher
      *     a matcher for the size of an examined {@link java.util.Map}
      */
-    @Factory
     public static <K, V> Matcher<Map<? extends K, ? extends V>> aMapWithSize(Matcher<? super Integer> sizeMatcher) {
         return new IsMapWithSize<K, V>(sizeMatcher);
     }
@@ -44,10 +42,9 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
      * @param size
      *     the expected size of an examined {@link java.util.Map}
      */
-    @Factory
     public static <K, V> Matcher<Map<? extends K, ? extends V>> aMapWithSize(int size) {
         Matcher<? super Integer> matcher = equalTo(size);
-        return IsMapWithSize.<K, V>aMapWithSize(matcher);
+        return IsMapWithSize.aMapWithSize(matcher);
     }
     
     /**
@@ -57,8 +54,7 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
      * <pre>assertThat(myMap, is(anEmptyMap()))</pre>
      * 
      */
-    @Factory
     public static <K, V> Matcher<Map<? extends K, ? extends V>> anEmptyMap() {
-        return IsMapWithSize.<K, V>aMapWithSize(equalTo(0));
+        return IsMapWithSize.aMapWithSize(equalTo(0));
     }
 }

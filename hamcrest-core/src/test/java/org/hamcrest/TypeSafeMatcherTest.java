@@ -1,9 +1,9 @@
 package org.hamcrest;
 
-import static org.junit.Assert.assertFalse;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-
 import org.junit.Test;
+
+import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
+import static org.junit.Assert.assertFalse;
 
 public final class TypeSafeMatcherTest {
     private final Matcher<String> matcher = new TypeSafeMatcherSubclass();
@@ -34,7 +34,7 @@ public final class TypeSafeMatcherTest {
     @Test public void
     describesMismatches() {
       assertMismatchDescription("was null", matcher, null);
-      assertMismatchDescription("was a java.lang.Integer (<3>)", (Matcher)matcher, new Integer(3));
+      assertMismatchDescription("was a java.lang.Integer (<3>)", (Matcher)matcher, 3);
       assertMismatchDescription("The mismatch", matcher, "a string");
     }
 }

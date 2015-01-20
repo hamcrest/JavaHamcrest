@@ -1,10 +1,7 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
- */
 package org.hamcrest.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.DiagnosingMatcher;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 
@@ -70,7 +67,6 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
      * 
      */
     @SuppressWarnings("unchecked")
-    @Factory
     public static <T> Matcher<T> instanceOf(Class<?> type) {
         return (Matcher<T>) new IsInstanceOf(type);
     }
@@ -88,7 +84,6 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
      *
      */
     @SuppressWarnings("unchecked")
-    @Factory
     public static <T> Matcher<T> any(Class<T> type) {
         return (Matcher<T>) new IsInstanceOf(type);
     }

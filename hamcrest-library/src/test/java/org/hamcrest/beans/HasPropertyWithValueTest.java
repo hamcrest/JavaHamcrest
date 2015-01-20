@@ -1,15 +1,4 @@
-/*  Copyright (c) 2000-20010 hamcrest.org
- */
 package org.hamcrest.beans;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
-import static org.hamcrest.core.IsAnything.anything;
-import static org.hamcrest.core.IsEqual.equalTo;
-
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
-import java.beans.SimpleBeanInfo;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Description;
@@ -17,12 +6,22 @@ import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 import org.hamcrest.core.IsEqual;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
+import java.beans.SimpleBeanInfo;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
+import static org.hamcrest.core.IsAnything.anything;
+import static org.hamcrest.core.IsEqual.equalTo;
+
 /**
  * @author Iain McGinniss
  * @author Nat Pryce
  * @author Steve Freeman
  * @since 1.1.0
  */
+@SuppressWarnings("UnusedDeclaration")
 public class HasPropertyWithValueTest extends AbstractMatcherTest {
   private final BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected");
   private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");

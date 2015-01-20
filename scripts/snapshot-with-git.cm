@@ -1,9 +1,0 @@
-#!/bin/bash
-set -u
-set -e
-
-BASE_DIR="$( cd "$( /usr/bin/dirname "${BASH_SOURCE[0]}" )/.." && /bin/pwd )"
-
-cd "$BASE_DIR"
-ant -Dversion="GIT-$(git log -1 --oneline | cut -d " " -f 1)"
-

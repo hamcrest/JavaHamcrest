@@ -1,8 +1,5 @@
-/*  Copyright (c) 2000-2009 hamcrest.org
- */
 package org.hamcrest.number;
 
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.comparator.ComparatorMatcherBuilder;
 
@@ -20,7 +17,6 @@ public class OrderingComparison {
      *
      * @param value the value which, when passed to the compareTo method of the examined object, should return zero
      */
-    @Factory
     public static <T extends Comparable<T>> Matcher<T> comparesEqualTo(T value) {
         return ComparatorMatcherBuilder.<T>usingNaturalOrdering().comparesEqualTo(value);
     }
@@ -35,7 +31,6 @@ public class OrderingComparison {
      * @param value the value which, when passed to the compareTo method of the examined object, should return greater
      *              than zero
      */
-    @Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThan(T value) {
         return ComparatorMatcherBuilder.<T>usingNaturalOrdering().greaterThan(value);
     }
@@ -50,7 +45,6 @@ public class OrderingComparison {
      * @param value the value which, when passed to the compareTo method of the examined object, should return greater
      *              than or equal to zero
      */
-    @Factory
     public static <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T value) {
         return ComparatorMatcherBuilder.<T>usingNaturalOrdering().greaterThanOrEqualTo(value);
     }
@@ -65,7 +59,6 @@ public class OrderingComparison {
      * @param value the value which, when passed to the compareTo method of the examined object, should return less
      *              than zero
      */
-    @Factory
     public static <T extends Comparable<T>> Matcher<T> lessThan(T value) {
         return ComparatorMatcherBuilder.<T>usingNaturalOrdering().lessThan(value);
     }
@@ -80,7 +73,6 @@ public class OrderingComparison {
      * @param value the value which, when passed to the compareTo method of the examined object, should return less
      *              than or equal to zero
      */
-    @Factory
     public static <T extends Comparable<T>> Matcher<T> lessThanOrEqualTo(T value) {
         return ComparatorMatcherBuilder.<T>usingNaturalOrdering().lessThanOrEqualTo(value);
     }

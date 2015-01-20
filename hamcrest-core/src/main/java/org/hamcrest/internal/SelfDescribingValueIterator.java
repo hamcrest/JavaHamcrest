@@ -1,8 +1,8 @@
 package org.hamcrest.internal;
 
-import java.util.Iterator;
-
 import org.hamcrest.SelfDescribing;
+
+import java.util.Iterator;
 
 public class SelfDescribingValueIterator<T> implements Iterator<SelfDescribing> {
     private Iterator<T> values;

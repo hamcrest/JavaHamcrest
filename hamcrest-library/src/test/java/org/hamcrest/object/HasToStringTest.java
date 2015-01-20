@@ -1,16 +1,11 @@
 package org.hamcrest.object;
 
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
-import static org.hamcrest.AbstractMatcherTest.assertDoesNotMatch;
-import static org.hamcrest.AbstractMatcherTest.assertMatches;
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-import static org.hamcrest.AbstractMatcherTest.assertNullSafe;
-import static org.hamcrest.AbstractMatcherTest.assertUnknownTypeSafe;
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.object.HasToString.hasToString;
-
 import org.hamcrest.Matcher;
 import org.junit.Test;
+
+import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.object.HasToString.hasToString;
 
 public final class HasToStringTest {
     private static final String TO_STRING_RESULT = "toString result";

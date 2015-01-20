@@ -1,14 +1,12 @@
-/*  Copyright (c) 2000-2006 hamcrest.org
- */
 package org.hamcrest.object;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.object.IsEventFrom.eventFrom;
-
-import java.util.EventObject;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+
+import java.util.EventObject;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.object.IsEventFrom.eventFrom;
 
 
 public class IsEventFromTest extends AbstractMatcherTest {
