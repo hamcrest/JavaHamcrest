@@ -10,9 +10,6 @@
 *.ipr
 *.iml
 .gradle
-gradlew
-gradlew.bat
-/gradle/
 
 gradle.properties
 release-key.asc
