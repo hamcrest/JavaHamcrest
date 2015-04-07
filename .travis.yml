@@ -6,4 +6,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - gradlew clean build javadoc
+  - ./gradlew clean build javadoc
