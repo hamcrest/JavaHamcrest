@@ -241,9 +241,10 @@ public class Matchers {
    * 
    * @param itemMatcher
    *     the matcher to apply to items provided by the examined {@link Iterable}
+   * @Deprecated use org.hamcrest.MatchingCollections instead
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(org.hamcrest.Matcher<? super T> itemMatcher) {
-    return IsCollectionContaining.<T>hasItem(itemMatcher);
+    return MatchingCollections.hasItem(itemMatcher);
   }
 
   /**
@@ -256,9 +257,10 @@ public class Matchers {
    * 
    * @param item
    *     the item to compare against the items provided by the examined {@link Iterable}
+   * @Deprecated use org.hamcrest.MatchingCollections instead
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(T item) {
-    return IsCollectionContaining.<T>hasItem(item);
+    return MatchingCollections.hasItem(item);
   }
 
   /**
@@ -271,9 +273,10 @@ public class Matchers {
    * 
    * @param itemMatchers
    *     the matchers to apply to items provided by the examined {@link Iterable}
+   * @Deprecated use org.hamcrest.MatchingCollections instead
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItems(org.hamcrest.Matcher<? super T>... itemMatchers) {
-    return IsCollectionContaining.<T>hasItems(itemMatchers);
+    return MatchingCollections.hasItems(itemMatchers);
   }
 
   /**
@@ -286,9 +289,10 @@ public class Matchers {
    * 
    * @param items
    *     the items to compare against the items provided by the examined {@link Iterable}
+   * @Deprecated use org.hamcrest.MatchingCollections instead
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItems(T... items) {
-    return IsCollectionContaining.<T>hasItems(items);
+    return MatchingCollections.hasItems(items);
   }
 
   /**
