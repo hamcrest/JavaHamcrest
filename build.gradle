@@ -9,7 +9,7 @@ targetCompatibility = VERSION_1_7
 archivesBaseName = "java-hamcrest"
 
 group = "org.hamcrest"
-version = "2.0.0.0"
+version = "2.0.1.0"
 
 
 repositories {
