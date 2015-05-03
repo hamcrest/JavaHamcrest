@@ -153,9 +153,10 @@ public class CoreMatchers {
    * 
    * @param itemMatcher
    *     the matcher to apply to items provided by the examined {@link Iterable}
+   * @Deprecated use org.hamcrest.MatchingCollections instead
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(org.hamcrest.Matcher<? super T> itemMatcher) {
-    return org.hamcrest.core.IsCollectionContaining.hasItem(itemMatcher);
+    return MatchingCollections.hasItem(itemMatcher);
   }
 
   /**
@@ -168,9 +169,10 @@ public class CoreMatchers {
    * 
    * @param item
    *     the item to compare against the items provided by the examined {@link Iterable}
+   * @Deprecated use org.hamcrest.MatchingCollections instead
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(T item) {
-    return org.hamcrest.core.IsCollectionContaining.hasItem(item);
+    return MatchingCollections.hasItem(item);
   }
 
   /**
@@ -183,10 +185,11 @@ public class CoreMatchers {
    * 
    * @param itemMatchers
    *     the matchers to apply to items provided by the examined {@link Iterable}
+   * @Deprecated use org.hamcrest.MatchingCollections instead
    */
   @SafeVarargs
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItems(org.hamcrest.Matcher<? super T>... itemMatchers) {
-    return org.hamcrest.core.IsCollectionContaining.hasItems(itemMatchers);
+    return MatchingCollections.hasItems(itemMatchers);
   }
 
   /**
@@ -199,10 +202,11 @@ public class CoreMatchers {
    * 
    * @param items
    *     the items to compare against the items provided by the examined {@link Iterable}
+   * @Deprecated use org.hamcrest.MatchingCollections instead
    */
   @SafeVarargs
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItems(T... items) {
-    return org.hamcrest.core.IsCollectionContaining.hasItems(items);
+    return MatchingCollections.hasItems(items);
   }
 
   /**

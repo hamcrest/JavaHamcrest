@@ -1,8 +1,10 @@
-package org.hamcrest.core;
+package org.hamcrest.collection;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+import org.hamcrest.collection.IsCollectionContaining;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,8 +13,8 @@ import java.util.Set;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.AbstractMatcherTest.*;
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
-import static org.hamcrest.core.IsCollectionContaining.hasItems;
+import static org.hamcrest.collection.IsCollectionContaining.hasItem;
+import static org.hamcrest.collection.IsCollectionContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public final class IsCollectionContainingTest {

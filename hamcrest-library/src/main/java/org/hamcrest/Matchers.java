@@ -1,5 +1,7 @@
 package org.hamcrest;
 
+import org.hamcrest.collection.IsCollectionContaining;
+
 public class Matchers {
 
   /**
@@ -241,7 +243,7 @@ public class Matchers {
    *     the matcher to apply to items provided by the examined {@link Iterable}
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(org.hamcrest.Matcher<? super T> itemMatcher) {
-    return org.hamcrest.core.IsCollectionContaining.<T>hasItem(itemMatcher);
+    return IsCollectionContaining.<T>hasItem(itemMatcher);
   }
 
   /**
@@ -256,7 +258,7 @@ public class Matchers {
    *     the item to compare against the items provided by the examined {@link Iterable}
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(T item) {
-    return org.hamcrest.core.IsCollectionContaining.<T>hasItem(item);
+    return IsCollectionContaining.<T>hasItem(item);
   }
 
   /**
@@ -271,7 +273,7 @@ public class Matchers {
    *     the matchers to apply to items provided by the examined {@link Iterable}
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItems(org.hamcrest.Matcher<? super T>... itemMatchers) {
-    return org.hamcrest.core.IsCollectionContaining.<T>hasItems(itemMatchers);
+    return IsCollectionContaining.<T>hasItems(itemMatchers);
   }
 
   /**
@@ -286,7 +288,7 @@ public class Matchers {
    *     the items to compare against the items provided by the examined {@link Iterable}
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItems(T... items) {
-    return org.hamcrest.core.IsCollectionContaining.<T>hasItems(items);
+    return IsCollectionContaining.<T>hasItems(items);
   }
 
   /**

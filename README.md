@@ -13,7 +13,7 @@ They've also been used for other purposes.
 
 Downloads
 ---------
-You can obtain Hamcrest binaries from [maven central][], or from [google code downloads][].
+You can obtain Hamcrest binaries from [maven central][]
 
 Extensions
 ----------
