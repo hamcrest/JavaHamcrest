@@ -1,5 +1,7 @@
 package org.hamcrest;
 
+import org.hamcrest.internal.SelfDescribingValue;
+
 
 public class MatcherAssert {
     public static <T> void assertThat(T actual, Matcher<? super T> matcher) {
@@ -7,14 +9,14 @@ public class MatcherAssert {
     }
     
     public static <T> void assertThat(String reason, T actual, Matcher<? super T> matcher) {
-    	assertThat(justInTimeString(reason), actual, matcher);
+    	assertThat(new SelfDescribingValue<String>(reason), actual, matcher);
     }
     
-    public static <T> void assertThat(JustInTimeMessage reason, T actual, Matcher<? super T> matcher) {
+    public static <T> void assertThat(SelfDescribing reason, T actual, Matcher<? super T> matcher) {
         if (!matcher.matches(actual)) {
             Description description = new StringDescription();
-            description.appendText(reason.getMessage())
-                       .appendText("\nExpected: ")
+            reason.describeTo(description);
+            description.appendText("\nExpected: ")
                        .appendDescriptionOf(matcher)
                        .appendText("\n     but: ");
             matcher.describeMismatch(actual, description);
@@ -24,18 +26,23 @@ public class MatcherAssert {
     }
     
     public static void assertThat(String reason, boolean assertion) {
-    	assertThat(justInTimeString(reason), assertion);
+    	assertThat(new SelfDescribingValue<String>(reason), assertion);
     }
     
-    public static void assertThat(JustInTimeMessage reason, boolean assertion) {
+    public static void assertThat(SelfDescribing reason, boolean assertion) {
         if (!assertion) {
-            throw new AssertionError(reason.getMessage());
+        	Description description = new StringDescription();
+        	reason.describeTo(description);
+            throw new AssertionError(description.toString());
         }
     }
     
-    public static JustInTimeMessage justInTimeString(final String string) {
-    	return new JustInTimeMessage() {
-    		public String getMessage() { return string; }
+    public static SelfDescribing describeAsString(final String string) {
+    	return new SelfDescribing() {
+			@Override
+			public void describeTo(Description description) {
+				description.appendText(string);
+			}
     	};
     }
 }
