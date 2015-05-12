@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.justInTimeString;
 
 public final class MatcherAssertTest {
 
@@ -17,6 +18,24 @@ public final class MatcherAssertTest {
 
         try {
             assertThat("identifier", actual, equalTo(expected));
+        }
+        catch (AssertionError e) {
+            assertTrue(e.getMessage().startsWith(expectedMessage));
+            return;
+        }
+
+        fail("should have failed");
+    }
+    
+    @Test public void
+    includesJustInTimeFailureMessageWithMatcher() {
+        String expected = "expected";
+        String actual = "actual";
+
+        String expectedMessage = "identifier\nExpected: \"expected\"\n     but: was \"actual\"";
+
+        try {
+            assertThat(justInTimeString("identifier"), actual, equalTo(expected));
         }
         catch (AssertionError e) {
             assertTrue(e.getMessage().startsWith(expectedMessage));
@@ -59,6 +78,22 @@ public final class MatcherAssertTest {
         fail("should have failed");
     }
 
+    @Test public void
+    canTestBooleanDirectlyWithJustInTimeMessage() {
+        assertThat("success reason message", true);
+
+        try {
+            assertThat(justInTimeString("failing reason message"), false);
+        }
+        catch (AssertionError e) {
+            assertEquals("failing reason message", e.getMessage());
+            return;
+        }
+
+        fail("should have failed");
+    }
+    
+    
     @Test public void
     includesMismatchDescription() {
         Matcher<String> matcherWithCustomMismatchDescription = new BaseMatcher<String>() {
