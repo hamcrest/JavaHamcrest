@@ -1,6 +1,5 @@
 package org.hamcrest;
 
-import org.hamcrest.internal.SelfDescribingValue;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -35,7 +34,7 @@ public final class MatcherAssertTest {
         String expectedMessage = "identifier\nExpected: \"expected\"\n     but: was \"actual\"";
 
         try {
-            assertThat(new SelfDescribingValue<String>("identifier"), actual, equalTo(expected));
+            assertThat(selfDescribingString("identifier"), actual, equalTo(expected));
         }
         catch (AssertionError e) {
             assertTrue(e.getMessage().startsWith(expectedMessage));
@@ -45,7 +44,7 @@ public final class MatcherAssertTest {
         fail("should have failed");
     }
 
-    @Test public void
+	@Test public void
     descriptionCanBeElided() {
         String expected = "expected";
         String actual = "actual";
@@ -83,7 +82,7 @@ public final class MatcherAssertTest {
         assertThat("success reason message", true);
 
         try {
-            assertThat(new SelfDescribingValue<String>("failing reason message"), false);
+            assertThat(selfDescribingString("failing reason message"), false);
         }
         catch (AssertionError e) {
             assertEquals("failing reason message", e.getMessage());
@@ -127,5 +126,15 @@ public final class MatcherAssertTest {
     @Test public void
     canAssertSubtypes() {
         assertThat(1, equalTo((Number) 1));
+    }
+    
+
+    private static SelfDescribing selfDescribingString(final String string) {
+    	return new SelfDescribing() {
+			@Override
+			public void describeTo(Description description) {
+				description.appendText(string);
+			}
+    	};
     }
 }
