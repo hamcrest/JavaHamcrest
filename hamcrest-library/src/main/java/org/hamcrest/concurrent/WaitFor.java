@@ -42,8 +42,8 @@ import static java.util.Objects.requireNonNull;
  * <pre>{@code
  * ComponentUnderTest cut = ...;
  * State expectedState = ...;
- * WaitForFunction<ComponentUnderTest,State> stateFunction = new WaitForFunction<>() { ... };
- * assertThat(componentUnderTest, waitFor(stateMatches(stateFunction, equalTo(expectedState)), 2, SECONDS));
+ * Function<ComponentUnderTest,State> stateFunction = new Function<>() { ... };
+ * assertThat(componentUnderTest, waitFor(applying(stateFunction, equalTo(expectedState)), 2, SECONDS));
  * }</pre>
  * </dd>
  * <dt><strong>Note:</strong></dt>
@@ -205,79 +205,6 @@ public class WaitFor<T> extends TypeSafeMatcher<T> {
     }
 
     /**
-     * <p>
-     * A function which is used to transform a component under test {@code F} to a state {@code T} which changes over
-     * time.
-     * </p>
-     * <p>
-     * This is a convenience interface if you cannot use Java 8+ functions or use Guava's Function interface.
-     * </p>
-     *
-     * @param <F> type of value to transform; typically the component under test
-     * @param <T> type of the target value to transform to; typically a value which represents the state of the
-     *            component under test
-     */
-    public interface WaitForFunction<F, T> {
-        T apply(F input);
-    }
-
-    /**
-     * <p>
-     * Matcher to delegate the matching of a transformed value to another (a normal) matcher.
-     * </p>
-     * <dl>
-     * <dt><strong>Note:</strong></dt>
-     * <dd>
-     * In order not to report a different state on failure than used for comparison the previously
-     * retrieved state is stored per thread when matching is tried. As a consequence
-     * {@link #describeMismatchSafely(Object, Description)} ignores the item expecting that it did
-     * not change meanwhile.
-     * </dd>
-     * </dl>
-     *
-     * @param <F> type of the actual value in the assertion; typically the component under test
-     * @param <T> type of the actual value to compare; typically the state of the component under test
-     */
-    public static class DelegatingWaitMatcher<F, T> extends TypeSafeMatcher<F> {
-        private final ThreadLocal<T> lastValue = new ThreadLocal<>();
-        private final WaitForFunction<F, T> stateFunction;
-        private final Matcher<? super T> stateMatcher;
-
-
-        /**
-         * <p>
-         * Constructor.
-         * </p>
-         *
-         * @param stateFunction the function to apply to convert the asserted value (typically the component under test)
-         *                      to the target value (typically its state)
-         * @param stateMatcher  matcher to apply to the transformed value; typically the state of the component under test
-         */
-        public DelegatingWaitMatcher(WaitForFunction<F, T> stateFunction, Matcher<? super T> stateMatcher) {
-            this.stateFunction = requireNonNull(stateFunction, "State function must not be null.");
-            this.stateMatcher = requireNonNull(stateMatcher, "Matcher for state value must not be null.");
-        }
-
-        @Override
-        protected boolean matchesSafely(F item) {
-            lastValue.set(stateFunction.apply(item));
-            return stateMatcher.matches(lastValue.get());
-        }
-
-        @Override
-        public void describeTo(Description description) {
-            stateMatcher.describeTo(description);
-        }
-
-        @Override
-        protected void describeMismatchSafely(F item, Description mismatchDescription) {
-            // Ignoring item, expecting that it did not change between call to describeMismatch and matches.
-            stateMatcher.describeMismatch(lastValue.get(), mismatchDescription);
-        }
-
-    }
-
-    /**
      * Creates a matcher which waits for the embedded matcher to evaluate to true.
      * It is required that the embedded matcher checks a mutable aspect of the matched object thus
      * typical default matchers like {@code equalTo} won't work.
@@ -304,23 +231,6 @@ public class WaitFor<T> extends TypeSafeMatcher<T> {
      */
     public static <T> Matcher<T> waitFor(Matcher<T> originalMatcher, long timeout, TimeUnit timeUnit) {
         return new WaitFor<>(originalMatcher, timeout, timeUnit);
-    }
-
-    /**
-     * <p>
-     * Applies a transformation to the value before comparing the transformed result with the given matcher.
-     * </p>
-     *
-     * @param stateFunction the function to apply to convert the asserted value (typically the component under test)
-     *                      to the target value (typically its state)
-     * @param stateMatcher  matcher to apply to the transformed value; typically the state of the component under test
-     * @param <F>           type to input into assertion
-     * @param <T>           actual value type to compare
-     * @return matcher which transforms input before comparison
-     */
-    public static <F, T> Matcher<F> stateMatches(WaitForFunction<F, T> stateFunction,
-                                                 Matcher<? super T> stateMatcher) {
-        return new DelegatingWaitMatcher<>(stateFunction, stateMatcher);
     }
 
 }

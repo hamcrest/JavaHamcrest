@@ -4,6 +4,8 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.function.ApplyingMatcher;
+import org.hamcrest.function.Function;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -112,7 +114,7 @@ public class WaitForTest {
     @Test
     public void example_use_case_with_delegating_matcher_works() throws Exception {
         ComponentUnderTest componentUnderTest = new ComponentUnderTest(1, 2);
-        Matcher<ComponentUnderTest> waitForMatcher = new NeverTimeOutWaitFor<>(new WaitFor.DelegatingWaitMatcher<>(new ToState(), Matchers.equalTo(2)));
+        Matcher<ComponentUnderTest> waitForMatcher = new NeverTimeOutWaitFor<>(new ApplyingMatcher<>(new ToState(), Matchers.equalTo(2)));
         assertThat("Requested state should have been reached on second try.", componentUnderTest, waitForMatcher);
     }
 
@@ -120,7 +122,7 @@ public class WaitForTest {
     public void delegating_matcher_remembers_previous_state_on_failure() throws Exception {
         ComponentUnderTest componentUnderTest = new ComponentUnderTest(42, 43);
         Matcher<ComponentUnderTest> waitForMatcher =
-                new TimeOutImmediatelyWaitFor<>(WaitFor.stateMatches(new ToState(), Matchers.equalTo(43)));
+                new TimeOutImmediatelyWaitFor<>(ApplyingMatcher.applying(new ToState(), Matchers.equalTo(43)));
         AssertionError caughtAssertionFailure = null;
         try {
             assertThat("Provoke failure because of timeout.", componentUnderTest, waitForMatcher);
@@ -162,7 +164,7 @@ public class WaitForTest {
     /**
      * Function to retrieve state from the component under test.
      */
-    private static class ToState implements WaitFor.WaitForFunction<ComponentUnderTest, Integer> {
+    private static class ToState implements Function<ComponentUnderTest, Integer> {
         @Override
         public Integer apply(ComponentUnderTest input) {
             return input.getState();
