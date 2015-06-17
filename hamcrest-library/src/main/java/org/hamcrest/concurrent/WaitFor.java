@@ -10,7 +10,8 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * <p>
- * Wait for the given matcher to evaluate to true. It is required that the embedded matcher changes its state over time.
+ * Wait for the given matcher to evaluate to true. It is required that the embedded matcher checks a mutable
+ * aspect of the matched object.
  * </p>
  * <p>
  * This matcher uses a decelerating wait approach, i. e. it tries to poll the state very often at the beginning
@@ -72,7 +73,7 @@ public class WaitFor<T> extends TypeSafeMatcher<T> {
     private static final long SLEEP_NOT_MUCH_LONGER_OFFSET_MILLIS = 100L;
 
     /**
-     * Original matcher who is required to changes its state while waiting.
+     * Original matcher who is required to check a mutable aspect of the matched object.
      */
     private final Matcher<T> originalMatcher;
     /**
@@ -278,7 +279,7 @@ public class WaitFor<T> extends TypeSafeMatcher<T> {
 
     /**
      * Creates a matcher which waits for the embedded matcher to evaluate to true.
-     * It is required that the embedded matcher changes its state over time thus
+     * It is required that the embedded matcher checks a mutable aspect of the matched object thus
      * typical default matchers like {@code equalTo} won't work.
      *
      * @param originalMatcher the original matcher to wait to return true
@@ -292,7 +293,7 @@ public class WaitFor<T> extends TypeSafeMatcher<T> {
 
     /**
      * Creates a matcher which waits for the embedded matcher to evaluate to true.
-     * It is required that the embedded matcher changes its state over time thus
+     * It is required that the embedded matcher checks a mutable aspect of the matched object thus
      * typical default matchers like {@code equalTo} won't work.
      *
      * @param originalMatcher the original matcher to wait to return true

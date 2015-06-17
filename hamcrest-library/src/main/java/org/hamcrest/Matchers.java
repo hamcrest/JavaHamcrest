@@ -1610,7 +1610,7 @@ public class Matchers {
 
   /**
    * Creates a matcher which waits for the embedded matcher to evaluate to true.
-   * It is required that the embedded matcher changes its state over time thus
+   * It is required that the embedded matcher checks a mutable aspect of the matched object thus
    * typical default matchers like {@code equalTo} won't work.
    *
    * @param originalMatcher the original matcher to wait to return true
@@ -1626,7 +1626,7 @@ public class Matchers {
 
   /**
    * Creates a matcher which waits for the embedded matcher to evaluate to true.
-   * It is required that the embedded matcher changes its state over time thus
+   * It is required that the embedded matcher checks a mutable aspect of the matched object thus
    * typical default matchers like {@code equalTo} won't work.
    *
    * @param originalMatcher the original matcher to wait to return true
