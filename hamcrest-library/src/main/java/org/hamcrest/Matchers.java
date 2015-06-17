@@ -1608,4 +1608,55 @@ public class Matchers {
     return org.hamcrest.xml.HasXPath.hasXPath(xPath, namespaceContext);
   }
 
+  /**
+   * Creates a matcher which waits for the embedded matcher to evaluate to true.
+   * It is required that the embedded matcher checks a mutable aspect of the matched object thus
+   * typical default matchers like {@code equalTo} won't work.
+   *
+   * @param originalMatcher the original matcher to wait to return true
+   * @param timeoutMs       timeout in milliseconds
+   * @param <T>             accepted value type of the original matcher
+   * @return matcher which waits
+   * @see #applying(org.hamcrest.function.Function, Matcher)
+   * @see #waitFor(Matcher, long, java.util.concurrent.TimeUnit)
+   */
+  public static <T> Matcher<T> waitFor(Matcher<T> originalMatcher, long timeoutMs) {
+    return org.hamcrest.concurrent.WaitFor.waitFor(originalMatcher, timeoutMs);
+  }
+
+  /**
+   * Creates a matcher which waits for the embedded matcher to evaluate to true.
+   * It is required that the embedded matcher checks a mutable aspect of the matched object thus
+   * typical default matchers like {@code equalTo} won't work.
+   *
+   * @param originalMatcher the original matcher to wait to return true
+   * @param timeout         timeout amount
+   * @param timeUnit        timeout unit
+   * @param <T>             accepted value type of the original matcher
+   * @return matcher which waits
+   * @see #applying(org.hamcrest.function.Function, Matcher)
+   * @see #waitFor(Matcher, long)
+   */
+  public static <T> Matcher<T> waitFor(Matcher<T> originalMatcher, long timeout, java.util.concurrent.TimeUnit timeUnit) {
+    return org.hamcrest.concurrent.WaitFor.waitFor(originalMatcher, timeout, timeUnit);
+  }
+
+  /**
+   * <p>
+   * Applies a transformation to the value before comparing the transformed result with the given matcher.
+   * </p>
+   *
+   * @param function        the function to apply to convert the asserted value to the target value
+   * @param delegateMatcher matcher to apply to the transformed value; typically the state of the component under test
+   * @param <F>             type to input into assertion
+   * @param <T>             actual value type to compare
+   * @return matcher which transforms input before comparison
+   * @see #waitFor(Matcher, long, java.util.concurrent.TimeUnit)
+   * @see #waitFor(Matcher, long)
+   */
+  public static <F, T> Matcher<F> applying(org.hamcrest.function.Function<F, T> function,
+                                               Matcher<? super T> delegateMatcher) {
+    return org.hamcrest.function.ApplyingMatcher.applying(function, delegateMatcher);
+  }
+
 }
