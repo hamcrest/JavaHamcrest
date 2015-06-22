@@ -1,7 +1,6 @@
 package org.hamcrest;
 
 import org.hamcrest.collection.IsCollectionContaining;
-import org.hamcrest.collection.IsIterableWithSize;
 
 import java.util.Collection;
 import java.util.List;
@@ -1020,7 +1019,7 @@ public class Matchers {
    *     a matcher for the number of items that should be yielded by an examined {@link Iterable}
    */
   public static <E> Matcher<Iterable<E>> iterableWithSize(Matcher<? super Integer> sizeMatcher) {
-    return IsIterableWithSize.<E>iterableWithSize(sizeMatcher);
+    return MatchingCollections.<E>iterableWithSize(sizeMatcher);
   }
 
   /**
