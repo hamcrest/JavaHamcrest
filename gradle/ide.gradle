@@ -1,0 +1,3 @@
+apply plugin: 'idea'
+
+idea.project.vcs = 'Git'
