@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import static org.hamcrest.Condition.matched;
@@ -104,9 +105,12 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
             public Condition<Object> apply(Method readMethod, Description mismatch) {
                 try {
                     return matched(readMethod.invoke(bean, NO_ARGUMENTS), mismatch);
-                } catch (Exception e) {
-                    mismatch.appendText(e.getMessage());
+                } catch (InvocationTargetException e) {
+                    final Throwable cause = e.getTargetException();
+                    mismatch.appendText(cause.getClass().getSimpleName() + " was thrown with message \"" + cause.getMessage() + "\"");
                     return notMatched();
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException("We shouldn't get an IllegalAccessException, since we already verified the method is readable", e);
                 }
             }
         };

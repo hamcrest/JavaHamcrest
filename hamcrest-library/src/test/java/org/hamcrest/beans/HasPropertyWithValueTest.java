@@ -73,6 +73,10 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     assertMismatchDescription("No property \"honk\"", hasProperty( "honk", anything()), shouldNotMatch);
   }
 
+  public void testExceptionsInBeanMethodsShouldBeReportedCorrectly() {
+    assertMismatchDescription("IllegalStateException was thrown with message \"getFoo() is not implemented correctly\"", hasProperty("foo", equalTo("bar")), new BuggyBean());
+  }
+
   public void testCanAccessAnAnonymousInnerClass() {
     class X implements IX {
       @Override
@@ -134,6 +138,12 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
       } catch (IntrospectionException e) {
         throw new RuntimeException("Introspection exception: " + e.getMessage());
       }
+    }
+  }
+
+  public static class BuggyBean {
+    public String getFoo() {
+      throw new IllegalStateException("getFoo() is not implemented correctly");
     }
   }
 }
