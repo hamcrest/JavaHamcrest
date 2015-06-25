@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import static org.hamcrest.Condition.matched;
@@ -104,9 +105,16 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
             public Condition<Object> apply(Method readMethod, Description mismatch) {
                 try {
                     return matched(readMethod.invoke(bean, NO_ARGUMENTS), mismatch);
-                } catch (Exception e) {
-                    mismatch.appendText(e.getMessage());
+                } catch (InvocationTargetException e) {
+                    mismatch
+                      .appendText("Calling '")
+                      .appendText(readMethod.toString())
+                      .appendText("': ")
+                      .appendValue(e.getTargetException().getMessage());
                     return notMatched();
+                } catch (Exception e) {
+                    throw new IllegalStateException(
+                      "Calling: '" + readMethod + "' should not have thrown " + e);
                 }
             }
         };
@@ -143,6 +151,6 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      *     a matcher for the value of the specified property of the examined bean
      */
     public static <T> Matcher<T> hasProperty(String propertyName, Matcher<?> valueMatcher) {
-        return new HasPropertyWithValue<T>(propertyName, valueMatcher);
+        return new HasPropertyWithValue<>(propertyName, valueMatcher);
     }
 }
