@@ -46,6 +46,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * @param items
      *     the items that must equal the items within an examined array
      */
+    @SafeVarargs
     public static <E> Matcher<E[]> arrayContaining(E... items) {
         List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
         for (E item : items) {
@@ -64,6 +65,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * @param itemMatchers
      *     the matchers that must be satisfied by the items in the examined array
      */
+    @SafeVarargs
     public static <E> Matcher<E[]> arrayContaining(Matcher<? super E>... itemMatchers) {
         //required for JDK 1.6
         //noinspection RedundantTypeArguments
