@@ -56,6 +56,7 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by an entry in an examined array
      */
+    @SafeVarargs
     public static <E> Matcher<E[]> arrayContainingInAnyOrder(Matcher<? super E>... itemMatchers) {
         return arrayContainingInAnyOrder(Arrays.asList(itemMatchers));
     }
@@ -102,6 +103,7 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
      * @param items
      *     the items that must equal the entries of an examined array, in any order
      */
+    @SafeVarargs
     public static <E> Matcher<E[]> arrayContainingInAnyOrder(E... items) {
       List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
       for (E item : items) {

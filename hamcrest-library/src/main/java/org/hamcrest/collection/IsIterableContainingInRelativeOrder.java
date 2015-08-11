@@ -77,6 +77,7 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * @param items
      *     the items that must be contained within items provided by an examined {@link Iterable} in the same relative order
      */
+    @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(E... items) {
         List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
         for (E item : items) {
@@ -96,6 +97,7 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * @param itemMatchers
      *     the matchers that must be satisfied by the items provided by an examined {@link Iterable} in the same relative order
      */
+    @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(Matcher<? super E>... itemMatchers) {
         return containsInRelativeOrder(asList(itemMatchers));
     }

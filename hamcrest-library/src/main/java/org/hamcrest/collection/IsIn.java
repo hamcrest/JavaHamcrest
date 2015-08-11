@@ -119,6 +119,7 @@ public class IsIn<T> extends BaseMatcher<T> {
      *     the elements amongst which matching items will be found 
      * 
      */
+    @SafeVarargs
     public static <T> Matcher<T> oneOf(T... elements) {
         return in(elements);
     }

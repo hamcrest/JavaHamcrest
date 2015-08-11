@@ -90,6 +90,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
      * @param elementMatchers
      *     the matchers that the elements of examined arrays should satisfy
      */
+    @SafeVarargs
     public static <T> IsArray<T> array(Matcher<? super T>... elementMatchers) {
         return new IsArray<T>(elementMatchers);
     }
