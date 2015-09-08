@@ -42,6 +42,7 @@ jar {
         attributes 'Implementation-Title': 'hamcrest-all',
                 'Implementation-Vendor': 'hamcrest.org',
                 'Implementation-Version': version
+        instruction 'Import-Package', '*; resolution:=optional'
     }
 }
 
