@@ -74,10 +74,23 @@ signing {
     sign configurations.archives
 }
 
+/* these classes aggregate all the Matchers */
+def codeCoverageIgnored = ["org/hamcrest/Matchers.class", "org/hamcrest/CoreMatchers.class"]
+
 jacocoTestReport {
     reports {
         xml.enabled = true // coveralls plugin depends on xml format report
         html.enabled = true
+    }
+    // BUG: https://issues.gradle.org/browse/GRADLE-2955
+    afterEvaluate {
+        classDirectories = fileTree(dir: "${buildDir}/classes/main/").exclude(codeCoverageIgnored)
+    }
+}
+test {
+    jacoco {
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+        excludes = codeCoverageIgnored
     }
 }
 
