@@ -1,6 +1,8 @@
 ![JavaHamcrest](http://hamcrest.org/images/logo.jpg)
 
 [![Build Status](https://travis-ci.org/hamcrest/JavaHamcrest.png?branch=master)](https://travis-ci.org/hamcrest/JavaHamcrest)
+[![Coverage Status](https://coveralls.io/repos/hamcrest/JavaHamcrest/badge.png?branch=master&service=github)](https://coveralls.io/github/hamcrest/JavaHamcrest?branch=master)
+
 
 Java Hamcrest
 =============
