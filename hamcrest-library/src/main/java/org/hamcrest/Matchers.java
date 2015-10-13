@@ -464,7 +464,7 @@ public class Matchers {
    * Creates a matcher that matches if the examined {@link String} contains the specified
    * {@link String} anywhere, ignoring case.
    * For example:
-   * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
+   * <pre>assertThat("myStringOfNote", containsStringIgnoringCase("string"))</pre>
    * 
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
@@ -494,7 +494,7 @@ public class Matchers {
    * {@link String}, ignoring case
    * </p>
    * For example:
-   * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
+   * <pre>assertThat("myStringOfNote", startsWithIgnoringCase("My"))</pre>
    * 
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
@@ -520,7 +520,7 @@ public class Matchers {
    * Creates a matcher that matches if the examined {@link String} ends with the specified
    * {@link String}, ignoring case.
    * For example:
-   * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
+   * <pre>assertThat("myStringOfNote", endsWithIgnoringCase("note"))</pre>
    * 
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string

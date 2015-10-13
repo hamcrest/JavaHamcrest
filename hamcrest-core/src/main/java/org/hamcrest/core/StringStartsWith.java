@@ -2,9 +2,6 @@ package org.hamcrest.core;
 
 import org.hamcrest.Matcher;
 
-/**
- * Tests if the argument is a string that contains a substring.
- */
 public class StringStartsWith extends SubstringMatcher {
     public StringStartsWith(boolean ignoringCase, String substring) { super("starting with", ignoringCase, substring); }
 
@@ -30,7 +27,7 @@ public class StringStartsWith extends SubstringMatcher {
      * {@link String}, ignoring case
      * </p>
      * For example:
-     * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
+     * <pre>assertThat("myStringOfNote", startsWithIgnoringCase("My"))</pre>
      *
      * @param prefix
      *      the substring that the returned matcher will expect at the start of any examined string

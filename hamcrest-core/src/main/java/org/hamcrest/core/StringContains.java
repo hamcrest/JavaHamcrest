@@ -33,7 +33,7 @@ public class StringContains extends SubstringMatcher {
      * Creates a matcher that matches if the examined {@link String} contains the specified
      * {@link String} anywhere, ignoring case.
      * For example:
-     * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
+     * <pre>assertThat("myStringOfNote", containsStringIgnoringCase("string"))</pre>
      *
      * @param substring
      *     the substring that the returned matcher will expect to find within any examined string
