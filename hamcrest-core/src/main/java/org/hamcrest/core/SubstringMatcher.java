@@ -13,6 +13,10 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
     protected final String substring;
 
     protected SubstringMatcher(String relationship, boolean ignoringCase, String substring) {
+        if (substring == null) {
+            throw new IllegalArgumentException("Substring should be non null");
+        }
+
         this.relationship = relationship;
         this.ignoringCase = ignoringCase;
         this.substring = substring;
