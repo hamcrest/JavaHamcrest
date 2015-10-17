@@ -50,7 +50,7 @@ public final class IsEqualIgnoringCaseTest {
     @Test public void
     describesItself() {
     	final Matcher<String> matcher = equalToIgnoringCase("heLLo");
-        assertDescription("equalToIgnoringCase(\"heLLo\")", matcher);
+        assertDescription("a string equal to \"heLLo\" ignoring case", matcher);
     }
 
     @Test public void
