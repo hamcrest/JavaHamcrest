@@ -1113,6 +1113,19 @@ public class Matchers {
   }
 
   /**
+   * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map}'s set of entries
+   * satisfies the specified <code>entriesMatcher</code>.
+   * For example:
+   * <pre>assertThat(myMap, hasEntries(hasSize(2)))</pre>
+   *
+   * @param entriesMatcher
+   *     the matcher that must be satisfied by the set of entries
+   */
+  public static <K, V> org.hamcrest.Matcher<java.util.Map<? extends K,? extends V>> hasEntries(Matcher<? super java.util.Set<? extends java.util.Map.Entry<? extends K, ? extends V>>> entriesMatcher) {
+    return org.hamcrest.collection.IsMapWithEntries.hasEntries(entriesMatcher);
+  }
+
+  /**
    * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
    * at least one key that satisfies the specified matcher.
    * For example:
