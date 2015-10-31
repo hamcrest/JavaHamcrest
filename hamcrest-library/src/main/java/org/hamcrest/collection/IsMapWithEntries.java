@@ -30,4 +30,18 @@ public class IsMapWithEntries<K, V> extends FeatureMatcher<Map<? extends K, ? ex
         return new IsMapWithEntries<>(entriesMatcher);
     }
 
+    /**
+     * Creates a matcher for {@link Map}s matching when the examined {@link Map}'s set of entries
+     * contains, in any order, entries satisfying the specified <code>entriesMatchers</code>.
+     * For example:
+     * <pre>assertThat(myMap, hasEntries(entry("a key"), entry("another key")))</pre>
+     *
+     * @param entriesMatchers
+     *     the matchers that must be satisfied by the entries
+     */
+    @SafeVarargs
+    public static <K, V> Matcher<Map<? extends K, ? extends V>> hasEntries(Matcher<? super Map.Entry<? extends K, ? extends V>>... entriesMatchers) {
+        return new IsMapWithEntries<>(IsIterableContainingInAnyOrder.containsInAnyOrder(entriesMatchers));
+    }
+
 }

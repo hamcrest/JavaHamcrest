@@ -5,7 +5,10 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
+import static org.hamcrest.collection.IsMapEntry.entry;
 import static org.hamcrest.collection.IsMapWithEntries.hasEntries;
 
 public class IsMapWithEntriesTest extends AbstractMatcherTest {
@@ -29,6 +32,15 @@ public class IsMapWithEntriesTest extends AbstractMatcherTest {
 
     public void testHasReadableDescription() {
         assertDescription("a map with entries an empty collection", hasEntries(Matchers.empty()));
+    }
+
+    public void testMatchesANumberOfExplicitEntriesInAnyOrder() {
+        Map<String, Integer> map = new LinkedHashMap<>();
+        map.put("c", 3);
+        map.put("b", 2);
+        map.put("a", 1);
+
+        assertMatches(hasEntries(entry("a", Matchers.equalTo(1)), entry("b", Matchers.equalTo(2)), entry("c", Matchers.equalTo(3))), map);
     }
 
 }
