@@ -1126,6 +1126,62 @@ public class Matchers {
   }
 
   /**
+   * Creates a matcher for {@link java.util.Map.Entry}s matching when the examined {@link java.util.Map.Entry} has a key which satisfies
+   * the specified <code>keyMatcher</code>, and a value which satisfies the specified <code>valueMatcher</code>.
+   * For example:
+   * <pre>assertThat(myMap.keySet(), hasItem(entry(equalTo("key"), notNullValue())))</pre>
+   *
+   * @param keyMatcher
+   *     the matcher that must be satisfied by the key
+   * @param valueMatcher
+   *     the matcher that must be satisfied by the value
+   */
+  public static <K, V> Matcher<? super java.util.Map.Entry<? extends K, ? extends V>> entry(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
+    return org.hamcrest.collection.IsMapEntry.entry(keyMatcher, valueMatcher);
+  }
+
+  /**
+   * Creates a matcher for {@link java.util.Map.Entry}s matching when the examined {@link java.util.Map.Entry} has a key which satisfies
+   * the specified <code>keyMatcher</code>; the value is ignored.
+   * For example:
+   * <pre>assertThat(myMap.keySet(), hasItem(entry(equalTo("key"))))</pre>
+   *
+   * @param keyMatcher
+   *     the matcher that must be satisfied by the key
+   */
+  public static <K> Matcher<? super java.util.Map.Entry<? extends K, ?>> entry(Matcher<? super K> keyMatcher) {
+    return org.hamcrest.collection.IsMapEntry.entry(keyMatcher);
+  }
+
+  /**
+   * Creates a matcher for {@link java.util.Map.Entry}s matching when the examined {@link java.util.Map.Entry} has the specified
+   * <code>key</code>, and a value which satisfies the specified <code>valueMatcher</code>.
+   * For example:
+   * <pre>assertThat(myMap.keySet(), hasItem(entry("key", notNullValue())))</pre>
+   *
+   * @param key
+   *     the required key
+   * @param valueMatcher
+   *     the matcher that must be satisfied by the value
+   */
+  public static <K, V> Matcher<? super java.util.Map.Entry<? extends K, ? extends V>> entry(K key, Matcher<? super V> valueMatcher) {
+    return org.hamcrest.collection.IsMapEntry.entry(key, valueMatcher);
+  }
+
+  /**
+   * Creates a matcher for {@link java.util.Map.Entry}s matching when the examined {@link java.util.Map.Entry} has the specified
+   * <code>key</code>; the value is ignored.
+   * For example:
+   * <pre>assertThat(myMap.keySet(), hasItem(entry("key")))</pre>
+   *
+   * @param key
+   *     the required key
+   */
+  public static <K> Matcher<? super java.util.Map.Entry<? extends K, ?>> entry(K key) {
+    return org.hamcrest.collection.IsMapEntry.entry(key);
+  }
+
+  /**
    * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
    * at least one key that satisfies the specified matcher.
    * For example:
