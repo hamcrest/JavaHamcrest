@@ -20,12 +20,19 @@ public class IsArrayContainingTest extends AbstractMatcherTest {
     public void testDoesNotMatchAnArrayThatDoesntContainAnElementMatchingTheGivenMatcher() {
         assertDoesNotMatch("should not matches array that doesn't contain 'a'",
                 hasItemInArray("a"), new String[]{"b", "c"});
+        assertMismatchDescription("mismatches were: [was \"b\", was \"c\"]",
+                hasItemInArray("a"), new String[]{"b", "c"});
+
         assertDoesNotMatch("should not matches empty array",
+                hasItemInArray("a"), new String[0]);
+        assertMismatchDescription("was empty",
                 hasItemInArray("a"), new String[0]);
     }
 
     public void testDoesNotMatchNull() {
         assertDoesNotMatch("should not matches null",
+                hasItemInArray("a"), null);
+        assertMismatchDescription("was null",
                 hasItemInArray("a"), null);
     }
 

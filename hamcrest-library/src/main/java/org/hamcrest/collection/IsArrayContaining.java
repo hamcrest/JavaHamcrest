@@ -3,6 +3,7 @@ package org.hamcrest.collection;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsCollectionContaining;
 
 import java.util.Arrays;
 
@@ -12,25 +13,22 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * Matches if an array contains an item satisfying a nested matcher.
  */
 public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
+    private final IsCollectionContaining<T> collectionMatcher;
     private final Matcher<? super T> elementMatcher;
 
     public IsArrayContaining(Matcher<? super T> elementMatcher) {
+    	this.collectionMatcher = new IsCollectionContaining<T>(elementMatcher);
         this.elementMatcher = elementMatcher;
     }
 
     @Override
-    public boolean matchesSafely(T[] array) {
-        for (T item : array) {
-            if (elementMatcher.matches(item)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean matchesSafely(T[] item) {
+        return collectionMatcher.matches(Arrays.asList(item));
     }
     
     @Override
     public void describeMismatchSafely(T[] item, Description mismatchDescription) {
-        super.describeMismatch(Arrays.asList(item), mismatchDescription);
+        collectionMatcher.describeMismatch(Arrays.asList(item), mismatchDescription);
     }
 
     @Override
