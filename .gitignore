@@ -13,3 +13,8 @@
 
 gradle.properties
 release-key.asc
+
+# files generated when importing Gradle project in Eclipse
+.classpath
+.project
+.settings
