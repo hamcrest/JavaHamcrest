@@ -137,6 +137,9 @@ public abstract class BaseDescription implements Description {
             case '\t':
                 append("\\t");
                 break;
+            case '\\':
+                append("\\\\");
+                break;
             default:
                 append(ch);
         }
