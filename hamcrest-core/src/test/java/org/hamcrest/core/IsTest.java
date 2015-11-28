@@ -43,8 +43,9 @@ public final class IsTest {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test public void
     providesConvenientShortcutForIsInstanceOf() {
-        final Matcher matcher = isA(Integer.class);
+        final Matcher matcher = isA(Number.class);
         assertMatches(matcher, 1);
+        assertMatches(matcher, 1.1);
         assertDoesNotMatch(matcher, new Object());
         assertDoesNotMatch(matcher, null);
     }

@@ -69,7 +69,7 @@ public class Is<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
      * 
      */
-    public static <T> Matcher<T> isA(Class<T> type) {
+    public static <T> Matcher<T> isA(Class<?> type) {
         final Matcher<T> typeMatcher = instanceOf(type);
         return is(typeMatcher);
     }

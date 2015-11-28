@@ -207,7 +207,7 @@ public class Matchers {
    * instead of:
    * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
    */
-  public static <T> org.hamcrest.Matcher<T> isA(java.lang.Class<T> type) {
+  public static <T> org.hamcrest.Matcher<T> isA(java.lang.Class<?> type) {
     return org.hamcrest.core.Is.<T>isA(type);
   }
 
