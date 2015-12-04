@@ -60,5 +60,17 @@ public class IsTraversedAsTest {
     List<Integer> actual = arrayList(1, null, null);
     assertThat(actual, is(traversedAs(1, null, null)));
   }
+  
+  @Test(expected = NullPointerException.class)
+  public void expectedNullFails() {
+    List<Integer> actual = arrayList(1, null, null);
+    List<Integer> expected = null;
+    assertThat(actual, is(traversedAs(expected)));
+  }
+  
+  @Test
+  public void actualNullFails() {
+    assertThat(null, is(not(traversedAs(1, 2))));
+  }
 
 }

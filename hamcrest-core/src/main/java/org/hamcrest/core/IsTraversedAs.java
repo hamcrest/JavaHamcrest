@@ -17,6 +17,7 @@ public class IsTraversedAs<E> extends TypeSafeMatcher<Iterable<E>> {
     return new IsTraversedAs<E>(expected);
   }
   
+  @SafeVarargs
   public static <E> Matcher<Iterable<E>> traversedAs(E... expected) {
     return new IsTraversedAs<E>(asList(expected));
   }
