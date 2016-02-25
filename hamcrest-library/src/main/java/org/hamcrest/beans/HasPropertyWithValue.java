@@ -10,8 +10,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
 import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
@@ -95,7 +93,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     private Condition<PropertyDescriptor> propertyOn(T bean, Description mismatch) {
         PropertyDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, bean);
         if(property != null && property.getReadMethod() == null) {
-            String booleanGetter = "is" + StringUtils.capitalize(propertyName);
+            String booleanGetter = "is" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
             for(Method method : bean.getClass().getDeclaredMethods()) {
                 if (method.getName().equals(booleanGetter)) {
                     try {
