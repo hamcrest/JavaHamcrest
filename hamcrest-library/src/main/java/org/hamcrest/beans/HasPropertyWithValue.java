@@ -1,13 +1,16 @@
 package org.hamcrest.beans;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.hamcrest.Condition;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import com.sun.xml.internal.ws.util.StringUtils;
 
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
@@ -34,7 +37,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  *     return name;
  *   }
  * }</pre>
- * 
+ *
  * And that these person objects are generated within a piece of code under test
  * (a class named PersonGenerator). This object is sent to one of our mock objects
  * which overrides the PersonGenerationListener interface:
@@ -42,14 +45,14 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * public interface PersonGenerationListener {
  *   public void personGenerated(Person person);
  * }</pre>
- * 
+ *
  * In order to check that the code under test generates a person with name
  * "Iain" we would do the following:
  * <pre>
  * Mock personGenListenerMock = mock(PersonGenerationListener.class);
  * personGenListenerMock.expects(once()).method("personGenerated").with(and(isA(Person.class), hasProperty("Name", eq("Iain")));
  * PersonGenerationListener listener = (PersonGenerationListener)personGenListenerMock.proxy();</pre>
- * 
+ *
  * <p>If an exception is thrown by the getter method for a property, the property
  * does not exist, is not readable, or a reflection related exception is thrown
  * when trying to invoke it then this is treated as an evaluation failure and
@@ -91,7 +94,18 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
 
     private Condition<PropertyDescriptor> propertyOn(T bean, Description mismatch) {
         PropertyDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, bean);
-        if (property == null) {
+        if(property != null && property.getReadMethod() == null) {
+            String booleanGetter = "is" + StringUtils.capitalize(propertyName);
+            for(Method method : bean.getClass().getDeclaredMethods()) {
+                if (method.getName().equals(booleanGetter)) {
+                    try {
+                        property.setReadMethod(method);
+                    } catch (IntrospectionException e) {
+                        throw new IllegalStateException("Cannot set read method" + e);
+                    }
+                }
+            }
+        } else {
             mismatch.appendText("No property \"" + propertyName + "\"");
             return notMatched();
         }
@@ -144,7 +158,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      * with the specified name whose value satisfies the specified matcher.
      * For example:
      * <pre>assertThat(myBean, hasProperty("foo", equalTo("bar"))</pre>
-     * 
+     *
      * @param propertyName
      *     the name of the JavaBean property that examined beans should possess
      * @param valueMatcher
