@@ -93,7 +93,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     private Condition<PropertyDescriptor> propertyOn(T bean, Description mismatch) {
         PropertyDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, bean);
         if (property != null) {
-            if (property.getReadMethod() == null) {
+            if (property.getReadMethod() == null && property.getPropertyType().equals(Boolean.class)) {
                 String booleanGetter = "is" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
                 for(Method method : bean.getClass().getDeclaredMethods()) {
                     if (method.getName().equals(booleanGetter)) {
