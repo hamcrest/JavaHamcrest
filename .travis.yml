@@ -5,5 +5,8 @@ jdk:
   - oraclejdk7
   - oraclejdk8
 
+addons:
+  hostname: localhost
+
 script:
   - ./gradlew clean build javadoc
