@@ -16,7 +16,7 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
 
     public IsEqualIgnoringCase(String string) {
         if (string == null) {
-            throw new IllegalArgumentException("Non-null value required by IsEqualIgnoringCase()");
+            throw new IllegalArgumentException("Non-null value required");
         }
         this.string = string;
     }

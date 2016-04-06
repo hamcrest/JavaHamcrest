@@ -18,7 +18,7 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
 
     public IsEqualIgnoringWhiteSpace(String string) {
         if (string == null) {
-            throw new IllegalArgumentException("Non-null value required by IsEqualIgnoringCase()");
+            throw new IllegalArgumentException("Non-null value required");
         }
         this.string = string;
     }
