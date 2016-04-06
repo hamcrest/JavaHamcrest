@@ -13,3 +13,4 @@
 
 gradle.properties
 release-key.asc
+grade-wrapper.properties
