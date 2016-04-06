@@ -36,6 +36,12 @@ sourceSets {
     }
 }
 
+test {
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
 jar {
     manifest {
         attributes 'Implementation-Title': 'hamcrest-all',
