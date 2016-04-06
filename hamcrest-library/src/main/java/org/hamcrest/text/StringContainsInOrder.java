@@ -22,6 +22,7 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
             if (fromIndex == -1) {
                 return false;
             }
+            fromIndex++;
         }
         
         return true;
