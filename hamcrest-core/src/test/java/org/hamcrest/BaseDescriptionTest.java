@@ -51,6 +51,12 @@ public final class BaseDescriptionTest {
     }
 
     @Test public void
+    quotesAppendedBackslash() {
+        baseDescription.appendValue('\\');
+        assertEquals("\"\\\\\"", result.toString());
+    }
+
+    @Test public void
     quotesAppendedDoubleQuotes() {
         baseDescription.appendValue('"');
         assertEquals("\"\\\"\"", result.toString());
