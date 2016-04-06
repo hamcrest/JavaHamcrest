@@ -42,8 +42,7 @@ public class ArrayMatching {
    *     the element that should be present in examined arrays
    */
   public static <T> Matcher<T[]> hasItemInArray(T element) {
-      Matcher<? super T> matcher = equalTo(element);
-      return hasItemInArray(matcher);
+    return hasItemInArray(equalTo(element));
   }
 
   /**
@@ -115,11 +114,7 @@ public class ArrayMatching {
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(E... items) {
-    final List<Matcher<? super E>> matchers = new ArrayList<>();
-    for (E item : items) {
-        matchers.add(equalTo(item));
-    }
-    return arrayContainingInAnyOrder(matchers);
+    return arrayContainingInAnyOrder(asEqualMatchers(items));
   }
 
   /**
@@ -134,13 +129,8 @@ public class ArrayMatching {
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContaining(E... items) {
-      List<Matcher<? super E>> matchers = new ArrayList<>();
-      for (E item : items) {
-          matchers.add(equalTo(item));
-      }
-      return arrayContaining(matchers);
+    return arrayContaining(asEqualMatchers(items));
   }
-
   /**
    * Creates a matcher for arrays that matches when each item in the examined array satisfies the
    * corresponding matcher in the specified matchers.  For a positive match, the examined array
@@ -174,4 +164,13 @@ public class ArrayMatching {
       return new  ArrayMatcher<>(new IsIterableContainingInOrder<>(itemMatchers), itemMatchers, "");
   }
 
+
+  private static <E> List<Matcher<? super E>> asEqualMatchers(E[] items) {
+    final List<Matcher<? super E>> matchers = new ArrayList<>();
+    for (E item : items) {
+      matchers.add(equalTo(item));
+    }
+    return matchers;
+  }
 }
+
