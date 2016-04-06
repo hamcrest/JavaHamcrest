@@ -58,7 +58,7 @@ public class IsIn<T> extends BaseMatcher<T> {
      * 
      */
     public static <T> Matcher<T> in(Collection<T> collection) {
-        return new IsIn<T>(collection);
+        return new IsIn<>(collection);
     }
 
     /**
@@ -89,7 +89,7 @@ public class IsIn<T> extends BaseMatcher<T> {
      * 
      */
     public static <T> Matcher<T> in(T[] elements) {
-        return new IsIn<T>(elements);
+        return new IsIn<>(elements);
     }
     
     /**
@@ -104,6 +104,7 @@ public class IsIn<T> extends BaseMatcher<T> {
      *     the elements amongst which matching items will be found 
      * 
      */
+    @SafeVarargs
     @Deprecated
     public static <T> Matcher<T> isOneOf(T... elements) {
         return oneOf(elements);
@@ -119,6 +120,7 @@ public class IsIn<T> extends BaseMatcher<T> {
      *     the elements amongst which matching items will be found 
      * 
      */
+    @SafeVarargs
     public static <T> Matcher<T> oneOf(T... elements) {
         return in(elements);
     }
