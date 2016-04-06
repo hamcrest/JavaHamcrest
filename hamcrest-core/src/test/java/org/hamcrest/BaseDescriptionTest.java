@@ -32,7 +32,31 @@ public final class BaseDescriptionTest {
         assertEquals("\"f\"", result.toString());
     }
 
-    @Test public void 
+    @Test public void
+    quotesAppendedTab() {
+        baseDescription.appendValue('\t');
+        assertEquals("\"\\t\"", result.toString());
+    }
+
+    @Test public void
+    quotesAppendedNewLine() {
+        baseDescription.appendValue('\n');
+        assertEquals("\"\\n\"", result.toString());
+    }
+
+    @Test public void
+    quotesAppendedLineReturn() {
+        baseDescription.appendValue('\r');
+        assertEquals("\"\\r\"", result.toString());
+    }
+
+    @Test public void
+    quotesAppendedDoubleQuotes() {
+        baseDescription.appendValue('"');
+        assertEquals("\"\\\"\"", result.toString());
+    }
+
+    @Test public void
     bracketsAppendedShortValue() {
         baseDescription.appendValue(Short.valueOf("2"));
         assertEquals("<2s>", result.toString());
