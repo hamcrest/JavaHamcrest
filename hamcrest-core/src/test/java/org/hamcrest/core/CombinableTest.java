@@ -9,8 +9,8 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 public final class CombinableTest {
-    private static final CombinableMatcher<Integer> EITHER_3_OR_4 = CombinableMatcher.<Integer>either(equalTo(3)).or(equalTo(4));
-    private static final CombinableMatcher<Integer> NOT_3_AND_NOT_4 = CombinableMatcher.<Integer>both(not(equalTo(3))).and(not(equalTo(4)));
+    private static final CombinableMatcher<Integer> EITHER_3_OR_4 = CombinableMatcher.either(equalTo(3)).or(equalTo(4));
+    private static final CombinableMatcher<Integer> NOT_3_AND_NOT_4 = CombinableMatcher.both(not(equalTo(3))).and(not(equalTo(4)));
 
     @Test public void
     copesWithNullsAndUnknownTypes() {

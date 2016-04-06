@@ -51,7 +51,7 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
      *     the matcher to apply to elements in examined arrays
      */
     public static <T> Matcher<T[]> hasItemInArray(Matcher<? super T> elementMatcher) {
-        return new IsArrayContaining<T>(elementMatcher);
+        return new IsArrayContaining<>(elementMatcher);
     }
 
     /**
@@ -66,6 +66,6 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
      */
     public static <T> Matcher<T[]> hasItemInArray(T element) {
         Matcher<? super T> matcher = equalTo(element);
-        return IsArrayContaining.<T>hasItemInArray(matcher);
+        return IsArrayContaining.hasItemInArray(matcher);
     }
 }
