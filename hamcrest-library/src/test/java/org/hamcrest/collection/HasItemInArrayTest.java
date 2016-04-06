@@ -3,34 +3,38 @@ package org.hamcrest.collection;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
+import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.collection.ArrayMatching.hasItemInArray;
 
-public class IsArrayContainingTest extends AbstractMatcherTest {
+public class HasItemInArrayTest extends AbstractMatcherTest {
 
     @Override
     protected Matcher<?> createMatcher() {
-        return ArrayMatching.hasItemInArray("irrelevant");
+        return hasItemInArray("irrelevant");
     }
 
     public void testMatchesAnArrayThatContainsAnElementMatchingTheGivenMatcher() {
         assertMatches("should matches array that contains 'a'",
-                ArrayMatching.hasItemInArray("a"), new String[]{"a", "b", "c"});
+                hasItemInArray("a"), new String[]{"a", "b", "c"});
     }
 
     public void testDoesNotMatchAnArrayThatDoesntContainAnElementMatchingTheGivenMatcher() {
         assertDoesNotMatch("should not matches array that doesn't contain 'a'",
-                ArrayMatching.hasItemInArray("a"), new String[]{"b", "c"});
+                hasItemInArray("a"), new String[]{"b", "c"});
         assertDoesNotMatch("should not matches empty array",
-                ArrayMatching.hasItemInArray("a"), new String[0]);
+                hasItemInArray("a"), new String[0]);
+        assertMismatchDescription(
+              "mismatches were: [<3> was greater than <2>, <4> was greater than <2>, <5> was greater than <2>]",
+              hasItemInArray(lessThan(2)), new Integer[] {3, 4, 5});
     }
 
     public void testDoesNotMatchNull() {
         assertDoesNotMatch("should not matches null",
-                ArrayMatching.hasItemInArray("a"), null);
+                hasItemInArray("a"), null);
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("an array containing \"a\"", ArrayMatching.hasItemInArray("a"));
+        assertDescription("an array containing a value less than <2>", hasItemInArray(lessThan(2)));
     }
 
     // Remaining code no longer compiles, thanks to generics. I think that's a good thing, but

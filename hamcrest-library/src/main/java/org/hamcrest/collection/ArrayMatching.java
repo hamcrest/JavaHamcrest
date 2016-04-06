@@ -28,7 +28,7 @@ public class ArrayMatching {
    *     the matcher to apply to elements in examined arrays
    */
   public static <T> Matcher<T[]> hasItemInArray(Matcher<? super T> elementMatcher) {
-      return new IsArrayContaining<>(elementMatcher);
+      return new HasItemInArray<>(elementMatcher);
   }
 
   /**
@@ -163,7 +163,6 @@ public class ArrayMatching {
   public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
       return new ArrayAsIterableMatcher<>(new IsIterableContainingInOrder<>(itemMatchers), itemMatchers, "");
   }
-
 
   private static <E> List<Matcher<? super E>> asEqualMatchers(E[] items) {
     final List<Matcher<? super E>> matchers = new ArrayList<>();
