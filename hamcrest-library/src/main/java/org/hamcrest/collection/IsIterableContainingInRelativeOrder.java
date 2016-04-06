@@ -19,7 +19,7 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
 
     @Override
     protected boolean matchesSafely(Iterable<? extends E> iterable, Description mismatchDescription) {
-        MatchSeriesInRelativeOrder<E> matchSeriesInRelativeOrder = new MatchSeriesInRelativeOrder<E>(matchers, mismatchDescription);
+        MatchSeriesInRelativeOrder<E> matchSeriesInRelativeOrder = new MatchSeriesInRelativeOrder<>(matchers, mismatchDescription);
         matchSeriesInRelativeOrder.processItems(iterable);
         return matchSeriesInRelativeOrder.isFinished();
     }
@@ -77,8 +77,9 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * @param items
      *     the items that must be contained within items provided by an examined {@link Iterable} in the same relative order
      */
+    @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(E... items) {
-        List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
+        List<Matcher<? super E>> matchers = new ArrayList<>();
         for (E item : items) {
             matchers.add(equalTo(item));
         }
@@ -96,6 +97,7 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      * @param itemMatchers
      *     the matchers that must be satisfied by the items provided by an examined {@link Iterable} in the same relative order
      */
+    @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(Matcher<? super E>... itemMatchers) {
         return containsInRelativeOrder(asList(itemMatchers));
     }
@@ -112,6 +114,6 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      *     an examined {@link Iterable} in the same relative order
      */
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(List<Matcher<? super E>> itemMatchers) {
-        return new IsIterableContainingInRelativeOrder<E>(itemMatchers);
+        return new IsIterableContainingInRelativeOrder<>(itemMatchers);
     }
 }
