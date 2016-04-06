@@ -1,9 +1,6 @@
 package org.hamcrest.beans;
 
-import org.hamcrest.AbstractMatcherTest;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.StringDescription;
+import org.hamcrest.*;
 import org.hamcrest.core.IsEqual;
 
 import java.beans.IntrospectionException;
@@ -11,6 +8,7 @@ import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -23,8 +21,8 @@ import static org.hamcrest.core.IsEqual.equalTo;
  */
 @SuppressWarnings("UnusedDeclaration")
 public class HasPropertyWithValueTest extends AbstractMatcherTest {
-  private final BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected");
-  private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected");
+  private final BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected", true);
+  private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected", false);
 
   private final BeanWithInfo beanWithInfo = new BeanWithInfo("with info");
 
@@ -34,9 +32,17 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   }
 
   public void testMatchesBeanWithoutInfoWithMatchedNamedProperty() {
-    assertMatches("with property", hasProperty("property", equalTo("is expected")), shouldMatch);
-    assertMismatchDescription("property 'property' was \"not expected\"", 
-                              hasProperty("property", equalTo("is expected")), shouldNotMatch);
+    final Matcher<BeanWithoutInfo> propertyMatcher = hasProperty("property", equalTo("is expected"));
+
+    assertMatches("with property", propertyMatcher, shouldMatch);
+    assertMismatchDescription("property 'property' was \"not expected\"", propertyMatcher, shouldNotMatch);
+  }
+
+  public void testMatchesBeanWithoutInfoWithMatchedNamedBooleanProperty() {
+    final Matcher<BeanWithoutInfo> booleanPropertyMatcher = hasProperty("booleanProperty", is(true));
+
+    assertMatches("with property", booleanPropertyMatcher, shouldMatch);
+    assertMismatchDescription("property 'booleanProperty' was <false>", booleanPropertyMatcher, shouldNotMatch);
   }
 
   public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
@@ -97,9 +103,11 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   public static class BeanWithoutInfo {
     private String property;
+    private final boolean booleanProperty;
 
-    public BeanWithoutInfo(String property) {
+    public BeanWithoutInfo(String property, boolean booleanProperty) {
       this.property = property;
+      this.booleanProperty = booleanProperty;
     }
 
     public String getProperty() {
@@ -109,6 +117,8 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     public void setProperty(String property) {
       this.property = property;
     }
+
+    public boolean isBooleanProperty() { return booleanProperty; }
 
     public void setWriteOnlyProperty(@SuppressWarnings("unused") float property) {
     }

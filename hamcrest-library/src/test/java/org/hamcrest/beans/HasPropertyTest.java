@@ -15,7 +15,7 @@ import static org.hamcrest.beans.HasProperty.hasProperty;
  */
 public final class HasPropertyTest {
 
-    private final HasPropertyWithValueTest.BeanWithoutInfo bean = new HasPropertyWithValueTest.BeanWithoutInfo("a bean");
+    private final HasPropertyWithValueTest.BeanWithoutInfo bean = new HasPropertyWithValueTest.BeanWithoutInfo("a bean", false);
 
     @Test public void
     copesWithNullsAndUnknownTypes() {
