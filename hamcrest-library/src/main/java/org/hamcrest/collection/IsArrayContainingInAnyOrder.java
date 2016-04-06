@@ -16,7 +16,7 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
     private final Collection<Matcher<? super E>> matchers;
 
     public IsArrayContainingInAnyOrder(Collection<Matcher<? super E>> matchers) {
-        this.iterableMatcher = new IsIterableContainingInAnyOrder<E>(matchers);
+        this.iterableMatcher = new IsIterableContainingInAnyOrder<>(matchers);
         this.matchers = matchers;
     }
 
@@ -56,6 +56,7 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by an entry in an examined array
      */
+    @SafeVarargs
     public static <E> Matcher<E[]> arrayContainingInAnyOrder(Matcher<? super E>... itemMatchers) {
         return arrayContainingInAnyOrder(Arrays.asList(itemMatchers));
     }
@@ -81,7 +82,7 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
      *     a list of matchers, each of which must be satisfied by an item provided by an examined array
      */
     public static <E> Matcher<E[]> arrayContainingInAnyOrder(Collection<Matcher<? super E>> itemMatchers) {
-        return new IsArrayContainingInAnyOrder<E>(itemMatchers);
+        return new IsArrayContainingInAnyOrder<>(itemMatchers);
     }
 
     /**
@@ -102,11 +103,12 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
      * @param items
      *     the items that must equal the entries of an examined array, in any order
      */
+    @SafeVarargs
     public static <E> Matcher<E[]> arrayContainingInAnyOrder(E... items) {
-      List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>();
+      List<Matcher<? super E>> matchers = new ArrayList<>();
       for (E item : items) {
           matchers.add(equalTo(item));
       }
-      return new IsArrayContainingInAnyOrder<E>(matchers);
+      return new IsArrayContainingInAnyOrder<>(matchers);
     }
 }
