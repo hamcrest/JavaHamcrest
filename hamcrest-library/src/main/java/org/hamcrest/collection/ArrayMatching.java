@@ -92,7 +92,7 @@ public class ArrayMatching {
    *     a list of matchers, each of which must be satisfied by an item provided by an examined array
    */
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(Collection<Matcher<? super E>> itemMatchers) {
-      return new IsArrayContainingInAnyOrder<>(itemMatchers);
+      return isArrayContainingInAnyOrder(itemMatchers);
   }
 
   /**
@@ -115,11 +115,11 @@ public class ArrayMatching {
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(E... items) {
-    List<Matcher<? super E>> matchers = new ArrayList<>();
+    final List<Matcher<? super E>> matchers = new ArrayList<>();
     for (E item : items) {
         matchers.add(equalTo(item));
     }
-    return new IsArrayContainingInAnyOrder<>(matchers);
+    return arrayContainingInAnyOrder(matchers);
   }
 
   /**
@@ -172,5 +172,9 @@ public class ArrayMatching {
    */
   public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
       return new IsArrayContainingInOrder<>(itemMatchers);
+  }
+
+  private static <E> ArrayMatcher<E> isArrayContainingInAnyOrder(Collection<Matcher<? super E>> matchers) {
+    return new ArrayMatcher<>(new IsIterableContainingInAnyOrder<>(matchers), matchers, "in any order");
   }
 }
