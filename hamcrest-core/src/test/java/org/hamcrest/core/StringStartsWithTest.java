@@ -43,4 +43,22 @@ public class StringStartsWithTest extends AbstractMatcherTest {
         assertMismatchDescription("was \"Something else\"", ignoreCase, "Something else");
     }
 
+    public void testStartsWithNullStringShouldThrowIllegalArgumentException() {
+        try {
+            startsWith(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+    }
+
+    public void testStartsWithNullStringIgnoringCaseShouldThrowIllegalArgumentException() {
+        try {
+            startsWithIgnoringCase(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+    }
+
 }

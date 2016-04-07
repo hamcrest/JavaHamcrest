@@ -42,4 +42,22 @@ public class StringEndsWithTest extends AbstractMatcherTest {
         assertDescription("a string ending with \"EXCERpt\" ignoring case", ignoringCase);
     }
 
+    public void testEndsWithNullStringShouldThrowIllegalArgumentException() {
+        try {
+            endsWith(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+    }
+
+    public void testEndsWithNullStringIgnoringCaseShouldThrowIllegalArgumentException() {
+        try {
+            endsWithIgnoringCase(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+    }
+
 }
