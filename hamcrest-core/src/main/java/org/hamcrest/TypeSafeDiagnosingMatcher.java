@@ -60,9 +60,14 @@ public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
     @SuppressWarnings("unchecked")
     @Override
     public final void describeMismatch(Object item, Description mismatchDescription) {
-      if (item == null || !expectedType.isInstance(item)) {
-        super.describeMismatch(item, mismatchDescription);
-      } else {
+      if (item == null) {
+        mismatchDescription.appendText("was null");
+    } else if (!expectedType.isInstance(item)) {
+      mismatchDescription.appendText("was ")
+            .appendText(item.getClass().getSimpleName())
+            .appendText(" ")
+            .appendValue(item);
+    } else {
         matchesSafely((T) item, mismatchDescription);
       }
     }
