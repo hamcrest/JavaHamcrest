@@ -5,7 +5,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
 
 /**
  * Decorates another Matcher, retaining the behaviour but allowing tests
@@ -46,7 +45,7 @@ public class Is<T> extends BaseMatcher<T> {
      * 
      */
     public static <T> Matcher<T> is(Matcher<T> matcher) {
-        return new Is<T>(matcher);
+        return new Is<>(matcher);
     }
 
     /**
@@ -69,8 +68,7 @@ public class Is<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
      * 
      */
-    public static <T> Matcher<T> isA(Class<T> type) {
-        final Matcher<T> typeMatcher = instanceOf(type);
-        return is(typeMatcher);
+    public static <T> Matcher<T> isA(Class<?> type) {
+        return is(IsInstanceOf.<T>instanceOf(type));
     }
 }
