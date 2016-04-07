@@ -12,6 +12,12 @@ package org.hamcrest;
  * new features and remain compatible with all Matcher implementations.
  * </p>
  * <p>
+ * When using Hamcrest, there is no guarantee as to how often <code>matches()</code> or
+ * <code>describeMismatch()</code> will be called, so the objects passed as
+ * <code>actual</code> arguments should not change when referenced. If you're testing a
+ * stream, a good practice is to collect the contents of the stream before matching.
+ * </p>
+ * <p>
  * N.B. Well designed matchers should be immutable.
  * </p>
  *
@@ -27,12 +33,12 @@ public interface Matcher<T> extends SelfDescribing {
      * (because of type erasure with Java generics). It is down to the implementations
      * to check the correct type.
      *
-     * @param item the object against which the matcher is evaluated.
+     * @param actual the object against which the matcher is evaluated.
      * @return <code>true</code> if <var>item</var> matches, otherwise <code>false</code>.
      *
      * @see BaseMatcher
      */
-    boolean matches(Object item);
+    boolean matches(Object actual);
     
     /**
      * Generate a description of why the matcher has not accepted the item.
@@ -41,11 +47,11 @@ public interface Matcher<T> extends SelfDescribing {
      * This method assumes that <code>matches(item)</code> is false, but 
      * will not check this.
      *
-     * @param item The item that the Matcher has rejected.
+     * @param actual The item that the Matcher has rejected.
      * @param mismatchDescription
      *     The description to be built or appended to.
      */
-    void describeMismatch(Object item, Description mismatchDescription);
+    void describeMismatch(Object actual, Description mismatchDescription);
 
     /**
      * This method simply acts a friendly reminder not to implement Matcher directly and
