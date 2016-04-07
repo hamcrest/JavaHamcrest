@@ -39,6 +39,6 @@ public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
      *     the matcher to apply to every item provided by the examined {@link Iterable}
      */
     public static <U> Matcher<Iterable<? extends U>> everyItem(final Matcher<U> itemMatcher) {
-        return new Every<U>(itemMatcher);
+        return new Every<>(itemMatcher);
     }
 }
