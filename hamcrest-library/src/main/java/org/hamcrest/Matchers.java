@@ -1,6 +1,9 @@
 package org.hamcrest;
 
 import org.hamcrest.collection.ArrayMatching;
+import org.hamcrest.core.StringRegularExpression;
+
+import java.util.regex.Pattern;
 
 @SuppressWarnings("unused")
 public class Matchers {
@@ -534,6 +537,36 @@ public class Matchers {
    */
   public static org.hamcrest.Matcher<java.lang.String> endsWithIgnoringCase(java.lang.String suffix) {
     return org.hamcrest.core.StringEndsWith.endsWithIgnoringCase(suffix);
+  }
+
+  /**
+   * Validate a string with a {@link java.util.regex.Pattern}.
+   *
+   * <pre>
+   * assertThat(&quot;abc&quot;, matchesRegex(Pattern.compile(&quot;&circ;[a-z]$&quot;));
+   * </pre>
+   *
+   * @param pattern
+   *            the pattern to be used.
+   * @return The matcher.
+   */
+  public static Matcher<String> matchesRegex(Pattern pattern) {
+    return StringRegularExpression.matchesRegex(pattern);
+  }
+
+  /**
+   * Validate a string with a regex.
+   *
+   * <pre>
+   * assertThat(&quot;abc&quot;, matchesRegex(&quot;&circ;[a-z]+$&quot;));
+   * </pre>
+   *
+   * @param regex
+   *            The regex to be used for the validation.
+   * @return The matcher.
+   */
+  public static Matcher<String> matchesRegex(String regex) {
+    return StringRegularExpression.matchesRegex(Pattern.compile(regex));
   }
 
   /**
