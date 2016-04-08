@@ -3,6 +3,7 @@ package org.hamcrest;
 import org.hamcrest.collection.ArrayMatching;
 import org.hamcrest.core.IsIterableContaining;
 import org.hamcrest.core.StringRegularExpression;
+import org.hamcrest.text.IsEqualCompressingWhiteSpace;
 
 import java.util.regex.Pattern;
 
@@ -467,7 +468,7 @@ public class Matchers {
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> containsString(java.lang.String substring) {
+  public static Matcher<java.lang.String> containsString(java.lang.String substring) {
     return org.hamcrest.core.StringContains.containsString(substring);
   }
 
@@ -480,7 +481,7 @@ public class Matchers {
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> containsStringIgnoringCase(java.lang.String substring) {
+  public static Matcher<java.lang.String> containsStringIgnoringCase(java.lang.String substring) {
     return org.hamcrest.core.StringContains.containsStringIgnoringCase(substring);
   }
 
@@ -495,7 +496,7 @@ public class Matchers {
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> startsWith(java.lang.String prefix) {
+  public static Matcher<java.lang.String> startsWith(java.lang.String prefix) {
     return org.hamcrest.core.StringStartsWith.startsWith(prefix);
   }
 
@@ -510,7 +511,7 @@ public class Matchers {
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> startsWithIgnoringCase(java.lang.String prefix) {
+  public static Matcher<java.lang.String> startsWithIgnoringCase(java.lang.String prefix) {
     return org.hamcrest.core.StringStartsWith.startsWithIgnoringCase(prefix);
   }
 
@@ -523,7 +524,7 @@ public class Matchers {
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> endsWith(java.lang.String suffix) {
+  public static Matcher<java.lang.String> endsWith(java.lang.String suffix) {
     return org.hamcrest.core.StringEndsWith.endsWith(suffix);
   }
 
@@ -536,7 +537,7 @@ public class Matchers {
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> endsWithIgnoringCase(java.lang.String suffix) {
+  public static Matcher<java.lang.String> endsWithIgnoringCase(java.lang.String suffix) {
     return org.hamcrest.core.StringEndsWith.endsWithIgnoringCase(suffix);
   }
 
@@ -1367,8 +1368,17 @@ public class Matchers {
    * @param expectedString
    *     the expected value of matched strings
    */
-  public static org.hamcrest.Matcher<java.lang.String> equalToIgnoringCase(java.lang.String expectedString) {
+  public static Matcher<java.lang.String> equalToIgnoringCase(java.lang.String expectedString) {
     return org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase(expectedString);
+  }
+
+  /**
+   * @deprecated {@link #equalToCompressingWhiteSpace(String)}
+   * @param expectedString
+   *     the expected value of matched strings
+   */
+  public static Matcher<java.lang.String> equalToIgnoringWhiteSpace(java.lang.String expectedString) {
+    return equalToCompressingWhiteSpace(expectedString);
   }
 
   /**
@@ -1381,12 +1391,12 @@ public class Matchers {
    * </ul>
    * For example:
    * <pre>assertThat("   my\tfoo  bar ", equalToIgnoringWhiteSpace(" my  foo bar"))</pre>
-   * 
+   *
    * @param expectedString
    *     the expected value of matched strings
    */
-  public static org.hamcrest.Matcher<java.lang.String> equalToIgnoringWhiteSpace(java.lang.String expectedString) {
-    return org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace(expectedString);
+  public static Matcher<java.lang.String> equalToCompressingWhiteSpace(java.lang.String expectedString) {
+    return IsEqualCompressingWhiteSpace.equalToCompressingWhiteSpace(expectedString);
   }
 
   /**
@@ -1395,7 +1405,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat(((String)null), is(emptyOrNullString()))</pre>
    */
-  public static org.hamcrest.Matcher<java.lang.String> emptyOrNullString() {
+  public static Matcher<java.lang.String> emptyOrNullString() {
     return org.hamcrest.text.IsEmptyString.emptyOrNullString();
   }
 
@@ -1404,7 +1414,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat("", is(emptyString()))</pre>
    */
-  public static org.hamcrest.Matcher<java.lang.String> emptyString() {
+  public static Matcher<java.lang.String> emptyString() {
     return org.hamcrest.text.IsEmptyString.emptyString();
   }
 
@@ -1417,7 +1427,7 @@ public class Matchers {
    * @deprecated use is(emptyOrNullString()) instead
    */
   @SuppressWarnings("deprecation")
-  public static org.hamcrest.Matcher<java.lang.String> isEmptyOrNullString() {
+  public static Matcher<java.lang.String> isEmptyOrNullString() {
     return org.hamcrest.text.IsEmptyString.isEmptyOrNullString();
   }
 
@@ -1429,7 +1439,7 @@ public class Matchers {
    * @deprecated use is(emptyString()) instead
    */
   @SuppressWarnings("deprecation")
-  public static org.hamcrest.Matcher<java.lang.String> isEmptyString() {
+  public static Matcher<java.lang.String> isEmptyString() {
     return org.hamcrest.text.IsEmptyString.isEmptyString();
   }
 
@@ -1439,7 +1449,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat(((String)null), is(blankOrNullString()))</pre>
    */
-  public static org.hamcrest.Matcher<java.lang.String> blankOrNullString() {
+  public static Matcher<java.lang.String> blankOrNullString() {
     return org.hamcrest.text.IsBlankString.blankOrNullString();
   }
 
@@ -1449,7 +1459,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat("  ", is(blankString()))</pre>
    */
-  public static org.hamcrest.Matcher<java.lang.String> blankString() {
+  public static Matcher<java.lang.String> blankString() {
     return org.hamcrest.text.IsBlankString.blankString();
   }
 
@@ -1457,7 +1467,7 @@ public class Matchers {
    * Creates a matcher of {@link java.lang.String} that matches when the examined string
    * exactly matches the given {@link java.util.regex.Pattern}.
    */
-  public static org.hamcrest.Matcher<java.lang.String> matchesPattern(java.util.regex.Pattern pattern) {
+  public static Matcher<java.lang.String> matchesPattern(java.util.regex.Pattern pattern) {
     return org.hamcrest.text.MatchesPattern.matchesPattern(pattern);
   }
 
@@ -1465,7 +1475,7 @@ public class Matchers {
    * Creates a matcher of {@link java.lang.String} that matches when the examined string
    * exactly matches the given regular expression, treated as a {@link java.util.regex.Pattern}.
    */
-  public static org.hamcrest.Matcher<java.lang.String> matchesPattern(java.lang.String regex) {
+  public static Matcher<java.lang.String> matchesPattern(java.lang.String regex) {
     return org.hamcrest.text.MatchesPattern.matchesPattern(regex);
   }
 
@@ -1479,7 +1489,7 @@ public class Matchers {
    * @param substrings
    *     the substrings that must be contained within matching strings
    */
-  public static org.hamcrest.Matcher<java.lang.String> stringContainsInOrder(java.lang.Iterable<java.lang.String> substrings) {
+  public static Matcher<java.lang.String> stringContainsInOrder(java.lang.Iterable<java.lang.String> substrings) {
     return org.hamcrest.text.StringContainsInOrder.stringContainsInOrder(substrings);
   }
 
@@ -1493,7 +1503,7 @@ public class Matchers {
    * @param substrings
    *     the substrings that must be contained within matching strings
    */
-  public static org.hamcrest.Matcher<java.lang.String> stringContainsInOrder(java.lang.String... substrings) {
+  public static Matcher<java.lang.String> stringContainsInOrder(java.lang.String... substrings) {
     return org.hamcrest.text.StringContainsInOrder.stringContainsInOrder(substrings);
   }
 
@@ -1617,7 +1627,7 @@ public class Matchers {
    * @param valueMatcher
    *     matcher for the value at the specified xpath
    */
-  public static org.hamcrest.Matcher<org.w3c.dom.Node> hasXPath(java.lang.String xPath, org.hamcrest.Matcher<java.lang.String> valueMatcher) {
+  public static org.hamcrest.Matcher<org.w3c.dom.Node> hasXPath(java.lang.String xPath, Matcher<java.lang.String> valueMatcher) {
     return org.hamcrest.xml.HasXPath.hasXPath(xPath, valueMatcher);
   }
 
@@ -1635,7 +1645,7 @@ public class Matchers {
    * @param valueMatcher
    *     matcher for the value at the specified xpath
    */
-  public static org.hamcrest.Matcher<org.w3c.dom.Node> hasXPath(java.lang.String xPath, javax.xml.namespace.NamespaceContext namespaceContext, org.hamcrest.Matcher<java.lang.String> valueMatcher) {
+  public static org.hamcrest.Matcher<org.w3c.dom.Node> hasXPath(java.lang.String xPath, javax.xml.namespace.NamespaceContext namespaceContext, Matcher<java.lang.String> valueMatcher) {
     return org.hamcrest.xml.HasXPath.hasXPath(xPath, namespaceContext, valueMatcher);
   }
 
