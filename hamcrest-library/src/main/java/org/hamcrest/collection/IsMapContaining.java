@@ -56,7 +56,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      *     the value matcher that, in combination with the keyMatcher, must be satisfied by at least one entry
      */
     public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
-        return new IsMapContaining<K,V>(keyMatcher, valueMatcher);
+        return new IsMapContaining<>(keyMatcher, valueMatcher);
     }
 
     /**
@@ -72,7 +72,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      *     the value that, in combination with the key, must be describe at least one entry
      */
     public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(K key, V value) {
-        return new IsMapContaining<K,V>(equalTo(key), equalTo(value));
+        return new IsMapContaining<>(equalTo(key), equalTo(value));
     }
     
     /**
@@ -85,7 +85,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      *     the matcher that must be satisfied by at least one key
      */
     public static <K> Matcher<Map<? extends K, ?>> hasKey(Matcher<? super K> keyMatcher) {
-        return new IsMapContaining<K,Object>(keyMatcher, anything());
+        return new IsMapContaining<>(keyMatcher, anything());
     }
 
     /**
@@ -98,7 +98,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      *     the key that satisfying maps must contain
      */
     public static <K> Matcher<Map<? extends K, ?>> hasKey(K key) {
-        return new IsMapContaining<K,Object>(equalTo(key), anything());
+        return new IsMapContaining<>(equalTo(key), anything());
     }
 
     /**
@@ -111,7 +111,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      *     the matcher that must be satisfied by at least one value
      */
     public static <V> Matcher<Map<?, ? extends V>> hasValue(Matcher<? super V> valueMatcher) {
-        return new IsMapContaining<Object,V>(anything(), valueMatcher);
+        return new IsMapContaining<>(anything(), valueMatcher);
     }
 
     /**
@@ -124,6 +124,6 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      *     the value that satisfying maps must contain
      */
     public static <V> Matcher<Map<?, ? extends V>> hasValue(V value) {
-        return new IsMapContaining<Object,V>(anything(), equalTo(value));
+        return new IsMapContaining<>(anything(), equalTo(value));
     }
 }
