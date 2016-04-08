@@ -7,7 +7,7 @@ import static org.hamcrest.text.IsEqualCompressingWhiteSpace.equalToCompressingW
 
 public class IsEqualCompressingWhiteSpaceTest extends AbstractMatcherTest {
 
-    private final Matcher<String> matcher = equalToCompressingWhiteSpace("Hello World   how\n are we? ");
+    private final Matcher<String> matcher = equalToCompressingWhiteSpace(" Hello World   how\n are we? ");
 
     @Override
     protected Matcher<?> createMatcher() {
@@ -38,7 +38,7 @@ public class IsEqualCompressingWhiteSpaceTest extends AbstractMatcherTest {
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("a string equal to \"Hello World   how\\n are we? \" compressing white space",
+        assertDescription("a string equal to \" Hello World   how\\n are we? \" compressing white space",
                         matcher);
     }
 }

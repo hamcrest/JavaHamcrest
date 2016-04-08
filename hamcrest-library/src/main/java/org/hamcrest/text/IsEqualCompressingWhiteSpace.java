@@ -25,7 +25,7 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
 
     @Override
     public boolean matchesSafely(String item) {
-        return stripSpace(string).equals(stripSpace(item));
+        return stripSpaces(string).equals(stripSpaces(item));
     }
     
     @Override
@@ -40,22 +40,8 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
                 .appendText(" compressing white space");
     }
 
-    public String stripSpace(String toBeStripped) {
-        final StringBuilder result = new StringBuilder();
-        boolean lastWasSpace = true;
-        for (int i = 0; i < toBeStripped.length(); i++) {
-            char c = toBeStripped.charAt(i);
-            if (isWhitespace(c)) {
-                if (!lastWasSpace) {
-                    result.append(' ');
-                }
-                lastWasSpace = true;
-            } else {
-                result.append(c);
-                lastWasSpace = false;
-            }
-        }
-        return result.toString().trim();
+    public String stripSpaces(String toBeStripped) {
+        return toBeStripped.replaceAll("\\s+", " ").trim();
     }
 
     /**
