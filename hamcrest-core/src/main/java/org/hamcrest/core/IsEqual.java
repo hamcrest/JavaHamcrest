@@ -84,7 +84,7 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * 
      */
     public static <T> Matcher<T> equalTo(T operand) {
-        return new IsEqual<T>(operand);
+        return new IsEqual<>(operand);
     }
 
     /**
@@ -92,6 +92,6 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * compared to be of the same static type.
      */
     public static Matcher<Object> equalToObject(Object operand) {
-        return new IsEqual<Object>(operand);
+        return new IsEqual<>(operand);
     }
 }
