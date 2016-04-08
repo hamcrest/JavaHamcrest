@@ -78,6 +78,20 @@ public final class IsEqualTest {
     }
 
     @Test public void
+    comparesTheElementsOfArraysWithNulls() {
+        String[] s1 = {"a", null, "b"};
+        String[] s2 = {"a", null, "b"};
+        String[] s3 = {"c", "d"};
+        String[] s4 = {"a", "b", "c", "d"};
+
+        final Matcher<String[]> matcher = equalTo(s1);
+        assertMatches(matcher, s1);
+        assertMatches(matcher, s2);
+        assertDoesNotMatch(matcher, s3);
+        assertDoesNotMatch(matcher, s4);
+    }
+
+    @Test public void
     comparesTheElementsOfAnArrayOfPrimitiveTypes() {
         int[] i1 = new int[]{1, 2};
         int[] i2 = new int[]{1, 2};
