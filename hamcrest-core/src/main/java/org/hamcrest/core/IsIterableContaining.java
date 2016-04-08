@@ -10,10 +10,10 @@ import java.util.List;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
+public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
     private final Matcher<? super T> elementMatcher;
 
-    public IsCollectionContaining(Matcher<? super T> elementMatcher) {
+    public IsIterableContaining(Matcher<? super T> elementMatcher) {
         this.elementMatcher = elementMatcher;
     }
 
@@ -67,7 +67,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      *     the matcher to apply to items provided by the examined {@link Iterable}
      */
     public static <T> Matcher<Iterable<? super T>> hasItem(Matcher<? super T> itemMatcher) {
-        return new IsCollectionContaining<>(itemMatcher);
+        return new IsIterableContaining<>(itemMatcher);
     }
 
     /**
@@ -83,7 +83,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      */
     public static <T> Matcher<Iterable<? super T>> hasItem(T item) {
         // Doesn't forward to hasItem() method so compiler can sort out generics.
-        return new IsCollectionContaining<>(equalTo(item));
+        return new IsIterableContaining<>(equalTo(item));
     }
 
     /**
@@ -103,7 +103,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
         
         for (Matcher<? super T> elementMatcher : itemMatchers) {
           // Doesn't forward to hasItem() method so compiler can sort out generics.
-          all.add(new IsCollectionContaining<>(elementMatcher));
+          all.add(new IsIterableContaining<>(elementMatcher));
         }
         
         return allOf(all);

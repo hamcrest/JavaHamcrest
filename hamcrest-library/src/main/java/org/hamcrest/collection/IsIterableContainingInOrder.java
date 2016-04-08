@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.collection.ArrayMatching.asEqualMatchers;
 
 public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
     private final List<Matcher<? super E>> matchers;
@@ -94,12 +94,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      */
     @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> contains(E... items) {
-        List<Matcher<? super E>> matchers = new ArrayList<>();
-        for (E item : items) {
-            matchers.add(equalTo(item));
-        }
-
-        return contains(matchers);
+        return contains(asEqualMatchers(items));
     }
 
     /**

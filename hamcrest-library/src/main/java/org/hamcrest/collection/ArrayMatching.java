@@ -164,7 +164,7 @@ public class ArrayMatching {
       return new ArrayAsIterableMatcher<>(new IsIterableContainingInOrder<>(itemMatchers), itemMatchers, "");
   }
 
-  private static <E> List<Matcher<? super E>> asEqualMatchers(E[] items) {
+  public static <E> List<Matcher<? super E>> asEqualMatchers(E[] items) {
     final List<Matcher<? super E>> matchers = new ArrayList<>();
     for (E item : items) {
       matchers.add(equalTo(item));
