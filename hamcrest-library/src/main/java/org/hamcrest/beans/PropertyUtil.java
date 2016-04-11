@@ -2,6 +2,7 @@ package org.hamcrest.beans;
 
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
+import java.beans.MethodDescriptor;
 import java.beans.PropertyDescriptor;
 
 /**
@@ -31,9 +32,30 @@ public class PropertyUtil {
         return null;
     }
 
+    public static PropertyDescriptor getPropertyDescriptor4Boolean(String propertyName, Object fromObj) throws IllegalArgumentException {
+        try {
+            for (MethodDescriptor method : Introspector.getBeanInfo(fromObj.getClass(), Object.class).getMethodDescriptors()) {
+                if (method.getName().equals(getBooleanGetterName4Property(propertyName))) {
+                    return new PropertyDescriptor(propertyName, method.getMethod(), null);
+                }
+            }
+
+            return null;
+        } catch (IntrospectionException e) {
+            return null;
+        }
+    }
+
+    public static String getBooleanGetterName4Property(String propertyName) {
+        if(propertyName == null || propertyName.length() == 0) {
+            return null;
+        }
+        return "is" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
+    }
+
     /**
      * Returns all the property descriptors for the class associated with the given object
-     * 
+     *
      * @param fromObj Use the class of this object
      * @param stopClass Don't include any properties from this ancestor class upwards.
      * @return Property descriptors

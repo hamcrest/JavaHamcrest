@@ -94,9 +94,8 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         PropertyDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, bean);
         if (property != null) {
             if (property.getReadMethod() == null && property.getPropertyType().equals(Boolean.class)) {
-                String booleanGetter = "is" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
                 for(Method method : bean.getClass().getDeclaredMethods()) {
-                    if (method.getName().equals(booleanGetter)) {
+                    if (method.getName().equals(PropertyUtil.getBooleanGetterName4Property(propertyName))) {
                         try {
                             property.setReadMethod(method);
                         } catch (IntrospectionException e) {
@@ -106,8 +105,11 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
                 }
             }
         } else {
-            mismatch.appendText("No property \"" + propertyName + "\"");
-            return notMatched();
+            property = PropertyUtil.getPropertyDescriptor4Boolean(propertyName, bean);
+            if (property == null) {
+                mismatch.appendText("No property \"" + propertyName + "\"");
+                return notMatched();
+            }
         }
 
         return matched(property, mismatch);

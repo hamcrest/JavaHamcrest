@@ -1,14 +1,14 @@
 package org.hamcrest.beans;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
+import java.beans.SimpleBeanInfo;
+
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 import org.hamcrest.core.IsEqual;
-
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
-import java.beans.SimpleBeanInfo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
@@ -35,24 +35,24 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   public void testMatchesBeanWithoutInfoWithMatchedNamedProperty() {
     assertMatches("with property", hasProperty("property", equalTo("is expected")), shouldMatch);
-    assertMismatchDescription("property 'property' was \"not expected\"", 
+    assertMismatchDescription("property 'property' was \"not expected\"",
                               hasProperty("property", equalTo("is expected")), shouldNotMatch);
   }
 
   public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
     assertMatches("with bean info", hasProperty("property", equalTo("with info")), beanWithInfo);
-    assertMismatchDescription("property 'property' was \"with info\"", 
+    assertMismatchDescription("property 'property' was \"with info\"",
         hasProperty("property", equalTo("without info")), beanWithInfo);
   }
 
   public void testDoesNotMatchBeanWithoutInfoOrMatchedNamedProperty() {
-    assertMismatchDescription("No property \"nonExistentProperty\"", 
+    assertMismatchDescription("No property \"nonExistentProperty\"",
                               hasProperty("nonExistentProperty", anything()), shouldNotMatch);
    }
 
   public void testDoesNotMatchWriteOnlyProperty() {
     assertMismatchDescription("property \"writeOnlyProperty\" is not readable",
-                              hasProperty("writeOnlyProperty", anything()), shouldNotMatch); 
+                              hasProperty("writeOnlyProperty", anything()), shouldNotMatch);
   }
 
   public void testDescribeTo() {
@@ -62,7 +62,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   public void testMatchesPropertyAndValue() {
     assertMatches("property with value", hasProperty("property", anything()), beanWithInfo);
   }
-  
+
   public void testDoesNotWriteMismatchIfPropertyMatches() {
     Description description = new StringDescription();
     hasProperty( "property", anything()).describeMismatch(beanWithInfo, description);
@@ -91,8 +91,38 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     assertThat(new X(), HasPropertyWithValue.hasProperty("test", IsEqual.equalTo(1)));
   }
 
+  public void testCanAccessPrimitiveBooleanProperty() {
+    class L implements IL {
+      @Override
+      public boolean isTest() {
+        return true;
+      }
+    }
+
+    assertThat(new L(), HasPropertyWithValue.hasProperty("test", IsEqual.equalTo(true)));
+  }
+
+  public void testCanAccessBooleanProperty() {
+    class C implements IC {
+      @Override
+      public Boolean isTest() {
+        return new Boolean(true);
+      }
+    }
+
+    assertThat(new C(), HasPropertyWithValue.hasProperty("test", IsEqual.equalTo(true)));
+  }
+
   interface IX {
     int getTest();
+  }
+
+  interface IL {
+    boolean isTest();
+  }
+
+  interface IC {
+    Boolean isTest();
   }
 
   public static class BeanWithoutInfo {
@@ -135,8 +165,8 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     @Override
     public PropertyDescriptor[] getPropertyDescriptors() {
       try {
-        return new PropertyDescriptor[] { 
-            new PropertyDescriptor("property", BeanWithInfo.class, "property", null) 
+        return new PropertyDescriptor[] {
+            new PropertyDescriptor("property", BeanWithInfo.class, "property", null)
           };
       } catch (IntrospectionException e) {
         throw new AssertionError("Introspection exception", e);
