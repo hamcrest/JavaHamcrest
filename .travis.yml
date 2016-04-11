@@ -5,8 +5,5 @@ jdk:
   - oraclejdk7
   - oraclejdk8
 
-addons:
-    hostname: dummy
-
 script:
   - ./gradlew clean build javadoc
