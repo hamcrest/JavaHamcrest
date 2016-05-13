@@ -72,7 +72,7 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
     }
 
     private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, PropertyDescriptor[] descriptors) {
-        List<PropertyMatcher> result = new ArrayList<PropertyMatcher>(descriptors.length);
+        List<PropertyMatcher> result = new ArrayList<>(descriptors.length);
         for (PropertyDescriptor propertyDescriptor : descriptors) {
             result.add(new PropertyMatcher(propertyDescriptor, bean));
         }
@@ -80,7 +80,7 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
     }
 
     private static Set<String> propertyNamesFrom(PropertyDescriptor[] descriptors) {
-        HashSet<String> result = new HashSet<String>();
+        HashSet<String> result = new HashSet<>();
         for (PropertyDescriptor propertyDescriptor : descriptors) {
             result.add(propertyDescriptor.getDisplayName());
         }
@@ -134,7 +134,7 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
      *     the bean against which examined beans are compared
      */
     public static <T> Matcher<T> samePropertyValuesAs(T expectedBean) {
-        return new SamePropertyValuesAs<T>(expectedBean);
+        return new SamePropertyValuesAs<>(expectedBean);
     }
 
 }
