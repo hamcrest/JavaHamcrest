@@ -51,9 +51,8 @@ public abstract class AbstractMatcherTest extends TestCase {
   public static void assertUnknownTypeSafe(Matcher<?> matcher) {
       try {
           matcher.matches(new UnknownType());
-      }
-      catch (Exception e) {
-          Assert.fail("Matcher was not unknown type safe");
+      } catch (Exception e) {
+          Assert.fail("Matcher was not unknown type safe, because: " + e);
       }
   }
 
@@ -68,7 +67,7 @@ public abstract class AbstractMatcherTest extends TestCase {
   }
 
   public void testCopesWithUnknownTypes() {
-    assertUnknownTypeSafe(createMatcher());
+    createMatcher().matches(new UnknownType());
   }
 
   public static class UnknownType {

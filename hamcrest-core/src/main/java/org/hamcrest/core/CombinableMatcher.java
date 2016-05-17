@@ -28,15 +28,15 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
   }
 
   public CombinableMatcher<T> and(Matcher<? super T> other) {
-    return new CombinableMatcher<T>(new AllOf<T>(templatedListWith(other)));
+    return new CombinableMatcher<>(new AllOf<>(templatedListWith(other)));
   }
 
   public CombinableMatcher<T> or(Matcher<? super T> other) {
-    return new CombinableMatcher<T>(new AnyOf<T>(templatedListWith(other)));
+    return new CombinableMatcher<>(new AnyOf<>(templatedListWith(other)));
   }
 
   private ArrayList<Matcher<? super T>> templatedListWith(Matcher<? super T> other) {
-    ArrayList<Matcher<? super T>> matchers = new ArrayList<Matcher<? super T>>();
+    ArrayList<Matcher<? super T>> matchers = new ArrayList<>();
     matchers.add(matcher);
     matchers.add(other);
     return matchers;
@@ -48,7 +48,7 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * <pre>assertThat("fab", both(containsString("a")).and(containsString("b")))</pre>
    */
   public static <LHS> CombinableBothMatcher<LHS> both(Matcher<? super LHS> matcher) {
-    return new CombinableBothMatcher<LHS>(matcher);
+    return new CombinableBothMatcher<>(matcher);
   }
   
   public static final class CombinableBothMatcher<X> {
@@ -57,7 +57,7 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
         this.first = matcher;
     }
     public CombinableMatcher<X> and(Matcher<? super X> other) {
-      return new CombinableMatcher<X>(first).and(other);
+      return new CombinableMatcher<>(first).and(other);
     }
   }
 
@@ -67,7 +67,7 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * <pre>assertThat("fan", either(containsString("a")).or(containsString("b")))</pre>
    */
   public static <LHS> CombinableEitherMatcher<LHS> either(Matcher<? super LHS> matcher) {
-    return new CombinableEitherMatcher<LHS>(matcher);
+    return new CombinableEitherMatcher<>(matcher);
   }
   
   public static final class CombinableEitherMatcher<X> {
@@ -76,7 +76,7 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
         this.first = matcher;
     }
     public CombinableMatcher<X> or(Matcher<? super X> other) {
-      return new CombinableMatcher<X>(first).or(other);
+      return new CombinableMatcher<>(first).or(other);
     }
   }
 }
