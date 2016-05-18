@@ -11,11 +11,11 @@ import java.util.Set;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.AbstractMatcherTest.*;
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
-import static org.hamcrest.core.IsCollectionContaining.hasItems;
+import static org.hamcrest.core.IsIterableContaining.hasItem;
+import static org.hamcrest.core.IsIterableContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public final class IsCollectionContainingTest {
+public final class IsIterableContainingTest {
     
     @Test public void
     copesWithNullsAndUnknownTypes() {
@@ -52,11 +52,11 @@ public final class IsCollectionContainingTest {
     
     @Test public void
     canMatchItemWhenCollectionHoldsSuperclass() { // Issue 24
-        final Set<Number> s = new HashSet<Number>();
+        final Set<Number> s = new HashSet<>();
         s.add(2);
 
-        assertMatches(new IsCollectionContaining<Number>(new IsEqual<Number>(2)), s);
-        assertMatches(IsCollectionContaining.hasItem(2), s);
+        assertMatches(new IsIterableContaining<>(new IsEqual<Number>(2)), s);
+        assertMatches(IsIterableContaining.hasItem(2), s);
     }
 
     @SuppressWarnings("unchecked")

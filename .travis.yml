@@ -1,5 +1,13 @@
 language: java
 
+# workaround for broken openjdk7
+sudo: required # for setting hostname
+addons:
+  hostname: localhost
+before_install:
+- cat /etc/hosts
+# end
+
 jdk:
   - openjdk7
   - oraclejdk7

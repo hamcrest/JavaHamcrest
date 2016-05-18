@@ -5,20 +5,29 @@ import org.junit.Test;
 
 import static org.hamcrest.AbstractMatcherTest.assertDescription;
 import static org.hamcrest.AbstractMatcherTest.assertMatches;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsAnything.anything;
 
 public final class IsAnythingTest {
 
     private final Matcher<Object> matcher = anything();
 
-    private static class CustomThing { }
-    
-    @Test public void
+    private static class CustomThing {
+    }
+
+    @Test
+    public void
     alwaysEvaluatesToTrue() {
         assertMatches("didn't match null", matcher, null);
         assertMatches("didn't match Object", matcher, new Object());
         assertMatches("didn't match custom object", matcher, new CustomThing());
         assertMatches("didn't match String", matcher, "hi");
+    }
+
+    @Test
+    public void compilesWithoutTypeWarnings() {
+        assertThat(new CustomThing(), is(anything()));
     }
 
     @Test public void

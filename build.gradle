@@ -2,6 +2,7 @@ import static org.gradle.api.JavaVersion.VERSION_1_7
 
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'osgi'
 apply plugin: 'signing'
 
 sourceCompatibility = VERSION_1_7
@@ -36,11 +37,21 @@ sourceSets {
     }
 }
 
+test {
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
 jar {
     manifest {
         attributes 'Implementation-Title': 'hamcrest-all',
                 'Implementation-Vendor': 'hamcrest.org',
                 'Implementation-Version': version
+        instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
+                                         javax.xml.xpath; resolution:=optional,
+                                         org.w3c.dom; resolution:=optional,
+                                         *'''
     }
 }
 
@@ -116,5 +127,5 @@ uploadArchives {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.4'
+    gradleVersion = '2.8'
 }

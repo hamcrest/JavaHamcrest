@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.hamcrest.AbstractMatcherTest.*;
 import static org.hamcrest.core.StringContains.containsString;
 
@@ -37,7 +38,7 @@ public final class EveryTest {
 
     @Test public void
     describesAMismatch() {
-        assertMismatchDescription("an item was \"BXB\"", matcher, asList("BXB"));
+        assertMismatchDescription("an item was \"BXB\"", matcher, singletonList("BXB"));
     }
 }
 

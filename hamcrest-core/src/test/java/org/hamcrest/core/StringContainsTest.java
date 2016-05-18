@@ -40,4 +40,6 @@ public class StringContainsTest extends AbstractMatcherTest {
         assertMismatchDescription("was \"Something else\"", ignoringCase, "Something else");
         assertDescription("a string containing \"ExCert\" ignoring case", ignoringCase);
     }
+
+
 }

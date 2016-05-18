@@ -66,8 +66,9 @@ public abstract class BaseDescription implements Description {
         }
     }
 
+    @SafeVarargs
     @Override
-    public <T> Description appendValueList(String start, String separator, String end, T... values) {
+    public final <T> Description appendValueList(String start, String separator, String end, T... values) {
         return appendValueList(start, separator, end, Arrays.asList(values));
     }
     
@@ -77,7 +78,7 @@ public abstract class BaseDescription implements Description {
     }
     
     private <T> Description appendValueList(String start, String separator, String end, Iterator<T> values) {
-        return appendList(start, separator, end, new SelfDescribingValueIterator<T>(values));
+        return appendList(start, separator, end, new SelfDescribingValueIterator<>(values));
     }
     
     @Override
@@ -136,6 +137,9 @@ public abstract class BaseDescription implements Description {
                 break;
             case '\t':
                 append("\\t");
+                break;
+            case '\\':
+                append("\\\\");
                 break;
             default:
                 append(ch);

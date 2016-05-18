@@ -18,7 +18,7 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
 
     public IsEqualIgnoringWhiteSpace(String string) {
         if (string == null) {
-            throw new IllegalArgumentException("Non-null value required by IsEqualIgnoringCase()");
+            throw new IllegalArgumentException("Non-null value required");
         }
         this.string = string;
     }
@@ -35,9 +35,9 @@ public class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher<String> {
     
     @Override
     public void describeTo(Description description) {
-        description.appendText("equalToIgnoringWhiteSpace(")
+        description.appendText("a string equal to ")
                 .appendValue(string)
-                .appendText(")");
+                .appendText(" ignoring white space");
     }
 
     public String stripSpace(String toBeStripped) {

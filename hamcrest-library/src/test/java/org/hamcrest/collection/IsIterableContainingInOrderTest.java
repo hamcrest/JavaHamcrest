@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -22,7 +23,7 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     }
 
     public void testMatchingSingleItemIterable() throws Exception {
-        assertMatches("Single item iterable", contains(1), asList(1));
+        assertMatches("Single item iterable", contains(1), singletonList(1));
     }
 
     public void testMatchingMultipleItemIterable() throws Exception {
@@ -34,12 +35,11 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchWithFewerElementsThanExpected() throws Exception {
-        List<WithValue> valueList = asList(make(1), make(2));
-        assertMismatchDescription("no item was value with <3>", contains123, valueList);
+        assertMismatchDescription("no item was value with <3>", contains123, asList(make(1), make(2)));
     }
 
     public void testDoesNotMatchIfSingleItemMismatches() throws Exception {
-        assertMismatchDescription("item 0: value was <3>", contains(value(4)), asList(make(3)));
+        assertMismatchDescription("item 0: value was <3>", contains(value(4)), singletonList(make(3)));
     }
 
     public void testDoesNotMatchIfOneOfMultipleItemsMismatch() throws Exception {

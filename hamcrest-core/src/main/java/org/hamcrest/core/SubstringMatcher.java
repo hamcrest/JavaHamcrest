@@ -16,6 +16,9 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
         this.relationship = relationship;
         this.ignoringCase = ignoringCase;
         this.substring = substring;
+        if (null == substring) {
+            throw new IllegalArgumentException("missing substring");
+        }
     }
 
     @Override

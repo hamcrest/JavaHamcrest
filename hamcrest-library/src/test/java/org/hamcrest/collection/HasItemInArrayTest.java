@@ -3,9 +3,10 @@ package org.hamcrest.collection;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
+import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.collection.ArrayMatching.hasItemInArray;
 
-public class IsArrayContainingTest extends AbstractMatcherTest {
+public class HasItemInArrayTest extends AbstractMatcherTest {
 
     @Override
     protected Matcher<?> createMatcher() {
@@ -22,6 +23,9 @@ public class IsArrayContainingTest extends AbstractMatcherTest {
                 hasItemInArray("a"), new String[]{"b", "c"});
         assertDoesNotMatch("should not matches empty array",
                 hasItemInArray("a"), new String[0]);
+        assertMismatchDescription(
+              "mismatches were: [<3> was greater than <2>, <4> was greater than <2>, <5> was greater than <2>]",
+              hasItemInArray(lessThan(2)), new Integer[] {3, 4, 5});
     }
 
     public void testDoesNotMatchNull() {
@@ -30,7 +34,7 @@ public class IsArrayContainingTest extends AbstractMatcherTest {
     }
 
     public void testHasAReadableDescription() {
-        assertDescription("an array containing \"a\"", hasItemInArray("a"));
+        assertDescription("an array containing a value less than <2>", hasItemInArray(lessThan(2)));
     }
 
     // Remaining code no longer compiles, thanks to generics. I think that's a good thing, but

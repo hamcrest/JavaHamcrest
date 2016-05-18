@@ -29,7 +29,7 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      *     a matcher for the length of an examined array
      */
     public static <E> Matcher<E[]> arrayWithSize(Matcher<? super Integer> sizeMatcher) {
-        return new IsArrayWithSize<E>(sizeMatcher);
+        return new IsArrayWithSize<>(sizeMatcher);
     }
 
     /**
@@ -53,7 +53,6 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      * 
      */
     public static <E> Matcher<E[]> emptyArray() {
-        Matcher<E[]> isEmpty = arrayWithSize(0);
-        return describedAs("an empty array", isEmpty);
+        return describedAs("an empty array", IsArrayWithSize.<E>arrayWithSize(0));
     }
 }

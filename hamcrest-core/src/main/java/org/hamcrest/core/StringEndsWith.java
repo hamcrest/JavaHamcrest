@@ -30,7 +30,7 @@ public class StringEndsWith extends SubstringMatcher {
      * Creates a matcher that matches if the examined {@link String} ends with the specified
      * {@link String}, ignoring case.
      * For example:
-     * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
+     * <pre>assertThat("myStringOfNote", endsWithIgnoringCase("note"))</pre>
      *
      * @param suffix
      *      the substring that the returned matcher will expect at the end of any examined string
