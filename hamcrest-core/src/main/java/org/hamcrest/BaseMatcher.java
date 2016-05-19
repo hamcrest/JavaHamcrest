@@ -25,4 +25,18 @@ public abstract class BaseMatcher<T> implements Matcher<T> {
     public String toString() {
         return StringDescription.toString(this);
     }
+
+    /**
+     * Useful null-check method. Writes a mismatch description if the actual object is null
+     * @param actual the object to check
+     * @param mismatch where to write the mismatch description, if any
+     * @return false iff the actual object is null
+     */
+    protected static boolean isNotNull(Object actual, Description mismatch) {
+        if (actual == null) {
+            mismatch.appendText("was null");
+            return false;
+        }
+        return true;
+    }
 }

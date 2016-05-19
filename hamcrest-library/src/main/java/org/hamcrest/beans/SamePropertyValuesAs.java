@@ -3,7 +3,6 @@ package org.hamcrest.beans;
 import org.hamcrest.Description;
 import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
@@ -16,12 +15,12 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
 import static org.hamcrest.beans.PropertyUtil.propertyDescriptorsFor;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
+public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     private final T expectedBean;
     private final Set<String> propertyNames;
     private final List<PropertyMatcher> propertyMatchers;
 
-
+    @SuppressWarnings("WeakerAccess")
     public SamePropertyValuesAs(T expectedBean) {
         PropertyDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
         this.expectedBean = expectedBean;
@@ -30,10 +29,11 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
     }
 
     @Override
-    public boolean matchesSafely(T bean, Description mismatch) {
-        return isCompatibleType(bean, mismatch)
-                && hasNoExtraProperties(bean, mismatch)
-                && hasMatchingValues(bean, mismatch);
+    protected boolean matches(Object actual, Description mismatch) {
+        return isNotNull(actual, mismatch)
+                && isCompatibleType(actual, mismatch)
+                && hasNoExtraProperties(actual, mismatch)
+                && hasMatchingValues(actual, mismatch);
     }
 
     @Override
@@ -43,16 +43,17 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
     }
 
 
-    private boolean isCompatibleType(T item, Description mismatchDescription) {
-        if (!expectedBean.getClass().isAssignableFrom(item.getClass())) {
-            mismatchDescription.appendText("is incompatible type: " + item.getClass().getSimpleName());
-            return false;
+    private boolean isCompatibleType(Object actual, Description mismatchDescription) {
+        if (expectedBean.getClass().isAssignableFrom(actual.getClass())) {
+            return true;
         }
-        return true;
+
+        mismatchDescription.appendText("is incompatible type: " + actual.getClass().getSimpleName());
+        return false;
     }
 
-    private boolean hasNoExtraProperties(T item, Description mismatchDescription) {
-        Set<String> actualPropertyNames = propertyNamesFrom(propertyDescriptorsFor(item, Object.class));
+    private boolean hasNoExtraProperties(Object actual, Description mismatchDescription) {
+        Set<String> actualPropertyNames = propertyNamesFrom(propertyDescriptorsFor(actual, Object.class));
         actualPropertyNames.removeAll(propertyNames);
         if (!actualPropertyNames.isEmpty()) {
             mismatchDescription.appendText("has extra properties called " + actualPropertyNames);
@@ -61,10 +62,10 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
         return true;
     }
 
-    private boolean hasMatchingValues(T item, Description mismatchDescription) {
+    private boolean hasMatchingValues(Object actual, Description mismatchDescription) {
         for (PropertyMatcher propertyMatcher : propertyMatchers) {
-            if (!propertyMatcher.matches(item)) {
-                propertyMatcher.describeMismatch(item, mismatchDescription);
+            if (!propertyMatcher.matches(actual)) {
+                propertyMatcher.describeMismatch(actual, mismatchDescription);
                 return false;
             }
         }
@@ -87,7 +88,7 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
         return result;
     }
 
-    public static class PropertyMatcher extends DiagnosingMatcher<Object> {
+    private static class PropertyMatcher extends DiagnosingMatcher<Object> {
         private final Method readMethod;
         private final Matcher<Object> matcher;
         private final String propertyName;
@@ -133,7 +134,7 @@ public class SamePropertyValuesAs<T> extends TypeSafeDiagnosingMatcher<T> {
      * @param expectedBean
      *     the bean against which examined beans are compared
      */
-    public static <T> Matcher<T> samePropertyValuesAs(T expectedBean) {
+    public static <B> Matcher<B> samePropertyValuesAs(B expectedBean) {
         return new SamePropertyValuesAs<>(expectedBean);
     }
 
