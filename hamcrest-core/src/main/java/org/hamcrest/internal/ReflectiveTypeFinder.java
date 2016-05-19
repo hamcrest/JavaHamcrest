@@ -53,7 +53,7 @@ public class ReflectiveTypeFinder {
    * @param method The method to examine.
    * @return true if this method references the relevant type
    */
-  protected boolean canObtainExpectedTypeFrom(Method method) {
+  private boolean canObtainExpectedTypeFrom(Method method) {
       return method.getName().equals(methodName)
               && method.getParameterTypes().length == expectedNumberOfParameters
               && !method.isSynthetic();
@@ -64,7 +64,7 @@ public class ReflectiveTypeFinder {
    * @param method The method from which to extract
    * @return The type we're looking for
    */
-  protected Class<?> expectedTypeFrom(Method method) {
+  private Class<?> expectedTypeFrom(Method method) {
       return method.getParameterTypes()[typedParameter];
   }
 }

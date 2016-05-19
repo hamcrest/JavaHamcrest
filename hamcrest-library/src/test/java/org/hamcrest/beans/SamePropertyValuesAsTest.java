@@ -81,6 +81,8 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
     public Value getValue() {
       return valueProperty;
     }
+
+    @Override public String toString() { return "an ExampleBean"; }
   }
   
   public static class SubBeanWithNoExtraProperties extends ExampleBean {
