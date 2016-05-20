@@ -67,7 +67,7 @@ public class HasEqualValues<T> extends TypeSafeDiagnosingMatcher<T> {
     }
 
     private static List<FieldMatcher> fieldMatchers(Object expectedObject) {
-        List<FieldMatcher> result = new ArrayList<>();
+        final List<FieldMatcher> result = new ArrayList<>();
         for (Field field : expectedObject.getClass().getFields()) {
             result.add(new FieldMatcher(field, expectedObject));
         }

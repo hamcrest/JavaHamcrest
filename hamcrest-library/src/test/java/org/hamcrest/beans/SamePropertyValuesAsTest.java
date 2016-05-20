@@ -5,7 +5,7 @@ import org.hamcrest.Matcher;
 
 import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 
-@SuppressWarnings("UnusedDeclaration")
+@SuppressWarnings("WeakerAccess")
 public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   private static final Value aValue = new Value("expected");
   private static final ExampleBean expectedBean = new ExampleBean("same", 1, aValue);
@@ -17,16 +17,16 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
     return samePropertyValuesAs(expectedBean);
   }
 
-  public void testReportsMatchWhenAllPropertiesMatch() {
+  public void test_reports_match_when_all_properties_match() {
     assertMatches("matched properties", samePropertyValuesAs(expectedBean), actualBean);
   }
   
-  public void testReportsMismatchWhenActualTypeIsNotAssignableToExpectedType() {
+  public void test_reports_mismatch_when_actual_type_is_not_assignable_to_expected_type() {
     assertMismatchDescription("is incompatible type: ExampleBean", 
                               samePropertyValuesAs((Object)aValue), actualBean);
   }
 
-  public void testReportsMismatchOnFirstPropertyDifference() {
+  public void test_reports_mismatch_on_first_property_difference() {
     assertMismatchDescription("string was \"different\"", 
         samePropertyValuesAs(expectedBean), new ExampleBean("different", 1, aValue));
     assertMismatchDescription("int was <2>", 
@@ -35,12 +35,12 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
         samePropertyValuesAs(expectedBean), new ExampleBean("same", 1, new Value("other")));
   }
 
-  public void testMatchesBeansWithInheritanceButNoExtraProperties() {
+  public void test_matches_beans_with_inheritance_but_no_extra_properties() {
     assertMatches("sub type with same properties", 
         samePropertyValuesAs(expectedBean), new SubBeanWithNoExtraProperties("same", 1, aValue));
   }
 
-  public void testRejectsSubTypeThatHasExtraProperties() {
+  public void test_rejects_subtype_that_has_extra_properties() {
     assertMismatchDescription("has extra properties called [extra]", 
         samePropertyValuesAs(expectedBean), new SubBeanWithExtraProperty("same", 1, aValue));
   }
@@ -95,6 +95,7 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
     public SubBeanWithExtraProperty(String stringProperty, int intProperty, Value valueProperty) {
       super(stringProperty, intProperty, valueProperty);
     }
+    @SuppressWarnings("unused")
     public String getExtra() { return "extra"; }
   }
 }
