@@ -62,7 +62,7 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
      *   <li>any remaining whitespace, appearing within either string, is collapsed to a single space before comparison</li>
      * </ul>
      * For example:
-     * <pre>assertThat("   my\tfoo  bar ", equalToIgnoringWhiteSpace(" my  foo bar"))</pre>
+     * <pre>assertThat("   my\tfoo  bar ", equalToCompressingWhiteSpace(" my  foo bar"))</pre>
      *
      * @param expectedString
      *     the expected value of matched strings
