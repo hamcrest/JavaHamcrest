@@ -9,7 +9,7 @@ import static org.hamcrest.core.StringEndsWith.endsWithIgnoringCase;
 
 public class StringEndsWithTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
-    final Matcher<String> stringEndsWith = endsWith(EXCERPT);
+    final Matcher<CharSequence> stringEndsWith = endsWith(EXCERPT);
 
     @Override
     protected Matcher<?> createMatcher() {
@@ -30,7 +30,7 @@ public class StringEndsWithTest extends AbstractMatcherTest {
     }
 
     public void testMatchesSubstringAtEndIngoringCase() {
-        final Matcher<String> ignoringCase = endsWithIgnoringCase("EXCERpt");
+        final Matcher<CharSequence> ignoringCase = endsWithIgnoringCase("EXCERpt");
         assertDoesNotMatch(ignoringCase, "eXCErpt" + "END");
         assertMatches(ignoringCase, "START" + "EXceRpt");
         assertMatches(ignoringCase, "EXcerPT");

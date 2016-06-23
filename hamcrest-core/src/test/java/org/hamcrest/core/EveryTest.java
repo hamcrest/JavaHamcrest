@@ -12,7 +12,7 @@ import static org.hamcrest.core.StringContains.containsString;
 
 public final class EveryTest {
 
-    private final Matcher<Iterable<? extends String>> matcher = Every.everyItem(containsString("a"));
+    private final Matcher<Iterable<? extends CharSequence>> matcher = Every.everyItem(containsString("a"));
 
     @Test public void
     copesWithNullsAndUnknownTypes() {
