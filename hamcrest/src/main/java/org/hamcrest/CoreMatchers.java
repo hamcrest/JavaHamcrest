@@ -249,7 +249,7 @@ public class CoreMatchers {
    * used when it is necessary to make generics conform, for example in the JMock clause
    * <code>with(any(Thing.class))</code></p>
    * For example:
-   * <pre>assertThat(new Canoe(), instanceOf(Canoe.class));</pre>
+   * <pre>assertThat(new Canoe(), any(Canoe.class));</pre>
    */
   public static <T> org.hamcrest.Matcher<T> any(java.lang.Class<T> type) {
     return org.hamcrest.core.IsInstanceOf.any(type);
