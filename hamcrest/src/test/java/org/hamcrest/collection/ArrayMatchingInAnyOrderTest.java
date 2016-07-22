@@ -3,7 +3,6 @@ package org.hamcrest.collection;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-import static org.hamcrest.collection.ArrayMatching.arrayContainingInAnyOrder;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class ArrayMatchingInAnyOrderTest extends AbstractMatcherTest {

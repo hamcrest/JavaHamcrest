@@ -4,8 +4,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-import static java.lang.Character.isWhitespace;
-
 /**
  * Tests if a string is equal to another string, compressing any changes in whitespace.
  */
