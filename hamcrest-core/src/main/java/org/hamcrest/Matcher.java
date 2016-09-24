@@ -41,6 +41,15 @@ public interface Matcher<T> extends SelfDescribing {
     boolean matches(Object actual);
     
     /**
+     * Creates a new Matcher that matches when both this and the given
+     * matcher match.
+     *
+     * @param otherMatcher
+     * @return a Matcher matching when both this and the given matcher match
+     */
+    Matcher<T> and(Matcher<? super T> otherMatcher);
+
+    /**
      * Generate a description of why the matcher has not accepted the item.
      * The description will be part of a larger description of why a matching
      * failed, so it should be concise. 

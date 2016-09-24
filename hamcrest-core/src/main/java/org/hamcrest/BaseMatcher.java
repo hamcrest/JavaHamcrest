@@ -1,5 +1,7 @@
 package org.hamcrest;
 
+import org.hamcrest.core.AllOf;
+
 /**
  * BaseClass for all Matcher implementations.
  *
@@ -14,6 +16,14 @@ public abstract class BaseMatcher<T> implements Matcher<T> {
     @Deprecated
     public final void _dont_implement_Matcher___instead_extend_BaseMatcher_() {
         // See Matcher interface for an explanation of this method.
+    }
+
+    /**
+     * @see AllOf#allOf(Matcher[])
+     */
+    @Override
+    public Matcher<T> and(Matcher<? super T> otherMatcher) {
+        return AllOf.<T>allOf(this, otherMatcher);
     }
 
     @Override
