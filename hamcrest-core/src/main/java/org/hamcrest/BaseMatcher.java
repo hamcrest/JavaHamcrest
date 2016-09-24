@@ -21,6 +21,18 @@ public abstract class BaseMatcher<T> implements Matcher<T> {
         description.appendText("was ").appendValue(item);
     }
 
+    /**
+     * @return true if the given object is a BaseMatcher
+     * and its String representation is equal to this one.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null || !(obj instanceof BaseMatcher)) {
+            return false;
+        }
+        return toString().equals(obj.toString());
+    }
+
     @Override
     public String toString() {
         return StringDescription.toString(this);
