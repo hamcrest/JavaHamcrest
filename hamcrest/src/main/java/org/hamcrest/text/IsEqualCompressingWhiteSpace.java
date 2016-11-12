@@ -39,7 +39,7 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
     }
 
     public String stripSpaces(String toBeStripped) {
-        return toBeStripped.replaceAll("\\s+", " ").trim();
+        return toBeStripped.replaceAll("[\\p{Z}\\p{C}]+", " ").trim();
     }
 
     /**
