@@ -40,7 +40,6 @@ public class StringContainsInAnyOrder extends TypeSafeMatcher<String> {
     /**
      * Creates a matcher of {@link String} that matches when the examined string contains all of
      * the specified substrings, regardless of the order of their appearance.
-     * <p/>
      * For example:
      * <pre>assertThat("myfoobarbaz", stringContainsInAnyOrder("bar", "foo"))</pre>
      *
@@ -54,7 +53,6 @@ public class StringContainsInAnyOrder extends TypeSafeMatcher<String> {
     /**
      * Creates a matcher of {@link String} that matches when the examined string contains all of
      * the specified substrings, regardless of the order of their appearance.
-     * <p/>
      * For example:
      * <pre>assertThat("myfoobarbaz", stringContainsInAnyOrder("bar", "foo"))</pre>
      *
