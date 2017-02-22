@@ -1508,6 +1508,34 @@ public class Matchers {
   }
 
   /**
+   * Creates a matcher of {@link String} that matches when the examined string contains all of
+   * the specified substrings, regardless of the order of their appearance.
+   * For example:
+   * <pre>assertThat("myfoobarbaz", stringContainsInAnyOrder(Arrays.asList("bar", "foo")))</pre>
+   * succeeds even if "foo" occurs before "bar" in the string "myfoobarbaz"
+   *
+   * @param substrings
+   *     the substrings that must be contained within matching strings
+   */
+  public static Matcher<java.lang.String> stringContainsInAnyOrder(java.lang.Iterable<java.lang.String> substrings) {
+    return org.hamcrest.text.StringContainsInAnyOrder.stringContainsInAnyOrder(substrings);
+  }
+
+  /**
+   * Creates a matcher of {@link String} that matches when the examined string contains all of
+   * the specified substrings, regardless of the order of their appearance.
+   * For example:
+   * <pre>assertThat("myfoobarbaz", stringContainsInAnyOrder("bar", "foo"))</pre>
+   * succeeds even if "foo" occurs before "bar" in the string "myfoobarbaz"
+   *
+   * @param substrings
+   *     the substrings that must be contained within matching strings
+   */
+  public static Matcher<java.lang.String> stringContainsInAnyOrder(java.lang.String... substrings) {
+    return org.hamcrest.text.StringContainsInAnyOrder.stringContainsInAnyOrder(substrings);
+  }
+
+  /**
    * Creates a matcher that matches any examined object whose <code>toString</code> method
    * returns a value that satisfies the specified matcher.
    * For example:
