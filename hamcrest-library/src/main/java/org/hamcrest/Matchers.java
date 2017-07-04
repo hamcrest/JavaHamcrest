@@ -619,7 +619,7 @@ public class Matchers {
    * logically equal to the corresponding item in the specified items.  For a positive match,
    * the examined array must be of the same length as the number of specified items.
    * For example:
-   * <pre>assertThat(new String[]{"foo", "bar"}, contains("foo", "bar"))</pre>
+   * <pre>assertThat(new String[]{"foo", "bar"}, arrayContaining("foo", "bar"))</pre>
    * 
    * @param items
    *     the items that must equal the items within an examined array
@@ -720,7 +720,7 @@ public class Matchers {
    * <p>
    * For example:
    * </p>
-   * <pre>assertThat(new String[]{"foo", "bar"}, containsInAnyOrder("bar", "foo"))</pre>
+   * <pre>assertThat(new String[]{"foo", "bar"}, arrayContainingInAnyOrder("bar", "foo"))</pre>
    * 
    * @param items
    *     the items that must equal the entries of an examined array, in any order
