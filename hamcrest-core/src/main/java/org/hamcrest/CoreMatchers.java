@@ -374,7 +374,7 @@ public class CoreMatchers {
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> containsString(java.lang.String substring) {
+  public static org.hamcrest.Matcher<java.lang.CharSequence> containsString(java.lang.CharSequence substring) {
     return org.hamcrest.core.StringContains.containsString(substring);
   }
 
@@ -387,7 +387,7 @@ public class CoreMatchers {
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> containsStringIgnoringCase(java.lang.String substring) {
+  public static org.hamcrest.Matcher<java.lang.CharSequence> containsStringIgnoringCase(java.lang.CharSequence substring) {
     return org.hamcrest.core.StringContains.containsStringIgnoringCase(substring);
   }
 
@@ -402,7 +402,7 @@ public class CoreMatchers {
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> startsWith(java.lang.String prefix) {
+  public static org.hamcrest.Matcher<java.lang.CharSequence> startsWith(java.lang.CharSequence prefix) {
     return org.hamcrest.core.StringStartsWith.startsWith(prefix);
   }
 
@@ -417,7 +417,7 @@ public class CoreMatchers {
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> startsWithIgnoringCase(java.lang.String prefix) {
+  public static org.hamcrest.Matcher<java.lang.CharSequence> startsWithIgnoringCase(java.lang.CharSequence prefix) {
     return org.hamcrest.core.StringStartsWith.startsWithIgnoringCase(prefix);
   }
 
@@ -430,7 +430,7 @@ public class CoreMatchers {
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> endsWith(java.lang.String suffix) {
+  public static org.hamcrest.Matcher<java.lang.CharSequence> endsWith(java.lang.CharSequence suffix) {
     return org.hamcrest.core.StringEndsWith.endsWith(suffix);
   }
 
@@ -443,7 +443,7 @@ public class CoreMatchers {
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    */
-  public static org.hamcrest.Matcher<java.lang.String> endsWithIgnoringCase(java.lang.String suffix) {
+  public static org.hamcrest.Matcher<java.lang.CharSequence> endsWithIgnoringCase(java.lang.CharSequence suffix) {
     return org.hamcrest.core.StringEndsWith.endsWithIgnoringCase(suffix);
   }
 

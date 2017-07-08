@@ -6,7 +6,7 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that contains a substring.
  */
 public class StringContains extends SubstringMatcher {
-    public StringContains(boolean ignoringCase, String substring) {
+    public StringContains(boolean ignoringCase, CharSequence substring) {
         super("containing", ignoringCase, substring);
     }
 
@@ -25,7 +25,7 @@ public class StringContains extends SubstringMatcher {
      *     the substring that the returned matcher will expect to find within any examined string
      * 
      */
-    public static Matcher<String> containsString(String substring) {
+    public static Matcher<CharSequence> containsString(CharSequence substring) {
         return new StringContains(false, substring);
     }
 
@@ -39,7 +39,7 @@ public class StringContains extends SubstringMatcher {
      *     the substring that the returned matcher will expect to find within any examined string
      *
      */
-    public static Matcher<String> containsStringIgnoringCase(String substring) {
+    public static Matcher<CharSequence> containsStringIgnoringCase(CharSequence substring) {
         return new StringContains(true, substring);
     }
 

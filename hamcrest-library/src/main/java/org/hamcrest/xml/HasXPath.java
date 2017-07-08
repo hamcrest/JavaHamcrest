@@ -5,6 +5,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.hamcrest.core.IsAnything;
+import org.w3c.dom.CharacterData;
 import org.w3c.dom.Node;
 
 import javax.xml.namespace.NamespaceContext;
@@ -23,9 +24,9 @@ import static org.hamcrest.Condition.notMatched;
  */
 public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     public static final NamespaceContext NO_NAMESPACE_CONTEXT = null;
-    private static final IsAnything<String> WITH_ANY_CONTENT = new IsAnything<String>("");
-    private static final Condition.Step<Object,String> NODE_EXISTS = nodeExists();
-    private final Matcher<String> valueMatcher;
+    private static final IsAnything<CharSequence> WITH_ANY_CONTENT = new IsAnything<CharSequence>("");
+    private static final Condition.Step<Object, CharSequence> NODE_EXISTS = nodeExists();
+    private final Matcher<CharSequence> valueMatcher;
     private final XPathExpression compiledXPath;
     private final String xpathString;
     private final QName evaluationMode;
@@ -35,7 +36,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * @param valueMatcher Matcher to use at given XPath.
      *                     May be null to specify that the XPath must exist but the value is irrelevant.
      */
-    public HasXPath(String xPathExpression, Matcher<String> valueMatcher) {
+    public HasXPath(String xPathExpression, Matcher<CharSequence> valueMatcher) {
         this(xPathExpression, NO_NAMESPACE_CONTEXT, valueMatcher);
     }
 
@@ -45,14 +46,15 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * @param valueMatcher Matcher to use at given XPath.
      *                     May be null to specify that the XPath must exist but the value is irrelevant.
      */
-    public HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
+    public HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<CharSequence> valueMatcher) {
         this(xPathExpression, namespaceContext, valueMatcher, STRING);
     }
 
-    private HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<String> valueMatcher, QName mode) {
+    @SuppressWarnings({"unchecked"})
+    private HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<? extends CharSequence> valueMatcher, QName mode) {
         this.compiledXPath = compiledXPath(xPathExpression, namespaceContext);
         this.xpathString = xPathExpression;
-        this.valueMatcher = valueMatcher;
+        this.valueMatcher = (Matcher<CharSequence>) valueMatcher;
         this.evaluationMode = mode;
     }
 
@@ -80,15 +82,15 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
         return notMatched();
     }
 
-    private static Condition.Step<Object, String> nodeExists() {
-        return new Condition.Step<Object, String>() {
+    private static Condition.Step<Object, CharSequence> nodeExists() {
+        return new Condition.Step<Object, CharSequence>() {
             @Override
-            public Condition<String> apply(Object value, Description mismatch) {
+            public Condition<CharSequence> apply(Object value, Description mismatch) {
                 if (value == null) {
                     mismatch.appendText("xpath returned no results.");
                     return notMatched();
                 }
-                return matched(String.valueOf(value), mismatch);
+                return matched((CharSequence) String.valueOf(value), mismatch);
             }
         };
     }
@@ -117,7 +119,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * @param valueMatcher
      *     matcher for the value at the specified xpath
      */
-    public static Matcher<Node> hasXPath(String xPath, Matcher<String> valueMatcher) {
+    public static Matcher<Node> hasXPath(String xPath, Matcher<? extends CharSequence> valueMatcher) {
         return hasXPath(xPath, NO_NAMESPACE_CONTEXT, valueMatcher);
     }
 
@@ -135,7 +137,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * @param valueMatcher
      *     matcher for the value at the specified xpath
      */
-    public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
+    public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext, Matcher<? extends CharSequence> valueMatcher) {
         return new HasXPath(xPath, namespaceContext, valueMatcher, STRING);
     }
 

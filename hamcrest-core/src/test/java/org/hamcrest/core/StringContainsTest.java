@@ -9,7 +9,7 @@ import static org.hamcrest.core.StringContains.containsStringIgnoringCase;
 
 public class StringContainsTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
-    final Matcher<String> stringContains = containsString(EXCERPT);
+    final Matcher<CharSequence> stringContains = containsString(EXCERPT);
 
     @Override
     protected Matcher<?> createMatcher() {
@@ -30,7 +30,7 @@ public class StringContainsTest extends AbstractMatcherTest {
     }
 
     public void testMatchesSubstringsIgnoringCase() {
-        final Matcher<String> ignoringCase = containsStringIgnoringCase("ExCert");
+        final Matcher<CharSequence> ignoringCase = containsStringIgnoringCase("ExCert");
         assertMatches(ignoringCase, "eXcERT" + "END");
         assertMatches(ignoringCase, "START" + "EXCert");
         assertMatches(ignoringCase, "START" + "excERT" + "END");
