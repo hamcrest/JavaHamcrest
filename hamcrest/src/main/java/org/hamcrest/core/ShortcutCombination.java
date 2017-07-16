@@ -6,9 +6,9 @@ import org.hamcrest.Matcher;
 
 abstract class ShortcutCombination<T> extends BaseMatcher<T> {
 
-    private final Iterable<Matcher<? super T>> matchers;
+    private final Iterable<? extends Matcher<? super T>> matchers;
 
-    public ShortcutCombination(Iterable<Matcher<? super T>> matchers) {
+    public ShortcutCombination(Iterable<? extends Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }
     
