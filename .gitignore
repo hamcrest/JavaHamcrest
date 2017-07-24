@@ -14,3 +14,7 @@
 gradle.properties
 release-key.asc
 grade-wrapper.properties
+
+**/.settings/
+**/.project
+**/.classpath
