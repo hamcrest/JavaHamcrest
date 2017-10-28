@@ -2,6 +2,9 @@ package org.hamcrest.beans;
 
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.Ignore;
+
+import java.beans.PropertyDescriptor;
 
 import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 
@@ -10,6 +13,7 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   private static final Value aValue = new Value("expected");
   private static final ExampleBean expectedBean = new ExampleBean("same", 1, aValue);
   private static final ExampleBean actualBean = new ExampleBean("same", 1, aValue);
+  private static final ExampleBean actualMostPropertiesBean = new ExampleBean("same", 2, aValue);
   
   
   @Override
@@ -20,7 +24,15 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   public void test_reports_match_when_all_properties_match() {
     assertMatches("matched properties", samePropertyValuesAs(expectedBean), actualBean);
   }
-  
+
+  /**
+   * TODO implement method and un-ignore test
+   */
+  public void _test_reports_match_when_desired_properties_match() {
+    PropertyDescriptor[] ignoredProperties = null;
+    assertMatches("matched properties", samePropertyValuesAs(expectedBean, ignoredProperties), actualMostPropertiesBean);
+  }
+
   public void test_reports_mismatch_when_actual_type_is_not_assignable_to_expected_type() {
     assertMismatchDescription("is incompatible type: ExampleBean", 
                               samePropertyValuesAs((Object)aValue), actualBean);

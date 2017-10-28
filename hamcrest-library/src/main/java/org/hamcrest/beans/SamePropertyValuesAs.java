@@ -138,4 +138,11 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
         return new SamePropertyValuesAs<>(expectedBean);
     }
 
+    /**
+     * TODO implement
+     */
+    public static <B> Matcher<B> samePropertyValuesAs(B expectedBean, PropertyDescriptor[] ignoredProperties) {
+        return new SamePropertyValuesAs<>(expectedBean);
+    }
+
 }
