@@ -61,3 +61,4 @@ Also, thanks to everyone who has worked on DynaMock, nMock, jMock, EasyMock and 
 [Maven central]: http://search.maven.org/#search%7Cga%7C1%7Cg%3Aorg.hamcrest
 [hamcrest extensions page]: https://github.com/hamcrest/JavaHamcrest/wiki/Related-Projects
 [GitHub issue tracker]: https://github.com/hamcrest/JavaHamcrest/issues
+[google code downloads]: https://code.google.com/archive/p/hamcrest/downloads
