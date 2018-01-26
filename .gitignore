@@ -9,7 +9,10 @@
 *.iws
 *.ipr
 *.iml
+.classpath
 .gradle
+.project
+.settings/
 
 gradle.properties
 release-key.asc
