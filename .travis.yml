@@ -1,12 +1,20 @@
 language: java
 
-# workaround for broken openjdk7
-sudo: required # for setting hostname
-addons:
-  hostname: localhost
+# workaround for broken openjdk7 https://github.com/SonarOpenCommunity/sonar-cxx/issues/700
 before_install:
-- cat /etc/hosts
-# end
+  - cat /etc/hosts # optionally check the content *before*
+  - sudo hostname "$(hostname | cut -c1-63)"
+  - sed -e "s/^\\(127\\.0\\.0\\.1.*\\)/\\1 $(hostname | cut -c1-63)/" /etc/hosts | sudo tee /etc/hosts
+  - cat /etc/hosts # optionally check the content *after*
+
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 
 jdk:
   - oraclejdk7
