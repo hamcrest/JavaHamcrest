@@ -8,6 +8,9 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ListIterator;
 
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
@@ -69,10 +72,16 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     private static final Condition.Step<PropertyDescriptor,Method> WITH_READ_METHOD = withReadMethod();
     private final String propertyName;
     private final Matcher<Object> valueMatcher;
+    private final String messageFormat;
 
     public HasPropertyWithValue(String propertyName, Matcher<?> valueMatcher) {
+        this(propertyName, valueMatcher, " property '%s' ");
+    }
+
+    public HasPropertyWithValue(String propertyName, Matcher<?> valueMatcher, String messageFormat) {
         this.propertyName = propertyName;
         this.valueMatcher = nastyGenericsWorkaround(valueMatcher);
+        this.messageFormat = messageFormat;
     }
 
     @Override
@@ -80,7 +89,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         return propertyOn(bean, mismatch)
                   .and(WITH_READ_METHOD)
                   .and(withPropertyValue(bean))
-                  .matching(valueMatcher, "property '" + propertyName + "' ");
+                  .matching(valueMatcher, String.format(messageFormat, propertyName));
     }
 
     @Override
@@ -153,4 +162,30 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     public static <T> Matcher<T> hasProperty(String propertyName, Matcher<?> valueMatcher) {
         return new HasPropertyWithValue<>(propertyName, valueMatcher);
     }
+
+    /**
+     * Creates a matcher that matches when the examined object is a graph of
+     * JavaBean objects that can be navigated along the declared dot-separated path
+     * and the final element of that path is a JavaBean property whose value satisfies the
+     * specified matcher.
+     * For example:
+     * <pre>assertThat(myBean, hasProperty("foo.bar.baz", equalTo("a property value"))</pre>
+     *
+     * @param path
+     *     the dot-separated path from the examined object to the JavaBean property
+     * @param valueMatcher
+     *     a matcher for the value of the specified property of the examined bean
+     */
+    public static <T> Matcher<T> hasPropertyAtPath(String path, Matcher<T> valueMatcher) {
+        List<String> properties = Arrays.asList(path.split("\\."));
+            ListIterator<String> iterator =
+                properties.listIterator(properties.size());
+
+            Matcher<T> ret = valueMatcher;
+            while (iterator.hasPrevious()) {
+                ret = new HasPropertyWithValue<>(iterator.previous(), ret, "%s.");
+            }
+            return ret;
+    }
+
 }
