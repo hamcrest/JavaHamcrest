@@ -1114,6 +1114,38 @@ public class Matchers {
 
   /**
    * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
+   * at least one entry whose key equals the specified <code>key</code> <b>and</b> whose
+   * value satisfies the specified <code>valueMatcher</code>.
+   * For example:
+   * <pre>assertThat(myMap, hasEntry("bar", equalTo("foo")))</pre>
+   *
+   * @param key
+   *     the key that, in combination with the valueMatcher, must be describe at least one entry
+   * @param valueMatcher
+   *     the value matcher that, in combination with the key, must be satisfied by at least one entry
+   */
+  public static <K, V> org.hamcrest.Matcher<java.util.Map<? extends K,? extends V>> hasEntry(K key, org.hamcrest.Matcher<? super V> valueMatcher) {
+    return org.hamcrest.collection.IsMapContaining.hasEntry(key, valueMatcher);
+  }
+
+  /**
+   * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
+   * at least one entry whose key satisfies the specified <code>keyMatcher</code> <b>and</b> whose value
+   * equals the specified <code>value</code>.
+   * For example:
+   * <pre>assertThat(myMap, hasEntry(equalTo("bar"), "foo"))</pre>
+   *
+   * @param keyMatcher
+   *     the key matcher that, in combination with the value, must be satisfied by at least one entry
+   * @param value
+   *     the value that, in combination with the keyMatcher, must be describe at least one entry
+   */
+  public static <K, V> org.hamcrest.Matcher<java.util.Map<? extends K,? extends V>> hasEntry(org.hamcrest.Matcher<? super K> keyMatcher, V value) {
+    return org.hamcrest.collection.IsMapContaining.hasEntry(keyMatcher, value);
+  }
+
+  /**
+   * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
    * at least one key that satisfies the specified matcher.
    * For example:
    * <pre>assertThat(myMap, hasKey(equalTo("bar")))</pre>

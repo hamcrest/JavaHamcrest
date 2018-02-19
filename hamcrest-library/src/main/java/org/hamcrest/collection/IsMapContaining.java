@@ -74,6 +74,38 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
     public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(K key, V value) {
         return new IsMapContaining<>(equalTo(key), equalTo(value));
     }
+
+    /**
+     * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
+     * at least one entry whose key equals the specified <code>key</code> <b>and</b> whose
+     * value satisfies the specified <code>valueMatcher</code>.
+     * For example:
+     * <pre>assertThat(myMap, hasEntry("bar", equalTo("foo")))</pre>
+     *
+     * @param key
+     *     the key that, in combination with the valueMatcher, must be describe at least one entry
+     * @param valueMatcher
+     *     the value matcher that, in combination with the key, must be satisfied by at least one entry
+     */
+    public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(K key, Matcher<? super V> valueMatcher) {
+        return new IsMapContaining<>(equalTo(key), valueMatcher);
+    }
+
+    /**
+     * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
+     * at least one entry whose key satisfies the specified <code>keyMatcher</code> <b>and</b> whose value
+     * equals the specified <code>value</code>.
+     * For example:
+     * <pre>assertThat(myMap, hasEntry(equalTo("bar"), "foo"))</pre>
+     *
+     * @param keyMatcher
+     *     the key matcher that, in combination with the value, must be satisfied by at least one entry
+     * @param value
+     *     the value that, in combination with the keyMatcher, must be describe at least one entry
+     */
+    public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(Matcher<? super K> keyMatcher, V value) {
+        return new IsMapContaining<>(keyMatcher, equalTo(value));
+    }
     
     /**
      * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
