@@ -3,8 +3,10 @@ package org.hamcrest;
 import org.hamcrest.collection.ArrayMatching;
 import org.hamcrest.core.IsIterableContaining;
 import org.hamcrest.core.StringRegularExpression;
+import org.hamcrest.optional.IsEmptyOptional;
 import org.hamcrest.text.IsEqualCompressingWhiteSpace;
 
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("unused")
@@ -1675,6 +1677,11 @@ public class Matchers {
    */
   public static org.hamcrest.Matcher<org.w3c.dom.Node> hasXPath(java.lang.String xPath, javax.xml.namespace.NamespaceContext namespaceContext) {
     return org.hamcrest.xml.HasXPath.hasXPath(xPath, namespaceContext);
+  }
+
+
+  public static <T> Matcher<Optional<? extends T>> emptyOptional(){
+      return IsEmptyOptional.emptyOptional();
   }
 
 
