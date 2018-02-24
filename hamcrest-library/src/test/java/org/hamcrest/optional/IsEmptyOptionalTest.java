@@ -13,8 +13,8 @@ import static org.hamcrest.optional.IsEmptyOptional.*;
 
 public class IsEmptyOptionalTest {
 
-    private static Optional<?> EMPTY_OPTIONAL = Optional.empty();
-    private static Optional<?> NON_EMPTY_OPTIONAL = Optional.of(1);
+    private static Optional<Integer> EMPTY_OPTIONAL = Optional.empty();
+    private static Optional<Integer> NON_EMPTY_OPTIONAL = Optional.of(1);
 
     @Test
     public void copesWithNullsAndUnknownTypes(){

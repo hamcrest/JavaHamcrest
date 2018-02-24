@@ -23,6 +23,12 @@ public class IsEmptyOptional<T> extends TypeSafeMatcher<Optional<? extends T>> {
         return !actual.isPresent();
     }
 
+    /**
+     * Creates a matcher for {@link Optional}s matching when the examined optional has no value.
+     * For example:
+     * <pre>assertThat(Optional.empty(), emptyOptional())</pre>
+     *
+     */
     public static <T> Matcher<Optional<? extends T>> emptyOptional() {
         return new IsEmptyOptional<>();
     }
