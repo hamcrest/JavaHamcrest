@@ -9,7 +9,7 @@ public class HasValueOptional<T> extends OptionalMatcher<T> {
 
     private final Optional<T> optionalValue;
 
-    public HasValueOptional(T value) {
+    private HasValueOptional(T value) {
         optionalValue = Optional.ofNullable(value);
     }
 
@@ -34,10 +34,23 @@ public class HasValueOptional<T> extends OptionalMatcher<T> {
     }
 
 
+    /**
+     * Creates a matcher for {@link Optional}s matching when the examined optional has some value.
+     * For example:
+     * <pre>assertThat(myOptional, is(optionalWithValue()))</pre>
+     */
     public static <T> Matcher<Optional<T>> optionalWithValue(){
         return new HasValueOptional<>(null);
     }
 
+    /**
+     * Creates a matcher for {@link Optional}s matching when the examined optional has specific value.
+     * For example:
+     * <pre>assertThat(myOptional, is(optionalWithValue(2)))</pre>
+     *
+     * @param value
+     *       value that the examined object must have
+     */
     public static <T> Matcher<Optional<T>> optionalWithValue(T value){
         if (value == null){
             throw new IllegalArgumentException("Value can't be null. Use IsEmptyOptional.emptyOptional instead.");

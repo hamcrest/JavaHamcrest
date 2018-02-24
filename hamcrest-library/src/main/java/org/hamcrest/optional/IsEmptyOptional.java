@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public class IsEmptyOptional<T> extends OptionalMatcher<T> {
 
-
+    private IsEmptyOptional(){}
 
     @Override
     protected boolean matchesSafely(Optional<T> item) {
@@ -23,6 +23,10 @@ public class IsEmptyOptional<T> extends OptionalMatcher<T> {
         return getTextOrDefault(item, "Empty");
     }
 
+
+    /**
+     * Only to gain semantic
+     */
     private boolean isNotPresent(Optional<T> actual) {
         return !actual.isPresent();
     }
@@ -30,7 +34,7 @@ public class IsEmptyOptional<T> extends OptionalMatcher<T> {
     /**
      * Creates a matcher for {@link Optional}s matching when the examined optional has no value.
      * For example:
-     * <pre>assertThat(Optional.empty(), emptyOptional())</pre>
+     * <pre>assertThat(myOptional, is(emptyOptional()))</pre>
      *
      */
     public static <T> Matcher<Optional<T>> emptyOptional() {

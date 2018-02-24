@@ -26,7 +26,10 @@ public abstract class OptionalMatcher<T> extends TypeSafeMatcher<Optional<T>> {
                     .appendText(">");
     }
 
-    protected final String getTextOrDefault(Optional<T> value, String defaultValue) {
+    /**
+     * Helper for encapsulate get toString or default value of {@link Optional}
+     */
+    final String getTextOrDefault(Optional<T> value, String defaultValue) {
         return value.map(Object::toString).orElse(defaultValue);
     }
 

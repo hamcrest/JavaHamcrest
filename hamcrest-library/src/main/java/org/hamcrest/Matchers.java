@@ -1680,16 +1680,33 @@ public class Matchers {
     return org.hamcrest.xml.HasXPath.hasXPath(xPath, namespaceContext);
   }
 
-
+  /**
+   * Creates a matcher for {@link Optional}s matching when the examined optional has no value.
+   * For example:
+   * <pre>assertThat(myOptional, is(emptyOptional()))</pre>
+   *
+   */
   public static <T> Matcher<Optional<T>> emptyOptional(){
       return IsEmptyOptional.emptyOptional();
   }
 
-
+  /**
+   * Creates a matcher for {@link Optional}s matching when the examined optional has some value.
+   * For example:
+   * <pre>assertThat(myOptional, is(optionalWithValue()))</pre>
+   */
   public static <T> Matcher<Optional<T>> optionalWithValue(){
       return HasValueOptional.optionalWithValue();
   }
 
+  /**
+   * Creates a matcher for {@link Optional}s matching when the examined optional has specific value.
+   * For example:
+   * <pre>assertThat(myOptional, is(optionalWithValue(2)))</pre>
+   *
+   * @param value
+   *       value that the examined object must have
+   */
   public static <T> Matcher<Optional<T>> optionalWithValue(T value){
       return HasValueOptional.optionalWithValue(value);
   }
