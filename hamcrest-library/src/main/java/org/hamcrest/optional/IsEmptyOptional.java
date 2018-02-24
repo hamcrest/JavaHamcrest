@@ -11,7 +11,16 @@ public class IsEmptyOptional<T> extends TypeSafeMatcher<Optional<T>> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendValue(Optional.empty());
+        description
+                .appendText("Optional<Empty>");
+    }
+
+    @Override
+    protected void describeMismatchSafely(Optional<T> item, Description mismatchDescription) {
+        mismatchDescription
+                .appendText("was ")
+                    .appendText("Optional<" + item.map(Object::toString).orElse("Empty") + ">");
+
     }
 
     @Override

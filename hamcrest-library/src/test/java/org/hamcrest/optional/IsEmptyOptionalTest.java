@@ -57,7 +57,7 @@ public class IsEmptyOptionalTest {
     public void describeItSelf(){
         Matcher<Optional<Integer>> matcher = emptyOptional();
 
-        assertDescription("<Optional.empty>", matcher);
+        assertDescription("Optional<Empty>", matcher);
     }
 
 
@@ -66,7 +66,7 @@ public class IsEmptyOptionalTest {
 
         Matcher<Optional<Integer>> matcher = emptyOptional();
 
-        assertMismatchDescription("was <Optional[1]>", matcher, NON_EMPTY_OPTIONAL);
+        assertMismatchDescription("was Optional<1>", matcher, NON_EMPTY_OPTIONAL);
 
     }
 }
