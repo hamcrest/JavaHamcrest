@@ -11,7 +11,7 @@ public class IsEmptyOptional<T> extends TypeSafeMatcher<Optional<? extends T>> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("Empty Optional");
+        description.appendValue(Optional.empty());
     }
 
     @Override
