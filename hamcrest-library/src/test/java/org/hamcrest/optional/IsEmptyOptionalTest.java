@@ -18,7 +18,7 @@ public class IsEmptyOptionalTest {
 
     @Test
     public void copesWithNullsAndUnknownTypes(){
-        Matcher<Optional<?>> matcher = emptyOptional();
+        Matcher<Optional<Integer>> matcher = emptyOptional();
         matcher.matches(null);
 
         assertNullSafe(matcher);
@@ -28,7 +28,7 @@ public class IsEmptyOptionalTest {
 
     @Test
     public void matchWhenUtilisingANestedMatcher(){
-        Matcher<Optional<?>> matcher = is(emptyOptional());
+        Matcher<Optional<Integer>> matcher = is(emptyOptional());
 
         assertMatches(matcher, EMPTY_OPTIONAL);
         assertDoesNotMatch(matcher, NON_EMPTY_OPTIONAL);
@@ -37,7 +37,7 @@ public class IsEmptyOptionalTest {
 
     @Test
     public void matchWhenReceiveAEmptyOptional(){
-        Matcher<Optional<?>> matcher = emptyOptional();
+        Matcher<Optional<Integer>> matcher = emptyOptional();
 
         assertMatches(matcher, EMPTY_OPTIONAL);
         assertDoesNotMatch(matcher, NON_EMPTY_OPTIONAL);
@@ -46,7 +46,7 @@ public class IsEmptyOptionalTest {
 
     @Test
     public void describeItSelf(){
-        Matcher<Optional<?>> matcher = emptyOptional();
+        Matcher<Optional<Integer>> matcher = emptyOptional();
 
         assertDescription("<Optional.empty>", matcher);
     }
@@ -55,7 +55,7 @@ public class IsEmptyOptionalTest {
     @Test
     public void describesAMismatch(){
 
-        Matcher<Optional<?>> matcher = emptyOptional();
+        Matcher<Optional<Integer>> matcher = emptyOptional();
 
         assertMismatchDescription("was <Optional[1]>", matcher, NON_EMPTY_OPTIONAL);
 

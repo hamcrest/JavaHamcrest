@@ -1680,7 +1680,7 @@ public class Matchers {
   }
 
 
-  public static <T> Matcher<Optional<? extends T>> emptyOptional(){
+  public static <T> Matcher<Optional<T>> emptyOptional(){
       return IsEmptyOptional.emptyOptional();
   }
 

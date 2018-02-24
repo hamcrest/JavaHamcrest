@@ -6,7 +6,7 @@ import org.hamcrest.TypeSafeMatcher;
 
 import java.util.Optional;
 
-public class IsEmptyOptional<T> extends TypeSafeMatcher<Optional<? extends T>> {
+public class IsEmptyOptional<T> extends TypeSafeMatcher<Optional<T>> {
 
 
     @Override
@@ -15,11 +15,11 @@ public class IsEmptyOptional<T> extends TypeSafeMatcher<Optional<? extends T>> {
     }
 
     @Override
-    protected boolean matchesSafely(Optional<? extends T> item) {
+    protected boolean matchesSafely(Optional<T> item) {
         return isNotPresent(item);
     }
 
-    private boolean isNotPresent(Optional<? extends T> actual) {
+    private boolean isNotPresent(Optional<T> actual) {
         return !actual.isPresent();
     }
 
@@ -29,7 +29,7 @@ public class IsEmptyOptional<T> extends TypeSafeMatcher<Optional<? extends T>> {
      * <pre>assertThat(Optional.empty(), emptyOptional())</pre>
      *
      */
-    public static <T> Matcher<Optional<? extends T>> emptyOptional() {
+    public static <T> Matcher<Optional<T>> emptyOptional() {
         return new IsEmptyOptional<>();
     }
 
