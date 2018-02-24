@@ -19,10 +19,7 @@ cache:
     - $HOME/.gradle/wrapper/
 
 jdk:
-  - openjdk7
   - oraclejdk8
   - openjdk8
-  - oraclejdk9
-
 script:
   - ./gradlew clean build javadoc

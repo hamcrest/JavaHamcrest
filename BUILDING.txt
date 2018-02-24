@@ -4,7 +4,7 @@
 
 --[ Build requirements ]-------------------------------------
 
-* JDK 1.7
+* JDK 1.8
 
 --[ Building from the command line ]-------------------------
 
