@@ -15,6 +15,7 @@ public class IsEmptyOptionalTest {
 
     private static Optional<Integer> EMPTY_OPTIONAL = Optional.empty();
     private static Optional<Integer> NON_EMPTY_OPTIONAL = Optional.of(1);
+    private static Optional<Integer> NULL_EMPTY_OPTIONAL = Optional.ofNullable(null);
 
     @Test
     public void copesWithNullsAndUnknownTypes(){
@@ -40,6 +41,14 @@ public class IsEmptyOptionalTest {
         Matcher<Optional<Integer>> matcher = emptyOptional();
 
         assertMatches(matcher, EMPTY_OPTIONAL);
+        assertDoesNotMatch(matcher, NON_EMPTY_OPTIONAL);
+    }
+
+    @Test
+    public void matchWhenReceiveAOptionalWithNullValue(){
+        Matcher<Optional<Integer>> matcher = emptyOptional();
+
+        assertMatches(matcher, NULL_EMPTY_OPTIONAL);
         assertDoesNotMatch(matcher, NON_EMPTY_OPTIONAL);
     }
 
