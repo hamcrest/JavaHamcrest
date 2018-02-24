@@ -1,12 +1,10 @@
 package org.hamcrest.optional;
 
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
 import java.util.Optional;
 
-public class HasValueOptional<T> extends TypeSafeMatcher<Optional<T>> {
+public class HasValueOptional<T> extends OptionalMatcher<T> {
 
 
     private final Optional<T> optionalValue;
@@ -26,25 +24,21 @@ public class HasValueOptional<T> extends TypeSafeMatcher<Optional<T>> {
     }
 
     @Override
-    public void describeTo(Description description) {
-        description
-                .appendText("Optional<" + optionalValue.map(Object::toString).orElse("Some Value") + ">");
+    protected String getDescribeText() {
+        return getTextOrDefault(optionalValue, "Some Value");
     }
 
     @Override
-    protected void describeMismatchSafely(Optional<T> item, Description mismatchDescription) {
-
-        mismatchDescription
-                .appendText("was ")
-                    .appendText("Optional<" + item.map(Object::toString).orElse("Empty") + ">");
+    protected String getDescribeMismatchText(Optional<T> item) {
+        return getTextOrDefault(item, "Empty");
     }
 
 
-    public static <T> Matcher<Optional<T>> hasValue(){
+    public static <T> Matcher<Optional<T>> optionalWithValue(){
         return new HasValueOptional<>(null);
     }
 
-    public static <T> Matcher<Optional<T>> hasValue(T value){
+    public static <T> Matcher<Optional<T>> optionalWithValue(T value){
         if (value == null){
             throw new IllegalArgumentException("Value can't be null. Use IsEmptyOptional.emptyOptional instead.");
         }

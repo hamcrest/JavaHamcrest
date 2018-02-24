@@ -3,6 +3,7 @@ package org.hamcrest;
 import org.hamcrest.collection.ArrayMatching;
 import org.hamcrest.core.IsIterableContaining;
 import org.hamcrest.core.StringRegularExpression;
+import org.hamcrest.optional.HasValueOptional;
 import org.hamcrest.optional.IsEmptyOptional;
 import org.hamcrest.text.IsEqualCompressingWhiteSpace;
 
@@ -1684,5 +1685,13 @@ public class Matchers {
       return IsEmptyOptional.emptyOptional();
   }
 
+
+  public static <T> Matcher<Optional<T>> optionalWithValue(){
+      return HasValueOptional.optionalWithValue();
+  }
+
+  public static <T> Matcher<Optional<T>> optionalWithValue(T value){
+      return HasValueOptional.optionalWithValue(value);
+  }
 
 }

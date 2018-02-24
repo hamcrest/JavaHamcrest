@@ -1,31 +1,26 @@
 package org.hamcrest.optional;
 
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
 import java.util.Optional;
 
-public class IsEmptyOptional<T> extends TypeSafeMatcher<Optional<T>> {
+public class IsEmptyOptional<T> extends OptionalMatcher<T> {
 
 
-    @Override
-    public void describeTo(Description description) {
-        description
-                .appendText("Optional<Empty>");
-    }
-
-    @Override
-    protected void describeMismatchSafely(Optional<T> item, Description mismatchDescription) {
-        mismatchDescription
-                .appendText("was ")
-                    .appendText("Optional<" + item.map(Object::toString).orElse("Empty") + ">");
-
-    }
 
     @Override
     protected boolean matchesSafely(Optional<T> item) {
         return isNotPresent(item);
+    }
+
+    @Override
+    protected String getDescribeText() {
+        return "Empty";
+    }
+
+    @Override
+    protected String getDescribeMismatchText(Optional<T> item) {
+        return getTextOrDefault(item, "Empty");
     }
 
     private boolean isNotPresent(Optional<T> actual) {

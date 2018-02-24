@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import static org.hamcrest.AbstractMatcherTest.*;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.optional.HasValueOptional.hasValue;
+import static org.hamcrest.optional.HasValueOptional.optionalWithValue;
 
 public class HasValueOptionalTest {
     private static Optional<Integer> EMPTY_OPTIONAL = Optional.empty();
@@ -16,7 +16,7 @@ public class HasValueOptionalTest {
 
     @Test
     public void copesWithNullsAndUnknownTypes(){
-        Matcher<Optional<Integer>> matcher = hasValue();
+        Matcher<Optional<Integer>> matcher = optionalWithValue();
         matcher.matches(null);
 
         assertNullSafe(matcher);
@@ -25,7 +25,7 @@ public class HasValueOptionalTest {
 
     @Test
     public void matchWhenReceiveAOptionalWithSomeValue(){
-        Matcher<Optional<Integer>> matcher = hasValue();
+        Matcher<Optional<Integer>> matcher = optionalWithValue();
 
         assertMatches(matcher, NON_EMPTY_OPTIONAL);
         assertDoesNotMatch(matcher, EMPTY_OPTIONAL);
@@ -35,7 +35,7 @@ public class HasValueOptionalTest {
 
     @Test
     public void matchWhenUtilisingANestedMatcher(){
-        Matcher<Optional<Integer>> matcher = is(hasValue());
+        Matcher<Optional<Integer>> matcher = is(optionalWithValue());
 
         assertMatches(matcher, NON_EMPTY_OPTIONAL);
         assertDoesNotMatch(matcher, EMPTY_OPTIONAL);
@@ -45,7 +45,7 @@ public class HasValueOptionalTest {
 
     @Test
     public void matchWhenReceiveAOptionalWithSpecificValue(){
-        Matcher<Optional<Integer>> matcher = hasValue(1);
+        Matcher<Optional<Integer>> matcher = optionalWithValue(1);
 
         assertMatches(matcher, NON_EMPTY_OPTIONAL);
         assertDoesNotMatch(matcher, EMPTY_OPTIONAL);
@@ -54,7 +54,7 @@ public class HasValueOptionalTest {
 
     @Test
     public void noMatchWhenReceiveAOptionalWithADifferentValue(){
-        Matcher<Optional<Integer>> matcher = hasValue(2);
+        Matcher<Optional<Integer>> matcher = optionalWithValue(2);
 
         assertDoesNotMatch(matcher, NON_EMPTY_OPTIONAL);
         assertDoesNotMatch(matcher, EMPTY_OPTIONAL);
@@ -64,12 +64,12 @@ public class HasValueOptionalTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void throwsIllegalArgumentExceptionIfGivenNullValue(){
-        hasValue(null);
+        optionalWithValue(null);
     }
 
     @Test
     public void describeItSelf(){
-        Matcher<Optional<Integer>> matcher = hasValue();
+        Matcher<Optional<Integer>> matcher = optionalWithValue();
 
         assertDescription("Optional<Some Value>", matcher);
     }
@@ -78,7 +78,7 @@ public class HasValueOptionalTest {
     @Test
     public void describesAMismatch(){
 
-        Matcher<Optional<Integer>> matcher = hasValue(2);
+        Matcher<Optional<Integer>> matcher = optionalWithValue(2);
 
         assertMismatchDescription("was Optional<1>", matcher, NON_EMPTY_OPTIONAL);
 
