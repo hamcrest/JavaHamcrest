@@ -23,6 +23,10 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
         this.string = string;
     }
 
+    protected String getString() {
+        return string;
+    }
+
     @Override
     public boolean matchesSafely(String item) {
         return stripSpaces(string).equals(stripSpaces(item));
