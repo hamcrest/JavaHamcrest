@@ -15,7 +15,6 @@ public final class DescribedAsTest {
         Matcher<Object> matcher = describedAs("irrelevant", anything());
 
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

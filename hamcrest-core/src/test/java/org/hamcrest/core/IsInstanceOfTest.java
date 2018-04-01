@@ -14,7 +14,6 @@ public final class IsInstanceOfTest {
         Matcher<?> matcher = instanceOf(Number.class);
 
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

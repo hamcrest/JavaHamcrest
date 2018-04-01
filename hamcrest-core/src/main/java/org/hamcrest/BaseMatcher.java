@@ -17,7 +17,7 @@ public abstract class BaseMatcher<T> implements Matcher<T> {
     }
 
     @Override
-    public void describeMismatch(Object item, Description description) {
+    public void describeMismatch(T item, Description description) {
         description.appendText("was ").appendValue(item);
     }
 

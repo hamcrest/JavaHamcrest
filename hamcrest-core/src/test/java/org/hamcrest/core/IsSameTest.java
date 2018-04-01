@@ -15,7 +15,6 @@ public final class IsSameTest {
         Matcher<String> matcher = sameInstance("irrelevant");
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

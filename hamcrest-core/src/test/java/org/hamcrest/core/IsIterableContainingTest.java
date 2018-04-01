@@ -22,7 +22,6 @@ public final class IsIterableContainingTest {
         Matcher<?> matcher = hasItem(equalTo("irrelevant"));
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

@@ -3,6 +3,7 @@ package org.hamcrest.core;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static org.hamcrest.core.IsNot.not;
 
@@ -26,8 +27,8 @@ public class IsNull<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(nullValue())</pre>
      * 
      */
-    public static Matcher<Object> nullValue() {
-        return new IsNull<Object>();
+    public static <T> Matcher<T> nullValue() {
+        return new IsNull<>();
     }
 
     /**
@@ -38,8 +39,8 @@ public class IsNull<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(not(nullValue())))</pre>
      * 
      */
-    public static Matcher<Object> notNullValue() {
-        return not(nullValue());
+    public static <T> Matcher<T> notNullValue() {
+        return Matchers.<T>not(IsNull.<T>nullValue());
     }
 
     /**

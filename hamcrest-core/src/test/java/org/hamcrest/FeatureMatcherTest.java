@@ -35,7 +35,7 @@ public final class FeatureMatcherTest {
 
     public static class Match extends IsEqual<String> {
         public Match(String equalArg) { super(equalArg); }
-        @Override public void describeMismatch(Object item, Description description) {
+        @Override public void describeMismatch(String item, Description description) {
             description.appendText("mismatch-description");
         }
     }

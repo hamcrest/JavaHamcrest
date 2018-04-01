@@ -16,10 +16,8 @@ public final class IsNullTest {
     @Test public void
     copesWithNullsAndUnknownTypes() {
         assertNullSafe(nullMatcher);
-        assertUnknownTypeSafe(nullMatcher);
         
         assertNullSafe(notNullMatcher);
-        assertUnknownTypeSafe(notNullMatcher);
     }
 
     @Test public void
