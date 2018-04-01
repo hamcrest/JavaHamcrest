@@ -16,7 +16,7 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     }
 
     @Override
-    public boolean matches(Object o) {
+    public boolean matches(T o) {
         return matches(o, true);
     }
 

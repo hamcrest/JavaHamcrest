@@ -25,7 +25,7 @@ public class DescribedAs<T> extends BaseMatcher<T> {
     }
     
     @Override
-    public boolean matches(Object o) {
+    public boolean matches(T o) {
         return matcher.matches(o);
     }
 
@@ -46,7 +46,7 @@ public class DescribedAs<T> extends BaseMatcher<T> {
     }
     
     @Override
-    public void describeMismatch(Object item, Description description) {
+    public void describeMismatch(T item, Description description) {
         matcher.describeMismatch(item, description);
     }
 

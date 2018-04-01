@@ -21,9 +21,9 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     @Override
     public boolean matches(Object o, Description mismatch) {
         for (Matcher<? super T> matcher : matchers) {
-            if (!matcher.matches(o)) {
+            if (!matcher.matches((T)o)) {
                 mismatch.appendDescriptionOf(matcher).appendText(" ");
-                matcher.describeMismatch(o, mismatch);
+                matcher.describeMismatch((T)o, mismatch);
               return false;
             }
         }

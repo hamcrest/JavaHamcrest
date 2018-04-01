@@ -13,7 +13,6 @@ public final class IsNanTest {
         Matcher<Double> matcher = notANumber();
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

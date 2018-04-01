@@ -28,7 +28,6 @@ public final class TypeSafeMatcherTest {
     @Test public void
     canDetermineMatcherTypeFromProtectedMatchesSafelyMethod() {
         assertFalse(matcher.matches(null));
-        assertFalse(matcher.matches(10));
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

@@ -16,7 +16,6 @@ public final class AnyOfTest {
         Matcher<String> matcher = anyOf(equalTo("irrelevant"), startsWith("irr"));
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

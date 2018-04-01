@@ -13,12 +13,12 @@ abstract class ShortcutCombination<T> extends BaseMatcher<T> {
     }
     
     @Override
-    public abstract boolean matches(Object o);
+    public abstract boolean matches(T o);
     
     @Override
     public abstract void describeTo(Description description);
     
-    protected boolean matches(Object o, boolean shortcut) {
+    protected boolean matches(T o, boolean shortcut) {
         for (Matcher<? super T> matcher : matchers) {
             if (matcher.matches(o) == shortcut) {
                 return shortcut;

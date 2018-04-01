@@ -33,9 +33,4 @@ public final class CustomTypeSafeMatcherTest {
     isNullSafe() {
         assertNullSafe(customMatcher);
     }
-    
-    @Test public void
-    copesWithUnknownTypes() {
-        assertUnknownTypeSafe(customMatcher);
-    }
 }

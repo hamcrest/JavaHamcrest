@@ -62,7 +62,6 @@ public final class HasXPathTest {
         Matcher<Node> matcher = hasXPath("//irrelevant");
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

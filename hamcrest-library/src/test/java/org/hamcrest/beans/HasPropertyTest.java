@@ -22,7 +22,6 @@ public final class HasPropertyTest {
         Matcher<Object> matcher = hasProperty("irrelevant");
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

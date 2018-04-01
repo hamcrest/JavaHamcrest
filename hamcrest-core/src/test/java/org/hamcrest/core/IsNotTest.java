@@ -15,7 +15,6 @@ public final class IsNotTest {
         Matcher<String> matcher = not("something");
 
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void
