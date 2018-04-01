@@ -39,7 +39,7 @@ public class PropertyUtil {
      * @return Property descriptors
      * @throws IllegalArgumentException if there's a introspection failure
      */
-    public static PropertyDescriptor[] propertyDescriptorsFor(Object fromObj, Class<Object> stopClass) throws IllegalArgumentException {
+    public static PropertyDescriptor[] propertyDescriptorsFor(Object fromObj, Class<?> stopClass) throws IllegalArgumentException {
       try {
         return Introspector.getBeanInfo(fromObj.getClass(), stopClass).getPropertyDescriptors();
       } catch (IntrospectionException e) {

@@ -19,7 +19,6 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     private final List<PropertyMatcher> propertyMatchers;
     private final List<String> ignoredFields;
 
-    @SuppressWarnings("WeakerAccess")
     public SamePropertyValuesAs(T expectedBean, List<String> ignoredProperties) {
         PropertyDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
         this.expectedBean = expectedBean;
@@ -100,7 +99,6 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
         return ! ignoredFields.contains(propertyDescriptor.getDisplayName());
     }
 
-    @SuppressWarnings("WeakerAccess")
     private static class PropertyMatcher extends DiagnosingMatcher<Object> {
         private final Method readMethod;
         private final Matcher<Object> matcher;

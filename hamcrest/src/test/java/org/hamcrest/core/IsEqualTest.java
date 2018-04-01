@@ -4,6 +4,7 @@ import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import static org.hamcrest.AbstractMatcherTest.*;
+import org.hamcrest.Matchers;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsEqual.equalToObject;
 
@@ -14,7 +15,6 @@ public final class IsEqualTest {
         Matcher<?> matcher = equalTo("irrelevant");
 
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void
@@ -125,10 +125,10 @@ public final class IsEqualTest {
     hasUntypedVariant() {
         Object original = 10;
 
-        assertMatches(equalToObject(10), original);
-        assertDoesNotMatch(equalToObject(0), original);
-        assertDoesNotMatch(equalToObject("10"), original);
-        assertDoesNotMatch(equalToObject(10), "10");
+        assertMatches(Matchers.<Object>equalToObject(10), original);
+        assertDoesNotMatch(Matchers.<Object>equalToObject(0), original);
+        assertDoesNotMatch(Matchers.<Object>equalToObject("10"), original);
+        assertDoesNotMatch(Matchers.<Object>equalToObject(10), "10");
     }
 
     @Test public void

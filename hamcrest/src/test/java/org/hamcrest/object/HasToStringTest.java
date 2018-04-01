@@ -21,7 +21,6 @@ public final class HasToStringTest {
         Matcher<Object> matcher = hasToString(equalTo("irrelevant"));
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
     
     @Test public void

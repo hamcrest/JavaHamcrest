@@ -5,7 +5,6 @@ import org.junit.Test;
 import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
 import static org.junit.Assert.assertFalse;
 
-@SuppressWarnings("WeakerAccess")
 public final class TypeSafeMatcherTest {
     private final Matcher<String> matcher = new TypeSafeMatcherSubclass();
 
@@ -28,7 +27,6 @@ public final class TypeSafeMatcherTest {
     @Test public void
     canDetermineMatcherTypeFromProtectedMatchesSafelyMethod() {
         assertFalse(matcher.matches(null));
-        assertFalse(matcher.matches(10));
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

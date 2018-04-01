@@ -3,7 +3,6 @@ package org.hamcrest.object;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-@SuppressWarnings("WeakerAccess")
 public class HasEqualsValuesTest extends AbstractMatcherTest {
     private static final WithPublicFields WITH_PUBLIC_FIELDS = new WithPublicFields('x', 666, "a string");
     private static final HasEqualValues<WithPublicFields> WITH_PUBLIC_FIELDS_MATCHER = new HasEqualValues<>(WITH_PUBLIC_FIELDS);

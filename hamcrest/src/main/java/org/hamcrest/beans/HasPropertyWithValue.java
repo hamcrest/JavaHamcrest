@@ -14,6 +14,7 @@ import java.util.ListIterator;
 
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
+import org.hamcrest.Matchers;
 import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
 
 /**
@@ -69,19 +70,28 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * @author Steve Freeman
  * @author cristcost at github
  */
-public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
+public class HasPropertyWithValue<V, T> extends TypeSafeDiagnosingMatcher<T> {
     private static final Condition.Step<PropertyDescriptor,Method> WITH_READ_METHOD = withReadMethod();
     private final String propertyName;
-    private final Matcher<Object> valueMatcher;
+    private final Matcher<V> valueMatcher;
     private final String messageFormat;
 
-    public HasPropertyWithValue(String propertyName, Matcher<?> valueMatcher) {
+    public HasPropertyWithValue(String propertyName, Matcher<V> valueMatcher) {
         this(propertyName, valueMatcher, " property '%s' ");
     }
 
-    public HasPropertyWithValue(String propertyName, Matcher<?> valueMatcher, String messageFormat) {
+    public HasPropertyWithValue(String propertyName, Matcher<V> valueMatcher, String messageFormat) {
+        if(propertyName == null) {
+            throw new IllegalArgumentException("propertyName mustn't be null");
+        }
         this.propertyName = propertyName;
-        this.valueMatcher = nastyGenericsWorkaround(valueMatcher);
+        if(valueMatcher == null) {
+            throw new IllegalArgumentException("valueMatcher mustn't be null");
+        }
+        this.valueMatcher = valueMatcher;
+        if(messageFormat == null) {
+            throw new IllegalArgumentException("messageFormat mustn't be null");
+        }
         this.messageFormat = messageFormat;
     }
 
@@ -109,12 +119,12 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         return matched(property, mismatch);
     }
 
-    private Condition.Step<Method, Object> withPropertyValue(final T bean) {
-        return new Condition.Step<Method, Object>() {
+    private Condition.Step<Method, V> withPropertyValue(final T bean) {
+        return new Condition.Step<Method, V>() {
             @Override
-            public Condition<Object> apply(Method readMethod, Description mismatch) {
+            public Condition<V> apply(Method readMethod, Description mismatch) {
                 try {
-                    return matched(readMethod.invoke(bean, NO_ARGUMENTS), mismatch);
+                    return matched((V)readMethod.invoke(bean, NO_ARGUMENTS), mismatch);
                 } catch (InvocationTargetException e) {
                     mismatch
                       .appendText("Calling '")
@@ -128,11 +138,6 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
                 }
             }
         };
-    }
-
-    @SuppressWarnings("unchecked")
-    private static Matcher<Object> nastyGenericsWorkaround(Matcher<?> valueMatcher) {
-        return (Matcher<Object>) valueMatcher;
     }
 
     private static Condition.Step<PropertyDescriptor,Method> withReadMethod() {
@@ -177,14 +182,23 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      * @param valueMatcher
      *     a matcher for the value of the specified property of the examined bean
      */
-    public static <T> Matcher<T> hasPropertyAtPath(String path, Matcher<T> valueMatcher) {
+    public static <V, T> Matcher<T> hasPropertyAtPath(String path, Matcher<V> valueMatcher) {
         List<String> properties = Arrays.asList(path.split("\\."));
             ListIterator<String> iterator =
                 properties.listIterator(properties.size());
+            if(!iterator.hasPrevious()) {
+                throw new IllegalArgumentException(String.format("path '%s' "
+                        + "defines no properties",
+                        path));
+            }
 
-            Matcher<T> ret = valueMatcher;
+            Matcher<T> ret = null;
             while (iterator.hasPrevious()) {
-                ret = new HasPropertyWithValue<>(iterator.previous(), ret, "%s.");
+                ret = new HasPropertyWithValue<>(iterator.previous(),
+                        iterator.hasPrevious()
+                                ? Matchers.not(Matchers.anything())
+                                : valueMatcher,
+                        "%s.");
             }
             return ret;
     }

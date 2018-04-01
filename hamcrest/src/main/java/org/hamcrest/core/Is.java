@@ -21,7 +21,7 @@ public class Is<T> extends BaseMatcher<T> {
     }
 
     @Override
-    public boolean matches(Object arg) {
+    public boolean matches(T arg) {
         return matcher.matches(arg);
     }
 
@@ -31,7 +31,7 @@ public class Is<T> extends BaseMatcher<T> {
     }
 
     @Override
-    public void describeMismatch(Object item, Description mismatchDescription) {
+    public void describeMismatch(T item, Description mismatchDescription) {
         matcher.describeMismatch(item, mismatchDescription);
     }
 

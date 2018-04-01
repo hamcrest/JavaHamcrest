@@ -8,14 +8,14 @@ package org.hamcrest;
 public abstract class DiagnosingMatcher<T> extends BaseMatcher<T> {
 
     @Override
-    public final boolean matches(Object item) {
+    public final boolean matches(T item) {
         return matches(item, Description.NONE);
     }
 
     @Override
-    public final void describeMismatch(Object item, Description mismatchDescription) {
+    public final void describeMismatch(T item, Description mismatchDescription) {
         matches(item, mismatchDescription);
     }
 
-    protected abstract boolean matches(Object item, Description mismatchDescription);
+    protected abstract boolean matches(T item, Description mismatchDescription);
 }

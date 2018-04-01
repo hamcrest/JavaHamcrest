@@ -16,8 +16,6 @@ public final class CombinableTest {
     copesWithNullsAndUnknownTypes() {
         assertNullSafe(EITHER_3_OR_4);
         assertNullSafe(NOT_3_AND_NOT_4);
-        assertUnknownTypeSafe(EITHER_3_OR_4);
-        assertUnknownTypeSafe(NOT_3_AND_NOT_4);
     }
 
     @Test public void
