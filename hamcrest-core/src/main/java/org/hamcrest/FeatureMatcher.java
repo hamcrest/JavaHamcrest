@@ -51,4 +51,18 @@ public abstract class FeatureMatcher<T, U> extends TypeSafeDiagnosingMatcher<T> 
     description.appendText(featureDescription).appendText(" ")
                .appendDescriptionOf(subMatcher);
   }
+
+  public static <T, U> FeatureMatcher<T, U> ofFunction(final Mapper<T, U> mapper, Matcher<? super U> matcher, String featureDescription, String featureName) {
+  	return new FeatureMatcher<T, U>(matcher, featureDescription, featureName) {
+	  @Override
+	  protected U featureValueOf(T actual) {
+	    return mapper.map(actual);
+	  }
+	};
+  }
+
+  // TODO java 8 @FunctionalInterface
+  public interface Mapper<T, U> {
+  	U map(T t);
+  }
 }
