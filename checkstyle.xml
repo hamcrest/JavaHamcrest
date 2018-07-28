@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+ <!DOCTYPE module PUBLIC
+   "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+   "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<!--keep the file in project root although NetBeans 8.0.2 doesn't find it there and allow to add additional project files (don't skip a proper project structure in favour of IDE deficies)-->
+<module name="Checker">
+    <!-- Following interprets the header file as regular expressions. -->
+    <!-- Due to the fact that checkstyle only seems to be able to (re)use text from a license file if no text stands before the header in the source code and the fact that variable text is used in the header (package name), use the `RegexpHeader` module to validate the headers -->
+    <module name="RegexpHeader">
+        <property
+            name="header"
+            value="^/\*\*\n \* BSD License\n \*\n \* Copyright \(c\) 2000-2015 www.hamcrest.org\n \* All rights reserved.\n \*\n \* Redistribution and use in source and binary forms, with or without\n \* modification, are permitted provided that the following conditions are met:\n \*\n \* Redistributions of source code must retain the above copyright notice, this\n \* list of conditions and the following disclaimer. Redistributions in binary\n \* form must reproduce the above copyright notice, this list of conditions and\n \* the following disclaimer in the documentation and/or other materials provided\n \* with the distribution.\n \*\n \* Neither the name of Hamcrest nor the names of its contributors may be used to\n \* endorse or promote products derived from this software without specific prior\n \* written permission.\n \*\n \* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;\n \* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n \* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n \* ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE\n \* LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\n \* CONSEQUENTIAL DAMAGES \(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\n \* SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\n \* INTERRUPTION\) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\n \* CONTRACT, STRICT LIABILITY, OR TORT \(INCLUDING NEGLIGENCE OR OTHERWISE\)\n \* ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n \* POSSIBILITY OF SUCH DAMAGE.\n \*/\n"/><!--add package ([0-9a-zA-Z]+.)*[0-9a-zA-Z]+;\n after clarifying how to add optional group containing \n (asked http://stackoverflow.com/questions/33266679/how-to-specify-an-optional-regex-group-with-a-newline-character-in-checkstyles for inputs)-->
+        <property name="fileExtensions" value="java"/>
+    </module>
+    <!-- Checks that there are no tab characters ('\t') in the source code. -->
+    <module name="FileTabCharacter">
+        <!-- Report on each line in each file -->
+        <property name="eachLine" value="true"/>
+    </module>
+    <module name="TreeWalker">
+        <!-- No EOL should be placed before block start ('{') -->
+        <module name="LeftCurly">
+            <property name="option" value="eol"/>
+            <property name="severity" value="error"/>
+        </module>
+        <!-- '}' rules -->
+        <module name="RightCurly">
+            <!-- '}' should be on the same line as a next statement -->
+            <property name="option" value="same"/>
+            <property name="severity" value="error"/>
+        </module>
+        <!-- Braces are mandatory around code blocks -->
+        <module name="NeedBraces">
+            <property name="severity" value="error"/>
+        </module>
+
+        <!-- Javadoc -->
+        <!-- Checks the Javadoc of a method or constructor. -->
+        <module name="JavadocMethod">
+            <property name="scope" value="public"/>
+            <property name="allowMissingJavadoc" value="true"/>
+            <property name="severity" value="error"/>
+        </module>
+        <!-- Checks Javadoc comments for class and interface definitions. -->
+        <module name="JavadocType">
+            <property name="scope" value="public"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="AtclauseOrder"/>
+        <module name="JavadocTagContinuationIndentation">
+            <property name="offset" value="4"/>
+        </module>
+        <module name="NonEmptyAtclauseDescription"/>
+        <!--<module name="SummaryJavadocCheck"/>-->
+            <!-- requires all methods to have a Javadoc -->
+
+        <!-- Checks for Naming Conventions.              -->
+        <!-- See http://checkstyle.sourceforge.net/config_naming.html -->
+        <!-- Sun Naming Conventions -->
+        <module name="ConstantName"/>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="PackageName"/>
+        <module name="ParameterName"/>
+        <module name="StaticVariableName"/>
+        <module name="TypeName"/>
+        <!-- Checks correct indentation of Java Code. -->
+        <module name="Indentation">
+            <!-- how many spaces to use for new indentation level -->
+            <property name="basicOffset" value="4" />
+            <!-- how far brace should be indented when on next line -->
+            <property name="braceAdjustment" value="0"/>
+            <!-- how much to indent a case label -->
+            <property name="caseIndent" value="4"/>
+        </module>
+        <!-- Specify method parameters code conventions -->
+        <!--<module name="MethodParamPad">
+             Whitespace is required after method name 
+            <property name="option" value="space" />
+             Check only methods and constructors declarations 
+            <property name="tokens" value="METHOD_DEF, CTOR_DEF" />
+        </module>  -->
+        <!-- Checks the policy on the padding of parentheses; i.e. whether a space is required after a left parenthesis and before a
+        right parenthesis, or such spaces are forbidden. -->
+        <!--<module name="ParenPad">
+            Whitespace required before ')' and after ')' 
+            <property name="option" value="space"/>
+        </module>  -->
+        <module name="Regexp">
+            <property name="format" value="[ \t]+$"/>
+            <property name="illegalPattern" value="true"/>
+            <property name="message" value="Trailing whitespace"/>
+        </module>
+        <module name="UnusedImports"/>
+        <module name="RedundantImport"/>
+        <module name="ImportOrder">
+            <property name="option" value="inflow"/>
+        </module>
+        <module name="SuppressionCommentFilter"/>
+        <module name="AnnotationLocation">
+            <property name="allowSamelineMultipleAnnotations" value="false"/>
+            <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
+            <property name="allowSamelineParameterizedAnnotation" value="false"/>
+        </module>
+    </module>
+</module>

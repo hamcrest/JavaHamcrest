@@ -1,13 +1,46 @@
+/**
+ * BSD License
+ *
+ * Copyright (c) 2000-2015 www.hamcrest.org
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer. Redistributions in binary
+ * form must reproduce the above copyright notice, this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution.
+ *
+ * Neither the name of Hamcrest nor the names of its contributors may be used to
+ * endorse or promote products derived from this software without specific prior
+ * written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
 package org.hamcrest.comparator;
 
+import static java.lang.Integer.signum;
+import java.util.Comparator;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-import java.util.Comparator;
-
-import static java.lang.Integer.signum;
-
+/**
+ * A builder for comparator matchers.
+ * @param <T> the matcher type
+ */
 public final class ComparatorMatcherBuilder<T> {
 
     private final Comparator<T> comparator;
@@ -17,14 +50,17 @@ public final class ComparatorMatcherBuilder<T> {
      * Creates a matcher factory for matchers of {@code Comparable}s.
      * For example:
      * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().lessThanOrEqualTo(1))</pre>
+     * @param <T> the matcher type
+     * @return the created matcher
      */
     public static <T extends Comparable<T>> ComparatorMatcherBuilder<T> usingNaturalOrdering() {
-        return new ComparatorMatcherBuilder<T>(new Comparator<T>() {
+        return new ComparatorMatcherBuilder<>(new Comparator<T>() {
             @Override
             public int compare(T o1, T o2) {
                 return o1.compareTo(o2);
             }
-        }, false);
+        },
+                false);
     }
 
     /**
@@ -35,9 +71,12 @@ public final class ComparatorMatcherBuilder<T> {
      * return -o1.compareTo(o2);
      * }
      * }).lessThan(4))</pre>
+     * @param <T> the matcher type
+     * @param comparator the comparator to use
+     * @return the created matcher
      */
     public static <T> ComparatorMatcherBuilder<T> comparedBy(Comparator<T> comparator) {
-        return new ComparatorMatcherBuilder<T>(comparator, true);
+        return new ComparatorMatcherBuilder<>(comparator, true);
     }
 
     private ComparatorMatcherBuilder(Comparator<T> comparator, boolean includeComparatorInDescription) {
@@ -45,6 +84,10 @@ public final class ComparatorMatcherBuilder<T> {
         this.includeComparatorInDescription = includeComparatorInDescription;
     }
 
+    /**
+     * A comparator matcher implementation.
+     * @param <T> the matcher type
+     */
     private static final class ComparatorMatcher<T> extends TypeSafeMatcher<T> {
         private static final int LESS_THAN = -1;
         private static final int GREATER_THAN = 1;
@@ -56,10 +99,10 @@ public final class ComparatorMatcherBuilder<T> {
         private final int maxCompare;
         private final boolean includeComparatorInDescription;
 
-        private static final String[] comparisonDescriptions = {
-                "less than",
-                "equal to",
-                "greater than"
+        private static final String[] COMPARISON_DESCRIPTIONS = {
+            "less than",
+            "equal to",
+            "greater than"
         };
 
         private ComparatorMatcher(Comparator<T> comparator, T expected, int minCompare, int maxCompare, boolean includeComparatorInDescription) {
@@ -103,7 +146,7 @@ public final class ComparatorMatcherBuilder<T> {
         }
 
         private static String asText(int comparison) {
-            return comparisonDescriptions[signum(comparison) + 1];
+            return COMPARISON_DESCRIPTIONS[signum(comparison) + 1];
         }
     }
 
@@ -115,9 +158,10 @@ public final class ComparatorMatcherBuilder<T> {
      * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().comparesEqualTo(1))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return zero
+     * @return the created matcher
      */
     public Matcher<T> comparesEqualTo(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.EQUAL, includeComparatorInDescription);
+        return new ComparatorMatcher<>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.EQUAL, includeComparatorInDescription);
     }
 
     /**
@@ -129,9 +173,10 @@ public final class ComparatorMatcherBuilder<T> {
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return greater
      *              than zero
+     * @return the created matcher
      */
     public Matcher<T> greaterThan(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.GREATER_THAN, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
+        return new ComparatorMatcher<>(comparator, value, ComparatorMatcher.GREATER_THAN, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
     }
 
     /**
@@ -143,9 +188,10 @@ public final class ComparatorMatcherBuilder<T> {
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return greater
      *              than or equal to zero
+     * @return the created matcher
      */
     public Matcher<T> greaterThanOrEqualTo(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
+        return new ComparatorMatcher<>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
     }
 
     /**
@@ -157,9 +203,10 @@ public final class ComparatorMatcherBuilder<T> {
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return less
      *              than zero
+     * @return the created matcher
      */
     public Matcher<T> lessThan(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.LESS_THAN, includeComparatorInDescription);
+        return new ComparatorMatcher<>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.LESS_THAN, includeComparatorInDescription);
     }
 
     /**
@@ -171,8 +218,9 @@ public final class ComparatorMatcherBuilder<T> {
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return less
      *              than or equal to zero
+     * @return the created matcher
      */
     public Matcher<T> lessThanOrEqualTo(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.EQUAL, includeComparatorInDescription);
+        return new ComparatorMatcher<>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.EQUAL, includeComparatorInDescription);
     }
 }

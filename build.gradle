@@ -7,6 +7,7 @@ version = "2.2-SNAPSHOT"
 
 subprojects {
     apply plugin: 'java-library'
+    apply plugin: 'checkstyle'
 
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
@@ -16,6 +17,24 @@ subprojects {
 
     repositories {
         mavenCentral()
+    }
+
+    checkstyle {
+
+        project.ext.checkstyleVersion = '8.23'
+
+        sourceSets = [ project.sourceSets.main, project.sourceSets.test ]
+        ignoreFailures = false
+        configFile = file("${project.rootDir}/checkstyle.xml")
+
+        configurations {
+            checkstyle
+        }
+
+        dependencies{
+            assert project.hasProperty("checkstyleVersion")
+            checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
+        }
     }
 
     test {

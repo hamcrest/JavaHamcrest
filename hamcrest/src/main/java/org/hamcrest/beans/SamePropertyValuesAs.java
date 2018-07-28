@@ -1,18 +1,54 @@
+/**
+ * BSD License
+ *
+ * Copyright (c) 2000-2015 www.hamcrest.org
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer. Redistributions in binary
+ * form must reproduce the above copyright notice, this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution.
+ *
+ * Neither the name of Hamcrest nor the names of its contributors may be used to
+ * endorse or promote products derived from this software without specific prior
+ * written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
 package org.hamcrest.beans;
-
-import org.hamcrest.Description;
-import org.hamcrest.DiagnosingMatcher;
-import org.hamcrest.Matcher;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
-import java.util.*;
-
+import java.util.ArrayList;
 import static java.util.Arrays.asList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import org.hamcrest.Description;
+import org.hamcrest.DiagnosingMatcher;
+import org.hamcrest.Matcher;
 import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
 import static org.hamcrest.beans.PropertyUtil.propertyDescriptorsFor;
 import static org.hamcrest.core.IsEqual.equalTo;
 
+/**
+ * A matcher that matches identical property values.
+ * @param <T> the matcher type
+ */
 public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     private final T expectedBean;
     private final Set<String> propertyNames;
@@ -147,12 +183,14 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
      * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean))</pre>
      * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean), "age", "height")</pre>
      *
+     * @param <T> the matcher type
      * @param expectedBean
      *     the bean against which examined beans are compared
      * @param ignoredProperties
      *     do not check any of these named properties.
+     * @return the created matcher
      */
-    public static <B> Matcher<B> samePropertyValuesAs(B expectedBean, String... ignoredProperties) {
+    public static <T> Matcher<T> samePropertyValuesAs(T expectedBean, String... ignoredProperties) {
         return new SamePropertyValuesAs<>(expectedBean, asList(ignoredProperties));
     }
 

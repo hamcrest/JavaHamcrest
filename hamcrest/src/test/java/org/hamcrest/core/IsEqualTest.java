@@ -1,24 +1,57 @@
+/**
+ * BSD License
+ *
+ * Copyright (c) 2000-2015 www.hamcrest.org
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer. Redistributions in binary
+ * form must reproduce the above copyright notice, this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution.
+ *
+ * Neither the name of Hamcrest nor the names of its contributors may be used to
+ * endorse or promote products derived from this software without specific prior
+ * written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
 package org.hamcrest.core;
 
-import org.hamcrest.Matcher;
-import org.junit.Test;
-
 import static org.hamcrest.AbstractMatcherTest.*;
+import org.hamcrest.Matcher;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsEqual.equalToObject;
+import org.junit.Test;
 
+/**
+ * Is equal test.
+ */
 public final class IsEqualTest {
 
-    @Test public void
-    copesWithNullsAndUnknownTypes() {
+    @Test
+    public void copesWithNullsAndUnknownTypes() {
         Matcher<?> matcher = equalTo("irrelevant");
 
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }
 
-    @Test public void
-    comparesObjectsUsingEqualsMethod() {
+    @Test
+    public void comparesObjectsUsingEqualsMethod() {
         final Matcher<String> matcher1 = equalTo("hi");
         assertMatches(matcher1, "hi");
         assertDoesNotMatch(matcher1, "bye");
@@ -30,10 +63,10 @@ public final class IsEqualTest {
         assertDoesNotMatch(matcher2, null);
     }
 
-    @Test public void
-    canCompareNullValues() {
+    @Test
+    public void canCompareNullValues() {
         final Matcher<Object> matcher = equalTo(null);
-        
+
         assertMatches(matcher, null);
         assertDoesNotMatch(matcher, 2);
         assertDoesNotMatch(matcher, "hi");
@@ -41,8 +74,8 @@ public final class IsEqualTest {
     }
 
     @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
-    @Test public void
-    honoursIsEqualImplementationEvenWithNullValues() {
+    @Test
+    public void honoursIsEqualImplementationEvenWithNullValues() {
         Object alwaysEqual = new Object() {
             @Override
             public boolean equals(Object obj) {
@@ -62,8 +95,8 @@ public final class IsEqualTest {
         assertDoesNotMatch(matcher, neverEqual);
     }
 
-    @Test public void
-    comparesTheElementsOfAnObjectArray() {
+    @Test
+    public void comparesTheElementsOfAnObjectArray() {
         String[] s1 = {"a", "b"};
         String[] s2 = {"a", "b"};
         String[] s3 = {"c", "d"};
@@ -77,8 +110,8 @@ public final class IsEqualTest {
         assertDoesNotMatch(matcher, null);
     }
 
-    @Test public void
-    comparesTheElementsOfArraysWithNulls() {
+    @Test
+    public void comparesTheElementsOfArraysWithNulls() {
         String[] s1 = {"a", null, "b"};
         String[] s2 = {"a", null, "b"};
         String[] s3 = {"c", "d"};
@@ -91,8 +124,8 @@ public final class IsEqualTest {
         assertDoesNotMatch(matcher, s4);
     }
 
-    @Test public void
-    comparesTheElementsOfAnArrayOfPrimitiveTypes() {
+    @Test
+    public void comparesTheElementsOfAnArrayOfPrimitiveTypes() {
         int[] i1 = new int[]{1, 2};
         int[] i2 = new int[]{1, 2};
         int[] i3 = new int[]{3, 4};
@@ -106,8 +139,8 @@ public final class IsEqualTest {
         assertDoesNotMatch(matcher, null);
     }
 
-    @Test public void
-    recursivelyTestsElementsOfArrays() {
+    @Test
+    public void recursivelyTestsElementsOfArrays() {
         int[][] i1 = new int[][]{{1, 2}, {3, 4}};
         int[][] i2 = new int[][]{{1, 2}, {3, 4}};
         int[][] i3 = new int[][]{{5, 6}, {7, 8}};
@@ -121,8 +154,8 @@ public final class IsEqualTest {
         assertDoesNotMatch(matcher, null);
     }
 
-    @Test public void
-    hasUntypedVariant() {
+    @Test
+    public void hasUntypedVariant() {
         Object original = 10;
 
         assertMatches(equalToObject(10), original);
@@ -131,8 +164,8 @@ public final class IsEqualTest {
         assertDoesNotMatch(equalToObject(10), "10");
     }
 
-    @Test public void
-    includesTheResultOfCallingToStringOnItsArgumentInTheDescription() {
+    @Test
+    public void includesTheResultOfCallingToStringOnItsArgumentInTheDescription() {
         final String argumentDescription = "ARGUMENT DESCRIPTION";
         Object argument = new Object() {
             @Override
@@ -143,14 +176,14 @@ public final class IsEqualTest {
         assertDescription("<" + argumentDescription + ">", equalTo(argument));
     }
 
-    @Test public void
-    returnsAnObviousDescriptionIfCreatedWithANestedMatcherByMistake() {
+    @Test
+    public void returnsAnObviousDescriptionIfCreatedWithANestedMatcherByMistake() {
         Matcher<? super String> innerMatcher = equalTo("NestedMatcher");
         assertDescription("<" + innerMatcher.toString() + ">", equalTo(innerMatcher));
     }
 
-    @Test public void
-    returnsGoodDescriptionIfCreatedWithNullReference() {
+    @Test
+    public void returnsGoodDescriptionIfCreatedWithNullReference() {
         assertDescription("null", equalTo(null));
     }
 }
