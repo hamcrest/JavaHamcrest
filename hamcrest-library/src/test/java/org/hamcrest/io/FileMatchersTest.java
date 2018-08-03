@@ -4,6 +4,10 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.PosixFilePermission;
+import java.util.Set;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -41,47 +45,62 @@ public class FileMatchersTest extends AbstractMatcherTest {
         assertDoesNotMatch("doesn't match missing file", FileMatchers.anExistingFile(), new File("foo"));
     }
 
-    public void testAReadableFile() {
-        file.setReadable(true);
+    public void testAReadableFile() throws IOException {
+        Set<PosixFilePermission> perms = Files.getPosixFilePermissions(file.toPath());
+        perms.add(PosixFilePermission.OWNER_READ);
+        Files.setPosixFilePermissions(file.toPath(), perms);
         assertMatches("matches readable file", FileMatchers.aReadableFile(), file);
-        if (file.setReadable(false)) {
-            assertDoesNotMatch("doesn't match unreadable file", FileMatchers.aReadableFile(), file);
-        }
+        perms = Files.getPosixFilePermissions(file.toPath());
+        perms.remove(PosixFilePermission.OWNER_READ);
+        Files.setPosixFilePermissions(file.toPath(), perms);
+        assertDoesNotMatch("doesn't match unreadable file", FileMatchers.aReadableFile(), file);
     }
 
-    public void testAWritableFile() {
+    public void testAWritableFile() throws IOException {
         assertMatches("matches writable file", FileMatchers.aWritableFile(), file);
-        file.setWritable(false);
+        Set<PosixFilePermission> perms = Files.getPosixFilePermissions(file.toPath());
+        perms.remove(PosixFilePermission.OWNER_WRITE);
+        Files.setPosixFilePermissions(file.toPath(), perms);
         assertDoesNotMatch("doesn't match unwritable file", FileMatchers.aWritableFile(), file);
     }
 
-    public void testAFileWithSizeLong() {
+    public void testAFileWithSizeLong() throws IOException {
         assertMatches("matches file size", FileMatchers.aFileWithSize(0L), file);
-        file.setWritable(false);
+        Set<PosixFilePermission> perms = Files.getPosixFilePermissions(file.toPath());
+        perms.remove(PosixFilePermission.OWNER_WRITE);
+        Files.setPosixFilePermissions(file.toPath(), perms);
         assertDoesNotMatch("doesn't match incorrect file size", FileMatchers.aFileWithSize(34L), file);
     }
 
-    public void testAFileWithSizeMatcherOfLong() {
+    public void testAFileWithSizeMatcherOfLong() throws IOException {
         assertMatches("matches file size", FileMatchers.aFileWithSize(equalTo(0L)), file);
-        file.setWritable(false);
+        Set<PosixFilePermission> perms = Files.getPosixFilePermissions(file.toPath());
+        perms.remove(PosixFilePermission.OWNER_WRITE);
+        Files.setPosixFilePermissions(file.toPath(), perms);
         assertDoesNotMatch("doesn't match incorrect file size", FileMatchers.aFileWithSize(equalTo(23L)), file);
     }
 
-    public void testAFileNamed() {
+    public void testAFileNamed() throws IOException {
         assertMatches("matches file name", FileMatchers.aFileNamed(equalTo(file.getName())), file);
-        file.setWritable(false);
+        Set<PosixFilePermission> perms = Files.getPosixFilePermissions(file.toPath());
+        perms.remove(PosixFilePermission.OWNER_WRITE);
+        Files.setPosixFilePermissions(file.toPath(), perms);
         assertDoesNotMatch("doesn't match incorrect file name", FileMatchers.aFileNamed(equalTo("foo")), file);
     }
 
     public void testAFileWithCanonicalPath() throws Exception {
         assertMatches("matches file canonical path", FileMatchers.aFileWithCanonicalPath(equalTo(file.getCanonicalPath())), file);
-        file.setWritable(false);
+        Set<PosixFilePermission> perms = Files.getPosixFilePermissions(file.toPath());
+        perms.remove(PosixFilePermission.OWNER_WRITE);
+        Files.setPosixFilePermissions(file.toPath(), perms);
         assertDoesNotMatch("doesn't match incorrect canonical path", FileMatchers.aFileWithCanonicalPath(equalTo("foo")), file);
     }
 
-    public void testAFileWithAbsolutePath() {
+    public void testAFileWithAbsolutePath() throws IOException {
         assertMatches("matches file absolute path", FileMatchers.aFileWithAbsolutePath(equalTo(file.getAbsolutePath())), file);
-        file.setWritable(false);
+        Set<PosixFilePermission> perms = Files.getPosixFilePermissions(file.toPath());
+        perms.remove(PosixFilePermission.OWNER_WRITE);
+        Files.setPosixFilePermissions(file.toPath(), perms);
         assertDoesNotMatch("doesn't match incorrect absolute path", FileMatchers.aFileWithAbsolutePath(equalTo("foo")), file);
     }
 
