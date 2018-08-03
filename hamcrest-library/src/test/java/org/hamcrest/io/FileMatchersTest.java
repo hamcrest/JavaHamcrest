@@ -4,6 +4,7 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -14,10 +15,10 @@ public class FileMatchersTest extends AbstractMatcherTest {
     private File file;
 
     @Override
-    protected void setUp() throws Exception {
+    protected void setUp() throws IOException {
         directory = File.createTempFile("myDir", "");
-        directory.delete();
-        directory.mkdirs();
+        assertTrue("deleting " + directory, directory.delete());
+        assertTrue("mkdir " + directory, directory.mkdirs());
         
         file = new File(directory, "myFile");
         file.createNewFile();
@@ -41,9 +42,10 @@ public class FileMatchersTest extends AbstractMatcherTest {
         assertDoesNotMatch("doesn't match missing file", FileMatchers.anExistingFile(), new File("foo"));
     }
 
-    public void testAReadableFile() {
+    public void testAReadableFile() { // Not all OSes will allow setting readability so have to be forgiving here.
         file.setReadable(true);
         assertMatches("matches readable file", FileMatchers.aReadableFile(), file);
+
         if (file.setReadable(false)) {
             assertDoesNotMatch("doesn't match unreadable file", FileMatchers.aReadableFile(), file);
         }
@@ -51,37 +53,33 @@ public class FileMatchersTest extends AbstractMatcherTest {
 
     public void testAWritableFile() {
         assertMatches("matches writable file", FileMatchers.aWritableFile(), file);
-        file.setWritable(false);
+
+        assertTrue("set writable off " + file, file.setWritable(false));
         assertDoesNotMatch("doesn't match unwritable file", FileMatchers.aWritableFile(), file);
     }
 
     public void testAFileWithSizeLong() {
         assertMatches("matches file size", FileMatchers.aFileWithSize(0L), file);
-        file.setWritable(false);
         assertDoesNotMatch("doesn't match incorrect file size", FileMatchers.aFileWithSize(34L), file);
     }
 
     public void testAFileWithSizeMatcherOfLong() {
         assertMatches("matches file size", FileMatchers.aFileWithSize(equalTo(0L)), file);
-        file.setWritable(false);
         assertDoesNotMatch("doesn't match incorrect file size", FileMatchers.aFileWithSize(equalTo(23L)), file);
     }
 
     public void testAFileNamed() {
         assertMatches("matches file name", FileMatchers.aFileNamed(equalTo(file.getName())), file);
-        file.setWritable(false);
         assertDoesNotMatch("doesn't match incorrect file name", FileMatchers.aFileNamed(equalTo("foo")), file);
     }
 
     public void testAFileWithCanonicalPath() throws Exception {
         assertMatches("matches file canonical path", FileMatchers.aFileWithCanonicalPath(equalTo(file.getCanonicalPath())), file);
-        file.setWritable(false);
         assertDoesNotMatch("doesn't match incorrect canonical path", FileMatchers.aFileWithCanonicalPath(equalTo("foo")), file);
     }
 
     public void testAFileWithAbsolutePath() {
         assertMatches("matches file absolute path", FileMatchers.aFileWithAbsolutePath(equalTo(file.getAbsolutePath())), file);
-        file.setWritable(false);
         assertDoesNotMatch("doesn't match incorrect absolute path", FileMatchers.aFileWithAbsolutePath(equalTo("foo")), file);
     }
 
