@@ -3,6 +3,7 @@ package org.hamcrest.collection;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -27,17 +28,17 @@ public class IsMapContainingTest extends AbstractMatcherTest {
         assertMismatchDescription("map was [<a=1>, <b=2>]", hasEntry(equalTo("c"), equalTo(3)), map);
     }
 
-//    no longer compiles. SF
-//    public void testMatchesMapContainingMatchingKeyAndValueWithoutGenerics() {
-//        Map map = new HashMap();
-//        map.put("a", 1);
-//        map.put("b", 2);
-//
-//        assertMatches("matcherA", hasEntry(equalTo("a"), equalTo(1)), map);
-//        assertMatches("matcherB", hasEntry(equalTo("b"), equalTo(2)), map);
-//        assertDoesNotMatch("matcherC", hasEntry(equalTo("c"), equalTo(3)), map);
-//    }
-//
+    @SuppressWarnings("unchecked")
+    public void testMatchesMapContainingMatchingKeyAndValueWithoutGenerics() {
+        Map map = new HashMap();
+        map.put("a", 1);
+        map.put("b", 2);
+
+        assertMatches("matcherA", hasEntry(equalTo("a"), equalTo(1)), map);
+        assertMatches("matcherB", hasEntry(equalTo("b"), equalTo(2)), map);
+        assertFalse("matcherC", hasEntry(equalTo("c"), equalTo(3)).matches(map)); // working around generics problem
+    }
+
     public void testDoesNotMatchNull() {
         assertMismatchDescription("was null", hasEntry(anything(), anything()), null);
     }
