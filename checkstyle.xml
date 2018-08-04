@@ -1,11 +1,19 @@
 <?xml version="1.0"?>
  <!DOCTYPE module PUBLIC
-   "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
-   "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+   "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+   "https://checkstyle.org/dtds/configuration_1_3.dtd">
 <module name="Checker">
     <!-- Checks that there are no tab characters ('\t') in the source code. -->
     <module name="FileTabCharacter">
         <!-- Report on each line in each file -->
         <property name="eachLine" value="true"/>
+    </module>
+    <!-- Following interprets the header file as regular expressions. -->
+    <!-- Due to the fact that checkstyle only seems to be able to (re)use text from a license file if no text stands before the header in the source code and the fact that variable text is used in the header (package name), use the `RegexpHeader` module to validate the headers -->
+    <module name="RegexpHeader">
+        <property
+            name="header"
+            value="^/\*\*\n \* Copyright \(c\) 2000-2022 www.hamcrest.org. All rights reserved.\n \*\n \* This work is licensed under the terms of the BSD license.\n \* For a copy, see LICENSE.txt in this repository.\n\*/\n"/>
+        <property name="fileExtensions" value="java"/>
     </module>
 </module>

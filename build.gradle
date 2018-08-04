@@ -1,4 +1,5 @@
 apply plugin: 'signing'
+apply plugin: 'checkstyle'
 apply plugin: 'osgi'
 apply plugin: 'maven-publish'
 
@@ -21,10 +22,7 @@ subprojects {
 
     checkstyle {
 
-        project.ext.checkstyleVersion = '6.18'
-            //works with a JDK 7 version which is supposed to be supported although
-            //deprecated, see https://github.com/hamcrest/JavaHamcrest/pull/211 for
-            //the discussion about the support
+        project.ext.checkstyleVersion = '8.41'
 
         sourceSets = [ project.sourceSets.main, project.sourceSets.test ]
         ignoreFailures = false

@@ -1,4 +1,14 @@
 /**
+ * Copyright (c) 2000-2022 www.hamcrest.org. All rights reserved.
+ *
+ * This work is licensed under the terms of the BSD license.
+ * For a copy, see LICENSE.txt in this repository.
+ */
+package org.hamcrest.internal;
+
+import java.lang.reflect.Method;
+
+/**
  * The TypeSafe classes, and their descendants, need a mechanism to find out what type has been used as a parameter 
  * for the concrete matcher. Unfortunately, this type is lost during type erasure so we need to use reflection 
  * to get it back, by picking out the type of a known parameter to a known method. 
@@ -23,10 +33,6 @@
  * @author Steve Freeman
  * @author Nat Pryce
  */
-package org.hamcrest.internal;
-
-import java.lang.reflect.Method;
-
 public class ReflectiveTypeFinder {
   private final String methodName;
   private final int expectedNumberOfParameters;
