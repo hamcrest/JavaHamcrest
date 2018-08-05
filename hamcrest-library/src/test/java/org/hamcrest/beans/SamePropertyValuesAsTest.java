@@ -45,18 +45,37 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
         samePropertyValuesAs(expectedBean), new SubBeanWithExtraProperty("same", 1, aValue));
   }
 
-  public void test_ignores_extra_fields() {
+  public void test_ignores_extra_subtype_properties() {
     final SubBeanWithExtraProperty withExtraProperty = new SubBeanWithExtraProperty("same", 1, aValue);
-    assertMatches("matched properties", samePropertyValuesAs(expectedBean, "extraProperty"), withExtraProperty);
-  }
-  
-  public void test_ignores_different_fields_in_both_directions() {
-    final ExampleBean differentBean = new ExampleBean("different", 1, aValue);
-    assertMatches("matched properties", samePropertyValuesAs(expectedBean, "stringProperty"), differentBean);
+    assertMatches("extra property", samePropertyValuesAs(expectedBean, "extraProperty"), withExtraProperty);
   }
 
+  public void test_ignores_different_properties() {
+    final ExampleBean differentBean = new ExampleBean("different", 1, aValue);
+    assertMatches("different property", samePropertyValuesAs(expectedBean, "stringProperty"), differentBean);
+  }
+
+  public void test_accepts_missing_properties_to_ignore() {
+    assertMatches("ignored property", samePropertyValuesAs(expectedBean, "notAProperty"), actualBean);
+  }
+
+  public void test_can_ignore_all_properties() {
+    final ExampleBean differentBean = new ExampleBean("different", 2, new Value("not expected"));
+    assertMatches(
+            "different property",
+            samePropertyValuesAs(expectedBean, "stringProperty", "intProperty", "valueProperty"),
+            differentBean);
+  }
+
+
   public void testDescribesItself() {
-    assertDescription("same property values as ExampleBean [intProperty: <1>, stringProperty: \"same\", valueProperty: <Value expected>]", samePropertyValuesAs(expectedBean));
+    assertDescription(
+            "same property values as ExampleBean [intProperty: <1>, stringProperty: \"same\", valueProperty: <Value expected>]",
+            samePropertyValuesAs(expectedBean));
+
+    assertDescription(
+            "same property values as ExampleBean [intProperty: <1>, stringProperty: \"same\", valueProperty: <Value expected>] ignoring [\"ignored1\", \"ignored2\"]",
+            samePropertyValuesAs(expectedBean, "ignored1", "ignored2"));
   }
 
   public static class Value {
@@ -71,6 +90,7 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
     }
   }
   
+  @SuppressWarnings("unused")
   public static class ExampleBean {
     private String stringProperty;
     private int intProperty;
