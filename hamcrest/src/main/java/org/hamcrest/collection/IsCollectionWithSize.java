@@ -44,7 +44,7 @@ public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static <E> Matcher<Collection<? extends E>> hasSize(int size) {
-    	return (Matcher)IsCollectionWithSize.hasSize(equalTo(size));
+        return (Matcher)IsCollectionWithSize.hasSize(equalTo(size));
     }
 
 }
