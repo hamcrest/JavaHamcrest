@@ -55,7 +55,7 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     }
     
     public void testCanHandleNullMatchers() {
-    	assertMatches(contains(null, null), asList(null, null));
+        assertMatches(contains(null, null), asList(null, null));
     }
 
     public static class WithValue {

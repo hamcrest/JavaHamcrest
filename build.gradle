@@ -6,6 +6,7 @@ group = "org.hamcrest"
 version = "2.2-SNAPSHOT"
 
 subprojects {
+    apply plugin: 'checkstyle'
     apply plugin: 'java-library'
 
     sourceCompatibility = JavaVersion.VERSION_1_7
@@ -16,6 +17,27 @@ subprojects {
 
     repositories {
         mavenCentral()
+    }
+
+    checkstyle {
+
+        project.ext.checkstyleVersion = '6.18'
+            //works with a JDK 7 version which is supposed to be supported although
+            //deprecated, see https://github.com/hamcrest/JavaHamcrest/pull/211 for
+            //the discussion about the support
+
+        sourceSets = [ project.sourceSets.main, project.sourceSets.test ]
+        ignoreFailures = false
+        configFile = file("${project.rootDir}/checkstyle.xml")
+
+        configurations {
+            checkstyle
+        }
+
+        dependencies{
+            assert project.hasProperty("checkstyleVersion")
+            checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
+        }
     }
 
     test {

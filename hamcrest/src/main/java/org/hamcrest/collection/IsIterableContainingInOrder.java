@@ -129,7 +129,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
         // required for JDK 1.6
         //noinspection RedundantTypeArguments
         final List<Matcher<? super E>> nullSafeWithExplicitTypeMatchers = NullSafety.<E>nullSafe(itemMatchers);
-    	return contains(nullSafeWithExplicitTypeMatchers);
+        return contains(nullSafeWithExplicitTypeMatchers);
     }
 
     /**

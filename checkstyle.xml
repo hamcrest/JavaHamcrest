@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+ <!DOCTYPE module PUBLIC
+   "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+   "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<module name="Checker">
+    <!-- Checks that there are no tab characters ('\t') in the source code. -->
+    <module name="FileTabCharacter">
+        <!-- Report on each line in each file -->
+        <property name="eachLine" value="true"/>
+    </module>
+</module>

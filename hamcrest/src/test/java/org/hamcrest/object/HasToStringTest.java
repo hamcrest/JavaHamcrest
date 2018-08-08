@@ -26,30 +26,30 @@ public final class HasToStringTest {
     
     @Test public void
     matchesWhenUtilisingANestedMatcher() {
-    	final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
+        final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
 
-    	assertMatches(matcher, TEST_OBJECT);
-    	assertDoesNotMatch(matcher, new Object());
+        assertMatches(matcher, TEST_OBJECT);
+        assertDoesNotMatch(matcher, new Object());
     }
 
     @Test public void
     matchesWhenUsingShortcutForHasToStringEqualTo() {
-    	final Matcher<Object> matcher = hasToString(TO_STRING_RESULT);
-    	
-		assertMatches(matcher, TEST_OBJECT);
-    	assertDoesNotMatch(matcher, new Object());
+        final Matcher<Object> matcher = hasToString(TO_STRING_RESULT);
+        
+        assertMatches(matcher, TEST_OBJECT);
+        assertDoesNotMatch(matcher, new Object());
     }
 
     @Test public void
     describesItself() {
-    	final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
+        final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
         assertDescription("with toString() \"toString result\"", matcher);
     }
 
     @Test public void
     describesAMismatch() {
-    	final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
-    	String expectedMismatchString = "toString() was \"Cheese\"";
+        final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
+        String expectedMismatchString = "toString() was \"Cheese\"";
         assertMismatchDescription(expectedMismatchString, matcher, "Cheese");
     }
 }
