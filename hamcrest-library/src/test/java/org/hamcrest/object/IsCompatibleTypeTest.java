@@ -7,19 +7,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.object.IsCompatibleType.typeCompatibleWith;
 
 public class IsCompatibleTypeTest extends AbstractMatcherTest {
-    public static class BaseClass {
+    static class BaseClass {
     }
 
-    public static class ExtendedClass extends BaseClass {
+    private static class ExtendedClass extends BaseClass {
     }
 
-    public interface BaseInterface {
+    interface BaseInterface {
     }
 
-    public interface ExtendedInterface extends BaseInterface {
+    interface ExtendedInterface extends BaseInterface {
     }
 
-    public static class ClassImplementingBaseInterface implements BaseInterface {
+    private static class ClassImplementingBaseInterface implements BaseInterface {
     }
 
     @Override
@@ -46,11 +46,6 @@ public class IsCompatibleTypeTest extends AbstractMatcherTest {
     public void testMatchesExtendedInterface() {
         assertThat(ExtendedInterface.class, typeCompatibleWith(BaseInterface.class));
     }
-
-//    public void testDoesNotMatchIncompatibleTypes() {
-//        assertThat(BaseClass.class, not(compatibleType(ExtendedClass.class)));
-//        assertThat(Integer.class, not(compatibleType(String.class)));
-//    }
 
     public void testHasReadableDescription() {
         assertDescription("type < java.lang.Runnable", typeCompatibleWith(Runnable.class));
