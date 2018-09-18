@@ -13,7 +13,7 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
   private final BigDecimal value;
 
   public BigDecimalCloseTo(BigDecimal value, BigDecimal error) {
-      this.delta = error;
+      this.delta = error.abs();
       this.value = value;
   }
 

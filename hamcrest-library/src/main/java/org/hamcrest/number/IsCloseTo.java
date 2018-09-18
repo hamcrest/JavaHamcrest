@@ -16,7 +16,7 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
     private final double value;
 
     public IsCloseTo(double value, double error) {
-        this.delta = error;
+        this.delta = Math.abs(error);
         this.value = value;
     }
 
