@@ -458,6 +458,22 @@ public class Matchers {
   public static <T> org.hamcrest.Matcher<T> theInstance(T target) {
     return org.hamcrest.core.IsSame.theInstance(target);
   }
+  
+  /**
+   * Creates a matcher of {@link CharSequence} that matches when a char sequence has the length
+   * of the specified <code>argument</code>.
+   * For example:
+   * 
+   * <pre>
+   * assertThat("text", length(4))
+   * </pre>
+   * 
+   * @param length
+   *            the expected length of the string
+   */
+  public static Matcher<CharSequence> hasLength(int length) {
+    return org.hamcrest.core.CharSequenceLength.length(length);
+  }
 
   /**
    * Creates a matcher that matches if the examined {@link String} contains the specified
