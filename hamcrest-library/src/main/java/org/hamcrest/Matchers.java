@@ -460,22 +460,6 @@ public class Matchers {
   }
   
   /**
-   * Creates a matcher of {@link CharSequence} that matches when a char sequence has the length
-   * of the specified <code>argument</code>.
-   * For example:
-   * 
-   * <pre>
-   * assertThat("text", length(4))
-   * </pre>
-   * 
-   * @param length
-   *            the expected length of the string
-   */
-  public static Matcher<CharSequence> hasLength(int length) {
-    return org.hamcrest.core.CharSequenceLength.length(length);
-  }
-
-  /**
    * Creates a matcher that matches if the examined {@link String} contains the specified
    * {@link String} anywhere.
    * For example:
@@ -1522,6 +1506,21 @@ public class Matchers {
   public static Matcher<java.lang.String> stringContainsInOrder(java.lang.String... substrings) {
     return org.hamcrest.text.StringContainsInOrder.stringContainsInOrder(substrings);
   }
+
+    /**
+     * Creates a matcher of {@link CharSequence} that matches when a char sequence has the length
+     * of the specified <code>argument</code>.
+     * For example:
+     *
+     * <pre>
+     * assertThat("text", length(4))
+     * </pre>
+     *
+     * @param length the expected length of the string
+     */
+    public static Matcher<CharSequence> hasLength(int length) {
+        return org.hamcrest.text.CharSequenceLength.hasLength(length);
+    }
 
   /**
    * Creates a matcher that matches any examined object whose <code>toString</code> method
