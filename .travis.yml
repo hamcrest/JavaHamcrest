@@ -10,10 +10,7 @@ before_install:
 - echo "security.provider.1=org.bouncycastle.jce.provider.BouncyCastleProvider" | sudo tee -a /etc/java-7-openjdk/security/java.security
 
 jdk:
-  - openjdk7
   - oraclejdk8
   - openjdk8
-  - oraclejdk9
-
 script:
   - ./gradlew clean build javadoc
