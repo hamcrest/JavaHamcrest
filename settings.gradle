@@ -1,1 +1,2 @@
 enableFeaturePreview('STABLE_PUBLISHING')
+rootProject.name = 'java-hamcrest'
