@@ -1,14 +1,12 @@
 import static org.gradle.api.JavaVersion.VERSION_1_7
 
 apply plugin: 'java'
-apply plugin: 'maven'
 apply plugin: 'osgi'
 apply plugin: 'signing'
 apply plugin: 'maven-publish'
 
 sourceCompatibility = VERSION_1_7
 targetCompatibility = VERSION_1_7
-archivesBaseName = "java-hamcrest"
 
 group = "org.hamcrest"
 version = "2.0.0.0"
@@ -66,67 +64,63 @@ task javadocJar(type: Jar) {
     from javadoc
 }
 
-artifacts {
-    archives sourcesJar, javadocJar
-}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'java-hamcrest'
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            pom {
+                name = 'Java Hamcrest'
+                description = 'Hamcrest matcher library for Java'
+                url = 'http://hamcrest.org/JavaHamcrest/'
 
-signing {
-    required { gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
-}
-
-uploadArchives {
-    if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
-        repositories {
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                scm {
+                    connection = 'git@github.com:hamcrest/JavaHamcrest.git'
+                    url = 'https://github.com/hamcrest/JavaHamcrest'
                 }
 
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                licenses {
+                    license {
+                        name = 'BSD Licence 3'
+                        url = 'http://opensource.org/licenses/BSD-3-Clause'
+                    }
                 }
 
-                pom.project {
-                    name 'Java Hamcrest'
-                    packaging 'jar'
-                    description 'Hamcrest matcher library for Java'
-                    url 'http://hamcrest.org/JavaHamcrest/'
-
-                    scm {
-                        connection 'git@github.com:hamcrest/JavaHamcrest.git'
-                        url 'https://github.com/hamcrest/JavaHamcrest'
+                developers {
+                    developer {
+                        id = 'joewalnes'
+                        name = 'Joe Walnes'
                     }
-
-                    licenses {
-                        license {
-                            name 'BSD Licence 3'
-                            url 'http://opensource.org/licenses/BSD-3-Clause'
-                        }
+                    developer {
+                        id = 'npryce'
+                        name = 'Nat Pryce'
                     }
-
-                    developers {
-                        developer {
-                            id 'joewalnes'
-                            name 'Joe Walnes'
-                        }
-                        developer {
-                            id 'npryce'
-                            name 'Nat Pryce'
-                        }
-                        developer {
-                            id 'sf105'
-                            name 'Steve Freeman'
-                        }
+                    developer {
+                        id = 'sf105'
+                        name = 'Steve Freeman'
                     }
+                }
+            }
+        }
+    }
+    repositories {
+        if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
+            maven {
+                def snapshotRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+                def stagingRepoUrl  = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                url = version.contains('SNAPSHOT') ? snapshotRepoUrl : stagingRepoUrl
+                credentials {
+                    username = ossrhUsername
+                    password = ossrhPassword
                 }
             }
         }
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.5'
+signing {
+    required { hasProperty('ossrhUsername') && hasProperty('ossrhPassword') }
+    sign publishing.publications.mavenJava
 }
