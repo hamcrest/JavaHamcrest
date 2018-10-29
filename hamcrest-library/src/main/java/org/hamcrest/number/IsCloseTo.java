@@ -11,7 +11,7 @@ import static java.lang.Math.abs;
  * Is the value a number equal to a value within some range of
  * acceptable error?
  */
-public class IsCloseTo extends TypeSafeMatcher<Double> {
+public class IsCloseTo extends TypeSafeMatcher<Number> {
     private final double delta;
     private final double value;
 
@@ -21,12 +21,12 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
     }
 
     @Override
-    public boolean matchesSafely(Double item) {
+    public boolean matchesSafely(Number item) {
         return actualDelta(item) <= 0.0;
     }
 
     @Override
-    public void describeMismatchSafely(Double item, Description mismatchDescription) {
+    public void describeMismatchSafely(Number item, Description mismatchDescription) {
       mismatchDescription.appendValue(item)
                          .appendText(" differed by ")
                          .appendValue(actualDelta(item))
@@ -42,8 +42,8 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
                 .appendValue(value);
     }
 
-    private double actualDelta(Double item) {
-      return abs(item - value) - delta;
+    private double actualDelta(Number item) {
+      return abs(item.doubleValue() - value) - delta;
     }
 
     /**
@@ -57,7 +57,7 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
      * @param error
      *     the delta (+/-) within which matches will be allowed
      */
-    public static Matcher<Double> closeTo(double operand, double error) {
+    public static Matcher<Number> closeTo(double operand, double error) {
         return new IsCloseTo(operand, error);
     }
 }

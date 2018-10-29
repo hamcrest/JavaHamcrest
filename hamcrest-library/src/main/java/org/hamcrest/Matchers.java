@@ -1261,7 +1261,7 @@ public class Matchers {
    * @param error
    *     the delta (+/-) within which matches will be allowed
    */
-  public static org.hamcrest.Matcher<java.lang.Double> closeTo(double operand, double error) {
+  public static org.hamcrest.Matcher<Number> closeTo(double operand, double error) {
     return org.hamcrest.number.IsCloseTo.closeTo(operand, error);
   }
 
