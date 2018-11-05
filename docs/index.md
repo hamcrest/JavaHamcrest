@@ -2,7 +2,7 @@
 title: Java Hamcrest
 layout: default
 ---
-# ![Hamcrest Surfer](http://hamcrest.org/images/logo.jpg) Java Hamcrest
+# ![Hamcrest Surfer](http://hamcrest.org/images/logo.jpg){:.logo}Java Hamcrest
 
 ## Matchers that can be combined to create flexible expressions of intent
 
