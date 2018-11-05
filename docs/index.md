@@ -16,7 +16,7 @@ layout: default
 * [Distributables and Dependency Configuration](distributables)
 * [Source Repository](http://github.com/hamcrest/JavaHamcrest)
 * [Project License](http://opensource.org/licenses/BSD-3-Clause)
-* [Extensions](https://github.com/hamcrest/JavaHamcrest/wiki/Related-Projects)
+* [Extensions](related)
 
 ### User Support
 
