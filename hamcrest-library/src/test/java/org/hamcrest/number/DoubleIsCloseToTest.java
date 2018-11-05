@@ -3,9 +3,9 @@ package org.hamcrest.number;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-import static org.hamcrest.number.IsCloseTo.closeTo;
+import static org.hamcrest.number.DoubleIsCloseTo.closeTo;
 
-public class IsCloseToTest extends AbstractMatcherTest {
+public class DoubleIsCloseToTest extends AbstractMatcherTest {
   private final Matcher<Double> matcher = closeTo(1.0d, 0.5d);
 
   @Override
@@ -20,9 +20,9 @@ public class IsCloseToTest extends AbstractMatcherTest {
         assertMatches("1.5d", matcher, 1.5d);
 
         assertDoesNotMatch("too large", matcher, 2.0);
-        assertMismatchDescription("<3.0> differed by <1.5> more than delta <0.5>", matcher, 3.0d);
+        assertMismatchDescription("<3.0> differed by <2.0>, but delta is <0.5>", matcher, 3.0d);
         assertDoesNotMatch("number too small", matcher, 0.0);
-        assertMismatchDescription("<0.1> differed by <0.4> more than delta <0.5>", matcher, 0.1);
+        assertMismatchDescription("<0.1> differed by <0.9>, but delta is <0.5>", matcher, 0.1);
     }
 
     public void test_is_self_describing() {
