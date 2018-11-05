@@ -1,0 +1,39 @@
+@import url(http://fonts.googleapis.com/css?family=Cabin+Sketch);
+@import url(http://fonts.googleapis.com/css?family=Alegreya);
+body {
+  font-family: "Alegreya";
+  margin: 40px auto;
+  width: 700px;
+}
+.content {
+  position: relative;
+}
+footer {
+  padding: 2em 0 1em 0;
+  font-size: 12px;
+}
+h1 {
+  font-size: 80px;
+  margin-top: .3em;
+  margin-bottom: 0;
+}
+h1 + h2 {
+  margin-top: 0;
+}
+h2 {
+  font-weight: 400;
+  font-size: 20px;
+}
+h1, h2 {
+  font-family: "Cabin Sketch";
+  text-rendering: optimizeLegibility;
+}
+.content > p {
+  line-height: 1.5em;
+  text-rendering: optimizeLegibility;
+}
+.logo {
+  height: 60px;
+  padding-left: 0px;
+  padding-right: 40px;
+}
