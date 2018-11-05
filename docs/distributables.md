@@ -2,6 +2,8 @@
 title: Hamcrest Distributables
 layout: default
 ---
+[Java Hamcrest Home](index)
+
 # Hamcrest Distributables
 
 ## Introduction

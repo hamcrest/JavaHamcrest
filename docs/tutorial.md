@@ -2,6 +2,8 @@
 title: Hamcrest Tutorial
 layout: default
 ---
+[Java Hamcrest Home](index)
+
 # Hamcrest Tutorial
 
 ## Introduction
