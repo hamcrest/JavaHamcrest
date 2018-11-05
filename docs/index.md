@@ -8,12 +8,12 @@ layout: default
 
 ### Documentation
 
-* [Getting Started](https://github.com/hamcrest/JavaHamcrest/wiki/The-Hamcrest-Tutorial)
+* [Getting Started](tutorial)
 * [API Documentation (JavaDoc)](javadoc/)
 
 ### Downloads
 
-* [Distributables and Dependency Configuration](https://github.com/hamcrest/JavaHamcrest/wiki/Hamcrest-Distributables)
+* [Distributables and Dependency Configuration](distributables)
 * [Source Repository](http://github.com/hamcrest/JavaHamcrest)
 * [Project License](http://opensource.org/licenses/BSD-3-Clause)
 * [Extensions](https://github.com/hamcrest/JavaHamcrest/wiki/Related-Projects)
