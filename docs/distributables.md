@@ -14,6 +14,9 @@ Hamcrest consists of different jars matching the different needs of
 applications. This document describes these distributables and the
 functionality contained in each of them.
 
+## Table of Contents
+{:.no_toc}
+
 * TOC
 {:toc}
 
