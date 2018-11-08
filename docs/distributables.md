@@ -5,12 +5,17 @@ layout: default
 [Java Hamcrest Home](index)
 
 # Hamcrest Distributables
+{:.no_toc}
 
 ## Introduction
+{:.no_toc}
 
 Hamcrest consists of different jars matching the different needs of
 applications. This document describes these distributables and the
 functionality contained in each of them.
+
+* TOC
+{:toc}
 
 ## The Java Hamcrest Jars
 
