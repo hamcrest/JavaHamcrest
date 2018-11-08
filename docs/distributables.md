@@ -93,11 +93,12 @@ Add the following dependency declaration to your `pom.xml`:
 ### Download
 
 You can download the jars directly from Maven Central. At a minimum, you will
-need `hamcrest-core-1.3.jar`, though most people will also use
-`hamcrest-library-1.3.jar` too. If you want to integrate Hamcrest Matchers with
-other 
+need `hamcrest-core.jar`, though most people will also use
+`hamcrest-library.jar` too. If you want to integrate Hamcrest Matchers with
+other test tools, such as jMock or EasyMock, download `hamcrest-integration.jar`, too.
 
-You can find the jars by searching Maven Central for groupId `org.hamcrest` using the following link:
+You can find the jars by searching Maven Central for groupId `org.hamcrest`
+using the following link:
 
 > [https://search.maven.org/search?q=g:org.hamcrest](https://search.maven.org/search?q=g:org.hamcrest) 
 
