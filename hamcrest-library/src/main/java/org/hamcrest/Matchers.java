@@ -1262,7 +1262,22 @@ public class Matchers {
    *     the delta (+/-) within which matches will be allowed
    */
   public static org.hamcrest.Matcher<java.lang.Double> closeTo(double operand, double error) {
-    return org.hamcrest.number.IsCloseTo.closeTo(operand, error);
+    return org.hamcrest.number.DoubleIsCloseTo.closeTo(operand, error);
+  }
+
+  /**
+   * Creates a matcher of {@link Float}s that matches when an examined float is equal
+   * to the specified <code>operand</code>, within a range of +/- <code>error</code>.
+   * For example:
+   * <pre>assertThat(1.03f, is(closeTo(1.0f, 0.03f)))</pre>
+   *
+   * @param operand
+   *     the expected value of matching doubles
+   * @param error
+   *     the delta (+/-) within which matches will be allowed
+   */
+  public static org.hamcrest.Matcher<java.lang.Float> closeTo(float operand, float error) {
+    return org.hamcrest.number.FloatIsCloseTo.closeTo(operand, error);
   }
 
   /**
