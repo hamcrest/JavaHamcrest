@@ -1,2 +1,10 @@
 enableFeaturePreview('STABLE_PUBLISHING')
-rootProject.name = 'java-hamcrest'
+
+include 'hamcrest-core',
+        'hamcrest-library'
+
+rootProject.name = 'hamcrest'
+
+// Change the file name of the child project build file to match the directory name
+// This avoids having multiple `build.gradle` files, making them easier to distinguish
+rootProject.children.each { childProject -> childProject.buildFileName = "${childProject.name}.gradle" }

@@ -1,0 +1,10 @@
+dependencies {
+    api project(':hamcrest-core')
+
+    testImplementation(group: 'junit', name: 'junit', version: '4.12') {
+        transitive = false
+    }
+    testImplementation project(':hamcrest-core').sourceSets.test.output
+}
+
+javadoc.title = "Hamcrest Library $version API"

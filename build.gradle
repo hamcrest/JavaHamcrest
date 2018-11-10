@@ -1,108 +1,159 @@
-import static org.gradle.api.JavaVersion.VERSION_1_7
-
-apply plugin: 'java'
-apply plugin: 'osgi'
 apply plugin: 'signing'
+apply plugin: 'osgi'
 apply plugin: 'maven-publish'
 
-sourceCompatibility = VERSION_1_7
-targetCompatibility = VERSION_1_7
-
 group = "org.hamcrest"
-version = "2.0.0.0"
+version = "1.4-SNAPSHOT"
 
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'osgi'
 
-repositories {
-    mavenCentral()
-}
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
 
-dependencies {
-    testCompile(group: 'junit', name: 'junit', version: '4.12') {
-        transitive = false
+    version = rootProject.version
+
+    repositories {
+        mavenCentral()
     }
-}
 
-sourceSets {
-    main {
-        java {
-            srcDirs 'hamcrest-core/src/main/java', 'hamcrest-library/src/main/java'
-        }
-
-    }
     test {
-        java {
-            srcDirs 'hamcrest-core/src/test/java', 'hamcrest-library/src/test/java'
+        testLogging {
+            exceptionFormat = 'full'
         }
     }
-}
 
-test {
-    testLogging {
-        exceptionFormat = 'full'
+    jar {
+        manifest {
+            attributes 'Implementation-Title': project.name,
+                    'Implementation-Vendor': 'hamcrest.org',
+                    'Implementation-Version': version
+            instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
+                                         javax.xml.xpath; resolution:=optional,
+                                         org.w3c.dom; resolution:=optional,
+                                         *'''
+        }
+    }
+
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
     }
 }
 
-jar {
+task allClassesJar(type: Jar, dependsOn: subprojects.tasks['build']) {
+    baseName = 'hamcrest-all'
+    subprojects.each { subproject ->
+        from zipTree(subproject.jar.archivePath)
+    }
     manifest {
         attributes 'Implementation-Title': 'hamcrest-all',
                 'Implementation-Vendor': 'hamcrest.org',
                 'Implementation-Version': version
-        instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
-                                         javax.xml.xpath; resolution:=optional,
-                                         org.w3c.dom; resolution:=optional,
-                                         *'''
     }
 }
 
-task sourcesJar(type: Jar) {
+
+task allSourcesJar(type: Jar) {
+    baseName = 'hamcrest-all'
     classifier = 'sources'
-    from sourceSets.main.allSource
+    subprojects.each { subproject ->
+        from subproject.sourceSets.main.allSource
+    }
 }
 
-task javadocJar(type: Jar) {
+task allJavadoc(type: Javadoc) {
+    group = 'Documentation'
+    description = 'Generate combined Javadoc for all projects'
+    title = "Hamcrest All $version API"
+    subprojects.each { proj ->
+        proj.tasks.withType(Javadoc).each { javadocTask ->
+            source += javadocTask.source
+            classpath += javadocTask.classpath
+            excludes += javadocTask.excludes
+            includes += javadocTask.includes
+        }
+    }
+}
+
+task allJavadocJar(type: Jar) {
     classifier = 'javadoc'
-    from javadoc
+    from allJavadoc
+}
+
+def pomConfigurationFor(String pomName, String pomDescription) {
+    return {
+        name = pomName
+        description = pomDescription
+        url = 'http://hamcrest.org/JavaHamcrest/'
+
+        scm {
+            connection = 'git@github.com:hamcrest/JavaHamcrest.git'
+            url = 'https://github.com/hamcrest/JavaHamcrest'
+        }
+
+        licenses {
+            license {
+                name = 'BSD Licence 3'
+                url = 'http://opensource.org/licenses/BSD-3-Clause'
+            }
+        }
+
+        developers {
+            developer {
+                id = 'joewalnes'
+                name = 'Joe Walnes'
+            }
+            developer {
+                id = 'npryce'
+                name = 'Nat Pryce'
+            }
+            developer {
+                id = 'sf105'
+                name = 'Steve Freeman'
+            }
+        }
+    }
 }
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'java-hamcrest'
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-            pom {
-                name = 'Java Hamcrest'
-                description = 'Hamcrest matcher library for Java'
-                url = 'http://hamcrest.org/JavaHamcrest/'
+        def coreProject = project(':hamcrest-core')
+        hamcrestCore(MavenPublication) {
+            from coreProject.components.java
+            artifactId coreProject.name
+            artifact coreProject.sourcesJar
+            artifact coreProject.javadocJar
+            pom pomConfigurationFor(
+                    'Hamcrest Core',
+                    'This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.')
+        }
 
-                scm {
-                    connection = 'git@github.com:hamcrest/JavaHamcrest.git'
-                    url = 'https://github.com/hamcrest/JavaHamcrest'
-                }
+        def libraryProject = project(':hamcrest-library')
+        hamcrestLibrary(MavenPublication) {
+            from libraryProject.components.java
+            artifactId = libraryProject.name
+            artifact libraryProject.sourcesJar
+            artifact libraryProject.javadocJar
+            pom pomConfigurationFor(
+                    'Hamcrest Library',
+                    'Hamcrest library of matcher implementations.')
+        }
 
-                licenses {
-                    license {
-                        name = 'BSD Licence 3'
-                        url = 'http://opensource.org/licenses/BSD-3-Clause'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id = 'joewalnes'
-                        name = 'Joe Walnes'
-                    }
-                    developer {
-                        id = 'npryce'
-                        name = 'Nat Pryce'
-                    }
-                    developer {
-                        id = 'sf105'
-                        name = 'Steve Freeman'
-                    }
-                }
-            }
+        hamcrestAll(MavenPublication) {
+            artifactId = 'hamcrest-all'
+            artifact allClassesJar
+            artifact allSourcesJar
+            artifact allJavadocJar
+            pom pomConfigurationFor(
+                    'Hamcrest All',
+                    'A self-contained hamcrest jar containing all of the sub-modules in a single artifact.')
         }
     }
     repositories {
@@ -122,5 +173,7 @@ publishing {
 
 signing {
     required { hasProperty('ossrhUsername') && hasProperty('ossrhPassword') }
-    sign publishing.publications.mavenJava
+    sign publishing.publications.hamcrestCore
+    sign publishing.publications.hamcrestLibrary
+    sign publishing.publications.hamcrestAll
 }
