@@ -87,85 +87,63 @@ task allJavadocJar(type: Jar) {
     from allJavadoc
 }
 
-publishing {
-    publications {
-        def coreProject = findProject("hamcrest-core")
-        hamcrestCore(MavenPublication) {
-            from coreProject.components.java
-            artifact coreProject.sourcesJar
-            artifact coreProject.javadocJar
-            pom {
-                name = 'Hamcrest Core'
-                description = 'This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.'
-                url = 'http://hamcrest.org/JavaHamcrest/'
+def pomConfigurationFor(String pomName, String pomDescription) {
+    return {
+        name = pomName
+        description = pomDescription
+        url = 'http://hamcrest.org/JavaHamcrest/'
 
-                scm {
-                    connection = 'git@github.com:hamcrest/JavaHamcrest.git'
-                    url = 'https://github.com/hamcrest/JavaHamcrest'
-                }
+        scm {
+            connection = 'git@github.com:hamcrest/JavaHamcrest.git'
+            url = 'https://github.com/hamcrest/JavaHamcrest'
+        }
 
-                licenses {
-                    license {
-                        name = 'BSD Licence 3'
-                        url = 'http://opensource.org/licenses/BSD-3-Clause'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id = 'joewalnes'
-                        name = 'Joe Walnes'
-                    }
-                    developer {
-                        id = 'npryce'
-                        name = 'Nat Pryce'
-                    }
-                    developer {
-                        id = 'sf105'
-                        name = 'Steve Freeman'
-                    }
-                }
+        licenses {
+            license {
+                name = 'BSD Licence 3'
+                url = 'http://opensource.org/licenses/BSD-3-Clause'
             }
         }
 
-        def libraryProject = findProject("hamcrest-library")
+        developers {
+            developer {
+                id = 'joewalnes'
+                name = 'Joe Walnes'
+            }
+            developer {
+                id = 'npryce'
+                name = 'Nat Pryce'
+            }
+            developer {
+                id = 'sf105'
+                name = 'Steve Freeman'
+            }
+        }
+    }
+}
+
+publishing {
+    publications {
+        def coreProject = project(':hamcrest-core')
+        hamcrestCore(MavenPublication) {
+            from coreProject.components.java
+            artifactId coreProject.name
+            artifact coreProject.sourcesJar
+            artifact coreProject.javadocJar
+            pom pomConfigurationFor(
+                    'Hamcrest Core',
+                    'This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.')
+        }
+
+        def libraryProject = project(':hamcrest-library')
         hamcrestLibrary(MavenPublication) {
-            artifactId = libraryProject.name
             from libraryProject.components.java
+            artifactId = libraryProject.name
             artifact libraryProject.sourcesJar
             artifact libraryProject.javadocJar
-            pom {
-                name = 'Hamcrest Library'
-                description = 'Hamcrest library of matcher implementations.'
-                url = 'http://hamcrest.org/JavaHamcrest/'
-
-                scm {
-                    connection = 'git@github.com:hamcrest/JavaHamcrest.git'
-                    url = 'https://github.com/hamcrest/JavaHamcrest'
-                }
-
-                licenses {
-                    license {
-                        name = 'BSD Licence 3'
-                        url = 'http://opensource.org/licenses/BSD-3-Clause'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id = 'joewalnes'
-                        name = 'Joe Walnes'
-                    }
-                    developer {
-                        id = 'npryce'
-                        name = 'Nat Pryce'
-                    }
-                    developer {
-                        id = 'sf105'
-                        name = 'Steve Freeman'
-                    }
-                }
-            }
+            pom pomConfigurationFor(
+                    'Hamcrest Library',
+                    'Hamcrest library of matcher implementations.')
         }
 
         hamcrestAll(MavenPublication) {
@@ -173,38 +151,9 @@ publishing {
             artifact allClassesJar
             artifact allSourcesJar
             artifact allJavadocJar
-            pom {
-                name = 'Hamcrest All'
-                description = 'A self-contained hamcrest jar containing all of the sub-modules in a single artifact.'
-                url = 'http://hamcrest.org/JavaHamcrest/'
-
-                scm {
-                    connection = 'git@github.com:hamcrest/JavaHamcrest.git'
-                    url = 'https://github.com/hamcrest/JavaHamcrest'
-                }
-
-                licenses {
-                    license {
-                        name = 'BSD Licence 3'
-                        url = 'http://opensource.org/licenses/BSD-3-Clause'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id = 'joewalnes'
-                        name = 'Joe Walnes'
-                    }
-                    developer {
-                        id = 'npryce'
-                        name = 'Nat Pryce'
-                    }
-                    developer {
-                        id = 'sf105'
-                        name = 'Steve Freeman'
-                    }
-                }
-            }
+            pom pomConfigurationFor(
+                    'Hamcrest All',
+                    'A self-contained hamcrest jar containing all of the sub-modules in a single artifact.')
         }
     }
     repositories {
