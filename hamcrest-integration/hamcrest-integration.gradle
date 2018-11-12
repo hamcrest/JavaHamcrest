@@ -1,0 +1,13 @@
+dependencies {
+    api project(':hamcrest-library')
+    api('jmock:jmock:1.1.0') {
+        transitive = false
+    }
+    api 'org.easymock:easymock:2.2'
+
+    testImplementation(group: 'junit', name: 'junit', version: '4.12') {
+        transitive = false
+    }
+}
+
+javadoc.title = "Hamcrest Integration $version API"

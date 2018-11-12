@@ -1,7 +1,8 @@
 enableFeaturePreview('STABLE_PUBLISHING')
 
 include 'hamcrest-core',
-        'hamcrest-library'
+        'hamcrest-library',
+        'hamcrest-integration'
 
 rootProject.name = 'hamcrest'
 

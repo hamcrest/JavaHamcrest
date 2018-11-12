@@ -146,6 +146,17 @@ publishing {
                     'Hamcrest library of matcher implementations.')
         }
 
+        def integrationProject = project(':hamcrest-integration')
+        hamcrestIntegration(MavenPublication) {
+            from integrationProject.components.java
+            artifactId = integrationProject.name
+            artifact integrationProject.sourcesJar
+            artifact integrationProject.javadocJar
+            pom pomConfigurationFor(
+                    'Hamcrest Integration',
+                    'Provides integration between Hamcrest and other testing tools, including JUnit (3 and 4), TestNG, jMock and EasyMock.')
+        }
+
         hamcrestAll(MavenPublication) {
             artifactId = 'hamcrest-all'
             artifact allClassesJar
@@ -175,5 +186,6 @@ signing {
     required { hasProperty('ossrhUsername') && hasProperty('ossrhPassword') }
     sign publishing.publications.hamcrestCore
     sign publishing.publications.hamcrestLibrary
+    sign publishing.publications.hamcrestIntegration
     sign publishing.publications.hamcrestAll
 }
