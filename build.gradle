@@ -127,6 +127,18 @@ publishing {
                     'Hamcrest All',
                     'A self-contained hamcrest jar containing all of the sub-modules in a single artifact.')
         }
+
+        def javaHamcrestProject = project(':java-hamcrest')
+        javaHamcrest(MavenPublication) {
+            from javaHamcrestProject.components.java
+            artifactId = javaHamcrestProject.name
+            artifact javaHamcrestProject.sourcesJar
+            artifact javaHamcrestProject.javadocJar
+            pom pomConfigurationFor(
+                    'Java Hamcrest',
+                    'An extensible API and library of matchers.')
+        }
+
     }
     repositories {
         if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
@@ -149,4 +161,5 @@ signing {
     sign publishing.publications.hamcrestLibrary
     sign publishing.publications.hamcrestIntegration
     sign publishing.publications.hamcrestAll
+    sign publishing.publications.javaHamcrest
 }
