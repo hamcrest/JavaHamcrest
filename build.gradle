@@ -47,46 +47,6 @@ subprojects {
     }
 }
 
-task allClassesJar(type: Jar, dependsOn: subprojects.tasks['build']) {
-    baseName = 'hamcrest-all'
-    subprojects.each { subproject ->
-        from zipTree(subproject.jar.archivePath)
-    }
-    manifest {
-        attributes 'Implementation-Title': 'hamcrest-all',
-                'Implementation-Vendor': 'hamcrest.org',
-                'Implementation-Version': version
-    }
-}
-
-
-task allSourcesJar(type: Jar) {
-    baseName = 'hamcrest-all'
-    classifier = 'sources'
-    subprojects.each { subproject ->
-        from subproject.sourceSets.main.allSource
-    }
-}
-
-task allJavadoc(type: Javadoc) {
-    group = 'Documentation'
-    description = 'Generate combined Javadoc for all projects'
-    title = "Hamcrest All $version API"
-    subprojects.each { proj ->
-        proj.tasks.withType(Javadoc).each { javadocTask ->
-            source += javadocTask.source
-            classpath += javadocTask.classpath
-            excludes += javadocTask.excludes
-            includes += javadocTask.includes
-        }
-    }
-}
-
-task allJavadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from allJavadoc
-}
-
 def pomConfigurationFor(String pomName, String pomDescription) {
     return {
         name = pomName
@@ -157,11 +117,12 @@ publishing {
                     'Provides integration between Hamcrest and other testing tools, including JUnit (3 and 4), TestNG, jMock and EasyMock.')
         }
 
+        def allProject = project(':hamcrest-all')
         hamcrestAll(MavenPublication) {
-            artifactId = 'hamcrest-all'
-            artifact allClassesJar
-            artifact allSourcesJar
-            artifact allJavadocJar
+            from allProject.components.java
+            artifactId = allProject.name
+            artifact allProject.sourcesJar
+            artifact allProject.javadocJar
             pom pomConfigurationFor(
                     'Hamcrest All',
                     'A self-contained hamcrest jar containing all of the sub-modules in a single artifact.')
