@@ -1,3 +1,4 @@
+version = rootProject.version
 
 sourceSets {
     main {

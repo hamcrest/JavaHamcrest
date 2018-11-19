@@ -3,7 +3,7 @@ apply plugin: 'osgi'
 apply plugin: 'maven-publish'
 
 group = "org.hamcrest"
-version = "1.4-SNAPSHOT"
+version = "2.1-SNAPSHOT"
 
 subprojects {
     apply plugin: 'java-library'
@@ -11,8 +11,6 @@ subprojects {
 
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
-
-    version = rootProject.version
 
     repositories {
         mavenCentral()
