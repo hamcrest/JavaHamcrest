@@ -84,61 +84,16 @@ def pomConfigurationFor(String pomName, String pomDescription) {
 
 publishing {
     publications {
-        def coreProject = project(':hamcrest-core')
+        def hamcrestProject = project(':hamcrest')
         hamcrestCore(MavenPublication) {
-            from coreProject.components.java
-            artifactId coreProject.name
-            artifact coreProject.sourcesJar
-            artifact coreProject.javadocJar
+            from hamcrestProject.components.java
+            artifactId hamcrestProject.name
+            artifact hamcrestProject.sourcesJar
+            artifact hamcrestProject.javadocJar
             pom pomConfigurationFor(
-                    'Hamcrest Core',
-                    'This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.')
+                    'Hamcrest',
+                    'Core API and libraries of hamcrest matcher framework.')
         }
-
-        def libraryProject = project(':hamcrest-library')
-        hamcrestLibrary(MavenPublication) {
-            from libraryProject.components.java
-            artifactId = libraryProject.name
-            artifact libraryProject.sourcesJar
-            artifact libraryProject.javadocJar
-            pom pomConfigurationFor(
-                    'Hamcrest Library',
-                    'Hamcrest library of matcher implementations.')
-        }
-
-        def integrationProject = project(':hamcrest-integration')
-        hamcrestIntegration(MavenPublication) {
-            from integrationProject.components.java
-            artifactId = integrationProject.name
-            artifact integrationProject.sourcesJar
-            artifact integrationProject.javadocJar
-            pom pomConfigurationFor(
-                    'Hamcrest Integration',
-                    'Provides integration between Hamcrest and other testing tools, including JUnit (3 and 4), TestNG, jMock and EasyMock.')
-        }
-
-        def allProject = project(':hamcrest-all')
-        hamcrestAll(MavenPublication) {
-            from allProject.components.java
-            artifactId = allProject.name
-            artifact allProject.sourcesJar
-            artifact allProject.javadocJar
-            pom pomConfigurationFor(
-                    'Hamcrest All',
-                    'A self-contained hamcrest jar containing all of the sub-modules in a single artifact.')
-        }
-
-        def javaHamcrestProject = project(':java-hamcrest')
-        javaHamcrest(MavenPublication) {
-            from javaHamcrestProject.components.java
-            artifactId = javaHamcrestProject.name
-            artifact javaHamcrestProject.sourcesJar
-            artifact javaHamcrestProject.javadocJar
-            pom pomConfigurationFor(
-                    'Java Hamcrest',
-                    'An extensible API and library of matchers.')
-        }
-
     }
     repositories {
         if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
@@ -158,8 +113,4 @@ publishing {
 signing {
     required { hasProperty('ossrhUsername') && hasProperty('ossrhPassword') }
     sign publishing.publications.hamcrestCore
-    sign publishing.publications.hamcrestLibrary
-    sign publishing.publications.hamcrestIntegration
-    sign publishing.publications.hamcrestAll
-    sign publishing.publications.javaHamcrest
 }
