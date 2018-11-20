@@ -17,8 +17,16 @@ documentation for more information.
 
 ### Changes for 2.1
 
-* TBD
-
+* Documentation updates
+* Add implementation for CharSequence length matcher
+* Fix for TypeSafeDiagnosingMatcher can't detect generic types for subclass
+* Renamed IsCollectionContaining to IsIterableContaining
+* Make Hamcrest an OSGI bundle
+* Add StringRegularExpression matcher
+* Fix StringContainsInOrder to detect if a repeated pattern is missing 
+* Add ArrayAsIterableMatcher
+* Fix description for IsEqualIgnoringCase
+* Fix JavaDoc examples
 
 ## Version 2.0.0.0 (18th January 2015)
 
