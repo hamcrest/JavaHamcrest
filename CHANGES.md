@@ -17,6 +17,7 @@ documentation for more information.
 
 ### Changes for 2.1
 
+* Publish a single jar `hamcrest-2.1.jar`
 * Documentation updates
 * Add implementation for CharSequence length matcher
 * Fix for TypeSafeDiagnosingMatcher can't detect generic types for subclass
@@ -34,7 +35,7 @@ This version was the first release after migrating from the old Google Code host
 
 * Upgraded to Java 7
 * Build with Gradle
-* Publish a single jar java-hamcrest-x.x.x.x.jar
+* Publish a single jar java-hamcrest-2.0.0.0.jar
 * Removed deprecated methods from previous release
 * Improve mismatch description of hasItem/hasItems
 * General improvements to mismatch descriptions
