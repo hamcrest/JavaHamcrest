@@ -80,10 +80,12 @@ def pomConfigurationFor(String pomName, String pomDescription) {
     }
 }
 
+def publishToOssrh = project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')
+
 publishing {
     publications {
         def hamcrestProject = project(':hamcrest')
-        hamcrestCore(MavenPublication) {
+        hamcrest(MavenPublication) {
             from hamcrestProject.components.java
             artifactId hamcrestProject.name
             artifact hamcrestProject.sourcesJar
@@ -94,7 +96,7 @@ publishing {
         }
     }
     repositories {
-        if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
+        if (publishToOssrh) {
             maven {
                 def snapshotRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
                 def stagingRepoUrl  = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
@@ -109,6 +111,6 @@ publishing {
 }
 
 signing {
-    required { hasProperty('ossrhUsername') && hasProperty('ossrhPassword') }
-    sign publishing.publications.hamcrestCore
+    required { publishToOssrh }
+    sign publishing.publications.hamcrest
 }
