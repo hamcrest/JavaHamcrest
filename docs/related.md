@@ -12,6 +12,7 @@ Here are some projects that provide additional features and matchers
 * [EZ Testing](https://github.com/EZGames/ez-testing) (contains base classes for defining chainable matchers that have a similar style to AssertJ)
 * [Hamcrest 1.3 Utility Matchers](https://github.com/NitorCreations/matchers) (Java matchers like CollectionMatchers, MapMatchers, FieldMatcher, SerializableMatcher etc)
 * [Hamcrest avro](https://github.com/Byhiras/avro-utils)
+* [Hamcrest Composites](https://github.com/Cornutum/hamcrest-composites) (for comparing complex Java objects with better testability)
 * [Hamcrest Date](https://github.com/modularit/hamcrest-date) (for comparing dates)
 * [Hamcrest HAR](https://github.com/roydekleijn/har-assert) (for HTTP archive files)
 * [Hamcrest Java Extras](https://github.com/sf105/hamcrest-java-extras) (currently only a couple of Json matchers)
