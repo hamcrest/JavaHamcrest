@@ -1,11 +1,11 @@
-/build
-/classes
-/bin
-/out
+build/
+classes/
+bin/
+out/
 .DS_Store
 *~
 *.swp
-/.idea
+.idea/
 *.iws
 *.ipr
 *.iml
@@ -13,7 +13,6 @@
 .gradle
 .project
 .settings/
-
 gradle.properties
 release-key.asc
 grade-wrapper.properties

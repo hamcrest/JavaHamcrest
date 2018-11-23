@@ -11,6 +11,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * Matches if map size satisfies a nested matcher.
  */
 public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ? extends V>, Integer> {
+    @SuppressWarnings("WeakerAccess")
     public IsMapWithSize(Matcher<? super Integer> sizeMatcher) {
       super(sizeMatcher, "a map with size", "map size");
     }
@@ -30,7 +31,7 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
      *     a matcher for the size of an examined {@link java.util.Map}
      */
     public static <K, V> Matcher<Map<? extends K, ? extends V>> aMapWithSize(Matcher<? super Integer> sizeMatcher) {
-        return new IsMapWithSize<K, V>(sizeMatcher);
+        return new IsMapWithSize<>(sizeMatcher);
     }
 
     /**
@@ -43,8 +44,7 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
      *     the expected size of an examined {@link java.util.Map}
      */
     public static <K, V> Matcher<Map<? extends K, ? extends V>> aMapWithSize(int size) {
-        Matcher<? super Integer> matcher = equalTo(size);
-        return IsMapWithSize.aMapWithSize(matcher);
+        return IsMapWithSize.aMapWithSize(equalTo(size));
     }
     
     /**

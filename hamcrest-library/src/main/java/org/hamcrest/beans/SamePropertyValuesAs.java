@@ -6,11 +6,9 @@ import org.hamcrest.Matcher;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
 import static org.hamcrest.beans.PropertyUtil.propertyDescriptorsFor;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -19,13 +17,15 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     private final T expectedBean;
     private final Set<String> propertyNames;
     private final List<PropertyMatcher> propertyMatchers;
+    private final List<String> ignoredFields;
 
     @SuppressWarnings("WeakerAccess")
-    public SamePropertyValuesAs(T expectedBean) {
+    public SamePropertyValuesAs(T expectedBean, List<String> ignoredProperties) {
         PropertyDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
         this.expectedBean = expectedBean;
-        this.propertyNames = propertyNamesFrom(descriptors);
-        this.propertyMatchers = propertyMatchersFor(expectedBean, descriptors);
+        this.ignoredFields = ignoredProperties;
+        this.propertyNames = propertyNamesFrom(descriptors, ignoredProperties);
+        this.propertyMatchers = propertyMatchersFor(expectedBean, descriptors, ignoredProperties);
     }
 
     @Override
@@ -40,6 +40,10 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     public void describeTo(Description description) {
         description.appendText("same property values as " + expectedBean.getClass().getSimpleName())
                    .appendList(" [", ", ", "]", propertyMatchers);
+        if (! ignoredFields.isEmpty()) {
+            description.appendText(" ignoring ")
+                    .appendValueList("[", ", ", "]", ignoredFields);
+        }
     }
 
 
@@ -53,7 +57,7 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     }
 
     private boolean hasNoExtraProperties(Object actual, Description mismatchDescription) {
-        Set<String> actualPropertyNames = propertyNamesFrom(propertyDescriptorsFor(actual, Object.class));
+        Set<String> actualPropertyNames = propertyNamesFrom(propertyDescriptorsFor(actual, Object.class), ignoredFields);
         actualPropertyNames.removeAll(propertyNames);
         if (!actualPropertyNames.isEmpty()) {
             mismatchDescription.appendText("has extra properties called " + actualPropertyNames);
@@ -72,22 +76,31 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
         return true;
     }
 
-    private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, PropertyDescriptor[] descriptors) {
+    private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, PropertyDescriptor[] descriptors, List<String> ignoredFields) {
         List<PropertyMatcher> result = new ArrayList<>(descriptors.length);
         for (PropertyDescriptor propertyDescriptor : descriptors) {
-            result.add(new PropertyMatcher(propertyDescriptor, bean));
+            if (isIgnored(ignoredFields, propertyDescriptor)) {
+                result.add(new PropertyMatcher(propertyDescriptor, bean));
+            }
         }
         return result;
     }
 
-    private static Set<String> propertyNamesFrom(PropertyDescriptor[] descriptors) {
+    private static Set<String> propertyNamesFrom(PropertyDescriptor[] descriptors, List<String> ignoredFields) {
         HashSet<String> result = new HashSet<>();
         for (PropertyDescriptor propertyDescriptor : descriptors) {
-            result.add(propertyDescriptor.getDisplayName());
+            if (isIgnored(ignoredFields, propertyDescriptor)) {
+                result.add(propertyDescriptor.getDisplayName());
+            }
         }
         return result;
     }
 
+    private static boolean isIgnored(List<String> ignoredFields, PropertyDescriptor propertyDescriptor) {
+        return ! ignoredFields.contains(propertyDescriptor.getDisplayName());
+    }
+
+    @SuppressWarnings("WeakerAccess")
     private static class PropertyMatcher extends DiagnosingMatcher<Object> {
         private final Method readMethod;
         private final Matcher<Object> matcher;
@@ -127,15 +140,20 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     /**
      * Creates a matcher that matches when the examined object has values for all of
      * its JavaBean properties that are equal to the corresponding values of the
-     * specified bean.
+     * specified bean. If any properties are marked as ignored, they will be dropped from
+     * both the expected and actual bean. Note that the ignored properties use JavaBean
+     * display names, for example <pre>age</pre> rather than method names such as <pre>getAge</pre>.
      * For example:
      * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean))</pre>
-     * 
+     * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean), "age", "height")</pre>
+     *
      * @param expectedBean
      *     the bean against which examined beans are compared
+     * @param ignoredProperties
+     *     do not check any of these named properties.
      */
-    public static <B> Matcher<B> samePropertyValuesAs(B expectedBean) {
-        return new SamePropertyValuesAs<>(expectedBean);
+    public static <B> Matcher<B> samePropertyValuesAs(B expectedBean, String... ignoredProperties) {
+        return new SamePropertyValuesAs<>(expectedBean, asList(ignoredProperties));
     }
 
 }

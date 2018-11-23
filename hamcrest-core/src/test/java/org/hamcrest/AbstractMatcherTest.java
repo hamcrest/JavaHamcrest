@@ -14,7 +14,7 @@ public abstract class AbstractMatcherTest extends TestCase {
       assertMatches("Expected match, but mismatched", matcher, arg);
   }
 
-  public static <T> void assertMatches(String message, Matcher<T> matcher, T arg) {
+  public static <T> void assertMatches(String message, Matcher<T> matcher, Object arg) {
     if (!matcher.matches(arg)) {
       Assert.fail(message + " because: '" + mismatchDescription(matcher, arg) + "'");
     }
@@ -34,7 +34,7 @@ public abstract class AbstractMatcherTest extends TestCase {
     Assert.assertEquals("Expected description", expected, description.toString().trim());
   }
 
-  public static <T> void assertMismatchDescription(String expected, Matcher<? super T> matcher, T arg) {
+  public static <T> void assertMismatchDescription(String expected, Matcher<? super T> matcher, Object arg) {
     Assert.assertFalse("Precondition: Matcher should not match item.", matcher.matches(arg));
     Assert.assertEquals("Expected mismatch description", expected, mismatchDescription(matcher, arg));
   }
@@ -64,7 +64,7 @@ public abstract class AbstractMatcherTest extends TestCase {
     createMatcher().matches(new UnknownType());
   }
 
-    private static <T> String mismatchDescription(Matcher<? super T> matcher, T arg) {
+    private static <T> String mismatchDescription(Matcher<? super T> matcher, Object arg) {
       Description description = new StringDescription();
       matcher.describeMismatch(arg, description);
       return description.toString().trim();

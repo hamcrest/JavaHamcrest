@@ -7,7 +7,7 @@ import org.hamcrest.text.IsEqualCompressingWhiteSpace;
 
 import java.util.regex.Pattern;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class Matchers {
 
   /**
@@ -167,7 +167,7 @@ public class Matchers {
    * @param matcher
    *     the matcher to wrap
    * @param values
-   *     optional values to insert into the tokenised description
+   *     optional values to insert into the tokenized description
    */
   public static <T> org.hamcrest.Matcher<T> describedAs(java.lang.String description, org.hamcrest.Matcher<T> matcher, java.lang.Object... values) {
     return org.hamcrest.core.DescribedAs.describedAs(description, matcher, values);
@@ -458,7 +458,7 @@ public class Matchers {
   public static <T> org.hamcrest.Matcher<T> theInstance(T target) {
     return org.hamcrest.core.IsSame.theInstance(target);
   }
-
+  
   /**
    * Creates a matcher that matches if the examined {@link String} contains the specified
    * {@link String} anywhere.
@@ -1507,6 +1507,21 @@ public class Matchers {
     return org.hamcrest.text.StringContainsInOrder.stringContainsInOrder(substrings);
   }
 
+    /**
+     * Creates a matcher of {@link CharSequence} that matches when a char sequence has the length
+     * of the specified <code>argument</code>.
+     * For example:
+     *
+     * <pre>
+     * assertThat("text", length(4))
+     * </pre>
+     *
+     * @param length the expected length of the string
+     */
+    public static Matcher<CharSequence> hasLength(int length) {
+        return org.hamcrest.text.CharSequenceLength.hasLength(length);
+    }
+
   /**
    * Creates a matcher that matches any examined object whose <code>toString</code> method
    * returns a value that satisfies the specified matcher.
@@ -1605,15 +1620,20 @@ public class Matchers {
   /**
    * Creates a matcher that matches when the examined object has values for all of
    * its JavaBean properties that are equal to the corresponding values of the
-   * specified bean.
+   * specified bean. If any properties are marked as ignored, they will be dropped from
+   * both the expected and actual bean. Note that the ignored properties use JavaBean
+   * display names, for example <pre>age</pre> rather than method names such as <pre>getAge</pre>.
    * For example:
    * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean))</pre>
-   * 
+   * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean), "age", "height")</pre>
+   *
    * @param expectedBean
    *     the bean against which examined beans are compared
+   * @param ignoredProperties
+   *     do not check any of these named properties.
    */
-  public static <T> org.hamcrest.Matcher<T> samePropertyValuesAs(T expectedBean) {
-    return org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs(expectedBean);
+  public static <B> Matcher<B> samePropertyValuesAs(B expectedBean, String... ignoredProperties) {
+    return org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs(expectedBean, ignoredProperties);
   }
 
   /**

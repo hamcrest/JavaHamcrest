@@ -1,132 +1,119 @@
-import static org.gradle.api.JavaVersion.VERSION_1_7
-
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'osgi'
 apply plugin: 'signing'
-
-sourceCompatibility = VERSION_1_7
-targetCompatibility = VERSION_1_7
-archivesBaseName = "java-hamcrest"
+apply plugin: 'osgi'
+apply plugin: 'maven-publish'
 
 group = "org.hamcrest"
-version = "2.0.0.0"
+version = "2.1-SNAPSHOT"
 
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'osgi'
 
-repositories {
-    mavenCentral()
-}
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+    
+    version = rootProject.version
 
-dependencies {
-    testCompile(group: 'junit', name: 'junit', version: '4.12') {
-        transitive = false
+    repositories {
+        mavenCentral()
     }
-}
 
-sourceSets {
-    main {
-        java {
-            srcDirs 'hamcrest-core/src/main/java', 'hamcrest-library/src/main/java'
-        }
-
-    }
     test {
-        java {
-            srcDirs 'hamcrest-core/src/test/java', 'hamcrest-library/src/test/java'
+        testLogging {
+            exceptionFormat = 'full'
         }
     }
-}
 
-test {
-    testLogging {
-        exceptionFormat = 'full'
-    }
-}
-
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'hamcrest-all',
-                   'Implementation-Vendor': 'hamcrest.org',
-                   'Implementation-Version': version,
-                   'Automatic-Module-Name': 'org.hamcrest'
-        instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
+    jar {
+        manifest {
+            attributes 'Implementation-Title': project.name,
+                    'Implementation-Vendor': 'hamcrest.org',
+                    'Implementation-Version': version,
+                    'Automatic-Module-Name': 'org.hamcrest'
+            instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
                                          javax.xml.xpath; resolution:=optional,
                                          org.w3c.dom; resolution:=optional,
                                          *'''
+        }
+    }
+
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
     }
 }
 
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
+def pomConfigurationFor(String pomName, String pomDescription) {
+    return {
+        name = pomName
+        description = pomDescription
+        url = 'http://hamcrest.org/JavaHamcrest/'
+
+        scm {
+            connection = 'git@github.com:hamcrest/JavaHamcrest.git'
+            url = 'https://github.com/hamcrest/JavaHamcrest'
+        }
+
+        licenses {
+            license {
+                name = 'BSD Licence 3'
+                url = 'http://opensource.org/licenses/BSD-3-Clause'
+            }
+        }
+
+        developers {
+            developer {
+                id = 'joewalnes'
+                name = 'Joe Walnes'
+            }
+            developer {
+                id = 'npryce'
+                name = 'Nat Pryce'
+            }
+            developer {
+                id = 'sf105'
+                name = 'Steve Freeman'
+            }
+        }
+    }
 }
 
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
+def publishToOssrh = project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')
 
-artifacts {
-    archives sourcesJar, javadocJar
-}
-
-signing {
-    required { gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
-}
-
-uploadArchives {
-    if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
-        repositories {
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
-                }
-
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
-                }
-
-                pom.project {
-                    name 'Java Hamcrest'
-                    packaging 'jar'
-                    description 'Hamcrest matcher library for Java'
-                    url 'http://hamcrest.org/JavaHamcrest/'
-
-                    scm {
-                        connection 'git@github.com:hamcrest/JavaHamcrest.git'
-                        url 'https://github.com/hamcrest/JavaHamcrest'
-                    }
-
-                    licenses {
-                        license {
-                            name 'BSD Licence 3'
-                            url 'http://opensource.org/licenses/BSD-3-Clause'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id 'joewalnes'
-                            name 'Joe Walnes'
-                        }
-                        developer {
-                            id 'npryce'
-                            name 'Nat Pryce'
-                        }
-                        developer {
-                            id 'sf105'
-                            name 'Steve Freeman'
-                        }
-                    }
+publishing {
+    publications {
+        def hamcrestProject = project(':hamcrest')
+        hamcrest(MavenPublication) {
+            from hamcrestProject.components.java
+            artifactId hamcrestProject.name
+            artifact hamcrestProject.sourcesJar
+            artifact hamcrestProject.javadocJar
+            pom pomConfigurationFor(
+                    'Hamcrest',
+                    'Core API and libraries of hamcrest matcher framework.')
+        }
+    }
+    repositories {
+        if (publishToOssrh) {
+            maven {
+                def snapshotRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+                def stagingRepoUrl  = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                url = version.contains('SNAPSHOT') ? snapshotRepoUrl : stagingRepoUrl
+                credentials {
+                    username = ossrhUsername
+                    password = ossrhPassword
                 }
             }
         }
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.8'
+signing {
+    required { publishToOssrh }
+    sign publishing.publications.hamcrest
 }

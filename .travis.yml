@@ -1,17 +1,19 @@
 language: java
 
-# workaround for broken openjdk7
-sudo: required # for setting hostname
-addons:
-  hostname: localhost
+# Workaround to using openjdk7 with Gradle due to security issue:
+# https://github.com/gradle/gradle/issues/2421
 before_install:
-- cat /etc/hosts
-# end
+- BCPROV_FILENAME=bcprov-ext-jdk15on-158.jar
+- wget "https://bouncycastle.org/download/${BCPROV_FILENAME}"
+- sudo mv $BCPROV_FILENAME /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext
+- sudo perl -pi.bak -e 's/^(security\.provider\.)([0-9]+)/$1.($2+1)/ge' /etc/java-7-openjdk/security/java.security
+- echo "security.provider.1=org.bouncycastle.jce.provider.BouncyCastleProvider" | sudo tee -a /etc/java-7-openjdk/security/java.security
 
 jdk:
   - openjdk7
-  - oraclejdk7
   - oraclejdk8
+  - openjdk8
+  - oraclejdk9
 
 script:
   - ./gradlew clean build javadoc

@@ -27,11 +27,11 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   }
 
   public void test_reports_mismatch_on_first_property_difference() {
-    assertMismatchDescription("string was \"different\"", 
+    assertMismatchDescription("stringProperty was \"different\"",
         samePropertyValuesAs(expectedBean), new ExampleBean("different", 1, aValue));
-    assertMismatchDescription("int was <2>", 
+    assertMismatchDescription("intProperty was <2>",
         samePropertyValuesAs(expectedBean), new ExampleBean("same", 2, aValue));
-    assertMismatchDescription("value was <Value other>", 
+    assertMismatchDescription("valueProperty was <Value other>",
         samePropertyValuesAs(expectedBean), new ExampleBean("same", 1, new Value("other")));
   }
 
@@ -41,12 +41,41 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   }
 
   public void test_rejects_subtype_that_has_extra_properties() {
-    assertMismatchDescription("has extra properties called [extra]", 
+    assertMismatchDescription("has extra properties called [extraProperty]",
         samePropertyValuesAs(expectedBean), new SubBeanWithExtraProperty("same", 1, aValue));
   }
-  
+
+  public void test_ignores_extra_subtype_properties() {
+    final SubBeanWithExtraProperty withExtraProperty = new SubBeanWithExtraProperty("same", 1, aValue);
+    assertMatches("extra property", samePropertyValuesAs(expectedBean, "extraProperty"), withExtraProperty);
+  }
+
+  public void test_ignores_different_properties() {
+    final ExampleBean differentBean = new ExampleBean("different", 1, aValue);
+    assertMatches("different property", samePropertyValuesAs(expectedBean, "stringProperty"), differentBean);
+  }
+
+  public void test_accepts_missing_properties_to_ignore() {
+    assertMatches("ignored property", samePropertyValuesAs(expectedBean, "notAProperty"), actualBean);
+  }
+
+  public void test_can_ignore_all_properties() {
+    final ExampleBean differentBean = new ExampleBean("different", 2, new Value("not expected"));
+    assertMatches(
+            "different property",
+            samePropertyValuesAs(expectedBean, "stringProperty", "intProperty", "valueProperty"),
+            differentBean);
+  }
+
+
   public void testDescribesItself() {
-    assertDescription("same property values as ExampleBean [int: <1>, string: \"same\", value: <Value expected>]", samePropertyValuesAs(expectedBean));
+    assertDescription(
+            "same property values as ExampleBean [intProperty: <1>, stringProperty: \"same\", valueProperty: <Value expected>]",
+            samePropertyValuesAs(expectedBean));
+
+    assertDescription(
+            "same property values as ExampleBean [intProperty: <1>, stringProperty: \"same\", valueProperty: <Value expected>] ignoring [\"ignored1\", \"ignored2\"]",
+            samePropertyValuesAs(expectedBean, "ignored1", "ignored2"));
   }
 
   public static class Value {
@@ -61,6 +90,7 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
     }
   }
   
+  @SuppressWarnings("unused")
   public static class ExampleBean {
     private String stringProperty;
     private int intProperty;
@@ -72,13 +102,13 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
       this.valueProperty = valueProperty;
     }
     
-    public String getString() {
+    public String getStringProperty() {
       return stringProperty;
     }
-    public int getInt() {
+    public int getIntProperty() {
       return intProperty;
     }
-    public Value getValue() {
+    public Value getValueProperty() {
       return valueProperty;
     }
 
@@ -96,6 +126,6 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
       super(stringProperty, intProperty, valueProperty);
     }
     @SuppressWarnings("unused")
-    public String getExtra() { return "extra"; }
+    public String getExtraProperty() { return "extra"; }
   }
 }

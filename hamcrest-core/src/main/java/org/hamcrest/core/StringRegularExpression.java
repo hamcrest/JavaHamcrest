@@ -37,7 +37,7 @@ public class StringRegularExpression extends TypeSafeDiagnosingMatcher<String> {
   }
 
   /**
-   * Validate a string with a {@link java.util.regex.Pattern}.
+   * Creates a matcher that checks if the examined string matches a specified {@link java.util.regex.Pattern}.
    *
    * <pre>
    * assertThat(&quot;abc&quot;, matchesRegex(Pattern.compile(&quot;&circ;[a-z]$&quot;));
@@ -52,7 +52,7 @@ public class StringRegularExpression extends TypeSafeDiagnosingMatcher<String> {
   }
 
   /**
-   * Validate a string with a regex.
+   * Creates a matcher that checks if the examined string matches a specified regex.
    *
    * <pre>
    * assertThat(&quot;abc&quot;, matchesRegex(&quot;&circ;[a-z]+$&quot;));
