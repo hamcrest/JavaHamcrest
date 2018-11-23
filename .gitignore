@@ -9,7 +9,10 @@ out/
 *.iws
 *.ipr
 *.iml
+.classpath
 .gradle
+.project
+.settings/
 gradle.properties
 release-key.asc
 grade-wrapper.properties

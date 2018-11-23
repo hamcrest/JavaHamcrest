@@ -28,7 +28,8 @@ subprojects {
         manifest {
             attributes 'Implementation-Title': project.name,
                     'Implementation-Vendor': 'hamcrest.org',
-                    'Implementation-Version': version
+                    'Implementation-Version': version,
+                    'Automatic-Module-Name': 'org.hamcrest'
             instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
                                          javax.xml.xpath; resolution:=optional,
                                          org.w3c.dom; resolution:=optional,
