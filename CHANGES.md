@@ -1,21 +1,21 @@
 # Hamcrest Changes
 
-## Version 2.1-SNAPSHOT (Unreleased)
+## Version 2.1-rc1 (25th November 2018)
 
-### Overview for 2.1
+### Overview for 2.1-rc1
 
 After a long hiatus without releases, this version simplifies the packaging of
 Hamcrest into a single jar: `hamcrest-<version>.jar`. Other big changes include
 Java 9 module compatibility, along with numerous other improvements and bug
 fixes.
 
-### Breaking Changes for 2.1
+### Breaking Changes for 2.1-rc1
 
 Although the class API has not changed since Hamcrest 1.3, the way that the
 project is packaged has changed. Refer to the [Hamcrest Distributables](http://hamcrest.org/JavaHamcrest/distributables.html)
 documentation for more information. 
 
-### Changes for 2.1
+### Changes for 2.1-rc1
 
 * Publish a single jar `hamcrest-2.1.jar`
 * Documentation updates
