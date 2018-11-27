@@ -83,6 +83,13 @@ def pomConfigurationFor(String pomName, String pomDescription) {
     }
 }
 
+def appendDependency(Object dependencies, String artifactId) {
+    def dependency = dependencies.appendNode('dependency')
+    dependency.appendNode('groupId',    'org.hamcrest')
+    dependency.appendNode('artifactId', artifactId)
+    dependency.appendNode('version',    rootProject.version)
+}
+
 def publishToOssrh = project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')
 
 publishing {
@@ -96,6 +103,28 @@ publishing {
             pom pomConfigurationFor(
                     'Hamcrest',
                     'Core API and libraries of hamcrest matcher framework.')
+        }
+
+        hamcrestCore(MavenPublication) {
+            artifactId 'hamcrest-core'
+            pom pomConfigurationFor(
+                    'Hamcrest Core',
+                    'Core Hamcrest API - deprecated, please use "hamcrest" instead')
+            pom.withXml {
+                def dependencies = asNode().appendNode('dependencies')
+                appendDependency(dependencies, 'hamcrest')
+            }
+        }
+
+        hamcrestLibrary(MavenPublication) {
+            artifactId 'hamcrest-library'
+            pom pomConfigurationFor(
+                    'Hamcrest Library',
+                    'A library of Hamcrest matchers - deprecated, please use "hamcrest" instead')
+            pom.withXml {
+                def dependencies = asNode().appendNode('dependencies')
+                appendDependency(dependencies, 'hamcrest-core')
+            }
         }
     }
     repositories {
@@ -116,4 +145,6 @@ publishing {
 signing {
     required { publishToOssrh }
     sign publishing.publications.hamcrest
+    sign publishing.publications.hamcrestCore
+    sign publishing.publications.hamcrestLibrary
 }
