@@ -83,7 +83,7 @@ def pomConfigurationFor(String pomName, String pomDescription) {
     }
 }
 
-def appendPomDepenency(Object dependencies, String artifactId) {
+def appendDependency(Object dependencies, String artifactId) {
     def dependency = dependencies.appendNode('dependency')
     dependency.appendNode('groupId',    'org.hamcrest')
     dependency.appendNode('artifactId', artifactId)
@@ -112,7 +112,7 @@ publishing {
                     'Core Hamcrest API - deprecated, please use "hamcrest" instead')
             pom.withXml {
                 def dependencies = asNode().appendNode('dependencies')
-                appendPomDepenency(dependencies, 'hamcrest')
+                appendDependency(dependencies, 'hamcrest')
             }
         }
 
@@ -123,7 +123,7 @@ publishing {
                     'A library of Hamcrest matchers - deprecated, please use "hamcrest" instead')
             pom.withXml {
                 def dependencies = asNode().appendNode('dependencies')
-                appendPomDepenency(dependencies, 'hamcrest-core')
+                appendDependency(dependencies, 'hamcrest-core')
             }
         }
     }
