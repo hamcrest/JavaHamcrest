@@ -1,5 +1,9 @@
 # Hamcrest Changes
 
+## Version 2.1-rc2 (27th November 2018)
+
+* Publish pom-only artifacts for hamcrest-core and hamcrest-library.
+
 ## Version 2.1-rc1 (25th November 2018)
 
 ### Overview for 2.1-rc1
