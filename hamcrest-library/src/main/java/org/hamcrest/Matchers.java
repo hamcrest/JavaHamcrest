@@ -1113,6 +1113,89 @@ public class Matchers {
   }
 
   /**
+   * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map}'s set of entries
+   * satisfies the specified <code>entriesMatcher</code>.
+   * For example:
+   * <pre>assertThat(myMap, hasEntries(hasSize(2)))</pre>
+   *
+   * @param entriesMatcher
+   *     the matcher that must be satisfied by the set of entries
+   */
+  public static <K, V> org.hamcrest.Matcher<java.util.Map<? extends K,? extends V>> hasEntries(Matcher<? super java.util.Set<? extends java.util.Map.Entry<? extends K, ? extends V>>> entriesMatcher) {
+    return org.hamcrest.collection.IsMapWithEntries.hasEntries(entriesMatcher);
+  }
+
+  /**
+   * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map}'s set of entries
+   * contains, in any order, entries satisfying the specified <code>entriesMatchers</code>.
+   * For example:
+   * <pre>assertThat(myMap, hasEntries(entry("a key"), entry("another key")))</pre>
+   *
+   * @param entriesMatchers
+   *     the matchers that must be satisfied by the entries
+   */
+  @SafeVarargs
+  public static <K, V> Matcher<java.util.Map<? extends K, ? extends V>> hasEntries(Matcher<? super java.util.Map.Entry<? extends K, ? extends V>>... entriesMatchers) {
+    return org.hamcrest.collection.IsMapWithEntries.hasEntries(entriesMatchers);
+  }
+
+  /**
+   * Creates a matcher for {@link java.util.Map.Entry}s matching when the examined {@link java.util.Map.Entry} has a key which satisfies
+   * the specified <code>keyMatcher</code>, and a value which satisfies the specified <code>valueMatcher</code>.
+   * For example:
+   * <pre>assertThat(myMap.keySet(), hasItem(entry(equalTo("key"), notNullValue())))</pre>
+   *
+   * @param keyMatcher
+   *     the matcher that must be satisfied by the key
+   * @param valueMatcher
+   *     the matcher that must be satisfied by the value
+   */
+  public static <K, V> Matcher<? super java.util.Map.Entry<? extends K, ? extends V>> entry(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
+    return org.hamcrest.collection.IsMapEntry.entry(keyMatcher, valueMatcher);
+  }
+
+  /**
+   * Creates a matcher for {@link java.util.Map.Entry}s matching when the examined {@link java.util.Map.Entry} has a key which satisfies
+   * the specified <code>keyMatcher</code>; the value is ignored.
+   * For example:
+   * <pre>assertThat(myMap.keySet(), hasItem(entry(equalTo("key"))))</pre>
+   *
+   * @param keyMatcher
+   *     the matcher that must be satisfied by the key
+   */
+  public static <K> Matcher<? super java.util.Map.Entry<? extends K, ?>> entry(Matcher<? super K> keyMatcher) {
+    return org.hamcrest.collection.IsMapEntry.entry(keyMatcher);
+  }
+
+  /**
+   * Creates a matcher for {@link java.util.Map.Entry}s matching when the examined {@link java.util.Map.Entry} has the specified
+   * <code>key</code>, and a value which satisfies the specified <code>valueMatcher</code>.
+   * For example:
+   * <pre>assertThat(myMap.keySet(), hasItem(entry("key", notNullValue())))</pre>
+   *
+   * @param key
+   *     the required key
+   * @param valueMatcher
+   *     the matcher that must be satisfied by the value
+   */
+  public static <K, V> Matcher<? super java.util.Map.Entry<? extends K, ? extends V>> entry(K key, Matcher<? super V> valueMatcher) {
+    return org.hamcrest.collection.IsMapEntry.entry(key, valueMatcher);
+  }
+
+  /**
+   * Creates a matcher for {@link java.util.Map.Entry}s matching when the examined {@link java.util.Map.Entry} has the specified
+   * <code>key</code>; the value is ignored.
+   * For example:
+   * <pre>assertThat(myMap.keySet(), hasItem(entry("key")))</pre>
+   *
+   * @param key
+   *     the required key
+   */
+  public static <K> Matcher<? super java.util.Map.Entry<? extends K, ?>> entry(K key) {
+    return org.hamcrest.collection.IsMapEntry.entry(key);
+  }
+
+  /**
    * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
    * at least one key that satisfies the specified matcher.
    * For example:
