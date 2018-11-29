@@ -1,23 +1,23 @@
-version = rootProject.version
+apply plugin: 'osgi'
 
-sourceSets {
-    main {
-        java {
-            srcDirs rootProject.file('hamcrest-core/src/main/java'),
-                    rootProject.file('hamcrest-library/src/main/java')
-        }
-    }
-    test {
-        java {
-            srcDirs rootProject.file('hamcrest-core/src/test/java'),
-                    rootProject.file('hamcrest-library/src/test/java')
-        }
-    }
-}
+version = rootProject.version
 
 dependencies {
     testImplementation(group: 'junit', name: 'junit', version: '4.12') {
         transitive = false
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': project.name,
+                'Implementation-Vendor': 'hamcrest.org',
+                'Implementation-Version': version,
+                'Automatic-Module-Name': 'org.hamcrest'
+        instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
+                                         javax.xml.xpath; resolution:=optional,
+                                         org.w3c.dom; resolution:=optional,
+                                         *'''
     }
 }
 

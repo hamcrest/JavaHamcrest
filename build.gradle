@@ -7,11 +7,11 @@ version = "2.1-SNAPSHOT"
 
 subprojects {
     apply plugin: 'java-library'
-    apply plugin: 'osgi'
 
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
-    
+
+    group = rootProject.group
     version = rootProject.version
 
     repositories {
@@ -21,19 +21,6 @@ subprojects {
     test {
         testLogging {
             exceptionFormat = 'full'
-        }
-    }
-
-    jar {
-        manifest {
-            attributes 'Implementation-Title': project.name,
-                    'Implementation-Vendor': 'hamcrest.org',
-                    'Implementation-Version': version,
-                    'Automatic-Module-Name': 'org.hamcrest'
-            instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
-                                         javax.xml.xpath; resolution:=optional,
-                                         org.w3c.dom; resolution:=optional,
-                                         *'''
         }
     }
 
@@ -83,13 +70,6 @@ def pomConfigurationFor(String pomName, String pomDescription) {
     }
 }
 
-def appendDependency(Object dependencies, String artifactId) {
-    def dependency = dependencies.appendNode('dependency')
-    dependency.appendNode('groupId',    'org.hamcrest')
-    dependency.appendNode('artifactId', artifactId)
-    dependency.appendNode('version',    rootProject.version)
-}
-
 def publishToOssrh = project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')
 
 publishing {
@@ -105,26 +85,26 @@ publishing {
                     'Core API and libraries of hamcrest matcher framework.')
         }
 
+        def hamcrestCoreProject = project(':hamcrest-core')
         hamcrestCore(MavenPublication) {
-            artifactId 'hamcrest-core'
+            from hamcrestCoreProject.components.java
+            artifactId hamcrestCoreProject.name
+            artifact hamcrestCoreProject.sourcesJar
+            artifact hamcrestCoreProject.javadocJar
             pom pomConfigurationFor(
                     'Hamcrest Core',
                     'Core Hamcrest API - deprecated, please use "hamcrest" instead')
-            pom.withXml {
-                def dependencies = asNode().appendNode('dependencies')
-                appendDependency(dependencies, 'hamcrest')
-            }
         }
 
+        def hamcrestLibraryProject = project(':hamcrest-library')
         hamcrestLibrary(MavenPublication) {
-            artifactId 'hamcrest-library'
+            from hamcrestLibraryProject.components.java
+            artifactId hamcrestLibraryProject.name
+            artifact hamcrestLibraryProject.sourcesJar
+            artifact hamcrestLibraryProject.javadocJar
             pom pomConfigurationFor(
                     'Hamcrest Library',
                     'A library of Hamcrest matchers - deprecated, please use "hamcrest" instead')
-            pom.withXml {
-                def dependencies = asNode().appendNode('dependencies')
-                appendDependency(dependencies, 'hamcrest-core')
-            }
         }
     }
     repositories {

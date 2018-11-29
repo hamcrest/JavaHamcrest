@@ -1,6 +1,8 @@
 enableFeaturePreview('STABLE_PUBLISHING')
 
 include 'hamcrest',
+        'hamcrest-core',
+        'hamcrest-library',
         'hamcrest-integration'
 
 rootProject.name = 'JavaHamcrest'
