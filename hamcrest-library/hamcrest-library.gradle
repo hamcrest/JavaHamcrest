@@ -1,0 +1,17 @@
+dependencies {
+    api project(':hamcrest-core')
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': project.name,
+                'Implementation-Vendor': 'hamcrest.org',
+                'Implementation-Version': version,
+                'Automatic-Module-Name': 'org.hamcrest'
+    }
+}
+
+javadoc {
+    title = "Hamcrest Library $version API"
+    options.showFromPackage()
+}
