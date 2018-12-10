@@ -1,12 +1,12 @@
 package org.hamcrest.collection;
 
-import static org.hamcrest.collection.IsArrayContainingInOrder.arrayContaining;
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
-public class IsArrayContainingInOrderTest extends AbstractMatcherTest {
+import static org.hamcrest.collection.ArrayMatching.arrayContaining;
+import static org.hamcrest.core.IsEqual.equalTo;
+
+public class ArrayMatchingInOrderTest extends AbstractMatcherTest {
 
     @SuppressWarnings("unchecked")
     @Override
@@ -33,9 +33,13 @@ public class IsArrayContainingInOrderTest extends AbstractMatcherTest {
     public void testMismatchesItemsInOrder() {
       Matcher<Integer[]> matcher = arrayContaining(1, 2, 3);
       assertMismatchDescription("was null", matcher, null);
-      assertMismatchDescription("No item matched: <1>", matcher, new Integer[] {});
-      assertMismatchDescription("No item matched: <2>", matcher, new Integer[] {1});
+      assertMismatchDescription("no item was <1>", matcher, new Integer[] {});
+      assertMismatchDescription("no item was <2>", matcher, new Integer[] {1});
       assertMismatchDescription("item 0: was <4>", matcher, new Integer[] {4,3,2,1});
       assertMismatchDescription("item 2: was <4>", matcher, new Integer[] {1,2, 4});
+    }
+
+    public void testCanHandleNullValuesInAnArray() {
+      assertMatches("with nulls", arrayContaining(null, null), new Object[]{null, null});
     }
 }
