@@ -42,7 +42,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * Creates a matcher for arrays that matcheswhen each item in the examined array is
      * logically equal to the corresponding item in the specified items.  For a positive match,
      * the examined array must be of the same length as the number of specified items.
-     * <p/>
+     * <p>
      * For example:
      * <pre>assertThat(new String[]{"foo", "bar"}, contains("foo", "bar"))</pre>
      *
@@ -63,7 +63,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * Creates a matcher for arrays that matches when each item in the examined array satisfies the
      * corresponding matcher in the specified matchers.  For a positive match, the examined array
      * must be of the same length as the number of specified matchers.
-     * <p/>
+     * <p>
      * For example:
      * <pre>assertThat(new String[]{"foo", "bar"}, contains(equalTo("foo"), equalTo("bar")))</pre>
      *
@@ -80,7 +80,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * Creates a matcher for arrays that matches when each item in the examined array satisfies the
      * corresponding matcher in the specified list of matchers.  For a positive match, the examined array
      * must be of the same length as the specified list of matchers.
-     * <p/>
+     * <p>
      * For example:
      * <pre>assertThat(new String[]{"foo", "bar"}, contains(Arrays.asList(equalTo("foo"), equalTo("bar"))))</pre>
      *
