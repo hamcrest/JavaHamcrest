@@ -33,8 +33,8 @@ public class IsArrayContainingInOrderTest extends AbstractMatcherTest {
     public void testMismatchesItemsInOrder() {
       Matcher<Integer[]> matcher = arrayContaining(1, 2, 3);
       assertMismatchDescription("was null", matcher, null);
-      assertMismatchDescription("No item matched: <1>", matcher, new Integer[] {});
-      assertMismatchDescription("No item matched: <2>", matcher, new Integer[] {1});
+      assertMismatchDescription("no item was <1>", matcher, new Integer[] {});
+      assertMismatchDescription("no item was <2>", matcher, new Integer[] {1});
       assertMismatchDescription("item 0: was <4>", matcher, new Integer[] {4,3,2,1});
       assertMismatchDescription("item 2: was <4>", matcher, new Integer[] {1,2, 4});
     }
