@@ -3,7 +3,7 @@ apply plugin: 'osgi'
 apply plugin: 'maven-publish'
 
 group = "org.hamcrest"
-version = "2.1-rc4"
+version = "2.1-SNAPSHOT"
 
 subprojects {
     apply plugin: 'java-library'
