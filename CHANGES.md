@@ -16,7 +16,9 @@ correctly upgrading transitive dependencies. Refer to the
 [Hamcrest Distributables](http://hamcrest.org/JavaHamcrest/distributables.html)
 documentation for more information, and in particular,
 [Upgrading from Hamcrest 1.x](http://hamcrest.org/JavaHamcrest/distributables.html#upgrading-from-hamcrest-1.x)
-* Renamed IsCollectionContaining to IsIterableContaining
+* `org.hamcrest.Factory` has been removed. This was only used in old implementations
+of the hamcrest build toolchain, and can safely be deleted from client code without
+any effect.
 
 ### Changes for 2.1
 
