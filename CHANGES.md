@@ -1,49 +1,44 @@
 # Hamcrest Changes
 
-## Version 2.1-rc2 (27th November 2018)
+## Version 2.1 (Unreleased)
 
-* Publish pom-only artifacts for hamcrest-core and hamcrest-library.
-
-## Version 2.1-rc1 (25th November 2018)
-
-### Overview for 2.1-rc1
+### Overview for 2.1
 
 After a long hiatus without releases, this version simplifies the packaging of
 Hamcrest into a single jar: `hamcrest-<version>.jar`. Other big changes include
-Java 9 module compatibility, along with numerous other improvements and bug
-fixes.
+Java 9 module compatibility, migrating the code repository from Google Code to
+GitHub, along with numerous other new features, improvements and bug fixes.
 
-### Breaking Changes for 2.1-rc1
+### Breaking Changes for 2.1
 
-Although the class API has not changed since Hamcrest 1.3, the way that the
-project is packaged has changed. Refer to the [Hamcrest Distributables](http://hamcrest.org/JavaHamcrest/distributables.html)
-documentation for more information. 
+* The way that the project is packaged has changed. This may cause problems with
+correctly upgrading transitive dependencies. Refer to the
+[Hamcrest Distributables](http://hamcrest.org/JavaHamcrest/distributables.html)
+documentation for more information, and in particular,
+[Upgrading from Hamcrest 1.x](http://hamcrest.org/JavaHamcrest/distributables.html#upgrading-from-hamcrest-1.x)
+* `org.hamcrest.Factory` has been removed. This was only used in old implementations
+of the hamcrest build toolchain, and can safely be deleted from client code without
+any effect.
 
-### Changes for 2.1-rc1
+### Changes for 2.1
 
-* Publish a single jar `hamcrest-2.1.jar`
 * Documentation updates
+* Several JavaDoc improvements and corrections
+* Fix JavaDoc examples
+* Upgraded to Java 7
+* Build with Gradle
+* Publish a single jar `hamcrest-2.1.jar`
+* Publish pom-only artifacts for `hamcrest-core` and `hamcrest-library`.
 * Add implementation for CharSequence length matcher
 * Fix for TypeSafeDiagnosingMatcher can't detect generic types for subclass
-* Renamed IsCollectionContaining to IsIterableContaining
 * Make Hamcrest an OSGI bundle
 * Add StringRegularExpression matcher
 * Fix StringContainsInOrder to detect if a repeated pattern is missing 
 * Add ArrayAsIterableMatcher
 * Fix description for IsEqualIgnoringCase
-* Fix JavaDoc examples
-
-## Version 2.0.0.0 (18th January 2015)
-
-This version was the first release after migrating from the old Google Code hosting to GitHub.
-
-* Upgraded to Java 7
-* Build with Gradle
-* Publish a single jar java-hamcrest-2.0.0.0.jar
 * Removed deprecated methods from previous release
 * Improve mismatch description of hasItem/hasItems
 * General improvements to mismatch descriptions
-* Several JavaDoc improvements and corrections
 * Deprecated several matcher factory methods of the for "isXyz"
 * Fix [GH issue #75](https://github.com/hamcrest/JavaHamcrest/issues/75) - address doclint errors reported in JDK 1.8
 * Fix [GH issue #69](https://github.com/hamcrest/JavaHamcrest/issues/69) - Iterable contains in order is null-safe

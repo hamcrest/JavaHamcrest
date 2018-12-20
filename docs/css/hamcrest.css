@@ -37,3 +37,8 @@ h1, h2 {
   padding-left: 0px;
   padding-right: 40px;
 }
+pre.highlight {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  padding: 0.5em;
+}
