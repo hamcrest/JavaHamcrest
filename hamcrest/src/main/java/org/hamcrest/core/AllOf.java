@@ -14,6 +14,11 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
 
     private final Iterable<Matcher<? super T>> matchers;
 
+    @SafeVarargs
+    public AllOf(Matcher<? super T> ... matchers) {
+        this(Arrays.asList(matchers));
+    }
+
     public AllOf(Iterable<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }
