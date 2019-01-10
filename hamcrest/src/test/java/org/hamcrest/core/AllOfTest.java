@@ -4,10 +4,12 @@ import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 
@@ -59,5 +61,10 @@ public final class AllOfTest {
     @Test public void
     hasAMismatchDescriptionDescribingTheFirstFailingMatch() {
         assertMismatchDescription("\"good\" was \"bad\"", allOf(equalTo("bad"), equalTo("good")), "bad");
+    }
+
+    @Test public void
+    varargs(){
+        assertThat("the text!", new AllOf<>(startsWith("the"), containsString("text"), endsWith("!")));
     }
 }

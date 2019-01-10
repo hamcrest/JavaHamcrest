@@ -4,6 +4,7 @@ import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.StringEndsWith.endsWith;
@@ -52,5 +53,10 @@ public final class AnyOfTest {
     hasAReadableDescription() {
         assertDescription("(\"good\" or \"bad\" or \"ugly\")",
                 anyOf(equalTo("good"), equalTo("bad"), equalTo("ugly")));
+    }
+
+    @Test public void
+    varargs(){
+        assertThat("the text!", new AnyOf<>(startsWith("the"), endsWith(".")));
     }
 }

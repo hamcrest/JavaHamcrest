@@ -11,6 +11,11 @@ import java.util.Arrays;
  */
 public class AnyOf<T> extends ShortcutCombination<T> {
 
+    @SafeVarargs
+    public AnyOf(Matcher<? super T> ... matchers) {
+        this(Arrays.asList(matchers));
+    }
+
     public AnyOf(Iterable<Matcher<? super T>> matchers) {
         super(matchers);
     }
