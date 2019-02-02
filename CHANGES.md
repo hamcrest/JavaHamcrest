@@ -4,6 +4,7 @@
 
 * Fix compatibility issue for development with Android D8 ([Issue #246](https://github.com/hamcrest/JavaHamcrest/issues/246)) 
 * Fix typo in license name ([Issue #247](https://github.com/hamcrest/JavaHamcrest/pull/247))
+* AllOf/AnyOf: Pass the matchers to constructor using varargs ([Issue #245](https://github.com/hamcrest/JavaHamcrest/pull/245))
 
 ## Version 2.1 (21st December 2018)
 
