@@ -139,7 +139,6 @@ public class IsNotANumber extends TypeSafeMatcher {
     description.appendText("not a number"); 
   }
 
-  @Factory 
   public static Matcher notANumber() { 
     return new IsNotANumber(); 
   }
