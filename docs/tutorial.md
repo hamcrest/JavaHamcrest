@@ -104,6 +104,7 @@ assertThat(theBiscuit, equalTo(myBiscuit));
 assertThat(theBiscuit, is(equalTo(myBiscuit))); 
 assertThat(theBiscuit, is(myBiscuit));
 ```
+
 The last form is allowed since is(T value) is overloaded to return `is(equalTo(value))`.
 
 ### Writing custom matchers
