@@ -12,14 +12,15 @@ Hamcrest is a framework for writing matcher objects allowing 'match' rules to be
 When writing tests it is sometimes difficult to get the balance right between overspecifying the test (and making it brittle to changes), and not specifying enough (making the test less valuable since it continues to pass even when the thing being tested is broken). Having a tool that allows you to pick out precisely the aspect under test and describe the values it should have, to a controlled level of precision, helps greatly in writing tests that are "just right". Such tests fail when the behaviour of the aspect under test deviates from the expected behaviour, yet continue to pass when minor, unrelated changes to the behaviour are made.
 
 ### My first Hamcrest test
-We'll start by writing a very simple JUnit 3 test, but instead of using JUnit's `assertEquals` methods, we use Hamcrest's `assertThat` construct and the standard set of matchers, both of which we statically import:
+We'll start by writing a very simple JUnit 5 test, but instead of using JUnit's `assertEquals` methods, we use Hamcrest's `assertThat` construct and the standard set of matchers, both of which we statically import:
 
 ```java 
+import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat; 
 import static org.hamcrest.Matchers.*;
-import junit.framework.TestCase;
 
-public class BiscuitTest extends TestCase { 
+public class BiscuitTest {
+  @Test 
   public void testEquals() { 
     Biscuit theBiscuit = new Biscuit("Ginger"); 
     Biscuit myBiscuit = new Biscuit("Ginger"); 
@@ -39,7 +40,7 @@ assertThat("hazelnuts", theBiscuit.getHazelnutCount(), equalTo(3));
 ```
 
 ### Other test frameworks
-Hamcrest has been designed from the outset to integrate with different unit testing frameworks. For example, Hamcrest can be used with JUnit 3 and 4 and TestNG. (For details have a look at the examples that come with the full Hamcrest distribution.) It is easy enough to migrate to using Hamcrest-style assertions in an existing test suite, since other assertion styles can co-exist with Hamcrest's.
+Hamcrest has been designed from the outset to integrate with different unit testing frameworks. For example, Hamcrest can be used with JUnit (all versions) and TestNG. (For details have a look at the examples that come with the full Hamcrest distribution.) It is easy enough to migrate to using Hamcrest-style assertions in an existing test suite, since other assertion styles can co-exist with Hamcrest's.
 
 Hamcrest can also be used with mock objects frameworks by using adaptors to bridge from the mock objects framework's concept of a matcher to a Hamcrest matcher. For example, JMock 1's constraints are Hamcrest's matchers. Hamcrest provides a JMock 1 adaptor to allow you to use Hamcrest matchers in your JMock 1 tests. JMock 2 doesn't need such an adaptor layer since it is designed to use Hamcrest as its matching library. Hamcrest also provides adaptors for EasyMock 2. Again, see the Hamcrest examples for more details.
 
@@ -111,6 +112,7 @@ Hamcrest comes bundled with lots of useful matchers, but you'll probably find th
 Let's write our own matcher for testing if a double value has the value NaN (not a number). This is the test we want to write:
 
 ```java
+@Test
 public void testSquareRootOfMinusOneIsNotANumber() { 
   assertThat(Math.sqrt(-1), is(notANumber())); 
 }
@@ -122,7 +124,6 @@ And here's the implementation:
 package org.hamcrest.examples.tutorial;
 
 import org.hamcrest.Description; 
-import org.hamcrest.Factory; 
 import org.hamcrest.Matcher; 
 import org.hamcrest.TypeSafeMatcher;
 
@@ -158,15 +159,13 @@ java.lang.AssertionError: Expected: is not a number got : <1.0>
 The third method in our matcher is a convenience factory method. We statically import this method to use the matcher in our test:
 
 ```java
+import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat; 
 import static org.hamcrest.Matchers.*;
-
 import static org.hamcrest.examples.tutorial.IsNotANumber.notANumber;
 
-import junit.framework.TestCase;
-
-public class NumberTest extends TestCase {
-
+public class NumberTest {
+  @Test
   public void testSquareRootOfMinusOneIsNotANumber() { 
     assertThat(Math.sqrt(-1), is(notANumber())); 
   } 
