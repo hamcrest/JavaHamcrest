@@ -35,6 +35,10 @@ public abstract class BaseDescription implements Description {
             append('"');
             toJavaSyntax((Character) value);
             append('"');
+        } else if (value instanceof Byte) {
+            append('<');
+            append(descriptionOf(value));
+            append("b>");
         } else if (value instanceof Short) {
             append('<');
             append(descriptionOf(value));

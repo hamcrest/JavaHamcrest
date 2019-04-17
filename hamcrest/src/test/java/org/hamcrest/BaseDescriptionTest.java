@@ -63,6 +63,12 @@ public final class BaseDescriptionTest {
     }
 
     @Test public void
+    bracketsAppendedByteValue() {
+        baseDescription.appendValue(Byte.valueOf("2"));
+        assertEquals("<2b>", result.toString());
+    }
+
+    @Test public void
     bracketsAppendedShortValue() {
         baseDescription.appendValue(Short.valueOf("2"));
         assertEquals("<2s>", result.toString());
