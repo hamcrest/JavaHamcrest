@@ -98,7 +98,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    */
-  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<T> first, org.hamcrest.Matcher<? super T> second) {
+  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second) {
     return org.hamcrest.core.AnyOf.anyOf(first, second);
   }
 
@@ -107,7 +107,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    */
-  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third) {
+  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third) {
     return org.hamcrest.core.AnyOf.anyOf(first, second, third);
   }
 
@@ -116,7 +116,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    */
-  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth) {
+  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth) {
     return org.hamcrest.core.AnyOf.anyOf(first, second, third, fourth);
   }
 
@@ -125,7 +125,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    */
-  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth) {
+  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth) {
     return org.hamcrest.core.AnyOf.anyOf(first, second, third, fourth, fifth);
   }
 
@@ -134,7 +134,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    */
-  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth, org.hamcrest.Matcher<? super T> sixth) {
+  public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth, org.hamcrest.Matcher<? super T> sixth) {
     return org.hamcrest.core.AnyOf.anyOf(first, second, third, fourth, fifth, sixth);
   }
 
