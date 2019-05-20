@@ -41,7 +41,7 @@ public class IsRelativelyCloseTo extends TypeSafeMatcher<Number> {
     }
 
     private double calcRelativeError(Number actual) {
-      return Math.abs(calcAbsoluteError(actual) / expected));
+      return Math.abs(calcAbsoluteError(actual) / expected);
     }
     
     private double calcAbsoluteError(Number actual) {
