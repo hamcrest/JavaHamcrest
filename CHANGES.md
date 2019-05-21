@@ -6,6 +6,7 @@
 * Fix typo in license name ([Issue #247](https://github.com/hamcrest/JavaHamcrest/pull/247))
 * AllOf/AnyOf: Pass the matchers to constructor using varargs ([Issue #245](https://github.com/hamcrest/JavaHamcrest/pull/245))
 * Matchers.anyOf: Fix generic bounds compatibility for JDK 11 ([Issue #256](https://github.com/hamcrest/JavaHamcrest/issues/256), [Issue #257](https://github.com/hamcrest/JavaHamcrest/issues/257))
+* Fix: AssertionError message is unhelpful when match fails for byte type ([Issue #254](https://github.com/hamcrest/JavaHamcrest/issues/254), [Issue #255](https://github.com/hamcrest/JavaHamcrest/issues/255))
 
 ## Version 2.1 (21st December 2018)
 
