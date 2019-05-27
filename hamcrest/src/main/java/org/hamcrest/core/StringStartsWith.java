@@ -6,6 +6,8 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that starts with a specific substring.
  */
 public class StringStartsWith extends SubstringMatcher {
+    public StringStartsWith(String substring) { this(false, substring); }
+
     public StringStartsWith(boolean ignoringCase, String substring) { super("starting with", ignoringCase, substring); }
 
     @Override
