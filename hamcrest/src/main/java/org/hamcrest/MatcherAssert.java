@@ -7,7 +7,7 @@ package org.hamcrest;
  */
 public class MatcherAssert {
 	
-	/**
+    /**
      * Verifies that <code>matcher</code> matches <code>actual</code>. 
      * Convenience method for performing an assertion without supplying a reason.
      * Equivalent to <code>assertThat("", actual, matcher)</code>.
