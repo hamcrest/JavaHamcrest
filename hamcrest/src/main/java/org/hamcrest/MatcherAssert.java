@@ -10,9 +10,11 @@ public class MatcherAssert {
         if (!matcher.matches(actual)) {
             Description description = new StringDescription();
             description.appendText(reason)
-                       .appendText("\nExpected: ")
+                       .appendText(System.lineSeparator())
+                       .appendText("Expected: ")
                        .appendDescriptionOf(matcher)
-                       .appendText("\n     but: ");
+                       .appendText(System.lineSeparator())
+                       .appendText("     but: ");
             matcher.describeMismatch(actual, description);
             
             throw new AssertionError(description.toString());

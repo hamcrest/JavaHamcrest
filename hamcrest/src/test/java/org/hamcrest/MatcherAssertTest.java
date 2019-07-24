@@ -12,8 +12,9 @@ public final class MatcherAssertTest {
     includesDescriptionOfTestedValueInErrorMessage() {
         String expected = "expected";
         String actual = "actual";
+        String endLine = System.lineSeparator();
 
-        String expectedMessage = "identifier\nExpected: \"expected\"\n     but: was \"actual\"";
+        String expectedMessage = "identifier" + endLine + "Expected: \"expected\"" + endLine + "     but: was \"actual\"";
 
         try {
             assertThat("identifier", actual, equalTo(expected));
@@ -30,8 +31,9 @@ public final class MatcherAssertTest {
     descriptionCanBeElided() {
         String expected = "expected";
         String actual = "actual";
+        String endLine = System.lineSeparator();
 
-        String expectedMessage = "\nExpected: \"expected\"\n     but: was \"actual\"";
+        String expectedMessage = endLine + "Expected: \"expected\"" + endLine + "     but: was \"actual\"";
 
         try {
             assertThat(actual, equalTo(expected));
@@ -78,7 +80,8 @@ public final class MatcherAssertTest {
             }
         };
 
-        String expectedMessage = "\nExpected: Something cool\n     but: Not cool";
+        String endLine = System.lineSeparator();
+        String expectedMessage = endLine + "Expected: Something cool" + endLine + "     but: Not cool";
 
         try {
             assertThat("Value", matcherWithCustomMismatchDescription);
