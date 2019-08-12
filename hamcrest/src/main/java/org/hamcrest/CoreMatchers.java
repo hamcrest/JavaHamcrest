@@ -447,4 +447,16 @@ public class CoreMatchers {
     return org.hamcrest.core.StringEndsWith.endsWithIgnoringCase(suffix);
   }
 
+  /**
+   * Creates a matcher that matches if the examined {@link String} has the specified length.
+   * For example:
+   * <pre>assertThat("myStringOfNote", length(14))</pre>
+   *
+   * @param length
+   *      the length the returned matcher will expect to be equal to the length of the examined string
+   */
+  public static org.hamcrest.Matcher<java.lang.String> length(int length) {
+    return org.hamcrest.core.StringHasLength.hasLength(length);
+  }
+
 }
