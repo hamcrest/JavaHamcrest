@@ -57,7 +57,7 @@ Hamcrest comes with a library of useful matchers. Here are some of the most impo
 #### Logical
 `allOf` - matches if all matchers match, short circuits (like Java &&)
 
-`anyOf` - matches if any matchers match, short circuits (like Java ||)
+`anyOf` - matches if any matchers match, short circuits (like Java \|\|)
 
 `not` - matches if the wrapped matcher doesn't match and vice versa
 
