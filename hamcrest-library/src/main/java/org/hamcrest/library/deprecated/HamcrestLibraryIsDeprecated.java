@@ -1,4 +1,4 @@
-package org.hamcrest;
+package org.hamcrest.library.deprecated;
 
 /**
  * All the classes in <code>hamcrest-library.jar</code> have moved to
