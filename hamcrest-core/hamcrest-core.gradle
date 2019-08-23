@@ -7,7 +7,7 @@ jar {
         attributes 'Implementation-Title': project.name,
                 'Implementation-Vendor': 'hamcrest.org',
                 'Implementation-Version': version,
-                'Automatic-Module-Name': 'org.hamcrest'
+                'Automatic-Module-Name': 'org.hamcrest.core.deprecated'
     }
 }
 
