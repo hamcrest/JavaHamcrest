@@ -1,5 +1,8 @@
 language: java
 
+# Need to select an older Ubuntu distribution that supports JDK7
+dist: trusty
+
 # Workaround to using openjdk7 with Gradle due to security issue:
 # https://github.com/gradle/gradle/issues/2421
 before_install:
