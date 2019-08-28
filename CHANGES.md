@@ -9,6 +9,7 @@
 * Fix: AssertionError message is unhelpful when match fails for byte type ([Issue #254](https://github.com/hamcrest/JavaHamcrest/issues/254), [Issue #255](https://github.com/hamcrest/JavaHamcrest/issues/255))
 * Fix: 1.3 compatible constructors for string matchers ([Issue #259](https://github.com/hamcrest/JavaHamcrest/issues/259), [Issue #260](https://github.com/hamcrest/JavaHamcrest/issues/260))
 * Use platform specific line breaks ([PR #267](https://github.com/hamcrest/JavaHamcrest/pull/267))
+* Fix: Split packages with Java 9 modules ([Issue #269](https://github.com/hamcrest/JavaHamcrest/issues/269), [PR #270](https://github.com/hamcrest/JavaHamcrest/pull/270))
 
 ## Version 2.1 (21st December 2018)
 
