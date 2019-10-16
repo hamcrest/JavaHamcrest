@@ -1,6 +1,16 @@
 # Hamcrest Changes
 
-## Version 2.2 (Unreleased)
+## Version 2.3 (Unreleased)
+
+### Improvements
+
+TBD
+
+### Bugfixes
+
+TBD
+
+## Version 2.2 (17th October 2019)
 
 ### Improvements
 
