@@ -56,7 +56,7 @@ Add the following to the `<dependencies>` section in your `pom.xml`:
 <dependency>
     <groupId>org.hamcrest</groupId>
     <artifactId>hamcrest</artifactId>
-    <version>2.1</version>
+    <version>2.2</version>
     <scope>test</scope>
 </dependency>
 ```
