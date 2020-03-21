@@ -66,7 +66,7 @@ Add the following to the `<dependencies>` section in your `pom.xml`:
 You can download the jars directly from Maven Central. You can find the jars by searching Maven Central for groupId `org.hamcrest`
 using the following link:
 
-> [https://search.maven.org/search?q=g:org.hamcrest](https://search.maven.org/search?q=g:org.hamcrest) 
+> [https://search.maven.org/artifact/org.hamcrest/hamcrest](https://search.maven.org/artifact/org.hamcrest/hamcrest)
 
 ## Previous Versions of Hamcrest
 
