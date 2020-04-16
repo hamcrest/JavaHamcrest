@@ -4,6 +4,7 @@ import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -62,7 +63,25 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
         assertThat(map, hasKey((Number)1));
 
         // TODO: work out the correct sprinkling of wildcards to get this to work!
-//        assertThat(map, hasKey(1));
+        //        assertThat(map, hasKey(1));
+    }
+
+    public void test_mapContainingNullKey_returnsFalse_forMapsWithNonnullKeys() throws Exception {
+        Map<Number, String> map = new Hashtable<>(); // Hashtables cannot store null keys
+        map.put(1, "A");
+        map.put(2, "B");
+
+        assertDoesNotMatch(hasKey((Number)null), map);
+    }
+
+
+    public void test_mapContainingNullKey_returnsTrue_forMapWithNullKey() throws Exception {
+        Map<Number, String> map = new HashMap<>(); // HashMap can store null keys
+        map.put(1, "A");
+        map.put(2, "B");
+        map.put(null, "C");
+
+        assertMatches(hasKey((Number)null), map);
     }
 
     public void testHasReadableDescription() {
