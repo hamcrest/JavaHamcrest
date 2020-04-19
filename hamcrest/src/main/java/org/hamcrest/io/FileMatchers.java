@@ -50,12 +50,8 @@ public final class FileMatchers {
 
     public static Matcher<File> aFileWithCanonicalPath(final Matcher<String> expected) {
         return new FeatureMatcher<File, String>(expected, "A file with canonical path", "path") {
-            @Override protected String featureValueOf(File actual) {
-                try {
-                    return actual.getCanonicalPath();
-                } catch (IOException e) {
-                    return "Exception: " + e.getMessage();
-                }
+            @Override protected String featureValueOf(File actual) throws IOException {
+                return actual.getCanonicalPath();
             }
         };
     }
