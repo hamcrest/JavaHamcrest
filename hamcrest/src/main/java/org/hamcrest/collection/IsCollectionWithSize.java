@@ -1,6 +1,5 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
 import java.util.Collection;
@@ -10,14 +9,19 @@ import static org.hamcrest.core.IsEqual.equalTo;
 /**
  * Matches if collection size satisfies a nested matcher.
  */
-public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends E>, Integer> {
+public class IsCollectionWithSize<E> extends SizeMatcher<Collection<? extends E>, E> {
     public IsCollectionWithSize(Matcher<? super Integer> sizeMatcher) {
-      super(sizeMatcher, "a collection with size", "collection size");
+      super(sizeMatcher, "collection");
     }
 
     @Override
     protected Integer featureValueOf(Collection<? extends E> actual) {
       return actual.size();
+    }
+
+    @Override
+    protected Iterable<? extends E> actualValues(Collection<? extends E> actual) {
+      return actual;
     }
 
     /**
