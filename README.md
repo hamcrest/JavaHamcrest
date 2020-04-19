@@ -1,6 +1,6 @@
 ![JavaHamcrest](http://hamcrest.org/images/logo.jpg)
 
-[![Build Status](https://travis-ci.org/hamcrest/JavaHamcrest.png?branch=master)](https://travis-ci.org/hamcrest/JavaHamcrest)
+[![Build Status](https://travis-ci.org/hamcrest/JavaHamcrest.png?branch=master)](https://travis-ci.org/hamcrest/JavaHamcrest) [![Maven Central](https://img.shields.io/maven-central/v/org.hamcrest/hamcrest.svg?label=Maven%20Central)](https://search.maven.org/artifact/org.hamcrest/hamcrest)
 
 Java Hamcrest
 =============
@@ -13,7 +13,7 @@ They've also been used for other purposes.
 
 Downloads
 ---------
-You can obtain Hamcrest binaries from [maven central][].
+You can obtain Hamcrest binaries from [maven central](https://search.maven.org/artifact/org.hamcrest/hamcrest). Learn more at [Hamcrest Distributables](http://hamcrest.org/JavaHamcrest/distributables).
 
 Extensions
 ----------
@@ -58,6 +58,5 @@ Also, thanks to everyone who has worked on DynaMock, nMock, jMock, EasyMock and 
 [logo]: http://hamcrest.org/images/logo.jpg
 [website]: https://github.com/hamcrest/JavaHamcrest
 [BSD License]: http://opensource.org/licenses/BSD-3-Clause
-[Maven central]: http://search.maven.org/#search%7Cga%7C1%7Cg%3Aorg.hamcrest
 [hamcrest extensions page]: https://github.com/hamcrest/JavaHamcrest/wiki/Related-Projects
 [GitHub issue tracker]: https://github.com/hamcrest/JavaHamcrest/issues
