@@ -18,10 +18,9 @@ public class ArrayAsIterableMatcher<E> extends TypeSafeMatcher<E[]> {
   protected final Collection<Matcher<? super E>> matchers;
 
   public ArrayAsIterableMatcher(
-        TypeSafeDiagnosingMatcher<Iterable<? extends E>> iterableMatcher,
-        Collection<Matcher<? super E>> matchers,
-        String message)
-  {
+      TypeSafeDiagnosingMatcher<Iterable<? extends E>> iterableMatcher,
+      Collection<Matcher<? super E>> matchers,
+      String message) {
     this.matchers = matchers;
     this.iterableMatcher = iterableMatcher;
     this.message = message;
@@ -29,7 +28,7 @@ public class ArrayAsIterableMatcher<E> extends TypeSafeMatcher<E[]> {
 
   @Override
   public boolean matchesSafely(E[] item) {
-      return iterableMatcher.matches(asList(item));
+    return iterableMatcher.matches(asList(item));
   }
 
   @Override
@@ -39,7 +38,7 @@ public class ArrayAsIterableMatcher<E> extends TypeSafeMatcher<E[]> {
 
   @Override
   public void describeTo(Description description) {
-      description.appendList("[", ", ", "]", matchers)
-          .appendText(" ").appendText(message);
+    description.appendList("[", ", ", "]", matchers)
+        .appendText(" ").appendText(message);
   }
 }

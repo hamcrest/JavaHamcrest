@@ -15,34 +15,39 @@ import static org.hamcrest.beans.HasProperty.hasProperty;
  */
 public final class HasPropertyTest {
 
-    private final HasPropertyWithValueTest.BeanWithoutInfo bean = new HasPropertyWithValueTest.BeanWithoutInfo("a bean", false);
+  private final HasPropertyWithValueTest.BeanWithoutInfo bean = new HasPropertyWithValueTest.BeanWithoutInfo("a bean", false);
 
-    @Test public void
-    copesWithNullsAndUnknownTypes() {
-        Matcher<Object> matcher = hasProperty("irrelevant");
-        
-        assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
-    }
+  @Test
+  public void
+  copesWithNullsAndUnknownTypes() {
+    Matcher<Object> matcher = hasProperty("irrelevant");
 
-    @Test public void
-    matchesWhenThePropertyExists() {
-        assertMatches(hasProperty("writeOnlyProperty"), bean);
-    }
+    assertNullSafe(matcher);
+    assertUnknownTypeSafe(matcher);
+  }
 
-    @Test public void
-    doesNotMatchIfPropertyDoesNotExist() {
-        assertDoesNotMatch(hasProperty("aNonExistentProp"), bean);
-    }
+  @Test
+  public void
+  matchesWhenThePropertyExists() {
+    assertMatches(hasProperty("writeOnlyProperty"), bean);
+  }
 
-    @Test public void
-    describesItself() {
-        assertDescription("hasProperty(\"property\")", hasProperty("property"));
-    }
+  @Test
+  public void
+  doesNotMatchIfPropertyDoesNotExist() {
+    assertDoesNotMatch(hasProperty("aNonExistentProp"), bean);
+  }
 
-    @Test public void
-    describesAMismatch() {
-        assertMismatchDescription("no \"aNonExistentProp\" in <[Person: a bean]>",
-                                  hasProperty("aNonExistentProp"), bean);
-    }
+  @Test
+  public void
+  describesItself() {
+    assertDescription("hasProperty(\"property\")", hasProperty("property"));
+  }
+
+  @Test
+  public void
+  describesAMismatch() {
+    assertMismatchDescription("no \"aNonExistentProp\" in <[Person: a bean]>",
+        hasProperty("aNonExistentProp"), bean);
+  }
 }

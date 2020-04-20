@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.number.BigDecimalCloseTo.closeTo;
 
-public class BigDecimalCloseToTest  extends AbstractMatcherTest {
+public class BigDecimalCloseToTest extends AbstractMatcherTest {
   private final Matcher<BigDecimal> matcher = closeTo(new BigDecimal("1.0"), new BigDecimal("0.5"));
 
   @Override
@@ -15,7 +15,7 @@ public class BigDecimalCloseToTest  extends AbstractMatcherTest {
     BigDecimal irrelevant = new BigDecimal("0.01");
     return closeTo(irrelevant, irrelevant);
   }
-  
+
   public void testEvaluatesToTrueIfArgumentIsEqualToABigDecimalWithinSomeError() {
     assertTrue(matcher.matches(new BigDecimal("1.0")));
     assertTrue(matcher.matches(new BigDecimal("0.5")));
@@ -26,7 +26,7 @@ public class BigDecimalCloseToTest  extends AbstractMatcherTest {
     assertDoesNotMatch("number too small", matcher, new BigDecimal("0.0"));
     assertMismatchDescription("<0.0> differed by <0.5> more than delta <0.5>", matcher, new BigDecimal("0.0"));
   }
-  
+
   public void testEvaluatesToTrueIfArgumentHasDifferentScale() {
     assertTrue(matcher.matches(new BigDecimal("1.000000")));
     assertTrue(matcher.matches(new BigDecimal("0.500000")));

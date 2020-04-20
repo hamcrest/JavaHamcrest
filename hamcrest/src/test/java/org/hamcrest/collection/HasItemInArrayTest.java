@@ -8,39 +8,39 @@ import static org.hamcrest.collection.ArrayMatching.hasItemInArray;
 
 public class HasItemInArrayTest extends AbstractMatcherTest {
 
-    @Override
-    protected Matcher<?> createMatcher() {
-        return hasItemInArray("irrelevant");
-    }
+  @Override
+  protected Matcher<?> createMatcher() {
+    return hasItemInArray("irrelevant");
+  }
 
-    public void testMatchesAnArrayThatContainsAnElementMatchingTheGivenMatcher() {
-        assertMatches("should matches array that contains 'a'",
-                hasItemInArray("a"), new String[]{"a", "b", "c"});
-    }
+  public void testMatchesAnArrayThatContainsAnElementMatchingTheGivenMatcher() {
+    assertMatches("should matches array that contains 'a'",
+        hasItemInArray("a"), new String[]{"a", "b", "c"});
+  }
 
-    public void testDoesNotMatchAnArrayThatDoesntContainAnElementMatchingTheGivenMatcher() {
-        assertDoesNotMatch("should not matches array that doesn't contain 'a'",
-                hasItemInArray("a"), new String[]{"b", "c"});
-        assertDoesNotMatch("should not matches empty array",
-                hasItemInArray("a"), new String[0]);
-        assertMismatchDescription(
-              "mismatches were: [<3> was greater than <2>, <4> was greater than <2>, <5> was greater than <2>]",
-              hasItemInArray(lessThan(2)), new Integer[] {3, 4, 5});
-    }
+  public void testDoesNotMatchAnArrayThatDoesntContainAnElementMatchingTheGivenMatcher() {
+    assertDoesNotMatch("should not matches array that doesn't contain 'a'",
+        hasItemInArray("a"), new String[]{"b", "c"});
+    assertDoesNotMatch("should not matches empty array",
+        hasItemInArray("a"), new String[0]);
+    assertMismatchDescription(
+        "mismatches were: [<3> was greater than <2>, <4> was greater than <2>, <5> was greater than <2>]",
+        hasItemInArray(lessThan(2)), new Integer[]{3, 4, 5});
+  }
 
-    public void testDoesNotMatchNull() {
-        assertDoesNotMatch("should not matches null",
-                hasItemInArray("a"), null);
-    }
+  public void testDoesNotMatchNull() {
+    assertDoesNotMatch("should not matches null",
+        hasItemInArray("a"), null);
+  }
 
-    public void testHasAReadableDescription() {
-        assertDescription("an array containing a value less than <2>", hasItemInArray(lessThan(2)));
-    }
+  public void testHasAReadableDescription() {
+    assertDescription("an array containing a value less than <2>", hasItemInArray(lessThan(2)));
+  }
 
-    // Remaining code no longer compiles, thanks to generics. I think that's a good thing, but
-    // I still need to investigate how this behaves with code that doesn't use generics.
-    // I expect ClassCastExceptions will be thrown.
-    // -Joe.
+  // Remaining code no longer compiles, thanks to generics. I think that's a good thing, but
+  // I still need to investigate how this behaves with code that doesn't use generics.
+  // I expect ClassCastExceptions will be thrown.
+  // -Joe.
 
 //    public void testDoesNotMatchObjectThatIsNotAnArray() {
 //        assertDoesNotMatch("should not matches empty list",

@@ -7,12 +7,13 @@ import static org.junit.Assert.assertEquals;
 
 public final class NullDescriptionTest {
 
-    private final NullDescription nullDescription = new Description.NullDescription();
+  private final NullDescription nullDescription = new Description.NullDescription();
 
-    @Test public void
-    isUnchangedByAppendedText() {
-        nullDescription.appendText("myText");
-        assertEquals("", nullDescription.toString());
-    }
+  @Test
+  public void
+  isUnchangedByAppendedText() {
+    nullDescription.appendText("myText");
+    assertEquals("", nullDescription.toString());
+  }
 
 }

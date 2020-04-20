@@ -9,9 +9,9 @@ import org.hamcrest.core.IsEqual;
  */
 public class EasyMock2Matchers {
 
-    public static String equalTo(String string) {
-        EasyMock2Adapter.adapt(IsEqual.equalTo(string));
-        return null;
-    }
+  public static String equalTo(String string) {
+    EasyMock2Adapter.adapt(IsEqual.equalTo(string));
+    return null;
+  }
 
 }

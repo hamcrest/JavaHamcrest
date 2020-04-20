@@ -67,7 +67,7 @@ public class CoreMatchers {
    * delegated to the decorated matcher, including its mismatch description.
    * For example:
    * <pre>describedAs("a big decimal equal to %0", equalTo(myBigDecimal), myBigDecimal.toPlainString())</pre>
-   * 
+   *
    * @param description
    *     the new description for the wrapped matcher
    * @param matcher
@@ -85,7 +85,7 @@ public class CoreMatchers {
    * <code>itemMatcher</code>.
    * For example:
    * <pre>assertThat(Arrays.asList("bar", "baz"), everyItem(startsWith("ba")))</pre>
-   * 
+   *
    * @param itemMatcher
    *     the matcher to apply to every item provided by the examined {@link Iterable}
    */
@@ -137,7 +137,7 @@ public class CoreMatchers {
   /**
    * Creates a matcher that always matches, regardless of the examined object, but describes
    * itself with the specified {@link String}.
-   * 
+   *
    * @param description
    *     a meaningful {@link String} used when describing itself
    */
@@ -152,7 +152,7 @@ public class CoreMatchers {
    * will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem(startsWith("ba")))</pre>
-   * 
+   *
    * @param itemMatcher
    *     the matcher to apply to items provided by the examined {@link Iterable}
    */
@@ -167,7 +167,7 @@ public class CoreMatchers {
    * will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem("bar"))</pre>
-   * 
+   *
    * @param item
    *     the item to compare against the items provided by the examined {@link Iterable}
    */
@@ -182,7 +182,7 @@ public class CoreMatchers {
    * the examined {@link Iterable} will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems(endsWith("z"), endsWith("o")))</pre>
-   * 
+   *
    * @param itemMatchers
    *     the matchers to apply to items provided by the examined {@link Iterable}
    */
@@ -198,7 +198,7 @@ public class CoreMatchers {
    * examined {@link Iterable} will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems("baz", "foo"))</pre>
-   * 
+   *
    * @param items
    *     the items to compare against the items provided by the examined {@link Iterable}
    */
@@ -211,17 +211,17 @@ public class CoreMatchers {
    * Creates a matcher that matches when the examined object is logically equal to the specified
    * <code>operand</code>, as determined by calling the {@link java.lang.Object#equals} method on
    * the <b>examined</b> object.
-   * 
+   *
    * <p>If the specified operand is <code>null</code> then the created matcher will only match if
    * the examined object's <code>equals</code> method returns <code>true</code> when passed a
    * <code>null</code> (which would be a violation of the <code>equals</code> contract), unless the
    * examined object itself is <code>null</code>, in which case the matcher will return a positive
    * match.</p>
-   * 
+   *
    * <p>The created matcher provides a special behaviour when examining <code>Array</code>s, whereby
    * it will match if both the operand and the examined object are arrays of the same length and
    * contain items that are equal to each other (according to the above rules) <b>in the same
-   * indexes</b>.</p> 
+   * indexes</b>.</p>
    * For example:
    * <pre>
    * assertThat("foo", equalTo("foo"));
@@ -244,7 +244,7 @@ public class CoreMatchers {
    * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
    * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
    * the examined object.
-   * 
+   *
    * <p>The created matcher forces a relationship between specified type and the examined object, and should be
    * used when it is necessary to make generics conform, for example in the JMock clause
    * <code>with(any(Thing.class))</code></p>
@@ -259,7 +259,7 @@ public class CoreMatchers {
    * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
    * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
    * the examined object.
-   * 
+   *
    * <p>The created matcher assumes no relationship between specified type and the examined object.</p>
    * For example:
    * <pre>assertThat(new Canoe(), instanceOf(Paddlable.class));</pre>
@@ -273,7 +273,7 @@ public class CoreMatchers {
    * it will match.
    * For example:
    * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
-   * 
+   *
    * @param matcher
    *     the matcher whose sense should be inverted
    */
@@ -287,7 +287,7 @@ public class CoreMatchers {
    * <pre>assertThat(cheese, is(not(smelly)))</pre>
    * instead of:
    * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
-   * 
+   *
    * @param value
    *     the value that any examined object should <b>not</b> equal
    */
@@ -313,7 +313,7 @@ public class CoreMatchers {
    * <pre>assertThat(cheese, is(notNullValue(X.class)))</pre>
    * instead of:
    * <pre>assertThat(cheese, is(not(nullValue(X.class))))</pre>
-   * 
+   *
    * @param type
    *     dummy parameter used to infer the generic type of the returned matcher
    */
@@ -335,7 +335,7 @@ public class CoreMatchers {
    * single dummy argument to facilitate type inference.
    * For example:
    * <pre>assertThat(cheese, is(nullValue(Cheese.class))</pre>
-   * 
+   *
    * @param type
    *     dummy parameter used to infer the generic type of the returned matcher
    */
@@ -346,7 +346,7 @@ public class CoreMatchers {
   /**
    * Creates a matcher that matches only when the examined object is the same instance as
    * the specified target object.
-   * 
+   *
    * @param target
    *     the target instance against which others should be assessed
    */
@@ -357,7 +357,7 @@ public class CoreMatchers {
   /**
    * Creates a matcher that matches only when the examined object is the same instance as
    * the specified target object.
-   * 
+   *
    * @param target
    *     the target instance against which others should be assessed
    */
@@ -370,7 +370,7 @@ public class CoreMatchers {
    * {@link String} anywhere.
    * For example:
    * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
-   * 
+   *
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    */
@@ -383,7 +383,7 @@ public class CoreMatchers {
    * {@link String} anywhere, ignoring case.
    * For example:
    * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
-   * 
+   *
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    */
@@ -398,7 +398,7 @@ public class CoreMatchers {
    * </p>
    * For example:
    * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
-   * 
+   *
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    */
@@ -413,7 +413,7 @@ public class CoreMatchers {
    * </p>
    * For example:
    * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
-   * 
+   *
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    */
@@ -426,7 +426,7 @@ public class CoreMatchers {
    * {@link String}.
    * For example:
    * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
-   * 
+   *
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    */
@@ -439,7 +439,7 @@ public class CoreMatchers {
    * {@link String}, ignoring case.
    * For example:
    * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
-   * 
+   *
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    */

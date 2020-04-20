@@ -48,18 +48,18 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
     assertMatches("with bean info", hasProperty("property", equalTo("with info")), beanWithInfo);
-    assertMismatchDescription("property 'property' was \"with info\"", 
+    assertMismatchDescription("property 'property' was \"with info\"",
         hasProperty("property", equalTo("without info")), beanWithInfo);
   }
 
   public void testDoesNotMatchBeanWithoutInfoOrMatchedNamedProperty() {
-    assertMismatchDescription("No property \"nonExistentProperty\"", 
-                              hasProperty("nonExistentProperty", anything()), shouldNotMatch);
-   }
+    assertMismatchDescription("No property \"nonExistentProperty\"",
+        hasProperty("nonExistentProperty", anything()), shouldNotMatch);
+  }
 
   public void testDoesNotMatchWriteOnlyProperty() {
     assertMismatchDescription("property \"writeOnlyProperty\" is not readable",
-                              hasProperty("writeOnlyProperty", anything()), shouldNotMatch); 
+        hasProperty("writeOnlyProperty", anything()), shouldNotMatch);
   }
 
   public void testMatchesPath() {
@@ -78,10 +78,10 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   public void testMatchesPropertyAndValue() {
     assertMatches("property with value", hasProperty("property", anything()), beanWithInfo);
   }
-  
+
   public void testDoesNotWriteMismatchIfPropertyMatches() {
     Description description = new StringDescription();
-    hasProperty( "property", anything()).describeMismatch(beanWithInfo, description);
+    hasProperty("property", anything()).describeMismatch(beanWithInfo, description);
     assertEquals("Expected mismatch description", "", description.toString());
   }
 
@@ -91,9 +91,9 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   public void testExceptionsInBeanMethodsShouldBeReportedCorrectly() {
     assertMismatchDescription(
-      "Calling 'public java.lang.String org.hamcrest.beans.HasPropertyWithValueTest$BeanWithBug.getBroken()': \"bean failed\"",
-      hasProperty("broken", anything()),
-      new BeanWithBug());
+        "Calling 'public java.lang.String org.hamcrest.beans.HasPropertyWithValueTest$BeanWithBug.getBroken()': \"bean failed\"",
+        hasProperty("broken", anything()),
+        new BeanWithBug());
   }
 
 
@@ -130,7 +130,9 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
       this.property = property;
     }
 
-    public boolean isBooleanProperty() { return booleanProperty; }
+    public boolean isBooleanProperty() {
+      return booleanProperty;
+    }
 
     public void setWriteOnlyProperty(@SuppressWarnings("unused") float property) {
     }
@@ -145,25 +147,35 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   public static class BeanWithInner {
     private final Object inner;
 
-    public BeanWithInner(Object inner) { this.inner = inner; }
-    public Object getInner() { return inner; }
+    public BeanWithInner(Object inner) {
+      this.inner = inner;
+    }
+
+    public Object getInner() {
+      return inner;
+    }
   }
 
   @SuppressWarnings("WeakerAccess")
   public static class BeanWithInfo {
     private final String propertyValue;
 
-    public BeanWithInfo(String propertyValue) { this.propertyValue = propertyValue; }
-    public String property() { return propertyValue; }
+    public BeanWithInfo(String propertyValue) {
+      this.propertyValue = propertyValue;
+    }
+
+    public String property() {
+      return propertyValue;
+    }
   }
 
   public static class BeanWithInfoBeanInfo extends SimpleBeanInfo {
     @Override
     public PropertyDescriptor[] getPropertyDescriptors() {
       try {
-        return new PropertyDescriptor[] { 
-            new PropertyDescriptor("property", BeanWithInfo.class, "property", null) 
-          };
+        return new PropertyDescriptor[]{
+            new PropertyDescriptor("property", BeanWithInfo.class, "property", null)
+        };
       } catch (IntrospectionException e) {
         throw new AssertionError("Introspection exception", e);
       }
@@ -179,6 +191,8 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   @SuppressWarnings("WeakerAccess")
   public static class BeanFailed extends RuntimeException {
-    public BeanFailed() { super("bean failed"); }
+    public BeanFailed() {
+      super("bean failed");
+    }
   }
 }

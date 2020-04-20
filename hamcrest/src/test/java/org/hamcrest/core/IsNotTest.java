@@ -10,33 +10,37 @@ import static org.hamcrest.core.IsNot.not;
 
 public final class IsNotTest {
 
-    @Test public void
-    copesWithNullsAndUnknownTypes() {
-        Matcher<String> matcher = not("something");
+  @Test
+  public void
+  copesWithNullsAndUnknownTypes() {
+    Matcher<String> matcher = not("something");
 
-        assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
-    }
+    assertNullSafe(matcher);
+    assertUnknownTypeSafe(matcher);
+  }
 
-    @Test public void
-    evaluatesToTheTheLogicalNegationOfAnotherMatcher() {
-        final Matcher<String> matcher = not(equalTo("A"));
+  @Test
+  public void
+  evaluatesToTheTheLogicalNegationOfAnotherMatcher() {
+    final Matcher<String> matcher = not(equalTo("A"));
 
-        assertMatches(matcher, "B");
-        assertDoesNotMatch(matcher, "A");
-    }
+    assertMatches(matcher, "B");
+    assertDoesNotMatch(matcher, "A");
+  }
 
-    @Test public void
-    providesConvenientShortcutForNotEqualTo() {
-        final Matcher<String> matcher = not("A");
+  @Test
+  public void
+  providesConvenientShortcutForNotEqualTo() {
+    final Matcher<String> matcher = not("A");
 
-        assertMatches(matcher, "B");
-        assertDoesNotMatch(matcher, "A");
-    }
+    assertMatches(matcher, "B");
+    assertDoesNotMatch(matcher, "A");
+  }
 
-    @Test public void
-    usesDescriptionOfNegatedMatcherWithPrefix() {
-        assertDescription("not an instance of java.lang.String", not(instanceOf(String.class)));
-        assertDescription("not \"A\"", not("A"));
-    }
+  @Test
+  public void
+  usesDescriptionOfNegatedMatcherWithPrefix() {
+    assertDescription("not an instance of java.lang.String", not(instanceOf(String.class)));
+    assertDescription("not \"A\"", not("A"));
+  }
 }

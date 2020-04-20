@@ -12,7 +12,9 @@ public class StringRegularExpressionTest extends AbstractMatcherTest {
   public final Matcher<String> matcher = matchesRegex("^[0-9]+$");
 
   @Override
-  protected Matcher<?> createMatcher() { return matcher; }
+  protected Matcher<?> createMatcher() {
+    return matcher;
+  }
 
 
   public void testMatchingRegex() {

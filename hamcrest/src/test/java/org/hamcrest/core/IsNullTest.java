@@ -10,34 +10,37 @@ import static org.hamcrest.core.IsNull.nullValue;
 
 public final class IsNullTest {
 
-    private final Matcher<Object> nullMatcher = nullValue();
-    private final Matcher<Object> notNullMatcher = notNullValue();
+  private final Matcher<Object> nullMatcher = nullValue();
+  private final Matcher<Object> notNullMatcher = notNullValue();
 
-    @Test public void
-    copesWithNullsAndUnknownTypes() {
-        assertNullSafe(nullMatcher);
-        assertUnknownTypeSafe(nullMatcher);
-        
-        assertNullSafe(notNullMatcher);
-        assertUnknownTypeSafe(notNullMatcher);
-    }
+  @Test
+  public void
+  copesWithNullsAndUnknownTypes() {
+    assertNullSafe(nullMatcher);
+    assertUnknownTypeSafe(nullMatcher);
 
-    @Test public void
-    evaluatesToTrueIfArgumentIsNull() {
-        assertMatches(nullMatcher, null);
-        assertDoesNotMatch(nullMatcher, new Object());
-        
-        assertMatches(notNullMatcher, new Object());
-        assertDoesNotMatch(notNullMatcher, null);
-    }
-    
-    @Test public void
-    supportsStaticTyping() {
-        requiresStringMatcher(nullValue(String.class));
-        requiresStringMatcher(notNullValue(String.class));
-    }
+    assertNullSafe(notNullMatcher);
+    assertUnknownTypeSafe(notNullMatcher);
+  }
 
-    private void requiresStringMatcher(@SuppressWarnings("unused") Matcher<String> arg) {
-        // no-op
-    }
+  @Test
+  public void
+  evaluatesToTrueIfArgumentIsNull() {
+    assertMatches(nullMatcher, null);
+    assertDoesNotMatch(nullMatcher, new Object());
+
+    assertMatches(notNullMatcher, new Object());
+    assertDoesNotMatch(notNullMatcher, null);
+  }
+
+  @Test
+  public void
+  supportsStaticTyping() {
+    requiresStringMatcher(nullValue(String.class));
+    requiresStringMatcher(notNullValue(String.class));
+  }
+
+  private void requiresStringMatcher(@SuppressWarnings("unused") Matcher<String> arg) {
+    // no-op
+  }
 }
