@@ -1507,6 +1507,21 @@ public class Matchers {
     return org.hamcrest.text.StringContainsInOrder.stringContainsInOrder(substrings);
   }
 
+  /**
+   * Creates a matcher of {@link CharSequence} that matches when a char sequence has the length
+   * that satisfies the specified matcher.
+   * For example:
+   *
+   * <pre>
+   * assertThat("text", hasLength(lessThan(4)))
+   * </pre>
+   *
+   * @param lengthMatcher a matcher for the expected length of the string
+   */
+  public static Matcher<CharSequence> hasLength(org.hamcrest.Matcher<? super java.lang.Integer> lengthMatcher) {
+    return org.hamcrest.text.CharSequenceLength.hasLength(lengthMatcher);
+  }
+
     /**
      * Creates a matcher of {@link CharSequence} that matches when a char sequence has the length
      * of the specified <code>argument</code>.
