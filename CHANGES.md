@@ -1,5 +1,17 @@
 # Hamcrest Changes
 
+## Version 3.0 (Unreleased)
+
+### Improvements
+
+• Java 1.8 or newer
+
+TBD
+
+### Bugfixes
+
+TBD
+
 ## Version 2.3 (Unreleased)
 
 ### Improvements
