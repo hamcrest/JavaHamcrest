@@ -13,34 +13,34 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
   private final BigDecimal value;
 
   public BigDecimalCloseTo(BigDecimal value, BigDecimal error) {
-      this.delta = error;
-      this.value = value;
+    this.delta = error;
+    this.value = value;
   }
 
   @Override
   public boolean matchesSafely(BigDecimal item) {
-      return actualDelta(item).compareTo(BigDecimal.ZERO) <= 0;
+    return actualDelta(item).compareTo(BigDecimal.ZERO) <= 0;
   }
 
   @Override
   public void describeMismatchSafely(BigDecimal item, Description mismatchDescription) {
-      mismatchDescription.appendValue(item)
-              .appendText(" differed by ")
-              .appendValue(actualDelta(item))
-              .appendText(" more than delta ")
-              .appendValue(delta);
+    mismatchDescription.appendValue(item)
+        .appendText(" differed by ")
+        .appendValue(actualDelta(item))
+        .appendText(" more than delta ")
+        .appendValue(delta);
   }
 
   @Override
   public void describeTo(Description description) {
-      description.appendText("a numeric value within ")
-              .appendValue(delta)
-              .appendText(" of ")
-              .appendValue(value);
+    description.appendText("a numeric value within ")
+        .appendValue(delta)
+        .appendText(" of ")
+        .appendValue(value);
   }
 
   private BigDecimal actualDelta(BigDecimal item) {
-      return item.subtract(value, MathContext.DECIMAL128).abs().subtract(delta, MathContext.DECIMAL128).stripTrailingZeros();
+    return item.subtract(value, MathContext.DECIMAL128).abs().subtract(delta, MathContext.DECIMAL128).stripTrailingZeros();
   }
 
   /**
@@ -49,14 +49,14 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
    * is done by BigDecimals {@link java.math.BigDecimal#compareTo(java.math.BigDecimal)} method.
    * For example:
    * <pre>assertThat(new BigDecimal("1.03"), is(closeTo(new BigDecimal("1.0"), new BigDecimal("0.03"))))</pre>
-   * 
+   *
    * @param operand
    *     the expected value of matching BigDecimals
    * @param error
    *     the delta (+/-) within which matches will be allowed
    */
   public static Matcher<BigDecimal> closeTo(BigDecimal operand, BigDecimal error) {
-      return new BigDecimalCloseTo(operand, error);
+    return new BigDecimalCloseTo(operand, error);
   }
 
 }

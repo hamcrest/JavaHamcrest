@@ -8,92 +8,93 @@ import static org.junit.Assert.*;
 
 public final class MatcherAssertTest {
 
-    @Test public void
-    includesDescriptionOfTestedValueInErrorMessage() {
-        String expected = "expected";
-        String actual = "actual";
-        String endLine = System.lineSeparator();
+  @Test
+  public void
+  includesDescriptionOfTestedValueInErrorMessage() {
+    String expected = "expected";
+    String actual = "actual";
+    String endLine = System.lineSeparator();
 
-        String expectedMessage = "identifier" + endLine + "Expected: \"expected\"" + endLine + "     but: was \"actual\"";
+    String expectedMessage = "identifier" + endLine + "Expected: \"expected\"" + endLine + "     but: was \"actual\"";
 
-        try {
-            assertThat("identifier", actual, equalTo(expected));
-        }
-        catch (AssertionError e) {
-            assertTrue(e.getMessage().startsWith(expectedMessage));
-            return;
-        }
-
-        fail("should have failed");
+    try {
+      assertThat("identifier", actual, equalTo(expected));
+    } catch (AssertionError e) {
+      assertTrue(e.getMessage().startsWith(expectedMessage));
+      return;
     }
 
-    @Test public void
-    descriptionCanBeElided() {
-        String expected = "expected";
-        String actual = "actual";
-        String endLine = System.lineSeparator();
+    fail("should have failed");
+  }
 
-        String expectedMessage = endLine + "Expected: \"expected\"" + endLine + "     but: was \"actual\"";
+  @Test
+  public void
+  descriptionCanBeElided() {
+    String expected = "expected";
+    String actual = "actual";
+    String endLine = System.lineSeparator();
 
-        try {
-            assertThat(actual, equalTo(expected));
-        }
-        catch (AssertionError e) {
-            assertTrue(e.getMessage().startsWith(expectedMessage));
-            return;
-        }
+    String expectedMessage = endLine + "Expected: \"expected\"" + endLine + "     but: was \"actual\"";
 
-        fail("should have failed");
+    try {
+      assertThat(actual, equalTo(expected));
+    } catch (AssertionError e) {
+      assertTrue(e.getMessage().startsWith(expectedMessage));
+      return;
     }
 
-    @Test public void
-    canTestBooleanDirectly() {
-        assertThat("success reason message", true);
+    fail("should have failed");
+  }
 
-        try {
-            assertThat("failing reason message", false);
-        }
-        catch (AssertionError e) {
-            assertEquals("failing reason message", e.getMessage());
-            return;
-        }
+  @Test
+  public void
+  canTestBooleanDirectly() {
+    assertThat("success reason message", true);
 
-        fail("should have failed");
+    try {
+      assertThat("failing reason message", false);
+    } catch (AssertionError e) {
+      assertEquals("failing reason message", e.getMessage());
+      return;
     }
 
-    @Test public void
-    includesMismatchDescription() {
-        Matcher<String> matcherWithCustomMismatchDescription = new BaseMatcher<String>() {
-            @Override
-            public boolean matches(Object item) {
-                return false;
-            }
+    fail("should have failed");
+  }
 
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Something cool");
-            }
+  @Test
+  public void
+  includesMismatchDescription() {
+    Matcher<String> matcherWithCustomMismatchDescription = new BaseMatcher<String>() {
+      @Override
+      public boolean matches(Object item) {
+        return false;
+      }
 
-            @Override
-            public void describeMismatch(Object item, Description mismatchDescription) {
-                mismatchDescription.appendText("Not cool");
-            }
-        };
+      @Override
+      public void describeTo(Description description) {
+        description.appendText("Something cool");
+      }
 
-        String endLine = System.lineSeparator();
-        String expectedMessage = endLine + "Expected: Something cool" + endLine + "     but: Not cool";
+      @Override
+      public void describeMismatch(Object item, Description mismatchDescription) {
+        mismatchDescription.appendText("Not cool");
+      }
+    };
 
-        try {
-            assertThat("Value", matcherWithCustomMismatchDescription);
-            fail("should have failed");
-        }
-        catch (AssertionError e) {
-            assertEquals(expectedMessage, e.getMessage());
-        }
+    String endLine = System.lineSeparator();
+    String expectedMessage = endLine + "Expected: Something cool" + endLine + "     but: Not cool";
+
+    try {
+      assertThat("Value", matcherWithCustomMismatchDescription);
+      fail("should have failed");
+    } catch (AssertionError e) {
+      assertEquals(expectedMessage, e.getMessage());
     }
+  }
 
-    @Test public void
-    canAssertSubtypes() {
-        assertThat(1, equalTo((Number) 1));
-    }
+  @Test
+  public void
+  canAssertSubtypes() {
+    assertThat(1, equalTo((Number) 1));
+  }
 }

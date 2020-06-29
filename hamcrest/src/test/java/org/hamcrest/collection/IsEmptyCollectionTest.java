@@ -12,34 +12,35 @@ import static org.hamcrest.core.Is.is;
 
 public class IsEmptyCollectionTest extends AbstractMatcherTest {
 
-    @Override
-    protected Matcher<Collection<?>> createMatcher() {
-        return empty();
-    }
+  @Override
+  protected Matcher<Collection<?>> createMatcher() {
+    return empty();
+  }
 
-    public void testMatchesAnEmptyCollection() {
-        assertMatches("empty collection", createMatcher(), emptyCollection());
-    }
+  public void testMatchesAnEmptyCollection() {
+    assertMatches("empty collection", createMatcher(), emptyCollection());
+  }
 
-    public void testDoesNotMatchACollectionWithAnItem() {
-        assertMismatchDescription("<[one, three]>", is(createMatcher()), collectionOfValues());
-    }
+  public void testDoesNotMatchACollectionWithAnItem() {
+    assertMismatchDescription("<[one, three]>", is(createMatcher()), collectionOfValues());
+  }
 
-    public void testHasAReadableDescription() {
-        assertDescription("an empty collection", createMatcher());
-    }
+  public void testHasAReadableDescription() {
+    assertDescription("an empty collection", createMatcher());
+  }
 
-    public void testCompiles() {
-        needs(IsEmptyCollection.emptyCollectionOf(String.class));
-    }
+  public void testCompiles() {
+    needs(IsEmptyCollection.emptyCollectionOf(String.class));
+  }
 
-    private void needs(@SuppressWarnings("unused") Matcher<Collection<String>> bar) { }
-    
-    private static Collection<String> collectionOfValues() {
-        return new ArrayList<String>(asList("one", "three"));
-    }
+  private void needs(@SuppressWarnings("unused") Matcher<Collection<String>> bar) {
+  }
 
-    private static Collection<Integer> emptyCollection() {
-        return new ArrayList<Integer>();
-    }
+  private static Collection<String> collectionOfValues() {
+    return new ArrayList<String>(asList("one", "three"));
+  }
+
+  private static Collection<Integer> emptyCollection() {
+    return new ArrayList<Integer>();
+  }
 }

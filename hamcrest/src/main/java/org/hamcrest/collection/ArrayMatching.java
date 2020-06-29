@@ -28,7 +28,7 @@ public class ArrayMatching {
    *     the matcher to apply to elements in examined arrays
    */
   public static <T> Matcher<T[]> hasItemInArray(Matcher<? super T> elementMatcher) {
-      return new HasItemInArray<>(elementMatcher);
+    return new HasItemInArray<>(elementMatcher);
   }
 
   /**
@@ -67,7 +67,7 @@ public class ArrayMatching {
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(Matcher<? super E>... itemMatchers) {
-      return arrayContainingInAnyOrder(asList(itemMatchers));
+    return arrayContainingInAnyOrder(asList(itemMatchers));
   }
 
   /**
@@ -131,6 +131,7 @@ public class ArrayMatching {
   public static <E> Matcher<E[]> arrayContaining(E... items) {
     return arrayContaining(asEqualMatchers(items));
   }
+
   /**
    * Creates a matcher for arrays that matches when each item in the examined array satisfies the
    * corresponding matcher in the specified matchers.  For a positive match, the examined array
@@ -143,11 +144,11 @@ public class ArrayMatching {
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContaining(Matcher<? super E>... itemMatchers) {
-      //required for JDK 1.6
-      //noinspection RedundantTypeArguments
-      final List<Matcher<? super E>> nullSafeWithExplicitTypeMatchers = NullSafety.<E>nullSafe(itemMatchers);
+    //required for JDK 1.6
+    //noinspection RedundantTypeArguments
+    final List<Matcher<? super E>> nullSafeWithExplicitTypeMatchers = NullSafety.<E>nullSafe(itemMatchers);
 
-      return arrayContaining(nullSafeWithExplicitTypeMatchers);
+    return arrayContaining(nullSafeWithExplicitTypeMatchers);
   }
 
   /**
@@ -161,7 +162,7 @@ public class ArrayMatching {
    *     a list of matchers, each of which must be satisfied by the corresponding item in an examined array
    */
   public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
-      return new ArrayAsIterableMatcher<>(new IsIterableContainingInOrder<>(itemMatchers), itemMatchers, "");
+    return new ArrayAsIterableMatcher<>(new IsIterableContainingInOrder<>(itemMatchers), itemMatchers, "");
   }
 
   public static <E> List<Matcher<? super E>> asEqualMatchers(E[] items) {

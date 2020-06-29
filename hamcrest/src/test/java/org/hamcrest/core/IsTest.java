@@ -10,42 +10,47 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public final class IsTest {
 
-    @Test public void
-    copesWithNullsAndUnknownTypes() {
-        Matcher<String> matcher = is("something");
-        
-        assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
-    }
+  @Test
+  public void
+  copesWithNullsAndUnknownTypes() {
+    Matcher<String> matcher = is("something");
 
-    @Test public void
-    matchesTheSameWayTheUnderlyingMatcherDoes() {
-        final Matcher<Boolean> matcher = is(equalTo(true));
+    assertNullSafe(matcher);
+    assertUnknownTypeSafe(matcher);
+  }
 
-        assertMatches(matcher, true);
-        assertDoesNotMatch(matcher, false);
-    }
+  @Test
+  public void
+  matchesTheSameWayTheUnderlyingMatcherDoes() {
+    final Matcher<Boolean> matcher = is(equalTo(true));
 
-    @Test public void
-    generatesIsPrefixInDescription() {
-        assertDescription("is <true>", is(equalTo(true)));
-        assertDescription("is \"A\"", is("A"));
-    }
+    assertMatches(matcher, true);
+    assertDoesNotMatch(matcher, false);
+  }
 
-    @Test public void
-    providesConvenientShortcutForIsEqualTo() {
-        final Matcher<String> matcher = is("A");
-        
-        assertMatches(matcher, "A");
-        assertDoesNotMatch(is("A"), "B");
-    }
+  @Test
+  public void
+  generatesIsPrefixInDescription() {
+    assertDescription("is <true>", is(equalTo(true)));
+    assertDescription("is \"A\"", is("A"));
+  }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Test public void
-    providesConvenientShortcutForIsInstanceOf() {
-        final Matcher matcher = isA(Number.class);
-        assertMatches(matcher, 1);
-        assertDoesNotMatch(matcher, new Object());
-        assertDoesNotMatch(matcher, null);
-    }
+  @Test
+  public void
+  providesConvenientShortcutForIsEqualTo() {
+    final Matcher<String> matcher = is("A");
+
+    assertMatches(matcher, "A");
+    assertDoesNotMatch(is("A"), "B");
+  }
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  @Test
+  public void
+  providesConvenientShortcutForIsInstanceOf() {
+    final Matcher matcher = isA(Number.class);
+    assertMatches(matcher, 1);
+    assertDoesNotMatch(matcher, new Object());
+    assertDoesNotMatch(matcher, null);
+  }
 }

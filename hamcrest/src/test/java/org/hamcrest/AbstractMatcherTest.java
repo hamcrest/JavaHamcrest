@@ -9,9 +9,9 @@ public abstract class AbstractMatcherTest extends TestCase {
    * Create an instance of the Matcher so some generic safety-net tests can be run on it.
    */
   protected abstract Matcher<?> createMatcher();
-  
+
   public static <T> void assertMatches(Matcher<T> matcher, T arg) {
-      assertMatches("Expected match, but mismatched", matcher, arg);
+    assertMatches("Expected match, but mismatched", matcher, arg);
   }
 
   public static <T> void assertMatches(String message, Matcher<T> matcher, Object arg) {
@@ -21,7 +21,7 @@ public abstract class AbstractMatcherTest extends TestCase {
   }
 
   public static <T> void assertDoesNotMatch(Matcher<? super T> c, T arg) {
-      assertDoesNotMatch("Unexpected match", c, arg);
+    assertDoesNotMatch("Unexpected match", c, arg);
   }
 
   public static <T> void assertDoesNotMatch(String message, Matcher<? super T> c, T arg) {
@@ -38,22 +38,21 @@ public abstract class AbstractMatcherTest extends TestCase {
     Assert.assertFalse("Precondition: Matcher should not match item.", matcher.matches(arg));
     Assert.assertEquals("Expected mismatch description", expected, mismatchDescription(matcher, arg));
   }
-  
+
   public static void assertNullSafe(Matcher<?> matcher) {
-      try {
-          matcher.matches(null);
-      }
-      catch (Exception e) {
-          Assert.fail("Matcher was not null safe");
-      }
+    try {
+      matcher.matches(null);
+    } catch (Exception e) {
+      Assert.fail("Matcher was not null safe");
+    }
   }
 
   public static void assertUnknownTypeSafe(Matcher<?> matcher) {
-      try {
-          matcher.matches(new UnknownType());
-      } catch (Exception e) {
-          Assert.fail("Matcher was not unknown type safe, because: " + e);
-      }
+    try {
+      matcher.matches(new UnknownType());
+    } catch (Exception e) {
+      Assert.fail("Matcher was not unknown type safe, because: " + e);
+    }
   }
 
   public void testIsNullSafe() {
@@ -64,11 +63,11 @@ public abstract class AbstractMatcherTest extends TestCase {
     createMatcher().matches(new UnknownType());
   }
 
-    private static <T> String mismatchDescription(Matcher<? super T> matcher, Object arg) {
-      Description description = new StringDescription();
-      matcher.describeMismatch(arg, description);
-      return description.toString().trim();
-    }
+  private static <T> String mismatchDescription(Matcher<? super T> matcher, Object arg) {
+    Description description = new StringDescription();
+    matcher.describeMismatch(arg, description);
+    return description.toString().trim();
+  }
 
   @SuppressWarnings("WeakerAccess")
   public static class UnknownType {
