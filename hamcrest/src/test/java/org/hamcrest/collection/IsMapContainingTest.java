@@ -28,6 +28,26 @@ public class IsMapContainingTest extends AbstractMatcherTest {
         assertMismatchDescription("map was [<a=1>, <b=2>]", hasEntry(equalTo("c"), equalTo(3)), map);
     }
 
+    public void testMatchesMapContainingKeyAndValueMatcher() {
+        Map<String,Integer> map = new TreeMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+
+        assertMatches("matcherA", hasEntry("a", equalTo(1)), map);
+        assertMatches("matcherB", hasEntry("b", equalTo(2)), map);
+        assertMismatchDescription("map was [<a=1>, <b=2>]", hasEntry("c", equalTo(3)), map);
+    }
+
+    public void testMatchesMapContainingKeyMatcherAndValue() {
+        Map<String,Integer> map = new TreeMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+
+        assertMatches("matcherA", hasEntry(equalTo("a"), 1), map);
+        assertMatches("matcherB", hasEntry(equalTo("b"), 2), map);
+        assertMismatchDescription("map was [<a=1>, <b=2>]", hasEntry(equalTo("c"), 3), map);
+    }
+
     @SuppressWarnings("unchecked")
     public void testMatchesMapContainingMatchingKeyAndValueWithoutGenerics() {
         Map map = new HashMap();
