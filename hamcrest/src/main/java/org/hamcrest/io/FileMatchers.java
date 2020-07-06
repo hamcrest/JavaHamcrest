@@ -94,7 +94,7 @@ public final class FileMatchers {
             public boolean matchesSafely(File actual, Description mismatchDescription) {
                 final boolean result = fileStatus.check(actual);
                 if (!result) {
-                    mismatchDescription.appendText(failureDescription);
+                    mismatchDescription.appendText(String.format("'%s' %s", actual, failureDescription));
                 }
                 return result;
             }
