@@ -117,7 +117,7 @@ apply plugin: 'java'
 dependencies {
     testImplementation 'org.hamcrest:hamcrest:2.2'
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
 }
 ```
 
@@ -144,7 +144,7 @@ dependencies, otherwise the older version will take precedence.
     <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.12</version>
+        <version>4.13</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
