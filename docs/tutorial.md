@@ -7,9 +7,9 @@ layout: default
 # Hamcrest Tutorial
 
 ## Introduction
-Hamcrest is a framework for writing matcher objects allowing 'match' rules to be defined declaratively. There are a number of situations where matchers are invaluble, such as UI validation, or data filtering, but it is in the area of writing flexible tests that matchers are most commonly used. This tutorial shows you how to use Hamcrest for unit testing.
+Hamcrest is a framework for writing matcher objects allowing 'match' rules to be defined declaratively. There are a number of situations where matchers are invaluable, such as UI validation or data filtering, but it is in the area of writing flexible tests that matchers are most commonly used. This tutorial shows you how to use Hamcrest for unit testing.
 
-When writing tests it is sometimes difficult to get the balance right between overspecifying the test (and making it brittle to changes), and not specifying enough (making the test less valuable since it continues to pass even when the thing being tested is broken). Having a tool that allows you to pick out precisely the aspect under test and describe the values it should have, to a controlled level of precision, helps greatly in writing tests that are "just right". Such tests fail when the behaviour of the aspect under test deviates from the expected behaviour, yet continue to pass when minor, unrelated changes to the behaviour are made.
+When writing tests it is sometimes difficult to get the balance right between over specifying the test (and making it brittle to changes), and not specifying enough (making the test less valuable since it continues to pass even when the thing being tested is broken). Having a tool that allows you to pick out precisely the aspect under test and describe the values it should have, to a controlled level of precision, helps greatly in writing tests that are "just right". Such tests fail when the behaviour of the aspect under test deviates from the expected behaviour, yet continue to pass when minor, unrelated changes to the behaviour are made.
 
 ### My first Hamcrest test
 We'll start by writing a very simple JUnit 5 test, but instead of using JUnit's `assertEquals` methods, we use Hamcrest's `assertThat` construct and the standard set of matchers, both of which we statically import:
@@ -97,7 +97,7 @@ Hamcrest comes with a library of useful matchers. Here are some of the most impo
 `containsString`, `endsWith`, `startsWith` - test string matching
 
 #### Sugar
-Hamcrest strives to make your tests as readable as possible. For example, the is matcher is a wrapper that doesn't add any extra behavior to the underlying matcher. The following assertions are all equivalent:
+Hamcrest strives to make your tests as readable as possible. For example, the `is` matcher is a wrapper that doesn't add any extra behavior to the underlying matcher. The following assertions are all equivalent:
 
 ```java
 assertThat(theBiscuit, equalTo(myBiscuit)); 
@@ -105,7 +105,7 @@ assertThat(theBiscuit, is(equalTo(myBiscuit)));
 assertThat(theBiscuit, is(myBiscuit));
 ```
 
-The last form is allowed since is(T value) is overloaded to return `is(equalTo(value))`.
+The last form is allowed since `is(T value)` is overloaded to return `is(equalTo(value))`.
 
 ### Writing custom matchers
 Hamcrest comes bundled with lots of useful matchers, but you'll probably find that you need to create your own from time to time to fit your testing needs. This commonly occurs when you find a fragment of code that tests the same set of properties over and over again (and in different tests), and you want to bundle the fragment into a single assertion. By writing your own matcher you'll eliminate code duplication and make your tests more readable!
