@@ -124,10 +124,17 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
     @SafeVarargs
     public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(T... items) {
         List<Matcher<? super T>> matchers = new ArrayList<>();
-        for (T item : items) {
+        if (items.length == 1 && items[0].getClass().isArray()) {
+          @SuppressWarnings("unchecked")
+          T[] realItems = (T[]) items[0];
+          for (T item : realItems) {
             matchers.add(equalTo(item));
+          }
+        } else {
+          for (T item : items) {
+              matchers.add(equalTo(item));
+          }
         }
-        
         return new IsIterableContainingInAnyOrder<>(matchers);
     }
 
