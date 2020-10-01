@@ -16,8 +16,7 @@ package org.hamcrest;
  * </pre>
  * This is a variant of {@link CustomMatcher} that first type checks
  * the argument being matched. By the time {@link TypeSafeMatcher#matchesSafely} is
- * is called the argument is guaranteed to be non-null and of the correct
- * type.
+ * called the argument is guaranteed to be non-null and of the correct type.
  *
  * @author Neil Dunn
  * @param <T> The type of object being matched
