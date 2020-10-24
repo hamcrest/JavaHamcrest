@@ -1,5 +1,15 @@
 # Hamcrest Changes
 
+## Version 3.0 (Unreleased)
+
+### Improvements
+
+TBD
+
+### Bugfixes
+
+TBD
+
 ## Version 2.3 (Unreleased)
 
 ### Improvements
