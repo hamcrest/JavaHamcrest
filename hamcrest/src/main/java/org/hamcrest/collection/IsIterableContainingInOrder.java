@@ -94,6 +94,11 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      */
     @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> contains(E... items) {
+        if (items.length == 1 && items[0].getClass().isArray()) {
+            @SuppressWarnings("unchecked")
+            E[] realItems = (E[]) items[0];
+            return contains(asEqualMatchers(realItems));
+        }
         return contains(asEqualMatchers(items));
     }
 
