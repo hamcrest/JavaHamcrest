@@ -6,7 +6,6 @@ os: linux
 dist: trusty
 
 jdk:
-  - openjdk7
   - oraclejdk8
   - openjdk8
   - openjdk11
