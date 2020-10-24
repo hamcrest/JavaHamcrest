@@ -4,6 +4,8 @@
 
 ### Improvements
 
+• Java 1.8 or newer
+
 TBD
 
 ### Bugfixes
