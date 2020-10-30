@@ -3,11 +3,9 @@ package org.hamcrest.collection;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+import org.hamcrest.internal.InPlacePermutator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -17,63 +15,61 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }
-    
+
     @Override
-    protected boolean matchesSafely(Iterable<? extends T> items, Description mismatchDescription) {
-      final Matching<T> matching = new Matching<>(matchers, mismatchDescription);
-      for (T item : items) {
-        if (! matching.matches(item)) {
-          return false;
+    protected boolean matchesSafely(final Iterable<? extends T> items, Description mismatchDescription) {
+        final T[] itemsArray = toArray(items);
+        @SuppressWarnings({"unchecked"})
+        final Matcher<? super T>[] matchersArray = matchers.toArray(new Matcher[0]);
+
+        if (itemsArray.length > matchersArray.length) {
+            mismatchDescription.appendText("too many items: ").appendValueList("[", ", ", "]", items);
+            return false;
+        } else if (itemsArray.length < matchersArray.length) {
+            mismatchDescription.appendText("not enough items: ").appendValueList("[", ", ", "]", items);
+            return false;
+        } else {
+            boolean matchesSomePermutation = checkMatchersPermutations(matchersArray, itemsArray);
+            if (!matchesSomePermutation) {
+                mismatchDescription.appendText("no permutation of the matchers matched the items sequence");
+            }
+            return matchesSomePermutation;
         }
-      }
-      
-      return matching.isFinished(items);
     }
-    
+
+    private boolean checkMatchersPermutations(final Matcher<? super T>[] matchersArray, final T[] itemsArray) {
+        InPlacePermutator permutator = new InPlacePermutator<Matcher<? super T>>(matchersArray) {
+            @Override
+            protected boolean handlePermutation() {
+                return permutationMatches(matchersArray, itemsArray);
+            }
+        };
+        return permutator.iteratePermutations();
+    }
+
+    @SuppressWarnings({"unchecked"})
+    private static <U> U[] toArray(Iterable<? extends U> items) {
+        ArrayList<U> arrayList = new ArrayList<>();
+        for (U item : items) {
+            arrayList.add(item);
+        }
+        return (U[]) arrayList.toArray();
+    }
+
+    private boolean permutationMatches(Matcher<? super T>[] matchersPermutation, T[] items) {
+        for (int i = 0; i < items.length; i++) {
+            if (!matchersPermutation[i].matches(items[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public void describeTo(Description description) {
       description.appendText("iterable with items ")
           .appendList("[", ", ", "]", matchers)
           .appendText(" in any order");
-    }
-
-    private static class Matching<S> {
-      private final Collection<Matcher<? super S>> matchers;
-      private final Description mismatchDescription;
-
-      public Matching(Collection<Matcher<? super S>> matchers, Description mismatchDescription) {
-        this.matchers = new ArrayList<>(matchers);
-        this.mismatchDescription = mismatchDescription;
-      }
-      
-      public boolean matches(S item) {
-        if (matchers.isEmpty()) {
-          mismatchDescription.appendText("no match for: ").appendValue(item);
-          return false;
-        }
-        return isMatched(item);
-      }
-
-      public boolean isFinished(Iterable<? extends S> items) {
-        if (matchers.isEmpty()) {
-          return true;
-        }
-        mismatchDescription
-          .appendText("no item matches: ").appendList("", ", ", "", matchers)
-          .appendText(" in ").appendValueList("[", ", ", "]", items);
-        return false;
-      }
-
-      private boolean isMatched(S item) {
-        for (Matcher<? super S>  matcher : matchers) {
-          if (matcher.matches(item)) {
-            matchers.remove(matcher);
-            return true;
-          }
-        }
-        mismatchDescription.appendText("not matched: ").appendValue(item);
-        return false;
-      }
     }
 
     /**
@@ -152,5 +148,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
     public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(Collection<Matcher<? super T>> itemMatchers) {
         return new IsIterableContainingInAnyOrder<>(itemMatchers);
     }
+
+
 }
 
