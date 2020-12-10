@@ -9,15 +9,15 @@ import java.util.Collection;
 /**
  * Tests if collection is empty.
  */
-public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E>> {
+public class IsEmptyCollection extends TypeSafeMatcher<Collection<?>> {
 
     @Override
-    public boolean matchesSafely(Collection<? extends E> item) {
+    public boolean matchesSafely(Collection<?> item) {
         return item.isEmpty();
     }
 
     @Override
-    public void describeMismatchSafely(Collection<? extends E> item, Description mismatchDescription) {
+    public void describeMismatchSafely(Collection<?> item, Description mismatchDescription) {
       mismatchDescription.appendValue(item);
     }
 
@@ -33,8 +33,8 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
      * <pre>assertThat(new ArrayList&lt;String&gt;(), is(empty()))</pre>
      * 
      */
-    public static <E> Matcher<Collection<? extends E>> empty() {
-        return new IsEmptyCollection<E>();
+    public static Matcher<Collection<?>> empty() {
+        return new IsEmptyCollection();
     }
 
     /**
@@ -45,9 +45,12 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
      * 
      * @param unusedToForceReturnType
      *     the type of the collection's content
+     *
+     * @deprecated This method is superfluous. Use {@link #empty()} instead.
      */
-    @SuppressWarnings({"unchecked", "UnusedParameters"})
-    public static <E> Matcher<Collection<E>> emptyCollectionOf(Class<E> unusedToForceReturnType) {
-      return (Matcher)empty();
+    @Deprecated
+    @SuppressWarnings({"UnusedParameters"})
+    public static Matcher<Collection<?>> emptyCollectionOf(Class<?> unusedToForceReturnType) {
+      return empty();
     }
 }

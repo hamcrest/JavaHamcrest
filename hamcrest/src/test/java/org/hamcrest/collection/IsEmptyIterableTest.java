@@ -28,12 +28,6 @@ public class IsEmptyIterableTest extends AbstractMatcherTest {
         assertDescription("an empty iterable", createMatcher());
     }
 
-    public void testCompiles() {
-        needs(IsEmptyIterable.emptyIterableOf(String.class));
-    }
-
-    private void needs(@SuppressWarnings("unused") Matcher<Iterable<String>> bar) { }
-
     private static Collection<String> collectionOfValues() {
         return new ArrayList<String>(asList("one", "three"));
     }

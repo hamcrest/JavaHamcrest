@@ -7,14 +7,14 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Tests if collection is empty.
  */
-public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
+public class IsEmptyIterable extends TypeSafeMatcher<Iterable<?>> {
 
     @Override
-    public boolean matchesSafely(Iterable<? extends E> iterable) {
+    public boolean matchesSafely(Iterable<?> iterable) {
         return !iterable.iterator().hasNext();
     }
     @Override
-    public void describeMismatchSafely(Iterable<? extends E> iter, Description mismatchDescription) {
+    public void describeMismatchSafely(Iterable<?> iter, Description mismatchDescription) {
         mismatchDescription.appendValueList("[", ",", "]", iter);
     }
 
@@ -29,8 +29,8 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
      * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyIterable()))</pre>
      * 
      */
-    public static <E> Matcher<Iterable<? extends E>> emptyIterable() {
-        return new IsEmptyIterable<E>();
+    public static Matcher<Iterable<?>> emptyIterable() {
+        return new IsEmptyIterable();
     }
 
     /**
@@ -40,9 +40,12 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
      * 
      * @param unusedToForceReturnType
      *     the type of the iterable's content
+     *
+     * @deprecated This method is superfluous. Use {@link #emptyIterable()}.
      */
-    @SuppressWarnings({"unchecked", "UnusedParameters"})
-    public static <E> Matcher<Iterable<E>> emptyIterableOf(Class<E> unusedToForceReturnType) {
-      return (Matcher)emptyIterable();
+    @Deprecated
+    @SuppressWarnings({"UnusedParameters"})
+    public static Matcher<Iterable<?>> emptyIterableOf(Class<?> unusedToForceReturnType) {
+      return emptyIterable();
     }
 }

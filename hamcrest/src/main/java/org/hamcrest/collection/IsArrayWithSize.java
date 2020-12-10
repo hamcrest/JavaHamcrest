@@ -9,13 +9,13 @@ import static org.hamcrest.core.IsEqual.equalTo;
 /**
  * Matches if array size satisfies a nested matcher.
  */
-public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
+public class IsArrayWithSize extends FeatureMatcher<Object[], Integer> {
     public IsArrayWithSize(Matcher<? super Integer> sizeMatcher) {
         super(sizeMatcher, "an array with size","array size");
     }
 
     @Override
-    protected Integer featureValueOf(E[] actual) {
+    protected Integer featureValueOf(Object[] actual) {
       return actual.length;
     }
 
@@ -28,8 +28,8 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      * @param sizeMatcher
      *     a matcher for the length of an examined array
      */
-    public static <E> Matcher<E[]> arrayWithSize(Matcher<? super Integer> sizeMatcher) {
-        return new IsArrayWithSize<>(sizeMatcher);
+    public static Matcher<Object[]> arrayWithSize(Matcher<? super Integer> sizeMatcher) {
+        return new IsArrayWithSize(sizeMatcher);
     }
 
     /**
@@ -41,7 +41,7 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      * @param size
      *     the length that an examined array must have for a positive match
      */
-    public static <E> Matcher<E[]> arrayWithSize(int size) {
+    public static Matcher<Object[]> arrayWithSize(int size) {
         return arrayWithSize(equalTo(size));
     }
 
@@ -52,7 +52,7 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      * <pre>assertThat(new String[0], emptyArray())</pre>
      * 
      */
-    public static <E> Matcher<E[]> emptyArray() {
-        return describedAs("an empty array", IsArrayWithSize.<E>arrayWithSize(0));
+    public static Matcher<Object[]> emptyArray() {
+        return describedAs("an empty array", arrayWithSize(0));
     }
 }
