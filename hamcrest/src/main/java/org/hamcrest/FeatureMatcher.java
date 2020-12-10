@@ -33,17 +33,23 @@ public abstract class FeatureMatcher<T, U> extends TypeSafeDiagnosingMatcher<T> 
    * @param actual the target object
    * @return the feature to be matched
    */
-  protected abstract U featureValueOf(T actual);
+  protected abstract U featureValueOf(T actual) throws Exception;
 
   @Override
   protected boolean matchesSafely(T actual, Description mismatch) {
-    final U featureValue = featureValueOf(actual);
-    if (!subMatcher.matches(featureValue)) {
-      mismatch.appendText(featureName).appendText(" ");
-      subMatcher.describeMismatch(featureValue, mismatch);
+    try {
+      final U featureValue = featureValueOf(actual);
+      if (!subMatcher.matches(featureValue)) {
+        mismatch.appendText(featureName).appendText(" ");
+        subMatcher.describeMismatch(featureValue, mismatch);
+        return false;
+      }
+      return true;
+    } catch (Exception e) { // catches exceptions thrown by featureValueOf(), if any
+      mismatch.appendText("an exception was thrown: ");
+      mismatch.appendText(e.toString()); //TODO + stacktrace (?)
       return false;
     }
-    return true;
   }
       
   @Override
