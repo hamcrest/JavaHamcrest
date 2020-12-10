@@ -72,9 +72,39 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      *     the value that, in combination with the key, must be describe at least one entry
      */
     public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(K key, V value) {
-        return new IsMapContaining<>(equalTo(key), equalTo(value));
+        return new IsMapContainingEntry<>(key, value);
     }
-    
+
+    /**
+     * Provides a type-safe optimization over the O(n) linear search in {@link IsMapContaining#matchesSafely(Map)},
+     * by leveraging the speed of the map's own {@link Map#containsKey(Object)} check.
+     * <p>
+     * It preserves the same descriptors.
+     */
+    private static class IsMapContainingEntry<K, V> extends IsMapContaining<K, V>
+    {
+        private final K key;
+
+        public IsMapContainingEntry(K key, V value)
+        {
+            super(equalTo(key), equalTo(value));
+            this.key = key;
+        }
+
+        @Override
+        public boolean matchesSafely(Map<? extends K, ? extends V> map)
+        {
+            try{
+                return map.containsKey(key) && super.valueMatcher.matches(map.get(key));
+            } catch (NullPointerException e){
+                // some maps (like Hashtable) don't want to let you check for a null key.
+                // to be consistent with previous behavior checking each entry,
+                // we squash any error coming from that to indicate simply that there's no entry with that key.
+                return false;
+            }
+        }
+    }
+
     /**
      * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
      * at least one key that satisfies the specified matcher.
@@ -98,7 +128,51 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      *     the key that satisfying maps must contain
      */
     public static <K> Matcher<Map<? extends K, ?>> hasKey(K key) {
-        return new IsMapContaining<>(equalTo(key), anything());
+        return new IsMapContainingKey<>(key);
+    }
+
+    /**
+     * Provides a type-safe optimization over the O(n) linear search in {@link IsMapContaining#matchesSafely(Map)},
+     * by leveraging the speed of the map's own {@link Map#containsKey(Object)} check.
+     * <p>
+     * It preserves the same descriptors.
+     */
+    private static class IsMapContainingKey<K, V> extends IsMapContaining<K, V>
+    {
+        private final K key;
+
+        public IsMapContainingKey(K key)
+        {
+            super(equalTo(key), anything());
+            this.key = key;
+        }
+
+        @Override
+        public boolean matchesSafely(Map<? extends K, ? extends V> map)
+        {
+            try
+            {
+                return map.containsKey(key);
+            } catch (NullPointerException e){
+                // some maps (like Hashtable) don't want to let you check for a null key.
+                // to be consistent with previous behavior checking each entry,
+                // we squash any error coming from that to indicate simply that there's no entry with that key.
+                return false;
+            }
+        }
+
+        @Override
+        public void describeMismatchSafely(Map<? extends K, ? extends V> map, Description mismatchDescription)
+        {
+            mismatchDescription.appendText("map keys were ").appendValueList("[", ", ", "]", map.keySet());
+        }
+
+        @Override
+        public void describeTo(Description description)
+        {
+            description.appendText("map containing key ")
+                    .appendDescriptionOf(super.keyMatcher);
+        }
     }
 
     /**
