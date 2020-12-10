@@ -1,7 +1,8 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
+
+import java.util.Arrays;
 
 import static org.hamcrest.core.DescribedAs.describedAs;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -9,14 +10,19 @@ import static org.hamcrest.core.IsEqual.equalTo;
 /**
  * Matches if array size satisfies a nested matcher.
  */
-public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
+public class IsArrayWithSize<E> extends SizeMatcher<E[], E> {
     public IsArrayWithSize(Matcher<? super Integer> sizeMatcher) {
-        super(sizeMatcher, "an array with size","array size");
+        super(sizeMatcher, "array");
     }
 
     @Override
     protected Integer featureValueOf(E[] actual) {
       return actual.length;
+    }
+
+    @Override
+    protected Iterable<? extends E> actualValues(E[] actual) {
+      return Arrays.asList(actual);
     }
 
     /**

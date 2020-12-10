@@ -5,6 +5,7 @@ import org.hamcrest.Matcher;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.hamcrest.collection.IsIterableWithSize.iterableWithSize;
 
@@ -33,5 +34,10 @@ public class IsIterableWithSizeTest extends AbstractMatcherTest {
 
     public void testHasAReadableDescription() {
         assertDescription("an iterable with size <4>", iterableWithSize(4));
+    }
+
+    public void testOnMismatchProvidesInsightfulDebuggingInformation() {
+        assertMismatchDescription("iterable size was <2>. Actual values: [<1>, <2>]",
+                iterableWithSize(1), Arrays.asList(1, 2));
     }
 }

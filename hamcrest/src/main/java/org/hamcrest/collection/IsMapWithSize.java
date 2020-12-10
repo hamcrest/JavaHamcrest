@@ -1,24 +1,29 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
 import java.util.Map;
+import java.util.Set;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
  * Matches if map size satisfies a nested matcher.
  */
-public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ? extends V>, Integer> {
+public final class IsMapWithSize<K, V> extends SizeMatcher<Map<? extends K, ? extends V>, Map.Entry<? extends K, ? extends V>> {
     @SuppressWarnings("WeakerAccess")
     public IsMapWithSize(Matcher<? super Integer> sizeMatcher) {
-      super(sizeMatcher, "a map with size", "map size");
+      super(sizeMatcher, "map");
     }
 
     @Override
     protected Integer featureValueOf(Map<? extends K, ? extends V> actual) {
       return actual.size();
+    }
+
+    @Override
+    protected Set<? extends Map.Entry<? extends K, ? extends V>> actualValues(Map<? extends K, ? extends V> actual) {
+      return actual.entrySet();
     }
 
     /**
