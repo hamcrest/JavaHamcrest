@@ -37,24 +37,24 @@ public final class IsBlankStringTest {
     
     @Test public void
     matchesAllCharactersConsideredWhitespaceByJavaLangCharacter() {
-    	// See Javadocs for Character.isWhitespace
-    	String[] consideredBlankByJavaLangCharacter = new String[] {
-    			"\t",
-    			"\n",
-    			"\u000B",
-    			"\f",
-    			"\r",
-    			"\u001C",
-    			"\u001D",
-    			"\u001E",
-    			"\u001F"
-    	};
-    	
-    	for(String string : consideredBlankByJavaLangCharacter) {
-    		assertTrue(string.isBlank());
-        	assertMatches(blankString(), string);
-        	assertMatches(blankOrNullString(), string);    		
-    	}
+        // See Javadocs for Character.isWhitespace
+        String[] consideredBlankByJavaLangCharacter = new String[] {
+                "\t",
+                "\n",
+                "\u000B",
+                "\f",
+                "\r",
+                "\u001C",
+                "\u001D",
+                "\u001E",
+                "\u001F"
+        };
+        
+        for(String string : consideredBlankByJavaLangCharacter) {
+            assertTrue(string.isBlank());
+            assertMatches(blankString(), string);
+            assertMatches(blankOrNullString(), string);
+        }
     }
 
     @Test public void
