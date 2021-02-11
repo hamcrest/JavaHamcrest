@@ -18,7 +18,7 @@ public final class ComparatorMatcherBuilder<T> {
      * For example:
      * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().lessThanOrEqualTo(1))</pre>
      */
-    public static <T extends Comparable<T>> ComparatorMatcherBuilder<T> usingNaturalOrdering() {
+    public static <T extends Comparable<? super T>> ComparatorMatcherBuilder<T> usingNaturalOrdering() {
         return new ComparatorMatcherBuilder<T>(new Comparator<T>() {
             @Override
             public int compare(T o1, T o2) {
