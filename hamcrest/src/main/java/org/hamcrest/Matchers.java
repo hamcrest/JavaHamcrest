@@ -1299,7 +1299,7 @@ public class Matchers {
    * 
    * @param value the value which, when passed to the compareTo method of the examined object, should return zero
    */
-  public static <T extends java.lang.Comparable<T>> org.hamcrest.Matcher<T> comparesEqualTo(T value) {
+  public static <T extends java.lang.Comparable<? super T>> org.hamcrest.Matcher<T> comparesEqualTo(T value) {
     return org.hamcrest.number.OrderingComparison.comparesEqualTo(value);
   }
 
@@ -1313,7 +1313,7 @@ public class Matchers {
    * @param value the value which, when passed to the compareTo method of the examined object, should return greater
    *              than zero
    */
-  public static <T extends java.lang.Comparable<T>> org.hamcrest.Matcher<T> greaterThan(T value) {
+  public static <T extends java.lang.Comparable<? super T>> org.hamcrest.Matcher<T> greaterThan(T value) {
     return org.hamcrest.number.OrderingComparison.greaterThan(value);
   }
 
@@ -1327,7 +1327,7 @@ public class Matchers {
    * @param value the value which, when passed to the compareTo method of the examined object, should return greater
    *              than or equal to zero
    */
-  public static <T extends java.lang.Comparable<T>> org.hamcrest.Matcher<T> greaterThanOrEqualTo(T value) {
+  public static <T extends java.lang.Comparable<? super T>> org.hamcrest.Matcher<T> greaterThanOrEqualTo(T value) {
     return org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo(value);
   }
 
@@ -1341,7 +1341,7 @@ public class Matchers {
    * @param value the value which, when passed to the compareTo method of the examined object, should return less
    *              than zero
    */
-  public static <T extends java.lang.Comparable<T>> org.hamcrest.Matcher<T> lessThan(T value) {
+  public static <T extends java.lang.Comparable<? super T>> org.hamcrest.Matcher<T> lessThan(T value) {
     return org.hamcrest.number.OrderingComparison.lessThan(value);
   }
 
@@ -1355,7 +1355,7 @@ public class Matchers {
    * @param value the value which, when passed to the compareTo method of the examined object, should return less
    *              than or equal to zero
    */
-  public static <T extends java.lang.Comparable<T>> org.hamcrest.Matcher<T> lessThanOrEqualTo(T value) {
+  public static <T extends java.lang.Comparable<? super T>> org.hamcrest.Matcher<T> lessThanOrEqualTo(T value) {
     return org.hamcrest.number.OrderingComparison.lessThanOrEqualTo(value);
   }
 
