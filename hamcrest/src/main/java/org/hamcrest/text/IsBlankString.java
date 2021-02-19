@@ -20,7 +20,16 @@ public final class IsBlankString extends TypeSafeMatcher<String> {
 
     @Override
     public boolean matchesSafely(String item) {
-        return item.isBlank();
+        final int length = item.length();
+        int offset = 0;
+        while(offset < length) {
+            final int codePoint = item.codePointAt(offset);
+            if(!Character.isWhitespace(codePoint)) {
+                return false;
+            }
+            offset += Character.charCount(codePoint);
+        }
+        return true;
     }
 
     @Override
