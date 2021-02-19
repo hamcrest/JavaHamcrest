@@ -51,7 +51,6 @@ public final class IsBlankStringTest {
         };
         
         for(String string : consideredBlankByJavaLangCharacter) {
-            assertTrue(string.isBlank());
             assertMatches(blankString(), string);
             assertMatches(blankOrNullString(), string);
         }
