@@ -20,10 +20,37 @@ public class MatcherAssert {
             throw new AssertionError(description.toString());
         }
     }
-    
+
     public static void assertThat(String reason, boolean assertion) {
         if (!assertion) {
             throw new AssertionError(reason);
+        }
+    }
+
+    public static <T extends Throwable> void assertThat(Executable executable, Throws<T> doesThrow) {
+        assertThat("", executable, doesThrow);
+    }
+
+    public static <T extends Throwable> void assertThat(String reason, Executable executable, Throws<T> doesThrow) {
+        boolean executionDidNotThrow = false;
+        try {
+            executable.execute();
+            executionDidNotThrow = true;
+        } catch (Throwable actual) {
+            assertThat(reason, (T) actual, doesThrow.asMatcher());
+        } finally {
+            if (executionDidNotThrow) {
+                Description description = new StringDescription();
+                description.appendText(reason)
+                        .appendText(System.lineSeparator())
+                        .appendText("Expected: ")
+                        .appendDescriptionOf(doesThrow)
+                        .appendText(System.lineSeparator())
+                        .appendText("     but: ");
+                doesThrow.describeMismatch(description);
+
+                throw new AssertionError(description.toString());
+            }
         }
     }
 }
