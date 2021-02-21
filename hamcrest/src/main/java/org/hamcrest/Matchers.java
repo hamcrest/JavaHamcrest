@@ -1712,5 +1712,71 @@ public class Matchers {
     return org.hamcrest.xml.HasXPath.hasXPath(xPath, namespaceContext);
   }
 
+  /**
+   * Creates a {@link Throws} object that matches a throwable according to the given throwable matcher.
+   * This can be used with the {@link MatcherAssert#assertThat(String, Executable, Throws)} family of methods.
+   * For example:
+   * <pre>assertThat(() -> methodCallThatThrowsException(), doesThrow(withMessage("file not found")))</pre>
+   *
+   * @param throwableMatcher
+   *     the matcher for the throwable to match, which must not be {@code null}
+   */
+  public static <T extends Throwable> Throws<T> doesThrow(Matcher<? super Throwable> throwableMatcher) {
+    return Throws.doesThrow(throwableMatcher);
+  }
 
+  /**
+   * Creates a {@link Throws} object that matches a throwable of the given type.
+   * This can be used with the {@link MatcherAssert#assertThat(String, Executable, Throws)} family of methods.
+   * For example:
+   * <pre>assertThat(() -> methodCallThatThrowsIOException(), throwsInstanceOf(IOException.class))</pre>
+   * This is shorthand for {@code doesThrow(instanceOf(MyThrowable.class))}, to be used as equivalent for JUnit 5's
+   * {@code assertThrows(MyThrowable.class, () -> {})}.
+   *
+   * @param throwableType
+   *     the type of the throwable to match, which must not be {@code null}
+   */
+  public static <T extends Throwable> Throws<T> throwsInstanceOf(Class<T> throwableType) {
+    return Throws.throwsInstanceOf(throwableType);
+  }
+
+  /**
+   * Creates a matcher that matches a throwable by matching its message.
+   * This can be used with the {@link MatcherAssert#assertThat(String, Executable, Throws)} family of methods.
+   * For example:
+   * <pre>assertThat(() -> methodCallThatThrowsException(), doesThrow(withMessage(startsWith("file not found"))))</pre>
+   *
+   * @param messageMatcher
+   *     the matcher to match the throwable's message with, which must not be {@code null}
+   */
+  public static <T extends Throwable> Matcher<T> withMessage(Matcher<String> messageMatcher) {
+    return Throws.withMessage(messageMatcher);
+  }
+
+  /**
+   * Creates a matcher that matches a throwable by its message.
+   * This can be used with the {@link MatcherAssert#assertThat(String, Executable, Throws)} family of methods.
+   * For example:
+   * <pre>assertThat(() -> methodCallThatThrowsException(), doesThrow(withMessage("message")))</pre>
+   * This is shorthand for {@code doesThrow(withMessage(equalTo("message")))}.
+   *
+   * @param messageToMatch
+   *     the message to match the throwable's message with, which must not be {@code null}
+   */
+  public static <T extends Throwable> Matcher<T> withMessage(String messageToMatch) {
+    return withMessage(equalTo(messageToMatch));
+  }
+
+  /**
+   * Creates a matcher that matches an outer throwable by matching its inner cause.
+   * This can be used with the {@link MatcherAssert#assertThat(String, Executable, Throws)} family of methods.
+   * For example:
+   * <pre>assertThat(() -> methodCallThatThrowsInvocationTargetException(), doesThrow(becauseOf(instanceOf(IOException.class))))</pre>
+   *
+   * @param causeMatcher
+   *     the matcher to matcher the outer throwable's inner cause with, which must not be {@code null}
+   */
+  public static <T extends Throwable> Matcher<T> becauseOf(Matcher<? extends Throwable> causeMatcher) {
+    return Throws.becauseOf(causeMatcher);
+  }
 }

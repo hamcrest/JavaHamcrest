@@ -1,9 +1,12 @@
 package org.hamcrest;
 
+import java.io.IOException;
+import javax.xml.stream.XMLStreamException;
+
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 
 public final class MatcherAssertTest {
@@ -95,5 +98,116 @@ public final class MatcherAssertTest {
     @Test public void
     canAssertSubtypes() {
         assertThat(1, equalTo((Number) 1));
+    }
+
+    @Test public void
+    throwableIsOfMatchingInstance() {
+        assertThat(
+                () -> { throw new IllegalStateException(); },
+                throwsInstanceOf(IllegalStateException.class)
+        );
+    }
+
+    @Test public void
+    throwableIsNotOfMatchingInstance() {
+        String endLine = System.lineSeparator();
+        String expectedMessage = endLine + "Expected: throws an instance of java.io.IOException" + endLine
+                + "     but: threw but <java.lang.IllegalStateException> is a java.lang.IllegalStateException";
+        try {
+            assertThat(
+                    () -> { throw new IllegalStateException(); },
+                    throwsInstanceOf(IOException.class)
+            );
+            fail("should have failed");
+        }
+        catch (AssertionError e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
+    }
+
+    @Test public void
+    throwableHasMatchingMessage() {
+        assertThat(
+                () -> { throw new Exception("message"); },
+                doesThrow(withMessage(equalTo("message")))
+        );
+    }
+
+    @Test public void
+    throwableDoesNotHaveMatchingMessage() {
+        String endLine = System.lineSeparator();
+        String expectedMessage = endLine + "Expected: throws with message \"expected message\"" + endLine
+                + "     but: threw but message was \"actual message\"";
+        try {
+            assertThat(
+                    () -> { throw new Exception("actual message"); },
+                    doesThrow(withMessage("expected message"))
+            );
+            fail("should have failed");
+        }
+        catch (AssertionError e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
+    }
+
+    @Test public void
+    throwableExecutionDoesNotThrow() {
+        String endLine = System.lineSeparator();
+        String expectedMessage = endLine + "Expected: throws an instance of java.lang.NoSuchMethodError"
+                + endLine + "     but: did not throw";
+        try {
+            assertThat(
+                    () -> {}, // Do nothing
+                    throwsInstanceOf(NoSuchMethodError.class)
+            );
+            fail("should have failed");
+        }
+        catch (AssertionError e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
+    }
+
+    @Test public void
+    throwableCauseMatches() {
+        assertThat(
+                () -> { throw new RuntimeException(new XMLStreamException()); },
+                doesThrow(becauseOf(instanceOf(XMLStreamException.class)))
+        );
+    }
+
+    @Test public void
+    throwableCauseDoesNotMatch() {
+        String endLine = System.lineSeparator();
+        String expectedMessage = endLine + "Expected: throws because of an instance of java.lang.NullPointerException"
+                + endLine + "     but: threw but cause <java.lang.IllegalArgumentException> is a java.lang.IllegalArgumentException";
+        try {
+            assertThat(
+                    () -> { throw new RuntimeException(new IllegalArgumentException()); },
+                    doesThrow(becauseOf(instanceOf(NullPointerException.class)))
+            );
+            fail("should have failed");
+        }
+        catch (AssertionError e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
+    }
+
+    @Test public void
+    throwableExecutionDoesNotMatchWithCustomMessage() {
+        String endLine = System.lineSeparator();
+        String expectedMessage = "Custom message"
+                + endLine + "Expected: throws an instance of java.lang.NullPointerException"
+                + endLine + "     but: threw but <java.lang.IllegalArgumentException> is a java.lang.IllegalArgumentException";
+        try {
+            assertThat(
+                    "Custom message",
+                    () -> { throw new IllegalArgumentException(); },
+                    throwsInstanceOf(NullPointerException.class)
+            );
+            fail("should have failed");
+        }
+        catch (AssertionError e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
     }
 }
