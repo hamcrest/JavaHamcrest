@@ -56,6 +56,6 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      */
     @SafeVarargs
     public static <T> Matcher<T> allOf(Matcher<? super T>... matchers) {
-        return allOf(Arrays.asList(matchers));
+        return allOf((Iterable) Arrays.asList(matchers));
     }
 }

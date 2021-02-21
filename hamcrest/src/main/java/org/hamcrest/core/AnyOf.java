@@ -46,6 +46,6 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      */
     @SafeVarargs
     public static <T> AnyOf<T> anyOf(Matcher<? super T>... matchers) {
-        return anyOf(Arrays.asList(matchers));
+        return anyOf((Iterable) Arrays.asList(matchers));
     }
 }

@@ -99,7 +99,7 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
      */
     @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(Matcher<? super E>... itemMatchers) {
-        return containsInRelativeOrder(asList(itemMatchers));
+        return containsInRelativeOrder((List) asList(itemMatchers));
     }
 
     /**

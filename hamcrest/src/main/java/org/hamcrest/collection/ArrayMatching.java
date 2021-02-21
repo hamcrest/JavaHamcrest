@@ -67,7 +67,7 @@ public class ArrayMatching {
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(Matcher<? super E>... itemMatchers) {
-      return arrayContainingInAnyOrder(asList(itemMatchers));
+      return arrayContainingInAnyOrder((Collection) asList(itemMatchers));
   }
 
   /**
