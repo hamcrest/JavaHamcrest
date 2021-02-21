@@ -103,7 +103,12 @@ public final class MatcherAssertTest {
     @Test public void
     throwableIsOfMatchingInstance() {
         assertThat(
-                () -> { throw new IllegalStateException(); },
+                new Executable() {
+                    @Override
+                    public void execute() {
+                        throw new IllegalStateException();
+                    }
+                },
                 throwsInstanceOf(IllegalStateException.class)
         );
     }
@@ -115,7 +120,12 @@ public final class MatcherAssertTest {
                 + "     but: threw but <java.lang.IllegalStateException> is a java.lang.IllegalStateException";
         try {
             assertThat(
-                    () -> { throw new IllegalStateException(); },
+                    new Executable() {
+                        @Override
+                        public void execute() {
+                            throw new IllegalStateException();
+                        }
+                    },
                     throwsInstanceOf(IOException.class)
             );
             fail("should have failed");
@@ -128,7 +138,12 @@ public final class MatcherAssertTest {
     @Test public void
     throwableHasMatchingMessage() {
         assertThat(
-                () -> { throw new Exception("message"); },
+                new Executable() {
+                    @Override
+                    public void execute() throws Exception {
+                        throw new Exception("message");
+                    }
+                },
                 doesThrow(withMessage(equalTo("message")))
         );
     }
@@ -140,7 +155,12 @@ public final class MatcherAssertTest {
                 + "     but: threw but message was \"actual message\"";
         try {
             assertThat(
-                    () -> { throw new Exception("actual message"); },
+                    new Executable() {
+                        @Override
+                        public void execute() throws Exception {
+                            throw new Exception("actual message");
+                        }
+                    },
                     doesThrow(withMessage("expected message"))
             );
             fail("should have failed");
@@ -157,7 +177,12 @@ public final class MatcherAssertTest {
                 + endLine + "     but: did not throw";
         try {
             assertThat(
-                    () -> {}, // Do nothing
+                    new Executable() {
+                        @Override
+                        public void execute() {
+                            // Do nothing
+                        }
+                    },
                     throwsInstanceOf(NoSuchMethodError.class)
             );
             fail("should have failed");
@@ -169,9 +194,15 @@ public final class MatcherAssertTest {
 
     @Test public void
     throwableCauseMatches() {
+        Matcher<? extends Throwable> instanceOfMatcher = instanceOf(XMLStreamException.class);
         assertThat(
-                () -> { throw new RuntimeException(new XMLStreamException()); },
-                doesThrow(becauseOf(instanceOf(XMLStreamException.class)))
+                new Executable() {
+                    @Override
+                    public void execute() {
+                        throw new RuntimeException(new XMLStreamException());
+                    }
+                },
+                doesThrow(becauseOf(instanceOfMatcher))
         );
     }
 
@@ -181,9 +212,15 @@ public final class MatcherAssertTest {
         String expectedMessage = endLine + "Expected: throws because of an instance of java.lang.NullPointerException"
                 + endLine + "     but: threw but cause <java.lang.IllegalArgumentException> is a java.lang.IllegalArgumentException";
         try {
+            Matcher<? extends Throwable> instanceOfMatcher = instanceOf(NullPointerException.class);
             assertThat(
-                    () -> { throw new RuntimeException(new IllegalArgumentException()); },
-                    doesThrow(becauseOf(instanceOf(NullPointerException.class)))
+                    new Executable() {
+                        @Override
+                        public void execute() {
+                            throw new RuntimeException(new IllegalArgumentException());
+                        }
+                    },
+                    doesThrow(becauseOf(instanceOfMatcher))
             );
             fail("should have failed");
         }
@@ -201,7 +238,12 @@ public final class MatcherAssertTest {
         try {
             assertThat(
                     "Custom message",
-                    () -> { throw new IllegalArgumentException(); },
+                    new Executable() {
+                        @Override
+                        public void execute() {
+                            throw new IllegalArgumentException();
+                        }
+                    },
                     throwsInstanceOf(NullPointerException.class)
             );
             fail("should have failed");

@@ -10,7 +10,7 @@ public final class Throws<T extends Throwable> implements SelfDescribing {
 
     private final Matcher<? super T> matcher;
 
-    public Throws(Matcher<? super T> throwableMatcher) {
+    public Throws(final Matcher<? super T> throwableMatcher) {
         requireNonNull(throwableMatcher);
         this.matcher = new BaseMatcher<T>() {
 
@@ -46,7 +46,7 @@ public final class Throws<T extends Throwable> implements SelfDescribing {
         description.appendText("did not throw");
     }
 
-    public static <T extends Throwable> Matcher<T> withMessage(Matcher<String> messageMatcher) {
+    public static <T extends Throwable> Matcher<T> withMessage(final Matcher<String> messageMatcher) {
         return new TypeSafeMatcher<T>() {
 
             @Override
@@ -68,7 +68,7 @@ public final class Throws<T extends Throwable> implements SelfDescribing {
         };
     }
 
-    public static <T extends Throwable> Matcher<T> becauseOf(Matcher<? extends Throwable> causeMatcher) {
+    public static <T extends Throwable> Matcher<T> becauseOf(final Matcher<? extends Throwable> causeMatcher) {
         return new TypeSafeMatcher<T>() {
 
             @Override
