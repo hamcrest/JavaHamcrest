@@ -1716,7 +1716,7 @@ public class Matchers {
    * Creates a {@link Throws} object that matches a throwable according to the given throwable matcher.
    * This can be used with the {@link MatcherAssert#assertThat(String, Executable, Throws)} family of methods.
    * For example:
-   * <pre>assertThat(() -> methodCallThatThrowsException(), doesThrow(withMessage("file not found")))</pre>
+   * <pre>assertThat(() -&gt; methodCallThatThrowsException(), doesThrow(withMessage("file not found")))</pre>
    *
    * @param throwableMatcher
    *     the matcher for the throwable to match, which must not be {@code null}
@@ -1729,7 +1729,7 @@ public class Matchers {
    * Creates a {@link Throws} object that matches a throwable of the given type.
    * This can be used with the {@link MatcherAssert#assertThat(String, Executable, Throws)} family of methods.
    * For example:
-   * <pre>assertThat(() -> methodCallThatThrowsIOException(), throwsInstanceOf(IOException.class))</pre>
+   * <pre>assertThat(() -&gt; methodCallThatThrowsIOException(), throwsInstanceOf(IOException.class))</pre>
    * This is shorthand for {@code doesThrow(instanceOf(MyThrowable.class))}, to be used as equivalent for JUnit 5's
    * {@code assertThrows(MyThrowable.class, () -> {})}.
    *
@@ -1744,7 +1744,7 @@ public class Matchers {
    * Creates a matcher that matches a throwable by matching its message.
    * This can be used with the {@link MatcherAssert#assertThat(String, Executable, Throws)} family of methods.
    * For example:
-   * <pre>assertThat(() -> methodCallThatThrowsException(), doesThrow(withMessage(startsWith("file not found"))))</pre>
+   * <pre>assertThat(() -&gt; methodCallThatThrowsException(), doesThrow(withMessage(startsWith("file not found"))))</pre>
    *
    * @param messageMatcher
    *     the matcher to match the throwable's message with, which must not be {@code null}
@@ -1757,7 +1757,7 @@ public class Matchers {
    * Creates a matcher that matches a throwable by its message.
    * This can be used with the {@link MatcherAssert#assertThat(String, Executable, Throws)} family of methods.
    * For example:
-   * <pre>assertThat(() -> methodCallThatThrowsException(), doesThrow(withMessage("message")))</pre>
+   * <pre>assertThat(() -&gt; methodCallThatThrowsException(), doesThrow(withMessage("message")))</pre>
    * This is shorthand for {@code doesThrow(withMessage(equalTo("message")))}.
    *
    * @param messageToMatch
@@ -1771,7 +1771,7 @@ public class Matchers {
    * Creates a matcher that matches an outer throwable by matching its inner cause.
    * This can be used with the {@link MatcherAssert#assertThat(String, Executable, Throws)} family of methods.
    * For example:
-   * <pre>assertThat(() -> methodCallThatThrowsInvocationTargetException(), doesThrow(becauseOf(instanceOf(IOException.class))))</pre>
+   * <pre>assertThat(() -&gt; methodCallThatThrowsInvocationTargetException(), doesThrow(becauseOf(instanceOf(IOException.class))))</pre>
    *
    * @param causeMatcher
    *     the matcher to matcher the outer throwable's inner cause with, which must not be {@code null}
