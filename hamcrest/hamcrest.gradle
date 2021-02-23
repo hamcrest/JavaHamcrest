@@ -3,6 +3,7 @@ apply plugin: 'osgi'
 version = rootProject.version
 
 dependencies {
+    api 'org.opentest4j:opentest4j:1.2.0'
     testImplementation(group: 'junit', name: 'junit', version: '4.13') {
         transitive = false
     }
