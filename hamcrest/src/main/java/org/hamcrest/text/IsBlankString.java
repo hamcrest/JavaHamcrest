@@ -22,9 +22,9 @@ public final class IsBlankString extends TypeSafeMatcher<String> {
     public boolean matchesSafely(String item) {
         final int length = item.length();
         int offset = 0;
-        while(offset < length) {
+        while (offset < length) {
             final int codePoint = item.codePointAt(offset);
-            if(!Character.isWhitespace(codePoint)) {
+            if (!Character.isWhitespace(codePoint)) {
                 return false;
             }
             offset += Character.charCount(codePoint);
