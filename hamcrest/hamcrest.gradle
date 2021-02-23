@@ -3,7 +3,9 @@ apply plugin: 'osgi'
 version = rootProject.version
 
 dependencies {
-    testImplementation(group: 'junit', name: 'junit', version: '4.13') {
+    compileOnly 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    compileOnly 'junit:junit:4.13.2'
+    testImplementation(group: 'junit', name: 'junit', version: '4.13.2') {
         transitive = false
     }
 }

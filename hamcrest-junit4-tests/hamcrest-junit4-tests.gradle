@@ -1,0 +1,17 @@
+dependencies {
+    testImplementation project(':hamcrest')
+    testImplementation(group: 'junit', name: 'junit', version: '4.13.2') {
+        transitive = false
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': project.name,
+                'Implementation-Vendor': 'hamcrest.org',
+                'Implementation-Version': version,
+                'Automatic-Module-Name': 'org.hamcrest.junit4-tests'
+    }
+}
+
+javadoc.title = "Hamcrest JUnit 4 Tests $version"
