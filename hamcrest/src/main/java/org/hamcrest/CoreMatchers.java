@@ -75,7 +75,7 @@ public class CoreMatchers {
    * @param values
    *     optional values to insert into the tokenised description
    */
-  public static <T> org.hamcrest.Matcher<T> describedAs(java.lang.String description, org.hamcrest.Matcher<T> matcher, java.lang.Object... values) {
+  public static <T> org.hamcrest.Matcher<T> describedAs(java.lang.String description, org.hamcrest.Matcher<T> matcher, T... values) {
     return org.hamcrest.core.DescribedAs.describedAs(description, matcher, values);
   }
 
@@ -130,7 +130,7 @@ public class CoreMatchers {
   /**
    * Creates a matcher that always matches, regardless of the examined object.
    */
-  public static org.hamcrest.Matcher<java.lang.Object> anything() {
+  public static <T> org.hamcrest.Matcher<T> anything() {
     return org.hamcrest.core.IsAnything.anything();
   }
 
@@ -141,7 +141,7 @@ public class CoreMatchers {
    * @param description
    *     a meaningful {@link String} used when describing itself
    */
-  public static org.hamcrest.Matcher<java.lang.Object> anything(java.lang.String description) {
+  public static <T> org.hamcrest.Matcher<T> anything(java.lang.String description) {
     return org.hamcrest.core.IsAnything.anything(description);
   }
 
@@ -236,7 +236,7 @@ public class CoreMatchers {
    * Creates an {@link org.hamcrest.core.IsEqual} matcher that does not enforce the values being
    * compared to be of the same static type.
    */
-  public static org.hamcrest.Matcher<java.lang.Object> equalToObject(java.lang.Object operand) {
+  public static <T> org.hamcrest.Matcher<T> equalToObject(T operand) {
     return org.hamcrest.core.IsEqual.equalToObject(operand);
   }
 
@@ -302,7 +302,7 @@ public class CoreMatchers {
    * instead of:
    * <pre>assertThat(cheese, is(not(nullValue())))</pre>
    */
-  public static org.hamcrest.Matcher<java.lang.Object> notNullValue() {
+  public static <T> org.hamcrest.Matcher<T> notNullValue() {
     return org.hamcrest.core.IsNull.notNullValue();
   }
 
@@ -326,7 +326,7 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat(cheese, is(nullValue())</pre>
    */
-  public static org.hamcrest.Matcher<java.lang.Object> nullValue() {
+  public static <T> org.hamcrest.Matcher<T> nullValue() {
     return org.hamcrest.core.IsNull.nullValue();
   }
 

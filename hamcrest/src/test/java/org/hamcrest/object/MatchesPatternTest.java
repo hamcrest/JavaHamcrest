@@ -15,7 +15,6 @@ public class MatchesPatternTest {
         Matcher<String> matcher = new MatchesPattern(Pattern.compile("."));
 
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test

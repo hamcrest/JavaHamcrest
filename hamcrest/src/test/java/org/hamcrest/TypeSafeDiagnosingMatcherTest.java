@@ -7,7 +7,6 @@ import static org.hamcrest.AbstractMatcherTest.*;
 /**
  * @author Steve Freeman 2016 http://www.hamcrest.com
  */
-@SuppressWarnings("WeakerAccess")
 public class TypeSafeDiagnosingMatcherTest {
 
     @Test public void

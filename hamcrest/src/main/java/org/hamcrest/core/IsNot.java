@@ -18,7 +18,7 @@ public class IsNot<T> extends BaseMatcher<T>  {
     }
 
     @Override
-    public boolean matches(Object arg) {
+    public boolean matches(T arg) {
         return !matcher.matches(arg);
     }
 

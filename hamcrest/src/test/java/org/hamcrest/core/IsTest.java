@@ -15,7 +15,6 @@ public final class IsTest {
         Matcher<String> matcher = is("something");
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

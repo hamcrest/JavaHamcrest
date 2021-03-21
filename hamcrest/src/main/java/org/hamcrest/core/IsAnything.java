@@ -33,7 +33,7 @@ public class IsAnything<T> extends BaseMatcher<T> {
     /**
      * Creates a matcher that always matches, regardless of the examined object.
      */
-    public static Matcher<Object> anything() { return new IsAnything<>(); }
+    public static <T> Matcher<T> anything() { return new IsAnything<>(); }
 
     /**
      * Creates a matcher that always matches, regardless of the examined object, but describes
@@ -42,7 +42,7 @@ public class IsAnything<T> extends BaseMatcher<T> {
      * @param description
      *     a meaningful {@link String} used when describing itself
      */
-    public static Matcher<Object> anything(String description) {
+    public static <T> Matcher<T> anything(String description) {
         return new IsAnything<>(description);
     }
 }

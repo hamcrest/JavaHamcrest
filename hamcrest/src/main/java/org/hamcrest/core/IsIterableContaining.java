@@ -25,7 +25,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
         }
 
         for (Object item : collection) {
-            if (elementMatcher.matches(item)) {
+            if (elementMatcher.matches((T)item)) {
                 return true;
             }
         }
@@ -36,7 +36,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
             if (isPastFirst) {
               mismatchDescription.appendText(", ");
             }
-            elementMatcher.describeMismatch(item, mismatchDescription);
+            elementMatcher.describeMismatch((T)item, mismatchDescription);
             isPastFirst = true;
         }
         mismatchDescription.appendText("]");

@@ -20,7 +20,6 @@ public final class AllOfTest {
         Matcher<String> matcher = allOf(equalTo("irrelevant"), startsWith("irr"));
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
     
     @Test public void

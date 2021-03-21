@@ -13,7 +13,6 @@ public final class IsEqualIgnoringCaseTest {
         Matcher<String> matcher = equalToIgnoringCase("irrelevant");
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

@@ -14,7 +14,6 @@ public final class IsEmptyStringTest {
         Matcher<String> matcher = emptyString();
         
         assertNullSafe(matcher);
-        assertUnknownTypeSafe(matcher);
     }
 
     @Test public void

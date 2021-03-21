@@ -5,7 +5,6 @@ import org.hamcrest.Matcher;
 
 import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 
-@SuppressWarnings("WeakerAccess")
 public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   private static final Value aValue = new Value("expected");
   private static final ExampleBean expectedBean = new ExampleBean("same", 1, aValue);

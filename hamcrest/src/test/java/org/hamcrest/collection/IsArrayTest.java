@@ -48,9 +48,9 @@ public class IsArrayTest extends AbstractMatcherTest {
     
     public void testHasAReadableMismatchDescriptionUsingCustomMatchers() {
         final BaseMatcher<String> m = new BaseMatcher<String>() {
-            @Override public boolean matches(Object item) { return false; }
+            @Override public boolean matches(String item) { return false; }
             @Override public void describeTo(Description description) { description.appendText("c"); }
-            @Override public void describeMismatch(Object item, Description description) {
+            @Override public void describeMismatch(String item, Description description) {
                 description.appendText("didn't match");
             }
         };
