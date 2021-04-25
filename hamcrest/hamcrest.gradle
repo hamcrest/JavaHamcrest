@@ -6,6 +6,7 @@ dependencies {
     testImplementation(group: 'junit', name: 'junit', version: '4.13') {
         transitive = false
     }
+    implementation "io.github.java-diff-utils:java-diff-utils:4.5"
 }
 
 jar {
