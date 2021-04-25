@@ -834,7 +834,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat(new ArrayList&lt;String&gt;(), is(empty()))</pre>
    */
-  public static <E> org.hamcrest.Matcher<java.util.Collection<? extends E>> empty() {
+  public static <E> org.hamcrest.Matcher empty() {
     return org.hamcrest.collection.IsEmptyCollection.empty();
   }
 
