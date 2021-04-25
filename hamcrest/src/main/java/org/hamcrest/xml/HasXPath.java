@@ -101,7 +101,6 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
         List<Condition<Object>> match_list = new ArrayList<>();
         try {
             NodeList list = (NodeList) compiledXPath.evaluate(item, evaluationMode);
-            Object obj = compiledXPath.evaluate(item, STRING);
             for (int i = 0; i < list.getLength(); i++) {
                 Node node = list.item(i);
                 match_list.add((matched((Object)node.getTextContent(), mismatch)));
