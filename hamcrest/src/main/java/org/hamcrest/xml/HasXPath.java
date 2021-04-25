@@ -6,14 +6,18 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.hamcrest.core.IsAnything;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.namespace.QName;
 import javax.xml.xpath.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static javax.xml.xpath.XPathConstants.NODESET;
 import static javax.xml.xpath.XPathConstants.STRING;
-import static org.hamcrest.Condition.matched;
-import static org.hamcrest.Condition.notMatched;
+import static org.hamcrest.Condition.*;
 
 /**
  * Applies a Matcher to a given XML Node in an existing XML Node tree, specified by an XPath expression.
@@ -58,9 +62,22 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
 
     @Override
     public boolean matchesSafely(Node item, Description mismatch) {
-        return evaluated(item, mismatch)
-               .and(NODE_EXISTS)
-               .matching(valueMatcher);
+        if (this.evaluationMode == NODESET)
+        {
+            List<Condition<Object>> match_list = evaluatedList(item, mismatch);
+
+            for (Condition<Object> match: match_list) {
+                if (match.and(NODE_EXISTS).matching(valueMatcher)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else {
+            return evaluated(item, mismatch)
+                    .and(NODE_EXISTS)
+                    .matching(valueMatcher);
+        }
     }
 
     @Override
@@ -78,6 +95,23 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
             mismatch.appendText(e.getMessage());
         }
         return notMatched();
+    }
+
+    private List<Condition<Object>> evaluatedList(Node item, Description mismatch) {
+        List<Condition<Object>> match_list = new ArrayList<>();
+        try {
+            NodeList list = (NodeList) compiledXPath.evaluate(item, evaluationMode);
+            Object obj = compiledXPath.evaluate(item, STRING);
+            for (int i = 0; i < list.getLength(); i++) {
+                Node node = list.item(i);
+                match_list.add((matched((Object)node.getTextContent(), mismatch)));
+            }
+            return match_list;
+        } catch (XPathExpressionException e) {
+            mismatch.appendText(e.getMessage());
+        }
+        match_list.add(notMatched());
+        return match_list;
     }
 
     private static Condition.Step<Object, String> nodeExists() {
@@ -136,7 +170,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      *     matcher for the value at the specified xpath
      */
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
-        return new HasXPath(xPath, namespaceContext, valueMatcher, STRING);
+        return new HasXPath(xPath, namespaceContext, valueMatcher, NODESET);
     }
 
     /**
