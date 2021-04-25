@@ -7,18 +7,31 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Tests if a string is equal to another string, compressing any changes in whitespace.
  */
+
 public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
 
     // TODO: Replace String with CharSequence to allow for easy interoperability between
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
 
-    private final String string;
+    enum whiteSpaceType
+    {
+        SPACE, // \s
+        TAB,// \t
+        LINEFEED,// \n
+        FORMFEED, // \f
+        CARRIAGERETURN, // \r
+        MIX;
+    }
 
-    public IsEqualCompressingWhiteSpace(String string) {
+    private final String string;
+    private final whiteSpaceType type;
+
+    public IsEqualCompressingWhiteSpace(String string, whiteSpaceType type) {
         if (string == null) {
             throw new IllegalArgumentException("Non-null value required");
         }
         this.string = string;
+        this.type = type;
     }
 
     @Override
@@ -39,7 +52,24 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
     }
 
     public String stripSpaces(String toBeStripped) {
-        return toBeStripped.replaceAll("[\\p{Z}\\p{C}]+", " ").trim();
+        if (this.type == whiteSpaceType.TAB){
+            return toBeStripped.replaceAll("[\\p{Z}\\t]+", " ").trim();
+        }
+        else if (this.type == whiteSpaceType.LINEFEED){
+            return toBeStripped.replaceAll("[\\p{Z}\\n]+", " ").trim();
+        }
+        else if (this.type == whiteSpaceType.FORMFEED){
+            return toBeStripped.replaceAll("[\\p{Z}\\f]+", " ").trim();
+        }
+        else if (this.type == whiteSpaceType.CARRIAGERETURN){
+            return toBeStripped.replaceAll("[\\p{Z}\\r]+", " ").trim();
+        }
+        else if (this.type == whiteSpaceType.SPACE){
+            return toBeStripped.replaceAll("[\\p{Z}]+", " ").trim();
+        }
+        else{
+            return toBeStripped.replaceAll("[\\p{Z}\\t\\n\\f\\r]+", " ").trim();
+        }
     }
 
     /**
@@ -47,8 +77,8 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
      * @param expectedString
      *     the expected value of matched strings
      */
-    public static Matcher<String> equalToIgnoringWhiteSpace(String expectedString) {
-        return new IsEqualCompressingWhiteSpace(expectedString);
+    public static Matcher<String> equalToIgnoringWhiteSpace(String expectedString, whiteSpaceType type) {
+        return new IsEqualCompressingWhiteSpace(expectedString, type);
     }
 
     /**
@@ -66,7 +96,31 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
      *     the expected value of matched strings
      */
     public static Matcher<String> equalToCompressingWhiteSpace(String expectedString) {
-        return new IsEqualCompressingWhiteSpace(expectedString);
+        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.MIX);
+    }
+
+    public static Matcher<String> equalToCompressingSPACE(String expectedString) {
+        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.SPACE);
+    }
+
+    public static Matcher<String> equalToCompressingTAB(String expectedString) {
+        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.TAB);
+    }
+
+    public static Matcher<String> equalToCompressingLINEFEED(String expectedString) {
+        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.LINEFEED);
+    }
+
+    public static Matcher<String> equalToCompressingFORMFEED(String expectedString) {
+        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.FORMFEED);
+    }
+
+    public static Matcher<String> equalToCompressingCARRIAGERETURN(String expectedString) {
+        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.CARRIAGERETURN);
+    }
+
+    public static Matcher<String> equalToCompressingMIX(String expectedString) {
+        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.MIX);
     }
 
 }
