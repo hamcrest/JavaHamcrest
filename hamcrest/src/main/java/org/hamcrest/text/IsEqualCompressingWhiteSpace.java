@@ -17,8 +17,6 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
      * enum the whitespace type where SPACE is '\s', TAB is '\t', LINE_FEED is '\n',
      * FORM_FEED is '\f', CARRIAGE_RETURN is '\r', MIX is combined type above.
      * @author Koko
-     * @version 0.0.1
-     * @date 2021/04/26
      */
     enum whiteSpaceType
     {
@@ -63,10 +61,8 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
      * besides that replace all whitespace specified by this.type with " "
      * strip redundant space between words
      * @author Koko
-     * @version 0.0.1
-     * @date 2021/04/26
-     * @Param string to be stripped
-     * @return: string after stripped
+     * @param toBeStripped
+     *     string to be stripped
      */
     private String stripSpaces(String toBeStripped) {
         if (this.type == whiteSpaceType.TAB){
@@ -119,10 +115,8 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
     /**
      * different types of generate string matcher according to whitespace type
      * @author Koko
-     * @version 0.0.1
-     * @date 2021/04/26
-     * @Param string to generate matcher
-     * @return: string matcher
+     * @param expectedString
+     *      string used to generate matcher
      */
     public static Matcher<String> equalToCompressingSpace(String expectedString) {
         return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.SPACE);
