@@ -13,20 +13,27 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
     // TODO: Replace String with CharSequence to allow for easy interoperability between
     //       String, StringBuffer, StringBuilder, CharBuffer, etc (joe).
 
+    /**
+     * enum the whitespace type where SPACE is '\s', TAB is '\t', LINE_FEED is '\n',
+     * FORM_FEED is '\f', CARRIAGE_RETURN is '\r', MIX is combined type above.
+     * @author Koko
+     * @version 0.0.1
+     * @date 2021/04/26
+     */
     enum whiteSpaceType
     {
-        SPACE, // \s
-        TAB,// \t
-        LINEFEED,// \n
-        FORMFEED, // \f
-        CARRIAGERETURN, // \r
-        MIX;
+        SPACE,
+        TAB,
+        LINE_FEED,
+        FORM_FEED,
+        CARRIAGE_RETURN,
+        MIX
     }
 
     private final String string;
     private final whiteSpaceType type;
 
-    public IsEqualCompressingWhiteSpace(String string, whiteSpaceType type) {
+    private IsEqualCompressingWhiteSpace(String string, whiteSpaceType type) {
         if (string == null) {
             throw new IllegalArgumentException("Non-null value required");
         }
@@ -51,17 +58,27 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
                 .appendText(" compressing white space");
     }
 
-    public String stripSpaces(String toBeStripped) {
+    /**
+     * strip space on the head and tail of the string;
+     * besides that replace all whitespace specified by this.type with " "
+     * strip redundant space between words
+     * @author Koko
+     * @version 0.0.1
+     * @date 2021/04/26
+     * @Param string to be stripped
+     * @return: string after stripped
+     */
+    private String stripSpaces(String toBeStripped) {
         if (this.type == whiteSpaceType.TAB){
             return toBeStripped.replaceAll("[\\p{Z}\\t]+", " ").trim();
         }
-        else if (this.type == whiteSpaceType.LINEFEED){
+        else if (this.type == whiteSpaceType.LINE_FEED){
             return toBeStripped.replaceAll("[\\p{Z}\\n]+", " ").trim();
         }
-        else if (this.type == whiteSpaceType.FORMFEED){
+        else if (this.type == whiteSpaceType.FORM_FEED){
             return toBeStripped.replaceAll("[\\p{Z}\\f]+", " ").trim();
         }
-        else if (this.type == whiteSpaceType.CARRIAGERETURN){
+        else if (this.type == whiteSpaceType.CARRIAGE_RETURN){
             return toBeStripped.replaceAll("[\\p{Z}\\r]+", " ").trim();
         }
         else if (this.type == whiteSpaceType.SPACE){
@@ -99,27 +116,35 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
         return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.MIX);
     }
 
-    public static Matcher<String> equalToCompressingSPACE(String expectedString) {
+    /**
+     * different types of generate string matcher according to whitespace type
+     * @author Koko
+     * @version 0.0.1
+     * @date 2021/04/26
+     * @Param string to generate matcher
+     * @return: string matcher
+     */
+    public static Matcher<String> equalToCompressingSpace(String expectedString) {
         return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.SPACE);
     }
 
-    public static Matcher<String> equalToCompressingTAB(String expectedString) {
+    public static Matcher<String> equalToCompressingTab(String expectedString) {
         return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.TAB);
     }
 
-    public static Matcher<String> equalToCompressingLINEFEED(String expectedString) {
-        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.LINEFEED);
+    public static Matcher<String> equalToCompressingLineFeed(String expectedString) {
+        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.LINE_FEED);
     }
 
-    public static Matcher<String> equalToCompressingFORMFEED(String expectedString) {
-        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.FORMFEED);
+    public static Matcher<String> equalToCompressingFormFeed(String expectedString) {
+        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.FORM_FEED);
     }
 
-    public static Matcher<String> equalToCompressingCARRIAGERETURN(String expectedString) {
-        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.CARRIAGERETURN);
+    public static Matcher<String> equalToCompressingCarriageReturn(String expectedString) {
+        return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.CARRIAGE_RETURN);
     }
 
-    public static Matcher<String> equalToCompressingMIX(String expectedString) {
+    public static Matcher<String> equalToCompressingMix(String expectedString) {
         return new IsEqualCompressingWhiteSpace(expectedString, whiteSpaceType.MIX);
     }
 
