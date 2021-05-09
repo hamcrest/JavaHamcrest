@@ -11,7 +11,7 @@ import static java.lang.Integer.signum;
 public final class ComparatorMatcherBuilder<T> {
 
     private final Comparator<T> comparator;
-    private final boolean includeComparatorInDescription;
+    private boolean includeComparatorInDescription;
 
     /**
      * Creates a matcher factory for matchers of {@code Comparable}s.
@@ -105,6 +105,16 @@ public final class ComparatorMatcherBuilder<T> {
         private static String asText(int comparison) {
             return comparisonDescriptions[signum(comparison) + 1];
         }
+    }
+
+    /**
+     * Include comparator in description.
+     *
+     * @param flag Include if true, otherwise exclude.
+     */
+    public ComparatorMatcherBuilder<T> includeComparatorInDescription(boolean flag) {
+        this.includeComparatorInDescription = flag;
+        return this;
     }
 
     /**
