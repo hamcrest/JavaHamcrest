@@ -99,6 +99,21 @@ public class ComparatorMatcherBuilderTest extends AbstractMatcherTest {
         assertThat(5, comparedBy(backwardsIntegerComparator).lessThan(4));
     }
 
+    public void testDescriptionWithoutComparatorDescription() {
+        final ComparatorMatcherBuilder<Integer> builder = ComparatorMatcherBuilder
+            .comparedBy(new Comparator<Integer>() {
+                @Override
+                public int compare(Integer fst, Integer snd) {
+                    return Integer.compare(fst, snd);
+                }
+            }).includeComparatorInDescription(false);
+        assertDescription("a value greater than <1>", builder.greaterThan(1));
+        assertDescription("a value equal to or greater than <1>", builder.greaterThanOrEqualTo(1));
+        assertDescription("a value equal to <1>", builder.comparesEqualTo(1));
+        assertDescription("a value less than or equal to <1>", builder.lessThanOrEqualTo(1));
+        assertDescription("a value less than <1>", builder.lessThan(1));
+    }
+
     public void testJavadocExamples() {
         assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().comparesEqualTo(1));
         assertThat(2, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().greaterThan(1));
