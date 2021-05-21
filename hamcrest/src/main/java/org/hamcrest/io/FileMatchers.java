@@ -5,12 +5,54 @@ import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public final class FileMatchers {
+
+    /**
+     * Matcher for matching file content with given file
+     * @param expected The file has expected content
+     * @return A FeatureMatcher that takes the content of a file as feature
+     */
+    public static Matcher<File> matchesContentOf(File expected) {
+        String expectedContent = "";
+        try {
+             expectedContent = new String(Files.readAllBytes(expected.toPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new FeatureMatcher<File, String>(equalTo(expectedContent), "A file with content", "content") {
+            @Override protected String featureValueOf(File actual) {
+                try {
+                    return new String(Files.readAllBytes(actual.toPath()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return "Exception: " + e.getMessage();
+                }
+            }
+        };
+    }
+
+    /**
+     * Matcher for matching file content with given String Matcher
+     * @param expected The expected content Matcher
+     * @return A FeatureMatcher that takes the content of a file as feature
+     */
+    public static Matcher<File> aFileWithContent(Matcher<String> expected) {
+        return new FeatureMatcher<File, String>(expected, "A file with content", "content") {
+            @Override protected String featureValueOf(File actual) {
+                try {
+                    return new String(Files.readAllBytes(actual.toPath()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return "Exception: " + e.getMessage();
+                }
+            }
+        };
+    }
 
     public static Matcher<File> anExistingDirectory() {
         return fileChecker(IS_DIRECTORY, "an existing directory", "is not a directory");
