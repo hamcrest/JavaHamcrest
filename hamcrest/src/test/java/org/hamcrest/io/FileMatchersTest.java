@@ -3,7 +3,9 @@ package org.hamcrest.io;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -13,6 +15,7 @@ public class FileMatchersTest extends AbstractMatcherTest {
 
     private File directory;
     private File file;
+    private File anotherFile;
 
     @Override
     protected void setUp() throws IOException {
@@ -22,6 +25,13 @@ public class FileMatchersTest extends AbstractMatcherTest {
         
         file = new File(directory, "myFile");
         file.createNewFile();
+
+        anotherFile = new File(directory, "myAnotherFile");
+        anotherFile.createNewFile();
+
+        BufferedWriter anotherFileWriter = new BufferedWriter(new FileWriter(anotherFile));
+        anotherFileWriter.write(("world"));
+        anotherFileWriter.close();
     }
     
     public void testAnExistingDirectory() {
@@ -88,4 +98,21 @@ public class FileMatchersTest extends AbstractMatcherTest {
         return FileMatchers.aFileWithSize(1L);
     }
 
+    public void testFileContentMatcher() {
+        assertMatches("matches file content with a file", FileMatchers.matchesContentOf(file), file);
+        assertDoesNotMatch("content of two files with different content won't match", FileMatchers.matchesContentOf(anotherFile), file);
+    }
+
+    public void testFileContentMatcherDescription() {
+        assertMismatchDescription("content was \"\"", FileMatchers.matchesContentOf(anotherFile), file);
+    }
+
+    public void testAFileWithContent() {
+        assertMatches("matches file content", FileMatchers.aFileWithContent(equalTo("")), file);
+        assertDoesNotMatch("doesn't match incorrect content", FileMatchers.aFileWithContent(equalTo("world")), file);
+    }
+
+    public void testAFileWithContentDescription() {
+        assertMismatchDescription("content was \"\"", FileMatchers.aFileWithContent(equalTo("world")), file);
+    }
 }
