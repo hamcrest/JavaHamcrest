@@ -7,7 +7,11 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.hamcrest.core.IsEqual;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
