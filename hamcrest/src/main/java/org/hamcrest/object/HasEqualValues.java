@@ -7,10 +7,10 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.hamcrest.core.IsEqual;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 
 public class HasEqualValues<T> extends TypeSafeDiagnosingMatcher<T> {
 
@@ -18,9 +18,13 @@ public class HasEqualValues<T> extends TypeSafeDiagnosingMatcher<T> {
     private final List<FieldMatcher> fieldMatchers;
 
     public HasEqualValues(T expectedObject) {
+        this(expectedObject, Collections.<String>emptySet());
+    }
+
+    public HasEqualValues(T expectedObject, Set<String> ignored) {
         super(expectedObject.getClass());
         this.expectedObject = expectedObject;
-        this.fieldMatchers = fieldMatchers(expectedObject);
+        this.fieldMatchers = fieldMatchers(expectedObject, ignored);
     }
 
     @Override
@@ -67,10 +71,12 @@ public class HasEqualValues<T> extends TypeSafeDiagnosingMatcher<T> {
         }
     }
 
-    private static List<FieldMatcher> fieldMatchers(Object expectedObject) {
+    private static List<FieldMatcher> fieldMatchers(Object expectedObject, Set<String> ignored) {
         final List<FieldMatcher> result = new ArrayList<>();
         for (Field field : expectedObject.getClass().getFields()) {
-            result.add(new FieldMatcher(field, expectedObject));
+            if (!ignored.contains(field.getName())) {
+                result.add(new FieldMatcher(field, expectedObject));
+            }
         }
         return result;
     }
@@ -83,4 +89,21 @@ public class HasEqualValues<T> extends TypeSafeDiagnosingMatcher<T> {
         }
     }
 
+    /**
+     * Creates a matcher that matches when the examined object has values for all of
+     * its fields that are equal to the corresponding values of the
+     * specified object. If any fields are marked as ignored, they will be dropped from
+     * both the expected and actual object.
+     * For example:
+     * <pre>assertThat(myObject, hasEqualValues(myExpectedObject))</pre>
+     * <pre>assertThat(myObject, hasEqualValues(myExpectedObject), "age", "height")</pre>
+     *
+     * @param expectedObject
+     *     the object against which examined objects are compared
+     * @param ignoredFields
+     *     do not check any of these named fields.
+     */
+    public static <B> Matcher<B> hasEqualValues(B expectedObject, String... ignoredFields) {
+        return new HasEqualValues<>(expectedObject, new HashSet<>(asList(ignoredFields)));
+    }
 }

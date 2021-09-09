@@ -2109,6 +2109,24 @@ public class Matchers {
   }
 
   /**
+   * Creates a matcher that matches when the examined object has values for all of
+   * its fields that are equal to the corresponding values of the
+   * specified object. If any fields are marked as ignored, they will be dropped from
+   * both the expected and actual object.
+   * For example:
+   * <pre>assertThat(myObject, hasEqualValues(myExpectedObject))</pre>
+   * <pre>assertThat(myObject, hasEqualValues(myExpectedObject), "age", "height")</pre>
+   *
+   * @param expectedObject
+   *     the object against which examined objects are compared
+   * @param ignoredFields
+   *     do not check any of these named fields.
+   */
+  public static <B> Matcher<B> hasEqualValues(B expectedObject, String... ignoredFields) {
+    return org.hamcrest.object.HasEqualValues.hasEqualValues(expectedObject, ignoredFields);
+  }
+
+  /**
    * Creates a matcher of {@link org.w3c.dom.Node}s that matches when the examined node has a value at the
    * specified <code>xPath</code> that satisfies the specified <code>valueMatcher</code>.
    * For example:
