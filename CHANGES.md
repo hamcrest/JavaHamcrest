@@ -4,7 +4,7 @@
 
 ### Improvements
 
-• Java 1.8 or newer
+* Java 1.8 or newer ([Issue #331](https://github.com/hamcrest/JavaHamcrest/issues/331)).
 
 TBD
 
