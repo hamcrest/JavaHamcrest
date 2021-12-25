@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'org.hamcrest'
+version '2.3-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation project(':hamcrest')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.8.2'
+}
+
+test {
+    useJUnitPlatform()
+}

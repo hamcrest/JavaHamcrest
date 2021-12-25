@@ -129,6 +129,39 @@ publishing {
                     'Hamcrest Library',
                     'A library of Hamcrest matchers - deprecated, please use "hamcrest" instead')
         }
+
+        def hamcrestJUnit5TestsProject = project(':hamcrest-junit5-tests')
+        hamcrestJUnit5Tests(MavenPublication) {
+            from hamcrestJUnit5TestsProject.components.java
+            artifactId hamcrestJUnit5TestsProject.name
+            artifact hamcrestJUnit5TestsProject.sourcesJar
+            artifact hamcrestJUnit5TestsProject.javadocJar
+            pom pomConfigurationFor(
+                    'Hamcrest JUnit 5 Tests',
+                    'A test suite for Hamcrest assumptions using JUnit 5')
+        }
+
+        def hamcrestJUnit4TestsProject = project(':hamcrest-junit4-tests')
+        hamcrestJUnit4Tests(MavenPublication) {
+            from hamcrestJUnit4TestsProject.components.java
+            artifactId hamcrestJUnit4TestsProject.name
+            artifact hamcrestJUnit4TestsProject.sourcesJar
+            artifact hamcrestJUnit4TestsProject.javadocJar
+            pom pomConfigurationFor(
+                    'Hamcrest JUnit4 Tests',
+                    'A test suite for Hamcrest assumptions using JUnit 4')
+        }
+
+        def hamcrestJUnit4JUnit5TestsProject = project(':hamcrest-junit4-junit5-tests')
+        hamcrestJUnit4JUnit5Tests(MavenPublication) {
+            from hamcrestJUnit4JUnit5TestsProject.components.java
+            artifactId hamcrestJUnit4JUnit5TestsProject.name
+            artifact hamcrestJUnit4JUnit5TestsProject.sourcesJar
+            artifact hamcrestJUnit4JUnit5TestsProject.javadocJar
+            pom pomConfigurationFor(
+                    'Hamcrest Hybrid JUnit 4/JUnit 5 Tests',
+                    'A test suite for Hamcrest assumptions using hybrid JUnit 4/JUnit 5')
+        }
     }
     repositories {
         if (publishToOssrh) {
@@ -150,4 +183,7 @@ signing {
     sign publishing.publications.hamcrest
     sign publishing.publications.hamcrestCore
     sign publishing.publications.hamcrestLibrary
+    sign publishing.publications.hamcrestJUnit5Tests
+    sign publishing.publications.hamcrestJUnit4Tests
+    sign publishing.publications.hamcrestJUnit4JUnit5Tests
 }

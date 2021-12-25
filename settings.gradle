@@ -1,6 +1,9 @@
 enableFeaturePreview('STABLE_PUBLISHING')
 
 include 'hamcrest',
+        'hamcrest-junit5-tests',
+        'hamcrest-junit4-tests',
+        'hamcrest-junit4-junit5-tests',
         'hamcrest-core',
         'hamcrest-library',
         'hamcrest-integration'
