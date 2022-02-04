@@ -30,3 +30,4 @@ Here are some projects that provide additional features and matchers
 * [Shazamcrest](https://github.com/shazam/shazamcrest) (Matchers for beans with custom field matching and nice failure messages)
 * [Spotify's hamcrest matchers](https://github.com/spotify/java-hamcrest) (Matchers for POJOs, JSON, and some of the types introduced in Java 8)
 * [valid4j](https://github.com/valid4j/valid4j) (assertion and validation library, i.e supporting design-by-contract style and/or recoverable input validation)
+* [matchers-json](https://github.com/g4s8/matchers-json) (Matchers for `javax.json` objects, arrays and values, and raw JSON string adapters)
