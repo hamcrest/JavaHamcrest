@@ -52,4 +52,5 @@ public final class HasToStringTest {
         String expectedMismatchString = "toString() was \"Cheese\"";
         assertMismatchDescription(expectedMismatchString, matcher, "Cheese");
     }
+
 }

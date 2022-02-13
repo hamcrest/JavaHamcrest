@@ -53,4 +53,5 @@ public class HasEqualsValuesTest extends AbstractMatcherTest {
             this.c = c;
         }
     }
+
 }
