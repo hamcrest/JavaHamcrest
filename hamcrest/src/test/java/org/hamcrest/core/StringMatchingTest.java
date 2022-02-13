@@ -12,6 +12,7 @@ import static org.hamcrest.core.StringStartsWith.startsWith;
  * @author Steve Freeman 2016 http://www.hamcrest.com
  */
 public class StringMatchingTest {
+
   @Rule public final ExpectedException thrown = ExpectedException.none();
 
   @Test public void

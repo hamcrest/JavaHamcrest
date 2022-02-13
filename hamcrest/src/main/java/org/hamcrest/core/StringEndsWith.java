@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that ends with a specific substring.
  */
 public class StringEndsWith extends SubstringMatcher {
+
     public StringEndsWith(String substring) { this(false, substring); }
 
     public StringEndsWith(boolean ignoringCase, String substring) { super("ending with", ignoringCase, substring); }

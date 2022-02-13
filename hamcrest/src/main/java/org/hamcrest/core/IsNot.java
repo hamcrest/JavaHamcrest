@@ -10,6 +10,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * Calculates the logical negation of a matcher.
  */
 public class IsNot<T> extends BaseMatcher<T>  {
+
     private final Matcher<T> matcher;
 
     public IsNot(Matcher<T> matcher) {

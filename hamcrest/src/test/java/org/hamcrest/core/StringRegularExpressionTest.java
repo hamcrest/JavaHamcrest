@@ -9,6 +9,7 @@ import static org.hamcrest.core.StringRegularExpression.matchesRegex;
  * @author Steve Freeman 2016 http://www.hamcrest.com
  */
 public class StringRegularExpressionTest extends AbstractMatcherTest {
+
   public final Matcher<String> matcher = matchesRegex("^[0-9]+$");
 
   @Override

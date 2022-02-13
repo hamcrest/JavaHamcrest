@@ -12,6 +12,7 @@ import static java.lang.Integer.parseInt;
  * Provides a custom description to another matcher.
  */
 public class DescribedAs<T> extends BaseMatcher<T> {
+
     private final String descriptionTemplate;
     private final Matcher<T> matcher;
     private final Object[] values;

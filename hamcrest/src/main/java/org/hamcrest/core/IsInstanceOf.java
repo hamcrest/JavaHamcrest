@@ -9,6 +9,7 @@ import org.hamcrest.Matcher;
  * Classes of basic types will be converted to the relevant "Object" classes
  */
 public class IsInstanceOf extends DiagnosingMatcher<Object> {
+
     private final Class<?> expectedClass;
     private final Class<?> matchableClass;
 

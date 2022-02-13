@@ -5,6 +5,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
+
     private final Matcher<? super T> matcher;
 
     public Every(Matcher<? super T> matcher) {

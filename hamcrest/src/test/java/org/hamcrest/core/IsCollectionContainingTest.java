@@ -16,6 +16,7 @@ import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsCollectionContainingTest extends AbstractMatcherTest {
+
     @Override
     protected Matcher<?> createMatcher() {
         return hasItem(equalTo("irrelevant"));
