@@ -52,4 +52,5 @@ public class PropertyUtil {
     }
 
     public static final Object[] NO_ARGUMENTS = new Object[0];
+
 }
