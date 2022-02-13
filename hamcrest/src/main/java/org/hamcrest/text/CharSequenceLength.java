@@ -54,6 +54,5 @@ public class CharSequenceLength extends FeatureMatcher<CharSequence, Integer> {
      public static Matcher<CharSequence> hasLength(Matcher<? super Integer> lengthMatcher) {
          return new CharSequenceLength(lengthMatcher);
      }
+
 }
-
-

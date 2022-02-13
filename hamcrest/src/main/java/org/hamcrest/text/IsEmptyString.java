@@ -77,4 +77,5 @@ public final class IsEmptyString extends TypeSafeMatcher<String> {
     public static Matcher<String> emptyOrNullString() {
         return NULL_OR_EMPTY_INSTANCE;
     }
+
 }

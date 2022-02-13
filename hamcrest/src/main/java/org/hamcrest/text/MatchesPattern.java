@@ -46,4 +46,5 @@ public class MatchesPattern extends TypeSafeMatcher<String> {
     public static Matcher<String> matchesPattern(String regex) {
         return new MatchesPattern(Pattern.compile(regex));
     }
+
 }

@@ -30,4 +30,5 @@ public class StringContainsInOrderTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("a string containing \"a\", \"b\", \"c\", \"c\" in order", matcher);
     }
+
 }
