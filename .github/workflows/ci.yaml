@@ -19,6 +19,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
+          distribution: 'temurin'
           java-version: ${{ matrix.java }}
       - name: Build with Gradle
         run: ./gradlew clean build javadoc
