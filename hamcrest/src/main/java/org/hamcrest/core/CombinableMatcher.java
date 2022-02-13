@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @param <T> the type of matcher being combined.
  */
 public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
+
   private final Matcher<? super T> matcher;
 
   public CombinableMatcher(Matcher<? super T> matcher) {

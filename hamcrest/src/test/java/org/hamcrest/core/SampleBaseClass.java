@@ -1,6 +1,7 @@
 package org.hamcrest.core;
 
 public class SampleBaseClass {
+
     String value;
 
     public SampleBaseClass(String value) {

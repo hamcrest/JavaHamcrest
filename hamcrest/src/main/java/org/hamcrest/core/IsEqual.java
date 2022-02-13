@@ -11,6 +11,7 @@ import java.lang.reflect.Array;
  * {@link java.lang.Object#equals} invokedMethod?
  */
 public class IsEqual<T> extends BaseMatcher<T> {
+
     private final Object expectedValue;
 
     public IsEqual(T equalArg) {

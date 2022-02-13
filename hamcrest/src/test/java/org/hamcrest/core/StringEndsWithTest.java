@@ -7,6 +7,7 @@ import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.hamcrest.core.StringEndsWith.endsWithIgnoringCase;
 
 public class StringEndsWithTest extends AbstractMatcherTest {
+
     static final String EXCERPT = "EXCERPT";
     final Matcher<String> stringEndsWith = endsWith(EXCERPT);
 

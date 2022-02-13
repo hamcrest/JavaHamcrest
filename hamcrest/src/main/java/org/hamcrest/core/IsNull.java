@@ -10,6 +10,7 @@ import static org.hamcrest.core.IsNot.not;
  * Is the value null?
  */
 public class IsNull<T> extends BaseMatcher<T> {
+
     @Override
     public boolean matches(Object o) {
         return o == null;

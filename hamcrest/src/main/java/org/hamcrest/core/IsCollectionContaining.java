@@ -9,6 +9,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  */
 @Deprecated
 public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
+
     private final IsIterableContaining<T> delegate;
 
     public IsCollectionContaining(Matcher<? super T> elementMatcher) {

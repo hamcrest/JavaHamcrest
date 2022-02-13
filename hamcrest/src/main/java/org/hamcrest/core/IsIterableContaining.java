@@ -11,6 +11,7 @@ import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
+
     private final Matcher<? super T> elementMatcher;
 
     public IsIterableContaining(Matcher<? super T> elementMatcher) {

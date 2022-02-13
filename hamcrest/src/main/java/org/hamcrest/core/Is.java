@@ -14,6 +14,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  *          vs.  assertThat(cheese, is(equalTo(smelly)))
  */
 public class Is<T> extends BaseMatcher<T> {
+
     private final Matcher<T> matcher;
 
     public Is(Matcher<T> matcher) {

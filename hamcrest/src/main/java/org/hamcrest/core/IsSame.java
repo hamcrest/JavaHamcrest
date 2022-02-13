@@ -8,6 +8,7 @@ import org.hamcrest.Matcher;
  * Is the value the same object as another value?
  */
 public class IsSame<T> extends BaseMatcher<T> {
+
     private final T object;
 
     public IsSame(T object) {

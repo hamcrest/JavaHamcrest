@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
  * Tests if the argument is a string that contains a specific substring.
  */
 public class StringContains extends SubstringMatcher {
+
     public StringContains(String substring) { this(false, substring); }
 
     public StringContains(boolean ignoringCase, String substring) {
