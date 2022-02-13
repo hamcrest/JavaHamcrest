@@ -6,6 +6,7 @@ import org.hamcrest.Matcher;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class HasToString<T> extends FeatureMatcher<T, String> {
+
     public HasToString(Matcher<? super String> toStringMatcher) {
       super(toStringMatcher, "with toString()", "toString()");
     }
