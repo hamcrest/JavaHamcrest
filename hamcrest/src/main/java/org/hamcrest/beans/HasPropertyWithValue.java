@@ -155,6 +155,8 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      * For example:
      * <pre>assertThat(myBean, hasProperty("foo", equalTo("bar"))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param propertyName
      *     the name of the JavaBean property that examined beans should possess
      * @param valueMatcher
@@ -173,6 +175,8 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      * For example:
      * <pre>assertThat(myBean, hasProperty("foo.bar.baz", equalTo("a property value"))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param path
      *     the dot-separated path from the examined object to the JavaBean property
      * @param valueMatcher
