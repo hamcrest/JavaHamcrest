@@ -9,9 +9,8 @@ jdk:
   - openjdk7
   - oraclejdk8
   - openjdk8
-  - oraclejdk9
   - openjdk11
-  - openjdk14
+  - openjdk17
 
 # Workaround to using openjdk7 with Gradle due to security issue:
 # https://github.com/gradle/gradle/issues/2421
