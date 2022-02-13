@@ -6,17 +6,20 @@ on: [push]
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
+env:
+  DEFAULT_OS: ubuntu-18.04
+  DEFAULT_JDK: 7
 
 jobs:
   build:
     name: Build Default Java/OS
-    runs-on: ubuntu-18.04
+    runs-on: '$DEFAULT_OS'
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 7
+          java-version: '$DEFAULT_JDK'
       - name: Gradle Clean Build
         run: ./gradlew clean build
 
@@ -26,11 +29,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04, ubuntu-20.04]
-        java: [7, 8, 11, 17, 18-ea, 19-ea]
+        os: ['$DEFAULT_OS', ubuntu-20.04]
+        java: ['$DEFAULT_JDK', 8, 11, 17, 18-ea, 19-ea]
         exclude:
-          - os: ubuntu-18.04
-            java: 7
+          - os: '$DEFAULT_OS'
+            java: '$DEFAULT_JDK'
       fail-fast: false
       max-parallel: 4
 
@@ -45,13 +48,13 @@ jobs:
   qa:
     name: QA Steps
     needs: test
-    runs-on: ubuntu-18.04
+    runs-on: '$DEFAULT_OS'
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 7
+          java-version: '$DEFAULT_JDK'
       - name: Gradle JavaDoc
         run: ./gradlew javadoc
 
