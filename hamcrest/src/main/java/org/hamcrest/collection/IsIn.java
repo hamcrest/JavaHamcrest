@@ -133,4 +133,5 @@ public class IsIn<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> oneOf(T... elements) {
         return in(elements);
     }
+
 }

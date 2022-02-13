@@ -46,4 +46,5 @@ public class IsMapContainingTest extends AbstractMatcherTest {
     public void testHasReadableDescription() {
         assertDescription("map containing [\"a\"-><2>]", hasEntry(equalTo("a"), (equalTo(2))));
     }
+
 }

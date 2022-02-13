@@ -51,4 +51,5 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
     public static <E> Matcher<Iterable<E>> emptyIterableOf(Class<E> unusedToForceReturnType) {
       return (Matcher)emptyIterable();
     }
+
 }

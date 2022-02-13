@@ -41,4 +41,5 @@ public class IsEmptyIterableTest extends AbstractMatcherTest {
     private static Collection<Integer> emptyCollection() {
         return new ArrayList<Integer>();
     }
+
 }

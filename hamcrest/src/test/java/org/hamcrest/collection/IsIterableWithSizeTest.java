@@ -34,4 +34,5 @@ public class IsIterableWithSizeTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("an iterable with size <4>", iterableWithSize(4));
     }
+
 }

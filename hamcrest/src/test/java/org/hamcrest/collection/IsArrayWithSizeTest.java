@@ -33,4 +33,5 @@ public class IsArrayWithSizeTest extends AbstractMatcherTest {
         assertDescription("an array with size <3>", arrayWithSize(equalTo(3)));
         assertDescription("an empty array", emptyArray());
     }
+
 }

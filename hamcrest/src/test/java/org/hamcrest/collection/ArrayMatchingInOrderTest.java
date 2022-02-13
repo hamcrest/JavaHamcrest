@@ -42,4 +42,5 @@ public class ArrayMatchingInOrderTest extends AbstractMatcherTest {
     public void testCanHandleNullValuesInAnArray() {
       assertMatches("with nulls", arrayContaining(null, null), new Object[]{null, null});
     }
+
 }

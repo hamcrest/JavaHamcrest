@@ -98,4 +98,5 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
         return new IsArrayContainingInOrder<E>(itemMatchers);
     }
+
 }

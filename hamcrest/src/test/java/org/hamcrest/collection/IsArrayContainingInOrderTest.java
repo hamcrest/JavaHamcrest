@@ -38,4 +38,5 @@ public class IsArrayContainingInOrderTest extends AbstractMatcherTest {
       assertMismatchDescription("item 0: was <4>", matcher, new Integer[] {4,3,2,1});
       assertMismatchDescription("item 2: was <4>", matcher, new Integer[] {1,2, 4});
     }
+
 }

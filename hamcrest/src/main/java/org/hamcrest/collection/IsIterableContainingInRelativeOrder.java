@@ -125,4 +125,5 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
     public static <E> Matcher<Iterable<? extends E>> containsInRelativeOrder(List<Matcher<? super E>> itemMatchers) {
         return new IsIterableContainingInRelativeOrder<>(itemMatchers);
     }
+
 }

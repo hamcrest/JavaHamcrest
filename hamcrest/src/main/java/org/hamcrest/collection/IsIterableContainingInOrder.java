@@ -159,4 +159,5 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     public static <E> Matcher<Iterable<? extends E>> contains(List<Matcher<? super E>> itemMatchers) {
         return new IsIterableContainingInOrder<>(itemMatchers);
     }
+
 }

@@ -43,4 +43,5 @@ public class IsMapContainingValueTest extends AbstractMatcherTest {
         assertMatches("hasValue 3", hasValue(3), map);      
         assertMismatchDescription("map was [<a=1>, <b=2>, <c=3>]", hasValue(4), map);      
     }
+
 }

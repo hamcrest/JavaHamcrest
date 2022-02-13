@@ -115,4 +115,5 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
       }
       return new IsArrayContainingInAnyOrder<E>(matchers);
     }
+
 }
