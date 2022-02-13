@@ -54,6 +54,7 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
    *     the expected value of matching BigDecimals
    * @param error
    *     the delta (+/-) within which matches will be allowed
+   * @return The matcher.
    */
   public static Matcher<BigDecimal> closeTo(BigDecimal operand, BigDecimal error) {
       return new BigDecimalCloseTo(operand, error);
