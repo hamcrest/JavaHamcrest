@@ -48,4 +48,5 @@ public class IsAnything<T> extends BaseMatcher<T> {
     public static Matcher<Object> anything(String description) {
         return new IsAnything<>(description);
     }
+
 }

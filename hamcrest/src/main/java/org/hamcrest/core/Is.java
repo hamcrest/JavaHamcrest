@@ -86,4 +86,5 @@ public class Is<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> isA(Class<?> type) {
         return is(IsInstanceOf.<T>instanceOf(type));
     }
+
 }

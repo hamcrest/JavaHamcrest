@@ -30,4 +30,5 @@ abstract class ShortcutCombination<T> extends BaseMatcher<T> {
     public void describeTo(Description description, String operator) {
         description.appendList("(", " " + operator + " ", ")", matchers);
     }
+
 }

@@ -67,4 +67,5 @@ public final class AllOfTest {
     varargs(){
         assertThat("the text!", new AllOf<>(startsWith("the"), containsString("text"), endsWith("!")));
     }
+
 }

@@ -41,5 +41,4 @@ public class StringContainsTest extends AbstractMatcherTest {
         assertDescription("a string containing \"ExCert\" ignoring case", ignoringCase);
     }
 
-
 }

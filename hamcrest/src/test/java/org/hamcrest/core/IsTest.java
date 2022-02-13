@@ -48,4 +48,5 @@ public final class IsTest {
         assertDoesNotMatch(matcher, new Object());
         assertDoesNotMatch(matcher, null);
     }
+
 }

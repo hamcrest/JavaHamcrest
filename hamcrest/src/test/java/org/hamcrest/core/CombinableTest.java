@@ -65,4 +65,5 @@ public final class CombinableTest {
         @SuppressWarnings("unused")
         Matcher<String> matcher = CombinableMatcher.both(equalTo("yellow")).and(notNullValue(String.class));
     }
+
 }

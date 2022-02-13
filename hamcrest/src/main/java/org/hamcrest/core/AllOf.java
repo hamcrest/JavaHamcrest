@@ -70,4 +70,5 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
     public static <T> Matcher<T> allOf(Matcher<? super T>... matchers) {
         return allOf(Arrays.asList(matchers));
     }
+
 }

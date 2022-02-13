@@ -40,4 +40,5 @@ public final class IsNullTest {
     private void requiresStringMatcher(@SuppressWarnings("unused") Matcher<String> arg) {
         // no-op
     }
+
 }

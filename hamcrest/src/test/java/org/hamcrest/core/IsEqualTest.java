@@ -153,5 +153,5 @@ public final class IsEqualTest {
     returnsGoodDescriptionIfCreatedWithNullReference() {
         assertDescription("null", equalTo(null));
     }
-}
 
+}

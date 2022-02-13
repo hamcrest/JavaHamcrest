@@ -65,5 +65,5 @@ public final class IsInstanceOfTest {
     private static <T> T with(@SuppressWarnings("unused") Matcher<T> matcher) {
         return null;
     }
-}
 
+}

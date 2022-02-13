@@ -40,5 +40,5 @@ public final class EveryTest {
     describesAMismatch() {
         assertMismatchDescription("an item was \"BXB\"", matcher, singletonList("BXB"));
     }
-}
 
+}

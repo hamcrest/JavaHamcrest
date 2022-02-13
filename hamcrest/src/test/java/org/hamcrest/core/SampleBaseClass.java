@@ -21,4 +21,5 @@ public class SampleBaseClass {
     public int hashCode() {
       return value.hashCode();
     }
+
 }

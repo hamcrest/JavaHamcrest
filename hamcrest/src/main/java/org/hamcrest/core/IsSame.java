@@ -54,4 +54,5 @@ public class IsSame<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> theInstance(T target) {
         return new IsSame<T>(target);
     }
+
 }

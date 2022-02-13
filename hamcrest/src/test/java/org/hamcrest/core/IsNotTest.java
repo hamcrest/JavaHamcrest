@@ -39,4 +39,5 @@ public final class IsNotTest {
         assertDescription("not an instance of java.lang.String", not(instanceOf(String.class)));
         assertDescription("not \"A\"", not("A"));
     }
+
 }

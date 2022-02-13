@@ -77,5 +77,5 @@ public class IsNull<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> notNullValue(Class<T> type) {
         return not(nullValue(type));
     }
-}
 
+}
