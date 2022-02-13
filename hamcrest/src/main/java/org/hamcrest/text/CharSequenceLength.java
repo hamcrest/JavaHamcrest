@@ -33,6 +33,7 @@ public class CharSequenceLength extends FeatureMatcher<CharSequence, Integer> {
      * </pre>
      *
      * @param length the expected length of the string
+     * @return The matcher.
      */
     public static Matcher<CharSequence> hasLength(int length) {
         return new CharSequenceLength(equalTo(length));
@@ -47,6 +48,7 @@ public class CharSequenceLength extends FeatureMatcher<CharSequence, Integer> {
       * </pre>
       *
       * @param lengthMatcher the expected length of the string
+      * @return The matcher.
       */
      @SuppressWarnings("WeakerAccess")
      public static Matcher<CharSequence> hasLength(Matcher<? super Integer> lengthMatcher) {
