@@ -93,6 +93,8 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
      * For example:
      * <pre>assertThat(new Integer[]{1,2,3}, is(array(equalTo(1), equalTo(2), equalTo(3))))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param elementMatchers
      *     the matchers that the elements of examined arrays should satisfy
      * @return The matcher.

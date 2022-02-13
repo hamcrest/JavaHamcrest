@@ -47,7 +47,8 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * <pre>assertThat(new String[]{"foo", "bar"}, contains("foo", "bar"))</pre>
      *
      * @deprecated As of version 2.1, use {@link ArrayMatching#arrayContaining(Object[])}.
-     *
+     * @param <E>
+     *     the matcher type.
      * @param items
      *     the items that must equal the items within an examined array
      * @return The matcher.
@@ -69,7 +70,8 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * <pre>assertThat(new String[]{"foo", "bar"}, contains(equalTo("foo"), equalTo("bar")))</pre>
      *
      * @deprecated As of version 2.1, use {@link ArrayMatching#arrayContaining(Matcher[])}.
-     *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatchers
      *     the matchers that must be satisfied by the items in the examined array
      * @return The matcher.
@@ -87,7 +89,8 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      * <pre>assertThat(new String[]{"foo", "bar"}, contains(Arrays.asList(equalTo("foo"), equalTo("bar"))))</pre>
      *
      * @deprecated As of version 2.1, use {@link ArrayMatching#arrayContaining(List)}.
-     *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by the corresponding item in an examined array
      * @return The matcher.

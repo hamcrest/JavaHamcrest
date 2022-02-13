@@ -93,6 +93,8 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * </p>
      * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder(equalTo("bar"), equalTo("foo")))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
      * @return The matcher.
@@ -119,6 +121,8 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * </p>
      * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder("bar", "foo"))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param items
      *     the items that must equal the items provided by an examined {@link Iterable} in any order
      * @return The matcher.
@@ -148,6 +152,8 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
      * <p>For example:</p>
      * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder(Arrays.asList(equalTo("bar"), equalTo("foo"))))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
      * @return The matcher.
