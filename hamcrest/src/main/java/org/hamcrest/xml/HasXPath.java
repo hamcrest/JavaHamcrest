@@ -22,6 +22,7 @@ import static org.hamcrest.Condition.notMatched;
  * @author Steve Freeman
  */
 public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
+
     public static final NamespaceContext NO_NAMESPACE_CONTEXT = null;
     private static final IsAnything<String> WITH_ANY_CONTENT = new IsAnything<String>("");
     private static final Condition.Step<Object,String> NODE_EXISTS = nodeExists();
