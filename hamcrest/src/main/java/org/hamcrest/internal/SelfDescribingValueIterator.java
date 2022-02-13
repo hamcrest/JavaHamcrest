@@ -6,11 +6,11 @@ import java.util.Iterator;
 
 public class SelfDescribingValueIterator<T> implements Iterator<SelfDescribing> {
     private Iterator<T> values;
-    
+
     public SelfDescribingValueIterator(Iterator<T> values) {
         this.values = values;
     }
-    
+
     @Override
     public boolean hasNext() {
         return values.hasNext();
