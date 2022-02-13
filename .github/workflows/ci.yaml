@@ -16,6 +16,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
+          distribution: 'temurin'
           java-version: 8
       - name: Gradle Clean Build
         run: ./gradlew clean build
@@ -39,6 +40,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
+          distribution: 'temurin'
           java-version: ${{ matrix.java }}
       - name: Gradle Clean Build
         run: ./gradlew clean build
@@ -51,6 +53,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
+          distribution: 'temurin'
           java-version: 8
       - name: Gradle JavaDoc
         run: ./gradlew javadoc
