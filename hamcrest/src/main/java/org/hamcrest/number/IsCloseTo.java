@@ -4,60 +4,54 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-import static java.lang.Math.abs;
-
-
 /**
- * Is the value a number equal to a value within some range of
- * acceptable error?
+ * Is the value a number equal to a value within some range of acceptable error?
  */
-public class IsCloseTo extends TypeSafeMatcher<Double> {
-    private final double delta;
-    private final double value;
+public class IsCloseTo extends TypeSafeMatcher<Number> {
+    private final double error;
+    private final double expected;
 
-    public IsCloseTo(double value, double error) {
-        this.delta = error;
-        this.value = value;
+    public IsCloseTo(double expected, double error) {
+        this.error = Math.abs(error);
+        this.expected = expected;
     }
 
     @Override
-    public boolean matchesSafely(Double item) {
-        return actualDelta(item) <= 0.0;
+    public boolean matchesSafely(Number actual) {
+        return calcError(actual) <= error;
     }
 
     @Override
-    public void describeMismatchSafely(Double item, Description mismatchDescription) {
+    public void describeMismatchSafely(Number item, Description mismatchDescription) {
       mismatchDescription.appendValue(item)
                          .appendText(" differed by ")
-                         .appendValue(actualDelta(item))
-                         .appendText(" more than delta ")
-                         .appendValue(delta);
+                         .appendValue(calcError(item));
     }
 
     @Override
     public void describeTo(Description description) {
         description.appendText("a numeric value within ")
-                .appendValue(delta)
+                .appendValue(error)
                 .appendText(" of ")
-                .appendValue(value);
+                .appendValue(expected);
     }
 
-    private double actualDelta(Double item) {
-      return abs(item - value) - delta;
+    private double calcError(Number actual) {
+      return Math.abs(expected - actual.doubleValue());
     }
 
     /**
-     * Creates a matcher of {@link Double}s that matches when an examined double is equal
+     * Creates a matcher of {@link Number}s that matches when an examined number is equal
      * to the specified <code>operand</code>, within a range of +/- <code>error</code>.
      * For example:
      * <pre>assertThat(1.03, is(closeTo(1.0, 0.03)))</pre>
      * 
-     * @param operand
-     *     the expected value of matching doubles
+     * @param expected
+     *     the expected value of matching numbers
      * @param error
-     *     the delta (+/-) within which matches will be allowed
+     *     the absolute error (+/-) within which matches will be allowed
      */
-    public static Matcher<Double> closeTo(double operand, double error) {
-        return new IsCloseTo(operand, error);
+    public static Matcher<Number> closeTo(double expected, double error) {
+        return new IsCloseTo(expected, error);
     }
 }
