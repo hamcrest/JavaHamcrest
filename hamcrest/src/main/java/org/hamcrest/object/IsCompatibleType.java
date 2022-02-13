@@ -6,26 +6,26 @@ import org.hamcrest.TypeSafeMatcher;
 
 public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
     private final Class<T> type;
-    
+
     public IsCompatibleType(Class<T> type) {
         this.type = type;
     }
-    
+
     @Override
     public boolean matchesSafely(Class<?> cls) {
         return type.isAssignableFrom(cls);
     }
-    
+
     @Override
     public void describeMismatchSafely(Class<?> cls, Description mismatchDescription) {
       mismatchDescription.appendValue(cls.getName());
     }
-    
+
     @Override
     public void describeTo(Description description) {
         description.appendText("type < ").appendText(type.getName());
     }
-    
+
     /**
      * Creates a matcher of {@link Class} that matches when the specified baseType is
      * assignable from the examined class.

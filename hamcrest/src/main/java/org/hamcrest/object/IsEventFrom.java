@@ -25,7 +25,7 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
           mismatchDescription.appendText("item type was " + item.getClass().getName());
           return false;
         }
-        
+
         if (!eventHasSameSource(item)) {
           mismatchDescription.appendText("source was ").appendValue(item.getSource());
           return false;
@@ -33,7 +33,7 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
         return true;
     }
 
-    
+
     private boolean eventHasSameSource(EventObject ev) {
         return ev.getSource() == source;
     }

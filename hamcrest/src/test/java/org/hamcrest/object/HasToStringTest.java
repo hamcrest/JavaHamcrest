@@ -19,11 +19,11 @@ public final class HasToStringTest {
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<Object> matcher = hasToString(equalTo("irrelevant"));
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }
-    
+
     @Test public void
     matchesWhenUtilisingANestedMatcher() {
         final Matcher<Object> matcher = hasToString(equalTo(TO_STRING_RESULT));
@@ -35,7 +35,7 @@ public final class HasToStringTest {
     @Test public void
     matchesWhenUsingShortcutForHasToStringEqualTo() {
         final Matcher<Object> matcher = hasToString(TO_STRING_RESULT);
-        
+
         assertMatches(matcher, TEST_OBJECT);
         assertDoesNotMatch(matcher, new Object());
     }

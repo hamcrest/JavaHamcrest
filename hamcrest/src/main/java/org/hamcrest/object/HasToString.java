@@ -9,7 +9,7 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
     public HasToString(Matcher<? super String> toStringMatcher) {
       super(toStringMatcher, "with toString()", "toString()");
     }
-    
+
     @Override
     protected String featureValueOf(T actual) {
       return String.valueOf(actual);
