@@ -49,6 +49,7 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
      *
      * @param substrings
      *     the substrings that must be contained within matching strings
+     * @return The matcher.
      */
     public static Matcher<String> stringContainsInOrder(Iterable<String> substrings) {
         return new StringContainsInOrder(substrings);
@@ -63,6 +64,7 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
      *
      * @param substrings
      *     the substrings that must be contained within matching strings
+     * @return The matcher.
      */
     public static Matcher<String> stringContainsInOrder(String... substrings) {
         return new StringContainsInOrder(Arrays.asList(substrings));

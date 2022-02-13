@@ -40,6 +40,7 @@ public class IsIn<T> extends BaseMatcher<T> {
      *
      * @param collection
      *     the collection in which matching items must be found
+     * @return The matcher.
      */
     @Deprecated
     public static <T> Matcher<T> isIn(Collection<T> collection) {
@@ -54,6 +55,7 @@ public class IsIn<T> extends BaseMatcher<T> {
      *
      * @param collection
      *     the collection in which matching items must be found
+     * @return The matcher.
      */
     public static <T> Matcher<T> in(Collection<T> collection) {
         return new IsIn<>(collection);
@@ -69,6 +71,7 @@ public class IsIn<T> extends BaseMatcher<T> {
      *
      * @param elements
      *     the array in which matching items must be found
+     * @return The matcher.
      */
     @Deprecated
     public static <T> Matcher<T> isIn(T[] elements) {
@@ -83,6 +86,7 @@ public class IsIn<T> extends BaseMatcher<T> {
      *
      * @param elements
      *     the array in which matching items must be found
+     * @return The matcher.
      */
     public static <T> Matcher<T> in(T[] elements) {
         return new IsIn<>(elements);
@@ -97,7 +101,8 @@ public class IsIn<T> extends BaseMatcher<T> {
      * @deprecated use is(oneOf(...)) instead
      *
      * @param elements
-     *     the elements amongst which matching items will be found 
+     *     the elements amongst which matching items will be found
+     * @return The matcher.
      */
     @SafeVarargs
     @Deprecated
@@ -112,7 +117,8 @@ public class IsIn<T> extends BaseMatcher<T> {
      * <pre>assertThat("foo", is(oneOf("bar", "foo")))</pre>
      *
      * @param elements
-     *     the elements amongst which matching items will be found 
+     *     the elements amongst which matching items will be found
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> Matcher<T> oneOf(T... elements) {

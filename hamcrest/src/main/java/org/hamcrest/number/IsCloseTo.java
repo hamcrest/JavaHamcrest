@@ -56,6 +56,7 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
      *     the expected value of matching doubles
      * @param error
      *     the delta (+/-) within which matches will be allowed
+     * @return The matcher.
      */
     public static Matcher<Double> closeTo(double operand, double error) {
         return new IsCloseTo(operand, error);

@@ -46,6 +46,7 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
      *
      * @param expectedString
      *     the expected value of matched strings
+     * @return The matcher.
      */
     public static Matcher<String> equalToIgnoringCase(String expectedString) {
         return new IsEqualIgnoringCase(expectedString);

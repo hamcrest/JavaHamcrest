@@ -26,6 +26,7 @@ public class ArrayMatching {
    *
    * @param elementMatcher
    *     the matcher to apply to elements in examined arrays
+   * @return The matcher.
    */
   public static <T> Matcher<T[]> hasItemInArray(Matcher<? super T> elementMatcher) {
       return new HasItemInArray<>(elementMatcher);
@@ -40,6 +41,7 @@ public class ArrayMatching {
    *
    * @param element
    *     the element that should be present in examined arrays
+   * @return The matcher.
    */
   public static <T> Matcher<T[]> hasItemInArray(T element) {
     return hasItemInArray(equalTo(element));
@@ -64,6 +66,7 @@ public class ArrayMatching {
    *
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by an entry in an examined array
+   * @return The matcher.
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(Matcher<? super E>... itemMatchers) {
@@ -89,6 +92,7 @@ public class ArrayMatching {
    *
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by an item provided by an examined array
+   * @return The matcher.
    */
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(Collection<Matcher<? super E>> itemMatchers) {
     return new ArrayAsIterableMatcher<>(new IsIterableContainingInAnyOrder<>(itemMatchers), itemMatchers, "in any order");
@@ -111,6 +115,7 @@ public class ArrayMatching {
    *
    * @param items
    *     the items that must equal the entries of an examined array, in any order
+   * @return The matcher.
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContainingInAnyOrder(E... items) {
@@ -126,6 +131,7 @@ public class ArrayMatching {
    *
    * @param items
    *     the items that must equal the items within an examined array
+   * @return The matcher.
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContaining(E... items) {
@@ -140,6 +146,7 @@ public class ArrayMatching {
    *
    * @param itemMatchers
    *     the matchers that must be satisfied by the items in the examined array
+   * @return The matcher.
    */
   @SafeVarargs
   public static <E> Matcher<E[]> arrayContaining(Matcher<? super E>... itemMatchers) {
@@ -159,6 +166,7 @@ public class ArrayMatching {
    *
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by the corresponding item in an examined array
+   * @return The matcher.
    */
   public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
       return new ArrayAsIterableMatcher<>(new IsIterableContainingInOrder<>(itemMatchers), itemMatchers, "");

@@ -23,6 +23,7 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
      *
      * @param toStringMatcher
      *     the matcher used to verify the toString result
+     * @return The matcher.
      */
     public static <T> Matcher<T> hasToString(Matcher<? super String> toStringMatcher) {
         return new HasToString<T>(toStringMatcher);
@@ -36,6 +37,7 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
      *
      * @param expectedToString
      *     the expected toString result
+     * @return The matcher.
      */
     public static <T> Matcher<T> hasToString(String expectedToString) {
         return new HasToString<T>(equalTo(expectedToString));

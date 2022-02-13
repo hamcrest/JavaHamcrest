@@ -26,6 +26,8 @@ public class MatchesPattern extends TypeSafeMatcher<String> {
     /**
      * Creates a matcher of {@link java.lang.String} that matches when the examined string
      * exactly matches the given {@link java.util.regex.Pattern}.
+     *
+     * @return The matcher.
      */
     public static Matcher<String> matchesPattern(Pattern pattern) {
         return new MatchesPattern(pattern);
@@ -34,6 +36,8 @@ public class MatchesPattern extends TypeSafeMatcher<String> {
     /**
      * Creates a matcher of {@link java.lang.String} that matches when the examined string
      * exactly matches the given regular expression, treated as a {@link java.util.regex.Pattern}.
+     *
+     * @return The matcher.
      */
     public static Matcher<String> matchesPattern(String regex) {
         return new MatchesPattern(Pattern.compile(regex));

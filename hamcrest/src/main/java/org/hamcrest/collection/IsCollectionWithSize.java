@@ -28,6 +28,7 @@ public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends
      *
      * @param sizeMatcher
      *     a matcher for the size of an examined {@link java.util.Collection}
+     * @return The matcher.
      */
     public static <E> Matcher<Collection<? extends E>> hasSize(Matcher<? super Integer> sizeMatcher) {
         return new IsCollectionWithSize<E>(sizeMatcher);
@@ -41,6 +42,7 @@ public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends
      *
      * @param size
      *     the expected size of an examined {@link java.util.Collection}
+     * @return The matcher.
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static <E> Matcher<Collection<? extends E>> hasSize(int size) {

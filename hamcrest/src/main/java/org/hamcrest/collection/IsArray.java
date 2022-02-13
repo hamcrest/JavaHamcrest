@@ -55,6 +55,8 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
      *
      * Can be overridden in subclasses to customise how the matcher is
      * described.
+     *
+     * @return The description prefix.
      */
     protected String descriptionStart() {
         return "[";
@@ -65,6 +67,8 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
      *
      * Can be overridden in subclasses to customise how the matcher is
      * described.
+     *
+     * @return The description separator.
      */
     protected String descriptionSeparator() {
         return ", ";
@@ -75,6 +79,8 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
      *
      * Can be overridden in subclasses to customise how the matcher is
      * described.
+     *
+     * @return The description suffix.
      */
     protected String descriptionEnd() {
         return "]";
@@ -89,6 +95,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
      *
      * @param elementMatchers
      *     the matchers that the elements of examined arrays should satisfy
+     * @return The matcher.
      */
     public static <T> IsArray<T> array(Matcher<? super T>... elementMatchers) {
         return new IsArray<T>(elementMatchers);

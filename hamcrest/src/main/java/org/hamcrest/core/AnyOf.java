@@ -34,6 +34,8 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
+     *
+     * @return The matcher.
      */
     public static <T> AnyOf<T> anyOf(Iterable<Matcher<? super T>> matchers) {
         return new AnyOf<>(matchers);
@@ -43,6 +45,8 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
+     *
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> AnyOf<T> anyOf(Matcher<? super T>... matchers) {

@@ -36,6 +36,7 @@ public class IsNot<T> extends BaseMatcher<T>  {
      *
      * @param matcher
      *     the matcher whose sense should be inverted
+     * @return The matcher.
      */
     public static <T> Matcher<T> not(Matcher<T> matcher) {
         return new IsNot<T>(matcher);
@@ -50,6 +51,7 @@ public class IsNot<T> extends BaseMatcher<T>  {
      *
      * @param value
      *     the value that any examined object should <b>not</b> equal
+     * @return The matcher.
      */
     public static <T> Matcher<T> not(T value) {
         return not(equalTo(value));
