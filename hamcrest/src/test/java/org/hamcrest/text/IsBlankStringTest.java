@@ -12,7 +12,7 @@ public final class IsBlankStringTest {
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<String> matcher = blankString();
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }

@@ -16,7 +16,7 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
     @Override
     public boolean matchesSafely(String s) {
         int fromIndex = 0;
-        
+
         for (String substring : substrings) {
             fromIndex = s.indexOf(substring, fromIndex);
             if (fromIndex == -1) {
@@ -24,22 +24,22 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
             }
             fromIndex++;
         }
-        
+
         return true;
     }
-    
+
     @Override
     public void describeMismatchSafely(String item, Description mismatchDescription) {
         mismatchDescription.appendText("was \"").appendText(item).appendText("\"");
     }
-    
+
     @Override
     public void describeTo(Description description) {
         description.appendText("a string containing ")
                    .appendValueList("", ", ", "", substrings)
                    .appendText(" in order");
     }
-    
+
     /**
      * Creates a matcher of {@link String} that matches when the examined string contains all of
      * the specified substrings, considering the order of their appearance.
