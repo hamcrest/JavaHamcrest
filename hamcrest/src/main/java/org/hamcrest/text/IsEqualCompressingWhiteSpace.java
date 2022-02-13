@@ -29,12 +29,12 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
     public boolean matchesSafely(String item) {
         return stripSpaces(string).equals(stripSpaces(item));
     }
-    
+
     @Override
     public void describeMismatchSafely(String item, Description mismatchDescription) {
       mismatchDescription.appendText("was ").appendValue(item);
     }
-    
+
     @Override
     public void describeTo(Description description) {
         description.appendText("a string equal to ")

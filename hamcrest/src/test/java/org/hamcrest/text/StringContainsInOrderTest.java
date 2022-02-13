@@ -14,7 +14,7 @@ public class StringContainsInOrderTest extends AbstractMatcherTest {
     protected Matcher<?> createMatcher() {
         return matcher;
     }
-    
+
     public void testMatchesOnlyIfStringContainsGivenSubstringsInTheSameOrder() {
         assertMatches("substrings in order", matcher, "abcc");
         assertMatches("substrings separated", matcher, "1a2b3c4c5");
@@ -26,7 +26,7 @@ public class StringContainsInOrderTest extends AbstractMatcherTest {
         assertDoesNotMatch("substring missing", matcher, "ac");
         assertDoesNotMatch("empty string", matcher, "");
     }
-    
+
     public void testHasAReadableDescription() {
         assertDescription("a string containing \"a\", \"b\", \"c\", \"c\" in order", matcher);
     }

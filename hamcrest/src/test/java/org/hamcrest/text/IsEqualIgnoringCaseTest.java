@@ -11,7 +11,7 @@ public final class IsEqualIgnoringCaseTest {
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<String> matcher = equalToIgnoringCase("irrelevant");
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }
@@ -19,25 +19,25 @@ public final class IsEqualIgnoringCaseTest {
     @Test public void
     ignoresCaseOfCharsInString() {
         final Matcher<String> matcher = equalToIgnoringCase("heLLo");
-        
+
         assertMatches(matcher, "HELLO");
         assertMatches(matcher, "hello");
         assertMatches(matcher, "HelLo");
         assertDoesNotMatch(matcher, "bye");
     }
 
-    @Test public void 
+    @Test public void
     mismatchesIfAdditionalWhitespaceIsPresent() {
         final Matcher<String> matcher = equalToIgnoringCase("heLLo");
-        
+
         assertDoesNotMatch(matcher, "hello ");
         assertDoesNotMatch(matcher, " hello");
     }
 
-    @Test public void 
+    @Test public void
     mismatchesNull() {
         final Matcher<String> matcher = equalToIgnoringCase("heLLo");
-        
+
         assertDoesNotMatch(matcher, null);
     }
 
