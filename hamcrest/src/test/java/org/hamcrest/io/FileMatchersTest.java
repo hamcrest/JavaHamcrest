@@ -19,11 +19,11 @@ public class FileMatchersTest extends AbstractMatcherTest {
         directory = File.createTempFile("myDir", "");
         assertTrue("deleting " + directory, directory.delete());
         assertTrue("mkdir " + directory, directory.mkdirs());
-        
+
         file = new File(directory, "myFile");
         file.createNewFile();
     }
-    
+
     public void testAnExistingDirectory() {
         assertMatches("matches existing directory", FileMatchers.anExistingDirectory(), directory);
         assertDoesNotMatch("doesn't match existing file", FileMatchers.anExistingDirectory(), file);
