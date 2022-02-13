@@ -739,7 +739,7 @@ public class Matchers {
    * @param sizeMatcher
    *     a matcher for the length of an examined array
    */
-  public static <E> org.hamcrest.Matcher<E[]> arrayWithSize(org.hamcrest.Matcher<? super java.lang.Integer> sizeMatcher) {
+  public static org.hamcrest.Matcher<Object[]> arrayWithSize(org.hamcrest.Matcher<? super java.lang.Integer> sizeMatcher) {
     return org.hamcrest.collection.IsArrayWithSize.arrayWithSize(sizeMatcher);
   }
 
@@ -752,7 +752,7 @@ public class Matchers {
    * @param size
    *     the length that an examined array must have for a positive match
    */
-  public static <E> org.hamcrest.Matcher<E[]> arrayWithSize(int size) {
+  public static org.hamcrest.Matcher<Object[]> arrayWithSize(int size) {
     return org.hamcrest.collection.IsArrayWithSize.arrayWithSize(size);
   }
 
@@ -762,7 +762,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat(new String[0], emptyArray())</pre>
    */
-  public static <E> org.hamcrest.Matcher<E[]> emptyArray() {
+  public static org.hamcrest.Matcher<Object[]> emptyArray() {
     return org.hamcrest.collection.IsArrayWithSize.emptyArray();
   }
 
@@ -775,7 +775,7 @@ public class Matchers {
    * @param sizeMatcher
    *     a matcher for the size of an examined {@link java.util.Map}
    */
-  public static <K, V> org.hamcrest.Matcher<java.util.Map<? extends K,? extends V>> aMapWithSize(org.hamcrest.Matcher<? super java.lang.Integer> sizeMatcher) {
+  public static org.hamcrest.Matcher<java.util.Map<?, ?>> aMapWithSize(org.hamcrest.Matcher<? super java.lang.Integer> sizeMatcher) {
     return org.hamcrest.collection.IsMapWithSize.aMapWithSize(sizeMatcher);
   }
 
@@ -788,7 +788,7 @@ public class Matchers {
    * @param size
    *     the expected size of an examined {@link java.util.Map}
    */
-  public static <K, V> org.hamcrest.Matcher<java.util.Map<? extends K,? extends V>> aMapWithSize(int size) {
+  public static org.hamcrest.Matcher<java.util.Map<?, ?>> aMapWithSize(int size) {
     return org.hamcrest.collection.IsMapWithSize.aMapWithSize(size);
   }
 
@@ -798,7 +798,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat(myMap, is(anEmptyMap()))</pre>
    */
-  public static <K, V> org.hamcrest.Matcher<java.util.Map<? extends K,? extends V>> anEmptyMap() {
+  public static org.hamcrest.Matcher<java.util.Map<?, ?>> anEmptyMap() {
     return org.hamcrest.collection.IsMapWithSize.anEmptyMap();
   }
 
@@ -811,7 +811,7 @@ public class Matchers {
    * @param sizeMatcher
    *     a matcher for the size of an examined {@link java.util.Collection}
    */
-  public static <E> org.hamcrest.Matcher<java.util.Collection<? extends E>> hasSize(org.hamcrest.Matcher<? super java.lang.Integer> sizeMatcher) {
+  public static org.hamcrest.Matcher<java.util.Collection<?>> hasSize(org.hamcrest.Matcher<? super java.lang.Integer> sizeMatcher) {
     return org.hamcrest.collection.IsCollectionWithSize.hasSize(sizeMatcher);
   }
 
@@ -824,7 +824,7 @@ public class Matchers {
    * @param size
    *     the expected size of an examined {@link java.util.Collection}
    */
-  public static <E> org.hamcrest.Matcher<java.util.Collection<? extends E>> hasSize(int size) {
+  public static org.hamcrest.Matcher<java.util.Collection<?>> hasSize(int size) {
     return org.hamcrest.collection.IsCollectionWithSize.hasSize(size);
   }
 
@@ -834,7 +834,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat(new ArrayList&lt;String&gt;(), is(empty()))</pre>
    */
-  public static <E> org.hamcrest.Matcher<java.util.Collection<? extends E>> empty() {
+  public static org.hamcrest.Matcher<java.util.Collection<?>> empty() {
     return org.hamcrest.collection.IsEmptyCollection.empty();
   }
 
@@ -846,8 +846,11 @@ public class Matchers {
    * 
    * @param unusedToForceReturnType
    *     the type of the collection's content
+   *
+   * @deprecated This method is superfluous. Use {@link #empty()} instead.
    */
-  public static <E> org.hamcrest.Matcher<java.util.Collection<E>> emptyCollectionOf(java.lang.Class<E> unusedToForceReturnType) {
+  @Deprecated
+  public static org.hamcrest.Matcher<java.util.Collection<?>> emptyCollectionOf(java.lang.Class<?> unusedToForceReturnType) {
     return org.hamcrest.collection.IsEmptyCollection.emptyCollectionOf(unusedToForceReturnType);
   }
 
@@ -856,7 +859,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyIterable()))</pre>
    */
-  public static <E> org.hamcrest.Matcher<java.lang.Iterable<? extends E>> emptyIterable() {
+  public static org.hamcrest.Matcher<java.lang.Iterable<?>> emptyIterable() {
     return org.hamcrest.collection.IsEmptyIterable.emptyIterable();
   }
 
@@ -867,8 +870,11 @@ public class Matchers {
    * 
    * @param unusedToForceReturnType
    *     the type of the iterable's content
+   *
+   * @deprecated This method is superfluous. Use {@link #emptyIterable()} instead.
    */
-  public static <E> org.hamcrest.Matcher<java.lang.Iterable<E>> emptyIterableOf(java.lang.Class<E> unusedToForceReturnType) {
+  @Deprecated
+  public static org.hamcrest.Matcher<java.lang.Iterable<?>> emptyIterableOf(java.lang.Class<?> unusedToForceReturnType) {
     return org.hamcrest.collection.IsEmptyIterable.emptyIterableOf(unusedToForceReturnType);
   }
 
@@ -1062,7 +1068,7 @@ public class Matchers {
    * @param sizeMatcher
    *     a matcher for the number of items that should be yielded by an examined {@link Iterable}
    */
-  public static <E> org.hamcrest.Matcher<java.lang.Iterable<E>> iterableWithSize(org.hamcrest.Matcher<? super java.lang.Integer> sizeMatcher) {
+  public static org.hamcrest.Matcher<java.lang.Iterable<?>> iterableWithSize(org.hamcrest.Matcher<? super java.lang.Integer> sizeMatcher) {
     return org.hamcrest.collection.IsIterableWithSize.iterableWithSize(sizeMatcher);
   }
 
@@ -1076,7 +1082,7 @@ public class Matchers {
    * @param size
    *     the number of items that should be yielded by an examined {@link Iterable}
    */
-  public static <E> org.hamcrest.Matcher<java.lang.Iterable<E>> iterableWithSize(int size) {
+  public static org.hamcrest.Matcher<java.lang.Iterable<?>> iterableWithSize(int size) {
     return org.hamcrest.collection.IsIterableWithSize.iterableWithSize(size);
   }
 

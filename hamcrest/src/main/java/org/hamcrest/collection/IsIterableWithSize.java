@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> {
+public class IsIterableWithSize extends FeatureMatcher<Iterable<?>, Integer> {
 
     public IsIterableWithSize(Matcher<? super Integer> sizeMatcher) {
         super(sizeMatcher, "an iterable with size", "iterable size");
@@ -15,9 +15,9 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
     
 
     @Override
-    protected Integer featureValueOf(Iterable<E> actual) {
+    protected Integer featureValueOf(Iterable<?> actual) {
       int size = 0;
-      for (Iterator<E> iterator = actual.iterator(); iterator.hasNext(); iterator.next()) {
+      for (Iterator<?> iterator = actual.iterator(); iterator.hasNext(); iterator.next()) {
         size++;
       }
       return size;
@@ -33,8 +33,8 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
      * @param sizeMatcher
      *     a matcher for the number of items that should be yielded by an examined {@link Iterable}
      */
-    public static <E> Matcher<Iterable<E>> iterableWithSize(Matcher<? super Integer> sizeMatcher) {
-        return new IsIterableWithSize<E>(sizeMatcher);
+    public static Matcher<Iterable<?>> iterableWithSize(Matcher<? super Integer> sizeMatcher) {
+        return new IsIterableWithSize(sizeMatcher);
     }
 
     /**
@@ -47,7 +47,7 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
      * @param size
      *     the number of items that should be yielded by an examined {@link Iterable}
      */
-    public static <E> Matcher<Iterable<E>> iterableWithSize(int size) {
+    public static Matcher<Iterable<?>> iterableWithSize(int size) {
         return iterableWithSize(equalTo(size));
     }
 }
