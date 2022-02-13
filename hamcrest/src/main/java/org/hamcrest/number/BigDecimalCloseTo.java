@@ -61,4 +61,3 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
   }
 
 }
-
