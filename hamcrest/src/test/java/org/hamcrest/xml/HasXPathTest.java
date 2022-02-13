@@ -60,7 +60,7 @@ public final class HasXPathTest {
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<Node> matcher = hasXPath("//irrelevant");
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }
@@ -118,7 +118,7 @@ public final class HasXPathTest {
     describesItself() {
         assertDescription("an XML document with XPath /some/path \"Cheddar\"",
                           hasXPath("/some/path", equalTo("Cheddar")));
-        
+
         assertDescription("an XML document with XPath /some/path",
                           hasXPath("/some/path"));
     }
