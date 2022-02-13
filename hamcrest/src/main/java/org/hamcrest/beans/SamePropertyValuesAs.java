@@ -151,6 +151,7 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
      *     the bean against which examined beans are compared
      * @param ignoredProperties
      *     do not check any of these named properties.
+     * @return The matcher.
      */
     public static <B> Matcher<B> samePropertyValuesAs(B expectedBean, String... ignoredProperties) {
         return new SamePropertyValuesAs<>(expectedBean, asList(ignoredProperties));

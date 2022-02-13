@@ -159,6 +159,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      *     the name of the JavaBean property that examined beans should possess
      * @param valueMatcher
      *     a matcher for the value of the specified property of the examined bean
+     * @return The matcher.
      */
     public static <T> Matcher<T> hasProperty(String propertyName, Matcher<?> valueMatcher) {
         return new HasPropertyWithValue<>(propertyName, valueMatcher);
@@ -176,6 +177,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      *     the dot-separated path from the examined object to the JavaBean property
      * @param valueMatcher
      *     a matcher for the value of the specified property of the examined bean
+     * @return The matcher.
      */
     public static <T> Matcher<T> hasPropertyAtPath(String path, Matcher<T> valueMatcher) {
         List<String> properties = Arrays.asList(path.split("\\."));
