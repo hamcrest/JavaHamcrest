@@ -40,4 +40,5 @@ public final class IsNanTest {
     describesAMismatch() {
         assertMismatchDescription("was <1.25>", notANumber(), 1.25);
     }
+
 }

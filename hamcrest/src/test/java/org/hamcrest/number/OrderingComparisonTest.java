@@ -77,4 +77,5 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
             return value - other.value;
         }
     }
+
 }

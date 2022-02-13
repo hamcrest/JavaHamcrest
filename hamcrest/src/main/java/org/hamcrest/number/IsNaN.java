@@ -37,4 +37,5 @@ public final class IsNaN extends TypeSafeMatcher<Double> {
     public static Matcher<Double> notANumber() {
         return new IsNaN();
     }
+
 }
