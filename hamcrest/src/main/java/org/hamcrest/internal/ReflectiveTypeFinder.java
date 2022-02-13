@@ -28,6 +28,7 @@ package org.hamcrest.internal;
 import java.lang.reflect.Method;
 
 public class ReflectiveTypeFinder {
+
   private final String methodName;
   private final int expectedNumberOfParameters;
   private final int typedParameter;

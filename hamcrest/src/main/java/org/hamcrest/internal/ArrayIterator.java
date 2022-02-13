@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Iterator;
 
 public class ArrayIterator implements Iterator<Object> {
+
     private final Object array;
     private int currentIndex = 0;
 
