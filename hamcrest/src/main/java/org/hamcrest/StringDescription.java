@@ -30,6 +30,9 @@ public class StringDescription extends BaseDescription {
 
     /**
      * Alias for {@link #toString(SelfDescribing)}.
+     *
+     * @return
+     *   The description of the object.
      */
     public static String asString(SelfDescribing selfDescribing) {
         return toString(selfDescribing);

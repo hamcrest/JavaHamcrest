@@ -21,6 +21,8 @@ public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
     /**
      * Subclasses should implement this. The item will already have been checked
      * for the specific type and will never be null.
+     *
+     * @return boolean true/false depending if item matches matcher.
      */
     protected abstract boolean matchesSafely(T item, Description mismatchDescription);
 

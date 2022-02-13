@@ -14,27 +14,37 @@ public interface Description {
   
     /**
      * Appends some plain text to the description.
+     *
+     * @return the update description when displaying the matcher error.
      */
     Description appendText(String text);
 
     /**
      * Appends the description of a {@link SelfDescribing} value to this description.
+     *
+     * @return the update description when displaying the matcher error.
      */
     Description appendDescriptionOf(SelfDescribing value);
 
     /**
      * Appends an arbitrary value to the description.
+     *
+     * @return the update description when displaying the matcher error.
      */
     Description appendValue(Object value);
 
     /**
      * Appends a list of values to the description.
+     *
+     * @return the update description when displaying the matcher error.
      */
     <T> Description appendValueList(String start, String separator, String end,
                                     T... values);
 
     /**
      * Appends a list of values to the description.
+     *
+     * @return the update description when displaying the matcher error.
      */
     <T> Description appendValueList(String start, String separator, String end,
                                     Iterable<T> values);
@@ -42,6 +52,8 @@ public interface Description {
     /**
      * Appends a list of {@link org.hamcrest.SelfDescribing} objects
      * to the description.
+     *
+     * @return the update description when displaying the matcher error.
      */
     Description appendList(String start, String separator, String end,
                            Iterable<? extends SelfDescribing> values);
