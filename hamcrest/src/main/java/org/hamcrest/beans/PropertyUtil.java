@@ -14,6 +14,7 @@ import java.beans.PropertyDescriptor;
  * @since 1.1.0
  */
 public class PropertyUtil {
+
     /**
      * Returns the description of the property with the provided
      * name on the provided object's interface.

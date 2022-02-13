@@ -70,6 +70,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * @author cristcost at github
  */
 public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
+
     private static final Condition.Step<PropertyDescriptor,Method> WITH_READ_METHOD = withReadMethod();
     private final String propertyName;
     private final Matcher<Object> valueMatcher;

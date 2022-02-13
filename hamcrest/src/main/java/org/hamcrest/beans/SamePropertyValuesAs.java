@@ -14,6 +14,7 @@ import static org.hamcrest.beans.PropertyUtil.propertyDescriptorsFor;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
+
     private final T expectedBean;
     private final Set<String> propertyNames;
     private final List<PropertyMatcher> propertyMatchers;
