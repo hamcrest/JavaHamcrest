@@ -14,19 +14,19 @@ public final class BaseDescriptionTest {
         }
     };
 
-    @Test public void 
+    @Test public void
     describesAppendedNullValue() {
         baseDescription.appendValue(null);
         assertEquals("null", result.toString());
     }
 
-    @Test public void 
+    @Test public void
     quotesAppendedStringValue() {
         baseDescription.appendValue("foo");
         assertEquals("\"foo\"", result.toString());
     }
 
-    @Test public void 
+    @Test public void
     quotesAppendedCharacterValue() {
         baseDescription.appendValue('f');
         assertEquals("\"f\"", result.toString());
@@ -74,39 +74,39 @@ public final class BaseDescriptionTest {
         assertEquals("<2s>", result.toString());
     }
 
-    @Test public void 
+    @Test public void
     bracketsAppendedLongValue() {
         baseDescription.appendValue(Long.valueOf("2"));
         assertEquals("<2L>", result.toString());
     }
 
-    @Test public void 
+    @Test public void
     bracketsAppendedFloatValue() {
         baseDescription.appendValue(Float.valueOf("1.2"));
         assertEquals("<1.2F>", result.toString());
     }
 
-    @Test public void 
+    @Test public void
     describesAppendedArrayValue() {
         baseDescription.appendValue(new String[] {"2", "3"});
         assertEquals("[\"2\", \"3\"]", result.toString());
     }
 
-    @Test public void 
+    @Test public void
     bracketsAppendedObjectValue() {
         final Object value = new Object();
         baseDescription.appendValue(value);
         assertEquals("<" + value.toString() + ">", result.toString());
     }
-    
-    @Test public void 
+
+    @Test public void
     safelyDescribesAppendedValueOfObjectWhoseToStringThrowsAnException() {
         final Object value = new Object() {
             @Override public String toString() {
                 throw new UnsupportedOperationException();
             }
         };
-        
+
         final String expected = value.getClass().getName() + "@" + Integer.toHexString(value.hashCode());
         baseDescription.appendValue(value);
         assertEquals("<" + expected + ">", result.toString());
