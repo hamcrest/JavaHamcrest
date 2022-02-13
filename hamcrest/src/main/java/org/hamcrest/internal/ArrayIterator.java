@@ -28,4 +28,5 @@ public class ArrayIterator implements Iterator<Object> {
     public void remove() {
         throw new UnsupportedOperationException("cannot remove items from an array");
     }
+
 }
