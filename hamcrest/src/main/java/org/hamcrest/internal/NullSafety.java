@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NullSafety {
+
     @SuppressWarnings("unchecked")
     public static <E> List<Matcher<? super E>> nullSafe(Matcher<? super E>[] itemMatchers) {
         final List<Matcher<? super E>> matchers = new ArrayList<Matcher<? super E>>(itemMatchers.length);
