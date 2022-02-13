@@ -66,7 +66,7 @@ public final class FileMatchers {
         };
     }
 
-    public static interface FileStatus {
+    public interface FileStatus {
         boolean check(File actual);
     }
 

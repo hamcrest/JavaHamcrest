@@ -11,7 +11,7 @@ public interface Description {
   /**
    * A description that consumes input but does nothing.
    */
-  static final Description NONE = new NullDescription();
+  Description NONE = new NullDescription();
 
     /**
      * Appends some plain text to the description.
@@ -92,7 +92,7 @@ public interface Description {
     Description appendList(String start, String separator, String end,
                            Iterable<? extends SelfDescribing> values);
 
-    public static final class NullDescription implements Description {
+    final class NullDescription implements Description {
       @Override
       public Description appendDescriptionOf(SelfDescribing value) {
         return this;
