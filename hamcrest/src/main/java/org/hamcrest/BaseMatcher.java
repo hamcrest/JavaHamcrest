@@ -39,4 +39,5 @@ public abstract class BaseMatcher<T> implements Matcher<T> {
         }
         return true;
     }
+
 }

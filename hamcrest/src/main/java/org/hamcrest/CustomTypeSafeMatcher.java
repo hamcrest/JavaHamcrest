@@ -35,4 +35,5 @@ public abstract class CustomTypeSafeMatcher<T> extends TypeSafeMatcher<T> {
     public final void describeTo(Description description) {
         description.appendText(fixedDescription);
     }
+
 }

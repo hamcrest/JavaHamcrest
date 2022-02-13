@@ -18,4 +18,5 @@ public abstract class DiagnosingMatcher<T> extends BaseMatcher<T> {
     }
 
     protected abstract boolean matches(Object item, Description mismatchDescription);
+
 }

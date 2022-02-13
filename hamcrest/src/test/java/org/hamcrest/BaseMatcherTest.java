@@ -23,4 +23,5 @@ public final class BaseMatcherTest {
 
         assertEquals("SOME DESCRIPTION", someMatcher.toString());
     }
+
 }

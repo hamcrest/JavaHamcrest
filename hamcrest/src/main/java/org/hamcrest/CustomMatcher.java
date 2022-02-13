@@ -34,4 +34,5 @@ public abstract class CustomMatcher<T> extends BaseMatcher<T> {
     public final void describeTo(Description description) {
         description.appendText(fixedDescription);
     }
+
 }

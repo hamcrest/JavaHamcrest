@@ -38,4 +38,5 @@ public final class CustomTypeSafeMatcherTest {
     copesWithUnknownTypes() {
         assertUnknownTypeSafe(customMatcher);
     }
+
 }

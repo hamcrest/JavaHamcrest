@@ -38,4 +38,5 @@ public final class TypeSafeMatcherTest {
       assertMismatchDescription("was a java.lang.Integer (<3>)", (Matcher)matcher, 3);
       assertMismatchDescription("The mismatch", matcher, "a string");
     }
+
 }
