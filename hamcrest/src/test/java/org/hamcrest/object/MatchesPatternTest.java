@@ -56,4 +56,5 @@ public class MatchesPatternTest {
         Matcher<?> m = MatchesPattern.matchesPattern("a[bc](d|e)");
         assertDescription("a string matching the pattern 'a[bc](d|e)'", m );
     }
+
 }

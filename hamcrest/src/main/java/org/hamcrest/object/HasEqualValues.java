@@ -82,5 +82,4 @@ public class HasEqualValues<T> extends TypeSafeDiagnosingMatcher<T> {
         }
     }
 
-
 }

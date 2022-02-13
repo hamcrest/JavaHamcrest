@@ -46,4 +46,5 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
     public static <T> Matcher<T> hasToString(String expectedToString) {
         return new HasToString<T>(equalTo(expectedToString));
     }
+
 }
