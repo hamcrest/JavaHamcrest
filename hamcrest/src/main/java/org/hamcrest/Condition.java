@@ -66,4 +66,5 @@ public abstract class Condition<T> {
             return notMatched();
         }
     }
+
 }

@@ -96,4 +96,5 @@ public final class MatcherAssertTest {
     canAssertSubtypes() {
         assertThat(1, equalTo((Number) 1));
     }
+
 }

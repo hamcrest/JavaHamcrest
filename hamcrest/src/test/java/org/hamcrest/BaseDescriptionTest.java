@@ -111,4 +111,5 @@ public final class BaseDescriptionTest {
         baseDescription.appendValue(value);
         assertEquals("<" + expected + ">", result.toString());
     }
+
 }

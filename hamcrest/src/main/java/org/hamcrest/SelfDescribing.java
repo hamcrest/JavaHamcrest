@@ -13,4 +13,5 @@ public interface SelfDescribing {
      *     The description to be built or appended to.
      */
     void describeTo(Description description);
+
 }

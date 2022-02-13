@@ -155,4 +155,5 @@ public abstract class BaseDescription implements Description {
                 append(ch);
         }
     }
+
 }

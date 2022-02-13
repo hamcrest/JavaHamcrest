@@ -2173,5 +2173,4 @@ public class Matchers {
     return org.hamcrest.xml.HasXPath.hasXPath(xPath, namespaceContext);
   }
 
-
 }

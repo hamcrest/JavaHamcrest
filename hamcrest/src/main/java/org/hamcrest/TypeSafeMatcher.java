@@ -97,4 +97,5 @@ public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
             describeMismatchSafely((T)item, description);
         }
     }
+
 }

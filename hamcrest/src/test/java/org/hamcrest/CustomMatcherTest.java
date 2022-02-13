@@ -17,4 +17,5 @@ public final class CustomMatcherTest {
 
         assertDescription("I match strings", matcher);
     }
+
 }

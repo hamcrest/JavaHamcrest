@@ -80,4 +80,5 @@ public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
         matchesSafely((T) item, mismatchDescription);
       }
     }
+
 }
