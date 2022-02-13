@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import static org.hamcrest.number.BigDecimalCloseTo.closeTo;
 
 public class BigDecimalCloseToTest  extends AbstractMatcherTest {
+
   private final Matcher<BigDecimal> matcher = closeTo(new BigDecimal("1.0"), new BigDecimal("0.5"));
 
   @Override

@@ -11,6 +11,7 @@ import static java.lang.Math.abs;
  * acceptable error?
  */
 public class IsCloseTo extends TypeSafeMatcher<Double> {
+
     private final double delta;
     private final double value;
 
