@@ -11,6 +11,7 @@ import static org.hamcrest.core.IsNull.nullValue;
  * Matches empty Strings (and null).
  */
 public final class IsEmptyString extends TypeSafeMatcher<String> {
+
     private static final IsEmptyString INSTANCE = new IsEmptyString();
     @SuppressWarnings("unchecked")
     private static final Matcher<String> NULL_OR_EMPTY_INSTANCE = anyOf(nullValue(), INSTANCE);

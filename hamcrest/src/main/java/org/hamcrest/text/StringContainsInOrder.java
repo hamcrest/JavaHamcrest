@@ -7,6 +7,7 @@ import org.hamcrest.TypeSafeMatcher;
 import java.util.Arrays;
 
 public class StringContainsInOrder extends TypeSafeMatcher<String> {
+
     private final Iterable<String> substrings;
 
     public StringContainsInOrder(Iterable<String> substrings) {

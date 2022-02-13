@@ -7,6 +7,7 @@ import org.hamcrest.TypeSafeMatcher;
 import java.util.regex.Pattern;
 
 public class MatchesPattern extends TypeSafeMatcher<String> {
+
     private final Pattern pattern;
 
     public MatchesPattern(Pattern pattern) {
