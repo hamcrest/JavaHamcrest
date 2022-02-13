@@ -38,6 +38,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      *
      * @param itemMatcher
      *     the matcher to apply to items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     public static <T> Matcher<Iterable<? super T>> hasItem(Matcher<? super T> itemMatcher) {
         return IsIterableContaining.hasItem(itemMatcher);
@@ -55,6 +56,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      *
      * @param item
      *     the item to compare against the items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     public static <T> Matcher<Iterable<? super T>> hasItem(T item) {
         // Doesn't forward to hasItem() method so compiler can sort out generics.
@@ -73,6 +75,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      *
      * @param itemMatchers
      *     the matchers to apply to items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> Matcher<Iterable<T>> hasItems(Matcher<? super T>... itemMatchers) {
@@ -91,6 +94,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      *
      * @param items
      *     the items to compare against the items provided by the examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <T> Matcher<Iterable<T>> hasItems(T... items) {

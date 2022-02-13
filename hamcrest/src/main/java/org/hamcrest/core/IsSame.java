@@ -33,6 +33,7 @@ public class IsSame<T> extends BaseMatcher<T> {
      *
      * @param target
      *     the target instance against which others should be assessed
+     * @return The matcher.
      */
     public static <T> Matcher<T> sameInstance(T target) {
         return new IsSame<T>(target);
@@ -44,6 +45,7 @@ public class IsSame<T> extends BaseMatcher<T> {
      *
      * @param target
      *     the target instance against which others should be assessed
+     * @return The matcher.
      */
     public static <T> Matcher<T> theInstance(T target) {
         return new IsSame<T>(target);

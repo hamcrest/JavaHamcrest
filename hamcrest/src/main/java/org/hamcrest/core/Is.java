@@ -42,6 +42,8 @@ public class Is<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(equalTo(smelly)))</pre>
      * instead of:
      * <pre>assertThat(cheese, equalTo(smelly))</pre>
+     *
+     * @return The matcher.
      */
     public static <T> Matcher<T> is(Matcher<T> matcher) {
         return new Is<>(matcher);
@@ -53,6 +55,8 @@ public class Is<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(smelly))</pre>
      * instead of:
      * <pre>assertThat(cheese, is(equalTo(smelly)))</pre>
+     *
+     * @return The matcher.
      */
     public static <T> Matcher<T> is(T value) {
         return is(equalTo(value));
@@ -64,6 +68,8 @@ public class Is<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, isA(Cheddar.class))</pre>
      * instead of:
      * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
+     *
+     * @return The matcher.
      */
     public static <T> Matcher<T> isA(Class<?> type) {
         return is(IsInstanceOf.<T>instanceOf(type));

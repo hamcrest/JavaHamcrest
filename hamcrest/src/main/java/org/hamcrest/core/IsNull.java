@@ -24,6 +24,8 @@ public class IsNull<T> extends BaseMatcher<T> {
      * Creates a matcher that matches if examined object is <code>null</code>.
      * For example:
      * <pre>assertThat(cheese, is(nullValue())</pre>
+     *
+     * @return The matcher.
      */
     public static Matcher<Object> nullValue() {
         return new IsNull<Object>();
@@ -35,6 +37,8 @@ public class IsNull<T> extends BaseMatcher<T> {
      * <pre>assertThat(cheese, is(notNullValue()))</pre>
      * instead of:
      * <pre>assertThat(cheese, is(not(nullValue())))</pre>
+     *
+     * @return The matcher.
      */
     public static Matcher<Object> notNullValue() {
         return not(nullValue());
@@ -48,6 +52,7 @@ public class IsNull<T> extends BaseMatcher<T> {
      *
      * @param type
      *     dummy parameter used to infer the generic type of the returned matcher
+     * @return The matcher.
      */
     public static <T> Matcher<T> nullValue(Class<T> type) {
         return new IsNull<T>();
@@ -63,6 +68,7 @@ public class IsNull<T> extends BaseMatcher<T> {
      *
      * @param type
      *     dummy parameter used to infer the generic type of the returned matcher
+     * @return The matcher.
      */
     public static <T> Matcher<T> notNullValue(Class<T> type) {
         return not(nullValue(type));

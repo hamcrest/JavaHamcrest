@@ -64,6 +64,8 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
      * <p>The created matcher assumes no relationship between specified type and the examined object.</p>
      * For example:
      * <pre>assertThat(new Canoe(), instanceOf(Paddlable.class));</pre>
+     *
+     * @return The matcher.
      */
     @SuppressWarnings("unchecked")
     public static <T> Matcher<T> instanceOf(Class<?> type) {
@@ -80,6 +82,8 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
      * <code>with(any(Thing.class))</code></p>
      * For example:
      * <pre>assertThat(new Canoe(), instanceOf(Canoe.class));</pre>
+     *
+     * @return The matcher.
      */
     @SuppressWarnings("unchecked")
     public static <T> Matcher<T> any(Class<T> type) {
