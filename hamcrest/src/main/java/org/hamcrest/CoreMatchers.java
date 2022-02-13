@@ -199,7 +199,7 @@ public class CoreMatchers {
   /**
    * Creates a matcher that always matches, regardless of the examined object, but describes
    * itself with the specified {@link String}.
-   * 
+   *
    * @param description
    *     a meaningful {@link String} used when describing itself
    * @return The matcher.
@@ -286,17 +286,17 @@ public class CoreMatchers {
    * Creates a matcher that matches when the examined object is logically equal to the specified
    * <code>operand</code>, as determined by calling the {@link java.lang.Object#equals} method on
    * the <b>examined</b> object.
-   * 
+   *
    * <p>If the specified operand is <code>null</code> then the created matcher will only match if
    * the examined object's <code>equals</code> method returns <code>true</code> when passed a
    * <code>null</code> (which would be a violation of the <code>equals</code> contract), unless the
    * examined object itself is <code>null</code>, in which case the matcher will return a positive
    * match.</p>
-   * 
+   *
    * <p>The created matcher provides a special behaviour when examining <code>Array</code>s, whereby
    * it will match if both the operand and the examined object are arrays of the same length and
    * contain items that are equal to each other (according to the above rules) <b>in the same
-   * indexes</b>.</p> 
+   * indexes</b>.</p>
    * For example:
    * <pre>
    * assertThat("foo", equalTo("foo"));
@@ -329,7 +329,7 @@ public class CoreMatchers {
    * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
    * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
    * the examined object.
-   * 
+   *
    * <p>The created matcher forces a relationship between specified type and the examined object, and should be
    * used when it is necessary to make generics conform, for example in the JMock clause
    * <code>with(any(Thing.class))</code></p>
@@ -350,7 +350,7 @@ public class CoreMatchers {
    * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
    * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
    * the examined object.
-   * 
+   *
    * <p>The created matcher assumes no relationship between specified type and the examined object.</p>
    * For example:
    * <pre>assertThat(new Canoe(), instanceOf(Paddlable.class));</pre>
@@ -489,7 +489,7 @@ public class CoreMatchers {
    * {@link String} anywhere.
    * For example:
    * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
-   * 
+   *
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    * @return The matcher.
@@ -503,7 +503,7 @@ public class CoreMatchers {
    * {@link String} anywhere, ignoring case.
    * For example:
    * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
-   * 
+   *
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    * @return The matcher.
@@ -519,7 +519,7 @@ public class CoreMatchers {
    * </p>
    * For example:
    * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
-   * 
+   *
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    * @return The matcher.
@@ -535,7 +535,7 @@ public class CoreMatchers {
    * </p>
    * For example:
    * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
-   * 
+   *
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    * @return The matcher.
@@ -549,7 +549,7 @@ public class CoreMatchers {
    * {@link String}.
    * For example:
    * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
-   * 
+   *
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    * @return The matcher.
@@ -563,7 +563,7 @@ public class CoreMatchers {
    * {@link String}, ignoring case.
    * For example:
    * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
-   * 
+   *
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    * @return The matcher.

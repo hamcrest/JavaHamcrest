@@ -11,7 +11,7 @@ public interface Description {
    * A description that consumes input but does nothing.
    */
   static final Description NONE = new NullDescription();
-  
+
     /**
      * Appends some plain text to the description.
      *

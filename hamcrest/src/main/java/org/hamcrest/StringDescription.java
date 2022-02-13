@@ -15,7 +15,7 @@ public class StringDescription extends BaseDescription {
     public StringDescription(Appendable out) {
         this.out = out;
     }
-    
+
     /**
      * Return the description of a {@link SelfDescribing} object as a String.
      *
@@ -57,7 +57,7 @@ public class StringDescription extends BaseDescription {
             throw new RuntimeException("Could not write description", e);
         }
     }
-    
+
     /**
      * Returns the description as a string.
      */

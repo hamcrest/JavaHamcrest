@@ -9,7 +9,7 @@ public abstract class AbstractMatcherTest extends TestCase {
    * Create an instance of the Matcher so some generic safety-net tests can be run on it.
    */
   protected abstract Matcher<?> createMatcher();
-  
+
   public static <T> void assertMatches(Matcher<T> matcher, T arg) {
       assertMatches("Expected match, but mismatched", matcher, arg);
   }
@@ -38,7 +38,7 @@ public abstract class AbstractMatcherTest extends TestCase {
     Assert.assertFalse("Precondition: Matcher should not match item.", matcher.matches(arg));
     Assert.assertEquals("Expected mismatch description", expected, mismatchDescription(matcher, arg));
   }
-  
+
   public static void assertNullSafe(Matcher<?> matcher) {
       try {
           matcher.matches(null);

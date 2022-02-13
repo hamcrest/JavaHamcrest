@@ -39,12 +39,12 @@ public interface Matcher<T> extends SelfDescribing {
      * @see BaseMatcher
      */
     boolean matches(Object actual);
-    
+
     /**
      * Generate a description of why the matcher has not accepted the item.
      * The description will be part of a larger description of why a matching
-     * failed, so it should be concise. 
-     * This method assumes that <code>matches(item)</code> is false, but 
+     * failed, so it should be concise.
+     * This method assumes that <code>matches(item)</code> is false, but
      * will not check this.
      *
      * @param actual The item that the Matcher has rejected.

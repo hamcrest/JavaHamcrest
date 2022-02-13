@@ -412,7 +412,7 @@ public class Matchers {
   /**
    * Creates a matcher that always matches, regardless of the examined object, but describes
    * itself with the specified {@link String}.
-   * 
+   *
    * @param description
    *     a meaningful {@link String} used when describing itself
    * @return The matcher.
@@ -499,17 +499,17 @@ public class Matchers {
    * Creates a matcher that matches when the examined object is logically equal to the specified
    * <code>operand</code>, as determined by calling the {@link java.lang.Object#equals} method on
    * the <b>examined</b> object.
-   * 
+   *
    * <p>If the specified operand is <code>null</code> then the created matcher will only match if
    * the examined object's <code>equals</code> method returns <code>true</code> when passed a
    * <code>null</code> (which would be a violation of the <code>equals</code> contract), unless the
    * examined object itself is <code>null</code>, in which case the matcher will return a positive
    * match.</p>
-   * 
+   *
    * <p>The created matcher provides a special behaviour when examining <code>Array</code>s, whereby
    * it will match if both the operand and the examined object are arrays of the same length and
    * contain items that are equal to each other (according to the above rules) <b>in the same
-   * indexes</b>.</p> 
+   * indexes</b>.</p>
    * For example:
    * <pre>
    * assertThat("foo", equalTo("foo"));
@@ -542,7 +542,7 @@ public class Matchers {
    * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
    * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
    * the examined object.
-   * 
+   *
    * <p>The created matcher forces a relationship between specified type and the examined object, and should be
    * used when it is necessary to make generics conform, for example in the JMock clause
    * <code>with(any(Thing.class))</code></p>
@@ -563,7 +563,7 @@ public class Matchers {
    * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
    * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
    * the examined object.
-   * 
+   *
    * <p>The created matcher assumes no relationship between specified type and the examined object.</p>
    * For example:
    * <pre>assertThat(new Canoe(), instanceOf(Paddlable.class));</pre>
@@ -696,13 +696,13 @@ public class Matchers {
   public static <T> org.hamcrest.Matcher<T> theInstance(T target) {
     return org.hamcrest.core.IsSame.theInstance(target);
   }
-  
+
   /**
    * Creates a matcher that matches if the examined {@link String} contains the specified
    * {@link String} anywhere.
    * For example:
    * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
-   * 
+   *
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    * @return The matcher.
@@ -716,7 +716,7 @@ public class Matchers {
    * {@link String} anywhere, ignoring case.
    * For example:
    * <pre>assertThat("myStringOfNote", containsStringIgnoringCase("Ring"))</pre>
-   * 
+   *
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    * @return The matcher.
@@ -732,7 +732,7 @@ public class Matchers {
    * </p>
    * For example:
    * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
-   * 
+   *
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    * @return The matcher.
@@ -748,7 +748,7 @@ public class Matchers {
    * </p>
    * For example:
    * <pre>assertThat("myStringOfNote", startsWithIgnoringCase("My"))</pre>
-   * 
+   *
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    * @return The matcher.
@@ -762,7 +762,7 @@ public class Matchers {
    * {@link String}.
    * For example:
    * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
-   * 
+   *
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    * @return The matcher.
@@ -776,7 +776,7 @@ public class Matchers {
    * {@link String}, ignoring case.
    * For example:
    * <pre>assertThat("myStringOfNote", endsWithIgnoringCase("note"))</pre>
-   * 
+   *
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    * @return The matcher.
@@ -1612,7 +1612,7 @@ public class Matchers {
    * specified elements.
    * For example:
    * <pre>assertThat("foo", isOneOf("bar", "foo"))</pre>
-   * 
+   *
    * @deprecated use is(oneOf(...)) instead
    * @param <T>
    *     the matcher type.
@@ -1648,7 +1648,7 @@ public class Matchers {
    * to the specified <code>operand</code>, within a range of +/- <code>error</code>.
    * For example:
    * <pre>assertThat(1.03, is(closeTo(1.0, 0.03)))</pre>
-   * 
+   *
    * @param operand
    *     the expected value of matching doubles
    * @param error
@@ -1676,7 +1676,7 @@ public class Matchers {
    * is done by BigDecimals {@link java.math.BigDecimal#compareTo(java.math.BigDecimal)} method.
    * For example:
    * <pre>assertThat(new BigDecimal("1.03"), is(closeTo(new BigDecimal("1.0"), new BigDecimal("0.03"))))</pre>
-   * 
+   *
    * @param operand
    *     the expected value of matching BigDecimals
    * @param error
@@ -1776,7 +1776,7 @@ public class Matchers {
    * the specified expectedString, ignoring case.
    * For example:
    * <pre>assertThat("Foo", equalToIgnoringCase("FOO"))</pre>
-   * 
+   *
    * @param expectedString
    *     the expected value of matched strings
    * @return The matcher.
@@ -1842,7 +1842,7 @@ public class Matchers {
    * has zero length.
    * For example:
    * <pre>assertThat(((String)null), isEmptyOrNullString())</pre>
-   * 
+   *
    * @deprecated use is(emptyOrNullString()) instead
    * @return The matcher.
    */
@@ -1855,7 +1855,7 @@ public class Matchers {
    * Creates a matcher of {@link String} that matches when the examined string has zero length.
    * For example:
    * <pre>assertThat("", isEmptyString())</pre>
-   * 
+   *
    * @deprecated use is(emptyString()) instead
    * @return The matcher.
    */
@@ -1918,7 +1918,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myfoobarbaz", stringContainsInOrder(Arrays.asList("bar", "foo")))</pre>
    * fails as "foo" occurs before "bar" in the string "myfoobarbaz"
-   * 
+   *
    * @param substrings
    *     the substrings that must be contained within matching strings
    * @return The matcher.
@@ -1933,7 +1933,7 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myfoobarbaz", stringContainsInOrder("bar", "foo"))</pre>
    * fails as "foo" occurs before "bar" in the string "myfoobarbaz"
-   * 
+   *
    * @param substrings
    *     the substrings that must be contained within matching strings
    * @return The matcher.
@@ -2027,7 +2027,7 @@ public class Matchers {
    * derived from <var>eventClass</var> announced by <var>source</var>.
    * For example:
    * <pre>assertThat(myEvent, is(eventFrom(PropertyChangeEvent.class, myBean)))</pre>
-   * 
+   *
    * @param eventClass
    *     the class of the event to match on
    * @param source
@@ -2043,7 +2043,7 @@ public class Matchers {
    * announced by <var>source</var>.
    * For example:
    * <pre>assertThat(myEvent, is(eventFrom(myBean)))</pre>
-   * 
+   *
    * @param source
    *     the source of the event
    * @return The matcher.
@@ -2113,7 +2113,7 @@ public class Matchers {
    * specified <code>xPath</code> that satisfies the specified <code>valueMatcher</code>.
    * For example:
    * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", equalTo("Cheddar")))</pre>
-   * 
+   *
    * @param xPath
    *     the target xpath
    * @param valueMatcher
@@ -2130,7 +2130,7 @@ public class Matchers {
    * the specified <code>valueMatcher</code>.
    * For example:
    * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", myNs, equalTo("Cheddar")))</pre>
-   * 
+   *
    * @param xPath
    *     the target xpath
    * @param namespaceContext
@@ -2148,7 +2148,7 @@ public class Matchers {
    * at the specified <code>xPath</code>, with any content.
    * For example:
    * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese"))</pre>
-   * 
+   *
    * @param xPath
    *     the target xpath
    * @return The matcher.
@@ -2162,7 +2162,7 @@ public class Matchers {
    * at the specified <code>xPath</code> within the specified namespace context, with any content.
    * For example:
    * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", myNs))</pre>
-   * 
+   *
    * @param xPath
    *     the target xpath
    * @param namespaceContext
