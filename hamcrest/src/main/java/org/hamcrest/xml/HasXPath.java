@@ -116,6 +116,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      *     the target xpath
      * @param valueMatcher
      *     matcher for the value at the specified xpath
+     * @return The matcher.
      */
     public static Matcher<Node> hasXPath(String xPath, Matcher<String> valueMatcher) {
         return hasXPath(xPath, NO_NAMESPACE_CONTEXT, valueMatcher);
@@ -134,6 +135,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      *     the namespace for matching nodes
      * @param valueMatcher
      *     matcher for the value at the specified xpath
+     * @return The matcher.
      */
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
         return new HasXPath(xPath, namespaceContext, valueMatcher, STRING);
@@ -147,6 +149,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      *
      * @param xPath
      *     the target xpath
+     * @return The matcher.
      */
     public static Matcher<Node> hasXPath(String xPath) {
         return hasXPath(xPath, NO_NAMESPACE_CONTEXT);
@@ -162,6 +165,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      *     the target xpath
      * @param namespaceContext
      *     the namespace for matching nodes
+     * @return The matcher.
      */
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext) {
         return new HasXPath(xPath, namespaceContext, WITH_ANY_CONTENT, XPathConstants.NODE);
