@@ -11,7 +11,7 @@ public final class IsNanTest {
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<Double> matcher = notANumber();
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }

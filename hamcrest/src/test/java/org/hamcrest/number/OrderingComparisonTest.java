@@ -62,7 +62,7 @@ public class OrderingComparisonTest extends AbstractMatcherTest {
       assertThat(new BigDecimal(10), greaterThanOrEqualTo(new BigDecimal("10.0")));
       assertThat(new BigDecimal("2"), comparesEqualTo(new BigDecimal("2.000")));
     }
-    
+
     public void testComparesCustomTypesWhoseCompareToReturnsValuesGreaterThatOne() {
         assertThat(new CustomInt(5), lessThan(new CustomInt(10)));
     }
