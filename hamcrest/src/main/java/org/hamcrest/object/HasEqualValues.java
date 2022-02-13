@@ -13,6 +13,7 @@ import java.util.List;
 import static java.lang.String.format;
 
 public class HasEqualValues<T> extends TypeSafeDiagnosingMatcher<T> {
+
     private final T expectedObject;
     private final List<FieldMatcher> fieldMatchers;
 

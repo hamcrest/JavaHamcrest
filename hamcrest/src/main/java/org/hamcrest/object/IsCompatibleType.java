@@ -5,6 +5,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
+
     private final Class<T> type;
 
     public IsCompatibleType(Class<T> type) {

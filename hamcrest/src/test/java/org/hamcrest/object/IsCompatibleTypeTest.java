@@ -7,6 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.object.IsCompatibleType.typeCompatibleWith;
 
 public class IsCompatibleTypeTest extends AbstractMatcherTest {
+
     static class BaseClass {
     }
 

@@ -8,6 +8,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.object.HasToString.hasToString;
 
 public final class HasToStringTest {
+
     private static final String TO_STRING_RESULT = "toString result";
     private static final Object TEST_OBJECT = new Object() {
         @Override

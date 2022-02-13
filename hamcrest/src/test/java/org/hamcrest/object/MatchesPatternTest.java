@@ -10,6 +10,7 @@ import static org.hamcrest.AbstractMatcherTest.*;
 import static org.junit.Assert.assertThat;
 
 public class MatchesPatternTest {
+
     @Test
     public void copesWithNullsAndUnknownTypes() {
         Matcher<String> matcher = new MatchesPattern(Pattern.compile("."));
