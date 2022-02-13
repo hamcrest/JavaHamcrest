@@ -1,4 +1,3 @@
-
 package org.hamcrest.text;
 
 import org.hamcrest.Description;

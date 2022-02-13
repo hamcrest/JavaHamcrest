@@ -1,6 +1,3 @@
-/**
- *
- */
 package org.hamcrest.core;
 
 import java.util.regex.Pattern;
