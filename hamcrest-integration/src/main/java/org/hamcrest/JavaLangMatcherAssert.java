@@ -15,4 +15,5 @@ public class JavaLangMatcherAssert {
     public static <T> boolean that(T argument, Matcher<? super T> matcher) {
         return matcher.matches(argument);
     }
+
 }
