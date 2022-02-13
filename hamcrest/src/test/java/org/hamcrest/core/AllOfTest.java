@@ -64,7 +64,7 @@ public final class AllOfTest {
     }
 
     @Test public void
-    varargs(){
+    varargs() {
         assertThat("the text!", new AllOf<>(startsWith("the"), containsString("text"), endsWith("!")));
     }
 
