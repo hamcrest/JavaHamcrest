@@ -10,6 +10,10 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param matchers
+   *     all the matchers must pass.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> allOf(java.lang.Iterable<org.hamcrest.Matcher<? super T>> matchers) {
@@ -21,6 +25,10 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param matchers
+   *     all the matchers must pass.
    * @return The matcher.
    */
   @SafeVarargs
@@ -34,6 +42,10 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param matchers
+   *     any the matchers must pass.
    * @return The matcher.
    */
   public static <T> org.hamcrest.core.AnyOf<T> anyOf(java.lang.Iterable<org.hamcrest.Matcher<? super T>> matchers) {
@@ -45,6 +57,10 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param matchers
+   *     any the matchers must pass.
    * @return The matcher.
    */
   @SafeVarargs
@@ -57,6 +73,10 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat("fab", both(containsString("a")).and(containsString("b")))</pre>
    *
+   * @param <LHS>
+   *     the matcher type.
+   * @param matcher
+   *     the matcher to combine, and both musth pass.
    * @return The matcher.
    */
   public static <LHS> org.hamcrest.core.CombinableMatcher.CombinableBothMatcher<LHS> both(org.hamcrest.Matcher<? super LHS> matcher) {
@@ -68,6 +88,10 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat("fan", either(containsString("a")).or(containsString("b")))</pre>
    *
+   * @param <LHS>
+   *     the matcher type.
+   * @param matcher
+   *     the matcher to combine, and either must pass.
    * @return The matcher.
    */
   public static <LHS> org.hamcrest.core.CombinableMatcher.CombinableEitherMatcher<LHS> either(org.hamcrest.Matcher<? super LHS> matcher) {
@@ -80,13 +104,14 @@ public class CoreMatchers {
    * For example:
    * <pre>describedAs("a big decimal equal to %0", equalTo(myBigDecimal), myBigDecimal.toPlainString())</pre>
    *
+   * @param <T>
+   *     the matcher type.
    * @param description
    *     the new description for the wrapped matcher
    * @param matcher
    *     the matcher to wrap
    * @param values
    *     optional values to insert into the tokenised description
-   *
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> describedAs(java.lang.String description, org.hamcrest.Matcher<T> matcher, java.lang.Object... values) {
@@ -100,9 +125,10 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat(Arrays.asList("bar", "baz"), everyItem(startsWith("ba")))</pre>
    *
+   * @param <U>
+   *     the matcher type.
    * @param itemMatcher
    *     the matcher to apply to every item provided by the examined {@link Iterable}
-   *
    * @return The matcher.
    */
   public static <U> org.hamcrest.Matcher<java.lang.Iterable<? extends U>> everyItem(org.hamcrest.Matcher<U> itemMatcher) {
@@ -117,6 +143,10 @@ public class CoreMatchers {
    * instead of:
    * <pre>assertThat(cheese, equalTo(smelly))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param matcher
+   *     the matcher {@link org.hamcrest.core.Is#is}.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> is(org.hamcrest.Matcher<T> matcher) {
@@ -130,6 +160,10 @@ public class CoreMatchers {
    * instead of:
    * <pre>assertThat(cheese, is(equalTo(smelly)))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param value
+   *     the value for matcher {@link org.hamcrest.core.Is#is}.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> is(T value) {
@@ -143,6 +177,10 @@ public class CoreMatchers {
    * instead of:
    * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param type
+   *     the type for matcher {@link org.hamcrest.core.Is#isA}.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> isA(java.lang.Class<T> type) {
@@ -164,7 +202,6 @@ public class CoreMatchers {
    * 
    * @param description
    *     a meaningful {@link String} used when describing itself
-   *
    * @return The matcher.
    */
   public static org.hamcrest.Matcher<java.lang.Object> anything(java.lang.String description) {
@@ -178,10 +215,11 @@ public class CoreMatchers {
    * will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem(startsWith("ba")))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param itemMatcher
    *     the matcher to apply to items provided by the examined {@link Iterable}
-   *
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(org.hamcrest.Matcher<? super T> itemMatcher) {
@@ -195,10 +233,11 @@ public class CoreMatchers {
    * will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem("bar"))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param item
    *     the item to compare against the items provided by the examined {@link Iterable}
-   *
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(T item) {
@@ -212,10 +251,11 @@ public class CoreMatchers {
    * the examined {@link Iterable} will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems(endsWith("z"), endsWith("o")))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param itemMatchers
    *     the matchers to apply to items provided by the examined {@link Iterable}
-   *
    * @return The matcher.
    */
   @SafeVarargs
@@ -230,10 +270,11 @@ public class CoreMatchers {
    * examined {@link Iterable} will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems("baz", "foo"))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param items
    *     the items to compare against the items provided by the examined {@link Iterable}
-   *
    * @return The matcher.
    */
   @SafeVarargs
@@ -262,6 +303,10 @@ public class CoreMatchers {
    * assertThat(new String[] {"foo", "bar"}, equalTo(new String[] {"foo", "bar"}));
    * </pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param operand
+   *     for matcher {@link org.hamcrest.core.IsEqual#equalTo}.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> equalTo(T operand) {
@@ -272,6 +317,8 @@ public class CoreMatchers {
    * Creates an {@link org.hamcrest.core.IsEqual} matcher that does not enforce the values being
    * compared to be of the same static type.
    *
+   * @param operand
+   *     the object for matcher {@link org.hamcrest.core.IsEqual#equalToObject}.
    * @return The matcher.
    */
   public static org.hamcrest.Matcher<java.lang.Object> equalToObject(java.lang.Object operand) {
@@ -289,6 +336,10 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat(new Canoe(), any(Canoe.class));</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param type
+   *     the type for matcher {@link org.hamcrest.core.IsInstanceOf#any}.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> any(java.lang.Class<T> type) {
@@ -304,6 +355,10 @@ public class CoreMatchers {
    * For example:
    * <pre>assertThat(new Canoe(), instanceOf(Paddlable.class));</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param type
+   *     the type for matcher {@link org.hamcrest.core.IsInstanceOf#instanceOf}.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> instanceOf(java.lang.Class<?> type) {
@@ -315,7 +370,9 @@ public class CoreMatchers {
    * it will match.
    * For example:
    * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param matcher
    *     the matcher whose sense should be inverted
    * @return The matcher.
@@ -330,7 +387,9 @@ public class CoreMatchers {
    * <pre>assertThat(cheese, is(not(smelly)))</pre>
    * instead of:
    * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param value
    *     the value that any examined object should <b>not</b> equal
    * @return The matcher.
@@ -359,7 +418,9 @@ public class CoreMatchers {
    * <pre>assertThat(cheese, is(notNullValue(X.class)))</pre>
    * instead of:
    * <pre>assertThat(cheese, is(not(nullValue(X.class))))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param type
    *     dummy parameter used to infer the generic type of the returned matcher
    * @return The matcher.
@@ -384,7 +445,9 @@ public class CoreMatchers {
    * single dummy argument to facilitate type inference.
    * For example:
    * <pre>assertThat(cheese, is(nullValue(Cheese.class))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param type
    *     dummy parameter used to infer the generic type of the returned matcher
    * @return The matcher.
@@ -396,7 +459,9 @@ public class CoreMatchers {
   /**
    * Creates a matcher that matches only when the examined object is the same instance as
    * the specified target object.
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param target
    *     the target instance against which others should be assessed
    * @return The matcher.
@@ -408,7 +473,9 @@ public class CoreMatchers {
   /**
    * Creates a matcher that matches only when the examined object is the same instance as
    * the specified target object.
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param target
    *     the target instance against which others should be assessed
    * @return The matcher.

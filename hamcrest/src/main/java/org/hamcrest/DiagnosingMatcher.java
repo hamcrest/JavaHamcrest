@@ -3,7 +3,7 @@ package org.hamcrest;
 /**
  * TODO(ngd): Document.
  *
- * @param <T>
+ * @param <T> the type of matcher being diagnosed.
  */
 public abstract class DiagnosingMatcher<T> extends BaseMatcher<T> {
 

@@ -108,6 +108,9 @@ public abstract class BaseDescription implements Description {
      * Append the String <var>str</var> to the description.  
      * The default implementation passes every character to {@link #append(char)}.  
      * Override in subclasses to provide an efficient implementation.
+     *
+     * @param str
+     *     the string to append.
      */
     protected void append(String str) {
         for (int i = 0; i < str.length(); i++) {
@@ -116,7 +119,10 @@ public abstract class BaseDescription implements Description {
     }
     
     /**
-     * Append the char <var>c</var> to the description.  
+     * Append the char <var>c</var> to the description.
+     *
+     * @param c
+     *     the char to append.
      */
     protected abstract void append(char c);
 

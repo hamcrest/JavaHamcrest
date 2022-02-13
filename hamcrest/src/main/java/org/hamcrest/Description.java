@@ -15,6 +15,8 @@ public interface Description {
     /**
      * Appends some plain text to the description.
      *
+     * @param text
+     *     the text to append.
      * @return the update description when displaying the matcher error.
      */
     Description appendText(String text);
@@ -22,6 +24,8 @@ public interface Description {
     /**
      * Appends the description of a {@link SelfDescribing} value to this description.
      *
+     * @param value
+     *     the value to append.
      * @return the update description when displaying the matcher error.
      */
     Description appendDescriptionOf(SelfDescribing value);
@@ -29,6 +33,8 @@ public interface Description {
     /**
      * Appends an arbitrary value to the description.
      *
+     * @param value
+     *     the object to append.
      * @return the update description when displaying the matcher error.
      */
     Description appendValue(Object value);
@@ -36,6 +42,16 @@ public interface Description {
     /**
      * Appends a list of values to the description.
      *
+     * @param <T>
+     *     the description type.
+     * @param start
+     *     the prefix.
+     * @param separator
+     *     the separator.
+     * @param end
+     *     the suffix.
+     * @param values
+     *     the values to append.
      * @return the update description when displaying the matcher error.
      */
     <T> Description appendValueList(String start, String separator, String end,
@@ -44,6 +60,16 @@ public interface Description {
     /**
      * Appends a list of values to the description.
      *
+     * @param <T>
+     *     the description type.
+     * @param start
+     *     the prefix.
+     * @param separator
+     *     the separator.
+     * @param end
+     *     the suffix.
+     * @param values
+     *     the values to append.
      * @return the update description when displaying the matcher error.
      */
     <T> Description appendValueList(String start, String separator, String end,
@@ -52,7 +78,14 @@ public interface Description {
     /**
      * Appends a list of {@link org.hamcrest.SelfDescribing} objects
      * to the description.
-     *
+     * @param start
+     *     the prefix.
+     * @param separator
+     *     the separator.
+     * @param end
+     *     the suffix.
+     * @param values
+     *     the values to append.
      * @return the update description when displaying the matcher error.
      */
     Description appendList(String start, String separator, String end,
