@@ -34,7 +34,7 @@ public class IsEmptyCollectionTest extends AbstractMatcherTest {
     }
 
     private void needs(@SuppressWarnings("unused") Matcher<Collection<String>> bar) { }
-    
+
     private static Collection<String> collectionOfValues() {
         return new ArrayList<String>(asList("one", "three"));
     }

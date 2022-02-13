@@ -18,7 +18,7 @@ public class ArrayMatchingInOrderTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("[<1>, <2>]", arrayContaining(equalTo(1), equalTo(2)));
     }
-    
+
     public void testMatchesItemsInOrder() {
       assertMatches("in order", arrayContaining(1, 2, 3), new Integer[] {1, 2, 3});
       assertMatches("single", arrayContaining(1), new Integer[] {1});
@@ -29,7 +29,7 @@ public class ArrayMatchingInOrderTest extends AbstractMatcherTest {
       assertMatches("in order", arrayContaining(equalTo(1), equalTo(2), equalTo(3)), new Integer[] {1, 2, 3});
       assertMatches("single", arrayContaining(equalTo(1)), new Integer[] {1});
     }
-    
+
     public void testMismatchesItemsInOrder() {
       Matcher<Integer[]> matcher = arrayContaining(1, 2, 3);
       assertMismatchDescription("was null", matcher, null);

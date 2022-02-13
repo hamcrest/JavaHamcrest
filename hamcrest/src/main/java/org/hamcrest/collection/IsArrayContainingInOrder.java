@@ -27,7 +27,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     public boolean matchesSafely(E[] item) {
         return iterableMatcher.matches(asList(item));
     }
-    
+
     @Override
     public void describeMismatchSafely(E[] item, Description mismatchDescription) {
       iterableMatcher.describeMismatch(asList(item), mismatchDescription);

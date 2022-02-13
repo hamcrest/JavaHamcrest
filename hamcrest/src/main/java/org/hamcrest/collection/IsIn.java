@@ -13,11 +13,11 @@ public class IsIn<T> extends BaseMatcher<T> {
     public IsIn(Collection<T> collection) {
         this.collection = collection;
     }
-    
+
     public IsIn(T[] elements) {
         collection = Arrays.asList(elements);
     }
-    
+
     @SuppressWarnings("SuspiciousMethodCalls")
     @Override
     public boolean matches(Object o) {
@@ -29,7 +29,7 @@ public class IsIn<T> extends BaseMatcher<T> {
         buffer.appendText("one of ");
         buffer.appendValueList("{", ", ", "}", collection);
     }
-    
+
     /**
      * Creates a matcher that matches when the examined object is found within the
      * specified collection.
@@ -47,7 +47,7 @@ public class IsIn<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> isIn(Collection<T> collection) {
         return in(collection);
     }
-    
+
     /**
      * Creates a matcher that matches when the examined object is found within the
      * specified collection.
@@ -81,7 +81,7 @@ public class IsIn<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> isIn(T[] elements) {
         return in(elements);
     }
-    
+
     /**
      * Creates a matcher that matches when the examined object is found within the
      * specified array.
@@ -97,7 +97,7 @@ public class IsIn<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> in(T[] elements) {
         return new IsIn<>(elements);
     }
-    
+
     /**
      * Creates a matcher that matches when the examined object is equal to one of the
      * specified elements.
@@ -116,7 +116,7 @@ public class IsIn<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> isOneOf(T... elements) {
         return oneOf(elements);
     }
-    
+
     /**
      * Creates a matcher that matches when the examined object is equal to one of the
      * specified elements.

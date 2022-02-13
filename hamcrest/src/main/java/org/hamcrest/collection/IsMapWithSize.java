@@ -56,7 +56,7 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
     public static <K, V> Matcher<Map<? extends K, ? extends V>> aMapWithSize(int size) {
         return IsMapWithSize.aMapWithSize(equalTo(size));
     }
-    
+
     /**
      * Creates a matcher for {@link java.util.Map}s that matches when the <code>size()</code> method returns
      * zero.

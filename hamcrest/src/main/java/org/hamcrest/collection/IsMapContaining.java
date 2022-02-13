@@ -84,7 +84,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
     public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(K key, V value) {
         return new IsMapContaining<>(equalTo(key), equalTo(value));
     }
-    
+
     /**
      * Creates a matcher for {@link java.util.Map}s matching when the examined {@link java.util.Map} contains
      * at least one key that satisfies the specified matcher.

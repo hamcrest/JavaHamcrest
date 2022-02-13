@@ -24,7 +24,7 @@ public class HasItemInArray<T> extends TypeSafeMatcher<T[]> {
     public boolean matchesSafely(T[] actual) {
         return collectionMatcher.matches(asList(actual));
     }
-    
+
     @Override
     public void describeMismatchSafely(T[] actual, Description mismatchDescription) {
         collectionMatcher.describeMismatch(asList(actual), mismatchDescription);

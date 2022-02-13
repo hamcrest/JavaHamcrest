@@ -66,12 +66,12 @@ public final class IsMapWithSizeTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("a map with size <3>", aMapWithSize(equalTo(3)));
     }
-    
+
     public void testCompilesWithATypedMap() {
       Map<String, Integer> arrayList = new HashMap<String, Integer>();
       MatcherAssert.assertThat(arrayList, aMapWithSize(0));
     }
-    
+
     private static <K, V> Map<K, V> mapWithKeys(K... keys) {
         final Map<K, V> result = new HashMap<K, V>();
         for (K key : keys) {
