@@ -48,9 +48,9 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
     public void testCanMatchItemWhenCollectionHoldsSuperclass() // Issue 24
     {
       final Set<Number> s = new HashSet<Number>();
-      s.add(Integer.valueOf(2));
-      assertThat(s, new IsCollectionContaining<Number>(new IsEqual<Number>(Integer.valueOf(2))));
-      assertThat(s, IsCollectionContaining.hasItem(Integer.valueOf(2)));
+      s.add(2);
+      assertThat(s, new IsCollectionContaining<Number>(new IsEqual<Number>(2)));
+      assertThat(s, IsCollectionContaining.hasItem(2));
     }
 
     @SuppressWarnings("unchecked")
