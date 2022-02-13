@@ -190,4 +190,5 @@ public final class ComparatorMatcherBuilder<T> {
     public Matcher<T> lessThanOrEqualTo(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.EQUAL, includeComparatorInDescription);
     }
+
 }
