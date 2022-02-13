@@ -140,7 +140,12 @@ public class IsUnmodifiableCollection<E> extends TypeSafeDiagnosingMatcher<Colle
             }
         });
         for (Constructor<?> declaredConstructor : declaredConstructors) {
-            declaredConstructor.setAccessible(true);
+            try {
+                declaredConstructor.setAccessible(true);
+            } catch (Exception ignore) {
+                // Since Java 17 it is impossible to make jdk* classes accessible without manipulation with modules:
+                // module java.base does not "opens java.util" to unnamed module
+            }
             final int parametersNumber = declaredConstructor.getParameterTypes().length;
 
             Object[] arguments = new Object[parametersNumber];
