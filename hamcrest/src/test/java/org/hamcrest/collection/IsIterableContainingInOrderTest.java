@@ -13,6 +13,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 @SuppressWarnings("unchecked")
 public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
+
     // temporary hack until the Java type system works
     private final Matcher<Iterable<? extends WithValue>> contains123 = contains(value(1), value(2), value(3));
 

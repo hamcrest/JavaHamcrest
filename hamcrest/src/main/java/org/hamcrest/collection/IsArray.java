@@ -11,6 +11,7 @@ import java.util.Arrays;
  * The array size must equal the number of element matchers.
  */
 public class IsArray<T> extends TypeSafeMatcher<T[]> {
+
     private final Matcher<? super T>[] elementMatchers;
 
     public IsArray(Matcher<? super T>[] elementMatchers) {

@@ -15,6 +15,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * @deprecated As of release 2.1, replaced by {@link ArrayMatching}.
  */
 public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
+
     private final Collection<Matcher<? super E>> matchers;
     private final IsIterableContainingInOrder<E> iterableMatcher;
 

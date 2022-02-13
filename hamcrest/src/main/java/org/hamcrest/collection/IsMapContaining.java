@@ -11,6 +11,7 @@ import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? extends V>> {
+
     private final Matcher<? super K> keyMatcher;
     private final Matcher<? super V> valueMatcher;
 

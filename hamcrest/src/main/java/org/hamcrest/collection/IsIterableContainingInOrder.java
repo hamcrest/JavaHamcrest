@@ -12,6 +12,7 @@ import static java.util.Collections.singletonList;
 import static org.hamcrest.collection.ArrayMatching.asEqualMatchers;
 
 public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
+
     private final List<Matcher<? super E>> matchers;
 
     public IsIterableContainingInOrder(List<Matcher<? super E>> matchers) {
