@@ -56,6 +56,7 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
      *     the class of the event to match on
      * @param source
      *     the source of the event
+     * @return The matcher.
      */
     public static Matcher<EventObject> eventFrom(Class<? extends EventObject> eventClass, Object source) {
         return new IsEventFrom(eventClass, source);
@@ -69,6 +70,7 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
      *
      * @param source
      *     the source of the event
+     * @return The matcher.
      */
     public static Matcher<EventObject> eventFrom(Object source) {
         return eventFrom(EventObject.class, source);
