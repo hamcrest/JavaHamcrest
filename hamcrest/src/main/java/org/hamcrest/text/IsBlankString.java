@@ -5,8 +5,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-import java.util.regex.Pattern;
-
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.IsNull.nullValue;
 
@@ -18,13 +16,20 @@ public final class IsBlankString extends TypeSafeMatcher<String> {
     @SuppressWarnings("unchecked")
     private static final Matcher<String> NULL_OR_BLANK_INSTANCE = anyOf(nullValue(), BLANK_INSTANCE);
 
-    private static final Pattern REGEX_WHITESPACE = Pattern.compile("\\s*");
-
     private IsBlankString() { }
 
     @Override
     public boolean matchesSafely(String item) {
-        return REGEX_WHITESPACE.matcher(item).matches();
+        final int length = item.length();
+        int offset = 0;
+        while (offset < length) {
+            final int codePoint = item.codePointAt(offset);
+            if (!Character.isWhitespace(codePoint)) {
+                return false;
+            }
+            offset += Character.charCount(codePoint);
+        }
+        return true;
     }
 
     @Override
