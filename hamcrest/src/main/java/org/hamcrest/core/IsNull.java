@@ -29,7 +29,7 @@ public class IsNull<T> extends BaseMatcher<T> {
      * @return The matcher.
      */
     public static Matcher<Object> nullValue() {
-        return new IsNull<Object>();
+        return new IsNull<>();
     }
 
     /**
@@ -58,7 +58,7 @@ public class IsNull<T> extends BaseMatcher<T> {
      * @return The matcher.
      */
     public static <T> Matcher<T> nullValue(Class<T> type) {
-        return new IsNull<T>();
+        return new IsNull<>();
     }
 
     /**

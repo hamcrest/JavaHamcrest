@@ -23,7 +23,7 @@ public final class ComparatorMatcherBuilder<T> {
      * @return The matcher.
      */
     public static <T extends Comparable<T>> ComparatorMatcherBuilder<T> usingNaturalOrdering() {
-        return new ComparatorMatcherBuilder<T>(new Comparator<T>() {
+        return new ComparatorMatcherBuilder<>(new Comparator<T>() {
             @Override
             public int compare(T o1, T o2) {
                 return o1.compareTo(o2);
@@ -47,7 +47,7 @@ public final class ComparatorMatcherBuilder<T> {
      * @return The matcher.
      */
     public static <T> ComparatorMatcherBuilder<T> comparedBy(Comparator<T> comparator) {
-        return new ComparatorMatcherBuilder<T>(comparator, true);
+        return new ComparatorMatcherBuilder<>(comparator, true);
     }
 
     private ComparatorMatcherBuilder(Comparator<T> comparator, boolean includeComparatorInDescription) {
@@ -128,7 +128,7 @@ public final class ComparatorMatcherBuilder<T> {
      * @return The matcher.
      */
     public Matcher<T> comparesEqualTo(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.EQUAL, includeComparatorInDescription);
+        return new ComparatorMatcher<>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.EQUAL, includeComparatorInDescription);
     }
 
     /**
@@ -143,7 +143,7 @@ public final class ComparatorMatcherBuilder<T> {
      * @return The matcher.
      */
     public Matcher<T> greaterThan(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.GREATER_THAN, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
+        return new ComparatorMatcher<>(comparator, value, ComparatorMatcher.GREATER_THAN, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
     }
 
     /**
@@ -158,7 +158,7 @@ public final class ComparatorMatcherBuilder<T> {
      * @return The matcher.
      */
     public Matcher<T> greaterThanOrEqualTo(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
+        return new ComparatorMatcher<>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
     }
 
     /**
@@ -173,7 +173,7 @@ public final class ComparatorMatcherBuilder<T> {
      * @return The matcher.
      */
     public Matcher<T> lessThan(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.LESS_THAN, includeComparatorInDescription);
+        return new ComparatorMatcher<>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.LESS_THAN, includeComparatorInDescription);
     }
 
     /**
@@ -188,7 +188,7 @@ public final class ComparatorMatcherBuilder<T> {
      * @return The matcher.
      */
     public Matcher<T> lessThanOrEqualTo(T value) {
-        return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.EQUAL, includeComparatorInDescription);
+        return new ComparatorMatcher<>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.EQUAL, includeComparatorInDescription);
     }
 
 }

@@ -68,7 +68,7 @@ public class DescribedAs<T> extends BaseMatcher<T> {
      * @return The matcher.
      */
     public static <T> Matcher<T> describedAs(String description, Matcher<T> matcher, Object... values) {
-        return new DescribedAs<T>(description, matcher, values);
+        return new DescribedAs<>(description, matcher, values);
     }
 
 }
