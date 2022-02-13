@@ -6,6 +6,7 @@ import java.io.IOException;
  * A {@link Description} that is stored as a string.
  */
 public class StringDescription extends BaseDescription {
+
     private final Appendable out;
 
     public StringDescription() {

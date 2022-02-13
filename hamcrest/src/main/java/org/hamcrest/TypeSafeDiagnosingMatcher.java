@@ -15,6 +15,7 @@ import org.hamcrest.internal.ReflectiveTypeFinder;
  * @author Steve Freeman
  */
 public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
+
     private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("matchesSafely", 2, 0);
     private final Class<?> expectedType;
 

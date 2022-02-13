@@ -9,8 +9,8 @@ package org.hamcrest;
  * Based on https://github.com/npryce/maybe-java
  * @author Steve Freeman 2012 http://www.hamcrest.com
  */
-
 public abstract class Condition<T> {
+
     public static final NotMatched<Object> NOT_MATCHED = new NotMatched<Object>();
 
     public interface Step<I, O> {

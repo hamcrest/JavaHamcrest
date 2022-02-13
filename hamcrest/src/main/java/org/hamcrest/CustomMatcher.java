@@ -21,6 +21,7 @@ package org.hamcrest;
  * @param <T> The type of object being matched.
  */
 public abstract class CustomMatcher<T> extends BaseMatcher<T> {
+
     private final String fixedDescription;
 
     public CustomMatcher(String description) {

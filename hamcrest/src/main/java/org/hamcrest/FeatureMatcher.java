@@ -10,6 +10,7 @@ import org.hamcrest.internal.ReflectiveTypeFinder;
  * @param <U> The type of the feature to be matched
  */
 public abstract class FeatureMatcher<T, U> extends TypeSafeDiagnosingMatcher<T> {
+
   private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("featureValueOf", 1, 0);
   private final Matcher<? super U> subMatcher;
   private final String featureDescription;

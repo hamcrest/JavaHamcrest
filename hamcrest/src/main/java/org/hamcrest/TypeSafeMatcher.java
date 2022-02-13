@@ -13,6 +13,7 @@ import org.hamcrest.internal.ReflectiveTypeFinder;
  * @author Nat Pryce
  */
 public abstract class TypeSafeMatcher<T> extends BaseMatcher<T> {
+
     private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("matchesSafely", 1, 0);
 
     final private Class<?> expectedType;

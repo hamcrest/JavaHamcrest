@@ -7,6 +7,7 @@ import static org.junit.Assert.assertFalse;
 
 @SuppressWarnings("WeakerAccess")
 public final class TypeSafeMatcherTest {
+
     private final Matcher<String> matcher = new TypeSafeMatcherSubclass();
 
     public static class TypeSafeMatcherSubclass extends TypeSafeMatcher<String> {
