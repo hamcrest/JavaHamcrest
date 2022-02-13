@@ -56,4 +56,5 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
     public static <E> Matcher<Iterable<E>> iterableWithSize(int size) {
         return iterableWithSize(equalTo(size));
     }
+
 }

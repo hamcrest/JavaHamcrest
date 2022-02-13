@@ -41,4 +41,5 @@ public class IsInTest extends AbstractMatcherTest {
             "one of {\"a\", \"b\", \"c\"}", 
             StringDescription.toString(isIn));
     }
+
 }

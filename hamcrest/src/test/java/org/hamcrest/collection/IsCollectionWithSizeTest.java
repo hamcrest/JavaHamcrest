@@ -74,4 +74,5 @@ public class IsCollectionWithSizeTest extends AbstractMatcherTest {
       ArrayList<String> arrayList = new ArrayList<String>();
       MatcherAssert.assertThat(arrayList, hasSize(0));
     }
+
 }

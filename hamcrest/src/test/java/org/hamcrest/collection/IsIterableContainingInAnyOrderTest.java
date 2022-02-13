@@ -51,4 +51,5 @@ public class IsIterableContainingInAnyOrderTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("iterable with items [<1>, <2>] in any order", containsInAnyOrder(1, 2));
     }
+
 }

@@ -72,4 +72,5 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
     public static <K, V> Matcher<Map<? extends K, ? extends V>> anEmptyMap() {
         return IsMapWithSize.aMapWithSize(equalTo(0));
     }
+
 }

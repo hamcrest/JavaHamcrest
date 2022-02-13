@@ -79,4 +79,5 @@ public final class IsMapWithSizeTest extends AbstractMatcherTest {
         }
         return result;
     }
+
 }

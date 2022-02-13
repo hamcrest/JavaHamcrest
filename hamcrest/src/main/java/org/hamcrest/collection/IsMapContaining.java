@@ -148,4 +148,5 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
     public static <V> Matcher<Map<?, ? extends V>> hasValue(V value) {
         return new IsMapContaining<>(anything(), equalTo(value));
     }
+
 }

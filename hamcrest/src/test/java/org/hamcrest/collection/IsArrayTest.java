@@ -56,4 +56,5 @@ public class IsArrayTest extends AbstractMatcherTest {
         };
         assertMismatchDescription("element <0> didn't match", array(m, equalTo("b")), new String[]{"c", "b"});
     }
+
 }

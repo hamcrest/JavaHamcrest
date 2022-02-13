@@ -161,5 +161,5 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
     public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(Collection<Matcher<? super T>> itemMatchers) {
         return new IsIterableContainingInAnyOrder<>(itemMatchers);
     }
-}
 
+}

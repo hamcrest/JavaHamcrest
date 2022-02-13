@@ -56,4 +56,5 @@ public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E
     public static <E> Matcher<Collection<E>> emptyCollectionOf(Class<E> unusedToForceReturnType) {
       return (Matcher)empty();
     }
+
 }

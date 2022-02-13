@@ -42,4 +42,5 @@ public class ArrayAsIterableMatcher<E> extends TypeSafeMatcher<E[]> {
       description.appendList("[", ", ", "]", matchers)
           .appendText(" ").appendText(message);
   }
+
 }

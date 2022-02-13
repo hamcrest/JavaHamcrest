@@ -73,4 +73,5 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
         @Override protected Integer featureValueOf(WithValue actual) { return actual.getValue(); }
       };
     }
+
 }
