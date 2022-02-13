@@ -13,12 +13,12 @@ public class IsInTest extends AbstractMatcherTest {
 
     @Override
     protected Matcher<?> createMatcher() {
-        return new IsIn<String>(elements);
+        return new IsIn<>(elements);
     }
 
     public void testReturnsTrueIfArgumentIsInCollection() {
         Collection<String> collection = Arrays.asList(elements);
-        Matcher<String> isIn = new IsIn<String>(collection);
+        Matcher<String> isIn = new IsIn<>(collection);
 
         assertMatches("a", isIn, "a");
         assertMatches("b", isIn, "b");
@@ -27,7 +27,7 @@ public class IsInTest extends AbstractMatcherTest {
     }
 
     public void testReturnsTrueIfArgumentIsInArray() {
-        Matcher<String> isIn = new IsIn<String>(elements);
+        Matcher<String> isIn = new IsIn<>(elements);
 
         assertMatches("a", isIn, "a");
         assertMatches("b", isIn, "b");
@@ -36,7 +36,7 @@ public class IsInTest extends AbstractMatcherTest {
     }
 
     public void testHasReadableDescription() {
-        Matcher<String> isIn = new IsIn<String>(elements);
+        Matcher<String> isIn = new IsIn<>(elements);
 
         assertEquals("description",
             "one of {\"a\", \"b\", \"c\"}",

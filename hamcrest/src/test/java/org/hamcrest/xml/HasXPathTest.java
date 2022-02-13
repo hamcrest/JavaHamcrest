@@ -48,7 +48,7 @@ public final class HasXPathTest {
 
         @Override
         public Iterator<String> getPrefixes(String namespaceURI) {
-            HashSet<String> prefixes = new HashSet<String>();
+            HashSet<String> prefixes = new HashSet<>();
             String prefix = getPrefix(namespaceURI);
             if (prefix != null) {
                 prefixes.add(prefix);

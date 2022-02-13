@@ -38,7 +38,7 @@ public class IsSame<T> extends BaseMatcher<T> {
      * @return The matcher.
      */
     public static <T> Matcher<T> sameInstance(T target) {
-        return new IsSame<T>(target);
+        return new IsSame<>(target);
     }
 
     /**
@@ -52,7 +52,7 @@ public class IsSame<T> extends BaseMatcher<T> {
      * @return The matcher.
      */
     public static <T> Matcher<T> theInstance(T target) {
-        return new IsSame<T>(target);
+        return new IsSame<>(target);
     }
 
 }

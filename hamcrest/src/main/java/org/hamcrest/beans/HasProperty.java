@@ -53,7 +53,7 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
      * @return The matcher.
      */
     public static <T> Matcher<T> hasProperty(String propertyName) {
-        return new HasProperty<T>(propertyName);
+        return new HasProperty<>(propertyName);
     }
 
 }

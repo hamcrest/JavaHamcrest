@@ -101,7 +101,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
      * @return The matcher.
      */
     public static <T> IsArray<T> array(Matcher<? super T>... elementMatchers) {
-        return new IsArray<T>(elementMatchers);
+        return new IsArray<>(elementMatchers);
     }
 
 }

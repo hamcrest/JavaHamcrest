@@ -33,7 +33,7 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
      * @return The matcher.
      */
     public static <E> Matcher<Iterable<? extends E>> emptyIterable() {
-        return new IsEmptyIterable<E>();
+        return new IsEmptyIterable<>();
     }
 
     /**

@@ -11,7 +11,7 @@ package org.hamcrest;
  */
 public abstract class Condition<T> {
 
-    public static final NotMatched<Object> NOT_MATCHED = new NotMatched<Object>();
+    public static final NotMatched<Object> NOT_MATCHED = new NotMatched<>();
 
     public interface Step<I, O> {
         Condition<O> apply(I value, Description mismatch);
@@ -31,7 +31,7 @@ public abstract class Condition<T> {
     }
 
     public static <T> Condition<T> matched(final T theValue, final Description mismatch) {
-        return new Matched<T>(theValue, mismatch);
+        return new Matched<>(theValue, mismatch);
     }
 
     private static final class Matched<T> extends Condition<T> {

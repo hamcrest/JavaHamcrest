@@ -40,7 +40,7 @@ public class IsNot<T> extends BaseMatcher<T>  {
      * @return The matcher.
      */
     public static <T> Matcher<T> not(Matcher<T> matcher) {
-        return new IsNot<T>(matcher);
+        return new IsNot<>(matcher);
     }
 
     /**

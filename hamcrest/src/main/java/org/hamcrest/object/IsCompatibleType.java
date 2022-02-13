@@ -40,7 +40,7 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
      * @return The matcher.
      */
     public static <T> Matcher<Class<?>> typeCompatibleWith(Class<T> baseType) {
-        return new IsCompatibleType<T>(baseType);
+        return new IsCompatibleType<>(baseType);
     }
 
 }
