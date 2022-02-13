@@ -84,4 +84,5 @@ public class ComparatorMatcherTest extends AbstractMatcherTest {
             return value - other.value;
         }
     }
+
 }

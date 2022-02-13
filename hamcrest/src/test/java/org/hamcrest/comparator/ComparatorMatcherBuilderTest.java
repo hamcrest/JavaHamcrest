@@ -125,4 +125,5 @@ public class ComparatorMatcherBuilderTest extends AbstractMatcherTest {
             return value - other.value;
         }
     }
+
 }
