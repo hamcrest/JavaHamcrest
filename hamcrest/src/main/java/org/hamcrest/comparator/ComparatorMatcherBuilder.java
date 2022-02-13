@@ -18,6 +18,8 @@ public final class ComparatorMatcherBuilder<T> {
      * For example:
      * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().lessThanOrEqualTo(1))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @return The matcher.
      */
     public static <T extends Comparable<T>> ComparatorMatcherBuilder<T> usingNaturalOrdering() {
@@ -38,6 +40,10 @@ public final class ComparatorMatcherBuilder<T> {
      * }
      * }).lessThan(4))</pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param comparator
+     *     the comparator for the matcher to use.
      * @return The matcher.
      */
     public static <T> ComparatorMatcherBuilder<T> comparedBy(Comparator<T> comparator) {
