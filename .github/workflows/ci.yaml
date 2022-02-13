@@ -14,9 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'temurin'
           java-version: 8
+          cache: 'gradle'
       - name: Gradle Clean Build
         run: ./gradlew clean build
 
@@ -37,9 +39,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'temurin'
           java-version: ${{ matrix.java }}
+          cache: 'gradle'
       - name: Gradle Clean Build
         run: ./gradlew clean build
   qa:
@@ -49,9 +53,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'temurin'
           java-version: 8
+          cache: 'gradle'
       - name: Gradle JavaDoc
         run: ./gradlew javadoc
 
