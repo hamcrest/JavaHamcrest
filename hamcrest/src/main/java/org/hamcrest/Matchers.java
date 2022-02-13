@@ -1000,11 +1000,11 @@ public class Matchers {
    * <p>For example:</p>
    * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder(Arrays.asList(equalTo("bar"), equalTo("foo"))))</pre>
    * 
-   * @param itemMatchers
-   *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
+   * @param items
+   *     a list of matchers or any objects, each of which must be satisfied by an item provided by an examined {@link Iterable}
    */
-  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? extends T>> containsInAnyOrder(java.util.Collection<org.hamcrest.Matcher<? super T>> itemMatchers) {
-    return org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder(itemMatchers);
+  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? extends T>> containsInAnyOrder(java.util.Collection<? super T> items) {
+    return org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder((T[])items.toArray());
   }
 
   /**
