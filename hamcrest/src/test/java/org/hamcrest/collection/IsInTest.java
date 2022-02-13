@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public class IsInTest extends AbstractMatcherTest {
+
     String[] elements = {"a", "b", "c"};
 
     @Override

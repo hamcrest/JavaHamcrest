@@ -10,6 +10,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * Matches if array size satisfies a nested matcher.
  */
 public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
+
     public IsArrayWithSize(Matcher<? super Integer> sizeMatcher) {
         super(sizeMatcher, "an array with size","array size");
     }

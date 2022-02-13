@@ -16,6 +16,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  */
 @Deprecated
 public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
+
     private final IsIterableContainingInAnyOrder<E> iterableMatcher;
     private final Collection<Matcher<? super E>> matchers;
 

@@ -11,6 +11,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * Matches if collection size satisfies a nested matcher.
  */
 public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends E>, Integer> {
+
     public IsCollectionWithSize(Matcher<? super Integer> sizeMatcher) {
       super(sizeMatcher, "a collection with size", "collection size");
     }

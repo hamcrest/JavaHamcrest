@@ -13,6 +13,7 @@ import static java.util.Arrays.asList;
  * @author Steve Freeman 2016 http://www.hamcrest.com
  */
 public class ArrayAsIterableMatcher<E> extends TypeSafeMatcher<E[]> {
+
   protected final TypeSafeDiagnosingMatcher<Iterable<? extends E>> iterableMatcher;
   private final String message;
   protected final Collection<Matcher<? super E>> matchers;

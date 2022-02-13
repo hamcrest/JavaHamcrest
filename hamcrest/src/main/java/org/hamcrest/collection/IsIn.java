@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public class IsIn<T> extends BaseMatcher<T> {
+
     private final Collection<T> collection;
 
     public IsIn(Collection<T> collection) {

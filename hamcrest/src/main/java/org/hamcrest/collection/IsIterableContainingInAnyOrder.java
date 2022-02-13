@@ -12,6 +12,7 @@ import java.util.List;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
+
     private final Collection<Matcher<? super T>> matchers;
 
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
