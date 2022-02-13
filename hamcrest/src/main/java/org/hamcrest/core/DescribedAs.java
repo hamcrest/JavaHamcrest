@@ -15,15 +15,15 @@ public class DescribedAs<T> extends BaseMatcher<T> {
     private final String descriptionTemplate;
     private final Matcher<T> matcher;
     private final Object[] values;
-    
-    private final static Pattern ARG_PATTERN = Pattern.compile("%([0-9]+)"); 
-    
+
+    private final static Pattern ARG_PATTERN = Pattern.compile("%([0-9]+)");
+
     public DescribedAs(String descriptionTemplate, Matcher<T> matcher, Object[] values) {
         this.descriptionTemplate = descriptionTemplate;
         this.matcher = matcher;
         this.values = values.clone();
     }
-    
+
     @Override
     public boolean matches(Object o) {
         return matcher.matches(o);
@@ -32,19 +32,19 @@ public class DescribedAs<T> extends BaseMatcher<T> {
     @Override
     public void describeTo(Description description) {
         java.util.regex.Matcher arg = ARG_PATTERN.matcher(descriptionTemplate);
-        
+
         int textStart = 0;
         while (arg.find()) {
             description.appendText(descriptionTemplate.substring(textStart, arg.start()));
             description.appendValue(values[parseInt(arg.group(1))]);
             textStart = arg.end();
         }
-        
+
         if (textStart < descriptionTemplate.length()) {
             description.appendText(descriptionTemplate.substring(textStart));
         }
     }
-    
+
     @Override
     public void describeMismatch(Object item, Description description) {
         matcher.describeMismatch(item, description);

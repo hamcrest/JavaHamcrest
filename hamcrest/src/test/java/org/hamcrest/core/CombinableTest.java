@@ -29,7 +29,7 @@ public final class CombinableTest {
     @Test public void
     acceptsAndRejectsThreeAnds() {
         CombinableMatcher<? super Integer> tripleAnd = NOT_3_AND_NOT_4.and(equalTo(2));
-        
+
         assertMatches("tripleAnd didn't pass", tripleAnd, 2);
         assertDoesNotMatch("tripleAnd didn't fail", tripleAnd, 3);
     }
@@ -49,7 +49,7 @@ public final class CombinableTest {
     @Test public void
     acceptsAndRejectsThreeOrs() {
         final CombinableMatcher<Integer> tripleOr = EITHER_3_OR_4.or(equalTo(11));
-        
+
         assertMatches("tripleOr didn't pass", tripleOr, 11);
         assertDoesNotMatch("tripleOr didn't fail", tripleOr, 9);
     }

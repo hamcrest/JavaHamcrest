@@ -54,7 +54,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
             .appendDescriptionOf(elementMatcher);
     }
 
-    
+
     /**
      * Creates a matcher for {@link Iterable}s that only matches when a single pass over the
      * examined {@link Iterable} yields at least one item that is matched by the specified
@@ -109,15 +109,15 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
     @SafeVarargs
     public static <T> Matcher<Iterable<T>> hasItems(Matcher<? super T>... itemMatchers) {
         List<Matcher<? super Iterable<T>>> all = new ArrayList<>(itemMatchers.length);
-        
+
         for (Matcher<? super T> elementMatcher : itemMatchers) {
           // Doesn't forward to hasItem() method so compiler can sort out generics.
           all.add(new IsIterableContaining<>(elementMatcher));
         }
-        
+
         return allOf(all);
     }
-    
+
     /**
      * Creates a matcher for {@link Iterable}s that matches when consecutive passes over the
      * examined {@link Iterable} yield at least one item that is equal to the corresponding
@@ -138,7 +138,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
         for (T item : items) {
             all.add(hasItem(item));
         }
-        
+
         return allOf(all);
     }
 

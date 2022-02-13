@@ -25,7 +25,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
         delegate.describeTo(description);
     }
 
-    
+
     /**
      * Creates a matcher for {@link Iterable}s that only matches when a single pass over the
      * examined {@link Iterable} yields at least one item that is matched by the specified
@@ -85,7 +85,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
     public static <T> Matcher<Iterable<T>> hasItems(Matcher<? super T>... itemMatchers) {
         return IsIterableContaining.hasItems(itemMatchers);
     }
-    
+
     /**
      * Creates a matcher for {@link Iterable}s that matches when consecutive passes over the
      * examined {@link Iterable} yield at least one item that is equal to the corresponding

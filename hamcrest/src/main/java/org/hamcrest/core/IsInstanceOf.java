@@ -25,14 +25,14 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
     }
 
     private static Class<?> matchableClass(Class<?> expectedClass) {
-      if (boolean.class.equals(expectedClass)) return Boolean.class; 
-      if (byte.class.equals(expectedClass)) return Byte.class; 
-      if (char.class.equals(expectedClass)) return Character.class; 
-      if (double.class.equals(expectedClass)) return Double.class; 
-      if (float.class.equals(expectedClass)) return Float.class; 
-      if (int.class.equals(expectedClass)) return Integer.class; 
-      if (long.class.equals(expectedClass)) return Long.class; 
-      if (short.class.equals(expectedClass)) return Short.class; 
+      if (boolean.class.equals(expectedClass)) return Boolean.class;
+      if (byte.class.equals(expectedClass)) return Byte.class;
+      if (char.class.equals(expectedClass)) return Character.class;
+      if (double.class.equals(expectedClass)) return Double.class;
+      if (float.class.equals(expectedClass)) return Float.class;
+      if (int.class.equals(expectedClass)) return Integer.class;
+      if (long.class.equals(expectedClass)) return Long.class;
+      if (short.class.equals(expectedClass)) return Short.class;
       return expectedClass;
     }
 
@@ -42,12 +42,12 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
         mismatch.appendText("null");
         return false;
       }
-      
+
       if (!matchableClass.isInstance(item)) {
         mismatch.appendValue(item).appendText(" is a " + item.getClass().getName());
         return false;
       }
-      
+
       return true;
     }
 
@@ -75,7 +75,7 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
     public static <T> Matcher<T> instanceOf(Class<?> type) {
         return (Matcher<T>) new IsInstanceOf(type);
     }
-    
+
     /**
      * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
      * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the

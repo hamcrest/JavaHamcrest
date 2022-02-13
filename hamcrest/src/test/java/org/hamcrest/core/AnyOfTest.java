@@ -15,7 +15,7 @@ public final class AnyOfTest {
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<String> matcher = anyOf(equalTo("irrelevant"), startsWith("irr"));
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }
@@ -23,7 +23,7 @@ public final class AnyOfTest {
     @Test public void
     evaluatesToTheTheLogicalDisjunctionOfTwoOtherMatchers() {
         Matcher<String> matcher = anyOf(startsWith("goo"), endsWith("ood"));
-        
+
         assertMatches("didn't pass both sub-matchers", matcher, "good");
         assertMatches("didn't pass second sub-matcher", matcher, "mood");
         assertMatches("didn't pass first sub-matcher", matcher, "goon");
@@ -33,7 +33,7 @@ public final class AnyOfTest {
     @Test public void
     evaluatesToTheTheLogicalDisjunctionOfManyOtherMatchers() {
         Matcher<String> matcher = anyOf(startsWith("g"), startsWith("go"), endsWith("d"), startsWith("go"), startsWith("goo"));
-        
+
         assertMatches("didn't pass middle sub-matcher", matcher, "vlad");
         assertDoesNotMatch("didn't fail all sub-matchers", matcher, "flan");
     }
@@ -45,7 +45,7 @@ public final class AnyOfTest {
                 equalTo(new SampleBaseClass("bad")),
                 equalTo(new SampleBaseClass("good")),
                 equalTo(new SampleSubClass("ugly")));
-        
+
         assertMatches("didn't pass middle sub-matcher", matcher, new SampleSubClass("good"));
     }
 

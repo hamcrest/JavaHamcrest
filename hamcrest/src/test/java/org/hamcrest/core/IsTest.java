@@ -13,7 +13,7 @@ public final class IsTest {
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<String> matcher = is("something");
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }
@@ -35,7 +35,7 @@ public final class IsTest {
     @Test public void
     providesConvenientShortcutForIsEqualTo() {
         final Matcher<String> matcher = is("A");
-        
+
         assertMatches(matcher, "A");
         assertDoesNotMatch(is("A"), "B");
     }
