@@ -19,6 +19,8 @@ public class EasyMock2Adapter implements IArgumentMatcher {
      * EasyMock {@link org.easymock.IArgumentMatcher} and
      * report it to EasyMock so it can be kept track of.
      *
+     * @param matcher
+     *     the matcher to adapt to EasyMock constraint.
      * @return The EasyMock matcher.
      */
     public static IArgumentMatcher adapt(Matcher<?> matcher) {
