@@ -4,15 +4,30 @@ name: Java CI
 on: [push]
 
 jobs:
+  build:
+    name: Build Default Java/OS
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 7
+      - name: Gradle Clean Build
+        run: ./gradlew clean build
+
   test:
+    name: Test JDK ${{ matrix.java }}, ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04]
         java: [7, 8, 11, 17, 18-ea, 19-ea]
+        exclude:
+          - os: ubuntu-18.04
+            java: 7
       fail-fast: false
       max-parallel: 4
-    name: Test JDK ${{ matrix.java }}, ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v2
@@ -20,7 +35,18 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
-      - name: Build with Gradle
-        run: ./gradlew clean build javadoc
+      - name: Gradle Clean Build
+        run: ./gradlew clean build
+  qa:
+    name: QA Steps
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 7
+      - name: Gradle JavaDoc
+        run: ./gradlew javadoc
 
 ...
