@@ -170,4 +170,5 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext) {
         return new HasXPath(xPath, namespaceContext, WITH_ANY_CONTENT, XPathConstants.NODE);
     }
+
 }
