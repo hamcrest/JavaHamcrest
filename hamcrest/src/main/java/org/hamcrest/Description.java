@@ -91,7 +91,6 @@ public interface Description {
     Description appendList(String start, String separator, String end,
                            Iterable<? extends SelfDescribing> values);
 
-
     public static final class NullDescription implements Description {
       @Override
       public Description appendDescriptionOf(SelfDescribing value) {

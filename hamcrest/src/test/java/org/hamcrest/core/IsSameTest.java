@@ -7,7 +7,6 @@ import static org.hamcrest.AbstractMatcherTest.*;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.hamcrest.core.IsSame.theInstance;
 
-
 public final class IsSameTest {
 
     @Test public void

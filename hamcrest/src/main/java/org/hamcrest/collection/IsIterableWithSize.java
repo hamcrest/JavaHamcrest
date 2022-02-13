@@ -13,7 +13,6 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
         super(sizeMatcher, "an iterable with size", "iterable size");
     }
 
-
     @Override
     protected Integer featureValueOf(Iterable<E> actual) {
       int size = 0;

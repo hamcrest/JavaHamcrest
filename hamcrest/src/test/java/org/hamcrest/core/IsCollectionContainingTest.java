@@ -32,7 +32,6 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
         final Matcher<Iterable<? super String>> matcher1 = hasItem(mismatchable("a"));
         assertMismatchDescription("mismatches were: [mismatched: b, mismatched: c]", matcher1, asList("b", "c"));
 
-
         final Matcher<Iterable<? super String>> matcher2 = hasItem(equalTo("a"));
         assertMismatchDescription("was empty", matcher2, new ArrayList<String>());
     }
@@ -80,7 +79,6 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
                 matcher5,
                 asList("e", "c", "b", "d")); // 'a' missing
     }
-
 
     private static Matcher<? super String> mismatchable(final String string) {
       return new TypeSafeDiagnosingMatcher<String>() {

@@ -4,7 +4,6 @@ import org.hamcrest.Description;
 import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Matcher;
 
-
 /**
  * Tests whether the value is an instance of a class.
  * Classes of basic types will be converted to the relevant "Object" classes

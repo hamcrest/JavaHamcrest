@@ -25,7 +25,6 @@ public class CharSequenceLengthTest extends AbstractMatcherTest {
         assertMismatchDescription("length was <6>", matcher, "aaaaaa");
     }
 
-
     public void test_matchesRelativeLengthOf_CharSequence() {
         final Matcher<CharSequence> matcher = hasLength(lessThan(4));
         assertMatches(matcher, "aaa");

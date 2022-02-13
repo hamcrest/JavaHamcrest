@@ -8,7 +8,6 @@ import java.util.EventObject;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.object.IsEventFrom.eventFrom;
 
-
 public class IsEventFromTest extends AbstractMatcherTest {
 
     @Override

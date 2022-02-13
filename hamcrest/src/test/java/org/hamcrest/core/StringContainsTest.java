@@ -6,7 +6,6 @@ import org.hamcrest.Matcher;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.core.StringContains.containsStringIgnoringCase;
 
-
 public class StringContainsTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
     final Matcher<String> stringContains = containsString(EXCERPT);

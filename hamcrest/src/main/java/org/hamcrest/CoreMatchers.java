@@ -36,7 +36,6 @@ public class CoreMatchers {
     return org.hamcrest.core.AllOf.allOf(matchers);
   }
 
-
   /**
    * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
    * For example:

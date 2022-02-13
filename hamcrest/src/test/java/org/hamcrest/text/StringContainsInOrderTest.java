@@ -6,7 +6,6 @@ import org.hamcrest.Matcher;
 import static java.util.Arrays.asList;
 import static org.hamcrest.text.StringContainsInOrder.stringContainsInOrder;
 
-
 public class StringContainsInOrderTest extends AbstractMatcherTest {
     final StringContainsInOrder matcher = new StringContainsInOrder(asList("a", "b", "c", "c"));
 

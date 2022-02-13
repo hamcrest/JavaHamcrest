@@ -11,7 +11,6 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   private static final ExampleBean expectedBean = new ExampleBean("same", 1, aValue);
   private static final ExampleBean actualBean = new ExampleBean("same", 1, aValue);
 
-
   @Override
   protected Matcher<?> createMatcher() {
     return samePropertyValuesAs(expectedBean);
@@ -66,7 +65,6 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
             samePropertyValuesAs(expectedBean, "stringProperty", "intProperty", "valueProperty"),
             differentBean);
   }
-
 
   public void testDescribesItself() {
     assertDescription(

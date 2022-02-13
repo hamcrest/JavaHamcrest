@@ -47,7 +47,6 @@ public class ComparatorMatcherTest extends AbstractMatcherTest {
         assertThat(0, lessThan(1));
     }
 
-
     public void testComparesObjectsForEquality() {
         assertThat(3, comparesEqualTo(3));
         assertThat("aa", comparesEqualTo("aa"));

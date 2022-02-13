@@ -14,7 +14,6 @@ public class StringRegularExpressionTest extends AbstractMatcherTest {
   @Override
   protected Matcher<?> createMatcher() { return matcher; }
 
-
   public void testMatchingRegex() {
     assertMatches(matcher, "12");
     assertDoesNotMatch(matcher, "abc");

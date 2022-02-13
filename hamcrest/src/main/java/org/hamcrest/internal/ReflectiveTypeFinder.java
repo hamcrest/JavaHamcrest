@@ -59,7 +59,6 @@ public class ReflectiveTypeFinder {
               && !method.isSynthetic();
   }
 
-
   /**
    * @param method The method from which to extract
    * @return The type we're looking for

@@ -25,7 +25,6 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
         delegate.describeTo(description);
     }
 
-
     /**
      * Creates a matcher for {@link Iterable}s that only matches when a single pass over the
      * examined {@link Iterable} yields at least one item that is matched by the specified

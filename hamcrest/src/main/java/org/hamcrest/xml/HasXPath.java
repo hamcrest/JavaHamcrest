@@ -105,7 +105,6 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
         }
     }
 
-
     /**
      * Creates a matcher of {@link org.w3c.dom.Node}s that matches when the examined node has a value at the
      * specified <code>xPath</code> that satisfies the specified <code>valueMatcher</code>.

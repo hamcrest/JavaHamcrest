@@ -46,7 +46,6 @@ public final class IsEqualIgnoringCaseTest {
         equalToIgnoringCase(null);
     }
 
-
     @Test public void
     describesItself() {
         final Matcher<String> matcher = equalToIgnoringCase("heLLo");

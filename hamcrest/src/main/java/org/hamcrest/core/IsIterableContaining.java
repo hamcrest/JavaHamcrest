@@ -54,7 +54,6 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
             .appendDescriptionOf(elementMatcher);
     }
 
-
     /**
      * Creates a matcher for {@link Iterable}s that only matches when a single pass over the
      * examined {@link Iterable} yields at least one item that is matched by the specified

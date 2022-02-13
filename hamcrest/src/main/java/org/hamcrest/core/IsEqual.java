@@ -6,7 +6,6 @@ import org.hamcrest.Matcher;
 
 import java.lang.reflect.Array;
 
-
 /**
  * Is the value equal to another value, as tested by the
  * {@link java.lang.Object#equals} invokedMethod?
