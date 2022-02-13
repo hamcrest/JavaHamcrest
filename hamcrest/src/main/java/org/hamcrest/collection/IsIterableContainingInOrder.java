@@ -91,6 +91,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      *
      * @param items
      *     the items that must equal the items provided by an examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> contains(E... items) {
@@ -107,6 +108,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * @param itemMatcher
      *     the matcher that must be satisfied by the single item provided by an
      *     examined {@link Iterable}
+     * @return The matcher.
      */
     @SuppressWarnings("unchecked")
     public static <E> Matcher<Iterable<? extends E>> contains(final Matcher<? super E> itemMatcher) {
@@ -123,6 +125,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      *
      * @param itemMatchers
      *     the matchers that must be satisfied by the items provided by an examined {@link Iterable}
+     * @return The matcher.
      */
     @SafeVarargs
     public static <E> Matcher<Iterable<? extends E>> contains(Matcher<? super E>... itemMatchers) {
@@ -143,6 +146,7 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by the corresponding item provided by
      *     an examined {@link Iterable}
+     * @return The matcher.
      */
     public static <E> Matcher<Iterable<? extends E>> contains(List<Matcher<? super E>> itemMatchers) {
         return new IsIterableContainingInOrder<>(itemMatchers);

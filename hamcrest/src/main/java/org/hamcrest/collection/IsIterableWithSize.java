@@ -32,6 +32,7 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
      *
      * @param sizeMatcher
      *     a matcher for the number of items that should be yielded by an examined {@link Iterable}
+     * @return The matcher.
      */
     public static <E> Matcher<Iterable<E>> iterableWithSize(Matcher<? super Integer> sizeMatcher) {
         return new IsIterableWithSize<E>(sizeMatcher);
@@ -46,6 +47,7 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
      *
      * @param size
      *     the number of items that should be yielded by an examined {@link Iterable}
+     * @return The matcher.
      */
     public static <E> Matcher<Iterable<E>> iterableWithSize(int size) {
         return iterableWithSize(equalTo(size));

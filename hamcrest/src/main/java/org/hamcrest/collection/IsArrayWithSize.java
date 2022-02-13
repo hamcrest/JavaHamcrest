@@ -27,6 +27,7 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      *
      * @param sizeMatcher
      *     a matcher for the length of an examined array
+     * @return The matcher.
      */
     public static <E> Matcher<E[]> arrayWithSize(Matcher<? super Integer> sizeMatcher) {
         return new IsArrayWithSize<>(sizeMatcher);
@@ -40,6 +41,7 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      *
      * @param size
      *     the length that an examined array must have for a positive match
+     * @return The matcher.
      */
     public static <E> Matcher<E[]> arrayWithSize(int size) {
         return arrayWithSize(equalTo(size));
@@ -50,6 +52,8 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      * is zero.
      * For example:
      * <pre>assertThat(new String[0], emptyArray())</pre>
+     *
+     * @return The matcher.
      */
     public static <E> Matcher<E[]> emptyArray() {
         return describedAs("an empty array", IsArrayWithSize.<E>arrayWithSize(0));
