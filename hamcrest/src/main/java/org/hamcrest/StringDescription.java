@@ -18,7 +18,7 @@ public class StringDescription extends BaseDescription {
     
     /**
      * Return the description of a {@link SelfDescribing} object as a String.
-     * 
+     *
      * @param selfDescribing
      *   The object to be described.
      * @return

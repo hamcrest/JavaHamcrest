@@ -43,7 +43,7 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
      * the specified expectedString, ignoring case.
      * For example:
      * <pre>assertThat("Foo", equalToIgnoringCase("FOO"))</pre>
-     * 
+     *
      * @param expectedString
      *     the expected value of matched strings
      */

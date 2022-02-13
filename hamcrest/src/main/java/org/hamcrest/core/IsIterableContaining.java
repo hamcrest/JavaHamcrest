@@ -62,7 +62,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      * will stop as soon as a matching item is found.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem(startsWith("ba")))</pre>
-     * 
+     *
      * @param itemMatcher
      *     the matcher to apply to items provided by the examined {@link Iterable}
      */
@@ -77,7 +77,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      * will stop as soon as a matching item is found.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem("bar"))</pre>
-     * 
+     *
      * @param item
      *     the item to compare against the items provided by the examined {@link Iterable}
      */
@@ -93,7 +93,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      * the examined {@link Iterable} will stop as soon as a matching item is found.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems(endsWith("z"), endsWith("o")))</pre>
-     * 
+     *
      * @param itemMatchers
      *     the matchers to apply to items provided by the examined {@link Iterable}
      */
@@ -116,7 +116,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      * examined {@link Iterable} will stop as soon as a matching item is found.
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems("baz", "foo"))</pre>
-     * 
+     *
      * @param items
      *     the items to compare against the items provided by the examined {@link Iterable}
      */

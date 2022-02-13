@@ -111,7 +111,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * specified <code>xPath</code> that satisfies the specified <code>valueMatcher</code>.
      * For example:
      * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", equalTo("Cheddar")))</pre>
-     * 
+     *
      * @param xPath
      *     the target xpath
      * @param valueMatcher
@@ -127,7 +127,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * the specified <code>valueMatcher</code>.
      * For example:
      * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", myNs, equalTo("Cheddar")))</pre>
-     * 
+     *
      * @param xPath
      *     the target xpath
      * @param namespaceContext
@@ -144,7 +144,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * at the specified <code>xPath</code>, with any content.
      * For example:
      * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese"))</pre>
-     * 
+     *
      * @param xPath
      *     the target xpath
      */
@@ -157,7 +157,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * at the specified <code>xPath</code> within the specified namespace context, with any content.
      * For example:
      * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", myNs))</pre>
-     * 
+     *
      * @param xPath
      *     the target xpath
      * @param namespaceContext

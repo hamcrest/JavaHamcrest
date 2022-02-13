@@ -55,7 +55,7 @@ public class DescribedAs<T> extends BaseMatcher<T> {
      * delegated to the decorated matcher, including its mismatch description.
      * For example:
      * <pre>describedAs("a big decimal equal to %0", equalTo(myBigDecimal), myBigDecimal.toPlainString())</pre> 
-     * 
+     *
      * @param description
      *     the new description for the wrapped matcher
      * @param matcher

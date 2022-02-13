@@ -33,7 +33,7 @@ public class PropertyUtil {
 
     /**
      * Returns all the property descriptors for the class associated with the given object
-     * 
+     *
      * @param fromObj Use the class of this object
      * @param stopClass Don't include any properties from this ancestor class upwards.
      * @return Property descriptors

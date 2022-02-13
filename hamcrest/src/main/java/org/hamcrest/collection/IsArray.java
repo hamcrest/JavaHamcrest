@@ -52,7 +52,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
     
     /**
      * Returns the string that starts the description.
-     * 
+     *
      * Can be overridden in subclasses to customise how the matcher is
      * described.
      */
@@ -62,7 +62,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
 
     /**
      * Returns the string that separates the elements in the description.
-     * 
+     *
      * Can be overridden in subclasses to customise how the matcher is
      * described.
      */
@@ -72,7 +72,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
 
     /**
      * Returns the string that ends the description.
-     * 
+     *
      * Can be overridden in subclasses to customise how the matcher is
      * described.
      */
@@ -86,7 +86,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
      * each matcher[i] is satisfied by array[i].
      * For example:
      * <pre>assertThat(new Integer[]{1,2,3}, is(array(equalTo(1), equalTo(2), equalTo(3))))</pre>
-     * 
+     *
      * @param elementMatchers
      *     the matchers that the elements of examined arrays should satisfy
      */

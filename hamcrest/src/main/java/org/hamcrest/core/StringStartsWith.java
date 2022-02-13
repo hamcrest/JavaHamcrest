@@ -20,7 +20,7 @@ public class StringStartsWith extends SubstringMatcher {
      * </p>
      * For example:
      * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
-     * 
+     *
      * @param prefix
      *      the substring that the returned matcher will expect at the start of any examined string
      */

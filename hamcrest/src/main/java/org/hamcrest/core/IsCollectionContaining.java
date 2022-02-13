@@ -35,7 +35,7 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem(startsWith("ba")))</pre>
      *
      * @deprecated As of version 2.1, use {@link IsIterableContaining#hasItem(Matcher)}.
-     * 
+     *
      * @param itemMatcher
      *     the matcher to apply to items provided by the examined {@link Iterable}
      */

@@ -20,7 +20,7 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
      * returns a value that satisfies the specified matcher.
      * For example:
      * <pre>assertThat(true, hasToString(equalTo("TRUE")))</pre>
-     * 
+     *
      * @param toStringMatcher
      *     the matcher used to verify the toString result
      */
@@ -33,7 +33,7 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
      * returns a value equalTo the specified string.
      * For example:
      * <pre>assertThat(true, hasToString("TRUE"))</pre>
-     * 
+     *
      * @param expectedToString
      *     the expected toString result
      */
