@@ -25,4 +25,5 @@ public class SelfDescribingValueIterator<T> implements Iterator<SelfDescribing> 
     public void remove() {
         values.remove();
     }
+
 }

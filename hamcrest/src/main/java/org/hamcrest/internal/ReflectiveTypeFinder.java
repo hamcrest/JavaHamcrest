@@ -67,4 +67,5 @@ public class ReflectiveTypeFinder {
   private Class<?> expectedTypeFrom(Method method) {
       return method.getParameterTypes()[typedParameter];
   }
+
 }

@@ -14,4 +14,5 @@ public class SelfDescribingValue<T> implements SelfDescribing {
     public void describeTo(Description description) {
         description.appendValue(value);
     }
+
 }
