@@ -20,7 +20,7 @@ public class StringDescription extends BaseDescription {
      * Return the description of a {@link SelfDescribing} object as a String.
      *
      * @param selfDescribing
-     *   The object to be described.
+     *    The object to be described.
      * @return
      *   The description of the object.
      */
@@ -31,6 +31,8 @@ public class StringDescription extends BaseDescription {
     /**
      * Alias for {@link #toString(SelfDescribing)}.
      *
+     * @param selfDescribing
+     *    The object to be described.
      * @return
      *   The description of the object.
      */

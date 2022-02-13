@@ -15,6 +15,10 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param matchers
+   *     all the matchers must pass.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> allOf(java.lang.Iterable<org.hamcrest.Matcher<? super T>> matchers) {
@@ -26,6 +30,10 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param matchers
+   *     all the matchers must pass.
    * @return The matcher.
    */
   @SafeVarargs
@@ -38,6 +46,12 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param first
+   *     first matcher that must pass.
+   * @param second
+   *     second matcher that must pass.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second) {
@@ -49,6 +63,14 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param first
+   *     first matcher that must pass.
+   * @param second
+   *     second matcher that must pass.
+   * @param third
+   *     third matcher that must pass.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third) {
@@ -60,6 +82,16 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param first
+   *     first matcher that must pass.
+   * @param second
+   *     second matcher that must pass.
+   * @param third
+   *     third matcher that must pass.
+   * @param fourth
+   *     fourth matcher that must pass.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth) {
@@ -71,6 +103,18 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param first
+   *     first matcher that must pass.
+   * @param second
+   *     second matcher that must pass.
+   * @param third
+   *     third matcher that must pass.
+   * @param fourth
+   *     fourth matcher that must pass.
+   * @param fifth
+   *     fifth matcher that must pass.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth) {
@@ -82,6 +126,20 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param first
+   *     first matcher that must pass.
+   * @param second
+   *     second matcher that must pass.
+   * @param third
+   *     third matcher that must pass.
+   * @param fourth
+   *     fourth matcher that must pass.
+   * @param fifth
+   *     fifth matcher that must pass.
+   * @param sixth
+   *     sixth matcher that must pass.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth, org.hamcrest.Matcher<? super T> sixth) {
@@ -93,6 +151,10 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param matchers
+   *     any the matchers must pass.
    * @return The matcher.
    */
   public static <T> org.hamcrest.core.AnyOf<T> anyOf(java.lang.Iterable<org.hamcrest.Matcher<? super T>> matchers) {
@@ -104,6 +166,10 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param matchers
+   *     any the matchers must pass.
    * @return The matcher.
    */
   @SafeVarargs
@@ -116,6 +182,12 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param first
+   *     first matcher to check.
+   * @param second
+   *     second matcher to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second) {
@@ -127,6 +199,14 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param first
+   *     first matcher to check.
+   * @param second
+   *     second matcher to check.
+   * @param third
+   *     third matcher to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third) {
@@ -138,6 +218,16 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param first
+   *     first matcher to check.
+   * @param second
+   *     second matcher to check.
+   * @param third
+   *     third matcher to check.
+   * @param fourth
+   *     fourth matcher to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth) {
@@ -149,6 +239,18 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param first
+   *     first matcher to check.
+   * @param second
+   *     second matcher to check.
+   * @param third
+   *     third matcher to check.
+   * @param fourth
+   *     fourth matcher to check.
+   * @param fifth
+   *     fifth matcher to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth) {
@@ -160,6 +262,20 @@ public class Matchers {
    * For example:
    * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param first
+   *     first matcher to check.
+   * @param second
+   *     second matcher to check.
+   * @param third
+   *     third matcher to check.
+   * @param fourth
+   *     fourth matcher to check.
+   * @param fifth
+   *     fifth matcher to check.
+   * @param sixth
+   *     sixth matcher to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.core.AnyOf<T> anyOf(org.hamcrest.Matcher<? super T> first, org.hamcrest.Matcher<? super T> second, org.hamcrest.Matcher<? super T> third, org.hamcrest.Matcher<? super T> fourth, org.hamcrest.Matcher<? super T> fifth, org.hamcrest.Matcher<? super T> sixth) {
@@ -171,6 +287,10 @@ public class Matchers {
    * For example:
    * <pre>assertThat("fab", both(containsString("a")).and(containsString("b")))</pre>
    *
+   * @param <LHS>
+   *     the matcher type.
+   * @param matcher
+   *     the matcher to combine, and both must pass.
    * @return The matcher.
    */
   public static <LHS> org.hamcrest.core.CombinableMatcher.CombinableBothMatcher<LHS> both(org.hamcrest.Matcher<? super LHS> matcher) {
@@ -182,6 +302,10 @@ public class Matchers {
    * For example:
    * <pre>assertThat("fan", either(containsString("a")).or(containsString("b")))</pre>
    *
+   * @param <LHS>
+   *     the matcher type.
+   * @param matcher
+   *     the matcher to combine, and either must pass.
    * @return The matcher.
    */
   public static <LHS> org.hamcrest.core.CombinableMatcher.CombinableEitherMatcher<LHS> either(org.hamcrest.Matcher<? super LHS> matcher) {
@@ -193,7 +317,9 @@ public class Matchers {
    * delegated to the decorated matcher, including its mismatch description.
    * For example:
    * <pre>describedAs("a big decimal equal to %0", equalTo(myBigDecimal), myBigDecimal.toPlainString())</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param description
    *     the new description for the wrapped matcher
    * @param matcher
@@ -212,7 +338,9 @@ public class Matchers {
    * <code>itemMatcher</code>.
    * For example:
    * <pre>assertThat(Arrays.asList("bar", "baz"), everyItem(startsWith("ba")))</pre>
-   * 
+   *
+   * @param <U>
+   *     the matcher type.
    * @param itemMatcher
    *     the matcher to apply to every item provided by the examined {@link Iterable}
    * @return The matcher.
@@ -229,6 +357,10 @@ public class Matchers {
    * instead of:
    * <pre>assertThat(cheese, equalTo(smelly))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param matcher
+   *     the matcher to wrap.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> is(org.hamcrest.Matcher<T> matcher) {
@@ -242,6 +374,10 @@ public class Matchers {
    * instead of:
    * <pre>assertThat(cheese, is(equalTo(smelly)))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param value
+   *     the value to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> is(T value) {
@@ -255,6 +391,10 @@ public class Matchers {
    * instead of:
    * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param type
+   *     the type to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> isA(java.lang.Class<?> type) {
@@ -288,7 +428,9 @@ public class Matchers {
    * will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem(startsWith("ba")))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param itemMatcher
    *     the matcher to apply to items provided by the examined {@link Iterable}
    * @return The matcher.
@@ -304,7 +446,9 @@ public class Matchers {
    * will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem("bar"))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param item
    *     the item to compare against the items provided by the examined {@link Iterable}
    * @return The matcher.
@@ -320,7 +464,9 @@ public class Matchers {
    * the examined {@link Iterable} will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems(endsWith("z"), endsWith("o")))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param itemMatchers
    *     the matchers to apply to items provided by the examined {@link Iterable}
    * @return The matcher.
@@ -337,7 +483,9 @@ public class Matchers {
    * examined {@link Iterable} will stop as soon as a matching item is found.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems("baz", "foo"))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param items
    *     the items to compare against the items provided by the examined {@link Iterable}
    * @return The matcher.
@@ -368,6 +516,10 @@ public class Matchers {
    * assertThat(new String[] {"foo", "bar"}, equalTo(new String[] {"foo", "bar"}));
    * </pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param operand
+   *     the value to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> equalTo(T operand) {
@@ -378,6 +530,8 @@ public class Matchers {
    * Creates an {@link org.hamcrest.core.IsEqual} matcher that does not enforce the values being
    * compared to be of the same static type.
    *
+   * @param operand
+   *     the value to check.
    * @return The matcher.
    */
   public static org.hamcrest.Matcher<java.lang.Object> equalToObject(java.lang.Object operand) {
@@ -395,6 +549,10 @@ public class Matchers {
    * For example:
    * <pre>assertThat(new Canoe(), instanceOf(Canoe.class));</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param type
+   *     the type to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> any(java.lang.Class<T> type) {
@@ -410,6 +568,10 @@ public class Matchers {
    * For example:
    * <pre>assertThat(new Canoe(), instanceOf(Paddlable.class));</pre>
    *
+   * @param <T>
+   *     the matcher type.
+   * @param type
+   *     the type to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> instanceOf(java.lang.Class<?> type) {
@@ -421,7 +583,9 @@ public class Matchers {
    * it will match.
    * For example:
    * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param matcher
    *     the matcher whose sense should be inverted
    * @return The matcher.
@@ -436,7 +600,9 @@ public class Matchers {
    * <pre>assertThat(cheese, is(not(smelly)))</pre>
    * instead of:
    * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param value
    *     the value that any examined object should <b>not</b> equal
    * @return The matcher.
@@ -465,7 +631,9 @@ public class Matchers {
    * <pre>assertThat(cheese, is(notNullValue(X.class)))</pre>
    * instead of:
    * <pre>assertThat(cheese, is(not(nullValue(X.class))))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param type
    *     dummy parameter used to infer the generic type of the returned matcher
    * @return The matcher.
@@ -490,7 +658,9 @@ public class Matchers {
    * single dummy argument to facilitate type inference.
    * For example:
    * <pre>assertThat(cheese, is(nullValue(Cheese.class))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param type
    *     dummy parameter used to infer the generic type of the returned matcher
    * @return The matcher.
@@ -502,7 +672,9 @@ public class Matchers {
   /**
    * Creates a matcher that matches only when the examined object is the same instance as
    * the specified target object.
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param target
    *     the target instance against which others should be assessed
    * @return The matcher.
@@ -514,7 +686,9 @@ public class Matchers {
   /**
    * Creates a matcher that matches only when the examined object is the same instance as
    * the specified target object.
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param target
    *     the target instance against which others should be assessed
    * @return The matcher.
@@ -647,7 +821,9 @@ public class Matchers {
    * each matcher[i] is satisfied by array[i].
    * For example:
    * <pre>assertThat(new Integer[]{1,2,3}, is(array(equalTo(1), equalTo(2), equalTo(3))))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param elementMatchers
    *     the matchers that the elements of examined arrays should satisfy
    * @return The matcher.
@@ -663,7 +839,9 @@ public class Matchers {
    * of the examined array will stop as soon as a matching element is found.
    * For example:
    * <pre>assertThat(new String[] {"foo", "bar"}, hasItemInArray(startsWith("ba")))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param elementMatcher
    *     the matcher to apply to elements in examined arrays
    * @return The matcher.
@@ -678,7 +856,9 @@ public class Matchers {
    * <pre>assertThat(hasItemInArray(x))</pre>
    * instead of:
    * <pre>assertThat(hasItemInArray(equalTo(x)))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param element
    *     the element that should be present in examined arrays
    * @return The matcher.
@@ -693,7 +873,9 @@ public class Matchers {
    * the examined array must be of the same length as the number of specified items.
    * For example:
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayContaining("foo", "bar"))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param items
    *     the items that must equal the items within an examined array
    * @return The matcher.
@@ -709,7 +891,9 @@ public class Matchers {
    * must be of the same length as the number of specified matchers.
    * For example:
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayContaining(equalTo("foo"), equalTo("bar")))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     the matchers that must be satisfied by the items in the examined array
    * @return The matcher.
@@ -725,7 +909,9 @@ public class Matchers {
    * must be of the same length as the specified list of matchers.
    * For example:
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayContaining(Arrays.asList(equalTo("foo"), equalTo("bar"))))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by the corresponding item in an examined array
    * @return The matcher.
@@ -750,7 +936,9 @@ public class Matchers {
    * For example:
    * </p>
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayContainingInAnyOrder(equalTo("bar"), equalTo("foo")))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by an entry in an examined array
    * @return The matcher.
@@ -776,7 +964,9 @@ public class Matchers {
    * For example:
    * </p>
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayContainingInAnyOrder(Arrays.asList(equalTo("bar"), equalTo("foo"))))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by an item provided by an examined array
    * @return The matcher.
@@ -799,7 +989,9 @@ public class Matchers {
    * For example:
    * </p>
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayContainingInAnyOrder("bar", "foo"))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param items
    *     the items that must equal the entries of an examined array, in any order
    * @return The matcher.
@@ -814,7 +1006,9 @@ public class Matchers {
    * satisfies the specified matcher.
    * For example:
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayWithSize(equalTo(2)))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param sizeMatcher
    *     a matcher for the length of an examined array
    * @return The matcher.
@@ -828,7 +1022,9 @@ public class Matchers {
    * equals the specified <code>size</code>.
    * For example:
    * <pre>assertThat(new String[]{"foo", "bar"}, arrayWithSize(2))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param size
    *     the length that an examined array must have for a positive match
    * @return The matcher.
@@ -843,6 +1039,8 @@ public class Matchers {
    * For example:
    * <pre>assertThat(new String[0], emptyArray())</pre>
    *
+   * @param <E>
+   *     the matcher type.
    * @return The matcher.
    */
   public static <E> org.hamcrest.Matcher<E[]> emptyArray() {
@@ -854,7 +1052,11 @@ public class Matchers {
    * a value that satisfies the specified matcher.
    * For example:
    * <pre>assertThat(myMap, is(aMapWithSize(equalTo(2))))</pre>
-   * 
+   *
+   * @param <K>
+   *     the map key type.
+   * @param <V>
+   *     the map value type.
    * @param sizeMatcher
    *     a matcher for the size of an examined {@link java.util.Map}
    * @return The matcher.
@@ -868,7 +1070,11 @@ public class Matchers {
    * a value equal to the specified <code>size</code>.
    * For example:
    * <pre>assertThat(myMap, is(aMapWithSize(2)))</pre>
-   * 
+   *
+   * @param <K>
+   *     the map key type.
+   * @param <V>
+   *     the map value type.
    * @param size
    *     the expected size of an examined {@link java.util.Map}
    * @return The matcher.
@@ -883,6 +1089,10 @@ public class Matchers {
    * For example:
    * <pre>assertThat(myMap, is(anEmptyMap()))</pre>
    *
+   * @param <K>
+   *     the map key type.
+   * @param <V>
+   *     the map value type.
    * @return The matcher.
    */
   public static <K, V> org.hamcrest.Matcher<java.util.Map<? extends K,? extends V>> anEmptyMap() {
@@ -894,7 +1104,9 @@ public class Matchers {
    * a value that satisfies the specified matcher.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), hasSize(equalTo(2)))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param sizeMatcher
    *     a matcher for the size of an examined {@link java.util.Collection}
    * @return The matcher.
@@ -908,7 +1120,9 @@ public class Matchers {
    * a value equal to the specified <code>size</code>.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), hasSize(2))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param size
    *     the expected size of an examined {@link java.util.Collection}
    * @return The matcher.
@@ -923,6 +1137,8 @@ public class Matchers {
    * For example:
    * <pre>assertThat(new ArrayList&lt;String&gt;(), is(empty()))</pre>
    *
+   * @param <E>
+   *     the matcher type.
    * @return The matcher.
    */
   public static <E> org.hamcrest.Matcher<java.util.Collection<? extends E>> empty() {
@@ -934,7 +1150,9 @@ public class Matchers {
    * method returns <code>true</code>.
    * For example:
    * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyCollectionOf(String.class)))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param unusedToForceReturnType
    *     the type of the collection's content
    * @return The matcher.
@@ -948,6 +1166,8 @@ public class Matchers {
    * For example:
    * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyIterable()))</pre>
    *
+   * @param <E>
+   *     the matcher type.
    * @return The matcher.
    */
   public static <E> org.hamcrest.Matcher<java.lang.Iterable<? extends E>> emptyIterable() {
@@ -958,7 +1178,9 @@ public class Matchers {
    * Creates a matcher for {@link Iterable}s matching examined iterables that yield no items.
    * For example:
    * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyIterableOf(String.class)))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param unusedToForceReturnType
    *     the type of the iterable's content
    * @return The matcher.
@@ -974,7 +1196,9 @@ public class Matchers {
    * must be of the same length as the number of specified items.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), contains("foo", "bar"))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param items
    *     the items that must equal the items provided by an examined {@link Iterable}
    * @return The matcher.
@@ -990,7 +1214,9 @@ public class Matchers {
    * For a positive match, the examined iterable must only yield one item.
    * For example:
    * <pre>assertThat(Arrays.asList("foo"), contains(equalTo("foo")))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatcher
    *     the matcher that must be satisfied by the single item provided by an
    *     examined {@link Iterable}
@@ -1007,7 +1233,9 @@ public class Matchers {
    * must be of the same length as the number of specified matchers.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), contains(equalTo("foo"), equalTo("bar")))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     the matchers that must be satisfied by the items provided by an examined {@link Iterable}
    * @return The matcher.
@@ -1024,7 +1252,9 @@ public class Matchers {
    * must be of the same length as the specified list of matchers.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), contains(Arrays.asList(equalTo("foo"), equalTo("bar"))))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by the corresponding item provided by
    *     an examined {@link Iterable}
@@ -1050,7 +1280,9 @@ public class Matchers {
    * For example:
    * </p>
    * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder(equalTo("bar"), equalTo("foo")))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
    * @return The matcher.
@@ -1076,7 +1308,9 @@ public class Matchers {
    * For example:
    * </p>
    * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder("bar", "foo"))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param items
    *     the items that must equal the items provided by an examined {@link Iterable} in any order
    * @return The matcher.
@@ -1100,7 +1334,9 @@ public class Matchers {
    * </p>
    * <p>For example:</p>
    * <pre>assertThat(Arrays.asList("foo", "bar"), containsInAnyOrder(Arrays.asList(equalTo("bar"), equalTo("foo"))))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by an item provided by an examined {@link Iterable}
    * @return The matcher.
@@ -1115,7 +1351,9 @@ public class Matchers {
    * corresponding item in the specified items, in the same relative order
    * For example:
    * <pre>assertThat(Arrays.asList("a", "b", "c", "d", "e"), containsInRelativeOrder("b", "d"))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param items
    *     the items that must be contained within items provided by an examined {@link Iterable} in the same relative order
    * @return The matcher.
@@ -1131,7 +1369,9 @@ public class Matchers {
    * matcher in the specified matchers, in the same relative order.
    * For example:
    * <pre>assertThat(Arrays.asList("a", "b", "c", "d", "e"), containsInRelativeOrder(equalTo("b"), equalTo("d")))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     the matchers that must be satisfied by the items provided by an examined {@link Iterable} in the same relative order
    * @return The matcher.
@@ -1147,7 +1387,9 @@ public class Matchers {
    * matcher in the specified list of matchers, in the same relative order.
    * For example:
    * <pre>assertThat(Arrays.asList("a", "b", "c", "d", "e"), contains(Arrays.asList(equalTo("b"), equalTo("d"))))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param itemMatchers
    *     a list of matchers, each of which must be satisfied by the items provided by
    *     an examined {@link Iterable} in the same relative order
@@ -1163,7 +1405,9 @@ public class Matchers {
    * matcher.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), iterableWithSize(equalTo(2)))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param sizeMatcher
    *     a matcher for the number of items that should be yielded by an examined {@link Iterable}
    * @return The matcher.
@@ -1178,7 +1422,9 @@ public class Matchers {
    * <code>size</code> argument.
    * For example:
    * <pre>assertThat(Arrays.asList("foo", "bar"), iterableWithSize(2))</pre>
-   * 
+   *
+   * @param <E>
+   *     the matcher type.
    * @param size
    *     the number of items that should be yielded by an examined {@link Iterable}
    * @return The matcher.
@@ -1193,7 +1439,11 @@ public class Matchers {
    * value satisfies the specified <code>valueMatcher</code>.
    * For example:
    * <pre>assertThat(myMap, hasEntry(equalTo("bar"), equalTo("foo")))</pre>
-   * 
+   *
+   * @param <K>
+   *     the map key type.
+   * @param <V>
+   *     the map value type.
    * @param keyMatcher
    *     the key matcher that, in combination with the valueMatcher, must be satisfied by at least one entry
    * @param valueMatcher
@@ -1210,7 +1460,11 @@ public class Matchers {
    * specified <code>value</code>.
    * For example:
    * <pre>assertThat(myMap, hasEntry("bar", "foo"))</pre>
-   * 
+   *
+   * @param <K>
+   *     the map key type.
+   * @param <V>
+   *     the map value type.
    * @param key
    *     the key that, in combination with the value, must be describe at least one entry
    * @param value
@@ -1226,7 +1480,9 @@ public class Matchers {
    * at least one key that satisfies the specified matcher.
    * For example:
    * <pre>assertThat(myMap, hasKey(equalTo("bar")))</pre>
-   * 
+   *
+   * @param <K>
+   *     the map key type.
    * @param keyMatcher
    *     the matcher that must be satisfied by at least one key
    * @return The matcher.
@@ -1240,7 +1496,9 @@ public class Matchers {
    * at least one key that is equal to the specified key.
    * For example:
    * <pre>assertThat(myMap, hasKey("bar"))</pre>
-   * 
+   *
+   * @param <K>
+   *     the map key type.
    * @param key
    *     the key that satisfying maps must contain
    * @return The matcher.
@@ -1254,7 +1512,9 @@ public class Matchers {
    * at least one value that satisfies the specified valueMatcher.
    * For example:
    * <pre>assertThat(myMap, hasValue(equalTo("foo")))</pre>
-   * 
+   *
+   * @param <V>
+   *     the value type.
    * @param valueMatcher
    *     the matcher that must be satisfied by at least one value
    * @return The matcher.
@@ -1268,7 +1528,9 @@ public class Matchers {
    * at least one value that is equal to the specified value.
    * For example:
    * <pre>assertThat(myMap, hasValue("foo"))</pre>
-   * 
+   *
+   * @param <V>
+   *     the value type.
    * @param value
    *     the value that satisfying maps must contain
    * @return The matcher.
@@ -1282,7 +1544,9 @@ public class Matchers {
    * specified collection.
    * For example:
    * <pre>assertThat("foo", is(in(Arrays.asList("bar", "foo"))))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param collection
    *     the collection in which matching items must be found
    * @return The matcher.
@@ -1296,7 +1560,9 @@ public class Matchers {
    * specified array.
    * For example:
    * <pre>assertThat("foo", is(in(new String[]{"bar", "foo"})))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param elements
    *     the array in which matching items must be found
    * @return The matcher.
@@ -1310,7 +1576,9 @@ public class Matchers {
    * specified collection.
    * For example:
    * <pre>assertThat("foo", isIn(Arrays.asList("bar", "foo")))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @deprecated use is(in(...)) instead
    * @param collection
    *     the collection in which matching items must be found
@@ -1326,8 +1594,10 @@ public class Matchers {
    * specified array.
    * For example:
    * <pre>assertThat("foo", isIn(new String[]{"bar", "foo"}))</pre>
-   * 
+   *
    * @deprecated use is(in(...)) instead
+   * @param <T>
+   *     the matcher type.
    * @param elements
    *     the array in which matching items must be found
    * @return The matcher.
@@ -1344,6 +1614,8 @@ public class Matchers {
    * <pre>assertThat("foo", isOneOf("bar", "foo"))</pre>
    * 
    * @deprecated use is(oneOf(...)) instead
+   * @param <T>
+   *     the matcher type.
    * @param elements
    *     the elements amongst which matching items will be found
    * @return The matcher.
@@ -1359,7 +1631,9 @@ public class Matchers {
    * specified elements.
    * For example:
    * <pre>assertThat("foo", is(oneOf("bar", "foo")))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param elements
    *     the elements amongst which matching items will be found
    * @return The matcher.
@@ -1419,7 +1693,9 @@ public class Matchers {
    * <b>examined</b> object.
    * For example:
    * <pre>assertThat(1, comparesEqualTo(1))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param value the value which, when passed to the compareTo method of the examined object, should return zero
    * @return The matcher.
    */
@@ -1433,7 +1709,9 @@ public class Matchers {
    * <b>examined</b> object.
    * For example:
    * <pre>assertThat(2, greaterThan(1))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param value the value which, when passed to the compareTo method of the examined object, should return greater
    *              than zero
    * @return The matcher.
@@ -1448,7 +1726,9 @@ public class Matchers {
    * of the <b>examined</b> object.
    * For example:
    * <pre>assertThat(1, greaterThanOrEqualTo(1))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param value the value which, when passed to the compareTo method of the examined object, should return greater
    *              than or equal to zero
    * @return The matcher.
@@ -1463,7 +1743,9 @@ public class Matchers {
    * <b>examined</b> object.
    * For example:
    * <pre>assertThat(1, lessThan(2))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param value the value which, when passed to the compareTo method of the examined object, should return less
    *              than zero
    * @return The matcher.
@@ -1478,7 +1760,9 @@ public class Matchers {
    * of the <b>examined</b> object.
    * For example:
    * <pre>assertThat(1, lessThanOrEqualTo(1))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param value the value which, when passed to the compareTo method of the examined object, should return less
    *              than or equal to zero
    * @return The matcher.
@@ -1608,6 +1892,8 @@ public class Matchers {
    * Creates a matcher of {@link java.lang.String} that matches when the examined string
    * exactly matches the given {@link java.util.regex.Pattern}.
    *
+   * @param pattern
+   *     the text pattern to match.
    * @return The matcher.
    */
   public static Matcher<java.lang.String> matchesPattern(java.util.regex.Pattern pattern) {
@@ -1618,6 +1904,8 @@ public class Matchers {
    * Creates a matcher of {@link java.lang.String} that matches when the examined string
    * exactly matches the given regular expression, treated as a {@link java.util.regex.Pattern}.
    *
+   * @param regex
+   *     the regex to match.
    * @return The matcher.
    */
   public static Matcher<java.lang.String> matchesPattern(java.lang.String regex) {
@@ -1691,7 +1979,9 @@ public class Matchers {
    * returns a value that satisfies the specified matcher.
    * For example:
    * <pre>assertThat(true, hasToString(equalTo("TRUE")))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param toStringMatcher
    *     the matcher used to verify the toString result
    * @return The matcher.
@@ -1705,7 +1995,9 @@ public class Matchers {
    * returns a value equalTo the specified string.
    * For example:
    * <pre>assertThat(true, hasToString("TRUE"))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param expectedToString
    *     the expected toString result
    * @return The matcher.
@@ -1719,7 +2011,9 @@ public class Matchers {
    * assignable from the examined class.
    * For example:
    * <pre>assertThat(Integer.class, typeCompatibleWith(Number.class))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param baseType
    *     the base class to examine classes against
    * @return The matcher.
@@ -1763,7 +2057,9 @@ public class Matchers {
    * with the specified name.
    * For example:
    * <pre>assertThat(myBean, hasProperty("foo"))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param propertyName
    *     the name of the JavaBean property that examined beans should possess
    * @return The matcher.
@@ -1777,7 +2073,9 @@ public class Matchers {
    * with the specified name whose value satisfies the specified matcher.
    * For example:
    * <pre>assertThat(myBean, hasProperty("foo", equalTo("bar"))</pre>
-   * 
+   *
+   * @param <T>
+   *     the matcher type.
    * @param propertyName
    *     the name of the JavaBean property that examined beans should possess
    * @param valueMatcher
@@ -1798,6 +2096,8 @@ public class Matchers {
    * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean))</pre>
    * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean), "age", "height")</pre>
    *
+   * @param <B>
+   *     the matcher type.
    * @param expectedBean
    *     the bean against which examined beans are compared
    * @param ignoredProperties
