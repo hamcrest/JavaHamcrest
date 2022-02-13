@@ -43,4 +43,5 @@ public class JMock1Adapter implements Constraint {
         hamcrestMatcher.describeTo(new StringDescription(buffer));
         return buffer;
     }
+
 }
