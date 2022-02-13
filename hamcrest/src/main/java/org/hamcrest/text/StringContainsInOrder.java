@@ -69,4 +69,5 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
     public static Matcher<String> stringContainsInOrder(String... substrings) {
         return new StringContainsInOrder(Arrays.asList(substrings));
     }
+
 }

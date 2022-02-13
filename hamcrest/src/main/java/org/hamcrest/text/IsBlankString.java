@@ -55,4 +55,5 @@ public final class IsBlankString extends TypeSafeMatcher<String> {
     public static Matcher<String> blankOrNullString() {
         return NULL_OR_BLANK_INSTANCE;
     }
+
 }

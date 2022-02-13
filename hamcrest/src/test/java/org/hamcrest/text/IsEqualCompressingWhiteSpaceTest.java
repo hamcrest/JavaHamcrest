@@ -45,4 +45,5 @@ public class IsEqualCompressingWhiteSpaceTest extends AbstractMatcherTest {
     public void testPassesIfWhitespacesContainsNoBreakSpace() {
         assertMatches(matcher, "Hello" + ((char)160) + "World how are we?");
     }
+
 }

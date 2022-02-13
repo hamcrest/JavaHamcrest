@@ -59,4 +59,5 @@ public final class IsEqualIgnoringCaseTest {
         String expectedMismatchString = "was \"Cheese\"";
         assertMismatchDescription(expectedMismatchString, matcher, "Cheese");
     }
+
 }

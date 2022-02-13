@@ -52,4 +52,5 @@ public final class IsBlankStringTest {
         assertMismatchDescription("was \"a\"", blankString(), "a");
         assertMismatchDescription("was \"a\"", blankOrNullString(), "a");
     }
+
 }
