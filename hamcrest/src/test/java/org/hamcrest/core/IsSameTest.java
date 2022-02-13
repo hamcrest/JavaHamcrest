@@ -13,7 +13,7 @@ public final class IsSameTest {
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<String> matcher = sameInstance("irrelevant");
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }

@@ -44,7 +44,7 @@ public class AnyOf<T> extends ShortcutCombination<T> {
     public static <T> AnyOf<T> anyOf(Iterable<Matcher<? super T>> matchers) {
         return new AnyOf<>(matchers);
     }
-    
+
     /**
      * Creates a matcher that matches if the examined object matches <b>ANY</b> of the specified matchers.
      * For example:

@@ -17,7 +17,7 @@ public final class IsNullTest {
     copesWithNullsAndUnknownTypes() {
         assertNullSafe(nullMatcher);
         assertUnknownTypeSafe(nullMatcher);
-        
+
         assertNullSafe(notNullMatcher);
         assertUnknownTypeSafe(notNullMatcher);
     }
@@ -26,11 +26,11 @@ public final class IsNullTest {
     evaluatesToTrueIfArgumentIsNull() {
         assertMatches(nullMatcher, null);
         assertDoesNotMatch(nullMatcher, new Object());
-        
+
         assertMatches(notNullMatcher, new Object());
         assertDoesNotMatch(notNullMatcher, null);
     }
-    
+
     @Test public void
     supportsStaticTyping() {
         requiresStringMatcher(nullValue(String.class));

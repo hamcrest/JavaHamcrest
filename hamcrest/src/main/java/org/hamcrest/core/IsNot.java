@@ -27,7 +27,7 @@ public class IsNot<T> extends BaseMatcher<T>  {
         description.appendText("not ").appendDescriptionOf(matcher);
     }
 
-    
+
     /**
      * Creates a matcher that wraps an existing matcher, but inverts the logic by which
      * it will match.

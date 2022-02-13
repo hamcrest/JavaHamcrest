@@ -16,11 +16,11 @@ import static org.hamcrest.core.IsIterableContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public final class IsIterableContainingTest {
-    
+
     @Test public void
     copesWithNullsAndUnknownTypes() {
         Matcher<?> matcher = hasItem(equalTo("irrelevant"));
-        
+
         assertNullSafe(matcher);
         assertUnknownTypeSafe(matcher);
     }
@@ -35,7 +35,7 @@ public final class IsIterableContainingTest {
     @Test public void
     doesNotMatchCollectionWithoutAnElementForGivenMatcher() {
         final Matcher<Iterable<? super String>> matcher = hasItem(mismatchable("a"));
-        
+
         assertMismatchDescription("mismatches were: [mismatched: b, mismatched: c]", matcher, asList("b", "c"));
         assertMismatchDescription("was empty", matcher, new ArrayList<String>());
     }
@@ -49,7 +49,7 @@ public final class IsIterableContainingTest {
     hasAReadableDescription() {
         assertDescription("a collection containing mismatchable: a", hasItem(mismatchable("a")));
     }
-    
+
     @Test public void
     canMatchItemWhenCollectionHoldsSuperclass() { // Issue 24
         final Set<Number> s = new HashSet<>();
@@ -64,24 +64,24 @@ public final class IsIterableContainingTest {
     matchesMultipleItemsInCollection() {
         final Matcher<Iterable<String>> matcher1 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));
         assertMatches("list containing all items", matcher1, asList("a", "b", "c"));
-        
+
         final Matcher<Iterable<String>> matcher2 = hasItems("a", "b", "c");
         assertMatches("list containing all items (without matchers)", matcher2, asList("a", "b", "c"));
-        
+
         final Matcher<Iterable<String>> matcher3 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));
         assertMatches("list containing all items in any order", matcher3, asList("c", "b", "a"));
-        
+
         final Matcher<Iterable<String>> matcher4 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));
         assertMatches("list containing all items plus others", matcher4, asList("e", "c", "b", "a", "d"));
-        
+
         final Matcher<Iterable<String>> matcher5 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));
         assertDoesNotMatch("not match list unless it contains all items", matcher5, asList("e", "c", "b", "d")); // 'a' missing
     }
-    
+
     @Test public void
     reportsMismatchWithAReadableDescriptionForMultipleItems() {
         final Matcher<Iterable<Integer>> matcher = hasItems(3, 4);
-        
+
         assertMismatchDescription("a collection containing <4> mismatches were: [was <1>, was <2>, was <3>]",
                                   matcher, asList(1, 2, 3));
     }
@@ -90,7 +90,7 @@ public final class IsIterableContainingTest {
         return new TypeSafeDiagnosingMatcher<String>() {
             @Override
             protected boolean matchesSafely(String item, Description mismatchDescription) {
-                if (string.equals(item)) 
+                if (string.equals(item))
                     return true;
 
                 mismatchDescription.appendText("mismatched: " + item);

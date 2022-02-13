@@ -10,7 +10,7 @@ import org.hamcrest.Matcher;
  */
 public class IsSame<T> extends BaseMatcher<T> {
     private final T object;
-    
+
     public IsSame(T object) {
         this.object = object;
     }
@@ -26,7 +26,7 @@ public class IsSame<T> extends BaseMatcher<T> {
                 .appendValue(object)
                 .appendText(")");
     }
-    
+
     /**
      * Creates a matcher that matches only when the examined object is the same instance as
      * the specified target object.
@@ -40,7 +40,7 @@ public class IsSame<T> extends BaseMatcher<T> {
     public static <T> Matcher<T> sameInstance(T target) {
         return new IsSame<T>(target);
     }
-    
+
     /**
      * Creates a matcher that matches only when the examined object is the same instance as
      * the specified target object.
