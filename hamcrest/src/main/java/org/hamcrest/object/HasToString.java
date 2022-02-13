@@ -21,6 +21,8 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
      * For example:
      * <pre>assertThat(true, hasToString(equalTo("TRUE")))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param toStringMatcher
      *     the matcher used to verify the toString result
      * @return The matcher.
@@ -35,6 +37,8 @@ public class HasToString<T> extends FeatureMatcher<T, String> {
      * For example:
      * <pre>assertThat(true, hasToString("TRUE"))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param expectedToString
      *     the expected toString result
      * @return The matcher.

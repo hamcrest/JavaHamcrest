@@ -32,6 +32,8 @@ public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
      * For example:
      * <pre>assertThat(Integer.class, typeCompatibleWith(Number.class))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param baseType
      *     the base class to examine classes against
      * @return The matcher.
