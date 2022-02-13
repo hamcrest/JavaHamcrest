@@ -28,6 +28,8 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
      * For example:
      * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyIterable()))</pre>
      *
+     * @param <E>
+     *     the matcher type.
      * @return The matcher.
      */
     public static <E> Matcher<Iterable<? extends E>> emptyIterable() {
@@ -39,6 +41,8 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<? extends E>> {
      * For example:
      * <pre>assertThat(new ArrayList&lt;String&gt;(), is(emptyIterableOf(String.class)))</pre>
      *
+     * @param <E>
+     *     the matcher type.
      * @param unusedToForceReturnType
      *     the type of the iterable's content
      * @return The matcher.

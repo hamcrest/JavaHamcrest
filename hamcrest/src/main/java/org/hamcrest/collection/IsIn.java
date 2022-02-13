@@ -37,7 +37,8 @@ public class IsIn<T> extends BaseMatcher<T> {
      * <pre>assertThat("foo", isIn(Arrays.asList("bar", "foo")))</pre>
      *
      * @deprecated use is(in(...)) instead
-     *
+     * @param <T>
+     *     the matcher type.
      * @param collection
      *     the collection in which matching items must be found
      * @return The matcher.
@@ -53,6 +54,8 @@ public class IsIn<T> extends BaseMatcher<T> {
      * For example:
      * <pre>assertThat("foo", is(in(Arrays.asList("bar", "foo"))))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param collection
      *     the collection in which matching items must be found
      * @return The matcher.
@@ -68,7 +71,8 @@ public class IsIn<T> extends BaseMatcher<T> {
      * <pre>assertThat("foo", isIn(new String[]{"bar", "foo"}))</pre>
      *
      * @deprecated use is(in(...)) instead
-     *
+     * @param <T>
+     *     the matcher type.
      * @param elements
      *     the array in which matching items must be found
      * @return The matcher.
@@ -84,6 +88,8 @@ public class IsIn<T> extends BaseMatcher<T> {
      * For example:
      * <pre>assertThat("foo", is(in(new String[]{"bar", "foo"})))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param elements
      *     the array in which matching items must be found
      * @return The matcher.
@@ -99,7 +105,8 @@ public class IsIn<T> extends BaseMatcher<T> {
      * <pre>assertThat("foo", isOneOf("bar", "foo"))</pre>
      *
      * @deprecated use is(oneOf(...)) instead
-     *
+     * @param <T>
+     *     the matcher type.
      * @param elements
      *     the elements amongst which matching items will be found
      * @return The matcher.
@@ -116,6 +123,8 @@ public class IsIn<T> extends BaseMatcher<T> {
      * For example:
      * <pre>assertThat("foo", is(oneOf("bar", "foo")))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param elements
      *     the elements amongst which matching items will be found
      * @return The matcher.

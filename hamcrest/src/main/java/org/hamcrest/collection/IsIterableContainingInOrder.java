@@ -89,6 +89,8 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains("foo", "bar"))</pre>
      *
+     * @param <E>
+     *     the matcher type.
      * @param items
      *     the items that must equal the items provided by an examined {@link Iterable}
      * @return The matcher.
@@ -105,6 +107,8 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * For example:
      * <pre>assertThat(Arrays.asList("foo"), contains(equalTo("foo")))</pre>
      *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatcher
      *     the matcher that must be satisfied by the single item provided by an
      *     examined {@link Iterable}
@@ -123,6 +127,8 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains(equalTo("foo"), equalTo("bar")))</pre>
      *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatchers
      *     the matchers that must be satisfied by the items provided by an examined {@link Iterable}
      * @return The matcher.
@@ -143,6 +149,8 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), contains(Arrays.asList(equalTo("foo"), equalTo("bar"))))</pre>
      *
+     * @param <E>
+     *     the matcher type.
      * @param itemMatchers
      *     a list of matchers, each of which must be satisfied by the corresponding item provided by
      *     an examined {@link Iterable}

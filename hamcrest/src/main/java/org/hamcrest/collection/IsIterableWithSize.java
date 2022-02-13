@@ -30,6 +30,8 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), iterableWithSize(equalTo(2)))</pre>
      *
+     * @param <E>
+     *     the matcher type.
      * @param sizeMatcher
      *     a matcher for the number of items that should be yielded by an examined {@link Iterable}
      * @return The matcher.
@@ -45,6 +47,8 @@ public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> 
      * For example:
      * <pre>assertThat(Arrays.asList("foo", "bar"), iterableWithSize(2))</pre>
      *
+     * @param <E>
+     *     the matcher type.
      * @param size
      *     the number of items that should be yielded by an examined {@link Iterable}
      * @return The matcher.
