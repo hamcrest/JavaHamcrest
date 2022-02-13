@@ -17,6 +17,8 @@ public final class ComparatorMatcherBuilder<T> {
      * Creates a matcher factory for matchers of {@code Comparable}s.
      * For example:
      * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().lessThanOrEqualTo(1))</pre>
+     *
+     * @return The matcher.
      */
     public static <T extends Comparable<T>> ComparatorMatcherBuilder<T> usingNaturalOrdering() {
         return new ComparatorMatcherBuilder<T>(new Comparator<T>() {
@@ -35,6 +37,8 @@ public final class ComparatorMatcherBuilder<T> {
      * return -o1.compareTo(o2);
      * }
      * }).lessThan(4))</pre>
+     *
+     * @return The matcher.
      */
     public static <T> ComparatorMatcherBuilder<T> comparedBy(Comparator<T> comparator) {
         return new ComparatorMatcherBuilder<T>(comparator, true);
@@ -115,6 +119,7 @@ public final class ComparatorMatcherBuilder<T> {
      * <pre>assertThat(1, ComparatorMatcherBuilder.&lt;Integer&gt;usingNaturalOrdering().comparesEqualTo(1))</pre>
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return zero
+     * @return The matcher.
      */
     public Matcher<T> comparesEqualTo(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.EQUAL, includeComparatorInDescription);
@@ -129,6 +134,7 @@ public final class ComparatorMatcherBuilder<T> {
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return greater
      *              than zero
+     * @return The matcher.
      */
     public Matcher<T> greaterThan(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.GREATER_THAN, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
@@ -143,6 +149,7 @@ public final class ComparatorMatcherBuilder<T> {
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return greater
      *              than or equal to zero
+     * @return The matcher.
      */
     public Matcher<T> greaterThanOrEqualTo(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.EQUAL, ComparatorMatcher.GREATER_THAN, includeComparatorInDescription);
@@ -157,6 +164,7 @@ public final class ComparatorMatcherBuilder<T> {
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return less
      *              than zero
+     * @return The matcher.
      */
     public Matcher<T> lessThan(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.LESS_THAN, includeComparatorInDescription);
@@ -171,6 +179,7 @@ public final class ComparatorMatcherBuilder<T> {
      *
      * @param value the value which, when passed to the Comparator supplied to this builder, should return less
      *              than or equal to zero
+     * @return The matcher.
      */
     public Matcher<T> lessThanOrEqualTo(T value) {
         return new ComparatorMatcher<T>(comparator, value, ComparatorMatcher.LESS_THAN, ComparatorMatcher.EQUAL, includeComparatorInDescription);
