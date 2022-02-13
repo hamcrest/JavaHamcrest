@@ -128,4 +128,5 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
     @SuppressWarnings("unused")
     public String getExtraProperty() { return "extra"; }
   }
+
 }

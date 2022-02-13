@@ -181,4 +181,5 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   public static class BeanFailed extends RuntimeException {
     public BeanFailed() { super("bean failed"); }
   }
+
 }

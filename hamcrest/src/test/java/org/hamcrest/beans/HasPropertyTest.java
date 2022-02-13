@@ -45,4 +45,5 @@ public final class HasPropertyTest {
         assertMismatchDescription("no \"aNonExistentProp\" in <[Person: a bean]>",
                                   hasProperty("aNonExistentProp"), bean);
     }
+
 }
