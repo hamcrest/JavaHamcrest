@@ -147,6 +147,8 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
      * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean))</pre>
      * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean), "age", "height")</pre>
      *
+     * @param <B>
+     *     the matcher type.
      * @param expectedBean
      *     the bean against which examined beans are compared
      * @param ignoredProperties
