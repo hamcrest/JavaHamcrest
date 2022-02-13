@@ -59,4 +59,5 @@ public final class AnyOfTest {
     varargs(){
         assertThat("the text!", new AnyOf<>(startsWith("the"), endsWith(".")));
     }
+
 }

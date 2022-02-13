@@ -103,5 +103,5 @@ public final class IsIterableContainingTest {
             }
         };
     }
-}
 
+}

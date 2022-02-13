@@ -96,4 +96,5 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
       return new CombinableMatcher<>(first).or(other);
     }
   }
+
 }

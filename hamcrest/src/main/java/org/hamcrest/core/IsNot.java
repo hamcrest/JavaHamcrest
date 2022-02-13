@@ -60,4 +60,5 @@ public class IsNot<T> extends BaseMatcher<T>  {
     public static <T> Matcher<T> not(T value) {
         return not(equalTo(value));
     }
+
 }

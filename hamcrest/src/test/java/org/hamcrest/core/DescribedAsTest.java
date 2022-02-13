@@ -46,4 +46,5 @@ public final class DescribedAsTest {
 
         assertMismatchDescription("was <1>", matcher, 1);
     }
+
 }

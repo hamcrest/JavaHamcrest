@@ -99,5 +99,5 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
         }
       };
     }
-}
 
+}

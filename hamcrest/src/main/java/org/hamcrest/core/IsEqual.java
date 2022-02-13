@@ -103,4 +103,5 @@ public class IsEqual<T> extends BaseMatcher<T> {
     public static Matcher<Object> equalToObject(Object operand) {
         return new IsEqual<>(operand);
     }
+
 }

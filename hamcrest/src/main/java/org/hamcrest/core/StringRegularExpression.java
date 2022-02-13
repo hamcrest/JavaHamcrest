@@ -65,4 +65,5 @@ public class StringRegularExpression extends TypeSafeDiagnosingMatcher<String> {
   public static Matcher<String> matchesRegex(String regex) {
     return matchesRegex(Pattern.compile(regex));
   }
+
 }

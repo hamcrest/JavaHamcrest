@@ -45,4 +45,5 @@ public final class IsSameTest {
     returnsReadableDescriptionFromToStringWhenInitialisedWithNull() {
         assertDescription("sameInstance(null)", sameInstance(null));
     }
+
 }

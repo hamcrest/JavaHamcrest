@@ -22,4 +22,5 @@ public class StringRegularExpressionTest extends AbstractMatcherTest {
     assertDescription("a string matching the pattern <^[0-9]+$>", matcher);
     assertMismatchDescription("the string was \"bcd\"", matcher, "bcd");
   }
+
 }
