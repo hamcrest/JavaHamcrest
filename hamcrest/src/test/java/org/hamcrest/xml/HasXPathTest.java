@@ -144,4 +144,5 @@ public final class HasXPathTest {
             throw new IllegalStateException(e);
         }
     }
+
 }
