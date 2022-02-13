@@ -65,13 +65,13 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * Creates a matcher that matches when the examined object is logically equal to the specified
      * <code>operand</code>, as determined by calling the {@link java.lang.Object#equals} method on
      * the <b>examined</b> object.
-     * 
+     *
      * <p>If the specified operand is <code>null</code> then the created matcher will only match if
      * the examined object's <code>equals</code> method returns <code>true</code> when passed a
      * <code>null</code> (which would be a violation of the <code>equals</code> contract), unless the
      * examined object itself is <code>null</code>, in which case the matcher will return a positive
      * match.</p>
-     * 
+     *
      * <p>The created matcher provides a special behaviour when examining <code>Array</code>s, whereby
      * it will match if both the operand and the examined object are arrays of the same length and
      * contain items that are equal to each other (according to the above rules) <b>in the same
@@ -81,7 +81,6 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * assertThat("foo", equalTo("foo"));
      * assertThat(new String[] {"foo", "bar"}, equalTo(new String[] {"foo", "bar"}));
      * </pre>
-     * 
      */
     public static <T> Matcher<T> equalTo(T operand) {
         return new IsEqual<>(operand);

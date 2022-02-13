@@ -27,11 +27,11 @@ public class CharSequenceLength extends FeatureMatcher<CharSequence, Integer> {
     /**
      * Creates a matcher of {@link CharSequence} that matches when a char sequence has the given length
      * For example:
-     * 
+     *
      * <pre>
      * assertThat("text", hasLength(4))
      * </pre>
-     * 
+     *
      * @param length the expected length of the string
      */
     public static Matcher<CharSequence> hasLength(int length) {

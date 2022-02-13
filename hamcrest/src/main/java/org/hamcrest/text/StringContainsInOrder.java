@@ -46,7 +46,7 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
      * For example:
      * <pre>assertThat("myfoobarbaz", stringContainsInOrder(Arrays.asList("bar", "foo")))</pre>
      * fails as "foo" occurs before "bar" in the string "myfoobarbaz"
-     * 
+     *
      * @param substrings
      *     the substrings that must be contained within matching strings
      */

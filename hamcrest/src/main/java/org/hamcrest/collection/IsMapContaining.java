@@ -49,7 +49,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * value satisfies the specified <code>valueMatcher</code>.
      * For example:
      * <pre>assertThat(myMap, hasEntry(equalTo("bar"), equalTo("foo")))</pre>
-     * 
+     *
      * @param keyMatcher
      *     the key matcher that, in combination with the valueMatcher, must be satisfied by at least one entry
      * @param valueMatcher
@@ -65,7 +65,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * specified <code>value</code>.
      * For example:
      * <pre>assertThat(myMap, hasEntry("bar", "foo"))</pre>
-     *  
+     *
      * @param key
      *     the key that, in combination with the value, must be describe at least one entry
      * @param value
@@ -80,7 +80,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * at least one key that satisfies the specified matcher.
      * For example:
      * <pre>assertThat(myMap, hasKey(equalTo("bar")))</pre>
-     * 
+     *
      * @param keyMatcher
      *     the matcher that must be satisfied by at least one key
      */
@@ -93,7 +93,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * at least one key that is equal to the specified key.
      * For example:
      * <pre>assertThat(myMap, hasKey("bar"))</pre>
-     * 
+     *
      * @param key
      *     the key that satisfying maps must contain
      */
@@ -106,7 +106,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * at least one value that satisfies the specified valueMatcher.
      * For example:
      * <pre>assertThat(myMap, hasValue(equalTo("foo")))</pre>
-     * 
+     *
      * @param valueMatcher
      *     the matcher that must be satisfied by at least one value
      */
@@ -119,7 +119,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      * at least one value that is equal to the specified value.
      * For example:
      * <pre>assertThat(myMap, hasValue("foo"))</pre>
-     * 
+     *
      * @param value
      *     the value that satisfying maps must contain
      */

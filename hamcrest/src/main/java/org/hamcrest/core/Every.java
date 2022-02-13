@@ -34,7 +34,7 @@ public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
      * <code>itemMatcher</code>.
      * For example:
      * <pre>assertThat(Arrays.asList("bar", "baz"), everyItem(startsWith("ba")))</pre>
-     * 
+     *
      * @param itemMatcher
      *     the matcher to apply to every item provided by the examined {@link Iterable}
      */

@@ -154,7 +154,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
      * with the specified name whose value satisfies the specified matcher.
      * For example:
      * <pre>assertThat(myBean, hasProperty("foo", equalTo("bar"))</pre>
-     * 
+     *
      * @param propertyName
      *     the name of the JavaBean property that examined beans should possess
      * @param valueMatcher

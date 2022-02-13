@@ -51,7 +51,7 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
      * derived from <var>eventClass</var> announced by <var>source</var>.
      * For example:
      * <pre>assertThat(myEvent, is(eventFrom(PropertyChangeEvent.class, myBean)))</pre>
-     * 
+     *
      * @param eventClass
      *     the class of the event to match on
      * @param source
@@ -66,7 +66,7 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
      * announced by <var>source</var>.
      * For example:
      * <pre>assertThat(myEvent, is(eventFrom(myBean)))</pre>
-     * 
+     *
      * @param source
      *     the source of the event
      */

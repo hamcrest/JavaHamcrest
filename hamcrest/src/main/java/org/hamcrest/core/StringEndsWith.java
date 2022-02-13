@@ -20,7 +20,7 @@ public class StringEndsWith extends SubstringMatcher {
      * {@link String}.
      * For example:
      * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
-     * 
+     *
      * @param suffix
      *      the substring that the returned matcher will expect at the end of any examined string
      */

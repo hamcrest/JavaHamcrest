@@ -47,7 +47,6 @@ public final class IsBlankString extends TypeSafeMatcher<String> {
      * contains zero or more whitespace characters and nothing else.
      * For example:
      * <pre>assertThat(((String)null), is(blankOrNullString()))</pre>
-     * 
      */
     public static Matcher<String> blankOrNullString() {
         return NULL_OR_BLANK_INSTANCE;

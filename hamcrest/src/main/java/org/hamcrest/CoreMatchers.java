@@ -67,7 +67,7 @@ public class CoreMatchers {
    * delegated to the decorated matcher, including its mismatch description.
    * For example:
    * <pre>describedAs("a big decimal equal to %0", equalTo(myBigDecimal), myBigDecimal.toPlainString())</pre>
-   * 
+   *
    * @param description
    *     the new description for the wrapped matcher
    * @param matcher
@@ -85,7 +85,7 @@ public class CoreMatchers {
    * <code>itemMatcher</code>.
    * For example:
    * <pre>assertThat(Arrays.asList("bar", "baz"), everyItem(startsWith("ba")))</pre>
-   * 
+   *
    * @param itemMatcher
    *     the matcher to apply to every item provided by the examined {@link Iterable}
    */
