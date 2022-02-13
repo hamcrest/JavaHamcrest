@@ -65,6 +65,10 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
      * For example:
      * <pre>assertThat(new Canoe(), instanceOf(Paddlable.class));</pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param type
+     *     the type to check.
      * @return The matcher.
      */
     @SuppressWarnings("unchecked")
@@ -83,6 +87,10 @@ public class IsInstanceOf extends DiagnosingMatcher<Object> {
      * For example:
      * <pre>assertThat(new Canoe(), instanceOf(Canoe.class));</pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param type
+     *     the type to check.
      * @return The matcher.
      */
     @SuppressWarnings("unchecked")

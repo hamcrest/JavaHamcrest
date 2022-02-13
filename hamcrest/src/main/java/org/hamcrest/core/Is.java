@@ -43,6 +43,10 @@ public class Is<T> extends BaseMatcher<T> {
      * instead of:
      * <pre>assertThat(cheese, equalTo(smelly))</pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param matcher
+     *     the matcher to wrap.
      * @return The matcher.
      */
     public static <T> Matcher<T> is(Matcher<T> matcher) {
@@ -56,6 +60,10 @@ public class Is<T> extends BaseMatcher<T> {
      * instead of:
      * <pre>assertThat(cheese, is(equalTo(smelly)))</pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param value
+     *     the value to check.
      * @return The matcher.
      */
     public static <T> Matcher<T> is(T value) {
@@ -69,6 +77,10 @@ public class Is<T> extends BaseMatcher<T> {
      * instead of:
      * <pre>assertThat(cheese, is(instanceOf(Cheddar.class)))</pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param type
+     *     the type to check.
      * @return The matcher.
      */
     public static <T> Matcher<T> isA(Class<?> type) {

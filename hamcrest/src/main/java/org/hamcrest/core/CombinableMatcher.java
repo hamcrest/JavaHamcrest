@@ -6,6 +6,11 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.util.ArrayList;
 
+/**
+ * TODO: Finish Class Level Documentation.
+ *
+ * @param <T> the type of matcher being combined.
+ */
 public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
   private final Matcher<? super T> matcher;
 
@@ -47,6 +52,10 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * For example:
    * <pre>assertThat("fab", both(containsString("a")).and(containsString("b")))</pre>
    *
+   * @param <LHS>
+   *     the matcher type.
+   * @param matcher
+   *     the matcher to combine, and both must pass.
    * @return The matcher.
    */
   public static <LHS> CombinableBothMatcher<LHS> both(Matcher<? super LHS> matcher) {
@@ -68,6 +77,10 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * For example:
    * <pre>assertThat("fan", either(containsString("a")).or(containsString("b")))</pre>
    *
+   * @param <LHS>
+   *     the matcher type.
+   * @param matcher
+   *     the matcher to combine, and either must pass.
    * @return The matcher.
    */
   public static <LHS> CombinableEitherMatcher<LHS> either(Matcher<? super LHS> matcher) {

@@ -36,6 +36,8 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      *
      * @deprecated As of version 2.1, use {@link IsIterableContaining#hasItem(Matcher)}.
      *
+     * @param <T>
+     *     the matcher type.
      * @param itemMatcher
      *     the matcher to apply to items provided by the examined {@link Iterable}
      * @return The matcher.
@@ -53,7 +55,8 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <pre>assertThat(Arrays.asList("foo", "bar"), hasItem("bar"))</pre>
      *
      * @deprecated As of version 2.1, use {@link IsIterableContaining#hasItem(Object)}.
-     *
+     * @param <T>
+     *     the matcher type.
      * @param item
      *     the item to compare against the items provided by the examined {@link Iterable}
      * @return The matcher.
@@ -72,7 +75,8 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems(endsWith("z"), endsWith("o")))</pre>
      *
      * @deprecated As of version 2.1, use {@link IsIterableContaining#hasItems(Matcher[])}}.
-     *
+     * @param <T>
+     *     the matcher type.
      * @param itemMatchers
      *     the matchers to apply to items provided by the examined {@link Iterable}
      * @return The matcher.
@@ -91,7 +95,8 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
      * <pre>assertThat(Arrays.asList("foo", "bar", "baz"), hasItems("baz", "foo"))</pre>
      *
      * @deprecated As of version 2.1, use {@link IsIterableContaining#hasItems(Object[])}}.
-     *
+     * @param <T>
+     *     the matcher type.
      * @param items
      *     the items to compare against the items provided by the examined {@link Iterable}
      * @return The matcher.

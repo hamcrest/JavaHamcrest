@@ -50,6 +50,8 @@ public class IsNull<T> extends BaseMatcher<T> {
      * For example:
      * <pre>assertThat(cheese, is(nullValue(Cheese.class))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param type
      *     dummy parameter used to infer the generic type of the returned matcher
      * @return The matcher.
@@ -66,6 +68,8 @@ public class IsNull<T> extends BaseMatcher<T> {
      * instead of:
      * <pre>assertThat(cheese, is(not(nullValue(X.class))))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param type
      *     dummy parameter used to infer the generic type of the returned matcher
      * @return The matcher.
