@@ -7,6 +7,7 @@ package org.hamcrest;
  * @see Matcher#describeTo(Description)
  */
 public interface Description {
+
   /**
    * A description that consumes input but does nothing.
    */

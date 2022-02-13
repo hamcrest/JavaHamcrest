@@ -7,6 +7,7 @@ import static org.hamcrest.AbstractMatcherTest.*;
 import static org.junit.Assert.assertEquals;
 
 public final class FeatureMatcherTest {
+
     private final FeatureMatcher<Thingy, String> resultMatcher = resultMatcher();
 
     @Test public void
