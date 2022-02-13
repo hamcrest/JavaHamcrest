@@ -10,8 +10,8 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   private static final Value aValue = new Value("expected");
   private static final ExampleBean expectedBean = new ExampleBean("same", 1, aValue);
   private static final ExampleBean actualBean = new ExampleBean("same", 1, aValue);
-  
-  
+
+
   @Override
   protected Matcher<?> createMatcher() {
     return samePropertyValuesAs(expectedBean);
@@ -20,9 +20,9 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   public void test_reports_match_when_all_properties_match() {
     assertMatches("matched properties", samePropertyValuesAs(expectedBean), actualBean);
   }
-  
+
   public void test_reports_mismatch_when_actual_type_is_not_assignable_to_expected_type() {
-    assertMismatchDescription("is incompatible type: ExampleBean", 
+    assertMismatchDescription("is incompatible type: ExampleBean",
                               samePropertyValuesAs((Object)aValue), actualBean);
   }
 
@@ -36,7 +36,7 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
   }
 
   public void test_matches_beans_with_inheritance_but_no_extra_properties() {
-    assertMatches("sub type with same properties", 
+    assertMatches("sub type with same properties",
         samePropertyValuesAs(expectedBean), new SubBeanWithNoExtraProperties("same", 1, aValue));
   }
 
@@ -89,7 +89,7 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
       return "Value " + value;
     }
   }
-  
+
   @SuppressWarnings("unused")
   public static class ExampleBean {
     private String stringProperty;
@@ -101,7 +101,7 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
       this.intProperty = intProperty;
       this.valueProperty = valueProperty;
     }
-    
+
     public String getStringProperty() {
       return stringProperty;
     }
@@ -114,13 +114,13 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
 
     @Override public String toString() { return "an ExampleBean"; }
   }
-  
+
   public static class SubBeanWithNoExtraProperties extends ExampleBean {
     public SubBeanWithNoExtraProperties(String stringProperty, int intProperty, Value valueProperty) {
       super(stringProperty, intProperty, valueProperty);
     }
   }
-  
+
   public static class SubBeanWithExtraProperty extends ExampleBean {
     public SubBeanWithExtraProperty(String stringProperty, int intProperty, Value valueProperty) {
       super(stringProperty, intProperty, valueProperty);

@@ -37,7 +37,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  *     return name;
  *   }
  * }</pre>
- * 
+ *
  * And that these person objects are generated within a piece of code under test
  * (a class named PersonGenerator). This object is sent to one of our mock objects
  * which overrides the PersonGenerationListener interface:
@@ -45,14 +45,14 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * public interface PersonGenerationListener {
  *   public void personGenerated(Person person);
  * }</pre>
- * 
+ *
  * In order to check that the code under test generates a person with name
  * "Iain" we would do the following:
  * <pre>
  * Mock personGenListenerMock = mock(PersonGenerationListener.class);
  * personGenListenerMock.expects(once()).method("personGenerated").with(and(isA(Person.class), hasProperty("Name", eq("Iain")));
  * PersonGenerationListener listener = (PersonGenerationListener)personGenListenerMock.proxy();</pre>
- * 
+ *
  * <p>If an exception is thrown by the getter method for a property, the property
  * does not exist, is not readable, or a reflection related exception is thrown
  * when trying to invoke it then this is treated as an evaluation failure and
