@@ -25,7 +25,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
 
     public static final NamespaceContext NO_NAMESPACE_CONTEXT = null;
     private static final IsAnything<String> WITH_ANY_CONTENT = new IsAnything<String>("");
-    private static final Condition.Step<Object,String> NODE_EXISTS = nodeExists();
+    private static final Condition.Step<Object, String> NODE_EXISTS = nodeExists();
     private final Matcher<String> valueMatcher;
     private final XPathExpression compiledXPath;
     private final String xpathString;

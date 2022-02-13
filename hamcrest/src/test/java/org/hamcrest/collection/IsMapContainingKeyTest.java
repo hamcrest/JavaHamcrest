@@ -18,14 +18,14 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
     }
 
     public void testMatchesSingletonMapContainingKey() {
-        Map<String,Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("a", 1);
 
         assertMatches("Matches single key", hasKey("a"), map);
     }
 
     public void testMatchesMapContainingKey() {
-        Map<String,Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("a", 1);
         map.put("b", 2);
         map.put("c", 3);
@@ -69,11 +69,11 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
     }
 
     public void testDoesNotMatchEmptyMap() {
-        assertMismatchDescription("map was []", hasKey("Foo"), new HashMap<String,Integer>());
+        assertMismatchDescription("map was []", hasKey("Foo"), new HashMap<String, Integer>());
     }
 
     public void testDoesNotMatchMapMissingKey() {
-        Map<String,Integer> map = new TreeMap<String, Integer>();
+        Map<String, Integer> map = new TreeMap<String, Integer>();
         map.put("a", 1);
         map.put("b", 2);
         map.put("c", 3);

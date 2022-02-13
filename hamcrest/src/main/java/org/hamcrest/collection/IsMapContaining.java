@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? extends V>> {
+public class IsMapContaining<K, V> extends TypeSafeMatcher<Map<? extends K, ? extends V>> {
 
     private final Matcher<? super K> keyMatcher;
     private final Matcher<? super V> valueMatcher;
@@ -61,7 +61,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      *     the value matcher that, in combination with the keyMatcher, must be satisfied by at least one entry
      * @return The matcher.
      */
-    public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
+    public static <K, V> Matcher<Map<? extends K, ? extends V>> hasEntry(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
         return new IsMapContaining<>(keyMatcher, valueMatcher);
     }
 
@@ -82,7 +82,7 @@ public class IsMapContaining<K,V> extends TypeSafeMatcher<Map<? extends K, ? ext
      *     the value that, in combination with the key, must be describe at least one entry
      * @return The matcher.
      */
-    public static <K,V> Matcher<Map<? extends K,? extends V>> hasEntry(K key, V value) {
+    public static <K, V> Matcher<Map<? extends K, ? extends V>> hasEntry(K key, V value) {
         return new IsMapContaining<>(equalTo(key), equalTo(value));
     }
 
