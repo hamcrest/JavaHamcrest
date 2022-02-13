@@ -1712,5 +1712,61 @@ public class Matchers {
     return org.hamcrest.xml.HasXPath.hasXPath(xPath, namespaceContext);
   }
 
+  /**
+   * <p>
+   * Creates an order agnostic matcher for {@link Iterable}s that matches when a single pass over
+   * the examined {@link Iterable} yields a series of items. For a positive match, the examined
+   * iterable must have  have at least one item in common with specified matchers.
+   * </p>
+   * <p>
+   * For example:
+   * </p>
+   * <pre>assertThat("Intersect with", Arrays.asList(1, 2, 3, 4), intersectWith(equalTo(2), equalTo(3)));</pre>
+   *
+   * @param itemMatchers
+   *     the matchers that must be satisfied by the items provided by an examined {@link Iterable} in the same relative order
+   */
+  @SafeVarargs
+  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? extends T>> intersectWith(org.hamcrest.Matcher<? super T>... itemMatchers) {
+    return org.hamcrest.collection.IsIterableIntersecting.intersectWith(itemMatchers);
+  }
+
+  /**
+   * <p>
+   * Creates an order agnostic matcher for {@link Iterable}s that matches when a single pass over
+   * the examined {@link Iterable} yields a series of items. For a positive match, the examined
+   * iterable must have  have at least one item in common with specified matchers.
+   * </p>
+   * <p>
+   * For example:
+   * </p>
+   * <pre>assertThat("Intersect with", Arrays.asList(1, 2, 3, 4), intersectWith(2, 3));</pre>
+   *
+   * @param items
+   *     the items that must equal the items provided by an examined {@link Iterable} in any order
+   */
+  @SafeVarargs
+  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? extends T>> intersectWith(T... items) {
+    return org.hamcrest.collection.IsIterableIntersecting.intersectWith(items);
+  }
+
+  /**
+   * <p>
+   * Creates an order agnostic matcher for {@link Iterable}s that matches when a single pass over
+   * the examined {@link Iterable} yields a series of items. For a positive match, the examined
+   * iterable must have  have at least one item in common with specified matchers.
+   * </p>
+   * <p>
+   * For example:
+   * </p>
+   * <pre>assertThat("Intersect with", Arrays.asList(1, 2, 3, 4), intersectWith(Arrays.asList(equalTo(2), equalTo(3))));</pre>
+   *
+   * @param itemMatchers
+   *     a list of matchers, each of which must be satisfied by the items provided by
+   *     an examined {@link Iterable} in the same relative order
+   */
+  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? extends T>> intersectWith(java.util.Collection<org.hamcrest.Matcher<? super T>> itemMatchers) {
+    return org.hamcrest.collection.IsIterableIntersecting.intersectWith(itemMatchers);
+  }
 
 }
