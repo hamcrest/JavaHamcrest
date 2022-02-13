@@ -46,7 +46,6 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
         }
     }
 
-
     private boolean isCompatibleType(Object actual, Description mismatchDescription) {
         if (expectedBean.getClass().isAssignableFrom(actual.getClass())) {
             return true;

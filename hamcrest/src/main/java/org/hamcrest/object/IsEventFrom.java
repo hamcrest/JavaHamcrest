@@ -6,7 +6,6 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import java.util.EventObject;
 
-
 /**
  * Tests if the value is an event announced by a specific object.
  */
@@ -32,7 +31,6 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
         }
         return true;
     }
-
 
     private boolean eventHasSameSource(EventObject ev) {
         return ev.getSource() == source;

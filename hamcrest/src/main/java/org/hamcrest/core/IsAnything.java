@@ -4,7 +4,6 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-
 /**
  * A matcher that always returns <code>true</code>.
  */

@@ -34,7 +34,6 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
         assertMatches("Matches c", hasKey("c"), map);
     }
 
-
 //    No longer compiles
 //    public void testMatchesMapContainingKeyWithNoGenerics() {
 //        Map map = new HashMap();

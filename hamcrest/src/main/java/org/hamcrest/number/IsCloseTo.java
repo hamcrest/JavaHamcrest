@@ -6,7 +6,6 @@ import org.hamcrest.TypeSafeMatcher;
 
 import static java.lang.Math.abs;
 
-
 /**
  * Is the value a number equal to a value within some range of
  * acceptable error?

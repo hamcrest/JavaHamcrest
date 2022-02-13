@@ -4,7 +4,6 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-
 /**
  * Is the value the same object as another value?
  */

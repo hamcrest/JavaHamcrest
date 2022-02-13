@@ -6,7 +6,6 @@ import org.hamcrest.Matcher;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.hamcrest.core.StringStartsWith.startsWithIgnoringCase;
 
-
 public class StringStartsWithTest extends AbstractMatcherTest {
     static final String EXCERPT = "EXCERPT";
     final Matcher<String> stringStartsWith = startsWith(EXCERPT);

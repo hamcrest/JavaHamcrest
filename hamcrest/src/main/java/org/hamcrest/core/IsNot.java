@@ -6,7 +6,6 @@ import org.hamcrest.Matcher;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
-
 /**
  * Calculates the logical negation of a matcher.
  */
@@ -26,7 +25,6 @@ public class IsNot<T> extends BaseMatcher<T>  {
     public void describeTo(Description description) {
         description.appendText("not ").appendDescriptionOf(matcher);
     }
-
 
     /**
      * Creates a matcher that wraps an existing matcher, but inverts the logic by which

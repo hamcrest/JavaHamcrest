@@ -2,7 +2,6 @@ package org.hamcrest;
 
 import org.hamcrest.internal.ReflectiveTypeFinder;
 
-
 /**
  * Convenient base class for Matchers that require a non-null value of a specific type
  * and that will report why the received value has been rejected.

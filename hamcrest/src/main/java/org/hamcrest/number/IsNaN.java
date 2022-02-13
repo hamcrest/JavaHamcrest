@@ -4,7 +4,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-
 /**
  * Is the value a number actually not a number (NaN)?
  */

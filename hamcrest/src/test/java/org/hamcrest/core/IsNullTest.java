@@ -7,7 +7,6 @@ import static org.hamcrest.AbstractMatcherTest.*;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
 
-
 public final class IsNullTest {
 
     private final Matcher<Object> nullMatcher = nullValue();

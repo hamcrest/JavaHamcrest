@@ -96,7 +96,6 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
       new BeanWithBug());
   }
 
-
   public void testCanAccessAnAnonymousInnerClass() {
     class X implements IX {
       @Override

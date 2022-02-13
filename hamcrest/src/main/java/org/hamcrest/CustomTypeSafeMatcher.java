@@ -1,6 +1,5 @@
 package org.hamcrest;
 
-
 /**
  * Utility class for writing one off matchers.
  * For example:

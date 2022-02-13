@@ -16,7 +16,6 @@ import static org.hamcrest.core.IsEqual.equalTo;
  */
 public class ArrayMatching {
 
-
   /**
    * Creates a matcher for arrays that matches when the examined array contains at least one item
    * that is matched by the specified <code>elementMatcher</code>.  Whilst matching, the traversal
