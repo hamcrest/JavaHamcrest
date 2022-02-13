@@ -12,19 +12,19 @@ import java.util.Arrays;
  */
 public class IsArray<T> extends TypeSafeMatcher<T[]> {
     private final Matcher<? super T>[] elementMatchers;
-    
+
     public IsArray(Matcher<? super T>[] elementMatchers) {
         this.elementMatchers = elementMatchers.clone();
     }
-    
+
     @Override
     public boolean matchesSafely(T[] array) {
         if (array.length != elementMatchers.length) return false;
-        
+
         for (int i = 0; i < array.length; i++) {
             if (!elementMatchers[i].matches(array[i])) return false;
         }
-        
+
         return true;
     }
 
@@ -46,10 +46,10 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
     @Override
     @SuppressWarnings("unchecked")
     public void describeTo(Description description) {
-        description.appendList(descriptionStart(), descriptionSeparator(), descriptionEnd(), 
+        description.appendList(descriptionStart(), descriptionSeparator(), descriptionEnd(),
                                Arrays.asList(elementMatchers));
     }
-    
+
     /**
      * Returns the string that starts the description.
      *
@@ -85,7 +85,7 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
     protected String descriptionEnd() {
         return "]";
     }
-    
+
     /**
      * Creates a matcher that matches arrays whose elements are satisfied by the specified matchers.  Matches
      * positively only if the number of matchers specified is equal to the length of the examined array and

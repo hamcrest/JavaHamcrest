@@ -17,7 +17,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }
-    
+
     @Override
     protected boolean matchesSafely(Iterable<? extends T> items, Description mismatchDescription) {
       final Matching<T> matching = new Matching<>(matchers, mismatchDescription);
@@ -26,10 +26,10 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
           return false;
         }
       }
-      
+
       return matching.isFinished(items);
     }
-    
+
     @Override
     public void describeTo(Description description) {
       description.appendText("iterable with items ")
@@ -45,7 +45,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
         this.matchers = new ArrayList<>(matchers);
         this.mismatchDescription = mismatchDescription;
       }
-      
+
       public boolean matches(S item) {
         if (matchers.isEmpty()) {
           mismatchDescription.appendText("no match for: ").appendValue(item);
@@ -133,7 +133,7 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
         for (T item : items) {
             matchers.add(equalTo(item));
         }
-        
+
         return new IsIterableContainingInAnyOrder<>(matchers);
     }
 

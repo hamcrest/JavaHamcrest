@@ -68,7 +68,7 @@ public class IsCollectionWithSizeTest extends AbstractMatcherTest {
     public void testHasAReadableDescription() {
         assertDescription("a collection with size <3>", hasSize(equalTo(3)));
     }
-    
+
     public void testCompilesWithATypedCollection() {
       // To prove Issue 43
       ArrayList<String> arrayList = new ArrayList<String>();
