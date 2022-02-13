@@ -71,7 +71,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  */
 public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
 
-    private static final Condition.Step<PropertyDescriptor,Method> WITH_READ_METHOD = withReadMethod();
+    private static final Condition.Step<PropertyDescriptor, Method> WITH_READ_METHOD = withReadMethod();
     private final String propertyName;
     private final Matcher<Object> valueMatcher;
     private final String messageFormat;
@@ -136,7 +136,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         return (Matcher<Object>) valueMatcher;
     }
 
-    private static Condition.Step<PropertyDescriptor,Method> withReadMethod() {
+    private static Condition.Step<PropertyDescriptor, Method> withReadMethod() {
         return new Condition.Step<PropertyDescriptor, java.lang.reflect.Method>() {
             @Override
             public Condition<Method> apply(PropertyDescriptor property, Description mismatch) {
