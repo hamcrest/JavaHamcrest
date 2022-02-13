@@ -35,6 +35,10 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param matchers
+     *     any the matchers must pass.
      * @return The matcher.
      */
     public static <T> AnyOf<T> anyOf(Iterable<Matcher<? super T>> matchers) {
@@ -46,6 +50,10 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      * For example:
      * <pre>assertThat("myValue", anyOf(startsWith("foo"), containsString("Val")))</pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param matchers
+     *     any the matchers must pass.
      * @return The matcher.
      */
     @SafeVarargs

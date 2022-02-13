@@ -45,6 +45,10 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      * For example:
      * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param matchers
+     *     all the matchers must pass.
      * @return The matcher.
      */
     public static <T> Matcher<T> allOf(Iterable<Matcher<? super T>> matchers) {
@@ -56,6 +60,10 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      * For example:
      * <pre>assertThat("myValue", allOf(startsWith("my"), containsString("Val")))</pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param matchers
+     *     all the matchers must pass.
      * @return The matcher.
      */
     @SafeVarargs

@@ -34,6 +34,8 @@ public class IsNot<T> extends BaseMatcher<T>  {
      * For example:
      * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param matcher
      *     the matcher whose sense should be inverted
      * @return The matcher.
@@ -49,6 +51,8 @@ public class IsNot<T> extends BaseMatcher<T>  {
      * instead of:
      * <pre>assertThat(cheese, is(not(equalTo(smelly))))</pre>
      *
+     * @param <T>
+     *     the matcher type.
      * @param value
      *     the value that any examined object should <b>not</b> equal
      * @return The matcher.

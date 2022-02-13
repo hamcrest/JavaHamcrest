@@ -82,6 +82,10 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * assertThat(new String[] {"foo", "bar"}, equalTo(new String[] {"foo", "bar"}));
      * </pre>
      *
+     * @param <T>
+     *     the matcher type.
+     * @param operand
+     *     the value to check.
      * @return The matcher.
      */
     public static <T> Matcher<T> equalTo(T operand) {
@@ -92,6 +96,8 @@ public class IsEqual<T> extends BaseMatcher<T> {
      * Creates an {@link org.hamcrest.core.IsEqual} matcher that does not enforce the values being
      * compared to be of the same static type.
      *
+     * @param operand
+     *     the value to check.
      * @return The matcher.
      */
     public static Matcher<Object> equalToObject(Object operand) {
