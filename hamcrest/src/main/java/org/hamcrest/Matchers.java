@@ -1141,7 +1141,7 @@ public class Matchers {
    *     the matcher type.
    * @return The matcher.
    */
-  public static <E> org.hamcrest.Matcher<java.util.Collection<? extends E>> empty() {
+  public static <E> org.hamcrest.Matcher empty() {
     return org.hamcrest.collection.IsEmptyCollection.empty();
   }
 
