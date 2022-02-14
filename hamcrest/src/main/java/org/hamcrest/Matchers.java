@@ -1914,6 +1914,34 @@ public class Matchers {
 
   /**
    * Creates a matcher of {@link String} that matches when the examined string contains all of
+   * the specified substrings.
+   * For example:
+   * <pre>assertThat("mybarbaz", stringContainsInAnyOrder(Arrays.asList("bar", "foo")))</pre>
+   * fails as "foo" doesn't exist in the string "mybarbaz"
+   *
+   * @param substrings
+   *     the substrings that must be contained within matching strings
+   */
+  public static Matcher<java.lang.String> stringContainsInAnyOrder(java.lang.Iterable<java.lang.String> substrings) {
+    return org.hamcrest.text.StringContainsInAnyOrder.stringContainsInAnyOrder(substrings);
+  }
+
+  /**
+   * Creates a matcher of {@link String} that matches when the examined string contains all of
+   * the specified substrings.
+   * For example:
+   * <pre>assertThat("mybarbaz", stringContainsInOrder("bar", "foo"))</pre>
+   * fails as "foo" doesn't exist in the string "mybarbaz"
+   *
+   * @param substrings
+   *     the substrings that must be contained within matching strings
+   */
+  public static Matcher<java.lang.String> stringContainsInAnyOrder(java.lang.String... substrings) {
+    return org.hamcrest.text.StringContainsInAnyOrder.stringContainsInAnyOrder(substrings);
+  }
+
+  /**
+   * Creates a matcher of {@link String} that matches when the examined string contains all of
    * the specified substrings, considering the order of their appearance.
    * For example:
    * <pre>assertThat("myfoobarbaz", stringContainsInOrder(Arrays.asList("bar", "foo")))</pre>
