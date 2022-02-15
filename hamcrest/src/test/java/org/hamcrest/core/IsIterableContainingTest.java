@@ -6,6 +6,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,8 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.AbstractMatcherTest.*;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 import static org.hamcrest.core.IsIterableContaining.hasItems;
+import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public final class IsIterableContainingTest {
@@ -84,6 +87,25 @@ public final class IsIterableContainingTest {
 
         assertMismatchDescription("a collection containing <4> mismatches were: [was <1>, was <2>, was <3>]",
                                   matcher, asList(1, 2, 3));
+    }
+
+    @Test public void
+    isIterableContainingAnyOrderCast() {
+        String[] array = new String[]{"1", "2"};
+        Object object = array;
+        Iterable<String> real = Arrays.asList("1", "2");
+        final Matcher<Iterable<? extends Object>> matcher = containsInAnyOrder(object);
+        assertTrue("does not match the same object", matcher.matches(real));
+    }
+
+    @Test
+    public void
+    isIterableContainingCast() {
+        String[] array = new String[]{"1", "2"};
+        Object object = array;
+        Iterable<String> real = Arrays.asList("1", "2");
+        final Matcher<Iterable<? extends Object>> matcher = contains(object);
+        assertTrue("does not match the same object", matcher.matches(real));
     }
 
     private static Matcher<? super String> mismatchable(final String string) {
