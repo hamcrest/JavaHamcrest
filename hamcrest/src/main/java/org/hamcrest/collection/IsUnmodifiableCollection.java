@@ -15,6 +15,7 @@ public class IsUnmodifiableCollection<E> extends TypeSafeDiagnosingMatcher<Colle
 
     private static final Map<Class, Object> DEFAULT_COLLECTIONS = new HashMap<>();
     private static final Set<String> KNOWN_UNMODIFIABLE_COLLECTIONS = new HashSet<>();
+    private static final Set<String> KNOWN_MODIFIABLE_COLLECTIONS = new HashSet<>();
 
     static {
         final List<String> list = Arrays.asList("a", "b", "c");
@@ -24,6 +25,8 @@ public class IsUnmodifiableCollection<E> extends TypeSafeDiagnosingMatcher<Colle
 
         KNOWN_UNMODIFIABLE_COLLECTIONS.add("java.util.ImmutableCollections");
         KNOWN_UNMODIFIABLE_COLLECTIONS.add("java.util.Collections$Unmodifiable");
+
+        KNOWN_MODIFIABLE_COLLECTIONS.add("java.util.Arrays$ArrayList");
     }
 
     /**
@@ -41,6 +44,12 @@ public class IsUnmodifiableCollection<E> extends TypeSafeDiagnosingMatcher<Colle
         for (String knownUnmodifiableCollection : KNOWN_UNMODIFIABLE_COLLECTIONS) {
             if (collectionClassName.startsWith(knownUnmodifiableCollection)) {
                 return true;
+            }
+        }
+        for (String knownModifiableCollection : KNOWN_MODIFIABLE_COLLECTIONS) {
+            if (collectionClassName.startsWith(knownModifiableCollection)) {
+                mismatchDescription.appendText(collectionClassName + " is a known modifiable collection");
+                return false;
             }
         }
         final Collection item = getInstanceOfType(collectionClass, collection);

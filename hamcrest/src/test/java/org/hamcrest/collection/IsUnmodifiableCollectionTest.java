@@ -181,7 +181,7 @@ public class IsUnmodifiableCollectionTest extends AbstractMatcherTest {
     }
 
     public void testMismatchesArraysList() {
-        assertMismatchDescription("was able to set an element of the collection", isUnmodifiable(), Arrays.asList(1, 2, 3));
+        assertMismatchDescription("java.util.Arrays$ArrayList is a known modifiable collection", isUnmodifiable(), Arrays.asList(1, 2, 3));
     }
 
     public void testMismatchesHashSet() {
