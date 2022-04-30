@@ -30,7 +30,7 @@ public abstract class BaseMatcher<T> implements Matcher<T> {
      * Useful null-check method. Writes a mismatch description if the actual object is null
      * @param actual the object to check
      * @param mismatch where to write the mismatch description, if any
-     * @return false iff the actual object is null
+     * @return false if the actual object is null
      */
     protected static boolean isNotNull(Object actual, Description mismatch) {
         if (actual == null) {
