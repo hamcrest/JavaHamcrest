@@ -18,6 +18,7 @@ Here are some projects that provide additional features and matchers
 * [Hamcrest HAR](https://github.com/roydekleijn/har-assert) (for HTTP archive files)
 * [Hamcrest Java Extras](https://github.com/sf105/hamcrest-java-extras) (currently only a couple of Json matchers)
 * [Hamcrest JSON](https://github.com/hertzsprung/hamcrest-json) (for comparing entire JSON documents)
+* [Hamcrest Mail](https://github.com/devopsix/hamcrest-mail) (for comparing types from the `javax.mail` package)
 * [Hamcrest Path](https://github.com/seinesoftware/hamcrest-path) (for testing path existence and permissions) 
 * [Hamcrest Querydsl](https://github.com/beloglazov/hamcrest-querydsl) (for checking query results: hasResultSize, hasColumnRange, hasColumnMax, hasColumnMin, hasColumnContainingAll, hasColumnContainingAny)
 * [Hamcrest Result Set Matcher](https://github.com/exasol/hamcrest-resultset-matcher) (comparing JDBC result set against each other or structures)
