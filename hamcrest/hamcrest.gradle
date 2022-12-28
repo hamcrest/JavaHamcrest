@@ -3,8 +3,12 @@ apply plugin: 'osgi'
 version = rootProject.version
 
 dependencies {
-    testImplementation(group: 'junit', name: 'junit', version: '4.13.2') {
-        transitive = false
+    testImplementation(group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.2') {
+        transitive = true
+    }
+    testImplementation(group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.8.2') {
+        transitive = true
+        exclude(module: 'hamcrest-core')
     }
 }
 

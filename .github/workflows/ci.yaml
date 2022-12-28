@@ -16,7 +16,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 7
+          java-version: 8
       - name: Gradle Clean Build
         run: ./gradlew clean build
 
@@ -27,10 +27,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04]
-        java: [7, 8, 11, 17, 18-ea, 19-ea]
+        java: [8, 11, 17, 18-ea, 19-ea]
         exclude:
           - os: ubuntu-18.04
-            java: 7
+            java: 8
       fail-fast: false
       max-parallel: 4
 
@@ -51,7 +51,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 7
+          java-version: 8
       - name: Gradle JavaDoc
         run: ./gradlew javadoc
 
