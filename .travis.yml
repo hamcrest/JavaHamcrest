@@ -1,5 +1,9 @@
 language: java
 
+cache:
+  directories:
+    - $HOME/.gradle
+
 os: linux
 
 # Need to select an older Ubuntu distribution that supports JDK7
