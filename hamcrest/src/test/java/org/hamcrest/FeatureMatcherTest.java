@@ -34,6 +34,14 @@ public final class FeatureMatcherTest {
         assertEquals("was ShouldNotMatch <ShouldNotMatch>", mismatchDescription.toString());
     }
 
+    @Test public void
+    canRecoverFromFaultyFeature() {
+        assertMismatchDescription(
+                "an exception was thrown: java.lang.UnsupportedOperationException: make the feature fail!",
+                resultMatcher, new FaultyThingy());
+    }
+
+
     public static class Match extends IsEqual<String> {
         public Match(String equalArg) { super(equalArg); }
         @Override public void describeMismatch(Object item, Description description) {
@@ -50,6 +58,17 @@ public final class FeatureMatcherTest {
 
         public String getResult() {
             return result;
+        }
+    }
+
+    public static class FaultyThingy extends Thingy {
+        public FaultyThingy() {
+            super("thingy with failing feature");
+        }
+
+        @Override
+        public String getResult() {
+            throw new UnsupportedOperationException("make the feature fail!");
         }
     }
 
