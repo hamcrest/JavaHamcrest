@@ -27,7 +27,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04]
-        java: [7, 8, 11, 17, 18-ea, 19-ea]
+        java: [7, 8, 11, 17, 18, 19-ea]
         exclude:
           - os: ubuntu-18.04
             java: 7
