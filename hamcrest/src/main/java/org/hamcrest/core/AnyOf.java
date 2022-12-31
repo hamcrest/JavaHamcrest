@@ -16,7 +16,7 @@ public class AnyOf<T> extends ShortcutCombination<T> {
         this(Arrays.asList(matchers));
     }
 
-    public AnyOf(Iterable<Matcher<? super T>> matchers) {
+    public AnyOf(Iterable<? extends Matcher<? super T>> matchers) {
         super(matchers);
     }
 
@@ -41,7 +41,7 @@ public class AnyOf<T> extends ShortcutCombination<T> {
      *     any the matchers must pass.
      * @return The matcher.
      */
-    public static <T> AnyOf<T> anyOf(Iterable<Matcher<? super T>> matchers) {
+    public static <T> AnyOf<T> anyOf(Iterable<? extends Matcher<? super T>> matchers) {
         return new AnyOf<>(matchers);
     }
 
