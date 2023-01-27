@@ -3,6 +3,11 @@ dependencies {
 }
 
 jar {
+    from('../') {
+        include 'LICENSE.txt'
+        into('META-INF')
+    }
+
     manifest {
         attributes 'Implementation-Title': project.name,
                 'Implementation-Vendor': 'hamcrest.org',
