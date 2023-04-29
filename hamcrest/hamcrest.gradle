@@ -13,6 +13,7 @@ jar {
         attributes 'Implementation-Title': project.name,
                 'Implementation-Vendor': 'hamcrest.org',
                 'Implementation-Version': version,
+                'Bundle-License': 'BSD-3-Clause',
                 'Automatic-Module-Name': 'org.hamcrest'
         instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
                                          javax.xml.xpath; resolution:=optional,
