@@ -3,11 +3,9 @@ package org.hamcrest.collection;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+import org.hamcrest.comparator.ComparatorMatcherBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -136,6 +134,42 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
         }
 
         return new IsIterableContainingInAnyOrder<>(matchers);
+    }
+
+    /**
+     * <p>
+     * Creates an order agnostic matcher for {@link Iterable}s that matches when a single pass over
+     * the examined {@link Iterable} yields a series of items, each logically equal according to
+     * the comparator to one item anywhere in the specified items. For a positive match, the
+     * examined iterable must be of the same length as the number of specified items.
+     * </p>
+     * <p>
+     * N.B. each of the specified items will only be used once during a given examination, so be
+     * careful when specifying items that may be equal to more than one entry in an examined
+     * iterable.
+     * </p>
+     * <p>
+     * For example:
+     * </p>
+     * <pre>assertThat(Arrays.asList("first", "second"), containsInAnyOrder(new StringLengthComparator(), "abcde", "ZYXWVU"))</pre>
+     *
+     * @param <T>
+     *     the matcher type.
+     * @param comparator
+     *     the comparator to use to compare items to the items provided.
+     * @param items
+     *     the items that must equal (according to the provided comparator) the items provided by
+     *     an examined {@link Iterable} in any order
+     * @return The matcher.
+     */
+    @SafeVarargs
+    public static <T> Matcher<Iterable<? extends T>> containsInAnyOrder(Comparator<T> comparator, T... items) {
+        List<Matcher<? super T>> matchers = new ArrayList<>();
+        for (T item : items) {
+            matchers.add(ComparatorMatcherBuilder.comparedBy(comparator).comparesEqualTo(item));
+        }
+
+        return containsInAnyOrder(matchers);
     }
 
     /**
