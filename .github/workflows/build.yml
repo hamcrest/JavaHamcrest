@@ -1,0 +1,31 @@
+name: Gradle Build
+
+on:
+  pull_request:
+    branches: [ "master" ]
+  merge_group:
+    types: [checks_requested]
+
+jobs:
+  build:
+    name: Java ${{ matrix.java }} build
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: true
+      matrix:
+        java: [ 8 ]
+        experimental: [false]
+        include:
+          - java: 17
+            experimental: true
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+          cache: gradle
+      - name: Build with Gradle
+        run: ./gradlew clean build javadoc
