@@ -1,10 +1,10 @@
 name: Gradle Build
 
-on:
-  pull_request:
-    branches: [ "master" ]
-  merge_group:
-    types: [checks_requested]
+on: [push]
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
