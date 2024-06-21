@@ -12,14 +12,14 @@ import java.util.Arrays;
  */
 public class AllOf<T> extends DiagnosingMatcher<T> {
 
-    private final Iterable<Matcher<? super T>> matchers;
+    private final Iterable<? extends Matcher<? super T>> matchers;
 
     @SafeVarargs
     public AllOf(Matcher<? super T> ... matchers) {
         this(Arrays.asList(matchers));
     }
 
-    public AllOf(Iterable<Matcher<? super T>> matchers) {
+    public AllOf(Iterable<? extends Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }
 
@@ -51,7 +51,7 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
      *     all the matchers must pass.
      * @return The matcher.
      */
-    public static <T> Matcher<T> allOf(Iterable<Matcher<? super T>> matchers) {
+    public static <T> Matcher<T> allOf(Iterable<? extends Matcher<? super T>> matchers) {
         return new AllOf<>(matchers);
     }
 
