@@ -1,13 +1,19 @@
 package org.hamcrest.beans;
 
-import org.hamcrest.*;
+import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
 import org.hamcrest.core.IsEqual;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.hamcrest.beans.HasPropertyWithValue.hasPropertyAtPath;
@@ -70,6 +76,11 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
     assertMismatchDescription("inner.No property \"wrong\"", hasPropertyAtPath("inner.wrong.property", anything()), new BeanWithInner(new BeanWithInner(shouldMatch)));
     assertMismatchDescription("inner.inner.property.was \"not expected\"", hasPropertyAtPath("inner.inner.property", equalTo("something")), new BeanWithInner(new BeanWithInner(shouldNotMatch)));
+  }
+
+  public void testMatchesAbstract() {
+    Path path = Paths.get("hi.txt");
+    assertThat(path, hasProperty("fileName", hasToString("hi.txt")));
   }
 
   public void testDescribeTo() {
