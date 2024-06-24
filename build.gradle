@@ -71,8 +71,10 @@ def pomConfigurationFor(String pomName, String pomDescription) {
 
         licenses {
             license {
-                name = 'BSD License 3'
-                url = 'http://opensource.org/licenses/BSD-3-Clause'
+                name = 'BSD-3-Clause'
+                // The file includes copyright text, so URL like http://opensource.org/licenses/BSD-3-Clause can't
+                // be used here.
+                url = 'https://raw.githubusercontent.com/hamcrest/JavaHamcrest/e4b9afdc2624bbebef3c7c739e6074ecd8a6c06e/LICENSE.txt'
             }
         }
 
