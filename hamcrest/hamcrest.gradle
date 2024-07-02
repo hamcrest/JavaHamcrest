@@ -1,4 +1,4 @@
-apply plugin: 'osgi'
+//apply plugin: 'osgi'
 
 version = rootProject.version
 
@@ -18,10 +18,10 @@ jar {
                 'Implementation-Vendor': 'hamcrest.org',
                 'Implementation-Version': version,
                 'Automatic-Module-Name': 'org.hamcrest'
-        instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
-                                         javax.xml.xpath; resolution:=optional,
-                                         org.w3c.dom; resolution:=optional,
-                                         *'''
+//        instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
+//                                         javax.xml.xpath; resolution:=optional,
+//                                         org.w3c.dom; resolution:=optional,
+//                                         *'''
     }
 }
 
