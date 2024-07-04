@@ -1,6 +1,7 @@
-apply plugin: 'signing'
-//apply plugin: 'osgi'
-apply plugin: 'maven-publish'
+plugins {
+    id "signing"
+    id "maven-publish"
+}
 
 group = "org.hamcrest"
 version = "3.0-SNAPSHOT"
