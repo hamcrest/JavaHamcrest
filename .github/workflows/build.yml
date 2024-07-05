@@ -1,6 +1,6 @@
 name: Gradle Build
 
-on: [push]
+on: [push, pull_request]
 
 concurrency:
   group: ${{ github.ref }}
