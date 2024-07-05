@@ -24,7 +24,7 @@ subprojects {
 
     checkstyle {
 
-        project.ext.checkstyleVersion = '6.18'
+        project.ext.checkstyleVersion = '9.3'
             //works with a JDK 7 version which is supposed to be supported although
             //deprecated, see https://github.com/hamcrest/JavaHamcrest/pull/211 for
             //the discussion about the support
