@@ -1,6 +1,7 @@
-apply plugin: 'signing'
-apply plugin: 'osgi'
-apply plugin: 'maven-publish'
+plugins {
+    id "signing"
+    id "maven-publish"
+}
 
 group = "org.hamcrest"
 version = "3.0-SNAPSHOT"
@@ -9,11 +10,13 @@ subprojects {
     apply plugin: 'checkstyle'
     apply plugin: 'java-library'
 
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-
     group = rootProject.group
     version = rootProject.version
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 
     repositories {
         mavenCentral()
@@ -21,7 +24,7 @@ subprojects {
 
     checkstyle {
 
-        project.ext.checkstyleVersion = '6.18'
+        project.ext.checkstyleVersion = '9.3'
             //works with a JDK 7 version which is supposed to be supported although
             //deprecated, see https://github.com/hamcrest/JavaHamcrest/pull/211 for
             //the discussion about the support
@@ -47,12 +50,12 @@ subprojects {
     }
 
     task sourcesJar(type: Jar) {
-        classifier = 'sources'
+        archiveClassifier = 'sources'
         from sourceSets.main.allSource
     }
 
     task javadocJar(type: Jar) {
-        classifier = 'javadoc'
+        archiveClassifier = 'javadoc'
         from javadoc
     }
 }

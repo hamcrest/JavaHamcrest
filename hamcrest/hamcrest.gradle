@@ -1,12 +1,14 @@
-apply plugin: 'osgi'
+plugins {
+    id 'biz.aQute.bnd.builder' version '6.4.0'
+}
 
 version = rootProject.version
 
 dependencies {
-    testImplementation(group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.2') {
+    testImplementation(group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.3') {
         transitive = true
     }
-    testImplementation(group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.8.2') {
+    testImplementation(group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.10.3') {
         transitive = true
         exclude(module: 'hamcrest-core')
     }
@@ -18,11 +20,16 @@ jar {
                 'Implementation-Vendor': 'hamcrest.org',
                 'Implementation-Version': version,
                 'Automatic-Module-Name': 'org.hamcrest'
-        instruction 'Import-Package', '''javax.xml.namespace; resolution:=optional,
-                                         javax.xml.xpath; resolution:=optional,
-                                         org.w3c.dom; resolution:=optional,
-                                         *'''
+    }
+    bundle {
+        bnd 'Bundle-Name':          'org.hamcrest',
+            'Bundle-SymbolicName':  'org.hamcrest',
+            'Import-Package':       'javax.xml.namespace; resolution:=optional,' +
+                                    'javax.xml.xpath;resolution:=optional,' +
+                                    'org.w3c.dom;resolution:=optional,' +
+                                    '*',
+            '-exportcontents':      'org.hamcrest.*'
     }
 }
 
-javadoc.title = "Hamcrest $version API"
+javadoc.title = 'Hamcrest $version API'
