@@ -1,5 +1,5 @@
 plugins {
-    id "biz.aQute.bnd.builder" version "6.4.0"
+    id 'biz.aQute.bnd.builder' version '6.4.0'
 }
 
 version = rootProject.version
@@ -22,14 +22,14 @@ jar {
                 'Automatic-Module-Name': 'org.hamcrest'
     }
     bundle {
-        bnd "Bundle-Name":          "org.hamcrest",
-            "Bundle-SymbolicName":  "org.hamcrest",
-            "Import-Package":       "javax.xml.namespace; resolution:=optional," +
-                                    "javax.xml.xpath;resolution:=optional," +
-                                    "org.w3c.dom;resolution:=optional," +
-                                    "*",
-            "-exportcontents":      "org.hamcrest.*"
+        bnd 'Bundle-Name':          'org.hamcrest',
+            'Bundle-SymbolicName':  'org.hamcrest',
+            'Import-Package':       'javax.xml.namespace; resolution:=optional,' +
+                                    'javax.xml.xpath;resolution:=optional,' +
+                                    'org.w3c.dom;resolution:=optional,' +
+                                    '*',
+            '-exportcontents':      'org.hamcrest.*'
     }
 }
 
-javadoc.title = "Hamcrest $version API"
+javadoc.title = 'Hamcrest $version API'
