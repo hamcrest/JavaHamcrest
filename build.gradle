@@ -10,11 +10,13 @@ subprojects {
     apply plugin: 'checkstyle'
     apply plugin: 'java-library'
 
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-
     group = rootProject.group
     version = rootProject.version
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 
     repositories {
         mavenCentral()
