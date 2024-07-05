@@ -5,10 +5,10 @@ plugins {
 version = rootProject.version
 
 dependencies {
-    testImplementation(group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.2') {
+    testImplementation(group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.3') {
         transitive = true
     }
-    testImplementation(group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.8.2') {
+    testImplementation(group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.10.3') {
         transitive = true
         exclude(module: 'hamcrest-core')
     }
