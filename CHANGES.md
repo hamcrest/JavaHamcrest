@@ -4,17 +4,8 @@
 
 ### Improvements
 
-* Java 1.8 or newer ([Issue #331](https://github.com/hamcrest/JavaHamcrest/issues/331)).
-
-TBD
-
-### Bugfixes
-
-TBD
-
-## Version 2.3 (Unreleased)
-
-### Improvements
+* Java 1.8 or newer ([Issue #331](https://github.com/hamcrest/JavaHamcrest/issues/331), [PR #411](https://github.com/hamcrest/JavaHamcrest/issues/411)).
+* FileMatchersTest simplification ([PR #389](https://github.com/hamcrest/JavaHamcrest/issues/389))
 
 TBD
 

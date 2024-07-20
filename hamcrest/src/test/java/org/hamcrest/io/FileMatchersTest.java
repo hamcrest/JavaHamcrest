@@ -18,9 +18,6 @@ public class FileMatchersTest extends AbstractMatcherTest {
     @Override
     protected void setUp() throws IOException {
         directory = Files.createTempDirectory("myDir").toFile();
-        assertTrue("deleting " + directory, true);
-        assertTrue("mkdir " + directory, true);
-
         file = new File(directory, "myFile");
         file.createNewFile();
     }

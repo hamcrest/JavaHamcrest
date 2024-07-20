@@ -51,6 +51,7 @@ Contributors:
   * Magne Rasmussen
   * David Saff
   * Tom Denley
+  * Joe Schmetzer
 
 Also, thanks to everyone who has worked on DynaMock, nMock, jMock, EasyMock and MiniMock! These libraries inspired Hamcrest.
 
