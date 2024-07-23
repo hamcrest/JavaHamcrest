@@ -6,6 +6,10 @@
 
 * Java 1.8 or newer ([Issue #331](https://github.com/hamcrest/JavaHamcrest/issues/331), [PR #411](https://github.com/hamcrest/JavaHamcrest/issues/411)).
 * FileMatchersTest simplification ([PR #389](https://github.com/hamcrest/JavaHamcrest/issues/389))
+* License cleanup ([PR #414](https://github.com/hamcrest/JavaHamcrest/issues/414),
+see also [#264](https://github.com/hamcrest/JavaHamcrest/issues/264),
+[#355](https://github.com/hamcrest/JavaHamcrest/issues/355), and
+[#399](https://github.com/hamcrest/JavaHamcrest/issues/399))
 
 TBD
 

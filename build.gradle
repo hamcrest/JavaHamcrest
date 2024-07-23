@@ -74,7 +74,7 @@ def pomConfigurationFor(String pomName, String pomDescription) {
 
         licenses {
             license {
-                name = 'BSD License 3'
+                name = 'BSD-3-Clause'
                 url = 'http://opensource.org/licenses/BSD-3-Clause'
             }
         }
