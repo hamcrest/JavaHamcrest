@@ -24,6 +24,7 @@ jar {
     bundle {
         bnd 'Bundle-Name':          'org.hamcrest',
             'Bundle-SymbolicName':  'org.hamcrest',
+            'Bundle-License':       'BSD-3-Clause',
             'Import-Package':       'javax.xml.namespace; resolution:=optional,' +
                                     'javax.xml.xpath;resolution:=optional,' +
                                     'org.w3c.dom;resolution:=optional,' +
