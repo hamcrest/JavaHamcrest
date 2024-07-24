@@ -12,8 +12,7 @@
 Hamcrest is a library of matchers, which can be combined in to create flexible expressions of intent in tests.
 They've also been used for other purposes.
 
-The [tutorial]([Hamcrest Distributables](http://hamcrest.org/JavaHamcrest/tutorial)) is
-good place to see how Hamcrest can be used.
+The [tutorial](http://hamcrest.org/JavaHamcrest/tutorial) is good place to see how Hamcrest can be used.
 
 ## Downloads
 
