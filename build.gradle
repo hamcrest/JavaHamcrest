@@ -49,6 +49,12 @@ subprojects {
         }
     }
 
+    jar {
+        metaInf {
+            from rootProject.file('LICENSE')
+        }
+    }
+
     task sourcesJar(type: Jar) {
         archiveClassifier = 'sources'
         from sourceSets.main.allSource
@@ -75,7 +81,7 @@ def pomConfigurationFor(String pomName, String pomDescription) {
         licenses {
             license {
                 name = 'BSD-3-Clause'
-                url = 'http://opensource.org/licenses/BSD-3-Clause'
+                url = 'https://raw.githubusercontent.com/hamcrest/JavaHamcrest/master/LICENSE'
             }
         }
 
