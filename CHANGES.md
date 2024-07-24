@@ -1,6 +1,6 @@
 # Hamcrest Changes
 
-## Version 3.0 (Unreleased)
+## Version 3.0-rc1 (24th July 2024)
 
 ### Breaking Changes
 
@@ -20,9 +20,6 @@
   [#396](https://github.com/hamcrest/JavaHamcrest/issues/396),and
   [#399](https://github.com/hamcrest/JavaHamcrest/issues/399))
 
-### Bugfixes
-
-TBD
 
 ## Version 2.2 (17th October 2019)
 

@@ -22,7 +22,8 @@ definition. Learn more at [Hamcrest Distributables](http://hamcrest.org/JavaHamc
 
 ## Documentation
 
-Documentation can be found on the [Hamcrest site](http://hamcrest.org).
+Documentation can be found on the [Hamcrest site](http://hamcrest.org). For a detailed list of recent changes,
+see [CHANGES.md](CHANGES.md)
 
 ## Reporting Bugs/Issues
 
@@ -34,7 +35,7 @@ after first checking that it hasn't been raised already.
 
 Building Hamcrest from source requires a minimum of JDK 1.8.
 
-Clone the repository, and from the top level directory in the repo
+Clone the repository, and from the top level directory in the repo workspace
 run the following command:
 
 ```shell
