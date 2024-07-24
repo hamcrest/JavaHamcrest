@@ -2,18 +2,23 @@
 
 ## Version 3.0 (Unreleased)
 
+### Breaking Changes
+
+* From version 3.0, the jar distributed to Maven Central is now compiled to Java 1.8 bytecode,
+  and is not compatible with previous versions of Java. See
+  [Issue #331](https://github.com/hamcrest/JavaHamcrest/issues/331) and
+  [PR #411](https://github.com/hamcrest/JavaHamcrest/issues/411) for details. Developers who use Java 1.7 earlier can still
+  depend upon `hamcrest-2.2.jar`.
+
 ### Improvements
 
-* Java 1.8 or newer ([Issue #331](https://github.com/hamcrest/JavaHamcrest/issues/331), [PR #411](https://github.com/hamcrest/JavaHamcrest/issues/411)).
 * FileMatchersTest simplification ([PR #389](https://github.com/hamcrest/JavaHamcrest/issues/389))
 * License cleanup ([PR #414](https://github.com/hamcrest/JavaHamcrest/issues/414),
-[PR #415](https://github.com/hamcrest/JavaHamcrest/issues/415), see also
-[#264](https://github.com/hamcrest/JavaHamcrest/issues/264),
-[#355](https://github.com/hamcrest/JavaHamcrest/issues/355),
-[#396](https://github.com/hamcrest/JavaHamcrest/issues/396),and
-[#399](https://github.com/hamcrest/JavaHamcrest/issues/399))
-
-TBD
+  [PR #415](https://github.com/hamcrest/JavaHamcrest/issues/415), see also
+  [#264](https://github.com/hamcrest/JavaHamcrest/issues/264),
+  [#355](https://github.com/hamcrest/JavaHamcrest/issues/355),
+  [#396](https://github.com/hamcrest/JavaHamcrest/issues/396),and
+  [#399](https://github.com/hamcrest/JavaHamcrest/issues/399))
 
 ### Bugfixes
 
@@ -30,7 +35,7 @@ TBD
 * Build now checks for consistent use of spaces ([PR #217](https://github.com/hamcrest/JavaHamcrest/pull/217))
 
 ### Bugfixes
-* Fix compatibility issue for development with Android D8 ([Issue #246](https://github.com/hamcrest/JavaHamcrest/issues/246)) 
+* Fix compatibility issue for development with Android D8 ([Issue #246](https://github.com/hamcrest/JavaHamcrest/issues/246))
 * Fix typo in license name ([Issue #247](https://github.com/hamcrest/JavaHamcrest/pull/247))
 * 1.3 compatible constructors for string matchers ([Issue #259](https://github.com/hamcrest/JavaHamcrest/issues/259), [Issue #260](https://github.com/hamcrest/JavaHamcrest/issues/260))
 * Fix for split packages with Java 9 modules ([Issue #269](https://github.com/hamcrest/JavaHamcrest/issues/269), [PR #270](https://github.com/hamcrest/JavaHamcrest/pull/270))
@@ -48,13 +53,13 @@ GitHub, along with numerous other new features, improvements and bug fixes.
 ### Breaking Changes for 2.1
 
 * The way that the project is packaged has changed. This may cause problems with
-correctly upgrading transitive dependencies. Refer to the
-[Hamcrest Distributables](http://hamcrest.org/JavaHamcrest/distributables.html)
-documentation for more information, and in particular,
-[Upgrading from Hamcrest 1.x](http://hamcrest.org/JavaHamcrest/distributables.html#upgrading-from-hamcrest-1.x)
+  correctly upgrading transitive dependencies. Refer to the
+  [Hamcrest Distributables](http://hamcrest.org/JavaHamcrest/distributables.html)
+  documentation for more information, and in particular,
+  [Upgrading from Hamcrest 1.x](http://hamcrest.org/JavaHamcrest/distributables.html#upgrading-from-hamcrest-1.x)
 * `org.hamcrest.Factory` has been removed. This was only used in old implementations
-of the hamcrest build toolchain, and can safely be deleted from client code without
-any effect.
+  of the hamcrest build toolchain, and can safely be deleted from client code without
+  any effect.
 
 ### Changes for 2.1
 
@@ -69,7 +74,7 @@ any effect.
 * Fix for TypeSafeDiagnosingMatcher can't detect generic types for subclass
 * Make Hamcrest an OSGI bundle
 * Add StringRegularExpression matcher
-* Fix StringContainsInOrder to detect if a repeated pattern is missing 
+* Fix StringContainsInOrder to detect if a repeated pattern is missing
 * Add ArrayAsIterableMatcher
 * Fix description for IsEqualIgnoringCase
 * Removed deprecated methods from previous release
@@ -112,17 +117,17 @@ any effect.
 * Added WithSamePropertyValuesAs matcher
 * Moved any() from IsAnything to IsInstanceOf. It now checks the type of the matched object
 * Moved MatcherAssert from integration to core
-* Tightened up generics.  
-* Added IsMapContainingKey and IsMapContainingValue matchers to resolve a 
+* Tightened up generics.
+* Added IsMapContainingKey and IsMapContainingValue matchers to resolve a
   generics bug in hasKey and hasValue static factories previously declared
   in IsMapContaining (ngd)
-* Added IsCollectionOnlyContaining and IsArrayOnlyContaining which matches 
-  collections (and arrays) where all match a given matcher. E.g onlyContains(3,4,5) 
+* Added IsCollectionOnlyContaining and IsArrayOnlyContaining which matches
+  collections (and arrays) where all match a given matcher. E.g onlyContains(3,4,5)
   or onlyContains(lessThan(9))
 * text module moved to separate project, hamcrest-text-patterns
 * added more colection matchers: xContainingInAnyOrder, xContainingInOrder, xWithSize
 * new text Matcher: IsEmptyString
-* hamcrest generator uses method return type 
+* hamcrest generator uses method return type
 
 ## Version 1.1 (30th June 2007)
 
@@ -146,7 +151,7 @@ any effect.
 * Generator recognizes @Factory methods that return subclass of Matcher.
   (Fix by David Saff)
 
-## Version 1.0 (15th Dececmber 2006)
+## Version 1.0 (15th December 2006)
 
 Initial release.
 
