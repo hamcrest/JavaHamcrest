@@ -30,18 +30,18 @@ when upgrading.
 ## The Hamcrest Jar
 
 All the base classes and standard matcher implementations are contained in a
-single jar file called `hamcrest-2.2.jar`.
+single jar file called `hamcrest-3.0.jar`.
 
 ### Using Hamcrest in a Gradle Project
 
-Add `"org.hamcrest:hamcrest:2.2"` to the dependencies section of your
+Add `"org.hamcrest:hamcrest:3.0"` to the dependencies section of your
 `build.gradle`, for example:
 
 ```gradle
 apply plugin: 'java'
 
 dependencies {
-    testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation 'org.hamcrest:hamcrest:3.0'
 }
 ```
 
@@ -56,7 +56,7 @@ Add the following to the `<dependencies>` section in your `pom.xml`:
 <dependency>
     <groupId>org.hamcrest</groupId>
     <artifactId>hamcrest</artifactId>
-    <version>2.2</version>
+    <version>3.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -115,8 +115,8 @@ directly declare a dependency upon these shim jars to force the upgrade.
 apply plugin: 'java'
 
 dependencies {
-    testImplementation 'org.hamcrest:hamcrest:2.2'
-    testImplementation 'org.hamcrest:hamcrest-library:2.2'
+    testImplementation 'org.hamcrest:hamcrest:3.0'
+    testImplementation 'org.hamcrest:hamcrest-library:3.0'
     testImplementation 'junit:junit:4.13.2'
 }
 ```
@@ -132,13 +132,13 @@ dependencies, otherwise the older version will take precedence.
     <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest</artifactId>
-        <version>2.2</version>
+        <version>3.0</version>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest-library</artifactId>
-        <version>2.2</version>
+        <version>3.0</version>
         <scope>test</scope>
     </dependency>
     <dependency>

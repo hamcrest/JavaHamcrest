@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.hamcrest"
-version = "3.0-SNAPSHOT"
+version = "3.0"
 
 subprojects {
     apply plugin: 'checkstyle'
