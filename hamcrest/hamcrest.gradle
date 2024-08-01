@@ -33,4 +33,4 @@ jar {
     }
 }
 
-javadoc.title = 'Hamcrest $version API'
+javadoc.title = "Hamcrest ${version} API"
