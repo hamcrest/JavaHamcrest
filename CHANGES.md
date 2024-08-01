@@ -1,5 +1,15 @@
 # Hamcrest Changes
 
+## Version 3.1 (Unreleased)
+
+### Improvements
+
+* TBD
+
+### Bugfixes
+
+* TBD
+
 ## Version 3.0 (1st August 2024)
 
 ### Breaking Changes
