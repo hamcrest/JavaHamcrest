@@ -1,6 +1,6 @@
 # Hamcrest Changes
 
-## Version 3.0-rc1 (24th July 2024)
+## Version 3.0 (1st August 2024)
 
 ### Breaking Changes
 
