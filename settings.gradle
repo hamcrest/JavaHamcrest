@@ -1,7 +1,6 @@
 include 'hamcrest',
         'hamcrest-core',
-        'hamcrest-library',
-        'hamcrest-integration'
+        'hamcrest-library'
 
 rootProject.name = 'JavaHamcrest'
 

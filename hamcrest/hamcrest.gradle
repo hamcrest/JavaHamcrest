@@ -34,3 +34,4 @@ jar {
 }
 
 javadoc.title = "Hamcrest ${version} API"
+javadoc.options.overview = file("javadoc-overview.html")
