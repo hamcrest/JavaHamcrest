@@ -6,4 +6,9 @@ package org.hamcrest.library.deprecated;
  */
 @Deprecated
 class HamcrestLibraryIsDeprecated {
+    /**
+     * Unused
+     */
+    private HamcrestLibraryIsDeprecated() {
+    }
 }
