@@ -1,10 +1,17 @@
 plugins {
     id "signing"
     id "maven-publish"
+    id "net.nemerosa.versioning" version "3.1.0"
+}
+//apply from: "gradle/versioning.gradle"
+
+versioning {
+
 }
 
+
 group = "org.hamcrest"
-version = "3.1-SNAPSHOT"
+version = versioning.info.full
 
 subprojects {
     apply plugin: 'checkstyle'
