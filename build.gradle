@@ -1,17 +1,18 @@
 plugins {
     id "signing"
     id "maven-publish"
-    id "net.nemerosa.versioning" version "3.1.0"
 }
-//apply from: "gradle/versioning.gradle"
-
-versioning {
-
-}
-
+apply from: "gradle/versioning.gradle"
 
 group = "org.hamcrest"
-version = versioning.info.full
+version = getMavenVersion()
+
+tasks.register("showVersion") {
+    doLast {
+        println("git version: " + getGitVersion())
+        println("mvn version: " + getMavenVersion())
+    }
+}
 
 subprojects {
     apply plugin: 'checkstyle'
