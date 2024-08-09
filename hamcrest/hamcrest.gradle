@@ -12,6 +12,7 @@ dependencies {
         transitive = true
         exclude(module: 'hamcrest-core')
     }
+    implementation "io.github.java-diff-utils:java-diff-utils:4.5"
 }
 
 jar {
