@@ -14,6 +14,10 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
 
     private final String string;
 
+    /**
+     * Constructor, best called from {@link #equalToCompressingWhiteSpace(String)}.
+     */
+    @SuppressWarnings("doclint")
     public IsEqualCompressingWhiteSpace(String string) {
         if (string == null) {
             throw new IllegalArgumentException("Non-null value required");
@@ -21,6 +25,7 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
         this.string = string;
     }
 
+    @SuppressWarnings("doclint")
     protected String getString() {
         return string;
     }
@@ -42,6 +47,7 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
                 .appendText(" compressing white space");
     }
 
+    @SuppressWarnings("doclint")
     public String stripSpaces(String toBeStripped) {
         return toBeStripped.replaceAll("[\\p{Z}\\p{C}]+", " ").trim();
     }

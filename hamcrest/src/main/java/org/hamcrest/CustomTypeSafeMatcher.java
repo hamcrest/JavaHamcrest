@@ -1,7 +1,7 @@
 package org.hamcrest;
 
 /**
- * Utility class for writing one off matchers.
+ * Utility class for writing one off matchers (with type safety and null checks).
  * For example:
  * <pre>
  * Matcher&lt;String&gt; aNonEmptyString = new CustomTypeSafeMatcher&lt;String&gt;("a non empty string") {
@@ -24,6 +24,10 @@ public abstract class CustomTypeSafeMatcher<T> extends TypeSafeMatcher<T> {
 
     private final String fixedDescription;
 
+    /**
+     * Constructor
+     * @param description the description of this matcher
+     */
     public CustomTypeSafeMatcher(String description) {
         if (description == null) {
             throw new IllegalArgumentException("Description must be non null!");

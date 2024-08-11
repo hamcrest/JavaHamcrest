@@ -7,8 +7,18 @@ import java.util.Iterator;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
+/**
+ * Matches if iterable size satisfies a size matcher.
+ *
+ * @param <E> the iterable element type
+ */
 public class IsIterableWithSize<E> extends FeatureMatcher<Iterable<E>, Integer> {
 
+    /**
+     * Constructor, best called from {@link #iterableWithSize(int)} or
+     * {@link #iterableWithSize(Matcher)}.
+     * @param sizeMatcher checks the expected size of the iterable
+     */
     public IsIterableWithSize(Matcher<? super Integer> sizeMatcher) {
         super(sizeMatcher, "an iterable with size", "iterable size");
     }

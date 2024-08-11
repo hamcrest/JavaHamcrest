@@ -9,10 +9,17 @@ public class StringDescription extends BaseDescription {
 
     private final Appendable out;
 
+    /**
+     * Creates a new description.
+     */
     public StringDescription() {
         this(new StringBuilder());
     }
 
+    /**
+     * Creates a new description using the given appendable.
+     * @param out the place to append the description.
+     */
     public StringDescription(Appendable out) {
         this.out = out;
     }

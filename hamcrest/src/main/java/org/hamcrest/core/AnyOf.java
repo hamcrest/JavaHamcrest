@@ -2,20 +2,33 @@ package org.hamcrest.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.collection.ArrayMatching;
 
 import java.util.Arrays;
 
 /**
  * Calculates the logical disjunction of multiple matchers. Evaluation is shortcut, so
  * subsequent matchers are not called if an earlier matcher returns <code>true</code>.
+ *
+ * @param <T> the matched value type
  */
 public class AnyOf<T> extends ShortcutCombination<T> {
 
+    /**
+     * Constructor, best called from {@link #anyOf(Matcher[])}.
+     * @see #anyOf(Matcher[]) 
+     */
+    @SuppressWarnings("doclint")
     @SafeVarargs
     public AnyOf(Matcher<? super T> ... matchers) {
         this(Arrays.asList(matchers));
     }
 
+    /**
+     * Constructor, best called from {@link #anyOf(Iterable)}.
+     * @see #anyOf(Iterable) 
+     */
+    @SuppressWarnings("doclint")
     public AnyOf(Iterable<Matcher<? super T>> matchers) {
         super(matchers);
     }

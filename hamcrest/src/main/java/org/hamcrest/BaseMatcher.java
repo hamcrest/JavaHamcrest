@@ -4,8 +4,14 @@ package org.hamcrest;
  * BaseClass for all Matcher implementations.
  *
  * @see Matcher
+ * @param <T> The Matcher type.
  */
 public abstract class BaseMatcher<T> implements Matcher<T> {
+    /**
+     * Default constructor.
+     */
+    public BaseMatcher() {
+    }
 
     /**
      * @see Matcher#_dont_implement_Matcher___instead_extend_BaseMatcher_()

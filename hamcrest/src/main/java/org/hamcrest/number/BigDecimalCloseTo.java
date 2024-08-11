@@ -3,15 +3,24 @@ package org.hamcrest.number;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.collection.ArrayMatching;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+/**
+ * A matcher that checks a {@link BigDecimal} is close to an expected value.
+ */
 public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
 
   private final BigDecimal delta;
   private final BigDecimal value;
 
+  /**
+   * Constructor, best called from {@link #closeTo(BigDecimal, BigDecimal)}.
+   * @see #closeTo(BigDecimal, BigDecimal)
+   */
+  @SuppressWarnings("doclint")
   public BigDecimalCloseTo(BigDecimal value, BigDecimal error) {
       this.delta = error;
       this.value = value;

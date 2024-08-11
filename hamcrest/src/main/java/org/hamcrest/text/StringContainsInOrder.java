@@ -6,10 +6,17 @@ import org.hamcrest.TypeSafeMatcher;
 
 import java.util.Arrays;
 
+/**
+ * Tests if a string contains the given substrings in order.
+ */
 public class StringContainsInOrder extends TypeSafeMatcher<String> {
 
     private final Iterable<String> substrings;
 
+    /**
+     * Constructor, best called from {@link #stringContainsInOrder(Iterable)}
+     * @param substrings the substrings that must be contained within matching strings
+     */
     public StringContainsInOrder(Iterable<String> substrings) {
         this.substrings = substrings;
     }

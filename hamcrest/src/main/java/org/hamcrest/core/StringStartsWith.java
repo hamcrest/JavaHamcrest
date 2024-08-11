@@ -7,9 +7,19 @@ import org.hamcrest.Matcher;
  */
 public class StringStartsWith extends SubstringMatcher {
 
-    public StringStartsWith(String substring) { this(false, substring); }
+    /**
+     * Constructor, best used with {@link #startsWith(String)}.
+     * @param prefix the expected start of the string.
+     */
+    public StringStartsWith(String prefix) { this(false, prefix); }
 
-    public StringStartsWith(boolean ignoringCase, String substring) { super("starting with", ignoringCase, substring); }
+    /**
+     * Constructor, best used with {@link #startsWith(String)} or
+     * {@link #startsWithIgnoringCase(String)}.
+     * @param ignoringCase whether to ignore case when matching
+     * @param prefix the expected start of the string.
+     */
+    public StringStartsWith(boolean ignoringCase, String prefix) { super("starting with", ignoringCase, prefix); }
 
     @Override
     protected boolean evalSubstringOf(String s) { return converted(s).startsWith(converted(substring)); }

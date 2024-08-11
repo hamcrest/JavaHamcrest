@@ -2,8 +2,19 @@ package org.hamcrest;
 
 import org.hamcrest.core.IsIterableContaining;
 
+/**
+ * Builder methods for various matchers.
+ * <p>
+ * <code>CodeMatchers</code> provides syntactic sugar for building matchers, or
+ * chains of matchers. By using static imports on these methods, concise and
+ * readable code calling the matchers can be maintained.
+ * </p>
+ */
 @SuppressWarnings("UnusedDeclaration")
 public class CoreMatchers {
+
+  private CoreMatchers() {
+  }
 
   /**
    * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
@@ -75,7 +86,7 @@ public class CoreMatchers {
    * @param <LHS>
    *     the matcher type.
    * @param matcher
-   *     the matcher to combine, and both musth pass.
+   *     the matcher to combine, and both must pass.
    * @return The matcher.
    */
   public static <LHS> org.hamcrest.core.CombinableMatcher.CombinableBothMatcher<LHS> both(org.hamcrest.Matcher<? super LHS> matcher) {
@@ -110,7 +121,7 @@ public class CoreMatchers {
    * @param matcher
    *     the matcher to wrap
    * @param values
-   *     optional values to insert into the tokenised description
+   *     optional values to insert into the tokenized description
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> describedAs(java.lang.String description, org.hamcrest.Matcher<T> matcher, java.lang.Object... values) {
@@ -145,7 +156,7 @@ public class CoreMatchers {
    * @param <T>
    *     the matcher type.
    * @param matcher
-   *     the matcher {@link org.hamcrest.core.Is#is}.
+   *     the matcher to wrap.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> is(org.hamcrest.Matcher<T> matcher) {
@@ -162,7 +173,7 @@ public class CoreMatchers {
    * @param <T>
    *     the matcher type.
    * @param value
-   *     the value for matcher {@link org.hamcrest.core.Is#is}.
+   *     the value to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> is(T value) {
@@ -179,7 +190,7 @@ public class CoreMatchers {
    * @param <T>
    *     the matcher type.
    * @param type
-   *     the type for matcher {@link org.hamcrest.core.Is#isA}.
+   *     the type to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> isA(java.lang.Class<T> type) {
@@ -188,7 +199,6 @@ public class CoreMatchers {
 
   /**
    * Creates a matcher that always matches, regardless of the examined object.
-   *
    * @return The matcher.
    */
   public static org.hamcrest.Matcher<java.lang.Object> anything() {
@@ -305,7 +315,7 @@ public class CoreMatchers {
    * @param <T>
    *     the matcher type.
    * @param operand
-   *     for matcher {@link org.hamcrest.core.IsEqual#equalTo}.
+   *     the value to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> equalTo(T operand) {
@@ -317,7 +327,7 @@ public class CoreMatchers {
    * compared to be of the same static type.
    *
    * @param operand
-   *     the object for matcher {@link org.hamcrest.core.IsEqual#equalToObject}.
+   *     the value to check.
    * @return The matcher.
    */
   public static org.hamcrest.Matcher<java.lang.Object> equalToObject(java.lang.Object operand) {
@@ -327,7 +337,7 @@ public class CoreMatchers {
   /**
    * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
    * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
-   * the examined object.
+   * examined object.
    *
    * <p>The created matcher forces a relationship between specified type and the examined object, and should be
    * used when it is necessary to make generics conform, for example in the JMock clause
@@ -338,7 +348,7 @@ public class CoreMatchers {
    * @param <T>
    *     the matcher type.
    * @param type
-   *     the type for matcher {@link org.hamcrest.core.IsInstanceOf#any}.
+   *     the type to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> any(java.lang.Class<T> type) {
@@ -357,7 +367,7 @@ public class CoreMatchers {
    * @param <T>
    *     the matcher type.
    * @param type
-   *     the type for matcher {@link org.hamcrest.core.IsInstanceOf#instanceOf}.
+   *     the type to check.
    * @return The matcher.
    */
   public static <T> org.hamcrest.Matcher<T> instanceOf(java.lang.Class<?> type) {
@@ -493,7 +503,7 @@ public class CoreMatchers {
    *     the substring that the returned matcher will expect to find within any examined string
    * @return The matcher.
    */
-  public static org.hamcrest.Matcher<java.lang.String> containsString(java.lang.String substring) {
+  public static Matcher<java.lang.String> containsString(java.lang.String substring) {
     return org.hamcrest.core.StringContains.containsString(substring);
   }
 
@@ -501,13 +511,13 @@ public class CoreMatchers {
    * Creates a matcher that matches if the examined {@link String} contains the specified
    * {@link String} anywhere, ignoring case.
    * For example:
-   * <pre>assertThat("myStringOfNote", containsString("ring"))</pre>
+   * <pre>assertThat("myStringOfNote", containsStringIgnoringCase("Ring"))</pre>
    *
    * @param substring
    *     the substring that the returned matcher will expect to find within any examined string
    * @return The matcher.
    */
-  public static org.hamcrest.Matcher<java.lang.String> containsStringIgnoringCase(java.lang.String substring) {
+  public static Matcher<java.lang.String> containsStringIgnoringCase(java.lang.String substring) {
     return org.hamcrest.core.StringContains.containsStringIgnoringCase(substring);
   }
 
@@ -523,7 +533,7 @@ public class CoreMatchers {
    *      the substring that the returned matcher will expect at the start of any examined string
    * @return The matcher.
    */
-  public static org.hamcrest.Matcher<java.lang.String> startsWith(java.lang.String prefix) {
+  public static Matcher<java.lang.String> startsWith(java.lang.String prefix) {
     return org.hamcrest.core.StringStartsWith.startsWith(prefix);
   }
 
@@ -533,13 +543,13 @@ public class CoreMatchers {
    * {@link String}, ignoring case
    * </p>
    * For example:
-   * <pre>assertThat("myStringOfNote", startsWith("my"))</pre>
+   * <pre>assertThat("myStringOfNote", startsWithIgnoringCase("My"))</pre>
    *
    * @param prefix
    *      the substring that the returned matcher will expect at the start of any examined string
    * @return The matcher.
    */
-  public static org.hamcrest.Matcher<java.lang.String> startsWithIgnoringCase(java.lang.String prefix) {
+  public static Matcher<java.lang.String> startsWithIgnoringCase(java.lang.String prefix) {
     return org.hamcrest.core.StringStartsWith.startsWithIgnoringCase(prefix);
   }
 
@@ -553,7 +563,7 @@ public class CoreMatchers {
    *      the substring that the returned matcher will expect at the end of any examined string
    * @return The matcher.
    */
-  public static org.hamcrest.Matcher<java.lang.String> endsWith(java.lang.String suffix) {
+  public static Matcher<java.lang.String> endsWith(java.lang.String suffix) {
     return org.hamcrest.core.StringEndsWith.endsWith(suffix);
   }
 
@@ -561,13 +571,13 @@ public class CoreMatchers {
    * Creates a matcher that matches if the examined {@link String} ends with the specified
    * {@link String}, ignoring case.
    * For example:
-   * <pre>assertThat("myStringOfNote", endsWith("Note"))</pre>
+   * <pre>assertThat("myStringOfNote", endsWithIgnoringCase("note"))</pre>
    *
    * @param suffix
    *      the substring that the returned matcher will expect at the end of any examined string
    * @return The matcher.
    */
-  public static org.hamcrest.Matcher<java.lang.String> endsWithIgnoringCase(java.lang.String suffix) {
+  public static Matcher<java.lang.String> endsWithIgnoringCase(java.lang.String suffix) {
     return org.hamcrest.core.StringEndsWith.endsWithIgnoringCase(suffix);
   }
 

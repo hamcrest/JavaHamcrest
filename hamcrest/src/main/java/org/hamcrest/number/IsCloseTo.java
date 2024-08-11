@@ -15,6 +15,10 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
     private final double delta;
     private final double value;
 
+    /**
+     * Constructor, best called from {@link #closeTo(double, double)}.
+     */
+    @SuppressWarnings("doclint")
     public IsCloseTo(double value, double error) {
         this.delta = error;
         this.value = value;

@@ -7,9 +7,19 @@ import org.hamcrest.Matcher;
  */
 public class StringEndsWith extends SubstringMatcher {
 
-    public StringEndsWith(String substring) { this(false, substring); }
+    /**
+     * Constructor, best used with {@link #endsWith(String)}.
+     * @param suffix the expected end of the string.
+     */
+    public StringEndsWith(String suffix) { this(false, suffix); }
 
-    public StringEndsWith(boolean ignoringCase, String substring) { super("ending with", ignoringCase, substring); }
+    /**
+     * Constructor, best used with {@link #endsWith(String)} or
+     * {@link #endsWithIgnoringCase(String)}.
+     * @param ignoringCase whether to ignore case when matching
+     * @param suffix the expected end of the string.
+     */
+    public StringEndsWith(boolean ignoringCase, String suffix) { super("ending with", ignoringCase, suffix); }
 
     @Override
     protected boolean evalSubstringOf(String s) {

@@ -3,6 +3,13 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
+/**
+ * Common behaviour for matchers that check substrings.
+ *
+ * @see StringContains
+ * @see StringEndsWith
+ * @see StringStartsWith
+ */
 public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
 
     // TODO: Replace String with CharSequence to allow for easy interoperability between
@@ -10,8 +17,10 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
 
     private final String relationship;
     private final boolean ignoringCase;
+    @SuppressWarnings("doclint")
     protected final String substring;
 
+    @SuppressWarnings("doclint")
     protected SubstringMatcher(String relationship, boolean ignoringCase, String substring) {
         this.relationship = relationship;
         this.ignoringCase = ignoringCase;
@@ -41,7 +50,18 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
         }
     }
 
+    /**
+     * Helper method to allow subclasses to handle case insensitivity.
+     * @param arg the string to adjust for case
+     * @return the input string in lowercase if ignoring case, otherwise the original string
+     */
     protected String converted(String arg) { return ignoringCase ? arg.toLowerCase() : arg; }
+
+    /**
+     * Checks if the input matches the specific substring.
+     * @param string the string to check
+     * @return the result of the match
+     */
     protected abstract boolean evalSubstringOf(String string);
 
 }

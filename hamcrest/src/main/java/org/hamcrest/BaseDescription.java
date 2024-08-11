@@ -13,6 +13,12 @@ import static java.lang.String.valueOf;
  */
 public abstract class BaseDescription implements Description {
 
+    /**
+     * Default constructor
+     */
+    public BaseDescription() {
+    }
+
     @Override
     public Description appendText(String text) {
         append(text);

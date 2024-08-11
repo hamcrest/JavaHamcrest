@@ -12,11 +12,18 @@ import static org.hamcrest.core.IsEqual.equalTo;
  *
  * For example:  assertThat(cheese, equalTo(smelly))
  *          vs.  assertThat(cheese, is(equalTo(smelly)))
+ *
+ * @param <T> the matched value type
  */
 public class Is<T> extends BaseMatcher<T> {
 
     private final Matcher<T> matcher;
 
+    /**
+     * Constructor, best called from {@link #is(Object)},
+     * {@link #is(Matcher)}, or {@link #isA(Class)}.
+     */
+    @SuppressWarnings("doclint")
     public Is(Matcher<T> matcher) {
         this.matcher = matcher;
     }

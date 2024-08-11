@@ -7,8 +7,19 @@ import org.hamcrest.text.IsEqualCompressingWhiteSpace;
 
 import java.util.regex.Pattern;
 
+/**
+ * Builder methods for various matchers.
+ * <p>
+ * <code>Matchers</code> provides syntactic sugar for building matchers, or
+ * chains of matchers. By using static imports on these methods, concise and
+ * readable code calling the matchers can be maintained.
+ * </p>
+ */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class Matchers {
+
+  private Matchers() {
+  }
 
   /**
    * Creates a matcher that matches if the examined object matches <b>ALL</b> of the specified matchers.
@@ -541,7 +552,7 @@ public class Matchers {
   /**
    * Creates a matcher that matches when the examined object is an instance of the specified <code>type</code>,
    * as determined by calling the {@link java.lang.Class#isInstance(Object)} method on that type, passing the
-   * the examined object.
+   * examined object.
    *
    * <p>The created matcher forces a relationship between specified type and the examined object, and should be
    * used when it is necessary to make generics conform, for example in the JMock clause

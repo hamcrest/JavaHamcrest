@@ -9,10 +9,17 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
  * Matches if map size satisfies a nested matcher.
+ *
+ * @param <K> the map key type.
+ * @param <V> the map value type.
  */
 public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ? extends V>, Integer> {
 
-    @SuppressWarnings("WeakerAccess")
+    /**
+     * Constructor, best called from {@link #aMapWithSize(int)},
+     * {@link #aMapWithSize(Matcher)}, or {@link #anEmptyMap()}
+     */
+    @SuppressWarnings({"WeakerAccess", "doclint"})
     public IsMapWithSize(Matcher<? super Integer> sizeMatcher) {
       super(sizeMatcher, "a map with size", "map size");
     }
@@ -64,10 +71,8 @@ public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ?
      * For example:
      * <pre>assertThat(myMap, is(anEmptyMap()))</pre>
      *
-     * @param <K>
-     *     the map key type.
-     * @param <V>
-     *     the map value type.
+     * @param <K> the map key type.
+     * @param <V> the map value type.
      * @return The matcher.
      */
     public static <K, V> Matcher<Map<? extends K, ? extends V>> anEmptyMap() {

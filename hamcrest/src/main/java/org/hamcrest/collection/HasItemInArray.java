@@ -10,12 +10,19 @@ import static java.util.Arrays.asList;
 
 /**
  * Matches if an array contains an item satisfying a nested matcher.
+ *
+ * @param <T> the array element type
  */
 public class HasItemInArray<T> extends TypeSafeMatcher<T[]> {
 
     private final Matcher<? super T> elementMatcher;
     private final TypeSafeDiagnosingMatcher<Iterable<? super T>> collectionMatcher;
 
+    /**
+     * Constructor, best called from {@link ArrayMatching}.
+     * @see ArrayMatching#hasItemInArray(Matcher)
+     */
+    @SuppressWarnings("doclint")
     public HasItemInArray(Matcher<? super T> elementMatcher) {
         this.elementMatcher = elementMatcher;
         this.collectionMatcher = new IsIterableContaining<>(elementMatcher);

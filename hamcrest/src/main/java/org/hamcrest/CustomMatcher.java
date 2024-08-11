@@ -13,17 +13,21 @@ package org.hamcrest;
  * <p>
  * This class is designed for scenarios where an anonymous inner class
  * matcher makes sense. It should not be used by API designers implementing
- * matchers.
+ * matchers. See {@link CustomTypeSafeMatcher} for a type safe variant of
+ * this class that you probably want to use.
  *
  * @author Neil Dunn
- * @see CustomTypeSafeMatcher for a type safe variant of this class that you probably
- *  want to use.
  * @param <T> The type of object being matched.
+ * @see CustomTypeSafeMatcher
  */
 public abstract class CustomMatcher<T> extends BaseMatcher<T> {
 
     private final String fixedDescription;
 
+    /**
+     * Constructor
+     * @param description the description of this matcher
+     */
     public CustomMatcher(String description) {
         if (description == null) {
             throw new IllegalArgumentException("Description should be non null!");

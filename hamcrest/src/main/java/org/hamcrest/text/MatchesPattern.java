@@ -6,10 +6,18 @@ import org.hamcrest.TypeSafeMatcher;
 
 import java.util.regex.Pattern;
 
+/**
+ * Tests if a string matches a regular expression.
+ */
 public class MatchesPattern extends TypeSafeMatcher<String> {
 
     private final Pattern pattern;
 
+    /**
+     * Constructor, best called from {@link #matchesPattern(String)} or
+     * {@link #matchesPattern(Pattern)}.
+     * @param pattern the regular expression to match
+     */
     public MatchesPattern(Pattern pattern) {
         this.pattern = pattern;
     }
@@ -40,8 +48,7 @@ public class MatchesPattern extends TypeSafeMatcher<String> {
      * Creates a matcher of {@link java.lang.String} that matches when the examined string
      * exactly matches the given regular expression, treated as a {@link java.util.regex.Pattern}.
      *
-     * @param regex
-     *     the regex to match.
+     * @param regex the regex to match.
      * @return The matcher.
      */
     public static Matcher<String> matchesPattern(String regex) {
