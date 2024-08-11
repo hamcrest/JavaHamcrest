@@ -56,7 +56,7 @@ public class IsNull<T> extends BaseMatcher<T> {
     }
 
     /**
-     * <p>Creates a matcher that matches if examined object is <code>null</code>>.
+     * <p>Creates a matcher that matches if examined object is <code>null</code>.
      * Accepts a single dummy argument to facilitate type inference.
      * </p>
      * For example:
