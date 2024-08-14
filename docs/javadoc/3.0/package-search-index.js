@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.hamcrest"},{"l":"org.hamcrest.beans"},{"l":"org.hamcrest.collection"},{"l":"org.hamcrest.comparator"},{"l":"org.hamcrest.core"},{"l":"org.hamcrest.io"},{"l":"org.hamcrest.number"},{"l":"org.hamcrest.object"},{"l":"org.hamcrest.text"},{"l":"org.hamcrest.xml"}];updateSearchResults();
