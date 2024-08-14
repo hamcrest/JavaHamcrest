@@ -19,9 +19,9 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
 
     /**
      * Constructor, best called from {@link #allOf(Matcher[])}.
+     * @param matchers the matchers
      * @see #allOf(Matcher[])
      */
-    @SuppressWarnings("doclint")
     @SafeVarargs
     public AllOf(Matcher<? super T> ... matchers) {
         this(Arrays.asList(matchers));
@@ -29,9 +29,9 @@ public class AllOf<T> extends DiagnosingMatcher<T> {
 
     /**
      * Constructor, best called from {@link #allOf(Iterable)}.
+     * @param matchers the matchers
      * @see #allOf(Iterable)
      */
-    @SuppressWarnings("doclint")
     public AllOf(Iterable<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }

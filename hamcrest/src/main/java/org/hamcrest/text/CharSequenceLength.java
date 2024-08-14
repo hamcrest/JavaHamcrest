@@ -17,9 +17,10 @@ public class CharSequenceLength extends FeatureMatcher<CharSequence, Integer> {
 
     /**
      * Constructor, best called from {@link #hasLength(Matcher)}.
+     * @param lengthMatcher the expected length
      * @see #hasLength(Matcher)
      */
-    @SuppressWarnings({"WeakerAccess", "doclint"})
+    @SuppressWarnings("WeakerAccess")
     public CharSequenceLength(Matcher<? super Integer> lengthMatcher) {
         super(lengthMatcher, "a CharSequence with length", "length");
     }

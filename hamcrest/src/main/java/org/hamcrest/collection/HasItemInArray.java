@@ -20,9 +20,9 @@ public class HasItemInArray<T> extends TypeSafeMatcher<T[]> {
 
     /**
      * Constructor, best called from {@link ArrayMatching}.
+     * @param elementMatcher matcher for the expected item
      * @see ArrayMatching#hasItemInArray(Matcher)
      */
-    @SuppressWarnings("doclint")
     public HasItemInArray(Matcher<? super T> elementMatcher) {
         this.elementMatcher = elementMatcher;
         this.collectionMatcher = new IsIterableContaining<>(elementMatcher);

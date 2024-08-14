@@ -21,14 +21,14 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
     private final List<Matcher<? super E>> matchers;
 
     /**
-     * Constructor, best called from one of the static factory methods.
+     * Constructor, best called from one of the static "<code>contains</code>" factory methods.
+     * @param matchers the matchers
      *
      * @see #contains(Object[])
      * @see #contains(Matcher)
      * @see #contains(Matcher[])
      * @see #contains(List)
      */
-    @SuppressWarnings("doclint")
     public IsIterableContainingInOrder(List<Matcher<? super E>> matchers) {
         this.matchers = matchers;
     }

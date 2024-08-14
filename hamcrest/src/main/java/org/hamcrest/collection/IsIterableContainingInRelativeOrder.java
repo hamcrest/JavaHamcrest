@@ -20,10 +20,9 @@ public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMa
 
     /**
      * Constructor, best called from {@link #containsInRelativeOrder(Object[])} ,
-     * {@link #containsInRelativeOrder(Matcher[])},
-     * or {@link #containsInRelativeOrder(List)}.
+     * {@link #containsInRelativeOrder(Matcher[])}, or {@link #containsInRelativeOrder(List)}.
+     * @param matchers the matchers
      */
-    @SuppressWarnings("doclint")
     public IsIterableContainingInRelativeOrder(List<Matcher<? super E>> matchers) {
         this.matchers = matchers;
     }

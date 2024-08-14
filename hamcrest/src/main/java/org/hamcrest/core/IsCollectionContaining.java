@@ -15,12 +15,12 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
 
     /**
      * Constructor, best called from one of the static factory methods.
+     * @param elementMatcher matches the expected element
      * @see #hasItem(Object)
      * @see #hasItem(Matcher)
      * @see #hasItems(Object[])
      * @see #hasItems(Matcher[])
      */
-    @SuppressWarnings("doclint")
     public IsCollectionContaining(Matcher<? super T> elementMatcher) {
         this.delegate = new IsIterableContaining<>(elementMatcher);
     }

@@ -18,9 +18,10 @@ public class BigDecimalCloseTo extends TypeSafeMatcher<BigDecimal> {
 
   /**
    * Constructor, best called from {@link #closeTo(BigDecimal, BigDecimal)}.
+   * @param value the expected value
+   * @param error the acceptable difference from the expected value
    * @see #closeTo(BigDecimal, BigDecimal)
    */
-  @SuppressWarnings("doclint")
   public BigDecimalCloseTo(BigDecimal value, BigDecimal error) {
       this.delta = error;
       this.value = value;

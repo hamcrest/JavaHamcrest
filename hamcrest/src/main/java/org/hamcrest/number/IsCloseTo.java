@@ -7,8 +7,7 @@ import org.hamcrest.TypeSafeMatcher;
 import static java.lang.Math.abs;
 
 /**
- * Is the value a number equal to a value within some range of
- * acceptable error?
+ * Is the value a number equal to a value within some range of acceptable error?
  */
 public class IsCloseTo extends TypeSafeMatcher<Double> {
 
@@ -17,8 +16,9 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
 
     /**
      * Constructor, best called from {@link #closeTo(double, double)}.
+     * @param value the expected value
+     * @param error the acceptable difference from the expected value
      */
-    @SuppressWarnings("doclint")
     public IsCloseTo(double value, double error) {
         this.delta = error;
         this.value = value;

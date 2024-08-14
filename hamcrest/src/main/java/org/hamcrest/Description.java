@@ -80,8 +80,13 @@ public interface Description {
     /**
      * A description that consumes input but does nothing.
      */
-    @SuppressWarnings("doclint")
     final class NullDescription implements Description {
+        /**
+         * Constructor.
+         */
+        public NullDescription() {
+        }
+
         @Override
         public Description appendDescriptionOf(SelfDescribing value) {
             return this;

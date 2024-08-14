@@ -16,10 +16,11 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public final class IsMapWithSize<K, V> extends FeatureMatcher<Map<? extends K, ? extends V>, Integer> {
 
     /**
-     * Constructor, best called from {@link #aMapWithSize(int)},
-     * {@link #aMapWithSize(Matcher)}, or {@link #anEmptyMap()}
+     * Constructor, best called from {@link #aMapWithSize(int)}, {@link #aMapWithSize(Matcher)},
+     * or {@link #anEmptyMap()}.
+     * @param sizeMatcher matcher for the expected size of the map
      */
-    @SuppressWarnings({"WeakerAccess", "doclint"})
+    @SuppressWarnings("WeakerAccess")
     public IsMapWithSize(Matcher<? super Integer> sizeMatcher) {
       super(sizeMatcher, "a map with size", "map size");
     }

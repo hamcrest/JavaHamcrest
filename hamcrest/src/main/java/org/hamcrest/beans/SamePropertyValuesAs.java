@@ -28,8 +28,10 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
 
     /**
      * Constructor, best called from {@link #samePropertyValuesAs(Object, String...)}.
+     * @param expectedBean the bean object with the expected values
+     * @param ignoredProperties list of property names that should be excluded from the match
      */
-    @SuppressWarnings({"WeakerAccess", "doclint"})
+    @SuppressWarnings("WeakerAccess")
     public SamePropertyValuesAs(T expectedBean, List<String> ignoredProperties) {
         PropertyDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
         this.expectedBean = expectedBean;

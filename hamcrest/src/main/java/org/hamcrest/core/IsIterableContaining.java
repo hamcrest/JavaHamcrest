@@ -20,12 +20,12 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
 
     /**
      * Constructor, best called from one of the static factory methods.
+     * @param elementMatcher matches the expected element
      * @see #hasItem(Object)
      * @see #hasItem(Matcher)
      * @see #hasItems(Object[])
      * @see #hasItems(Matcher[])
      */
-    @SuppressWarnings("doclint")
     public IsIterableContaining(Matcher<? super T> elementMatcher) {
         this.elementMatcher = elementMatcher;
     }

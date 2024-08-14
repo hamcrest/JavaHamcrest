@@ -37,16 +37,19 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
 
     /**
      * Constructor, best called from one of the <code>hasXPath</code> static factory methods.
+     * @param xPathExpression the target xpath
+     * @param valueMatcher matcher for the expected value
      */
-    @SuppressWarnings("doclint")
     public HasXPath(String xPathExpression, Matcher<String> valueMatcher) {
         this(xPathExpression, NO_NAMESPACE_CONTEXT, valueMatcher);
     }
 
     /**
      * Constructor, best called from one of the <code>hasXPath</code> static factory methods.
+     * @param xPathExpression the target xpath
+     * @param namespaceContext the namespace for matching nodes
+     * @param valueMatcher matcher for the expected value
      */
-    @SuppressWarnings("doclint")
     public HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
         this(xPathExpression, namespaceContext, valueMatcher, STRING);
     }
@@ -148,8 +151,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * For example:
      * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese"))</pre>
      *
-     * @param xPath
-     *     the target xpath
+     * @param xPath the target xpath
      * @return The matcher.
      */
     public static Matcher<Node> hasXPath(String xPath) {
@@ -162,10 +164,8 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * For example:
      * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", myNs))</pre>
      *
-     * @param xPath
-     *     the target xpath
-     * @param namespaceContext
-     *     the namespace for matching nodes
+     * @param xPath the target xpath
+     * @param namespaceContext the namespace for matching nodes
      * @return The matcher.
      */
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext) {

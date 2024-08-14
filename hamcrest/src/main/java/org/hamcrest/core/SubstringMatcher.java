@@ -17,10 +17,15 @@ public abstract class SubstringMatcher extends TypeSafeMatcher<String> {
 
     private final String relationship;
     private final boolean ignoringCase;
-    @SuppressWarnings("doclint")
+    /** The substring to match */
     protected final String substring;
 
-    @SuppressWarnings("doclint")
+    /**
+     * Build a <code>SubstringMatcher</code>.
+     * @param relationship a description of the matcher, such as "containing", "ending with", or "starting with"
+     * @param ignoringCase true for case-insensitive match
+     * @param substring the substring to match
+     */
     protected SubstringMatcher(String relationship, boolean ignoringCase, String substring) {
         this.relationship = relationship;
         this.ignoringCase = ignoringCase;

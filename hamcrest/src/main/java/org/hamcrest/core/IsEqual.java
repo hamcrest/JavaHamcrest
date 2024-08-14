@@ -17,10 +17,9 @@ public class IsEqual<T> extends BaseMatcher<T> {
     private final Object expectedValue;
 
     /**
-     * Constructor, best called from {@link #equalTo(Object)} or
-     * {@link #equalToObject(Object)}.
+     * Constructor, best called from {@link #equalTo(Object)} or {@link #equalToObject(Object)}.
+     * @param equalArg the expected value
      */
-    @SuppressWarnings("doclint")
     public IsEqual(T equalArg) {
         expectedValue = equalArg;
     }

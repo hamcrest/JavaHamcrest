@@ -16,9 +16,9 @@ public class AnyOf<T> extends ShortcutCombination<T> {
 
     /**
      * Constructor, best called from {@link #anyOf(Matcher[])}.
+     * @param matchers the matchers
      * @see #anyOf(Matcher[]) 
      */
-    @SuppressWarnings("doclint")
     @SafeVarargs
     public AnyOf(Matcher<? super T> ... matchers) {
         this(Arrays.asList(matchers));
@@ -26,9 +26,9 @@ public class AnyOf<T> extends ShortcutCombination<T> {
 
     /**
      * Constructor, best called from {@link #anyOf(Iterable)}.
+     * @param matchers the matchers
      * @see #anyOf(Iterable) 
      */
-    @SuppressWarnings("doclint")
     public AnyOf(Iterable<Matcher<? super T>> matchers) {
         super(matchers);
     }

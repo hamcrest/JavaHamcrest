@@ -16,8 +16,8 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
     /**
      * Constructor, best called from {@link #emptyArray()},
      * {@link #arrayWithSize(int)} or {@link #arrayWithSize(Matcher)}.
+     * @param sizeMatcher the expected size
      */
-    @SuppressWarnings("doclint")
     public IsArrayWithSize(Matcher<? super Integer> sizeMatcher) {
         super(sizeMatcher, "an array with size","array size");
     }

@@ -16,8 +16,8 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
 
     /**
      * Constructor, best called from {@link #equalToIgnoringCase(String)}.
+     * @param string the expected string
      */
-    @SuppressWarnings("doclint")
     public IsEqualIgnoringCase(String string) {
         if (string == null) {
             throw new IllegalArgumentException("Non-null value required");

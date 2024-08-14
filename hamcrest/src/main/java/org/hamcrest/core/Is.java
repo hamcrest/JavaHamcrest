@@ -20,10 +20,9 @@ public class Is<T> extends BaseMatcher<T> {
     private final Matcher<T> matcher;
 
     /**
-     * Constructor, best called from {@link #is(Object)},
-     * {@link #is(Matcher)}, or {@link #isA(Class)}.
+     * Constructor, best called from {@link #is(Object)}, {@link #is(Matcher)}, or {@link #isA(Class)}.
+     * @param matcher the matcher to wrap
      */
-    @SuppressWarnings("doclint")
     public Is(Matcher<T> matcher) {
         this.matcher = matcher;
     }

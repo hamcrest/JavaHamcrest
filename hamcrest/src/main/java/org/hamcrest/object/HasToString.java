@@ -11,7 +11,10 @@ import static org.hamcrest.core.IsEqual.equalTo;
  */
 public class HasToString<T> extends FeatureMatcher<T, String> {
 
-    @SuppressWarnings("doclint")
+    /**
+     * Constructor, best called from {@link #hasToString(String)} or {@link #hasToString(Matcher)}.
+     * @param toStringMatcher expected result from calling <code>toString()</code>
+     */
     public HasToString(Matcher<? super String> toStringMatcher) {
       super(toStringMatcher, "with toString()", "toString()");
     }

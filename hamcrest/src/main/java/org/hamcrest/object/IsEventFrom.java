@@ -15,10 +15,10 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
     private final Object source;
 
     /**
-     * Constructor, best called from {@link #eventFrom(Object)} or
-     * {@link #eventFrom(Class, Object)}.
+     * Constructor, best called from {@link #eventFrom(Object)} or {@link #eventFrom(Class, Object)}.
+     * @param eventClass the expected class of the event
+     * @param source the expected source of the event
      */
-    @SuppressWarnings("doclint")
     public IsEventFrom(Class<?> eventClass, Object source) {
         this.eventClass = eventClass;
         this.source = source;

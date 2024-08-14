@@ -21,7 +21,10 @@ public class IsMapContaining<K, V> extends TypeSafeMatcher<Map<? extends K, ? ex
     private final Matcher<? super V> valueMatcher;
 
     /**
-     * Constructor, best called from one of the static factory methods.
+     * Constructor, best called from one of the static factory methods (<code>hasKey</code>, <code>hasValue</code>,
+     * or <code>hasEntry</code>).
+     * @param keyMatcher matcher for expected keys
+     * @param valueMatcher matcher for expected values
      * @see #hasKey(Object) 
      * @see #hasKey(Matcher) 
      * @see #hasValue(Object)
@@ -29,7 +32,6 @@ public class IsMapContaining<K, V> extends TypeSafeMatcher<Map<? extends K, ? ex
      * @see #hasEntry(Object, Object) 
      * @see #hasEntry(Matcher, Matcher) 
      */
-    @SuppressWarnings("doclint")
     public IsMapContaining(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
         this.keyMatcher = keyMatcher;
         this.valueMatcher = valueMatcher;

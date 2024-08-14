@@ -18,8 +18,8 @@ public class IsArray<T> extends TypeSafeMatcher<T[]> {
 
     /**
      * Constructor, best called from {@link #array(Matcher[])}.
+     * @param elementMatchers matchers for expected values
      */
-    @SuppressWarnings("doclint")
     public IsArray(Matcher<? super T>[] elementMatchers) {
         this.elementMatchers = elementMatchers.clone();
     }

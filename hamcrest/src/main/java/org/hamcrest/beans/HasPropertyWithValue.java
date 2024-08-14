@@ -77,8 +77,9 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     /**
      * Constructor, best called from {@link #hasProperty(String, Matcher)} or
      * {@link #hasPropertyAtPath(String, Matcher)}.
+     * @param propertyName the name of the property
+     * @param valueMatcher matcher for the expected value
      */
-    @SuppressWarnings("doclint")
     public HasPropertyWithValue(String propertyName, Matcher<?> valueMatcher) {
         this(propertyName, valueMatcher, " property '%s' ");
     }
@@ -86,8 +87,10 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     /**
      * Constructor, best called from {@link #hasProperty(String, Matcher)} or
      * {@link #hasPropertyAtPath(String, Matcher)}.
+     * @param propertyName the name of the property
+     * @param valueMatcher matcher for the expected value
+     * @param messageFormat format string for the description
      */
-    @SuppressWarnings("doclint")
     public HasPropertyWithValue(String propertyName, Matcher<?> valueMatcher, String messageFormat) {
         this.propertyName = propertyName;
         this.valueMatcher = nastyGenericsWorkaround(valueMatcher);

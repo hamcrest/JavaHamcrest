@@ -33,9 +33,11 @@ public class ArrayAsIterableMatcher<E> extends TypeSafeMatcher<E[]> {
 
   /**
    * Constructor, best called from {@link ArrayMatching#arrayContainingInAnyOrder(Matcher[])}.
+   * @param iterableMatcher the iterable matchers
+   * @param matchers the matchers
+   * @param message the description of this matcher
    * @see ArrayMatching#arrayContainingInAnyOrder(Matcher[])
    */
-  @SuppressWarnings("doclint")
   public ArrayAsIterableMatcher(
         TypeSafeDiagnosingMatcher<Iterable<? extends E>> iterableMatcher,
         Collection<Matcher<? super E>> matchers,

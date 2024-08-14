@@ -21,9 +21,9 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
 
     /**
      * Constructor, best called from {@link #hasProperty(String)}.
+     * @param propertyName the name of the property
      * @see #hasProperty(String) 
      */
-    @SuppressWarnings("doclint")
     public HasProperty(String propertyName) {
         this.propertyName = propertyName;
     }

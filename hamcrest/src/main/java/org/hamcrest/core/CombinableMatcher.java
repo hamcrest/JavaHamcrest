@@ -31,10 +31,10 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
 
   /**
    * Constructor, best called from <code>either</code> or <code>both</code>.
+   * @param matcher the starting matcher
    * @see #either(Matcher)
    * @see #both(Matcher) 
    */
-  @SuppressWarnings("doclint")
   public CombinableMatcher(Matcher<? super T> matcher) {
     this.matcher = matcher;
   }
@@ -83,10 +83,8 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * For example:
    * <pre>assertThat("fab", both(containsString("a")).and(containsString("b")))</pre>
    *
-   * @param <LHS>
-   *     the matcher type.
-   * @param matcher
-   *     the matcher to combine, and both must pass.
+   * @param <LHS> the matcher type.
+   * @param matcher the matcher to combine, and both must pass.
    * @return The matcher.
    */
   public static <LHS> CombinableBothMatcher<LHS> both(Matcher<? super LHS> matcher) {
@@ -102,12 +100,19 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
   public static final class CombinableBothMatcher<X> {
     private final Matcher<? super X> first;
 
-    @SuppressWarnings("doclint")
+    /**
+     * Constructor, best called from {@link #both(Matcher)}.
+     * @param matcher the first matcher
+     */
     public CombinableBothMatcher(Matcher<? super X> matcher) {
         this.first = matcher;
     }
 
-    @SuppressWarnings("doclint")
+    /**
+     * Specify the second matcher in a <code>CombinableMatcher</code> pair.
+     * @param other the second matcher
+     * @return the combined matcher
+     */
     public CombinableMatcher<X> and(Matcher<? super X> other) {
       return new CombinableMatcher(first).and(other);
     }
@@ -118,10 +123,8 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
    * For example:
    * <pre>assertThat("fan", either(containsString("a")).or(containsString("b")))</pre>
    *
-   * @param <LHS>
-   *     the matcher type.
-   * @param matcher
-   *     the matcher to combine, and either must pass.
+   * @param <LHS> the matcher type.
+   * @param matcher the matcher to combine, and either must pass.
    * @return The matcher.
    */
   public static <LHS> CombinableEitherMatcher<LHS> either(Matcher<? super LHS> matcher) {
@@ -137,12 +140,19 @@ public class CombinableMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
   public static final class CombinableEitherMatcher<X> {
     private final Matcher<? super X> first;
 
-    @SuppressWarnings("doclint")
+    /**
+     * Constructor, best called from {@link #either(Matcher)}
+     * @param matcher the matcher
+     */
     public CombinableEitherMatcher(Matcher<? super X> matcher) {
         this.first = matcher;
     }
 
-    @SuppressWarnings("doclint")
+    /**
+     * Specify the second matcher in a <code>CombinableMatcher</code> pair.
+     * @param other the second matcher
+     * @return the combined matcher
+     */
     public CombinableMatcher<X> or(Matcher<? super X> other) {
       return new CombinableMatcher(first).or(other);
     }

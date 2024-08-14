@@ -21,12 +21,12 @@ public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher
     private final Collection<Matcher<? super T>> matchers;
 
     /**
-     * Constructor, best called from one of the static factory methods.
+     * Constructor, best called from one of the static "<code>containsInAnyOrder</code>" factory methods.
+     * @param matchers the matchers
      * @see #containsInAnyOrder(Object[])
      * @see #containsInAnyOrder(Collection)
      * @see #containsInAnyOrder(Matcher[])
      */
-    @SuppressWarnings("doclint")
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }

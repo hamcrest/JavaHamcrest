@@ -15,10 +15,9 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class IsCollectionWithSize<E> extends FeatureMatcher<Collection<? extends E>, Integer> {
 
     /**
-     * Constructor, best called from {@link #hasSize(int)} or
-     * {@link #hasSize(Matcher)}.
+     * Constructor, best called from {@link #hasSize(int)} or {@link #hasSize(Matcher)}.
+     * @param sizeMatcher the expected size
      */
-    @SuppressWarnings("doclint")
     public IsCollectionWithSize(Matcher<? super Integer> sizeMatcher) {
       super(sizeMatcher, "a collection with size", "collection size");
     }

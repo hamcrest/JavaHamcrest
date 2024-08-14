@@ -17,16 +17,16 @@ public class IsIn<T> extends BaseMatcher<T> {
 
     /**
      * Constructor, best called from {@link #in(Collection)}.
+     * @param collection the expected element matchers
      */
-    @SuppressWarnings("doclint")
     public IsIn(Collection<T> collection) {
         this.collection = collection;
     }
 
     /**
      * Constructor, best called from {@link #in(Object[])}.
+     * @param elements the expected elements
      */
-    @SuppressWarnings("doclint")
     public IsIn(T[] elements) {
         collection = Arrays.asList(elements);
     }

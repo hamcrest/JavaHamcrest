@@ -23,10 +23,9 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
 
     /**
      * Constructor, best called from {@link #arrayContainingInAnyOrder(Object[])},
-     * {@link #arrayContainingInAnyOrder(Matcher[])}, or
-     * {@link #arrayContainingInAnyOrder(Collection)}.
+     * {@link #arrayContainingInAnyOrder(Matcher[])}, or {@link #arrayContainingInAnyOrder(Collection)}.
+     * @param matchers matchers for expected values
      */
-    @SuppressWarnings("doclint")
     public IsArrayContainingInAnyOrder(Collection<Matcher<? super E>> matchers) {
         this.iterableMatcher = new IsIterableContainingInAnyOrder<>(matchers);
         this.matchers = matchers;

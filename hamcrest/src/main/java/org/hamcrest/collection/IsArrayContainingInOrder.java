@@ -24,8 +24,8 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     /**
      * Constructor, best called from {@link #arrayContaining(Object[])},
      * {@link #arrayContaining(Matcher[])}, or {@link #arrayContaining(List)}.
+     * @param matchers matchers for expected values
      */
-    @SuppressWarnings("doclint")
     public IsArrayContainingInOrder(List<Matcher<? super E>> matchers) {
         this.iterableMatcher = new IsIterableContainingInOrder<>(matchers);
         this.matchers = matchers;

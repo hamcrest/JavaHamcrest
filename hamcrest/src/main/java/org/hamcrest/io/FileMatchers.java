@@ -20,56 +20,58 @@ public final class FileMatchers {
 
     /**
      * A matcher that checks if a directory exists.
+     * @return the file matcher
      */
-    @SuppressWarnings("doclint")
     public static Matcher<File> anExistingDirectory() {
         return fileChecker(IS_DIRECTORY, "an existing directory", "is not a directory");
     }
 
     /**
      * A matcher that checks if a file or directory exists.
+     * @return the file matcher
      */
-    @SuppressWarnings("doclint")
     public static Matcher<File> anExistingFileOrDirectory() {
         return fileChecker(EXISTS, "an existing file or directory", "does not exist");
     }
 
     /**
      * A matcher that checks if a file exists.
+     * @return the file matcher
      */
-    @SuppressWarnings("doclint")
     public static Matcher<File> anExistingFile() {
         return fileChecker(IS_FILE, "an existing File", "is not a file");
     }
 
     /**
      * A matcher that checks if a file is readable.
+     * @return the file matcher
      */
-    @SuppressWarnings("doclint")
     public static Matcher<File> aReadableFile() {
         return fileChecker(CAN_READ, "a readable File", "cannot be read");
     }
 
     /**
      * A matcher that checks if a directory is writable.
+     * @return the file matcher
      */
-    @SuppressWarnings("doclint")
     public static Matcher<File> aWritableFile() {
         return fileChecker(CAN_WRITE, "a writable File", "cannot be written to");
     }
 
     /**
      * A matcher that checks if a file has a specific size.
+     * @param size the expected size
+     * @return the file matcher
      */
-    @SuppressWarnings("doclint")
     public static Matcher<File> aFileWithSize(long size) {
         return aFileWithSize(equalTo(size));
     }
 
     /**
      * A matcher that checks if a file size matches an expected size.
+     * @param expected matcher for the expected size
+     * @return the file matcher
      */
-    @SuppressWarnings("doclint")
     public static Matcher<File> aFileWithSize(final Matcher<Long> expected) {
         return new FeatureMatcher<File, Long>(expected, "A file with size", "size") {
             @Override protected Long featureValueOf(File actual) { return actual.length(); }
@@ -78,8 +80,9 @@ public final class FileMatchers {
 
     /**
      * A matcher that checks if a file name matches an expected name.
+     * @param expected the expected name
+     * @return the file matcher
      */
-    @SuppressWarnings("doclint")
     public static Matcher<File> aFileNamed(final Matcher<String> expected) {
         return new FeatureMatcher<File, String>(expected, "A file with name", "name") {
             @Override protected String featureValueOf(File actual) { return actual.getName(); }
@@ -88,8 +91,9 @@ public final class FileMatchers {
 
     /**
      * A matcher that checks if a file canonical path matches an expected path.
+     * @param expected the expected path
+     * @return the file matcher
      */
-    @SuppressWarnings("doclint")
     public static Matcher<File> aFileWithCanonicalPath(final Matcher<String> expected) {
         return new FeatureMatcher<File, String>(expected, "A file with canonical path", "path") {
             @Override protected String featureValueOf(File actual) {
@@ -104,8 +108,9 @@ public final class FileMatchers {
 
     /**
      * A matcher that checks if a file absolute path matches an expected path.
+     * @param expected the expected path
+     * @return the file matcher
      */
-    @SuppressWarnings("doclint")
     public static Matcher<File> aFileWithAbsolutePath(final Matcher<String> expected) {
         return new FeatureMatcher<File, String>(expected, "A file with absolute path", "path") {
             @Override protected String featureValueOf(File actual) { return actual.getAbsolutePath(); }

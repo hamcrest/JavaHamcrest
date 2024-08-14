@@ -22,8 +22,8 @@ public class IsAnything<T> extends BaseMatcher<T> {
 
     /**
      * Constructor, best called from {@link #anything(String)}.
+     * @param message matcher description
      */
-    @SuppressWarnings("doclint")
     public IsAnything(String message) {
         this.message = message;
     }
