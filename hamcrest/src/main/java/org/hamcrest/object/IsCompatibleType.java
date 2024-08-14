@@ -4,10 +4,18 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+/**
+ * A matcher of {@link Class} that matches when the specified baseType is assignable from the examined class.
+ * @param <T> the type of the class
+ */
 public class IsCompatibleType<T> extends TypeSafeMatcher<Class<?>> {
 
     private final Class<T> type;
 
+    /**
+     * Constructor, best called from {@link #typeCompatibleWith(Class)}.
+     * @param type the expected type
+     */
     public IsCompatibleType(Class<T> type) {
         this.type = type;
     }

@@ -7,8 +7,18 @@ import org.hamcrest.Matcher;
  */
 public class StringContains extends SubstringMatcher {
 
+    /**
+     * Constructor, best used with {@link #containsString(String)}.
+     * @param substring the expected substring.
+     */
     public StringContains(String substring) { this(false, substring); }
 
+    /**
+     * Constructor, best used with {@link #containsString(String)}  or
+     * {@link #containsStringIgnoringCase(String)}.
+     * @param ignoringCase whether to ignore case when matching
+     * @param substring the expected substring.
+     */
     public StringContains(boolean ignoringCase, String substring) {
         super("containing", ignoringCase, substring);
     }

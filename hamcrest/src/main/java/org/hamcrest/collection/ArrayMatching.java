@@ -11,10 +11,13 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
- * @author Steve Freeman 2016 http://www.hamcrest.com
  * Collected helper code for converting matchers between lists and iterables.
+ *
+ * @author Steve Freeman 2016 http://www.hamcrest.com
  */
 public class ArrayMatching {
+  private ArrayMatching() {
+  }
 
   /**
    * Creates a matcher for arrays that matches when the examined array contains at least one item
@@ -187,6 +190,12 @@ public class ArrayMatching {
       return new ArrayAsIterableMatcher<>(new IsIterableContainingInOrder<>(itemMatchers), itemMatchers, "");
   }
 
+  /**
+   * Converts item array to corresponding array of <code>equalTo</code> matchers
+   * @param items items to convert
+   * @return list of corresponding <code>equaTo</code> matchers
+   * @param <E> type of array items
+   */
   public static <E> List<Matcher<? super E>> asEqualMatchers(E[] items) {
     final List<Matcher<? super E>> matchers = new ArrayList<>();
     for (E item : items) {

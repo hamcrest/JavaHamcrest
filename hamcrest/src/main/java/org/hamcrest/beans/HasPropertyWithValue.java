@@ -17,9 +17,9 @@ import static org.hamcrest.Condition.notMatched;
 import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
 
 /**
- * <p>Matcher that asserts that a JavaBean property on an argument passed to the
- * mock object meets the provided matcher. This is useful for when objects
- * are created within code under test and passed to a mock object, and you wish
+ * <p>A matcher that checks if an object has a JavaBean property with the
+ * specified name and an expected value. This is useful for when objects are
+ * created within code under test and passed to a mock object, and you wish
  * to assert that the created object has certain properties.
  * </p>
  *
@@ -27,8 +27,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * Consider the situation where we have a class representing a person, which
  * follows the basic JavaBean convention of having get() and possibly set()
  * methods for it's properties:
- * <pre>
- * public class Person {
+ * <pre>{@code  public class Person {
  *   private String name;
  *   public Person(String person) {
  *     this.person = person;
@@ -36,22 +35,20 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  *   public String getName() {
  *     return name;
  *   }
- * }</pre>
+ * } }</pre>
  *
  * And that these person objects are generated within a piece of code under test
  * (a class named PersonGenerator). This object is sent to one of our mock objects
  * which overrides the PersonGenerationListener interface:
- * <pre>
- * public interface PersonGenerationListener {
+ * <pre>{@code  public interface PersonGenerationListener {
  *   public void personGenerated(Person person);
- * }</pre>
+ * } }</pre>
  *
  * In order to check that the code under test generates a person with name
  * "Iain" we would do the following:
- * <pre>
- * Mock personGenListenerMock = mock(PersonGenerationListener.class);
+ * <pre>{@code  Mock personGenListenerMock = mock(PersonGenerationListener.class);
  * personGenListenerMock.expects(once()).method("personGenerated").with(and(isA(Person.class), hasProperty("Name", eq("Iain")));
- * PersonGenerationListener listener = (PersonGenerationListener)personGenListenerMock.proxy();</pre>
+ * PersonGenerationListener listener = (PersonGenerationListener)personGenListenerMock.proxy(); }</pre>
  *
  * <p>If an exception is thrown by the getter method for a property, the property
  * does not exist, is not readable, or a reflection related exception is thrown
@@ -59,11 +56,12 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * the matches method will return false.
  * </p>
  * <p>This matcher class will also work with JavaBean objects that have explicit
- * bean descriptions via an associated BeanInfo description class. See the
- * JavaBeans specification for more information:
- * http://java.sun.com/products/javabeans/docs/index.html
+ * bean descriptions via an associated BeanInfo description class.
+ * See <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/beans/index.html">https://docs.oracle.com/javase/8/docs/technotes/guides/beans/index.html</a> for
+ * more information on JavaBeans.
  * </p>
  *
+ * @param <T> the Matcher type
  * @author Iain McGinniss
  * @author Nat Pryce
  * @author Steve Freeman
@@ -76,10 +74,23 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     private final Matcher<Object> valueMatcher;
     private final String messageFormat;
 
+    /**
+     * Constructor, best called from {@link #hasProperty(String, Matcher)} or
+     * {@link #hasPropertyAtPath(String, Matcher)}.
+     * @param propertyName the name of the property
+     * @param valueMatcher matcher for the expected value
+     */
     public HasPropertyWithValue(String propertyName, Matcher<?> valueMatcher) {
         this(propertyName, valueMatcher, " property '%s' ");
     }
 
+    /**
+     * Constructor, best called from {@link #hasProperty(String, Matcher)} or
+     * {@link #hasPropertyAtPath(String, Matcher)}.
+     * @param propertyName the name of the property
+     * @param valueMatcher matcher for the expected value
+     * @param messageFormat format string for the description
+     */
     public HasPropertyWithValue(String propertyName, Matcher<?> valueMatcher, String messageFormat) {
         this.propertyName = propertyName;
         this.valueMatcher = nastyGenericsWorkaround(valueMatcher);

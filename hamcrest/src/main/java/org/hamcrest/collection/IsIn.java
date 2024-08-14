@@ -7,14 +7,26 @@ import org.hamcrest.Matcher;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * Tests if a collection contains a matching object.
+ * @param <T> the type of the objects in the collection
+ */
 public class IsIn<T> extends BaseMatcher<T> {
 
     private final Collection<T> collection;
 
+    /**
+     * Constructor, best called from {@link #in(Collection)}.
+     * @param collection the expected element matchers
+     */
     public IsIn(Collection<T> collection) {
         this.collection = collection;
     }
 
+    /**
+     * Constructor, best called from {@link #in(Object[])}.
+     * @param elements the expected elements
+     */
     public IsIn(T[] elements) {
         collection = Arrays.asList(elements);
     }

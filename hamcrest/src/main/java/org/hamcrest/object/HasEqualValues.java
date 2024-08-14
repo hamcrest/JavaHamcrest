@@ -12,11 +12,19 @@ import java.util.List;
 
 import static java.lang.String.format;
 
+/**
+ * A matcher that checks if an object as equal fields values to an expected object.
+ * @param <T> the type of the object being matched.
+ */
 public class HasEqualValues<T> extends TypeSafeDiagnosingMatcher<T> {
 
     private final T expectedObject;
     private final List<FieldMatcher> fieldMatchers;
 
+    /**
+     * Constructor
+     * @param expectedObject the object with expected field values.
+     */
     public HasEqualValues(T expectedObject) {
         super(expectedObject.getClass());
         this.expectedObject = expectedObject;

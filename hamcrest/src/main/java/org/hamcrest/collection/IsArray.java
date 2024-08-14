@@ -9,11 +9,17 @@ import java.util.Arrays;
 /**
  * Matcher for array whose elements satisfy a sequence of matchers.
  * The array size must equal the number of element matchers.
+ *
+ * @param <T> the array element type
  */
 public class IsArray<T> extends TypeSafeMatcher<T[]> {
 
     private final Matcher<? super T>[] elementMatchers;
 
+    /**
+     * Constructor, best called from {@link #array(Matcher[])}.
+     * @param elementMatchers matchers for expected values
+     */
     public IsArray(Matcher<? super T>[] elementMatchers) {
         this.elementMatchers = elementMatchers.clone();
     }

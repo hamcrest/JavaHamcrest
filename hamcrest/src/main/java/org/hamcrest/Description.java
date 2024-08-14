@@ -8,16 +8,16 @@ package org.hamcrest;
  */
 public interface Description {
 
-  /**
-   * A description that consumes input but does nothing.
-   */
-  static final Description NONE = new NullDescription();
+    /**
+     * A description that consumes input but does nothing, implemented by
+     * {@link NullDescription}.
+     */
+    Description NONE = new NullDescription();
 
     /**
      * Appends some plain text to the description.
      *
-     * @param text
-     *     the text to append.
+     * @param text the text to append.
      * @return the update description when displaying the matcher error.
      */
     Description appendText(String text);
@@ -25,8 +25,7 @@ public interface Description {
     /**
      * Appends the description of a {@link SelfDescribing} value to this description.
      *
-     * @param value
-     *     the value to append.
+     * @param value the value to append.
      * @return the update description when displaying the matcher error.
      */
     Description appendDescriptionOf(SelfDescribing value);
@@ -34,8 +33,7 @@ public interface Description {
     /**
      * Appends an arbitrary value to the description.
      *
-     * @param value
-     *     the object to append.
+     * @param value the object to append.
      * @return the update description when displaying the matcher error.
      */
     Description appendValue(Object value);
@@ -43,16 +41,11 @@ public interface Description {
     /**
      * Appends a list of values to the description.
      *
-     * @param <T>
-     *     the description type.
-     * @param start
-     *     the prefix.
-     * @param separator
-     *     the separator.
-     * @param end
-     *     the suffix.
-     * @param values
-     *     the values to append.
+     * @param <T>       the description type.
+     * @param start     the prefix.
+     * @param separator the separator.
+     * @param end       the suffix.
+     * @param values    the values to append.
      * @return the update description when displaying the matcher error.
      */
     <T> Description appendValueList(String start, String separator, String end,
@@ -61,16 +54,11 @@ public interface Description {
     /**
      * Appends a list of values to the description.
      *
-     * @param <T>
-     *     the description type.
-     * @param start
-     *     the prefix.
-     * @param separator
-     *     the separator.
-     * @param end
-     *     the suffix.
-     * @param values
-     *     the values to append.
+     * @param <T>       the description type.
+     * @param start     the prefix.
+     * @param separator the separator.
+     * @param end       the suffix.
+     * @param values    the values to append.
      * @return the update description when displaying the matcher error.
      */
     <T> Description appendValueList(String start, String separator, String end,
@@ -79,56 +67,62 @@ public interface Description {
     /**
      * Appends a list of {@link org.hamcrest.SelfDescribing} objects
      * to the description.
-     * @param start
-     *     the prefix.
-     * @param separator
-     *     the separator.
-     * @param end
-     *     the suffix.
-     * @param values
-     *     the values to append.
+     *
+     * @param start     the prefix.
+     * @param separator the separator.
+     * @param end       the suffix.
+     * @param values    the values to append.
      * @return the update description when displaying the matcher error.
      */
     Description appendList(String start, String separator, String end,
                            Iterable<? extends SelfDescribing> values);
 
-    public static final class NullDescription implements Description {
-      @Override
-      public Description appendDescriptionOf(SelfDescribing value) {
-        return this;
-      }
+    /**
+     * A description that consumes input but does nothing.
+     */
+    final class NullDescription implements Description {
+        /**
+         * Constructor.
+         */
+        public NullDescription() {
+        }
 
-      @Override
-      public Description appendList(String start, String separator,
-          String end, Iterable<? extends SelfDescribing> values) {
-        return this;
-      }
+        @Override
+        public Description appendDescriptionOf(SelfDescribing value) {
+            return this;
+        }
 
-      @Override
-      public Description appendText(String text) {
-        return this;
-      }
+        @Override
+        public Description appendList(String start, String separator,
+                                      String end, Iterable<? extends SelfDescribing> values) {
+            return this;
+        }
 
-      @Override
-      public Description appendValue(Object value) {
-        return this;
-      }
+        @Override
+        public Description appendText(String text) {
+            return this;
+        }
 
-      @Override
-      public <T> Description appendValueList(String start, String separator,
-          String end, T... values) {
-        return this;
-      }
+        @Override
+        public Description appendValue(Object value) {
+            return this;
+        }
 
-      @Override
-      public <T> Description appendValueList(String start, String separator,
-          String end, Iterable<T> values) {
-        return this;
-      }
+        @Override
+        public <T> Description appendValueList(String start, String separator,
+                                               String end, T... values) {
+            return this;
+        }
 
-      @Override
+        @Override
+        public <T> Description appendValueList(String start, String separator,
+                                               String end, Iterable<T> values) {
+            return this;
+        }
+
+        @Override
         public String toString() {
-          return "";
+            return "";
         }
     }
 

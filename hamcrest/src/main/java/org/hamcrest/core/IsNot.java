@@ -8,11 +8,18 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
  * Calculates the logical negation of a matcher.
+ *
+ * @param <T> the matched value type
  */
 public class IsNot<T> extends BaseMatcher<T>  {
 
     private final Matcher<T> matcher;
 
+    /**
+     * Constructor, best called from {@link #not(Object)} or
+     * {@link #not(Matcher)}.
+     * @param matcher the matcher to negate
+     */
     public IsNot(Matcher<T> matcher) {
         this.matcher = matcher;
     }

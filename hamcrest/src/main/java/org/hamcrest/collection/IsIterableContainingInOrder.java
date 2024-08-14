@@ -11,10 +11,24 @@ import java.util.List;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.collection.ArrayMatching.asEqualMatchers;
 
+/**
+ * Tests if an iterable contains matching elements in order.
+ *
+ * @param <E> the type of items in the iterable.
+ */
 public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
 
     private final List<Matcher<? super E>> matchers;
 
+    /**
+     * Constructor, best called from one of the static "<code>contains</code>" factory methods.
+     * @param matchers the matchers
+     *
+     * @see #contains(Object[])
+     * @see #contains(Matcher)
+     * @see #contains(Matcher[])
+     * @see #contains(List)
+     */
     public IsIterableContainingInOrder(List<Matcher<? super E>> matchers) {
         this.matchers = matchers;
     }

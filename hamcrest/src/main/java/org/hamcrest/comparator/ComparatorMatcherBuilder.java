@@ -8,6 +8,10 @@ import java.util.Comparator;
 
 import static java.lang.Integer.signum;
 
+/**
+ * Builder for matchers that allow matchers to use a corresponding Compartor
+ * @param <T> the type of the value being compared/matched.
+ */
 public final class ComparatorMatcherBuilder<T> {
 
     private final Comparator<T> comparator;

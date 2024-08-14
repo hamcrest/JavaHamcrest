@@ -6,11 +6,18 @@ import org.hamcrest.Matcher;
 
 /**
  * Is the value the same object as another value?
+ *
+ * @param <T> the matched value type
  */
 public class IsSame<T> extends BaseMatcher<T> {
 
     private final T object;
 
+    /**
+     * Constructor, best called from {@link #sameInstance(Object)} or
+     * {@link #theInstance(Object)}.
+     * @param object the object to check
+     */
     public IsSame(T object) {
         this.object = object;
     }

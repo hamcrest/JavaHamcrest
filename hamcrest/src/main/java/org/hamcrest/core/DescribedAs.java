@@ -10,6 +10,8 @@ import static java.lang.Integer.parseInt;
 
 /**
  * Provides a custom description to another matcher.
+ *
+ * @param <T> the matched value type
  */
 public class DescribedAs<T> extends BaseMatcher<T> {
 
@@ -19,6 +21,12 @@ public class DescribedAs<T> extends BaseMatcher<T> {
 
     private final static Pattern ARG_PATTERN = Pattern.compile("%([0-9]+)");
 
+    /**
+     * Constructor, best called from {@link #describedAs(String, Matcher, Object...)}.
+     * @param descriptionTemplate the new description for the wrapped matcher
+     * @param matcher the matcher to wrap
+     * @param values optional values to insert into the tokenised description
+     */
     public DescribedAs(String descriptionTemplate, Matcher<T> matcher, Object[] values) {
         this.descriptionTemplate = descriptionTemplate;
         this.matcher = matcher;
@@ -57,18 +65,14 @@ public class DescribedAs<T> extends BaseMatcher<T> {
      * For example:
      * <pre>describedAs("a big decimal equal to %0", equalTo(myBigDecimal), myBigDecimal.toPlainString())</pre>
      *
-     * @param <T>
-     *     the matcher type.
-     * @param description
-     *     the new description for the wrapped matcher
-     * @param matcher
-     *     the matcher to wrap
-     * @param values
-     *     optional values to insert into the tokenised description
+     * @param <T> the matcher type.
+     * @param descriptionTemplate the new description for the wrapped matcher
+     * @param matcher the matcher to wrap
+     * @param values optional values to insert into the tokenised description
      * @return The matcher.
      */
-    public static <T> Matcher<T> describedAs(String description, Matcher<T> matcher, Object... values) {
-        return new DescribedAs<>(description, matcher, values);
+    public static <T> Matcher<T> describedAs(String descriptionTemplate, Matcher<T> matcher, Object... values) {
+        return new DescribedAs<>(descriptionTemplate, matcher, values);
     }
 
 }

@@ -5,8 +5,16 @@ import org.hamcrest.Matcher;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
+/**
+ * A Matcher that checks the output of the <code>toString()</code> method.
+ * @param <T> The Matcher type.
+ */
 public class HasToString<T> extends FeatureMatcher<T, String> {
 
+    /**
+     * Constructor, best called from {@link #hasToString(String)} or {@link #hasToString(Matcher)}.
+     * @param toStringMatcher expected result from calling <code>toString()</code>
+     */
     public HasToString(Matcher<? super String> toStringMatcher) {
       super(toStringMatcher, "with toString()", "toString()");
     }

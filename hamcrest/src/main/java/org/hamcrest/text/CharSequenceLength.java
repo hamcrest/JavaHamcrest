@@ -3,16 +3,22 @@ package org.hamcrest.text;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 
 /**
+ * A Matcher that checks the length of a string.
  * @author Marco Leichsenring
  * @author Steve Freeman
  */
 public class CharSequenceLength extends FeatureMatcher<CharSequence, Integer> {
 
+
     /**
-     * @param lengthMatcher         The matcher to apply to the feature
+     * Constructor, best called from {@link #hasLength(Matcher)}.
+     * @param lengthMatcher the expected length
+     * @see #hasLength(Matcher)
      */
     @SuppressWarnings("WeakerAccess")
     public CharSequenceLength(Matcher<? super Integer> lengthMatcher) {

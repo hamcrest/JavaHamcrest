@@ -10,9 +10,19 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
 
+/**
+ * Tests if an iterable contains matching elements in relative order.
+ *
+ * @param <E> the type of items in the iterable.
+ */
 public class IsIterableContainingInRelativeOrder<E> extends TypeSafeDiagnosingMatcher<Iterable<? extends E>> {
     private final List<Matcher<? super E>> matchers;
 
+    /**
+     * Constructor, best called from {@link #containsInRelativeOrder(Object[])} ,
+     * {@link #containsInRelativeOrder(Matcher[])}, or {@link #containsInRelativeOrder(List)}.
+     * @param matchers the matchers
+     */
     public IsIterableContainingInRelativeOrder(List<Matcher<? super E>> matchers) {
         this.matchers = matchers;
     }

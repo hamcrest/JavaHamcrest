@@ -21,6 +21,7 @@ package org.hamcrest;
  * N.B. Well designed matchers should be immutable.
  * </p>
  *
+ * @param <T> the matched value type
  * @see BaseMatcher
  */
 public interface Matcher<T> extends SelfDescribing {

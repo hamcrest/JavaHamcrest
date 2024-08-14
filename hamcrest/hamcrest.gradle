@@ -33,4 +33,8 @@ jar {
     }
 }
 
-javadoc.title = "Hamcrest ${version} API"
+javadoc {
+    title = "Hamcrest ${version} API"
+    exclude "org/hamcrest/internal/*"
+    options.overview = file("javadoc-overview.html")
+}

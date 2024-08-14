@@ -12,6 +12,7 @@ import java.util.List;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
+ * @param <E> the collection element type
  * @deprecated As of release 2.1, replaced by {@link ArrayMatching}.
  */
 @Deprecated
@@ -20,6 +21,11 @@ public class IsArrayContainingInAnyOrder<E> extends TypeSafeMatcher<E[]> {
     private final IsIterableContainingInAnyOrder<E> iterableMatcher;
     private final Collection<Matcher<? super E>> matchers;
 
+    /**
+     * Constructor, best called from {@link #arrayContainingInAnyOrder(Object[])},
+     * {@link #arrayContainingInAnyOrder(Matcher[])}, or {@link #arrayContainingInAnyOrder(Collection)}.
+     * @param matchers matchers for expected values
+     */
     public IsArrayContainingInAnyOrder(Collection<Matcher<? super E>> matchers) {
         this.iterableMatcher = new IsIterableContainingInAnyOrder<>(matchers);
         this.matchers = matchers;

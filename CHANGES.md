@@ -4,7 +4,7 @@
 
 ### Improvements
 
-* TBD
+* Javadoc improvements and cleanup ([PR #420](https://github.com/hamcrest/JavaHamcrest/pull/420))
 
 ### Bugfixes
 

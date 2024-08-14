@@ -74,6 +74,12 @@ subprojects {
     }
 }
 
+allprojects {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << '-Xlint:-options'
+    }
+}
+
 def pomConfigurationFor(String pomName, String pomDescription) {
     return {
         name = pomName

@@ -5,6 +5,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
+ * @param <T> the collection element type
  * @deprecated As of release 2.1, replaced by {@link IsIterableContaining}.
  */
 @Deprecated
@@ -12,6 +13,14 @@ public class IsCollectionContaining<T> extends TypeSafeDiagnosingMatcher<Iterabl
 
     private final IsIterableContaining<T> delegate;
 
+    /**
+     * Constructor, best called from one of the static factory methods.
+     * @param elementMatcher matches the expected element
+     * @see #hasItem(Object)
+     * @see #hasItem(Matcher)
+     * @see #hasItems(Object[])
+     * @see #hasItems(Matcher[])
+     */
     public IsCollectionContaining(Matcher<? super T> elementMatcher) {
         this.delegate = new IsIterableContaining<>(elementMatcher);
     }
