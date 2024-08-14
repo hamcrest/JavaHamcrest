@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Hamcrest Overview</title>
+</head>
+<body>
+<p>Matchers that can be combined to create flexible expressions of intent.</p>
+<p>For example:</p>
+<pre style="border: 1px solid #ccc; margin: 0; padding: 0.5em;"><code>import org.junit.jupiter.api.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
+public class BiscuitTest {
+  &#64;Test
+  public void testEquals() {
+    Biscuit theBiscuit = new Biscuit("Ginger");
+    Biscuit myBiscuit = new Biscuit("Ginger");
+    assertThat(theBiscuit, equalTo(myBiscuit));
+  }
+}
+</code></pre>
+
+<p>For more information and documentation, see:</p>
+<ul>
+    <li>The <a href="https://hamcrest.org/JavaHamcrest/tutorial" target="_top">Getting Started</a> tutorial</li>
+    <li>The <a href="https://github.com/hamcrest/JavaHamcrest" target="_top">source code on GitHub</a></li>
+</ul>
+
+</body>
+</html>
+

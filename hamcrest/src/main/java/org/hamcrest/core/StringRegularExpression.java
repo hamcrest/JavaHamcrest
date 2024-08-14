@@ -7,12 +7,17 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
+ * A matcher that checks a string against a regular expression.
+ *
  * @author borettim
  * @author sf105
- *
  */
 public class StringRegularExpression extends TypeSafeDiagnosingMatcher<String> {
 
+  /**
+   * Constructor, best used from {@link #matchesRegex(String)}.
+   * @param pattern the regular expression to match against
+   */
   protected StringRegularExpression(Pattern pattern) {
     this.pattern = pattern;
   }

@@ -12,6 +12,8 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
+ * @param <E> the array element type
+ *
  * @deprecated As of release 2.1, replaced by {@link ArrayMatching}.
  */
 public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
@@ -19,6 +21,11 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     private final Collection<Matcher<? super E>> matchers;
     private final IsIterableContainingInOrder<E> iterableMatcher;
 
+    /**
+     * Constructor, best called from {@link #arrayContaining(Object[])},
+     * {@link #arrayContaining(Matcher[])}, or {@link #arrayContaining(List)}.
+     * @param matchers matchers for expected values
+     */
     public IsArrayContainingInOrder(List<Matcher<? super E>> matchers) {
         this.iterableMatcher = new IsIterableContainingInOrder<>(matchers);
         this.matchers = matchers;

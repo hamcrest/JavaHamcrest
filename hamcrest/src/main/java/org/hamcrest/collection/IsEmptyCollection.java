@@ -7,9 +7,18 @@ import org.hamcrest.TypeSafeMatcher;
 import java.util.Collection;
 
 /**
- * Tests if collection is empty.
+ * Tests if a collection is empty.
+ *
+ * @param <E> the collection element type
  */
 public class IsEmptyCollection<E> extends TypeSafeMatcher<Collection<? extends E>> {
+
+    /**
+     * Constructor, best called from {@link #empty()} or
+     * {@link #emptyCollectionOf(Class)}.
+     */
+    public IsEmptyCollection() {
+    }
 
     @Override
     public boolean matchesSafely(Collection<? extends E> item) {

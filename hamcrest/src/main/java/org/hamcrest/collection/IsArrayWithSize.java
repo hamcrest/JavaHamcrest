@@ -7,10 +7,17 @@ import static org.hamcrest.core.DescribedAs.describedAs;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
- * Matches if array size satisfies a nested matcher.
+ * Matches if array size satisfies a size matcher.
+ *
+ * @param <E> the array element type
  */
 public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
 
+    /**
+     * Constructor, best called from {@link #emptyArray()},
+     * {@link #arrayWithSize(int)} or {@link #arrayWithSize(Matcher)}.
+     * @param sizeMatcher the expected size
+     */
     public IsArrayWithSize(Matcher<? super Integer> sizeMatcher) {
         super(sizeMatcher, "an array with size","array size");
     }

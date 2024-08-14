@@ -8,12 +8,18 @@ import java.lang.reflect.Array;
 
 /**
  * Is the value equal to another value, as tested by the
- * {@link java.lang.Object#equals} invokedMethod?
+ * {@link java.lang.Object#equals} method.
+ *
+ * @param <T> the matched value type
  */
 public class IsEqual<T> extends BaseMatcher<T> {
 
     private final Object expectedValue;
 
+    /**
+     * Constructor, best called from {@link #equalTo(Object)} or {@link #equalToObject(Object)}.
+     * @param equalArg the expected value
+     */
     public IsEqual(T equalArg) {
         expectedValue = equalArg;
     }

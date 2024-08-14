@@ -13,6 +13,12 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
 import static org.hamcrest.beans.PropertyUtil.propertyDescriptorsFor;
 import static org.hamcrest.core.IsEqual.equalTo;
 
+/**
+ * A matcher that checks if a given bean has the same property values
+ * as an example bean.
+ * @param <T> the matcher value type.
+ * @see #samePropertyValuesAs(Object, String...)
+ */
 public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
 
     private final T expectedBean;
@@ -20,6 +26,11 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     private final List<PropertyMatcher> propertyMatchers;
     private final List<String> ignoredFields;
 
+    /**
+     * Constructor, best called from {@link #samePropertyValuesAs(Object, String...)}.
+     * @param expectedBean the bean object with the expected values
+     * @param ignoredProperties list of property names that should be excluded from the match
+     */
     @SuppressWarnings("WeakerAccess")
     public SamePropertyValuesAs(T expectedBean, List<String> ignoredProperties) {
         PropertyDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
@@ -138,21 +149,22 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     }
 
     /**
-     * Creates a matcher that matches when the examined object has values for all of
+     * <p>Creates a matcher that matches when the examined object has values for all of
      * its JavaBean properties that are equal to the corresponding values of the
      * specified bean. If any properties are marked as ignored, they will be dropped from
      * both the expected and actual bean. Note that the ignored properties use JavaBean
-     * display names, for example <pre>age</pre> rather than method names such as <pre>getAge</pre>.
+     * display names, for example "<code>age</code>" rather than method names such as
+     * "<code>getAge</code>".
+     * </p>
      * For example:
-     * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean))</pre>
-     * <pre>assertThat(myBean, samePropertyValuesAs(myExpectedBean), "age", "height")</pre>
+     * <pre>{@code
+     * assertThat(myBean, samePropertyValuesAs(myExpectedBean))
+     * assertThat(myBean, samePropertyValuesAs(myExpectedBean), "age", "height")
+     * }</pre>
      *
-     * @param <B>
-     *     the matcher type.
-     * @param expectedBean
-     *     the bean against which examined beans are compared
-     * @param ignoredProperties
-     *     do not check any of these named properties.
+     * @param <B> the matcher value type.
+     * @param expectedBean the bean against which examined beans are compared
+     * @param ignoredProperties do not check any of these named properties.
      * @return The matcher.
      */
     public static <B> Matcher<B> samePropertyValuesAs(B expectedBean, String... ignoredProperties) {

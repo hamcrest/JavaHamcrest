@@ -4,10 +4,19 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
+/**
+ * A matcher that applies a delegate matcher to every item in an  {@link Iterable}.
+ *
+ * @param <T> the type of the items in the iterable
+ */
 public class Every<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
 
     private final Matcher<? super T> matcher;
 
+    /**
+     * Constructor, best called from {@link #everyItem(Matcher)}.
+     * @param matcher a matcher used to check every item in the iterable.
+     */
     public Every(Matcher<? super T> matcher) {
         this.matcher= matcher;
     }

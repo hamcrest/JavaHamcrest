@@ -6,10 +6,11 @@ import org.hamcrest.internal.ReflectiveTypeFinder;
  * Convenient base class for Matchers that require a non-null value of a specific type
  * and that will report why the received value has been rejected.
  * This implements the null check, checks the type and then casts.
- * To use, implement <pre>matchesSafely()</pre>.
+ * To use, implement {@link #matchesSafely(Object, Description)}.
  *
- * @param <T>
- *     the matcher type.
+ * @param <T> the matcher type.
+ * @see DiagnosingMatcher
+ *
  * @author Neil Dunn
  * @author Nat Pryce
  * @author Steve Freeman

@@ -3,22 +3,35 @@ package org.hamcrest.core;
 import org.hamcrest.Description;
 import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Matcher;
+import org.hamcrest.collection.ArrayMatching;
 
 import java.util.Arrays;
 
 /**
  * Calculates the logical conjunction of multiple matchers. Evaluation is shortcut, so
  * subsequent matchers are not called if an earlier matcher returns <code>false</code>.
+ *
+ * @param <T> the matched value type
  */
 public class AllOf<T> extends DiagnosingMatcher<T> {
 
     private final Iterable<Matcher<? super T>> matchers;
 
+    /**
+     * Constructor, best called from {@link #allOf(Matcher[])}.
+     * @param matchers the matchers
+     * @see #allOf(Matcher[])
+     */
     @SafeVarargs
     public AllOf(Matcher<? super T> ... matchers) {
         this(Arrays.asList(matchers));
     }
 
+    /**
+     * Constructor, best called from {@link #allOf(Iterable)}.
+     * @param matchers the matchers
+     * @see #allOf(Iterable)
+     */
     public AllOf(Iterable<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }

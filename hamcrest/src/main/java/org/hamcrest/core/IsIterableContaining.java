@@ -10,10 +10,22 @@ import java.util.List;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.IsEqual.equalTo;
 
+/**
+ * Tests if an iterable contains matching elements.
+ * @param <T> the type of items in the iterable
+ */
 public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
 
     private final Matcher<? super T> elementMatcher;
 
+    /**
+     * Constructor, best called from one of the static factory methods.
+     * @param elementMatcher matches the expected element
+     * @see #hasItem(Object)
+     * @see #hasItem(Matcher)
+     * @see #hasItems(Object[])
+     * @see #hasItems(Matcher[])
+     */
     public IsIterableContaining(Matcher<? super T> elementMatcher) {
         this.elementMatcher = elementMatcher;
     }

@@ -14,6 +14,10 @@ public class IsEqualIgnoringCase extends TypeSafeMatcher<String> {
 
     private final String string;
 
+    /**
+     * Constructor, best called from {@link #equalToIgnoringCase(String)}.
+     * @param string the expected string
+     */
     public IsEqualIgnoringCase(String string) {
         if (string == null) {
             throw new IllegalArgumentException("Non-null value required");

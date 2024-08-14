@@ -3,12 +3,14 @@ package org.hamcrest.beans;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.collection.ArrayMatching;
 
 /**
- * A Matcher that checks that an object has a JavaBean property
- * with the specified name. If an error occurs during introspection
- * of the object then this is treated as a mismatch.
+ * A matcher that checks if an object has a JavaBean property with the
+ * specified name. If an error occurs during introspection of the object
+ * then this is treated as a mismatch.
  *
+ * @param <T> The Matcher type.
  * @author Iain McGinniss
  * @author Nat Pryce
  * @author Steve Freeman
@@ -17,6 +19,11 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
 
     private final String propertyName;
 
+    /**
+     * Constructor, best called from {@link #hasProperty(String)}.
+     * @param propertyName the name of the property
+     * @see #hasProperty(String) 
+     */
     public HasProperty(String propertyName) {
         this.propertyName = propertyName;
     }

@@ -23,6 +23,10 @@ import static org.hamcrest.Condition.notMatched;
  */
 public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
 
+    /**
+     * Null <code>NamespaceContext</code>, used to document deliberate use
+     * of no namespace.
+     */
     public static final NamespaceContext NO_NAMESPACE_CONTEXT = null;
     private static final IsAnything<String> WITH_ANY_CONTENT = new IsAnything<>("");
     private static final Condition.Step<Object, String> NODE_EXISTS = nodeExists();
@@ -32,19 +36,19 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     private final QName evaluationMode;
 
     /**
-     * @param xPathExpression XPath expression.
-     * @param valueMatcher Matcher to use at given XPath.
-     *                     May be null to specify that the XPath must exist but the value is irrelevant.
+     * Constructor, best called from one of the <code>hasXPath</code> static factory methods.
+     * @param xPathExpression the target xpath
+     * @param valueMatcher matcher for the expected value
      */
     public HasXPath(String xPathExpression, Matcher<String> valueMatcher) {
         this(xPathExpression, NO_NAMESPACE_CONTEXT, valueMatcher);
     }
 
     /**
-     * @param xPathExpression XPath expression.
-     * @param namespaceContext Resolves XML namespace prefixes in the XPath expression
-     * @param valueMatcher Matcher to use at given XPath.
-     *                     May be null to specify that the XPath must exist but the value is irrelevant.
+     * Constructor, best called from one of the <code>hasXPath</code> static factory methods.
+     * @param xPathExpression the target xpath
+     * @param namespaceContext the namespace for matching nodes
+     * @param valueMatcher matcher for the expected value
      */
     public HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<String> valueMatcher) {
         this(xPathExpression, namespaceContext, valueMatcher, STRING);
@@ -147,8 +151,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * For example:
      * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese"))</pre>
      *
-     * @param xPath
-     *     the target xpath
+     * @param xPath the target xpath
      * @return The matcher.
      */
     public static Matcher<Node> hasXPath(String xPath) {
@@ -161,10 +164,8 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
      * For example:
      * <pre>assertThat(xml, hasXPath("/root/something[2]/cheese", myNs))</pre>
      *
-     * @param xPath
-     *     the target xpath
-     * @param namespaceContext
-     *     the namespace for matching nodes
+     * @param xPath the target xpath
+     * @param namespaceContext the namespace for matching nodes
      * @return The matcher.
      */
     public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext) {

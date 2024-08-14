@@ -3,6 +3,9 @@ package org.hamcrest.number;
 import org.hamcrest.Matcher;
 import org.hamcrest.comparator.ComparatorMatcherBuilder;
 
+/**
+ * Static methods for building ordering comparisons.
+ */
 public class OrderingComparison {
 
     private OrderingComparison() {

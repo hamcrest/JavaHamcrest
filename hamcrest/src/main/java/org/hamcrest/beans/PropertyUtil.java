@@ -5,8 +5,8 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 
 /**
- * Utility class for accessing properties on JavaBean objects.
- * See http://java.sun.com/products/javabeans/docs/index.html for
+ * Utility class with static methods for accessing properties on JavaBean objects.
+ * See <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/beans/index.html">https://docs.oracle.com/javase/8/docs/technotes/guides/beans/index.html</a> for
  * more information on JavaBeans.
  *
  * @author Iain McGinniss
@@ -14,6 +14,9 @@ import java.beans.PropertyDescriptor;
  * @since 1.1.0
  */
 public class PropertyUtil {
+
+    private PropertyUtil() {
+    }
 
     /**
      * Returns the description of the property with the provided
@@ -52,6 +55,9 @@ public class PropertyUtil {
       }
     }
 
+    /**
+     * Empty object array, used for documenting that we are deliberately passing no arguments to a method.
+     */
     public static final Object[] NO_ARGUMENTS = new Object[0];
 
 }

@@ -11,10 +11,22 @@ import java.util.List;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
+/**
+ * Tests if an iterable contains matching elements in any order.
+ *
+ * @param <T> the type of items in the iterable.
+ */
 public class IsIterableContainingInAnyOrder<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
 
     private final Collection<Matcher<? super T>> matchers;
 
+    /**
+     * Constructor, best called from one of the static "<code>containsInAnyOrder</code>" factory methods.
+     * @param matchers the matchers
+     * @see #containsInAnyOrder(Object[])
+     * @see #containsInAnyOrder(Collection)
+     * @see #containsInAnyOrder(Matcher[])
+     */
     public IsIterableContainingInAnyOrder(Collection<Matcher<? super T>> matchers) {
         this.matchers = matchers;
     }

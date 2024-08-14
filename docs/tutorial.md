@@ -34,9 +34,11 @@ The `assertThat` method is a stylized sentence for making a test assertion. In t
 If you have more than one assertion in your test you can include an identifier for the tested value in the assertion:
 
 ```java
-assertThat("chocolate chips", theBiscuit.getChocolateChipCount(), equalTo(10)); 
+assertThat("chocolate chips",
+           theBiscuit.getChocolateChipCount(), equalTo(10));
 
-assertThat("hazelnuts", theBiscuit.getHazelnutCount(), equalTo(3));
+assertThat("hazelnuts",
+           theBiscuit.getHazelnutCount(), equalTo(3));
 ```
 
 ### Other test frameworks
@@ -122,7 +124,7 @@ public void testSquareRootOfMinusOneIsNotANumber() {
 And here's the implementation:
 
 ```java 
-package org.hamcrest.examples.tutorial;
+package org.hamcrest.examples;
 
 import org.hamcrest.Description; 
 import org.hamcrest.Matcher; 
@@ -162,7 +164,7 @@ The third method in our matcher is a convenience factory method. We statically i
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat; 
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.examples.tutorial.IsNotANumber.notANumber;
+import static org.hamcrest.examples.IsNotANumber.notANumber;
 
 public class NumberTest {
   @Test

@@ -9,10 +9,8 @@ layout: default
 Here are some projects that provide additional features and matchers
 
 * [Awaitility](https://github.com/jayway/awaitility) (a DSL that allows you to express expectations of an asynchronous system in a concise and easy to read manner)
-* [EZ Testing](https://github.com/EZGames/ez-testing) (contains base classes for defining chainable matchers that have a similar style to AssertJ)
 * [Hamcrest 1.3 Utility Matchers](https://github.com/NitorCreations/matchers) (Java matchers like CollectionMatchers, MapMatchers, FieldMatcher, SerializableMatcher etc)
 * [Hamcrest auto matcher](https://github.com/itsallcode/hamcrest-auto-matcher) (uses reflection to automatically match model classes)
-* [Hamcrest avro](https://github.com/Byhiras/avro-utils)
 * [Hamcrest Composites](https://github.com/Cornutum/hamcrest-composites) (for comparing complex Java objects with better testability)
 * [Hamcrest Date](https://github.com/modularit/hamcrest-date) (for comparing dates)
 * [Hamcrest HAR](https://github.com/roydekleijn/har-assert) (for HTTP archive files)

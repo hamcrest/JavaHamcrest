@@ -6,19 +6,33 @@ import org.hamcrest.Matcher;
 
 /**
  * A matcher that always returns <code>true</code>.
+ *
+ * @param <T> the matched value type
  */
 public class IsAnything<T> extends BaseMatcher<T> {
 
     private final String message;
 
+    /**
+     * Constructor, best called from {@link #anything()}.
+     */
     public IsAnything() {
         this("ANYTHING");
     }
 
+    /**
+     * Constructor, best called from {@link #anything(String)}.
+     * @param message matcher description
+     */
     public IsAnything(String message) {
         this.message = message;
     }
 
+    /**
+     * Always returns true.
+     * @param o the object against which the matcher is evaluated.
+     * @return true
+     */
     @Override
     public boolean matches(Object o) {
         return true;

@@ -10,11 +10,28 @@ import java.util.Map.Entry;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
 
+/**
+ * Matches if map keys, values or entries match the value matchers.
+ * @param <K> the type of the map keys
+ * @param <V> the type of the map values
+ */
 public class IsMapContaining<K, V> extends TypeSafeMatcher<Map<? extends K, ? extends V>> {
 
     private final Matcher<? super K> keyMatcher;
     private final Matcher<? super V> valueMatcher;
 
+    /**
+     * Constructor, best called from one of the static factory methods (<code>hasKey</code>, <code>hasValue</code>,
+     * or <code>hasEntry</code>).
+     * @param keyMatcher matcher for expected keys
+     * @param valueMatcher matcher for expected values
+     * @see #hasKey(Object) 
+     * @see #hasKey(Matcher) 
+     * @see #hasValue(Object)
+     * @see #hasValue(Matcher)
+     * @see #hasEntry(Object, Object) 
+     * @see #hasEntry(Matcher, Matcher) 
+     */
     public IsMapContaining(Matcher<? super K> keyMatcher, Matcher<? super V> valueMatcher) {
         this.keyMatcher = keyMatcher;
         this.valueMatcher = valueMatcher;
