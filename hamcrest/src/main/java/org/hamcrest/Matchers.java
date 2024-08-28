@@ -3,8 +3,11 @@ package org.hamcrest;
 import org.hamcrest.collection.ArrayMatching;
 import org.hamcrest.core.IsIterableContaining;
 import org.hamcrest.core.StringRegularExpression;
+import org.hamcrest.optional.OptionalEmpty;
+import org.hamcrest.optional.OptionalWithValue;
 import org.hamcrest.text.IsEqualCompressingWhiteSpace;
 
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 /**
@@ -2184,4 +2187,45 @@ public class Matchers {
     return org.hamcrest.xml.HasXPath.hasXPath(xPath, namespaceContext);
   }
 
+  /**
+   * Matcher that expects empty {@link Optional}.
+   *
+   * @param <T> type of optional value
+   * @return The matcher.
+   */
+  public static <T> Matcher<Optional<T>> emptyOptional() {
+    return OptionalEmpty.emptyOptional();
+  }
+
+  /**
+   * Matcher for {@link Optional} that expects that value is present.
+   *
+   * @param <T> type of optional value
+   * @return The matcher.
+   */
+  public static <T> Matcher<Optional<T>> optionalWithValue() {
+    return OptionalWithValue.optionalWithValue();
+  }
+
+  /**
+   * Matcher for {@link Optional} that expects that value is present and is equal to <code>value</code>
+   *
+   * @param <T> type of optional value
+   * @param value to validate present optional value
+   * @return The matcher.
+   */
+  public static <T> Matcher<Optional<T>> optionalWithValue(T value) {
+    return OptionalWithValue.optionalWithValue(value);
+  }
+
+  /**
+   * Matcher for {@link Optional} that expects that value is present and matches <code>matcher</code>
+   *
+   * @param <T> type of optional value
+   * @param matcher matcher to validate present optional value
+   * @return The matcher.
+   */
+  public static <T> Matcher<Optional<T>> optionalWithValue(Matcher<? super T> matcher) {
+    return OptionalWithValue.optionalWithValue(matcher);
+  }
 }
