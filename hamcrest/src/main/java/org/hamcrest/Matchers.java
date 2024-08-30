@@ -1800,6 +1800,19 @@ public class Matchers {
   }
 
   /**
+   * Creates a matcher of {@link String} that matches when the examined string is equal to
+   * the specified expectedString, with markdown style diff message when mismatch
+   * For example:
+   * <pre>assertThat("Foo", equalToWithDiff("FOO"))</pre>
+   *
+   * @param expectedString
+   *     the expected value of matched strings
+   */
+  public static Matcher<java.lang.String> equalToWithDiff(java.lang.String expectedString) {
+    return org.hamcrest.text.IsEqualWithDiff.equalToWithDiff(expectedString);
+  }
+
+  /**
    * @deprecated {@link #equalToCompressingWhiteSpace(String)}
    * @param expectedString
    *     the expected value of matched strings
