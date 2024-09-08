@@ -7,11 +7,17 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 import java.util.Optional;
 
 /**
- * Matcher that expects empty {@link Optional}.
+ * Matcher that expects an empty {@link Optional}.
 
  * @param <T> type of {@link Optional} value
  */
 public class OptionalEmpty<T> extends TypeSafeDiagnosingMatcher<Optional<T>> {
+
+    /**
+     * Constructor, best called from {@link #emptyOptional()}.
+     */
+    public OptionalEmpty() {
+    }
 
     /**
      * Matcher that expects empty {@link Optional}.
