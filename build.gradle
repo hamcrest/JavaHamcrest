@@ -2,9 +2,19 @@ plugins {
     id "signing"
     id "maven-publish"
 }
+apply from: "gradle/versioning.gradle"
 
 group = "org.hamcrest"
-version = "3.1-SNAPSHOT"
+version = getMavenVersion()
+
+tasks.register("showVersion") {
+    group = "Build"
+    description = "Show the version, as derived from git tags"
+    doLast {
+        println("git version: " + getGitVersion())
+        println("mvn version: " + getMavenVersion())
+    }
+}
 
 subprojects {
     apply plugin: 'checkstyle'

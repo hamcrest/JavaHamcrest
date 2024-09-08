@@ -1,0 +1,25 @@
+ext.getGitVersion = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine "git", "describe", "--tags"
+        standardOutput = stdout
+    }
+    return stdout.toString().trim().replaceAll("v", "")
+}
+
+ext.getMavenVersion = { ->
+    def gitVersion = getGitVersion()
+    if (!gitVersion.contains("-")) {
+        // We're directly on a tagged commit
+        return gitVersion
+    }
+
+    def match = gitVersion =~ /^(\d+)\.(\d+)-.*$/
+    // Make sure we're only using the major.minor version.
+    assert match : "Unexpected version from git: ${gitVersion}"
+
+    // We're not directly on a tagged commit, so increment the minor version and call it a snapshot
+    def (_, major, minor) = match[0]
+    def mvnMinor = minor.toInteger() + 1
+    return "${major}.${mvnMinor}-SNAPSHOT"
+}
