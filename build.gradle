@@ -8,6 +8,8 @@ group = "org.hamcrest"
 version = getMavenVersion()
 
 tasks.register("showVersion") {
+    group = "Build"
+    description = "Show the version, as derived from git tags"
     doLast {
         println("git version: " + getGitVersion())
         println("mvn version: " + getMavenVersion())
