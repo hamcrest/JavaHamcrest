@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -45,6 +46,13 @@ public class IsMapContainingTest extends AbstractMatcherTest {
 
     public void testHasReadableDescription() {
         assertDescription("map containing [\"a\"-><2>]", hasEntry(equalTo("a"), (equalTo(2))));
+    }
+
+    public void testTypeVariance() {
+        Map<String, Number> m = new HashMap<>();
+        Integer foo = 6;
+        m.put("foo", foo);
+        assertThat(m, hasEntry("foo", foo));
     }
 
 }

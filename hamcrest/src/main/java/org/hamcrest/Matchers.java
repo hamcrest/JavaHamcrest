@@ -449,7 +449,7 @@ public class Matchers {
    *     the matcher to apply to items provided by the examined {@link Iterable}
    * @return The matcher.
    */
-  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(org.hamcrest.Matcher<? super T> itemMatcher) {
+  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? extends T>> hasItem(org.hamcrest.Matcher<? super T> itemMatcher) {
     return IsIterableContaining.hasItem(itemMatcher);
   }
 
@@ -467,7 +467,7 @@ public class Matchers {
    *     the item to compare against the items provided by the examined {@link Iterable}
    * @return The matcher.
    */
-  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(T item) {
+  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? extends T>> hasItem(T item) {
     return IsIterableContaining.hasItem(item);
   }
 
@@ -486,7 +486,7 @@ public class Matchers {
    * @return The matcher.
    */
   @SafeVarargs
-  public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItems(org.hamcrest.Matcher<? super T>... itemMatchers) {
+  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? extends T>> hasItems(org.hamcrest.Matcher<? super T>... itemMatchers) {
     return IsIterableContaining.hasItems(itemMatchers);
   }
 
@@ -505,7 +505,7 @@ public class Matchers {
    * @return The matcher.
    */
   @SafeVarargs
-  public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItems(T... items) {
+  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? extends T>> hasItems(T... items) {
     return IsIterableContaining.hasItems(items);
   }
 

@@ -2,6 +2,22 @@
 
 ## Version 3.1 (Unreleased)
 
+### Breaking Changes
+
+* As a result of the bugfix to allow matching against polymorphic collections
+([PR #422](https://github.com/hamcrest/JavaHamcrest/pull/422)), the signature of the
+`hasItem` and `hasItems` methods has changed. Code relying on the exact signature of
+these methods will need to be updated. The following methods are affected:
+  * `org.hamcrest.CoreMatchers.hasItem`
+  * `org.hamcrest.CoreMatchers.hasItems`
+  * `org.hamcrest.Matchers.hasItem`
+  * `org.hamcrest.Matchers.hasItems`
+  * `org.hamcrest.core.IsCollectionContaining.hasItem`
+  * `org.hamcrest.core.IsCollectionContaining.hasItems`
+  * `org.hamcrest.core.IsIterableContaining.hasItem`
+  * `org.hamcrest.core.IsIterableContaining.hasItems`
+  * TODO: decide if these breaking changes should trigger a major version upgrade (i.e v4.0)
+
 ### Improvements
 
 * Javadoc improvements and cleanup ([PR #420](https://github.com/hamcrest/JavaHamcrest/pull/420))
@@ -10,7 +26,8 @@
 
 ### Bugfixes
 
-* TBD
+* Allow matching against polymorphic collections ([#252](https://github.com/hamcrest/JavaHamcrest/issues/252),
+  [PR #422](https://github.com/hamcrest/JavaHamcrest/pull/422))
 
 ## Version 3.0 (1st August 2024)
 

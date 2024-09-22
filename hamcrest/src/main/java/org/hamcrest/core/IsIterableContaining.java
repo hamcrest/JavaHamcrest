@@ -14,7 +14,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * Tests if an iterable contains matching elements.
  * @param <T> the type of items in the iterable
  */
-public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? super T>> {
+public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<? extends T>> {
 
     private final Matcher<? super T> elementMatcher;
 
@@ -31,7 +31,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
     }
 
     @Override
-    protected boolean matchesSafely(Iterable<? super T> collection, Description mismatchDescription) {
+    protected boolean matchesSafely(Iterable<? extends T> collection, Description mismatchDescription) {
         if (isEmpty(collection)) {
           mismatchDescription.appendText("was empty");
           return false;
@@ -56,7 +56,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
         return false;
     }
 
-    private boolean isEmpty(Iterable<? super T> iterable) {
+    private boolean isEmpty(Iterable<? extends T> iterable) {
       return ! iterable.iterator().hasNext();
     }
 
@@ -81,7 +81,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      *     the matcher to apply to items provided by the examined {@link Iterable}
      * @return The matcher.
      */
-    public static <T> Matcher<Iterable<? super T>> hasItem(Matcher<? super T> itemMatcher) {
+    public static <T> Matcher<Iterable<? extends T>> hasItem(Matcher<? super T> itemMatcher) {
         return new IsIterableContaining<>(itemMatcher);
     }
 
@@ -99,7 +99,7 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      *     the item to compare against the items provided by the examined {@link Iterable}
      * @return The matcher.
      */
-    public static <T> Matcher<Iterable<? super T>> hasItem(T item) {
+    public static <T> Matcher<Iterable<? extends T>> hasItem(T item) {
         // Doesn't forward to hasItem() method so compiler can sort out generics.
         return new IsIterableContaining<>(equalTo(item));
     }
@@ -119,8 +119,8 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      * @return The matcher.
      */
     @SafeVarargs
-    public static <T> Matcher<Iterable<T>> hasItems(Matcher<? super T>... itemMatchers) {
-        List<Matcher<? super Iterable<T>>> all = new ArrayList<>(itemMatchers.length);
+    public static <T> Matcher<Iterable<? extends T>> hasItems(Matcher<? super T>... itemMatchers) {
+        List<Matcher<? super Iterable<? extends T>>> all = new ArrayList<>(itemMatchers.length);
 
         for (Matcher<? super T> elementMatcher : itemMatchers) {
           // Doesn't forward to hasItem() method so compiler can sort out generics.
@@ -145,8 +145,8 @@ public class IsIterableContaining<T> extends TypeSafeDiagnosingMatcher<Iterable<
      * @return The matcher.
      */
     @SafeVarargs
-    public static <T> Matcher<Iterable<T>> hasItems(T... items) {
-        List<Matcher<? super Iterable<T>>> all = new ArrayList<>(items.length);
+    public static <T> Matcher<Iterable<? extends T>> hasItems(T... items) {
+        List<Matcher<? super Iterable<? extends T>>> all = new ArrayList<>(items.length);
         for (T item : items) {
             all.add(hasItem(item));
         }

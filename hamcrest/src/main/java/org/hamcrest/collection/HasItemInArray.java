@@ -16,7 +16,7 @@ import static java.util.Arrays.asList;
 public class HasItemInArray<T> extends TypeSafeMatcher<T[]> {
 
     private final Matcher<? super T> elementMatcher;
-    private final TypeSafeDiagnosingMatcher<Iterable<? super T>> collectionMatcher;
+    private final TypeSafeDiagnosingMatcher<Iterable<? extends T>> collectionMatcher;
 
     /**
      * Constructor, best called from {@link ArrayMatching}.
