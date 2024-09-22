@@ -1,8 +1,8 @@
 package org.hamcrest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.test.MatcherAssertions.*;
 
 /**
  * @author Steve Freeman 2016 http://www.hamcrest.com

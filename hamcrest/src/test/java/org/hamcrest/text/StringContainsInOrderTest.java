@@ -1,9 +1,11 @@
 package org.hamcrest.text;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.text.StringContainsInOrder.stringContainsInOrder;
 
 public class StringContainsInOrderTest extends AbstractMatcherTest {
@@ -15,6 +17,7 @@ public class StringContainsInOrderTest extends AbstractMatcherTest {
         return matcher;
     }
 
+    @Test
     public void testMatchesOnlyIfStringContainsGivenSubstringsInTheSameOrder() {
         assertMatches("substrings in order", matcher, "abcc");
         assertMatches("substrings separated", matcher, "1a2b3c4c5");
@@ -27,6 +30,7 @@ public class StringContainsInOrderTest extends AbstractMatcherTest {
         assertDoesNotMatch("empty string", matcher, "");
     }
 
+    @Test
     public void testHasAReadableDescription() {
         assertDescription("a string containing \"a\", \"b\", \"c\", \"c\" in order", matcher);
     }

@@ -2,17 +2,21 @@ package org.hamcrest.beans;
 
 import org.hamcrest.*;
 import org.hamcrest.core.IsEqual;
+import org.hamcrest.test.AbstractMatcherTest;
+import org.junit.jupiter.api.Test;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.hamcrest.beans.HasPropertyWithValue.hasPropertyAtPath;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Iain McGinniss
@@ -33,6 +37,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     return hasProperty("irrelevant", anything());
   }
 
+  @Test
   public void testMatchesBeanWithoutInfoWithMatchedNamedProperty() {
     final Matcher<BeanWithoutInfo> propertyMatcher = hasProperty("property", equalTo("is expected"));
 
@@ -40,6 +45,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     assertMismatchDescription("property 'property' was \"not expected\"", propertyMatcher, shouldNotMatch);
   }
 
+  @Test
   public void testMatchesBeanWithoutInfoWithMatchedNamedBooleanProperty() {
     final Matcher<BeanWithoutInfo> booleanPropertyMatcher = hasProperty("booleanProperty", is(true));
 
@@ -47,22 +53,26 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     assertMismatchDescription("property 'booleanProperty' was <false>", booleanPropertyMatcher, shouldNotMatch);
   }
 
+  @Test
   public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
     assertMatches("with bean info", hasProperty("property", equalTo("with info")), beanWithInfo);
     assertMismatchDescription("property 'property' was \"with info\"",
         hasProperty("property", equalTo("without info")), beanWithInfo);
   }
 
+  @Test
   public void testDoesNotMatchBeanWithoutInfoOrMatchedNamedProperty() {
     assertMismatchDescription("No property \"nonExistentProperty\"",
                               hasProperty("nonExistentProperty", anything()), shouldNotMatch);
    }
 
+   @Test
   public void testDoesNotMatchWriteOnlyProperty() {
     assertMismatchDescription("property \"writeOnlyProperty\" is not readable",
                               hasProperty("writeOnlyProperty", anything()), shouldNotMatch);
   }
 
+  @Test
   public void testMatchesPath() {
     assertMatches("1-step path", hasPropertyAtPath("property", equalTo("is expected")), shouldMatch);
     assertMatches("2-step path", hasPropertyAtPath("inner.property", equalTo("is expected")), new BeanWithInner(shouldMatch));
@@ -72,24 +82,29 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     assertMismatchDescription("inner.inner.property.was \"not expected\"", hasPropertyAtPath("inner.inner.property", equalTo("something")), new BeanWithInner(new BeanWithInner(shouldNotMatch)));
   }
 
+  @Test
   public void testDescribeTo() {
     assertDescription("hasProperty(\"property\", <true>)", hasProperty("property", equalTo(true)));
   }
 
+  @Test
   public void testMatchesPropertyAndValue() {
     assertMatches("property with value", hasProperty("property", anything()), beanWithInfo);
   }
 
+  @Test
   public void testDoesNotWriteMismatchIfPropertyMatches() {
     Description description = new StringDescription();
     hasProperty( "property", anything()).describeMismatch(beanWithInfo, description);
-    assertEquals("Expected mismatch description", "", description.toString());
+    assertEquals("", description.toString(), "Expected mismatch description");
   }
 
+  @Test
   public void testDescribesMissingPropertyMismatch() {
     assertMismatchDescription("No property \"honk\"", hasProperty("honk", anything()), shouldNotMatch);
   }
 
+  @Test
   public void testExceptionsInBeanMethodsShouldBeReportedCorrectly() {
     assertMismatchDescription(
       "Calling 'public java.lang.String org.hamcrest.beans.HasPropertyWithValueTest$BeanWithBug.getBroken()': \"bean failed\"",
@@ -97,6 +112,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
       new BeanWithBug());
   }
 
+  @Test
   public void testCanAccessAnAnonymousInnerClass() {
     class X implements IX {
       @Override

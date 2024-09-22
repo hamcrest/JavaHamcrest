@@ -1,8 +1,10 @@
 package org.hamcrest.core;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.hamcrest.core.StringEndsWith.endsWithIgnoringCase;
 
@@ -16,6 +18,7 @@ public class StringEndsWithTest extends AbstractMatcherTest {
         return stringEndsWith;
     }
 
+    @Test
     public void testMatchesSubstringAtEnd() {
         assertDoesNotMatch(stringEndsWith, EXCERPT + "END");
         assertMatches(stringEndsWith, "START" + EXCERPT);
@@ -29,6 +32,7 @@ public class StringEndsWithTest extends AbstractMatcherTest {
         assertDescription("a string ending with \"EXCERPT\"", stringEndsWith);
     }
 
+    @Test
     public void testMatchesSubstringAtEndIngoringCase() {
         final Matcher<String> ignoringCase = endsWithIgnoringCase("EXCERpt");
         assertDoesNotMatch(ignoringCase, "eXCErpt" + "END");

@@ -1,12 +1,15 @@
 package org.hamcrest.comparator;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.test.MatcherAssertions.assertDescription;
+import static org.hamcrest.test.MatcherAssertions.assertMismatchDescription;
 import static org.hamcrest.comparator.ComparatorMatcherBuilder.comparedBy;
 import static org.hamcrest.core.IsNot.not;
 
@@ -33,6 +36,7 @@ public class ComparatorMatcherBuilderTest extends AbstractMatcherTest {
         return integerComparatorMatcherBuilder.greaterThan(1);
     }
 
+    @Test
     public void testDescription() {
         assertDescription("a value greater than <1>", integerComparatorMatcherBuilder.greaterThan(1));
         assertDescription("a value equal to or greater than <1>", integerComparatorMatcherBuilder.greaterThanOrEqualTo(1));
@@ -47,6 +51,7 @@ public class ComparatorMatcherBuilderTest extends AbstractMatcherTest {
         assertDescription("a value less than <1> when compared by <backwards integer comparator>", comparedBy(backwardsIntegerComparator).lessThan(1));
     }
 
+    @Test
     public void testMismatchDescriptions() {
         assertMismatchDescription("<0> was less than <1>", integerComparatorMatcherBuilder.greaterThan(1), 0);
         assertMismatchDescription("<1> was equal to <1>", integerComparatorMatcherBuilder.greaterThan(1), 1);
@@ -59,45 +64,54 @@ public class ComparatorMatcherBuilderTest extends AbstractMatcherTest {
         assertMismatchDescription("<2> was equal to <2> when compared by <backwards integer comparator>", comparedBy(backwardsIntegerComparator).lessThan(2), 2);
     }
 
+    @Test
     public void testComparesObjectsForGreaterThan() {
         assertThat(2, integerComparatorMatcherBuilder.greaterThan(1));
         assertThat(0, not(integerComparatorMatcherBuilder.greaterThan(1)));
     }
 
+    @Test
     public void testComparesObjectsForLessThan() {
         assertThat(2, integerComparatorMatcherBuilder.lessThan(3));
         assertThat(0, integerComparatorMatcherBuilder.lessThan(1));
     }
 
+    @Test
     public void testComparesObjectsForEquality() {
         assertThat(3, integerComparatorMatcherBuilder.comparesEqualTo(3));
         assertThat("aa", stringComparatorMatcherBuilder.comparesEqualTo("aa"));
     }
 
+    @Test
     public void testAllowsForInclusiveComparisons() {
         assertThat("less", 1, integerComparatorMatcherBuilder.lessThanOrEqualTo(1));
         assertThat("greater", 1, integerComparatorMatcherBuilder.greaterThanOrEqualTo(1));
     }
 
+    @Test
     public void testSupportsDifferentTypesOfComparableObjects() {
         assertThat(1.1, doubleComparatorMatcherBuilder.greaterThan(1.0));
         assertThat("cc", stringComparatorMatcherBuilder.greaterThan("bb"));
     }
 
+    @Test
     public void testComparesBigDecimalsWithDifferentScalesCorrectlyForIssue20() {
         assertThat(new BigDecimal("10.0"), bigDecimalComparatorMatcherBuilder.greaterThanOrEqualTo(new BigDecimal("10")));
         assertThat(new BigDecimal(10), bigDecimalComparatorMatcherBuilder.greaterThanOrEqualTo(new BigDecimal("10.0")));
         assertThat(new BigDecimal("2"), bigDecimalComparatorMatcherBuilder.comparesEqualTo(new BigDecimal("2.000")));
     }
 
+    @Test
     public void testComparesCustomTypesWhoseCompareToReturnsValuesGreaterThatOne() {
         assertThat(new CustomInt(5), ComparatorMatcherBuilder.<CustomInt>usingNaturalOrdering().lessThan(new CustomInt(10)));
     }
 
+    @Test
     public void testComparesByCustomComparator() {
         assertThat(5, comparedBy(backwardsIntegerComparator).lessThan(4));
     }
 
+    @Test
     public void testJavadocExamples() {
         assertThat(1, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().comparesEqualTo(1));
         assertThat(2, ComparatorMatcherBuilder.<Integer>usingNaturalOrdering().greaterThan(1));

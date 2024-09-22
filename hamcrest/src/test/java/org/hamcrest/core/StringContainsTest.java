@@ -1,8 +1,10 @@
 package org.hamcrest.core;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.core.StringContains.containsStringIgnoringCase;
 
@@ -16,6 +18,7 @@ public class StringContainsTest extends AbstractMatcherTest {
         return stringContains;
     }
 
+    @Test
     public void testMatchesSubstrings() {
         assertMatches(stringContains, EXCERPT + "END");
         assertMatches(stringContains, "START" + EXCERPT);
@@ -29,6 +32,7 @@ public class StringContainsTest extends AbstractMatcherTest {
         assertDescription("a string containing \"EXCERPT\"", stringContains);
     }
 
+    @Test
     public void testMatchesSubstringsIgnoringCase() {
         final Matcher<String> ignoringCase = containsStringIgnoringCase("ExCert");
         assertMatches(ignoringCase, "eXcERT" + "END");

@@ -1,8 +1,10 @@
 package org.hamcrest.core;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.core.StringRegularExpression.matchesRegex;
 
 /**
@@ -15,6 +17,7 @@ public class StringRegularExpressionTest extends AbstractMatcherTest {
   @Override
   protected Matcher<?> createMatcher() { return matcher; }
 
+  @Test
   public void testMatchingRegex() {
     assertMatches(matcher, "12");
     assertDoesNotMatch(matcher, "abc");

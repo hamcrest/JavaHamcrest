@@ -1,7 +1,7 @@
 package org.hamcrest.xml;
 
 import org.hamcrest.Matcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -12,12 +12,12 @@ import java.io.ByteArrayInputStream;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.xml.HasXPath.hasXPath;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * @author Joe Walnes

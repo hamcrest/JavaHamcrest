@@ -1,10 +1,10 @@
 package org.hamcrest;
 
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.AbstractMatcherTest.*;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.test.MatcherAssertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public final class FeatureMatcherTest {
 
