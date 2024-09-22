@@ -136,7 +136,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
                     return notMatched();
                 } catch (Exception e) {
                     throw new IllegalStateException(
-                      "Calling: '" + readMethod + "' should not have thrown " + e);
+                      "Calling: '" + readMethod + "' should not have thrown", e);
                 }
             }
         };
