@@ -3,7 +3,9 @@ package org.hamcrest.exception;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.exception.ThrowsException.throwsException;
+import static org.hamcrest.exception.ThrowsExceptionWithMessage.withMessage;
 
 public class ThrowsExceptionEqualTest extends AbstractMatcherTest {
 
@@ -34,6 +36,18 @@ public class ThrowsExceptionEqualTest extends AbstractMatcherTest {
         Matcher<Runnable> matcher = throwsException(new IllegalArgumentException("Boom!"));
 
         assertMatches(matcher, runnableThrowing(new TestException("Boom!")));
+    }
+
+    public void testEvaluatesToTrueIfRunnableThrowsExceptionWithExpectedMessage() {
+        Matcher<Runnable> matcher = throwsException(withMessage("Boom!"));
+
+        assertMatches(matcher, runnableThrowing(new TestException("Boom!")));
+    }
+
+    public void testEvaluatesToTrueIfRunnableThrowsExceptionWithMatchingMessage() {
+        Matcher<Runnable> matcher = throwsException(withMessage(containsString("bar")));
+
+        assertMatches(matcher, runnableThrowing(new TestException("Foo bar baz")));
     }
 
     public static class TestException extends IllegalArgumentException {
