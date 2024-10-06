@@ -2,7 +2,7 @@ package org.hamcrest.exception;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -11,7 +11,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  *
  * @param <T> the type of the expected exception.
  */
-public class ThrowsExceptionWithMessage<T extends Throwable> extends TypeSafeMatcher<T> {
+public class ThrowsExceptionWithMessage<T extends Throwable> extends TypeSafeDiagnosingMatcher<T> {
     private final Matcher<? super String> messageMatcher;
 
     /**
@@ -32,17 +32,17 @@ public class ThrowsExceptionWithMessage<T extends Throwable> extends TypeSafeMat
     }
 
     @Override
-    protected boolean matchesSafely(T item) {
-        return this.messageMatcher.matches(item.getMessage());
+    protected boolean matchesSafely(T item, Description mismatchDescription) {
+        if (!this.messageMatcher.matches(item.getMessage())) {
+            mismatchDescription.appendText("an exception with message ").appendValue(item.getMessage()).appendText(" instead of ").appendDescriptionOf(messageMatcher);
+            return false;
+        }
+
+        return true;
     }
 
     @Override
     public void describeTo(Description description) {
         description.appendText("an exception with message ").appendDescriptionOf(messageMatcher);
-    }
-
-    @Override
-    protected void describeMismatchSafely(T item, Description mismatchDescription) {
-        mismatchDescription.appendText("an exception with message ").appendValue(item.getMessage()).appendText(" instead of ").appendDescriptionOf(messageMatcher);
     }
 }
