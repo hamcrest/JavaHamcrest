@@ -8,7 +8,7 @@ import org.hamcrest.TypeSafeMatcher;
  *
  * @param <T> the type of the expected exception.
  */
-public class ThrowsException<T extends Throwable> extends TypeSafeMatcher<Runnable> {
+public class ThrowsException<T extends RuntimeException> extends TypeSafeMatcher<Runnable> {
     private final T expectedException;
     private Throwable actualThrowable;
 
@@ -22,7 +22,7 @@ public class ThrowsException<T extends Throwable> extends TypeSafeMatcher<Runnab
         this.expectedException = expectedException;
     }
 
-    public static <U extends Throwable> ThrowsException<U> throwsException(U expectedException) {
+    public static <U extends RuntimeException> ThrowsException<U> throwsException(U expectedException) {
         return new ThrowsException<>(expectedException);
     }
 
@@ -33,7 +33,7 @@ public class ThrowsException<T extends Throwable> extends TypeSafeMatcher<Runnab
             return false;
         } catch (Throwable t) {
             this.actualThrowable = t;
-            return expectedException.getClass().isInstance(t) && t.getMessage().equals(expectedException.getMessage());
+            return expectedException.getClass().isAssignableFrom(t.getClass()) && t.getMessage().equals(expectedException.getMessage());
         }
     }
 

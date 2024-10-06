@@ -7,20 +7,12 @@ import static org.hamcrest.exception.ThrowsException.throwsException;
 
 public class ThrowsExceptionTest extends AbstractMatcherTest {
 
-    private static Runnable runnableThrowing(String message) {
-        return () -> {
-            throw new IllegalArgumentException(message);
-        };
+    private Runnable runnableThrowing(String message) {
+        return new ThrowingRunnable(new IllegalArgumentException(message));
     }
 
-    private static Runnable runnableThrowing(Class<? extends Throwable> exceptionClass, String message) {
-        return () -> {
-            try {
-                throw exceptionClass.getDeclaredConstructor().newInstance(message);
-            } catch (Throwable e) {
-                throw new RuntimeException(e);
-            }
-        };
+    private Runnable runnableThrowing(Throwable exception) {
+        return new ThrowingRunnable(exception);
     }
 
     @Override
@@ -34,7 +26,37 @@ public class ThrowsExceptionTest extends AbstractMatcherTest {
         assertMatches(matcher, runnableThrowing("Boom!"));
         assertDoesNotMatch(matcher, runnableThrowing("Bang!"));
         assertMismatchDescription("threw \"java.lang.IllegalArgumentException\" with message \"Bang!\" instead of \"Boom!\"", matcher, runnableThrowing("Bang!"));
-        assertDoesNotMatch(matcher, runnableThrowing(NullPointerException.class, "Bang!"));
-        assertMismatchDescription("threw a \"java.lang.RuntimeException\" instead of a \"java.lang.IllegalArgumentException\" exception", matcher, runnableThrowing(NullPointerException.class, "Bang!"));
+        assertDoesNotMatch(matcher, runnableThrowing(new NullPointerException("Boom!")));
+        assertMismatchDescription("threw a \"java.lang.NullPointerException\" instead of a \"java.lang.IllegalArgumentException\" exception", matcher, runnableThrowing(new NullPointerException("Boom!")));
+    }
+
+    public void testEvaluatesToTrueIfRunnableThrowsExceptionExtendingTheExpectedExceptionWithMatchingMessage() {
+        Matcher<Runnable> matcher = throwsException(new IllegalArgumentException("Boom!"));
+
+        assertMatches(matcher, runnableThrowing(new TestException("Boom!")));
+    }
+
+    public static class TestException extends IllegalArgumentException {
+        public TestException(String message) {
+            super(message);
+        }
+    }
+
+    static class ThrowingRunnable implements Runnable {
+        private final Throwable throwable;
+
+        ThrowingRunnable(Throwable throwable) {
+            this.throwable = throwable;
+        }
+
+        @Override
+        public void run() {
+            sneakyThrow(throwable);
+        }
+
+        @SuppressWarnings("unchecked")
+        private <T extends Throwable> void sneakyThrow(Throwable throwable) throws T {
+            throw (T) throwable;
+        }
     }
 }
