@@ -1,53 +1,47 @@
 package org.hamcrest.exception;
 
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+import static org.hamcrest.exception.ThrowsExceptionEqual.throwsExceptionEqual;
+
 /**
- * A matcher that checks if a Runnable throws an expected exception when run.
- *
- * @param <T> the type of the expected exception.
+ * Tests if a Runnable throws a matching exception.
  */
-public class ThrowsException<T extends RuntimeException> extends TypeSafeMatcher<Runnable> {
-    private final T expectedException;
-    private Throwable actualThrowable;
+public class ThrowsException extends TypeSafeMatcher<Runnable> {
+
+    private final Matcher<Runnable> elementMatcher;
 
     /**
-     * Constructor
-     *
-     * @param expectedException the expected exception.
+     * Constructor, best called from one of the static factory methods.
+     * @param elementMatcher matches the expected element
      */
-    ThrowsException(T expectedException) {
+    ThrowsException(Matcher<Runnable> elementMatcher) {
         super(Runnable.class);
-        this.expectedException = expectedException;
+        this.elementMatcher = elementMatcher;
     }
 
-    public static <U extends RuntimeException> ThrowsException<U> throwsException(U expectedException) {
-        return new ThrowsException<>(expectedException);
+    public static <U extends Throwable> ThrowsException throwsException(U item) {
+        return new ThrowsException(throwsExceptionEqual(item));
+    }
+
+    public static ThrowsException throwsException(Matcher<Runnable> itemMatcher) {
+        return new ThrowsException(itemMatcher);
     }
 
     @Override
     protected boolean matchesSafely(Runnable item) {
-        try {
-            item.run();
-            return false;
-        } catch (Throwable t) {
-            this.actualThrowable = t;
-            return expectedException.getClass().isAssignableFrom(t.getClass()) && t.getMessage().equals(expectedException.getMessage());
-        }
-    }
-
-    @Override
-    protected void describeMismatchSafely(Runnable item, Description mismatchDescription) {
-        if (expectedException.getClass().isInstance(actualThrowable)) {
-            mismatchDescription.appendText("threw ").appendValue(actualThrowable.getClass().getName()).appendText(" with message ").appendValue(actualThrowable.getMessage()).appendText(" instead of ").appendValue(expectedException.getMessage());
-            return;
-        }
-        mismatchDescription.appendText("threw a ").appendValue(actualThrowable.getClass().getName()).appendText(" instead of a ").appendValue(expectedException.getClass().getName()).appendText(" exception");
+        return elementMatcher.matches(item);
     }
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("throws ").appendValue(expectedException.getClass().getName()).appendText(" with message ").appendValue(expectedException.getMessage());
+        description.appendText("a runnable throwing ").appendDescriptionOf(elementMatcher);
+    }
+
+    @Override
+    protected void describeMismatchSafely(Runnable item, Description mismatchDescription) {
+        elementMatcher.describeMismatch(item, mismatchDescription);
     }
 }

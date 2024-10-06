@@ -5,7 +5,7 @@ import org.hamcrest.Matcher;
 
 import static org.hamcrest.exception.ThrowsException.throwsException;
 
-public class ThrowsExceptionTest extends AbstractMatcherTest {
+public class ThrowsExceptionEqualTest extends AbstractMatcherTest {
 
     private Runnable runnableThrowing(String message) {
         return new ThrowingRunnable(new IllegalArgumentException(message));
