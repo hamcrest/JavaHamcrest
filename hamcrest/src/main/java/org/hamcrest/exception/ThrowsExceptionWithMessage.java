@@ -11,46 +11,38 @@ import static org.hamcrest.core.IsEqual.equalTo;
  *
  * @param <T> the type of the expected exception.
  */
-public class ThrowsExceptionWithMessage<T extends String> extends TypeSafeMatcher<Runnable> {
-    private final Matcher<? super T> messageMatcher;
-    private String actualMessage;
+public class ThrowsExceptionWithMessage<T extends Throwable> extends TypeSafeMatcher<T> {
+    private final Matcher<? super String> messageMatcher;
 
     /**
      * Constructor, best called from one of the static factory methods.
      *
      * @param messageMatcher matches the exception message
      */
-    ThrowsExceptionWithMessage(Matcher<? super T> messageMatcher) {
-        super(Runnable.class);
+    ThrowsExceptionWithMessage(Matcher<? super String> messageMatcher) {
         this.messageMatcher = messageMatcher;
     }
 
-    public static <U extends String> ThrowsExceptionWithMessage<U> withMessage(U message) {
+    public static <U extends Throwable, V extends String> ThrowsExceptionWithMessage<U> withMessage(V message) {
         return new ThrowsExceptionWithMessage<>(equalTo(message));
     }
 
-    public static <U extends String> ThrowsExceptionWithMessage<U> withMessage(Matcher<? super U> messageMatcher) {
+    public static <U extends Throwable> ThrowsExceptionWithMessage<U> withMessage(Matcher<? super String> messageMatcher) {
         return new ThrowsExceptionWithMessage<>(messageMatcher);
     }
 
     @Override
-    protected boolean matchesSafely(Runnable item) {
-        try {
-            item.run();
-            return false;
-        } catch (Throwable t) {
-            actualMessage = t.getMessage();
-            return this.messageMatcher.matches(t.getMessage());
-        }
+    protected boolean matchesSafely(T item) {
+        return this.messageMatcher.matches(item.getMessage());
     }
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("a runnable throwing an exception with message ").appendDescriptionOf(messageMatcher);
+        description.appendText("an exception with message ").appendDescriptionOf(messageMatcher);
     }
 
     @Override
-    protected void describeMismatchSafely(Runnable item, Description mismatchDescription) {
-        mismatchDescription.appendText("exception message was ").appendValue(actualMessage).appendText(" instead of ").appendDescriptionOf(messageMatcher);
+    protected void describeMismatchSafely(T item, Description mismatchDescription) {
+        mismatchDescription.appendText("an exception with message ").appendValue(item.getMessage()).appendText(" instead of ").appendDescriptionOf(messageMatcher);
     }
 }
