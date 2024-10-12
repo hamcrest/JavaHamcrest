@@ -23,6 +23,7 @@ these methods will need to be updated. The following methods are affected:
 * Javadoc improvements and cleanup ([PR #420](https://github.com/hamcrest/JavaHamcrest/pull/420))
 * Optional matchers ([PR #421](https://github.com/hamcrest/JavaHamcrest/pull/421))
 * Derive version from git tags ([PR #419](https://github.com/hamcrest/JavaHamcrest/pull/419))
+* Migrate all tests to JUnit Jupiter ([PR #424](https://github.com/hamcrest/JavaHamcrest/pull/424))
 
 ### Bugfixes
 
