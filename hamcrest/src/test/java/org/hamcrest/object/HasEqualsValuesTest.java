@@ -1,7 +1,10 @@
 package org.hamcrest.object;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.test.MatcherAssertions.*;
 
 @SuppressWarnings("WeakerAccess")
 public class HasEqualsValuesTest extends AbstractMatcherTest {
@@ -14,22 +17,26 @@ public class HasEqualsValuesTest extends AbstractMatcherTest {
         return WITH_PUBLIC_FIELDS_MATCHER;
     }
 
+    @Test
     public void test_describes_itself() {
         assertDescription(
                 "WithPublicFields has values [i: <666>, s: \"a string\", c: \"x\"]",
                 WITH_PUBLIC_FIELDS_MATCHER);
     }
 
+    @Test
     public void test_matches_equivalent_object() {
         assertMatches(WITH_PUBLIC_FIELDS_MATCHER, new WithPublicFields('x', 666, "a string"));
     }
 
+    @Test
     public void test_mismatches_on_first_field_inequality() {
         assertMismatchDescription(
                 "'s' was \"different\"",
                 WITH_PUBLIC_FIELDS_MATCHER, new WithPublicFields('x', 666, "different"));
     }
 
+    @Test
     public void test_mismatches_on_inherited_field() {
         assertMismatchDescription(
                 "'c' was \"y\"",

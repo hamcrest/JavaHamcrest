@@ -1,8 +1,10 @@
 package org.hamcrest.core;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.hamcrest.core.StringStartsWith.startsWithIgnoringCase;
 
@@ -16,6 +18,7 @@ public class StringStartsWithTest extends AbstractMatcherTest {
         return stringStartsWith;
     }
 
+    @Test
     public void testMatchesStringAtStart() {
         assertMatches(stringStartsWith, EXCERPT + "END");
         assertDoesNotMatch(stringStartsWith, "START" + EXCERPT);
@@ -29,6 +32,7 @@ public class StringStartsWithTest extends AbstractMatcherTest {
         assertMismatchDescription("was \"Something else\"", stringStartsWith, "Something else");
     }
 
+    @Test
     public void testMatchesStringAtStartIgnoringCase() {
         final Matcher<String> ignoreCase = startsWithIgnoringCase("EXCerPT");
 

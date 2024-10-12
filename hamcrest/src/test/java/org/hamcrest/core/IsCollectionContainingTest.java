@@ -1,9 +1,10 @@
 package org.hamcrest.core;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -22,6 +24,7 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
         return hasItem(equalTo("irrelevant"));
     }
 
+    @Test
     public void testMatchesACollectionThatContainsAnElementMatchingTheGivenMatcher() {
         Matcher<Iterable<? extends String>> itemMatcher = hasItem(equalTo("a"));
 
@@ -29,6 +32,7 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
                 itemMatcher, asList("a", "b", "c"));
     }
 
+    @Test
     public void testDoesNotMatchCollectionThatDoesntContainAnElementMatchingTheGivenMatcher() {
         final Matcher<Iterable<? extends String>> matcher1 = hasItem(mismatchable("a"));
         assertMismatchDescription("mismatches were: [mismatched: b, mismatched: c]", matcher1, asList("b", "c"));
@@ -37,14 +41,17 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
         assertMismatchDescription("was empty", matcher2, new ArrayList<String>());
     }
 
+    @Test
     public void testDoesNotMatchNull() {
         assertDoesNotMatch("should not matches null", hasItem(equalTo("a")), null);
     }
 
+    @Test
     public void testHasAReadableDescription() {
         assertDescription("a collection containing \"a\"", hasItem(equalTo("a")));
     }
 
+    @Test
     public void testCanMatchItemWhenCollectionHoldsSuperclass() // Issue 24
     {
       final Set<Number> s = new HashSet<>();
@@ -53,6 +60,7 @@ public class IsCollectionContainingTest extends AbstractMatcherTest {
       assertThat(s, IsCollectionContaining.hasItem(2));
     }
 
+    @Test
     @SuppressWarnings("unchecked")
     public void testMatchesAllItemsInCollection() {
         final Matcher<Iterable<? extends String>> matcher1 = hasItems(equalTo("a"), equalTo("b"), equalTo("c"));

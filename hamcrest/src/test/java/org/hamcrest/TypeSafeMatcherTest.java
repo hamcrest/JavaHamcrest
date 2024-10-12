@@ -1,9 +1,9 @@
 package org.hamcrest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.AbstractMatcherTest.assertMismatchDescription;
-import static org.junit.Assert.assertFalse;
+import static org.hamcrest.test.MatcherAssertions.assertMismatchDescription;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SuppressWarnings("WeakerAccess")
 public final class TypeSafeMatcherTest {

@@ -1,13 +1,15 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
 
 public class IsMapContainingKeyTest extends AbstractMatcherTest {
@@ -17,6 +19,7 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
         return hasKey("foo");
     }
 
+    @Test
     public void testMatchesSingletonMapContainingKey() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1);
@@ -24,6 +27,7 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
         assertMatches("Matches single key", hasKey("a"), map);
     }
 
+    @Test
     public void testMatchesMapContainingKey() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1);
@@ -45,6 +49,7 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
 //        assertMatches("Matches c", hasKey("c"), map);
 //    }
 
+    @Test
     public void testMatchesMapContainingKeyWithIntegerKeys() throws Exception {
         Map<Integer, String> map = new HashMap<>();
         map.put(1, "A");
@@ -53,6 +58,7 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
         assertThat(map, hasKey(1));
     }
 
+    @Test
     public void testMatchesMapContainingKeyWithNumberKeys() throws Exception {
         Map<Number, String> map = new HashMap<>();
         map.put(1, "A");
@@ -64,14 +70,17 @@ public class IsMapContainingKeyTest extends AbstractMatcherTest {
 //        assertThat(map, hasKey(1));
     }
 
+    @Test
     public void testHasReadableDescription() {
         assertDescription("map containing [\"a\"->ANYTHING]", hasKey("a"));
     }
 
+    @Test
     public void testDoesNotMatchEmptyMap() {
         assertMismatchDescription("map was []", hasKey("Foo"), new HashMap<String, Integer>());
     }
 
+    @Test
     public void testDoesNotMatchMapMissingKey() {
         Map<String, Integer> map = new TreeMap<>();
         map.put("a", 1);

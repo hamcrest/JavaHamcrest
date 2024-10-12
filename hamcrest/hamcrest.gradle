@@ -5,13 +5,12 @@ plugins {
 version = rootProject.version
 
 dependencies {
-    testImplementation(group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.3') {
-        transitive = true
-    }
-    testImplementation(group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.10.3') {
-        transitive = true
-        exclude(module: 'hamcrest-core')
-    }
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named("test") {
+    useJUnitPlatform()
 }
 
 jar {

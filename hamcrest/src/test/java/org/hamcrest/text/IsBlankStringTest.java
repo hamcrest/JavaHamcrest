@@ -1,9 +1,9 @@
 package org.hamcrest.text;
 
 import org.hamcrest.Matcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.text.IsBlankString.blankOrNullString;
 import static org.hamcrest.text.IsBlankString.blankString;
 

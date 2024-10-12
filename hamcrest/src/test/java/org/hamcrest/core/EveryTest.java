@@ -1,13 +1,13 @@
 package org.hamcrest.core;
 
 import org.hamcrest.Matcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
-import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.core.StringContains.containsString;
 
 public final class EveryTest {

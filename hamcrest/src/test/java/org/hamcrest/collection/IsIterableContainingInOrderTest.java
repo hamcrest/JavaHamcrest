@@ -1,13 +1,15 @@
 package org.hamcrest.collection;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -22,38 +24,47 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
         return contains(1, 2);
     }
 
+    @Test
     public void testMatchingSingleItemIterable() throws Exception {
         assertMatches("Single item iterable", contains(1), singletonList(1));
     }
 
+    @Test
     public void testMatchingMultipleItemIterable() throws Exception {
         assertMatches("Multiple item iterable", contains(1, 2, 3), asList(1, 2, 3));
     }
 
+    @Test
     public void testDoesNotMatchWithMoreElementsThanExpected() throws Exception {
         assertMismatchDescription("not matched: <4>", contains(1, 2, 3), asList(1, 2, 3, 4));
     }
 
+    @Test
     public void testDoesNotMatchWithFewerElementsThanExpected() throws Exception {
         assertMismatchDescription("no item was value with <3>", contains123, asList(make(1), make(2)));
     }
 
+    @Test
     public void testDoesNotMatchIfSingleItemMismatches() throws Exception {
         assertMismatchDescription("item 0: value was <3>", contains(value(4)), singletonList(make(3)));
     }
 
+    @Test
     public void testDoesNotMatchIfOneOfMultipleItemsMismatch() throws Exception {
         assertMismatchDescription("item 2: value was <4>", contains123, asList(make(1), make(2), make(4)));
     }
 
+    @Test
     public void testDoesNotMatchEmptyIterable() throws Exception {
         assertMismatchDescription("no item was value with <4>", contains(value(4)), new ArrayList<WithValue>());
     }
 
+    @Test
     public void testHasAReadableDescription() {
         assertDescription("iterable containing [<1>, <2>]", contains(1, 2));
     }
 
+    @Test
     public void testCanHandleNullMatchers() {
         assertMatches(contains(null, null), asList(null, null));
     }

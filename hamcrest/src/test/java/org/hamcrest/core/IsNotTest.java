@@ -1,9 +1,9 @@
 package org.hamcrest.core;
 
 import org.hamcrest.Matcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.AbstractMatcherTest.*;
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNot.not;

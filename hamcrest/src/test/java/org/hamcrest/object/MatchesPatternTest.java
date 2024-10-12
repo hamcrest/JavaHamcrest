@@ -2,12 +2,12 @@ package org.hamcrest.object;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.text.MatchesPattern;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
 
-import static org.hamcrest.AbstractMatcherTest.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.test.MatcherAssertions.*;
 
 public class MatchesPatternTest {
 

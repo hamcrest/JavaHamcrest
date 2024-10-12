@@ -1,8 +1,9 @@
 package org.hamcrest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.AbstractMatcherTest.assertDescription;
+import static org.hamcrest.test.MatcherAssertions.assertDescription;
+
 
 public final class CustomMatcherTest {
 

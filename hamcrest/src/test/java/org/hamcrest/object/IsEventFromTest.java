@@ -1,11 +1,13 @@
 package org.hamcrest.object;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
 import java.util.EventObject;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.test.MatcherAssertions.assertMismatchDescription;
 import static org.hamcrest.object.IsEventFrom.eventFrom;
 
 public class IsEventFromTest extends AbstractMatcherTest {
@@ -15,6 +17,7 @@ public class IsEventFromTest extends AbstractMatcherTest {
         return eventFrom(null);
     }
 
+    @Test
     public void testEvaluatesToTrueIfArgumentIsAnEventObjectFiredByASpecifiedSource() {
         Object o = "Source";
         EventObject ev = new EventObject(o);
@@ -34,6 +37,7 @@ public class IsEventFromTest extends AbstractMatcherTest {
         }
     }
 
+    @Test
     public void testCanTestForSpecificEventClasses() {
         Object o = new Object();
         DerivedEvent goodEv = new DerivedEvent(o);

@@ -1,8 +1,10 @@
 package org.hamcrest.number;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
 public class IsCloseToTest extends AbstractMatcherTest {
@@ -15,6 +17,7 @@ public class IsCloseToTest extends AbstractMatcherTest {
         return closeTo(irrelevant, irrelevant);
     }
 
+    @Test
     public void test_matchesIfArgumentIsEqualToADoubleValueWithinSomeError() {
         assertMatches("1.0", matcher, 1.0);
         assertMatches("0.5d", matcher, 0.5d);
@@ -26,6 +29,7 @@ public class IsCloseToTest extends AbstractMatcherTest {
         assertMismatchDescription("<0.1> differed by <0.4> more than delta <0.5>", matcher, 0.1);
     }
 
+    @Test
     public void test_is_self_describing() {
         assertDescription("a numeric value within <0.5> of <1.0>", matcher);
     }

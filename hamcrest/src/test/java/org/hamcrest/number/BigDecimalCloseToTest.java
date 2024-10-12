@@ -1,11 +1,14 @@
 package org.hamcrest.number;
 
-import org.hamcrest.AbstractMatcherTest;
+import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.number.BigDecimalCloseTo.closeTo;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BigDecimalCloseToTest  extends AbstractMatcherTest {
 
@@ -17,6 +20,7 @@ public class BigDecimalCloseToTest  extends AbstractMatcherTest {
     return closeTo(irrelevant, irrelevant);
   }
 
+  @Test
   public void testEvaluatesToTrueIfArgumentIsEqualToABigDecimalWithinSomeError() {
     assertTrue(matcher.matches(new BigDecimal("1.0")));
     assertTrue(matcher.matches(new BigDecimal("0.5")));
@@ -28,6 +32,7 @@ public class BigDecimalCloseToTest  extends AbstractMatcherTest {
     assertMismatchDescription("<0.0> differed by <0.5> more than delta <0.5>", matcher, new BigDecimal("0.0"));
   }
 
+  @Test
   public void testEvaluatesToTrueIfArgumentHasDifferentScale() {
     assertTrue(matcher.matches(new BigDecimal("1.000000")));
     assertTrue(matcher.matches(new BigDecimal("0.500000")));
@@ -39,6 +44,7 @@ public class BigDecimalCloseToTest  extends AbstractMatcherTest {
     assertMismatchDescription("<0.000000> differed by <0.5> more than delta <0.5>", matcher, new BigDecimal("0.000000"));
   }
 
+  @Test
   public void test_is_self_describing() {
     assertDescription("a numeric value within <0.5> of <1.0>", matcher);
   }
