@@ -16,65 +16,65 @@ import static org.hamcrest.exception.ThrowsExceptionWithMessage.withMessage;
  */
 public class ThrowsException<T extends Runnable> extends TypeSafeMatcher<T> {
 
-    private final Matcher<? super Throwable> exceptionMatcher;
-    private Throwable actualException;
+  private final Matcher<? super Throwable> exceptionMatcher;
+  private Throwable actualException;
 
-    /**
-     * Constructor, best called from one of the static factory methods.
-     *
-     * @param elementMatcher matches the expected element
-     */
-    public ThrowsException(Matcher<? super Throwable> elementMatcher) {
-        this.exceptionMatcher = elementMatcher;
-    }
+  /**
+   * Constructor, best called from one of the static factory methods.
+   *
+   * @param elementMatcher matches the expected element
+   */
+  public ThrowsException(Matcher<? super Throwable> elementMatcher) {
+    this.exceptionMatcher = elementMatcher;
+  }
 
-    public static <U extends Runnable> ThrowsException<U> throwsException() {
-        return new ThrowsException<>(instanceOf(Throwable.class));
-    }
+  public static <U extends Runnable> ThrowsException<U> throwsException() {
+    return new ThrowsException<>(instanceOf(Throwable.class));
+  }
 
-    public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(V item) {
-        return new ThrowsException<>(exceptionEqualTo(item));
-    }
+  public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(V item) {
+    return new ThrowsException<>(exceptionEqualTo(item));
+  }
 
-    public static <U extends Runnable> ThrowsException<U> throwsException(Matcher<? super Throwable> exceptionMatcher) {
-        return new ThrowsException<>(exceptionMatcher);
-    }
+  public static <U extends Runnable> ThrowsException<U> throwsException(Matcher<? super Throwable> exceptionMatcher) {
+    return new ThrowsException<>(exceptionMatcher);
+  }
 
-    public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(Class<V> item) {
-        return new ThrowsException<>(instanceOf(item));
-    }
+  public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(Class<V> item) {
+    return new ThrowsException<>(instanceOf(item));
+  }
 
-    public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(Class<V> item , String message) {
-        return new ThrowsException<>(allOf(instanceOf(item), withMessage(message)));
-    }
+  public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(Class<V> item, String message) {
+    return new ThrowsException<>(allOf(instanceOf(item), withMessage(message)));
+  }
 
-    public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(Class<V> item , Matcher<? super Throwable> exceptionMatcher) {
-        return new ThrowsException<>(allOf(instanceOf(item), exceptionMatcher));
-    }
+  public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(Class<V> item, Matcher<? super Throwable> exceptionMatcher) {
+    return new ThrowsException<>(allOf(instanceOf(item), exceptionMatcher));
+  }
 
-    @Override
-    public boolean matchesSafely(T runnable) {
-        try {
-            runnable.run();
-            return false;
-        } catch (Throwable t) {
-            actualException = t;
-            return exceptionMatcher.matches(t);
-        }
+  @Override
+  public boolean matchesSafely(T runnable) {
+    try {
+      runnable.run();
+      return false;
+    } catch (Throwable t) {
+      actualException = t;
+      return exceptionMatcher.matches(t);
     }
+  }
 
-    @Override
-    public void describeTo(Description description) {
-        description.appendText("a runnable throwing ").appendDescriptionOf(exceptionMatcher);
-    }
+  @Override
+  public void describeTo(Description description) {
+    description.appendText("a runnable throwing ").appendDescriptionOf(exceptionMatcher);
+  }
 
-    @Override
-    public void describeMismatchSafely(T runnable, Description mismatchDescription) {
-        if (actualException == null) {
-            mismatchDescription.appendText("the runnable didn't throw");
-            return;
-        }
-        mismatchDescription.appendText("the runnable threw ");
-        exceptionMatcher.describeMismatch(actualException, mismatchDescription);
+  @Override
+  public void describeMismatchSafely(T runnable, Description mismatchDescription) {
+    if (actualException == null) {
+      mismatchDescription.appendText("the runnable didn't throw");
+      return;
     }
+    mismatchDescription.appendText("the runnable threw ");
+    exceptionMatcher.describeMismatch(actualException, mismatchDescription);
+  }
 }
