@@ -25,6 +25,7 @@ public final class ThrowsExceptionEqualTest {
     assertThat(codeThatThrows, throwsException());
     assertThat(codeThatThrows, throwsException(boom));
     assertThat(codeThatThrows, throwsException(RuntimeException.class));
+    assertThat(codeThatThrows, throwsException("boom"));
     assertThat(codeThatThrows, throwsException(withMessage("boom")));
     assertThat(codeThatThrows, throwsException(withMessage(containsString("oom"))));
     assertThat(codeThatThrows, throwsException(RuntimeException.class, "boom"));
