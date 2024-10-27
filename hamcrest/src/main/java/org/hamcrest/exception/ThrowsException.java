@@ -24,7 +24,7 @@ public class ThrowsException<T extends Runnable> extends TypeSafeMatcher<T> {
      *
      * @param elementMatcher matches the expected element
      */
-    ThrowsException(Matcher<? super Throwable> elementMatcher) {
+    public ThrowsException(Matcher<? super Throwable> elementMatcher) {
         this.exceptionMatcher = elementMatcher;
     }
 

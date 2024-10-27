@@ -19,7 +19,7 @@ public class ThrowsExceptionWithMessage<T extends Throwable> extends TypeSafeDia
      *
      * @param messageMatcher matches the exception message
      */
-    ThrowsExceptionWithMessage(Matcher<? super String> messageMatcher) {
+    public ThrowsExceptionWithMessage(Matcher<? super String> messageMatcher) {
         this.messageMatcher = messageMatcher;
     }
 

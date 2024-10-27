@@ -16,7 +16,7 @@ public class ThrowsExceptionEqualTo<T extends Throwable> extends TypeSafeDiagnos
      *
      * @param expectedException the expected exception.
      */
-    ThrowsExceptionEqualTo(T expectedException) {
+    public ThrowsExceptionEqualTo(T expectedException) {
         this.expectedException = expectedException;
     }
 
