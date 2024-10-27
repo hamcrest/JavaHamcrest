@@ -32,7 +32,7 @@ public class ThrowsException<T extends Runnable> extends TypeSafeMatcher<T> {
         return new ThrowsException<>(instanceOf(Throwable.class));
     }
 
-    public static <U extends Runnable, T extends Throwable> ThrowsException<U> throwsException(T item) {
+    public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(V item) {
         return new ThrowsException<>(exceptionEqualTo(item));
     }
 
@@ -40,15 +40,15 @@ public class ThrowsException<T extends Runnable> extends TypeSafeMatcher<T> {
         return new ThrowsException<>(exceptionMatcher);
     }
 
-    public static <U extends Runnable, T extends Throwable> ThrowsException<U> throwsException(Class<T> item) {
+    public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(Class<V> item) {
         return new ThrowsException<>(instanceOf(item));
     }
 
-    public static <U extends Runnable, T extends Throwable> ThrowsException<U> throwsException(Class<T> item , String message) {
+    public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(Class<V> item , String message) {
         return new ThrowsException<>(allOf(instanceOf(item), withMessage(message)));
     }
 
-    public static <U extends Runnable, T extends Throwable> ThrowsException<U> throwsException(Class<T> item , Matcher<? super Throwable> exceptionMatcher) {
+    public static <U extends Runnable, V extends Throwable> ThrowsException<U> throwsException(Class<V> item , Matcher<? super Throwable> exceptionMatcher) {
         return new ThrowsException<>(allOf(instanceOf(item), exceptionMatcher));
     }
 
