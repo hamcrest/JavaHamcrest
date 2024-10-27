@@ -4,7 +4,10 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.exception.ThrowsExceptionEqualTo.exceptionEqualTo;
+import static org.hamcrest.exception.ThrowsExceptionWithMessage.withMessage;
 
 /**
  * Tests if a Runnable throws a matching exception.
@@ -25,12 +28,28 @@ public class ThrowsException<T extends Runnable> extends TypeSafeMatcher<T> {
         this.exceptionMatcher = elementMatcher;
     }
 
+    public static <U extends Runnable> ThrowsException<U> throwsException() {
+        return new ThrowsException<>(instanceOf(Throwable.class));
+    }
+
     public static <U extends Runnable, T extends Throwable> ThrowsException<U> throwsException(T item) {
         return new ThrowsException<>(exceptionEqualTo(item));
     }
 
     public static <U extends Runnable> ThrowsException<U> throwsException(Matcher<? super Throwable> exceptionMatcher) {
         return new ThrowsException<>(exceptionMatcher);
+    }
+
+    public static <U extends Runnable, T extends Throwable> ThrowsException<U> throwsException(Class<T> item) {
+        return new ThrowsException<>(instanceOf(item));
+    }
+
+    public static <U extends Runnable, T extends Throwable> ThrowsException<U> throwsException(Class<T> item , String message) {
+        return new ThrowsException<>(allOf(instanceOf(item), withMessage(message)));
+    }
+
+    public static <U extends Runnable, T extends Throwable> ThrowsException<U> throwsException(Class<T> item , Matcher<? super Throwable> exceptionMatcher) {
+        return new ThrowsException<>(allOf(instanceOf(item), exceptionMatcher));
     }
 
     @Override

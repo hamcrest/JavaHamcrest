@@ -3,6 +3,7 @@ package org.hamcrest.exception;
 import org.hamcrest.AbstractMatcherTest;
 import org.hamcrest.Matcher;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.exception.ThrowsException.throwsException;
@@ -16,7 +17,23 @@ public class ThrowsExceptionEqualTest extends AbstractMatcherTest {
 
     @Override
     protected Matcher<?> createMatcher() {
-        return throwsException(new IllegalArgumentException("Boom!"));
+        return throwsException(IllegalArgumentException.class);
+    }
+
+    public void testExamples() {
+        RuntimeException boom = new RuntimeException("boom");
+        Runnable codeThatThrows = () -> {
+            throw boom;
+        };
+
+        assertThat(codeThatThrows, throwsException());
+        assertThat(codeThatThrows, throwsException(boom));
+        assertThat(codeThatThrows, throwsException(RuntimeException.class));
+        assertThat(codeThatThrows, throwsException(withMessage("boom")));
+        assertThat(codeThatThrows, throwsException(withMessage(containsString("oom"))));
+        assertThat(codeThatThrows, throwsException(RuntimeException.class, "boom"));
+        assertThat(codeThatThrows, throwsException(RuntimeException.class, withMessage("boom")));
+        assertThat(codeThatThrows, throwsException(RuntimeException.class, withMessage(containsString("boom"))));
     }
 
     public void testEvaluatesToTrueIfRunnableThrowsExpectedExceptionWithMatchingMessage() {
@@ -45,7 +62,8 @@ public class ThrowsExceptionEqualTest extends AbstractMatcherTest {
         assertMismatchDescription(
                 "the runnable didn't throw",
                 throwsException(new IllegalArgumentException("Boom!")),
-                (Runnable) () -> {}
+                (Runnable) () -> {
+                }
         );
     }
 
