@@ -2236,7 +2236,7 @@ public class Matchers {
    * @param <T> type of the Runnable
    * @return The matcher.
    */
-  public static <T extends Runnable> ThrowsException<T> throwsException() {
+  public static <T extends Runnable> Matcher<T> throwsException() {
     return ThrowsException.throwsException();
   }
 
@@ -2248,7 +2248,7 @@ public class Matchers {
    * @param throwableClass the Throwable class against which examined exceptions are compared
    * @return The matcher.
    */
-  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsException(Class<U> throwableClass) {
+  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsException(Class<U> throwableClass) {
     return ThrowsException.throwsException(throwableClass);
   }
 
@@ -2261,7 +2261,7 @@ public class Matchers {
    * @param message        the String against which examined exception messages are compared
    * @return The matcher.
    */
-  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsException(Class<U> throwableClass, String message) {
+  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsException(Class<U> throwableClass, String message) {
     return ThrowsException.throwsException(throwableClass, message);
   }
 
@@ -2274,7 +2274,7 @@ public class Matchers {
    * @param messageMatcher matcher to validate exception's message
    * @return The matcher.
    */
-  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsException(Class<U> throwableClass, Matcher<String> messageMatcher) {
+  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsException(Class<U> throwableClass, Matcher<String> messageMatcher) {
     return ThrowsException.throwsException(throwableClass, messageMatcher);
   }
 
@@ -2286,7 +2286,7 @@ public class Matchers {
    * @param message the String against which examined exception messages are compared
    * @return The matcher.
    */
-  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsExceptionWithMessage(String message) {
+  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsExceptionWithMessage(String message) {
     return ThrowsException.throwsExceptionWithMessage(message);
   }
 
@@ -2298,7 +2298,7 @@ public class Matchers {
    * @param messageMatcher matcher to validate exception's message
    * @return The matcher.
    */
-  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsExceptionWithMessage(Matcher<String> messageMatcher) {
+  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsExceptionWithMessage(Matcher<String> messageMatcher) {
     return ThrowsException.throwsExceptionWithMessage(messageMatcher);
   }
 }

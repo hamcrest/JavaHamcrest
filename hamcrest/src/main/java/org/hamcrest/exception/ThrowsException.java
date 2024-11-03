@@ -22,27 +22,27 @@ public class ThrowsException<T extends Runnable> extends TypeSafeDiagnosingMatch
     this.messageMatcher = messageMatcher;
   }
 
-  public static <T extends Runnable> ThrowsException<T> throwsException() {
+  public static <T extends Runnable> Matcher<T> throwsException() {
     return throwsException(Throwable.class);
   }
 
-  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsException(Class<U> throwableClass) {
+  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsException(Class<U> throwableClass) {
     return new ThrowsException<>(new IsInstanceOf(throwableClass), anything("<anything>"));
   }
 
-  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsException(Class<U> throwableClass, String exactMessage) {
+  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsException(Class<U> throwableClass, String exactMessage) {
     return throwsException(throwableClass, equalTo(exactMessage));
   }
 
-  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsException(Class<U> throwableClass, Matcher<String> messageMatcher) {
+  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsException(Class<U> throwableClass, Matcher<String> messageMatcher) {
     return new ThrowsException<>(new IsInstanceOf(throwableClass), messageMatcher);
   }
 
-  public static <T extends Runnable> ThrowsException<T> throwsExceptionWithMessage(String exactMessage) {
+  public static <T extends Runnable> Matcher<T> throwsExceptionWithMessage(String exactMessage) {
     return throwsException(Throwable.class, equalTo(exactMessage));
   }
 
-  public static <T extends Runnable> ThrowsException<T> throwsExceptionWithMessage(Matcher<String> messageMatcher) {
+  public static <T extends Runnable> Matcher<T> throwsExceptionWithMessage(Matcher<String> messageMatcher) {
     return throwsException(Throwable.class, messageMatcher);
   }
 
