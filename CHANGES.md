@@ -18,10 +18,14 @@ these methods will need to be updated. The following methods are affected:
   * `org.hamcrest.core.IsIterableContaining.hasItems`
   * TODO: decide if these breaking changes should trigger a major version upgrade (i.e v4.0)
 
+### New Features
+
+* Optional matchers ([PR #421](https://github.com/hamcrest/JavaHamcrest/pull/421))
+* Matchers for thrown exceptions ([PR #423](https://github.com/hamcrest/JavaHamcrest/pull/423))
+
 ### Improvements
 
 * Javadoc improvements and cleanup ([PR #420](https://github.com/hamcrest/JavaHamcrest/pull/420))
-* Optional matchers ([PR #421](https://github.com/hamcrest/JavaHamcrest/pull/421))
 * Derive version from git tags ([PR #419](https://github.com/hamcrest/JavaHamcrest/pull/419))
 * Migrate all tests to JUnit Jupiter ([PR #424](https://github.com/hamcrest/JavaHamcrest/pull/424))
 
