@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.throwsExceptionWithMessage;
 import static org.hamcrest.exception.ThrowsException.throwsException;
 import static org.hamcrest.test.MatcherAssertions.*;
 
@@ -22,7 +23,10 @@ public final class ThrowsExceptionTest {
     assertThat(ThrowsExceptionTest::throwIllegalArgumentException, throwsException());
     assertThat(ThrowsExceptionTest::throwIllegalArgumentException, throwsException(RuntimeException.class));
     assertThat(ThrowsExceptionTest::throwIllegalArgumentException, throwsException(RuntimeException.class, "Boom!"));
+    assertThat(ThrowsExceptionTest::throwIllegalArgumentException, throwsException(new IllegalArgumentException("Boom!")));
     assertThat(ThrowsExceptionTest::throwIllegalArgumentException, throwsException(RuntimeException.class, containsString("Boo")));
+    assertThat(ThrowsExceptionTest::throwIllegalArgumentException, throwsExceptionWithMessage("Boom!"));
+    assertThat(ThrowsExceptionTest::throwIllegalArgumentException, throwsExceptionWithMessage(containsString("Boo")));
   }
 
   @Test

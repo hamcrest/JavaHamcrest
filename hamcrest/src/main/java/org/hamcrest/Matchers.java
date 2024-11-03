@@ -2241,6 +2241,18 @@ public class Matchers {
   }
 
   /**
+   * Matcher for {@link Throwable} that expects that the Runnable throws an exception equal to the provided <code>throwable</code>
+   *
+   * @param <U>       type of the Runnable
+   * @param <T>       type of the Throwable
+   * @param throwable the Throwable class against which examined exceptions are compared
+   * @return The matcher.
+   */
+  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsException(U throwable) {
+    return ThrowsException.throwsException(throwable);
+  }
+
+  /**
    * Matcher for {@link Throwable} that expects that the Runnable throws an exception of the provided <code>throwableClass</code> class
    *
    * @param <U>            type of the Runnable

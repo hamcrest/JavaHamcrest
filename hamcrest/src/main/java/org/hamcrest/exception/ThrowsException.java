@@ -26,6 +26,10 @@ public class ThrowsException<T extends Runnable> extends TypeSafeDiagnosingMatch
     return throwsException(Throwable.class);
   }
 
+  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsException(U throwable) {
+    return throwsException(throwable.getClass(), throwable.getMessage());
+  }
+
   public static <T extends Runnable, U extends Throwable> Matcher<T> throwsException(Class<U> throwableClass) {
     return new ThrowsException<>(new IsInstanceOf(throwableClass), anything("<anything>"));
   }
