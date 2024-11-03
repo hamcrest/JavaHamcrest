@@ -3,6 +3,7 @@ package org.hamcrest;
 import org.hamcrest.collection.ArrayMatching;
 import org.hamcrest.core.IsIterableContaining;
 import org.hamcrest.core.StringRegularExpression;
+import org.hamcrest.exception.ThrowsException;
 import org.hamcrest.optional.OptionalEmpty;
 import org.hamcrest.optional.OptionalWithValue;
 import org.hamcrest.text.IsEqualCompressingWhiteSpace;
@@ -1972,21 +1973,21 @@ public class Matchers {
     return org.hamcrest.text.CharSequenceLength.hasLength(lengthMatcher);
   }
 
-    /**
-     * Creates a matcher of {@link CharSequence} that matches when a char sequence has the length
-     * of the specified <code>argument</code>.
-     * For example:
-     *
-     * <pre>
-     * assertThat("text", length(4))
-     * </pre>
-     *
-     * @param length the expected length of the string
-     * @return The matcher.
-     */
-    public static Matcher<CharSequence> hasLength(int length) {
-        return org.hamcrest.text.CharSequenceLength.hasLength(length);
-    }
+  /**
+   * Creates a matcher of {@link CharSequence} that matches when a char sequence has the length
+   * of the specified <code>argument</code>.
+   * For example:
+   *
+   * <pre>
+   * assertThat("text", length(4))
+   * </pre>
+   *
+   * @param length the expected length of the string
+   * @return The matcher.
+   */
+  public static Matcher<CharSequence> hasLength(int length) {
+    return org.hamcrest.text.CharSequenceLength.hasLength(length);
+  }
 
   /**
    * Creates a matcher that matches any examined object whose <code>toString</code> method
@@ -2227,5 +2228,77 @@ public class Matchers {
    */
   public static <T> Matcher<Optional<T>> optionalWithValue(Matcher<? super T> matcher) {
     return OptionalWithValue.optionalWithValue(matcher);
+  }
+
+  /**
+   * Matcher for {@link Throwable} that expects that the Runnable throws an exception
+   *
+   * @param <T> type of the Runnable
+   * @return The matcher.
+   */
+  public static <T extends Runnable> ThrowsException<T> throwsException() {
+    return ThrowsException.throwsException();
+  }
+
+  /**
+   * Matcher for {@link Throwable} that expects that the Runnable throws an exception of the provided <code>throwableClass</code> class
+   *
+   * @param <U>            type of the Runnable
+   * @param <T>            type of the Throwable
+   * @param throwableClass the Throwable class against which examined exceptions are compared
+   * @return The matcher.
+   */
+  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsException(Class<U> throwableClass) {
+    return ThrowsException.throwsException(throwableClass);
+  }
+
+  /**
+   * Matcher for {@link Throwable} that expects that the Runnable throws an exception of the provided <code>throwableClass</code> class and has a message equal to the provided <code>message</code>
+   *
+   * @param <T>            type of the Runnable
+   * @param <U>            type of the Throwable
+   * @param throwableClass the Throwable class against which examined exceptions are compared
+   * @param message        the String against which examined exception messages are compared
+   * @return The matcher.
+   */
+  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsException(Class<U> throwableClass, String message) {
+    return ThrowsException.throwsException(throwableClass, message);
+  }
+
+  /**
+   * Matcher for {@link Throwable} that expects that the Runnable throws an exception of the provided <code>throwableClass</code> class and has a message matching the provided <code>messageMatcher</code>
+   *
+   * @param <T>            type of the Runnable
+   * @param <U>            type of the Throwable
+   * @param throwableClass the Throwable class against which examined exceptions are compared
+   * @param messageMatcher matcher to validate exception's message
+   * @return The matcher.
+   */
+  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsException(Class<U> throwableClass, Matcher<String> messageMatcher) {
+    return ThrowsException.throwsException(throwableClass, messageMatcher);
+  }
+
+  /**
+   * Matcher for {@link Throwable} that expects that the Runnable throws an exception with a message equal to the provided <code>message</code>
+   *
+   * @param <T>     type of the Runnable
+   * @param <U>     type of the Throwable
+   * @param message the String against which examined exception messages are compared
+   * @return The matcher.
+   */
+  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsExceptionWithMessage(String message) {
+    return ThrowsException.throwsExceptionWithMessage(message);
+  }
+
+  /**
+   * Matcher for {@link Throwable} that expects that the Runnable throws an exception with a message matching the provided <code>messageMatcher</code>
+   *
+   * @param <T>            type of the Runnable
+   * @param <U>            type of the Throwable
+   * @param messageMatcher matcher to validate exception's message
+   * @return The matcher.
+   */
+  public static <T extends Runnable, U extends Throwable> ThrowsException<T> throwsExceptionWithMessage(Matcher<String> messageMatcher) {
+    return ThrowsException.throwsExceptionWithMessage(messageMatcher);
   }
 }
