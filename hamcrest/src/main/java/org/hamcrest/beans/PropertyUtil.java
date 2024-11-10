@@ -27,7 +27,7 @@ public class PropertyUtil {
      * @param fromObj
      *     the object to check.
      * @return the descriptor of the property, or null if the property does not exist.
-     * @throws IllegalArgumentException if there's a introspection failure
+     * @throws IllegalArgumentException if there's an introspection failure
      */
     public static PropertyDescriptor getPropertyDescriptor(String propertyName, Object fromObj) throws IllegalArgumentException {
         for (PropertyDescriptor property : propertyDescriptorsFor(fromObj, null)) {
@@ -45,7 +45,7 @@ public class PropertyUtil {
      * @param fromObj Use the class of this object
      * @param stopClass Don't include any properties from this ancestor class upwards.
      * @return Property descriptors
-     * @throws IllegalArgumentException if there's a introspection failure
+     * @throws IllegalArgumentException if there's an introspection failure
      */
     public static PropertyDescriptor[] propertyDescriptorsFor(Object fromObj, Class<Object> stopClass) throws IllegalArgumentException {
       try {
