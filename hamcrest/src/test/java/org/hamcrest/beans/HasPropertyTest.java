@@ -16,6 +16,7 @@ import static org.hamcrest.beans.HasProperty.hasProperty;
 public final class HasPropertyTest {
 
     private final HasPropertyWithValueTest.BeanWithoutInfo bean = new HasPropertyWithValueTest.BeanWithoutInfo("a bean", false);
+    private final HasPropertyWithValueTest.RecordLikeBeanWithoutInfo record = new HasPropertyWithValueTest.RecordLikeBeanWithoutInfo("a record", false);
 
     @Test public void
     copesWithNullsAndUnknownTypes() {
@@ -28,11 +29,13 @@ public final class HasPropertyTest {
     @Test public void
     matchesWhenThePropertyExists() {
         assertMatches(hasProperty("writeOnlyProperty"), bean);
+        assertMatches(hasProperty("property"), record);
     }
 
     @Test public void
     doesNotMatchIfPropertyDoesNotExist() {
         assertDoesNotMatch(hasProperty("aNonExistentProp"), bean);
+        assertDoesNotMatch(hasProperty("aNonExistentProp"), record);
     }
 
     @Test public void
@@ -44,6 +47,8 @@ public final class HasPropertyTest {
     describesAMismatch() {
         assertMismatchDescription("no \"aNonExistentProp\" in <[Person: a bean]>",
                                   hasProperty("aNonExistentProp"), bean);
+        assertMismatchDescription("no \"aNonExistentProp\" in <[Person: a record]>",
+                                  hasProperty("aNonExistentProp"), record);
     }
 
 }

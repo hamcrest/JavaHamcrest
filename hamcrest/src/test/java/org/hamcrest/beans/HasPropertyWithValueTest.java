@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
+import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.test.MatcherAssertions.*;
@@ -149,6 +150,44 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     public boolean isBooleanProperty() { return booleanProperty; }
 
     public void setWriteOnlyProperty(@SuppressWarnings("unused") float property) {
+    }
+
+    @Override
+    public String toString() {
+      return "[Person: " + property + "]";
+    }
+  }
+
+  /**
+   * A Java Record-like class to test the functionality of
+   * {@link org.hamcrest.beans.HasProperty#hasProperty(String) hasProperty(String)}
+   * with Java Records in JDK 8 environment.
+   *
+   * @see <a href="https://docs.oracle.com/en/java/javase/17/language/records.html">https://docs.oracle.com/en/java/javase/17/language/records.html</a>
+   */
+  public static final class RecordLikeBeanWithoutInfo {
+    private final String property;
+    private final boolean booleanProperty;
+
+    public RecordLikeBeanWithoutInfo(String property, boolean booleanProperty) {
+      this.property = property;
+      this.booleanProperty = booleanProperty;
+    }
+
+    public String property() { return this.property; }
+    public boolean booleanProperty()  { return this.booleanProperty; }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (!(o instanceof RecordLikeBeanWithoutInfo)) return false;
+      RecordLikeBeanWithoutInfo that = (RecordLikeBeanWithoutInfo) o;
+      return Objects.equals(this.property, that.property) && this.booleanProperty == that.booleanProperty;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(property, booleanProperty);
     }
 
     @Override
