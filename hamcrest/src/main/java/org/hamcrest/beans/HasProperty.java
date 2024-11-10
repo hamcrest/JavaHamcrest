@@ -3,7 +3,6 @@ package org.hamcrest.beans;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.collection.ArrayMatching;
 
 /**
  * A matcher that checks if an object has a JavaBean property with the
