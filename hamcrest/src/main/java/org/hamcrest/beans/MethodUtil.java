@@ -26,12 +26,13 @@ public class MethodUtil {
      *
      * @param propertyName the object property name.
      * @param fromObj the object to check.
+     * @param isNonVoid whether the method is non-void, which means the method has a return value.
      * @return the descriptor of the method, or null if the method does not exist.
      * @throws IllegalArgumentException if there's an introspection failure
      */
-    public static MethodDescriptor getMethodDescriptor(String propertyName, Object fromObj) throws IllegalArgumentException {
+    public static MethodDescriptor getMethodDescriptor(String propertyName, Object fromObj, boolean isNonVoid) throws IllegalArgumentException {
         for (MethodDescriptor method : methodDescriptorsFor(fromObj, null)) {
-            if (method.getName().equals(propertyName)) {
+            if (method.getName().equals(propertyName) && (!isNonVoid || method.getMethod().getReturnType() != void.class)) {
                 return method;
             }
         }

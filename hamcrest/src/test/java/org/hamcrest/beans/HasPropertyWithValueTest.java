@@ -176,6 +176,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
     public String property() { return this.property; }
     public boolean booleanProperty()  { return this.booleanProperty; }
+    public void notAGetterMethod() {}
 
     @Override
     public boolean equals(Object o) {

@@ -32,7 +32,7 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
     public boolean matchesSafely(T obj) {
         try {
             return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null ||
-                    MethodUtil.getMethodDescriptor(propertyName, obj) != null;
+                    MethodUtil.getMethodDescriptor(propertyName, obj, true) != null;
         } catch (IllegalArgumentException e) {
             return false;
         }

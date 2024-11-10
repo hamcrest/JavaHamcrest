@@ -36,6 +36,7 @@ public final class HasPropertyTest {
     doesNotMatchIfPropertyDoesNotExist() {
         assertDoesNotMatch(hasProperty("aNonExistentProp"), bean);
         assertDoesNotMatch(hasProperty("aNonExistentProp"), record);
+        assertDoesNotMatch(hasProperty("notAGetterMethod"), record);
     }
 
     @Test public void
