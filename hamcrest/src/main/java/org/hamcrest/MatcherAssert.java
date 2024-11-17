@@ -6,7 +6,10 @@ package org.hamcrest;
  */
 public class MatcherAssert {
 
-    private MatcherAssert() {
+    /**
+     * Unused.
+     */
+    public MatcherAssert() {
     }
 
     /**

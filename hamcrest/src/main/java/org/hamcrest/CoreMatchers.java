@@ -13,7 +13,10 @@ import org.hamcrest.core.IsIterableContaining;
 @SuppressWarnings("UnusedDeclaration")
 public class CoreMatchers {
 
-  private CoreMatchers() {
+  /**
+   * Unused
+   */
+  public CoreMatchers() {
   }
 
   /**
