@@ -22,7 +22,10 @@ import java.util.regex.Pattern;
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class Matchers {
 
-  private Matchers() {
+  /**
+   * Unused
+   */
+  public Matchers() {
   }
 
   /**
