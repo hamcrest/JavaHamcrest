@@ -2234,7 +2234,7 @@ public class Matchers {
   }
 
   /**
-   * Matcher for {@link Throwable} that expects that the Runnable throws an exception
+   * Matcher for {@link Runnable} that expects an exception to be thrown
    *
    * @param <T> type of the Runnable
    * @return The matcher.
@@ -2297,11 +2297,10 @@ public class Matchers {
    * Matcher for {@link Throwable} that expects that the Runnable throws an exception with a message equal to the provided <code>message</code>
    *
    * @param <T>     type of the Runnable
-   * @param <U>     type of the Throwable
    * @param message the String against which examined exception messages are compared
    * @return The matcher.
    */
-  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsExceptionWithMessage(String message) {
+  public static <T extends Runnable> Matcher<T> throwsExceptionWithMessage(String message) {
     return ThrowsException.throwsExceptionWithMessage(message);
   }
 
@@ -2309,11 +2308,10 @@ public class Matchers {
    * Matcher for {@link Throwable} that expects that the Runnable throws an exception with a message matching the provided <code>messageMatcher</code>
    *
    * @param <T>            type of the Runnable
-   * @param <U>            type of the Throwable
    * @param messageMatcher matcher to validate exception's message
    * @return The matcher.
    */
-  public static <T extends Runnable, U extends Throwable> Matcher<T> throwsExceptionWithMessage(Matcher<String> messageMatcher) {
+  public static <T extends Runnable> Matcher<T> throwsExceptionWithMessage(Matcher<String> messageMatcher) {
     return ThrowsException.throwsExceptionWithMessage(messageMatcher);
   }
 }
