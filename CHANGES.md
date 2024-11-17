@@ -25,7 +25,9 @@ these methods will need to be updated. The following methods are affected:
 
 ### Improvements
 
-* Javadoc improvements and cleanup ([PR #420](https://github.com/hamcrest/JavaHamcrest/pull/420))
+* Javadoc improvements and cleanup ([PR #420](https://github.com/hamcrest/JavaHamcrest/pull/420),
+[#427](https://github.com/hamcrest/JavaHamcrest/issues/427),
+[PR #428](https://github.com/hamcrest/JavaHamcrest/pull/428))
 * Derive version from git tags ([PR #419](https://github.com/hamcrest/JavaHamcrest/pull/419))
 * Migrate all tests to JUnit Jupiter ([PR #424](https://github.com/hamcrest/JavaHamcrest/pull/424))
 
