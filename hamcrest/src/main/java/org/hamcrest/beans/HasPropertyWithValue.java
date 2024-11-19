@@ -26,7 +26,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  * <h2>Example Usage</h2>
  * Consider the situation where we have a class representing a person, which
  * follows the basic JavaBean convention of having get() and possibly set()
- * methods for it's properties:
+ * methods for its properties:
  * <pre>{@code  public class Person {
  *   private String name;
  *   public Person(String person) {
@@ -122,22 +122,19 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     }
 
     private Condition.Step<Method, Object> withPropertyValue(final T bean) {
-        return new Condition.Step<Method, Object>() {
-            @Override
-            public Condition<Object> apply(Method readMethod, Description mismatch) {
-                try {
-                    return matched(readMethod.invoke(bean, NO_ARGUMENTS), mismatch);
-                } catch (InvocationTargetException e) {
-                    mismatch
-                      .appendText("Calling '")
-                      .appendText(readMethod.toString())
-                      .appendText("': ")
-                      .appendValue(e.getTargetException().getMessage());
-                    return notMatched();
-                } catch (Exception e) {
-                    throw new IllegalStateException(
-                      "Calling: '" + readMethod + "' should not have thrown " + e);
-                }
+        return (readMethod, mismatch) -> {
+            try {
+                return matched(readMethod.invoke(bean, NO_ARGUMENTS), mismatch);
+            } catch (InvocationTargetException e) {
+                mismatch
+                  .appendText("Calling '")
+                  .appendText(readMethod.toString())
+                  .appendText("': ")
+                  .appendValue(e.getTargetException().getMessage());
+                return notMatched();
+            } catch (Exception e) {
+                throw new IllegalStateException(
+                  "Calling: '" + readMethod + "' should not have thrown " + e);
             }
         };
     }
@@ -148,16 +145,13 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     }
 
     private static Condition.Step<PropertyDescriptor, Method> withReadMethod() {
-        return new Condition.Step<PropertyDescriptor, java.lang.reflect.Method>() {
-            @Override
-            public Condition<Method> apply(PropertyDescriptor property, Description mismatch) {
-                final Method readMethod = property.getReadMethod();
-                if (null == readMethod) {
-                    mismatch.appendText("property \"" + property.getName() + "\" is not readable");
-                    return notMatched();
-                }
-                return matched(readMethod, mismatch);
+        return (property, mismatch) -> {
+            final Method readMethod = property.getReadMethod();
+            if (null == readMethod) {
+                mismatch.appendText("property \"" + property.getName() + "\" is not readable");
+                return notMatched();
             }
+            return matched(readMethod, mismatch);
         };
     }
 
