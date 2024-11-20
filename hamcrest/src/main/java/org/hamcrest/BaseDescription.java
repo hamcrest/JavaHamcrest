@@ -3,6 +3,8 @@ package org.hamcrest;
 import org.hamcrest.internal.ArrayIterator;
 import org.hamcrest.internal.SelfDescribingValueIterator;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -35,6 +37,19 @@ public abstract class BaseDescription implements Description {
     public Description appendValue(Object value) {
         if (value == null) {
             append("null");
+        } else if (value instanceof SelfDescribing){
+            append('<');
+            try {
+                appendDescriptionOf( (SelfDescribing) value);
+            } catch (Exception ex){
+                // generating an error message should not throw another exception.
+                // process exception into mismatch description to preserve "nice" error messages
+                StringWriter stringWriter = new StringWriter();
+                PrintWriter printWriter = new PrintWriter(stringWriter);
+                ex.printStackTrace(printWriter);
+                append("Exception while resolving self description: " + stringWriter.toString());
+            }
+            append('>');
         } else if (value instanceof String) {
             toJavaSyntax((String) value);
         } else if (value instanceof Character) {
