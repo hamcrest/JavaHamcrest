@@ -5,6 +5,8 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
+import java.beans.FeatureDescriptor;
+import java.beans.MethodDescriptor;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -69,7 +71,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  */
 public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
 
-    private static final Condition.Step<PropertyDescriptor, Method> WITH_READ_METHOD = withReadMethod();
+    private static final Condition.Step<FeatureDescriptor, Method> WITH_READ_METHOD = withReadMethod();
     private final String propertyName;
     private final Matcher<Object> valueMatcher;
     private final String messageFormat;
@@ -111,8 +113,11 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
                    .appendDescriptionOf(valueMatcher).appendText(")");
     }
 
-    private Condition<PropertyDescriptor> propertyOn(T bean, Description mismatch) {
-        PropertyDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, bean);
+    private Condition<FeatureDescriptor> propertyOn(T bean, Description mismatch) {
+        FeatureDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, bean);
+        if (property == null) {
+            property = PropertyUtil.getMethodDescriptor(propertyName, bean, false);
+        }
         if (property == null) {
             mismatch.appendText("No property \"" + propertyName + "\"");
             return notMatched();
@@ -144,10 +149,12 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         return (Matcher<Object>) valueMatcher;
     }
 
-    private static Condition.Step<PropertyDescriptor, Method> withReadMethod() {
+    private static Condition.Step<FeatureDescriptor, Method> withReadMethod() {
         return (property, mismatch) -> {
-            final Method readMethod = property.getReadMethod();
-            if (null == readMethod) {
+            final Method readMethod = property instanceof PropertyDescriptor ?
+                    ((PropertyDescriptor) property).getReadMethod() :
+                    (((MethodDescriptor) property).getMethod());
+            if (null == readMethod || readMethod.getReturnType() == void.class) {
                 mismatch.appendText("property \"" + property.getName() + "\" is not readable");
                 return notMatched();
             }
