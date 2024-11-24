@@ -90,7 +90,7 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, PropertyDescriptor[] descriptors, List<String> ignoredFields) {
         List<PropertyMatcher> result = new ArrayList<>(descriptors.length);
         for (PropertyDescriptor propertyDescriptor : descriptors) {
-            if (isIgnored(ignoredFields, propertyDescriptor)) {
+            if (isNotIgnored(ignoredFields, propertyDescriptor)) {
                 result.add(new PropertyMatcher(propertyDescriptor, bean));
             }
         }
@@ -100,14 +100,14 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     private static Set<String> propertyNamesFrom(PropertyDescriptor[] descriptors, List<String> ignoredFields) {
         HashSet<String> result = new HashSet<>();
         for (PropertyDescriptor propertyDescriptor : descriptors) {
-            if (isIgnored(ignoredFields, propertyDescriptor)) {
+            if (isNotIgnored(ignoredFields, propertyDescriptor)) {
                 result.add(propertyDescriptor.getDisplayName());
             }
         }
         return result;
     }
 
-    private static boolean isIgnored(List<String> ignoredFields, PropertyDescriptor propertyDescriptor) {
+    private static boolean isNotIgnored(List<String> ignoredFields, PropertyDescriptor propertyDescriptor) {
         return ! ignoredFields.contains(propertyDescriptor.getDisplayName());
     }
 
