@@ -116,7 +116,7 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
     private Condition<FeatureDescriptor> propertyOn(T bean, Description mismatch) {
         FeatureDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, bean);
         if (property == null) {
-            property = PropertyUtil.getMethodDescriptor(propertyName, bean, false);
+            property = PropertyUtil.getMethodDescriptor(propertyName, bean);
         }
         if (property == null) {
             mismatch.appendText("No property \"" + propertyName + "\"");

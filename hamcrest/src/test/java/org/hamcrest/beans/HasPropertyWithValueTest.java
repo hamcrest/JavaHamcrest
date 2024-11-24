@@ -96,8 +96,6 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   public void testDoesNotMatchWriteOnlyProperty() {
     assertMismatchDescription("property \"writeOnlyProperty\" is not readable",
                               hasProperty("writeOnlyProperty", anything()), shouldNotMatch);
-    assertMismatchDescription("property \"writeOnlyProperty\" is not readable",
-                              hasProperty("writeOnlyProperty", anything()), recordShouldNotMatch);
   }
 
   @Test
@@ -219,7 +217,6 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     public String property() { return this.property; }
     public boolean booleanProperty() { return this.booleanProperty; }
     public void notAGetterMethod() {}
-    public void writeOnlyProperty(float property) {}
 
     @Override
     public boolean equals(Object o) {
