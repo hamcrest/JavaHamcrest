@@ -3,7 +3,6 @@ package org.hamcrest.beans;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.collection.ArrayMatching;
 
 /**
  * A matcher that checks if an object has a JavaBean property with the
@@ -31,7 +30,8 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
     @Override
     public boolean matchesSafely(T obj) {
         try {
-            return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null;
+            return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null ||
+                    PropertyUtil.getMethodDescriptor(propertyName, obj) != null;
         } catch (IllegalArgumentException e) {
             return false;
         }

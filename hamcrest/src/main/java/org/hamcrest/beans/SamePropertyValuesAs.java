@@ -4,6 +4,8 @@ import org.hamcrest.Description;
 import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Matcher;
 
+import java.beans.FeatureDescriptor;
+import java.beans.MethodDescriptor;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -11,6 +13,7 @@ import java.util.*;
 import static java.util.Arrays.asList;
 import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
 import static org.hamcrest.beans.PropertyUtil.propertyDescriptorsFor;
+import static org.hamcrest.beans.PropertyUtil.recordReadAccessorMethodDescriptorsFor;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
@@ -33,7 +36,11 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
      */
     @SuppressWarnings("WeakerAccess")
     public SamePropertyValuesAs(T expectedBean, List<String> ignoredProperties) {
-        PropertyDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
+        FeatureDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
+        if (descriptors == null || descriptors.length == 0) {
+            descriptors = recordReadAccessorMethodDescriptorsFor(expectedBean, Object.class);
+        }
+
         this.expectedBean = expectedBean;
         this.ignoredFields = ignoredProperties;
         this.propertyNames = propertyNamesFrom(descriptors, ignoredProperties);
@@ -87,27 +94,27 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
         return true;
     }
 
-    private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, PropertyDescriptor[] descriptors, List<String> ignoredFields) {
+    private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, FeatureDescriptor[] descriptors, List<String> ignoredFields) {
         List<PropertyMatcher> result = new ArrayList<>(descriptors.length);
-        for (PropertyDescriptor propertyDescriptor : descriptors) {
-            if (isIgnored(ignoredFields, propertyDescriptor)) {
-                result.add(new PropertyMatcher(propertyDescriptor, bean));
+        for (FeatureDescriptor descriptor : descriptors) {
+            if (isNotIgnored(ignoredFields, descriptor)) {
+                result.add(new PropertyMatcher(descriptor, bean));
             }
         }
         return result;
     }
 
-    private static Set<String> propertyNamesFrom(PropertyDescriptor[] descriptors, List<String> ignoredFields) {
+    private static Set<String> propertyNamesFrom(FeatureDescriptor[] descriptors, List<String> ignoredFields) {
         HashSet<String> result = new HashSet<>();
-        for (PropertyDescriptor propertyDescriptor : descriptors) {
-            if (isIgnored(ignoredFields, propertyDescriptor)) {
-                result.add(propertyDescriptor.getDisplayName());
+        for (FeatureDescriptor descriptor : descriptors) {
+            if (isNotIgnored(ignoredFields, descriptor)) {
+                result.add(descriptor.getDisplayName());
             }
         }
         return result;
     }
 
-    private static boolean isIgnored(List<String> ignoredFields, PropertyDescriptor propertyDescriptor) {
+    private static boolean isNotIgnored(List<String> ignoredFields, FeatureDescriptor propertyDescriptor) {
         return ! ignoredFields.contains(propertyDescriptor.getDisplayName());
     }
 
@@ -117,9 +124,11 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
         private final Matcher<Object> matcher;
         private final String propertyName;
 
-        public PropertyMatcher(PropertyDescriptor descriptor, Object expectedObject) {
+        public PropertyMatcher(FeatureDescriptor descriptor, Object expectedObject) {
             this.propertyName = descriptor.getDisplayName();
-            this.readMethod = descriptor.getReadMethod();
+            this.readMethod = descriptor instanceof PropertyDescriptor ?
+                    ((PropertyDescriptor) descriptor).getReadMethod() :
+                    ((MethodDescriptor) descriptor).getMethod();
             this.matcher = equalTo(readProperty(readMethod, expectedObject));
         }
 

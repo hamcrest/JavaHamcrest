@@ -19,6 +19,7 @@ public abstract class Condition<T> {
      * @param <I> the initial value type
      * @param <O> the next step value type
      */
+    @FunctionalInterface
     public interface Step<I, O> {
         /**
          * Apply this condition to a value

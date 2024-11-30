@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
+import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.test.MatcherAssertions.*;
@@ -30,6 +31,9 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   private final BeanWithoutInfo shouldMatch = new BeanWithoutInfo("is expected", true);
   private final BeanWithoutInfo shouldNotMatch = new BeanWithoutInfo("not expected", false);
 
+  private final RecordLikeBeanWithoutInfo recordShouldMatch = new RecordLikeBeanWithoutInfo("is expected", true);
+  private final RecordLikeBeanWithoutInfo recordShouldNotMatch = new RecordLikeBeanWithoutInfo("not expected", false);
+
   private final BeanWithInfo beanWithInfo = new BeanWithInfo("with info");
 
   @Override
@@ -46,11 +50,27 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   }
 
   @Test
+  public void testMatchesRecordLikeBeanWithoutInfoWithMatchedNamedProperty() {
+    final Matcher<RecordLikeBeanWithoutInfo> propertyMatcher = hasProperty("property", equalTo("is expected"));
+
+    assertMatches("with property", propertyMatcher, recordShouldMatch);
+    assertMismatchDescription("property 'property' was \"not expected\"", propertyMatcher, recordShouldNotMatch);
+  }
+
+  @Test
   public void testMatchesBeanWithoutInfoWithMatchedNamedBooleanProperty() {
     final Matcher<BeanWithoutInfo> booleanPropertyMatcher = hasProperty("booleanProperty", is(true));
 
     assertMatches("with property", booleanPropertyMatcher, shouldMatch);
     assertMismatchDescription("property 'booleanProperty' was <false>", booleanPropertyMatcher, shouldNotMatch);
+  }
+
+  @Test
+  public void testMatchesRecordLikeBeanWithoutInfoWithMatchedNamedBooleanProperty() {
+    final Matcher<RecordLikeBeanWithoutInfo> booleanPropertyMatcher = hasProperty("booleanProperty", is(true));
+
+    assertMatches("with property", booleanPropertyMatcher, recordShouldMatch);
+    assertMismatchDescription("property 'booleanProperty' was <false>", booleanPropertyMatcher, recordShouldNotMatch);
   }
 
   @Test
@@ -64,9 +84,15 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   public void testDoesNotMatchBeanWithoutInfoOrMatchedNamedProperty() {
     assertMismatchDescription("No property \"nonExistentProperty\"",
                               hasProperty("nonExistentProperty", anything()), shouldNotMatch);
-   }
+  }
 
-   @Test
+  @Test
+  public void testDoesNotMatchRecordLikeBeanWithoutInfoOrMatchedNamedProperty() {
+    assertMismatchDescription("No property \"nonExistentProperty\"",
+                              hasProperty("nonExistentProperty", anything()), recordShouldNotMatch);
+  }
+
+  @Test
   public void testDoesNotMatchWriteOnlyProperty() {
     assertMismatchDescription("property \"writeOnlyProperty\" is not readable",
                               hasProperty("writeOnlyProperty", anything()), shouldNotMatch);
@@ -83,6 +109,16 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   }
 
   @Test
+  public void testMatchesPathForJavaRecords() {
+    assertMatches("1-step path", hasPropertyAtPath("property", equalTo("is expected")), recordShouldMatch);
+    assertMatches("2-step path", hasPropertyAtPath("inner.property", equalTo("is expected")), new BeanWithInner(recordShouldMatch));
+    assertMatches("3-step path", hasPropertyAtPath("inner.inner.property", equalTo("is expected")), new BeanWithInner(new BeanWithInner(recordShouldMatch)));
+
+    assertMismatchDescription("inner.No property \"wrong\"", hasPropertyAtPath("inner.wrong.property", anything()), new BeanWithInner(new BeanWithInner(recordShouldMatch)));
+    assertMismatchDescription("inner.inner.property.was \"not expected\"", hasPropertyAtPath("inner.inner.property", equalTo("something")), new BeanWithInner(new BeanWithInner(recordShouldNotMatch)));
+  }
+
+  @Test
   public void testDescribeTo() {
     assertDescription("hasProperty(\"property\", <true>)", hasProperty("property", equalTo(true)));
   }
@@ -90,6 +126,11 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
   @Test
   public void testMatchesPropertyAndValue() {
     assertMatches("property with value", hasProperty("property", anything()), beanWithInfo);
+  }
+
+  @Test
+  public void testMatchesPropertyAndValueWithJavaRecords() {
+    assertMatches("property with value", hasProperty("property", anything()), recordShouldMatch);
   }
 
   @Test
@@ -157,6 +198,45 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     }
   }
 
+  /**
+   * A Java Record-like class to test the functionality of
+   * {@link HasProperty}, {@link HasPropertyWithValue}
+   * with Java Records in JDK 8 environment.
+   *
+   * @see <a href="https://docs.oracle.com/en/java/javase/17/language/records.html">https://docs.oracle.com/en/java/javase/17/language/records.html</a>
+   */
+  public static final class RecordLikeBeanWithoutInfo {
+    private final String property;
+    private final boolean booleanProperty;
+
+    public RecordLikeBeanWithoutInfo(String property, boolean booleanProperty) {
+      this.property = property;
+      this.booleanProperty = booleanProperty;
+    }
+
+    public String property() { return this.property; }
+    public boolean booleanProperty() { return this.booleanProperty; }
+    public void notAGetterMethod() {}
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (!(o instanceof RecordLikeBeanWithoutInfo)) return false;
+      RecordLikeBeanWithoutInfo that = (RecordLikeBeanWithoutInfo) o;
+      return Objects.equals(this.property, that.property) && this.booleanProperty == that.booleanProperty;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(property, booleanProperty);
+    }
+
+    @Override
+    public String toString() {
+      return "[Person: " + property + "]";
+    }
+  }
+
   @SuppressWarnings("WeakerAccess")
   public static class BeanWithInner {
     private final Object inner;
@@ -173,7 +253,7 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     public String property() { return propertyValue; }
   }
 
-  public static class BeanWithInfoBeanInfo extends SimpleBeanInfo {
+  public static class BeanWithInfoBeanInfo extends SimpleBeanInfo { // TODO: No usage. Can be removed.
     @Override
     public PropertyDescriptor[] getPropertyDescriptors() {
       try {
