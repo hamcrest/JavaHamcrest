@@ -2,13 +2,17 @@ package org.hamcrest.beans;
 
 import java.beans.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * Utility class with static methods for accessing properties on JavaBean objects.
+ * Utility class with static methods for accessing properties on JavaBean objects, or bean-like
+ * objects such as records.
+ * <p>
  * See <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/beans/index.html">https://docs.oracle.com/javase/8/docs/technotes/guides/beans/index.html</a> for
  * more information on JavaBeans.
  *
@@ -22,20 +26,25 @@ public class PropertyUtil {
     private PropertyUtil() {
     }
 
-    public static <T> FeatureDescriptor[] featureDescriptorsFor(T expectedBean) {
-        FeatureDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
+    public static <T> List<PropertyAccessor> propertyAccessorsFor(T bean) {
+        PropertyDescriptor[] descriptors = propertyDescriptorsFor(bean, Object.class);
         if (descriptors != null && descriptors.length > 0) {
-            return descriptors;
+            return Arrays.stream(descriptors)
+                    .map(pd -> PropertyAccessor.fromProperty(bean, pd))
+                    .collect(Collectors.toList());
         }
-        return recordReadAccessorMethodDescriptorsFor(expectedBean);
+
+        MethodDescriptor[] methodDescriptors = fieldReadDescriptorsFor(bean);
+        return Arrays.stream(methodDescriptors)
+                .map(md -> PropertyAccessor.fromMethod(bean, md))
+                .collect(Collectors.toList());
     }
 
-    public static <T> FeatureDescriptor getFeatureDescriptor(String propertyName, T bean) {
-        FeatureDescriptor property = getPropertyDescriptor(propertyName, bean);
-        if (property != null) {
-            return property;
-        }
-        return getMethodDescriptor(propertyName, bean);
+    public static <T> PropertyAccessor getPropertyAccessor(String propertyName, T bean) {
+        return propertyAccessorsFor(bean).stream()
+                .filter(pa -> propertyName.equals(pa.propertyName()))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -74,29 +83,6 @@ public class PropertyUtil {
     }
 
     /**
-     * Returns the description of the read accessor method with the provided
-     * name on the provided object's interface.
-     * This is what you need when you try to find a property from a target object
-     * when it doesn't follow standard JavaBean specification, a Java Record for example.
-     *
-     * @param propertyName the object property name.
-     * @param fromObj the object to check.
-     * @return the descriptor of the method, or null if the method does not exist.
-     * @throws IllegalArgumentException if there's an introspection failure
-     * @see <a href="https://docs.oracle.com/en/java/javase/17/language/records.html">Java Records</a>
-     *
-     */
-    public static MethodDescriptor getMethodDescriptor(String propertyName, Object fromObj) throws IllegalArgumentException {
-        for (MethodDescriptor method : recordReadAccessorMethodDescriptorsFor(fromObj)) {
-            if (method.getName().equals(propertyName)) {
-                return method;
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * Returns read accessor method descriptors for the class associated with the given object.
      * This is useful when you find getter methods for the fields from the object
      * when it doesn't follow standard JavaBean specification, a Java Record for example.
@@ -106,13 +92,13 @@ public class PropertyUtil {
      * @return Method descriptors for read accessor methods
      * @throws IllegalArgumentException if there's an introspection failure
      */
-    public static MethodDescriptor[] recordReadAccessorMethodDescriptorsFor(Object fromObj) throws IllegalArgumentException {
+    public static MethodDescriptor[] fieldReadDescriptorsFor(Object fromObj) throws IllegalArgumentException {
         try {
             Set<String> fieldNames = getFieldNames(fromObj);
             MethodDescriptor[] methodDescriptors = Introspector.getBeanInfo(fromObj.getClass(), null).getMethodDescriptors();
 
             return Arrays.stream(methodDescriptors)
-                    .filter(IsFieldAccessor.forOneOf(fieldNames))
+                    .filter(IsPropertyAccessor.forOneOf(fieldNames))
                     .toArray(MethodDescriptor[]::new);
         } catch (IntrospectionException e) {
             throw new IllegalArgumentException("Could not get method descriptors for " + fromObj.getClass(), e);
@@ -125,22 +111,58 @@ public class PropertyUtil {
      * This predicate assumes a method is a field access if the method name exactly
      * matches the field name, takes no parameters and returns a non-void type.
      */
-    private static class IsFieldAccessor implements Predicate<MethodDescriptor> {
-        private final Set<String> fieldNames;
+    private static class IsPropertyAccessor implements Predicate<MethodDescriptor> {
+        private final Set<String> propertyNames;
 
-        private IsFieldAccessor(Set<String> fieldNames) {
-            this.fieldNames = fieldNames;
+        private IsPropertyAccessor(Set<String> propertyNames) {
+            this.propertyNames = propertyNames;
         }
 
-        public static IsFieldAccessor forOneOf(Set<String> fieldNames) {
-            return new IsFieldAccessor(fieldNames);
+        public static IsPropertyAccessor forOneOf(Set<String> propertyNames) {
+            return new IsPropertyAccessor(propertyNames);
         }
 
         @Override
         public boolean test(MethodDescriptor md) {
-            return fieldNames.contains(md.getDisplayName()) &&
+            return propertyNames.contains(md.getDisplayName()) &&
                     md.getMethod().getReturnType() != void.class &&
                     md.getMethod().getParameterCount() == 0;
+        }
+    }
+
+    public static final class PropertyAccessor {
+        private final Object theObject;
+        private final String propertyName;
+        private final Method readMethod;
+
+        public PropertyAccessor(Object theObject, String propertyName, Method readMethod) {
+            this.theObject = theObject;
+            this.propertyName = propertyName;
+            this.readMethod = readMethod;
+        }
+
+        public static PropertyAccessor fromProperty(Object theObject, PropertyDescriptor pd) {
+            return new PropertyAccessor(theObject, pd.getDisplayName(), pd.getReadMethod());
+        }
+
+        public static PropertyAccessor fromMethod(Object theObject, MethodDescriptor md) {
+            return new PropertyAccessor(theObject, md.getDisplayName(), md.getMethod());
+        }
+
+        public String propertyName() {
+            return propertyName;
+        }
+
+        public Object propertyValue() {
+            try {
+                return readMethod.invoke(theObject, NO_ARGUMENTS);
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Could not invoke " + readMethod + " on " + theObject, e);
+            }
+        }
+
+        public Method readMethod() {
+            return readMethod;
         }
     }
 

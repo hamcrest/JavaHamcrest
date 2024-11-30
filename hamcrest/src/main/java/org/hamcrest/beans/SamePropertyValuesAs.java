@@ -3,16 +3,13 @@ package org.hamcrest.beans;
 import org.hamcrest.Description;
 import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Matcher;
+import org.hamcrest.beans.PropertyUtil.PropertyAccessor;
 
 import java.beans.FeatureDescriptor;
-import java.beans.MethodDescriptor;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Method;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
-import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
-import static org.hamcrest.beans.PropertyUtil.propertyDescriptorsFor;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
@@ -35,11 +32,11 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
      */
     @SuppressWarnings("WeakerAccess")
     public SamePropertyValuesAs(T expectedBean, List<String> ignoredProperties) {
-        FeatureDescriptor[] descriptors = PropertyUtil.featureDescriptorsFor(expectedBean);
+        List<PropertyAccessor> accessors = PropertyUtil.propertyAccessorsFor(expectedBean);
         this.expectedBean = expectedBean;
         this.ignoredFields = ignoredProperties;
-        this.propertyNames = propertyNamesFrom(descriptors, ignoredProperties);
-        this.propertyMatchers = propertyMatchersFor(expectedBean, descriptors, ignoredProperties);
+        this.propertyNames = propertyNamesFrom(accessors, ignoredProperties);
+        this.propertyMatchers = propertyMatchersFor(expectedBean, accessors, ignoredProperties);
     }
 
     @Override
@@ -70,7 +67,8 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     }
 
     private boolean hasNoExtraProperties(Object actual, Description mismatchDescription) {
-        Set<String> actualPropertyNames = propertyNamesFrom(propertyDescriptorsFor(actual, Object.class), ignoredFields);
+        List<PropertyAccessor> accessors = PropertyUtil.propertyAccessorsFor(actual);
+        Set<String> actualPropertyNames = propertyNamesFrom(accessors, ignoredFields);
         actualPropertyNames.removeAll(propertyNames);
         if (!actualPropertyNames.isEmpty()) {
             mismatchDescription.appendText("has extra properties called " + actualPropertyNames);
@@ -89,24 +87,18 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
         return true;
     }
 
-    private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, FeatureDescriptor[] descriptors, List<String> ignoredFields) {
-        List<PropertyMatcher> result = new ArrayList<>(descriptors.length);
-        for (FeatureDescriptor descriptor : descriptors) {
-            if (isNotIgnored(ignoredFields, descriptor)) {
-                result.add(new PropertyMatcher(descriptor, bean));
-            }
-        }
-        return result;
+    private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, List<PropertyAccessor> accessors, List<String> ignoredFields) {
+        return accessors.stream()
+                .filter(pa -> !ignoredFields.contains(pa.propertyName()))
+                .map(pa -> new PropertyMatcher(pa, bean))
+                .collect(Collectors.toList());
     }
 
-    private static Set<String> propertyNamesFrom(FeatureDescriptor[] descriptors, List<String> ignoredFields) {
-        HashSet<String> result = new HashSet<>();
-        for (FeatureDescriptor descriptor : descriptors) {
-            if (isNotIgnored(ignoredFields, descriptor)) {
-                result.add(descriptor.getDisplayName());
-            }
-        }
-        return result;
+    private static Set<String> propertyNamesFrom(List<PropertyAccessor> accessors, List<String> ignoredFields) {
+        return accessors.stream()
+                .map(PropertyAccessor::propertyName)
+                .filter(name -> !ignoredFields.contains(name))
+                .collect(Collectors.toSet());
     }
 
     private static boolean isNotIgnored(List<String> ignoredFields, FeatureDescriptor propertyDescriptor) {
@@ -115,23 +107,20 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
 
     @SuppressWarnings("WeakerAccess")
     private static class PropertyMatcher extends DiagnosingMatcher<Object> {
-        private final Method readMethod;
+        private final PropertyAccessor expectedAccessor;
         private final Matcher<Object> matcher;
-        private final String propertyName;
 
-        public PropertyMatcher(FeatureDescriptor descriptor, Object expectedObject) {
-            this.propertyName = descriptor.getDisplayName();
-            this.readMethod = descriptor instanceof PropertyDescriptor ?
-                    ((PropertyDescriptor) descriptor).getReadMethod() :
-                    ((MethodDescriptor) descriptor).getMethod();
-            this.matcher = equalTo(readProperty(readMethod, expectedObject));
+        public PropertyMatcher(PropertyAccessor expectedAccessor, Object expectedObject) {
+            this.expectedAccessor = expectedAccessor;
+            this.matcher = equalTo(expectedAccessor.propertyValue());
         }
 
         @Override
         public boolean matches(Object actual, Description mismatch) {
-            final Object actualValue = readProperty(readMethod, actual);
+            PropertyAccessor actualAccessor = PropertyUtil.getPropertyAccessor(expectedAccessor.propertyName(), actual);
+            Object actualValue = actualAccessor.propertyValue();
             if (!matcher.matches(actualValue)) {
-                mismatch.appendText(propertyName + " ");
+                mismatch.appendText(expectedAccessor.propertyName() + " ");
                 matcher.describeMismatch(actualValue, mismatch);
                 return false;
             }
@@ -140,15 +129,7 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
 
         @Override
         public void describeTo(Description description) {
-            description.appendText(propertyName + ": ").appendDescriptionOf(matcher);
-        }
-    }
-
-    private static Object readProperty(Method method, Object target) {
-        try {
-            return method.invoke(target, NO_ARGUMENTS);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Could not invoke " + method + " on " + target, e);
+            description.appendText(expectedAccessor.propertyName() + ": ").appendDescriptionOf(matcher);
         }
     }
 

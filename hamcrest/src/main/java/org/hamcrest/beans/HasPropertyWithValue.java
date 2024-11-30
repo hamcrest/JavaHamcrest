@@ -4,10 +4,8 @@ import org.hamcrest.Condition;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+import org.hamcrest.beans.PropertyUtil.PropertyAccessor;
 
-import java.beans.FeatureDescriptor;
-import java.beans.MethodDescriptor;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -71,7 +69,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  */
 public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
 
-    private static final Condition.Step<FeatureDescriptor, Method> WITH_READ_METHOD = withReadMethod();
+    private static final Condition.Step<PropertyAccessor, Method> WITH_READ_METHOD = withReadMethod();
     private final String propertyName;
     private final Matcher<Object> valueMatcher;
     private final String messageFormat;
@@ -113,8 +111,8 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
                    .appendDescriptionOf(valueMatcher).appendText(")");
     }
 
-    private Condition<FeatureDescriptor> propertyOn(T bean, Description mismatch) {
-        FeatureDescriptor property = PropertyUtil.getFeatureDescriptor(propertyName, bean);
+    private Condition<PropertyAccessor> propertyOn(T bean, Description mismatch) {
+        PropertyAccessor property = PropertyUtil.getPropertyAccessor(propertyName, bean);
         if (property == null) {
             mismatch.appendText("No property \"" + propertyName + "\"");
             return notMatched();
@@ -146,13 +144,11 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         return (Matcher<Object>) valueMatcher;
     }
 
-    private static Condition.Step<FeatureDescriptor, Method> withReadMethod() {
-        return (property, mismatch) -> {
-            final Method readMethod = property instanceof PropertyDescriptor ?
-                    ((PropertyDescriptor) property).getReadMethod() :
-                    (((MethodDescriptor) property).getMethod());
+    private static Condition.Step<PropertyAccessor, Method> withReadMethod() {
+        return (accessor, mismatch) -> {
+            final Method readMethod = accessor.readMethod();
             if (null == readMethod || readMethod.getReturnType() == void.class) {
-                mismatch.appendText("property \"" + property.getName() + "\" is not readable");
+                mismatch.appendText("property \"" + accessor.propertyName() + "\" is not readable");
                 return notMatched();
             }
             return matched(readMethod, mismatch);

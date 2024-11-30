@@ -45,7 +45,7 @@ class PropertyUtilTest {
     void testReturnsArrayOfMethodDescriptorFromTargetClass() {
         SamePropertyValuesAsTest.ExampleBean input = new SamePropertyValuesAsTest.ExampleBean("test", 1, null);
 
-        MethodDescriptor[] output = PropertyUtil.recordReadAccessorMethodDescriptorsFor(input);
+        MethodDescriptor[] output = PropertyUtil.fieldReadDescriptorsFor(input);
 
         assertThat(output, arrayWithSize(0));
     }
@@ -56,7 +56,7 @@ class PropertyUtilTest {
         RecordLikeClass.SmallClass smallClass2 = new RecordLikeClass.SmallClass("small", 3, BigDecimal.ONE, LocalDateTime.of(2024, 1, 2, 3, 4, 5));
         RecordLikeClass input = new RecordLikeClass("uno", 22, true, new Long[] {1L, 2L, 3L}, new ArrayList<>(Arrays.asList(smallClass1, smallClass2)));
 
-        MethodDescriptor[] output = PropertyUtil.recordReadAccessorMethodDescriptorsFor(input);
+        MethodDescriptor[] output = PropertyUtil.fieldReadDescriptorsFor(input);
 
         assertThat(output, arrayWithSize(5));
         assertThat(Arrays.stream(output).map(MethodDescriptor::getDisplayName).collect(Collectors.toList()),
