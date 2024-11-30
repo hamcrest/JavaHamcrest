@@ -13,7 +13,6 @@ import java.util.*;
 import static java.util.Arrays.asList;
 import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
 import static org.hamcrest.beans.PropertyUtil.propertyDescriptorsFor;
-import static org.hamcrest.beans.PropertyUtil.recordReadAccessorMethodDescriptorsFor;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
@@ -36,11 +35,7 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
      */
     @SuppressWarnings("WeakerAccess")
     public SamePropertyValuesAs(T expectedBean, List<String> ignoredProperties) {
-        FeatureDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
-        if (descriptors == null || descriptors.length == 0) {
-            descriptors = recordReadAccessorMethodDescriptorsFor(expectedBean, Object.class);
-        }
-
+        FeatureDescriptor[] descriptors = PropertyUtil.featureDescriptorsFor(expectedBean);
         this.expectedBean = expectedBean;
         this.ignoredFields = ignoredProperties;
         this.propertyNames = propertyNamesFrom(descriptors, ignoredProperties);

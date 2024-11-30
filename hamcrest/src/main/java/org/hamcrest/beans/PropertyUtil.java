@@ -1,12 +1,10 @@
 package org.hamcrest.beans;
 
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.MethodDescriptor;
-import java.beans.PropertyDescriptor;
+import java.beans.*;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -24,14 +22,28 @@ public class PropertyUtil {
     private PropertyUtil() {
     }
 
+    public static <T> FeatureDescriptor[] featureDescriptorsFor(T expectedBean) {
+        FeatureDescriptor[] descriptors = propertyDescriptorsFor(expectedBean, Object.class);
+        if (descriptors != null && descriptors.length > 0) {
+            return descriptors;
+        }
+        return recordReadAccessorMethodDescriptorsFor(expectedBean);
+    }
+
+    public static <T> FeatureDescriptor getFeatureDescriptor(String propertyName, T bean) {
+        FeatureDescriptor property = getPropertyDescriptor(propertyName, bean);
+        if (property != null) {
+            return property;
+        }
+        return getMethodDescriptor(propertyName, bean);
+    }
+
     /**
      * Returns the description of the property with the provided
      * name on the provided object's interface.
      *
-     * @param propertyName
-     *     the bean property name.
-     * @param fromObj
-     *     the object to check.
+     * @param propertyName the bean property name.
+     * @param fromObj the object to check.
      * @return the descriptor of the property, or null if the property does not exist.
      * @throws IllegalArgumentException if there's an introspection failure
      */
@@ -75,7 +87,7 @@ public class PropertyUtil {
      *
      */
     public static MethodDescriptor getMethodDescriptor(String propertyName, Object fromObj) throws IllegalArgumentException {
-        for (MethodDescriptor method : recordReadAccessorMethodDescriptorsFor(fromObj, null)) {
+        for (MethodDescriptor method : recordReadAccessorMethodDescriptorsFor(fromObj)) {
             if (method.getName().equals(propertyName)) {
                 return method;
             }
@@ -91,22 +103,44 @@ public class PropertyUtil {
      * Be careful as this doesn't return standard JavaBean getter methods, like a method starting with {@code get-}.
      *
      * @param fromObj Use the class of this object
-     * @param stopClass Don't include any properties from this ancestor class upwards.
      * @return Method descriptors for read accessor methods
      * @throws IllegalArgumentException if there's an introspection failure
      */
-    public static MethodDescriptor[] recordReadAccessorMethodDescriptorsFor(Object fromObj, Class<Object> stopClass) throws IllegalArgumentException {
+    public static MethodDescriptor[] recordReadAccessorMethodDescriptorsFor(Object fromObj) throws IllegalArgumentException {
         try {
-            Set<String> recordComponentNames = getFieldNames(fromObj);
-            MethodDescriptor[] methodDescriptors = Introspector.getBeanInfo(fromObj.getClass(), stopClass).getMethodDescriptors();
+            Set<String> fieldNames = getFieldNames(fromObj);
+            MethodDescriptor[] methodDescriptors = Introspector.getBeanInfo(fromObj.getClass(), null).getMethodDescriptors();
 
             return Arrays.stream(methodDescriptors)
-                    .filter(x -> recordComponentNames.contains(x.getDisplayName()))
-                    .filter(x -> x.getMethod().getReturnType() != void.class)
-                    .filter(x -> x.getMethod().getParameterCount() == 0)
+                    .filter(IsFieldAccessor.forOneOf(fieldNames))
                     .toArray(MethodDescriptor[]::new);
         } catch (IntrospectionException e) {
             throw new IllegalArgumentException("Could not get method descriptors for " + fromObj.getClass(), e);
+        }
+    }
+
+    /**
+     * Predicate that checks if a given {@link MethodDescriptor} corresponds to a field.
+     * <p>
+     * This predicate assumes a method is a field access if the method name exactly
+     * matches the field name, takes no parameters and returns a non-void type.
+     */
+    private static class IsFieldAccessor implements Predicate<MethodDescriptor> {
+        private final Set<String> fieldNames;
+
+        private IsFieldAccessor(Set<String> fieldNames) {
+            this.fieldNames = fieldNames;
+        }
+
+        public static IsFieldAccessor forOneOf(Set<String> fieldNames) {
+            return new IsFieldAccessor(fieldNames);
+        }
+
+        @Override
+        public boolean test(MethodDescriptor md) {
+            return fieldNames.contains(md.getDisplayName()) &&
+                    md.getMethod().getReturnType() != void.class &&
+                    md.getMethod().getParameterCount() == 0;
         }
     }
 
