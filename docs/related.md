@@ -25,6 +25,7 @@ Here are some projects that provide additional features and matchers
 * [http-matchers](https://github.com/valid4j/http-matchers) (Matchers to test your web service via the standard Java API for RESTful Services (JAX-RS))
 * [json-path-matchers](https://github.com/jayway/JsonPath/tree/master/json-path-assert) (for evaluating JSON path expressions)
 * [JsonUnit](https://github.com/lukas-krecan/JsonUnit) (for comparing JSON structures jsonEquals, jsonPartEquals)
+* [mapmatcher](https://github.com/nik9000/mapmatcher) (for comparing `Map` and `List` with nice error messages)
 * [Proboscis](https://github.com/sf105/proboscis) (a tiny java library for polling for a result, originally intended for tested asynchronous systems)
 * [Shazamcrest](https://github.com/shazam/shazamcrest) (Matchers for beans with custom field matching and nice failure messages)
 * [Spotify's hamcrest matchers](https://github.com/spotify/java-hamcrest) (Matchers for POJOs, JSON, and some of the types introduced in Java 8)
