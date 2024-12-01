@@ -75,6 +75,41 @@ public final class HasXPathTest {
         assertMatches(hasXPath("//something[@id='b']/cheese"), xml);
     }
 
+    /*
+    Test whether the multiple elements case works or not
+     */
+    @Test public void
+    appliesMatcherToXPathInDocumentWithMultipleElement() {
+        Document multipleBookXml = parse("<books>\n"
+                + "<book>\n"
+                + "<isbn>A-ISBN</isbn>\n"
+                + "</book>\n"
+                + "<book>\n"
+                + "<isbn>B-ISBN</isbn>\n"
+                + "<name>B-Book></name>\n"
+                + "</book>\n"
+                + "</books>\n"
+        );
+
+        assertMatches(hasXPath("/books/book/isbn", equalTo("B-ISBN")), multipleBookXml);
+        assertMatches(hasXPath("/books/book/isbn", equalTo("A-ISBN")), multipleBookXml);
+    }
+
+    /*
+    Test whether the single element case still works or not
+     */
+    @Test public void
+    appliesMatcherToPathInDocumentWithSingleElement() {
+        Document multipleBookXml = parse("<books>\n"
+                + "<book>\n"
+                + "<isbn>A-ISBN</isbn>\n"
+                + "</book>\n"
+                + "</books>\n"
+        );
+
+        assertMatches(hasXPath("/books/book/isbn", equalTo("A-ISBN")), multipleBookXml);
+    }
+
     @Test public void
     matchesEmptyElement() {
         assertMatches(hasXPath("//emptySomething"), xml);
