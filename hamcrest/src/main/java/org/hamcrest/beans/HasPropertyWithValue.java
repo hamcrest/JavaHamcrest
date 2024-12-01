@@ -14,7 +14,7 @@ import java.util.ListIterator;
 
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
-import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
+import static org.hamcrest.beans.PropertyAccessor.NO_ARGUMENTS;
 
 /**
  * <p>A matcher that checks if an object has a JavaBean property with the

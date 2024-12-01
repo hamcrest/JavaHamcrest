@@ -18,6 +18,9 @@ import java.util.stream.Collectors;
  * JavaBean specification and APIs, or it will fall back to finding
  * fields with corresponding methods, enabling the property matchers
  * to work with newer classes like Records.
+ * <p>
+ * See <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/beans/index.html">https://docs.oracle.com/javase/8/docs/technotes/guides/beans/index.html</a> for
+ * more information on JavaBeans.
  */
 public class PropertyAccessor {
     private final Object beanLikeObject;
@@ -33,7 +36,7 @@ public class PropertyAccessor {
     }
 
     private Map<String, PropertyReadLens> makeLensesFor(Object bean) {
-        PropertyDescriptor[] properties = PropertyUtil.propertyDescriptorsFor(bean, Object.class);
+        PropertyDescriptor[] properties = propertyDescriptorsFor(bean, Object.class);
         if (properties != null && properties.length > 0) {
             return makePropertyLensesFrom(properties);
         }
@@ -185,10 +188,32 @@ public class PropertyAccessor {
         public Object getValue() {
             Object bean = PropertyAccessor.this.beanLikeObject;
             try {
-                return readMethod.invoke(bean, PropertyUtil.NO_ARGUMENTS);
+                return readMethod.invoke(bean, NO_ARGUMENTS);
             } catch (Exception e) {
                 throw new IllegalArgumentException("Could not invoke " + readMethod + " on " + bean, e);
             }
         }
     }
+
+    /**
+     * Returns all the property descriptors for the class associated with the given object
+     *
+     * @param fromObj Use the class of this object
+     * @param stopClass Don't include any properties from this ancestor class upwards.
+     * @return Property descriptors
+     * @throws IllegalArgumentException if there's a introspection failure
+     */
+    public static PropertyDescriptor[] propertyDescriptorsFor(Object fromObj, Class<Object> stopClass) throws IllegalArgumentException {
+        try {
+            return Introspector.getBeanInfo(fromObj.getClass(), stopClass).getPropertyDescriptors();
+        } catch (IntrospectionException e) {
+            throw new IllegalArgumentException("Could not get property descriptors for " + fromObj.getClass(), e);
+        }
+    }
+
+    /**
+     * Empty object array, used for documenting that we are deliberately passing no arguments to a method.
+     */
+    public static final Object[] NO_ARGUMENTS = new Object[0];
+
 }
