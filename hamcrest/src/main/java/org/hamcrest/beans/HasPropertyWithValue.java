@@ -4,7 +4,7 @@ import org.hamcrest.Condition;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
-import org.hamcrest.beans.PropertyUtil.PropertyAccessor;
+import org.hamcrest.beans.PropertyAccessor.PropertyReadLens;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -69,7 +69,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  */
 public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
 
-    private static final Condition.Step<PropertyAccessor, Method> WITH_READ_METHOD = withReadMethod();
+    private static final Condition.Step<PropertyReadLens, Method> WITH_READ_METHOD = withReadMethod();
     private final String propertyName;
     private final Matcher<Object> valueMatcher;
     private final String messageFormat;
@@ -111,14 +111,14 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
                    .appendDescriptionOf(valueMatcher).appendText(")");
     }
 
-    private Condition<PropertyAccessor> propertyOn(T bean, Description mismatch) {
-        PropertyAccessor property = PropertyUtil.getPropertyAccessor(propertyName, bean);
-        if (property == null) {
+    private Condition<PropertyReadLens> propertyOn(T bean, Description mismatch) {
+        PropertyAccessor accessor = new PropertyAccessor(bean);
+        if (!accessor.fieldNames().contains(propertyName)) {
             mismatch.appendText("No property \"" + propertyName + "\"");
             return notMatched();
         }
 
-        return matched(property, mismatch);
+        return matched(accessor.readLensFor(propertyName), mismatch);
     }
 
     private Condition.Step<Method, Object> withPropertyValue(final T bean) {
@@ -144,11 +144,11 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         return (Matcher<Object>) valueMatcher;
     }
 
-    private static Condition.Step<PropertyAccessor, Method> withReadMethod() {
-        return (accessor, mismatch) -> {
-            final Method readMethod = accessor.readMethod();
+    private static Condition.Step<PropertyReadLens, Method> withReadMethod() {
+        return (readLens, mismatch) -> {
+            final Method readMethod = readLens.getReadMethod();
             if (null == readMethod || readMethod.getReturnType() == void.class) {
-                mismatch.appendText("property \"" + accessor.propertyName() + "\" is not readable");
+                mismatch.appendText("property \"" + readLens.getName() + "\" is not readable");
                 return notMatched();
             }
             return matched(readMethod, mismatch);

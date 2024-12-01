@@ -3,7 +3,7 @@ package org.hamcrest.beans;
 import org.hamcrest.Description;
 import org.hamcrest.DiagnosingMatcher;
 import org.hamcrest.Matcher;
-import org.hamcrest.beans.PropertyUtil.PropertyAccessor;
+import org.hamcrest.beans.PropertyAccessor.PropertyReadLens;
 
 import java.beans.FeatureDescriptor;
 import java.util.*;
@@ -32,11 +32,11 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
      */
     @SuppressWarnings("WeakerAccess")
     public SamePropertyValuesAs(T expectedBean, List<String> ignoredProperties) {
-        List<PropertyAccessor> accessors = PropertyUtil.propertyAccessorsFor(expectedBean);
+        PropertyAccessor accessor = new PropertyAccessor(expectedBean);
         this.expectedBean = expectedBean;
         this.ignoredFields = ignoredProperties;
-        this.propertyNames = propertyNamesFrom(accessors, ignoredProperties);
-        this.propertyMatchers = propertyMatchersFor(expectedBean, accessors, ignoredProperties);
+        this.propertyNames = propertyNamesFrom(accessor, ignoredProperties);
+        this.propertyMatchers = propertyMatchersFor(expectedBean, accessor, ignoredProperties);
     }
 
     @Override
@@ -67,9 +67,9 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
     }
 
     private boolean hasNoExtraProperties(Object actual, Description mismatchDescription) {
-        List<PropertyAccessor> accessors = PropertyUtil.propertyAccessorsFor(actual);
-        Set<String> actualPropertyNames = propertyNamesFrom(accessors, ignoredFields);
-        actualPropertyNames.removeAll(propertyNames);
+        PropertyAccessor accessor = new PropertyAccessor(actual);
+        Set<String> actualPropertyNames = propertyNamesFrom(accessor, ignoredFields);
+        propertyNames.forEach(actualPropertyNames::remove);
         if (!actualPropertyNames.isEmpty()) {
             mismatchDescription.appendText("has extra properties called " + actualPropertyNames);
             return false;
@@ -87,18 +87,17 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
         return true;
     }
 
-    private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, List<PropertyAccessor> accessors, List<String> ignoredFields) {
-        return accessors.stream()
-                .filter(pa -> !ignoredFields.contains(pa.propertyName()))
-                .map(pa -> new PropertyMatcher(pa, bean))
+    private static <T> List<PropertyMatcher> propertyMatchersFor(T bean, PropertyAccessor accessor, List<String> ignoredFields) {
+        return accessor.readLenses().stream()
+                .filter(lens -> !ignoredFields.contains(lens.getName()))
+                .map(lens -> new PropertyMatcher(lens, bean))
                 .collect(Collectors.toList());
     }
 
-    private static Set<String> propertyNamesFrom(List<PropertyAccessor> accessors, List<String> ignoredFields) {
-        return accessors.stream()
-                .map(PropertyAccessor::propertyName)
-                .filter(name -> !ignoredFields.contains(name))
-                .collect(Collectors.toSet());
+    private static Set<String> propertyNamesFrom(PropertyAccessor accessor, List<String> ignoredFields) {
+        Set<String> fieldNames = new HashSet<>(accessor.fieldNames());
+        ignoredFields.forEach(fieldNames::remove);
+        return fieldNames;
     }
 
     private static boolean isNotIgnored(List<String> ignoredFields, FeatureDescriptor propertyDescriptor) {
@@ -107,20 +106,20 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
 
     @SuppressWarnings("WeakerAccess")
     private static class PropertyMatcher extends DiagnosingMatcher<Object> {
-        private final PropertyAccessor expectedAccessor;
+        private final PropertyReadLens expectedReadLens;
         private final Matcher<Object> matcher;
 
-        public PropertyMatcher(PropertyAccessor expectedAccessor, Object expectedObject) {
-            this.expectedAccessor = expectedAccessor;
-            this.matcher = equalTo(expectedAccessor.propertyValue());
+        public PropertyMatcher(PropertyReadLens expectedReadLens, Object expectedObject) {
+            this.expectedReadLens = expectedReadLens;
+            this.matcher = equalTo(expectedReadLens.getValue());
         }
 
         @Override
         public boolean matches(Object actual, Description mismatch) {
-            PropertyAccessor actualAccessor = PropertyUtil.getPropertyAccessor(expectedAccessor.propertyName(), actual);
-            Object actualValue = actualAccessor.propertyValue();
+            PropertyAccessor actualAccessor = new PropertyAccessor(actual);
+            Object actualValue = actualAccessor.fieldValue(expectedReadLens.getName());
             if (!matcher.matches(actualValue)) {
-                mismatch.appendText(expectedAccessor.propertyName() + " ");
+                mismatch.appendText(expectedReadLens.getName()+ " ");
                 matcher.describeMismatch(actualValue, mismatch);
                 return false;
             }
@@ -129,7 +128,7 @@ public class SamePropertyValuesAs<T> extends DiagnosingMatcher<T> {
 
         @Override
         public void describeTo(Description description) {
-            description.appendText(expectedAccessor.propertyName() + ": ").appendDescriptionOf(matcher);
+            description.appendText(expectedReadLens.getName() + ": ").appendDescriptionOf(matcher);
         }
     }
 

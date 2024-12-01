@@ -107,14 +107,14 @@ public class SamePropertyValuesAsTest extends AbstractMatcherTest {
             "same property values as ExampleBean [intProperty: <1>, stringProperty: \"same\", valueProperty: <Value expected>]",
             samePropertyValuesAs(expectedBean));
     assertDescription(
-            "same property values as ExampleRecord [valueProperty: <Value expected>, stringProperty: \"same\", intProperty: <1>]",
+            "same property values as ExampleRecord [intProperty: <1>, stringProperty: \"same\", valueProperty: <Value expected>]",
             samePropertyValuesAs(expectedRecord));
 
     assertDescription(
             "same property values as ExampleBean [intProperty: <1>, stringProperty: \"same\", valueProperty: <Value expected>] ignoring [\"ignored1\", \"ignored2\"]",
             samePropertyValuesAs(expectedBean, "ignored1", "ignored2"));
     assertDescription(
-            "same property values as ExampleRecord [valueProperty: <Value expected>, stringProperty: \"same\", intProperty: <1>] ignoring [\"ignored1\", \"ignored2\"]",
+            "same property values as ExampleRecord [intProperty: <1>, stringProperty: \"same\", valueProperty: <Value expected>] ignoring [\"ignored1\", \"ignored2\"]",
             samePropertyValuesAs(expectedRecord, "ignored1", "ignored2"));
   }
 
