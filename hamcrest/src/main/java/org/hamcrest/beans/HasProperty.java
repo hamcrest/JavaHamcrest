@@ -30,8 +30,8 @@ public class HasProperty<T> extends TypeSafeMatcher<T> {
     @Override
     public boolean matchesSafely(T obj) {
         try {
-            return PropertyUtil.getPropertyDescriptor(propertyName, obj) != null ||
-                    PropertyUtil.getMethodDescriptor(propertyName, obj) != null;
+            PropertyAccessor accessor = new PropertyAccessor(obj);
+            return accessor.fieldNames().contains(propertyName);
         } catch (IllegalArgumentException e) {
             return false;
         }
