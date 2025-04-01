@@ -643,8 +643,8 @@ public class Matchers {
   }
 
   /**
-   * A shortcut to the frequently used <code>not(nullValue(X.class)). Accepts a
-   * single dummy argument to facilitate type inference.</code>.
+   * A shortcut to the frequently used <code>not(nullValue(X.class))</code>. Accepts a
+   * single dummy argument to facilitate type inference.
    * For example:
    * <pre>assertThat(cheese, is(notNullValue(X.class)))</pre>
    * instead of:
