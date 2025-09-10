@@ -18,6 +18,15 @@ public class TypeSafeDiagnosingMatcherTest {
     }
 
     @Test public void
+    describesMismatches_staticConstructor() {
+        Matcher<String> stringMatcher = 
+                TypeSafeDiagnosingMatcher.matcher(item->false,"matches","mismatching",String.class);        
+        assertMismatchDescription("was null", STRING_MATCHER, null);
+        assertMismatchDescription("was Character \"c\"", STRING_MATCHER, 'c');
+        assertMismatchDescription("mismatching", STRING_MATCHER, "other");
+    }
+
+    @Test public void
     detects_non_builtin_types() {
       final Matcher<NotBuiltIn> matcher = new TypeSafeDiagnosingMatcher<NotBuiltIn>() {
         @Override
@@ -33,12 +42,29 @@ public class TypeSafeDiagnosingMatcherTest {
     }
 
     @Test public void
+    detects_non_builtin_types_static_constructor() {
+        final Matcher<NotBuiltIn> matcher = 
+                TypeSafeDiagnosingMatcher.matcher(item->true,"a builtin","a not builtin",NotBuiltIn.class);        
+
+      assertMatches("not built in", matcher, new NotBuiltIn());
+      assertDoesNotMatch("other not built in", (Matcher)matcher, new OtherNotBuiltIn());
+    }
+
+    @Test public void
     filters_type_for_subclassed_matcher_when_expected_type_passed_in() {
       final Matcher<NotBuiltIn> matcher = new SubMatcher<>(new NotBuiltIn());
 
       assertMatches("not built in", matcher, new NotBuiltIn());
       assertDoesNotMatch("other not built in", (Matcher)matcher, new OtherNotBuiltIn());
-  }
+    }
+
+    @Test public void
+    filters_type_for_subclassed_matcher_when_expected_type_passed_in_staticConstructor() {
+        final Matcher<NotBuiltIn> matcher = SubMatcher.matcher(new NotBuiltIn());
+
+        assertMatches("not built in", matcher, new NotBuiltIn());
+        assertDoesNotMatch("other not built in", (Matcher)matcher, new OtherNotBuiltIn());
+    }
 
     @Test public void
     but_cannot_detect_generic_type_in_subclassed_matcher_using_reflection() {
@@ -59,15 +85,28 @@ public class TypeSafeDiagnosingMatcherTest {
         public void describeTo(Description description) { }
     };
 
+
     public static class SubMatcher<T> extends TypeSafeDiagnosingMatcher<T> {
-      public SubMatcher() {
-          super();
-      }
-      public SubMatcher(T expectedObject) {
-          super(expectedObject.getClass());
-      }
-      @Override protected boolean matchesSafely(T item, Description mismatchDescription) { return true; }
-      @Override public void describeTo(Description description) { description.appendText("sub type"); }
+        public SubMatcher() {
+        }
+
+        public SubMatcher(T expectedObject) {
+            super(expectedObject.getClass());
+        }
+
+        @Override
+        protected boolean matchesSafely(T item, Description mismatchDescription) {
+            return true;
+        }
+
+        @Override
+        public void describeTo(Description description) {
+            description.appendText("sub type");
+        }
+
+        static <T> Matcher<T> matcher(T expectedObject) {
+            return new SubMatcher<T>(expectedObject) {};
+        }
     }
 
     public static class NotBuiltIn {

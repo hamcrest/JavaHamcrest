@@ -65,6 +65,7 @@ public class IsEqualCompressingWhiteSpace extends TypeSafeMatcher<String> {
      *     the expected value of matched strings
      * @return The matcher.
      */
+    @Deprecated
     public static Matcher<String> equalToIgnoringWhiteSpace(String expectedString) {
         return new IsEqualCompressingWhiteSpace(expectedString);
     }

@@ -1,6 +1,8 @@
 package org.hamcrest.beans;
 
-import org.hamcrest.*;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.test.AbstractMatcherTest;
 import org.junit.jupiter.api.Test;
@@ -11,12 +13,12 @@ import java.beans.SimpleBeanInfo;
 import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.hamcrest.beans.HasPropertyWithValue.hasPropertyAtPath;
 import static org.hamcrest.core.IsAnything.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.test.MatcherAssertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -75,9 +77,9 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
 
   @Test
   public void testMatchesBeanWithInfoWithMatchedNamedProperty() {
-    assertMatches("with bean info", hasProperty("property", equalTo("with info")), beanWithInfo);
+    assertMatches(hasProperty("property", equalTo("with info")), beanWithInfo);
     assertMismatchDescription("property 'property' was \"with info\"",
-        hasProperty("property", equalTo("without info")), beanWithInfo);
+        hasProperty("property", equalTo("different")), beanWithInfo);
   }
 
   @Test
@@ -253,7 +255,10 @@ public class HasPropertyWithValueTest extends AbstractMatcherTest {
     public String property() { return propertyValue; }
   }
 
-  public static class BeanWithInfoBeanInfo extends SimpleBeanInfo { // TODO: No usage. Can be removed.
+  /**
+   * Used by bean introspector
+   */
+  public static class BeanWithInfoBeanInfo extends SimpleBeanInfo {
     @Override
     public PropertyDescriptor[] getPropertyDescriptors() {
       try {

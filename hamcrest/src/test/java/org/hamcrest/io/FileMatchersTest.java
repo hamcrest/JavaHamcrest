@@ -2,12 +2,13 @@ package org.hamcrest.io;
 
 import org.hamcrest.test.AbstractMatcherTest;
 import org.hamcrest.Matcher;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -16,14 +17,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class FileMatchersTest extends AbstractMatcherTest {
 
+    @TempDir Path tempDir;
     private File directory;
     private File file;
+    private File anotherFile;
 
     @BeforeEach
     protected void setUp() throws IOException {
-        directory = Files.createTempDirectory("myDir").toFile();
+        directory = Files.createDirectory(tempDir.resolve("myDir")).toFile();
         file = new File(directory, "myFile");
         file.createNewFile();
+  
+        anotherFile = new File(directory, "myAnotherFile");
+
+        Files.writeString(anotherFile.toPath(), "world");
     }
 
     @Test
@@ -95,9 +102,30 @@ public class FileMatchersTest extends AbstractMatcherTest {
         assertDoesNotMatch("doesn't match incorrect absolute path", FileMatchers.aFileWithAbsolutePath(equalTo("foo")), file);
     }
 
+    @Test
+    public void testFileContentMatcher() {
+        assertMatches("matches file content with a file", FileMatchers.matchesContentOf(file), file);
+        assertDoesNotMatch("content of two files with different content won't match", FileMatchers.matchesContentOf(anotherFile), file);
+    }
+
+    @Test
+    public void testFileContentMatcherDescription() {
+        assertMismatchDescription("content was \"\"", FileMatchers.matchesContentOf(anotherFile), file);
+    }
+
+    @Test
+    public void testAFileWithContent() {
+        assertMatches("matches file content", FileMatchers.aFileWithContent(equalTo("")), file);
+        assertDoesNotMatch("doesn't match incorrect content", FileMatchers.aFileWithContent(equalTo("world")), file);
+    }
+
+    @Test
+    public void testAFileWithContentDescription() {
+        assertMismatchDescription("content was \"\"", FileMatchers.aFileWithContent(equalTo("world")), file);
+    }
+
     @Override
     protected Matcher<?> createMatcher() {
         return FileMatchers.aFileWithSize(1L);
     }
-
 }

@@ -60,4 +60,8 @@ public final class AnyOfTest {
         assertThat("the text!", new AnyOf<>(startsWith("the"), endsWith(".")));
     }
 
+    @Test public void hasAReadableMismatchDescription() {
+        assertMismatchDescription("was \"foo\"",
+                anyOf(equalTo("good"), equalTo("bad"), equalTo("ugly")), "foo");
+    }
 }

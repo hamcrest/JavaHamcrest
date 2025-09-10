@@ -643,8 +643,8 @@ public class Matchers {
   }
 
   /**
-   * A shortcut to the frequently used <code>not(nullValue(X.class)). Accepts a
-   * single dummy argument to facilitate type inference.</code>.
+   * A shortcut to the frequently used <code>not(nullValue(X.class))</code>. Accepts a
+   * single dummy argument to facilitate type inference.
    * For example:
    * <pre>assertThat(cheese, is(notNullValue(X.class)))</pre>
    * instead of:
@@ -1602,6 +1602,7 @@ public class Matchers {
    *     the collection in which matching items must be found
    * @return The matcher.
    */
+  @Deprecated
   @SuppressWarnings("deprecation")
   public static <T> org.hamcrest.Matcher<T> isIn(java.util.Collection<T> collection) {
     return org.hamcrest.collection.IsIn.isIn(collection);
@@ -1620,6 +1621,7 @@ public class Matchers {
    *     the array in which matching items must be found
    * @return The matcher.
    */
+  @Deprecated
   @SuppressWarnings("deprecation")
   public static <T> org.hamcrest.Matcher<T> isIn(T[] elements) {
     return org.hamcrest.collection.IsIn.isIn(elements);
@@ -1638,6 +1640,7 @@ public class Matchers {
    *     the elements amongst which matching items will be found
    * @return The matcher.
    */
+  @Deprecated
   @SuppressWarnings("deprecation")
   @SafeVarargs
   public static <T> org.hamcrest.Matcher<T> isOneOf(T... elements) {
@@ -1809,6 +1812,7 @@ public class Matchers {
    *     the expected value of matched strings
    * @return The matcher.
    */
+  @Deprecated
   public static Matcher<java.lang.String> equalToIgnoringWhiteSpace(java.lang.String expectedString) {
     return equalToCompressingWhiteSpace(expectedString);
   }
@@ -1864,6 +1868,7 @@ public class Matchers {
    * @deprecated use is(emptyOrNullString()) instead
    * @return The matcher.
    */
+  @Deprecated
   @SuppressWarnings("deprecation")
   public static Matcher<java.lang.String> isEmptyOrNullString() {
     return org.hamcrest.text.IsEmptyString.isEmptyOrNullString();
@@ -1877,6 +1882,7 @@ public class Matchers {
    * @deprecated use is(emptyString()) instead
    * @return The matcher.
    */
+  @Deprecated
   @SuppressWarnings("deprecation")
   public static Matcher<java.lang.String> isEmptyString() {
     return org.hamcrest.text.IsEmptyString.isEmptyString();

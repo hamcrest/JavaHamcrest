@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public final class FeatureMatcherTest {
 
     private final FeatureMatcher<Thingy, String> resultMatcher = resultMatcher();
+    private final Matcher<Thingy> resultMatcherStaticCtr = 
+            FeatureMatcher.matcher(new Match("bar"), t->t.getResult(), "Thingy with result", "result", Thingy.class);
 
     @Test public void
     matchesPartOfAnObject() {
@@ -17,8 +19,19 @@ public final class FeatureMatcherTest {
     }
 
     @Test public void
+    matchesPartOfAnObject_staticConstructor() {
+        assertMatches("feature", resultMatcherStaticCtr, new Thingy("bar"));
+        assertDescription("Thingy with result \"bar\"", resultMatcherStaticCtr);
+    }
+
+    @Test public void
     mismatchesPartOfAnObject() {
         assertMismatchDescription("result mismatch-description", resultMatcher, new Thingy("foo"));
+    }
+
+    @Test public void
+    mismatchesPartOfAnObject_staticConstructor() {
+        assertMismatchDescription("result mismatch-description", resultMatcherStaticCtr, new Thingy("foo"));
     }
 
     @Test public void
@@ -27,10 +40,23 @@ public final class FeatureMatcherTest {
     }
 
     @Test public void
+    doesNotThrowNullPointerException_staticConstructor() {
+        assertMismatchDescription("was null", resultMatcherStaticCtr, null);
+    }
+
+    @Test public void
     doesNotThrowClassCastException() {
         resultMatcher.matches(new ShouldNotMatch());
         StringDescription mismatchDescription = new StringDescription();
         resultMatcher.describeMismatch(new ShouldNotMatch(), mismatchDescription);
+        assertEquals("was ShouldNotMatch <ShouldNotMatch>", mismatchDescription.toString());
+    }
+
+    @Test public void
+    doesNotThrowClassCastException_staticConstructor() {
+        resultMatcherStaticCtr.matches(new ShouldNotMatch());
+        StringDescription mismatchDescription = new StringDescription();
+        resultMatcherStaticCtr.describeMismatch(new ShouldNotMatch(), mismatchDescription);
         assertEquals("was ShouldNotMatch <ShouldNotMatch>", mismatchDescription.toString());
     }
 

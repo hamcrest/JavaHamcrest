@@ -4,10 +4,8 @@ import org.hamcrest.Condition;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+import org.hamcrest.beans.PropertyAccessor.PropertyReadLens;
 
-import java.beans.FeatureDescriptor;
-import java.beans.MethodDescriptor;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -16,7 +14,7 @@ import java.util.ListIterator;
 
 import static org.hamcrest.Condition.matched;
 import static org.hamcrest.Condition.notMatched;
-import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
+import static org.hamcrest.beans.PropertyAccessor.NO_ARGUMENTS;
 
 /**
  * <p>A matcher that checks if an object has a JavaBean property with the
@@ -71,7 +69,7 @@ import static org.hamcrest.beans.PropertyUtil.NO_ARGUMENTS;
  */
 public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
 
-    private static final Condition.Step<FeatureDescriptor, Method> WITH_READ_METHOD = withReadMethod();
+    private static final Condition.Step<PropertyReadLens, Method> WITH_READ_METHOD = withReadMethod();
     private final String propertyName;
     private final Matcher<Object> valueMatcher;
     private final String messageFormat;
@@ -113,17 +111,14 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
                    .appendDescriptionOf(valueMatcher).appendText(")");
     }
 
-    private Condition<FeatureDescriptor> propertyOn(T bean, Description mismatch) {
-        FeatureDescriptor property = PropertyUtil.getPropertyDescriptor(propertyName, bean);
-        if (property == null) {
-            property = PropertyUtil.getMethodDescriptor(propertyName, bean);
-        }
-        if (property == null) {
+    private Condition<PropertyReadLens> propertyOn(T bean, Description mismatch) {
+        PropertyAccessor accessor = new PropertyAccessor(bean);
+        if (!accessor.fieldNames().contains(propertyName)) {
             mismatch.appendText("No property \"" + propertyName + "\"");
             return notMatched();
         }
 
-        return matched(property, mismatch);
+        return matched(accessor.readLensFor(propertyName), mismatch);
     }
 
     private Condition.Step<Method, Object> withPropertyValue(final T bean) {
@@ -149,13 +144,11 @@ public class HasPropertyWithValue<T> extends TypeSafeDiagnosingMatcher<T> {
         return (Matcher<Object>) valueMatcher;
     }
 
-    private static Condition.Step<FeatureDescriptor, Method> withReadMethod() {
-        return (property, mismatch) -> {
-            final Method readMethod = property instanceof PropertyDescriptor ?
-                    ((PropertyDescriptor) property).getReadMethod() :
-                    (((MethodDescriptor) property).getMethod());
+    private static Condition.Step<PropertyReadLens, Method> withReadMethod() {
+        return (readLens, mismatch) -> {
+            final Method readMethod = readLens.getReadMethod();
             if (null == readMethod || readMethod.getReturnType() == void.class) {
-                mismatch.appendText("property \"" + property.getName() + "\" is not readable");
+                mismatch.appendText("property \"" + readLens.getName() + "\" is not readable");
                 return notMatched();
             }
             return matched(readMethod, mismatch);

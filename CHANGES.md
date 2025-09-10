@@ -1,27 +1,34 @@
 # Hamcrest Changes
 
-## Version 3.1 (Unreleased)
+## Version 4.0 (Unreleased)
 
 ### Breaking Changes
 
+* The baseline version of Java required for Hamcrest 4.0 has been moved to Java 17. Developers who use Java 8-16 can still depend upon hamcrest-3.0.jar.
 * As a result of the bugfix to allow matching against polymorphic collections
 ([PR #422](https://github.com/hamcrest/JavaHamcrest/pull/422)), the signature of the
 `hasItem` and `hasItems` methods has changed. Code relying on the exact signature of
 these methods will need to be updated. The following methods are affected:
-  * `org.hamcrest.CoreMatchers.hasItem`
-  * `org.hamcrest.CoreMatchers.hasItems`
-  * `org.hamcrest.Matchers.hasItem`
-  * `org.hamcrest.Matchers.hasItems`
-  * `org.hamcrest.core.IsCollectionContaining.hasItem`
-  * `org.hamcrest.core.IsCollectionContaining.hasItems`
-  * `org.hamcrest.core.IsIterableContaining.hasItem`
-  * `org.hamcrest.core.IsIterableContaining.hasItems`
-  * TODO: decide if these breaking changes should trigger a major version upgrade (i.e v4.0)
+    * `org.hamcrest.CoreMatchers.hasItem`
+    * `org.hamcrest.CoreMatchers.hasItems`
+    * `org.hamcrest.Matchers.hasItem`
+    * `org.hamcrest.Matchers.hasItems`
+    * `org.hamcrest.core.IsCollectionContaining.hasItem`
+    * `org.hamcrest.core.IsCollectionContaining.hasItems`
+    * `org.hamcrest.core.IsIterableContaining.hasItem`
+    * `org.hamcrest.core.IsIterableContaining.hasItems`
 
 ### New Features
 
-* Optional matchers ([PR #421](https://github.com/hamcrest/JavaHamcrest/pull/421))
-* Matchers for thrown exceptions ([PR #423](https://github.com/hamcrest/JavaHamcrest/pull/423))
+* Optional matchers `emptyOptional()`, `optionalWithValue()` available in `org.hamcrest.Matchers` ([PR #421](https://github.com/hamcrest/JavaHamcrest/pull/421))
+* Matchers for thrown exceptions available through `throwsException()` in `org.hamcrest.Matchers` ([PR #423](https://github.com/hamcrest/JavaHamcrest/pull/423))
+* New `org.hamcrest.io.PathMatchers` class for matching `java.nio.files.Path` objects ([PR #442](https://github.com/hamcrest/JavaHamcrest/pull/442))
+* Create custom matchers more succinctly using `matcher()` static factory methods on `FeatureMatcher` and `TypeSafeDiagnosingMatcher` ([PR #441](https://github.com/hamcrest/JavaHamcrest/pull/441))
+* `org.hamcrest.beans` property matchers now support Java record naming conventions in addition to bean naming conventions ([PR #429](https://github.com/hamcrest/JavaHamcrest/pull/429))
+* `IsIterableContainingInAnyOrder.containsInAnyOrder()` matcher now supports custom `Comparator`s ([PR #404](https://github.com/hamcrest/JavaHamcrest/pull/404))
+* New `IsIterableContainingParallelRuns.containsParallelRunsOf()` matcher is a more general implementation of `containsInRelativeOrder()` ([PR #383](https://github.com/hamcrest/JavaHamcrest/pull/383))
+* New `IsUnmodifiable.isUnmodifiableCollection` matcher for testing if a collection is unmodifiable. ([PR #381](https://github.com/hamcrest/JavaHamcrest/pull/381))([PR #379](https://github.com/hamcrest/JavaHamcrest/pull/379))
+* New matchers for testing the content of files in `org.hamcrest.io.FileMatchers` and `org.hamcrest.io.PathMatchers` ([PR #345](https://github.com/hamcrest/JavaHamcrest/pull/345))
 
 ### Improvements
 

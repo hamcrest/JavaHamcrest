@@ -1,5 +1,7 @@
 package org.hamcrest;
 
+import java.util.function.Predicate;
+
 import org.hamcrest.internal.ReflectiveTypeFinder;
 
 /**
@@ -81,5 +83,37 @@ public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
         matchesSafely((T) item, mismatchDescription);
       }
     }
+
+    /**
+     * Creates a {@code TypeSafeDiagnosingMatcher} that matches an item based on a {@code Predicate}.
+     * 
+     * <p>
+     * If the {@code predicate} returns {@code true}, the {@code Matcher} will match and use the {@code successDescription}.
+     * If the {@code predicate} returns {@code false}, the {@code Matcher} will not match and use the {@code failureDescription}.
+     * </p>
+     * 
+     * @param <T> Type of the item to match
+     * @param predicate {@code Predicate} to test the item. Should return {@code true} if the item matches, {@code false} otherwise.
+     * @param successDescription Description to use when the {@code predicate} matches
+     * @param failureDescription Description to use when the {@code predicate} does not match
+     * @param expectedType Expected type of the item to match
+     * @return Matcher that matches the item based on the {@code predicate}
+     */
+    public static <T> Matcher<T> matcher(Predicate<T> predicate, final String successDescription, final String failureDescription, Class<T> expectedType) {
+        return new TypeSafeDiagnosingMatcher<T>(expectedType) {
+            public boolean matchesSafely(T actual, Description mismatchDescription) {
+                final boolean result = predicate.test(actual);
+                if (!result) {
+                    mismatchDescription.appendText(String.format("'%s' %s", actual, failureDescription));
+                }
+                return result;
+            }
+
+            public void describeTo(Description description) {
+                description.appendText(successDescription);
+            }
+        };
+    }
+
 
 }

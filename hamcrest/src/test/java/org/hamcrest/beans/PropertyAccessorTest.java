@@ -2,71 +2,54 @@ package org.hamcrest.beans;
 
 import org.junit.jupiter.api.Test;
 
-import java.beans.MethodDescriptor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItem;
 
-class PropertyUtilTest {
+class PropertyAccessorTest {
 
     @Test
-    void testReturnsTheNamesOfAllFieldsFromTargetClass() {
+    void testAccessesAllFieldsFromBean() {
         SamePropertyValuesAsTest.ExampleBean input = new SamePropertyValuesAsTest.ExampleBean("test", 1, null);
+        PropertyAccessor accessor = new PropertyAccessor(input);
 
-        Set<String> output = PropertyUtil.getFieldNames(input);
+        Set<String> fields = accessor.fieldNames();
 
-        assertThat(output, hasSize(3));
-        assertThat(output, hasItems("stringProperty", "intProperty", "valueProperty"));
-        assertThat(output, not(hasItem("nonexistentField")));
+        assertThat(fields, hasSize(3));
+        assertThat(fields, hasItems("stringProperty", "intProperty", "valueProperty"));
+        assertThat(fields, not(hasItem("nonexistentField")));
+
+        assertThat(accessor.fieldValue("stringProperty"), equalTo("test"));
+        assertThat(accessor.fieldValue("intProperty"), equalTo(1));
+        assertThat(accessor.fieldValue("valueProperty"), equalTo(null));
     }
 
     @Test
-    void testReturnsTheNamesOfAllFieldsFromTargetRecord() {
+    void testReturnsTheNamesOfAllFieldsFromRecordLikeObject() {
         RecordLikeClass.SmallClass smallClass1 = new RecordLikeClass.SmallClass();
         RecordLikeClass.SmallClass smallClass2 = new RecordLikeClass.SmallClass("small", 3, BigDecimal.ONE, LocalDateTime.of(2024, 1, 2, 3, 4, 5));
-        RecordLikeClass input = new RecordLikeClass("uno", 22, true, new Long[] {1L, 2L, 3L}, new ArrayList<>(Arrays.asList(smallClass1, smallClass2)));
+        RecordLikeClass input = new RecordLikeClass("uno", 22, true, new Long[] {1L, 2L, 3L}, Arrays.asList(smallClass1, smallClass2));
+        PropertyAccessor accessor = new PropertyAccessor(input);
 
-        Set<String> output = PropertyUtil.getFieldNames(input);
+        Set<String> fields = accessor.fieldNames();
 
-        assertThat(output, hasSize(5));
-        assertThat(output, hasItems("numberArray", "test", "smallClasses", "name", "age"));
-        assertThat(output, not(hasItem("notAGetter1")));
-        assertThat(output, not(hasItem("notAGetter2")));
-        assertThat(output, not(hasItem("getAge")));
-        assertThat(output, not(hasItem("field1")));
-        assertThat(output, not(hasItem("nonexistentField")));
+        assertThat(fields, hasSize(5));
+        assertThat(fields, hasItems("numberArray", "test", "smallClasses", "name", "age"));
+        assertThat(fields, not(hasItem("notAGetter1")));
+        assertThat(fields, not(hasItem("notAGetter2")));
+        assertThat(fields, not(hasItem("field1")));
+        assertThat(fields, not(hasItem("nonexistentField")));
+
+        assertThat(accessor.fieldValue("name"), equalTo("uno"));
     }
-
-    @Test
-    void testReturnsArrayOfMethodDescriptorFromTargetClass() {
-        SamePropertyValuesAsTest.ExampleBean input = new SamePropertyValuesAsTest.ExampleBean("test", 1, null);
-
-        MethodDescriptor[] output = PropertyUtil.recordReadAccessorMethodDescriptorsFor(input, Object.class);
-
-        assertThat(output, arrayWithSize(0));
-    }
-
-    @Test
-    void testReturnsArrayOfMethodDescriptorFromTargetRecord() {
-        RecordLikeClass.SmallClass smallClass1 = new RecordLikeClass.SmallClass();
-        RecordLikeClass.SmallClass smallClass2 = new RecordLikeClass.SmallClass("small", 3, BigDecimal.ONE, LocalDateTime.of(2024, 1, 2, 3, 4, 5));
-        RecordLikeClass input = new RecordLikeClass("uno", 22, true, new Long[] {1L, 2L, 3L}, new ArrayList<>(Arrays.asList(smallClass1, smallClass2)));
-
-        MethodDescriptor[] output = PropertyUtil.recordReadAccessorMethodDescriptorsFor(input, Object.class);
-
-        assertThat(output, arrayWithSize(5));
-        assertThat(Arrays.stream(output).map(MethodDescriptor::getDisplayName).collect(Collectors.toList()),
-                   hasItems("numberArray", "test", "smallClasses", "name", "age"));
-    }
-
 
     /**
      * A Java Record-like class to test the functionality of
-     * {@link PropertyUtil} with Java Records in JDK 8 environment.
+     * {@link PropertyAccessor} with Java Records in JDK 8 environment.
      *
      * @see <a href="https://docs.oracle.com/en/java/javase/17/language/records.html">https://docs.oracle.com/en/java/javase/17/language/records.html</a>
      */
@@ -76,9 +59,9 @@ class PropertyUtilTest {
         private final int age;
         private final boolean test;
         private final Long[] numberArray;
-        private final List<SmallClass> smallClasses;
+        private final List<RecordLikeClass.SmallClass> smallClasses;
 
-        public RecordLikeClass(String name, int age, boolean test, Long[] numberArray, List<SmallClass> smallClasses) {
+        public RecordLikeClass(String name, int age, boolean test, Long[] numberArray, List<RecordLikeClass.SmallClass> smallClasses) {
             this.name = name;
             this.age = age;
             this.test = test;
@@ -90,13 +73,12 @@ class PropertyUtilTest {
         public int age() { return age; }
         public boolean test() { return test; }
         public Long[] numberArray() { return numberArray; }
-        public List<SmallClass> smallClasses() { return smallClasses; }
+        public List<RecordLikeClass.SmallClass> smallClasses() { return smallClasses; }
 
         public void notAGetter1() {}
         public String notAGetter2() { return "I'm nothing"; }
         public String name(String fake1, String fake2) { return name; }
         public void name(String fake1) {}
-        public int getAge() { return 0; }
 
         @Override
         public boolean equals(Object o) {

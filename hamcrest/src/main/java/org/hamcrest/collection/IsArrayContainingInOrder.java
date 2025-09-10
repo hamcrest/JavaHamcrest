@@ -16,6 +16,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  *
  * @deprecated As of release 2.1, replaced by {@link ArrayMatching}.
  */
+@Deprecated
 public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
 
     private final Collection<Matcher<? super E>> matchers;
@@ -61,6 +62,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      *     the items that must equal the items within an examined array
      * @return The matcher.
      */
+    @Deprecated
     public static <E> Matcher<E[]> arrayContaining(E... items) {
         List<Matcher<? super E>> matchers = new ArrayList<>();
         for (E item : items) {
@@ -84,6 +86,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      *     the matchers that must be satisfied by the items in the examined array
      * @return The matcher.
      */
+    @Deprecated
     public static <E> Matcher<E[]> arrayContaining(Matcher<? super E>... itemMatchers) {
         return arrayContaining((List) asList(itemMatchers));
     }
@@ -103,6 +106,7 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
      *     a list of matchers, each of which must be satisfied by the corresponding item in an examined array
      * @return The matcher.
      */
+    @Deprecated
     public static <E> Matcher<E[]> arrayContaining(List<Matcher<? super E>> itemMatchers) {
         return new IsArrayContainingInOrder<>(itemMatchers);
     }

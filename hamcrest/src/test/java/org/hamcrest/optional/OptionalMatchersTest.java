@@ -14,6 +14,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 public class OptionalMatchersTest {
+    private static final String LS = System.lineSeparator();
 
     @Test
     public void checkEmptyOptional() {
@@ -26,8 +27,8 @@ public class OptionalMatchersTest {
         AssertionError failure = assertThrows(AssertionError.class, () -> {
             assertThat(Optional.of(1), emptyOptional());
         });
-        assertEquals("\n" +
-                "Expected: empty\n" +
+        assertEquals(LS +
+                "Expected: empty" + LS +
                 "     but: is Optional[1]", failure.getMessage());
     }
 
@@ -36,8 +37,8 @@ public class OptionalMatchersTest {
         AssertionError failure = assertThrows(AssertionError.class, () -> {
             assertThat(Optional.of(1), is(emptyOptional()));
         });
-        assertEquals("\n" +
-                "Expected: is empty\n" +
+        assertEquals(LS +
+                "Expected: is empty" + LS +
                 "     but: is Optional[1]", failure.getMessage());
     }
 
@@ -46,8 +47,8 @@ public class OptionalMatchersTest {
         AssertionError failure = assertThrows(AssertionError.class, () -> {
             assertThat(Optional.empty(), is(not(emptyOptional())));
         });
-        assertEquals("\n" +
-                "Expected: is not empty\n" +
+        assertEquals(LS +
+                "Expected: is not empty" + LS +
                 "     but: was <Optional.empty>", failure.getMessage());
     }
 
@@ -76,8 +77,8 @@ public class OptionalMatchersTest {
         AssertionError failure = assertThrows(AssertionError.class, () -> {
             assertThat(Optional.empty(), is(optionalWithValue()));
         });
-        assertEquals("\n" +
-                "Expected: is present and matches any\n" +
+        assertEquals(LS +
+                "Expected: is present and matches any" + LS +
                 "     but: is Optional.empty", failure.getMessage());
     }
 
@@ -86,8 +87,8 @@ public class OptionalMatchersTest {
         AssertionError failure = assertThrows(AssertionError.class, () -> {
             assertThat(Optional.empty(), is(optionalWithValue(equalTo(1))));
         });
-        assertEquals("\n" +
-                "Expected: is present and matches <1>\n" +
+        assertEquals(LS +
+                "Expected: is present and matches <1>" + LS +
                 "     but: is Optional.empty", failure.getMessage());
     }
 
@@ -96,8 +97,8 @@ public class OptionalMatchersTest {
         AssertionError failure = assertThrows(AssertionError.class, () -> {
             assertThat(Optional.of("text"), is(optionalWithValue("Hello, world")));
         });
-        assertEquals("\n" +
-                "Expected: is present and matches \"Hello, world\"\n" +
+        assertEquals(LS +
+                "Expected: is present and matches \"Hello, world\"" + LS +
                 "     but: is Optional[text]", failure.getMessage());
     }
 }
