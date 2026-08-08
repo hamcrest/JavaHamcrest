@@ -1662,18 +1662,20 @@ public class Matchers {
   }
 
   /**
-   * Creates a matcher of {@link Double}s that matches when an examined double is equal
+   * Creates a matcher of {@link Number}s that matches when an examined number is equal
    * to the specified <code>operand</code>, within a range of +/- <code>error</code>.
+   * Comparison is performed using {@link Number#doubleValue()}.
    * For example:
    * <pre>assertThat(1.03, is(closeTo(1.0, 0.03)))</pre>
+   * <pre>assertThat(1.0f, is(closeTo(0.99, 0.1)))</pre>
    *
    * @param operand
-   *     the expected value of matching doubles
+   *     the expected value of matching numbers
    * @param error
    *     the delta (+/-) within which matches will be allowed
    * @return The matcher.
    */
-  public static org.hamcrest.Matcher<java.lang.Double> closeTo(double operand, double error) {
+  public static org.hamcrest.Matcher<java.lang.Number> closeTo(double operand, double error) {
     return org.hamcrest.number.IsCloseTo.closeTo(operand, error);
   }
 

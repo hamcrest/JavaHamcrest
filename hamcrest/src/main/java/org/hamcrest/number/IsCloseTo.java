@@ -9,7 +9,7 @@ import static java.lang.Math.abs;
 /**
  * Is the value a number equal to a value within some range of acceptable error?
  */
-public class IsCloseTo extends TypeSafeMatcher<Double> {
+public class IsCloseTo extends TypeSafeMatcher<Number> {
 
     private final double delta;
     private final double value;
@@ -25,12 +25,12 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
     }
 
     @Override
-    public boolean matchesSafely(Double item) {
+    public boolean matchesSafely(Number item) {
         return actualDelta(item) <= 0.0;
     }
 
     @Override
-    public void describeMismatchSafely(Double item, Description mismatchDescription) {
+    public void describeMismatchSafely(Number item, Description mismatchDescription) {
       mismatchDescription.appendValue(item)
                          .appendText(" differed by ")
                          .appendValue(actualDelta(item))
@@ -46,23 +46,25 @@ public class IsCloseTo extends TypeSafeMatcher<Double> {
                 .appendValue(value);
     }
 
-    private double actualDelta(Double item) {
-      return abs(item - value) - delta;
+    private double actualDelta(Number item) {
+      return abs(item.doubleValue() - value) - delta;
     }
 
     /**
-     * Creates a matcher of {@link Double}s that matches when an examined double is equal
+     * Creates a matcher of {@link Number}s that matches when an examined number is equal
      * to the specified <code>operand</code>, within a range of +/- <code>error</code>.
+     * Comparison is performed using {@link Number#doubleValue()}.
      * For example:
      * <pre>assertThat(1.03, is(closeTo(1.0, 0.03)))</pre>
+     * <pre>assertThat(1.0f, is(closeTo(0.99, 0.1)))</pre>
      *
      * @param operand
-     *     the expected value of matching doubles
+     *     the expected value of matching numbers
      * @param error
      *     the delta (+/-) within which matches will be allowed
      * @return The matcher.
      */
-    public static Matcher<Double> closeTo(double operand, double error) {
+    public static Matcher<Number> closeTo(double operand, double error) {
         return new IsCloseTo(operand, error);
     }
 
