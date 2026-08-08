@@ -35,6 +35,9 @@ these methods will need to be updated. The following methods are affected:
 
 * Allow matching against polymorphic collections ([#252](https://github.com/hamcrest/JavaHamcrest/issues/252),
   [PR #422](https://github.com/hamcrest/JavaHamcrest/pull/422))
+* `closeTo` accepts any `Number` (e.g. Float properties with `hasProperty`/`is` chaining),
+  not only Double ([#444](https://github.com/hamcrest/JavaHamcrest/issues/444))
+
 
 ## Version 3.0 (1st August 2024)
 
