@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.test.MatcherAssertions.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
@@ -22,6 +23,31 @@ public class IsIterableContainingInOrderTest extends AbstractMatcherTest {
     @Override
     protected Matcher<?> createMatcher() {
         return contains(1, 2);
+    }
+
+    @Test
+    public void testMatchingEmptyIterableWithNoExpectedItems() {
+        assertMatches(contains(new String[0]), emptyList());
+    }
+
+    @Test
+    public void testMatchingEmptyIterableWithNoExpectedMatchers() {
+        assertMatches(contains(new Matcher<?>[0]), emptyList());
+    }
+
+    @Test
+    public void testMatchingEmptyIterableWithEmptyMatcherList() {
+        assertMatches(contains(emptyList()), emptyList());
+    }
+
+    @Test
+    public void testDoesNotMatchNonEmptyIterableWithNoExpectedItems() {
+        assertMismatchDescription("not matched: <1>", contains(new Integer[0]), singletonList(1));
+    }
+
+    @Test
+    public void testHasAReadableDescriptionWithNoExpectedItems() {
+        assertDescription("iterable containing []", contains(new Integer[0]));
     }
 
     @Test

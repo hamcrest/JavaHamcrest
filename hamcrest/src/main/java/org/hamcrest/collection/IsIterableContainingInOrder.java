@@ -57,9 +57,6 @@ public class IsIterableContainingInOrder<E> extends TypeSafeDiagnosingMatcher<It
 
         public MatchSeries(List<Matcher<? super F>> matchers, Description mismatchDescription) {
             this.mismatchDescription = mismatchDescription;
-            if (matchers.isEmpty()) {
-                throw new IllegalArgumentException("Should specify at least one expected element");
-            }
             this.matchers = matchers;
         }
 
